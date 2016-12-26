@@ -1,0 +1,65 @@
+<div class="header header-sticky">
+  <%# cache current_user do # Cache per user, so the 'Logged in" etc. links works properly %>
+  <div class="container">
+    <!-- <%= link_to image_tag("logo.svg", alt: I18n.t('company.name')), root_path, class: "logo" %> -->
+
+    <div class="topbar">
+      <ul class="loginbar pull-right">
+        <!-- <li><a href="/over-ons">Over ons</a></li> -->
+        <!-- <li class="topbar-devider"></li> -->
+        <!-- <li><%= link_to "Bel me terug", new_contact_path %></li> -->
+        <!-- <li class="topbar-devider"></li> -->
+        <!-- <li><a href="/contact">Contact</a></li> -->
+        <!-- <li class="topbar-devider"></li> -->
+        <!-- <li> -->
+          <!-- <%= link_to "Inloggen", new_user_session_path unless user_signed_in? %> -->
+          <!-- <%= link_to "Uitloggen", destroy_user_session_path,  method: :delete if user_signed_in? %> -->
+        <!-- </li> -->
+        <!-- <% if user_signed_in? && current_user.admin? %> -->
+          <!-- <li class="topbar-devider"></li> -->
+          <!-- <li> -->
+            <!-- <%= link_to "Admin", admin_path %> -->
+          <!-- </li> -->
+        <!-- <% end %> -->
+      </ul>
+    </div>
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="fa fa-bars"></span>
+    </button>
+  </div>
+  <%# end %>
+
+  <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <!-- <%= render "layouts/header_nav_for_page", url: "opleiding" %> -->
+        <!-- <%= render "layouts/header_nav_for_page", url: "training" %> -->
+        <!-- <%= render "layouts/header_nav_for_page", url: "vorming" %> -->
+        <!-- <%= render "layouts/header_nav_for_page", url: "workshop" %> -->
+
+        <!-- <li class="<%= 'active' if controller.controller_path == 'agenda_items' %>"> -->
+          <!-- <%= link_to "Agenda", agenda_items_path %> -->
+        <!-- </li> -->
+
+        <!-- <li class="<%= 'active' if controller.controller_path == 'content_blogs' %>"> -->
+          <!-- <%= link_to "Blog", content_blogs_path %> -->
+        <!-- </li> -->
+      </ul>
+    </div>
+  </div>
+  <%# end %>
+</div>
+
+<% unless @breadcrumbs.nil? %>
+<div class="breadcrumbs">
+	<div class="container">
+		<!-- <h1 class="pull-left"><%= yield(:title) %></h1> -->
+		<h1 class="pull-left"><%= @breadcrumbs.second.name unless @breadcrumbs.second.nil? %></h1>
+		<ul class="pull-right breadcrumb">
+      <%= render_breadcrumbs :tag => :li, :separator => "" %>
+		</ul>
+	</div>
+</div>
+<% end %>

@@ -1,0 +1,98 @@
+<div id="footer-v2" class="footer-v2">
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 md-margin-bottom-40">
+          <div class="mb-20">
+            <!-- <%= link_to image_tag("logo.svg", alt: I18n.t('company.name'), class: "footer-logo"), root_path %> -->
+
+            <!-- <%= text_body :footer_company_description %> -->
+          </div>
+
+          <div class="headline">
+            <h2 class="heading-sm">Contact</h2>
+          </div>
+          <!-- <%= text_body :footer_address %> -->
+          <!-- <%= text_body :footer_contact %> -->
+        </div>
+
+        <div class="col-md-3 md-margin-bottom-40">
+          <!-- <%= render "layouts/footer_nav_for_page", url: "opleiding" %> -->
+          <!-- <%= render "layouts/footer_nav_for_page", url: "training" %> -->
+          <!-- <%= render "layouts/footer_nav_for_page", url: "vorming" %> -->
+          <!-- <%= render "layouts/footer_nav_for_page", url: "workshop" %> -->
+        </div>
+
+        <div class="col-md-3 md-margin-bottom-40">
+          <div class="mb-20">
+            <div class="headline">
+              <h2 class="heading-sm">Binnenkort</h2>
+            </div>
+            <ul class="list-unstyled blog-latest-posts">
+              <!-- <% AgendaItem.unscoped.up_next.limit(3).each do |agenda_item| %> -->
+              <!-- <li>
+								<h3>
+                  <%= link_to agenda_item.title, agenda_item %>
+                </h3>
+								<small><i class="fa fa-calendar-o mr-05"></i><%= I18n.l agenda_item.starts_at.to_date, format: :long %></small>
+							</li>
+              <% end %> -->
+            </ul>
+          </div>
+
+          <div class="mb-20">
+            <div class="headline">
+              <h2 class="heading-sm">Laatste nieuws</h2>
+            </div>
+            <ul class="list-unstyled blog-latest-posts">
+              <!-- <% ContentNewsItem.desc.limit(5).each do |content_news_item| %>
+              <li>
+                <h3><%= link_to content_news_item.title, content_news_item_path(content_news_item) %></h3>
+                <small>
+                  <i class="fa fa-calendar-o mr-05"></i><%= I18n.l content_news_item.published_at.localtime.to_date, format: :long %></small>
+              </li>
+              <% end %> -->
+            </ul>
+          </div>
+
+          <!-- <%= render "layouts/footer_nav_for_page", url: "portfolio" %> -->
+        </div>
+
+        <div class="col-md-3 md-margin-bottom-40">
+          <div class="mb-20">
+            <div class="headline">
+              <h2 class="heading-sm">Blog</h2>
+            </div>
+
+            <ul class="list-unstyled blog-latest-posts">
+              <!-- <% ContentBlog.desc.limit(5).each do |content_blog| %>
+              <li>
+                <h3><%= link_to content_blog.title, content_blog_path(content_blog) %></h3>
+                <small>
+                  <i class="fa fa-calendar-o mr-05"></i><%= I18n.l content_blog.published_at.localtime.to_date, format: :long %></small>
+                <%= markdown(content_blog.intro).html_safe %>
+              </li>
+              <% end %> -->
+            </ul>
+          </div>
+
+          <div class="mb-20">
+            <div class="headline">
+              <h2 class="heading-sm">Nieuwsbrief</h2>
+            </div>
+            <!-- <%= text_body :footer_newsletter %> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <div class="container">
+      <p class="text-center">Copyright ©
+        <%= Time.now.year %>
+        <a href="/"><%= I18n.t('company.name') %></a>. Alle rechten voorbehouden
+      </p>
+    </div>
+  </div>
+</div>
