@@ -19,6 +19,11 @@ gem 'mini_magick',                '>= 4.3.6'
 
 #gem 'bootstrap-sass',             '>= 3.3.6'
 #gem 'bootstrap-datepicker-rails'           # Datepicker for Bootstrap
+gem 'bootstrap', '~> 4.0.0.alpha5'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.4.0'
+end
+
 gem 'font-awesome-rails'
 gem 'rails-i18n'
 gem 'kaminari' #,                   '>= 0.16.3'  # Paging
