@@ -38,9 +38,56 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.0)
+      public_suffix (~> 2.0, >= 2.0.2)
+    airbrussh (1.1.1)
+      sshkit (>= 1.6.1, != 1.7.0)
+    ansi (1.5.0)
     arel (7.1.4)
+    autosize-rails (1.18.17)
+      rails (>= 3.1)
+    awesome_print (1.7.0)
+    bcrypt (3.1.11)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.2)
+    bullet (5.4.3)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
+    callsite (0.0.11)
+    capistrano (3.7.1)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-harrow (0.5.3)
+    capistrano-rails (1.2.1)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano3-puma (1.2.1)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+    carrierwave-imageoptimizer (1.4.0)
+      carrierwave (>= 0.8, < 2.0)
+      image_optimizer (~> 1.6)
+    coderay (1.1.1)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -49,13 +96,52 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.3)
+    countries (2.0.5)
+      i18n_data (~> 0.7.0)
+      money (~> 6.7)
+      unicode_utils (~> 1.4)
+    country_select (3.0.0)
+      countries (~> 2.0)
+      sort_alphabetical (~> 1.0)
     debug_inspector (0.0.2)
+    devise (4.2.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 5.1)
+      responders
+      warden (~> 1.2.3)
+    enum_help (0.0.16)
     erubis (2.7.0)
+    exception_notification (4.2.1)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
+    faker (1.7.1)
+      i18n (~> 0.5)
     ffi (1.9.14)
+    figaro (1.1.1)
+      thor (~> 0.14)
+    font-awesome-rails (4.7.0.1)
+      railties (>= 3.2, < 5.1)
+    formatador (0.2.5)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    guard (2.14.0)
+      formatador (>= 0.2.4)
+      listen (>= 2.7, < 4.0)
+      lumberjack (~> 1.0)
+      nenv (~> 0.1)
+      notiffany (~> 0.0)
+      pry (>= 0.9.12)
+      shellany (~> 0.0)
+      thor (>= 0.18.1)
+    guard-compat (1.2.1)
+    guard-minitest (2.4.6)
+      guard-compat (~> 1.2)
+      minitest (>= 3.0)
     i18n (0.7.0)
+    i18n_data (0.7.0)
+    image_optimizer (1.7.0)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -63,26 +149,72 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
+    lumberjack (1.0.10)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    meta_request (0.4.0)
+      callsite (~> 0.0, >= 0.0.11)
+      rack-contrib (~> 1.1)
+      railties (>= 3.0.0, < 5.1.0)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mini_backtrace (0.1.3)
+      minitest (> 1.2.0)
+      rails (>= 2.3.3)
+    mini_magick (4.6.0)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    minitest-reporters (1.1.13)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
+    money (6.7.1)
+      i18n (>= 0.6.4, <= 0.7.0)
+      sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.12.1)
+    nenv (0.3.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (4.0.0)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    notiffany (0.1.1)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
+    orm_adapter (0.5.0)
     pg (0.19.0)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.4.2)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+    public_suffix (2.0.4)
     puma (3.6.2)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (2.0.1)
+    rack-contrib (1.2.0)
+      rack (>= 0.9.1)
+    rack-mini-profiler (0.10.1)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.1)
@@ -102,6 +234,14 @@ GEM
       nokogiri (~> 1.6.0)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-i18n (5.0.1)
+      i18n (~> 0.7)
+      railties (~> 5.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (5.0.1)
       actionpack (= 5.0.1)
       activesupport (= 5.0.1)
@@ -112,6 +252,10 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
+    rolify (5.1.0)
+    ruby-progressbar (1.8.1)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -119,6 +263,14 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    shellany (0.0.1)
+    simple_form (3.3.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
+    sixarm_ruby_unaccent (1.1.1)
+    slop (3.6.0)
+    sort_alphabetical (1.1.0)
+      unicode_utils (>= 1.2.2)
     spring (2.0.0)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -131,6 +283,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sshkit (1.11.5)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -141,6 +296,10 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.4)
       execjs (>= 0.3.0, < 3)
+    unicode_utils (1.4.0)
+    uniform_notifier (1.10.0)
+    warden (1.2.6)
+      rack (>= 1.0)
     web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -154,15 +313,51 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autosize-rails
+  awesome_print
+  better_errors
+  binding_of_caller
+  breadcrumbs_on_rails
+  bullet
   byebug
+  capistrano
+  capistrano-bundler
+  capistrano-rails
+  capistrano-rvm
+  capistrano3-puma
+  carrierwave (>= 0.10.0)
+  carrierwave-imageoptimizer
   coffee-rails (~> 4.2)
+  country_select
+  devise
+  enum_help
+  exception_notification
+  faker (>= 1.6.0)
+  figaro
+  font-awesome-rails
+  guard
+  guard-minitest
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari
+  letter_opener
   listen (~> 3.0.5)
+  meta_request
+  mini_backtrace
+  mini_magick (>= 4.3.6)
+  minitest-reporters
+  net-ssh
   pg (~> 0.18)
+  pry-byebug
   puma (~> 3.0)
+  pundit
+  rack-mini-profiler
   rails (~> 5.0.0, >= 5.0.0.1)
+  rails-i18n
+  rails_12factor
+  rolify
   sass-rails (~> 5.0)
+  simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
@@ -170,5 +365,8 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console
 
+RUBY VERSION
+   ruby 2.3.3p222
+
 BUNDLED WITH
-   1.13.6
+   1.13.7

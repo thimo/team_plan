@@ -1,38 +1,48 @@
 source 'https://rubygems.org'
 
+ruby '2.3.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
-# Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
-# Use Puma as the app server
 gem 'puma', '~> 3.0'
-# Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'faker',                      '>= 1.6.0'
+gem 'carrierwave',                '>= 0.10.0'
+gem 'carrierwave-imageoptimizer' # also do: brew install optipng jpegoptim (or via 'apt-get' on Ubuntu)
+gem 'mini_magick',                '>= 4.3.6'
+
+#gem 'bootstrap-sass',             '>= 3.3.6'
+#gem 'bootstrap-datepicker-rails'           # Datepicker for Bootstrap
+gem 'font-awesome-rails'
+gem 'rails-i18n'
+gem 'kaminari' #,                   '>= 0.16.3'  # Paging
+#gem 'kaminari-bootstrap' #,         '>= 3.0.1'   # Bootstrap templates for paging
+
+gem 'simple_form' #,                '>= 3.2.0'
+gem 'country_select'
+gem 'autosize-rails' #,             '1.18.17' # Auto-resize textarea's
+
+gem 'breadcrumbs_on_rails' #,       '>= 3.0.1'   # Breadcrumbs in admin
+gem 'enum_help' #,                  '>= 0.0.14'
+gem 'net-ssh' #,                    '>= 3.0.2'
+gem 'figaro' #,                     '>= 1.1.1'
+gem 'devise'
+gem 'pundit' #,                     '~> 1.1.0'
+gem 'rolify' #,                     '~> 5.0.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  gem 'awesome_print', require: "awesome_print"
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -42,6 +52,31 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'letter_opener' # TODO configureren ??
+
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+  gem 'meta_request'
+  gem 'better_errors' # https://github.com/charliesome/better_errors
+  gem 'binding_of_caller'
+  gem 'bullet'
+  gem 'rack-mini-profiler'
+end
+
+group :test do
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
+  gem 'guard'
+  gem 'guard-minitest'
+end
+
+group :production, :staging do
+  gem 'rails_12factor'
+  gem 'exception_notification' # TODO configureren
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
