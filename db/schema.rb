@@ -10,10 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226222341) do
+ActiveRecord::Schema.define(version: 20161226225943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "members", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.date     "born_on"
+    t.string   "address"
+    t.string   "zipcode"
+    t.string   "city"
+    t.string   "country"
+    t.string   "phone"
+    t.string   "phone2"
+    t.string   "email"
+    t.string   "email2"
+    t.integer  "gender"
+    t.string   "member_id"
+    t.string   "association_id"
+    t.boolean  "active"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "team_members", force: :cascade do |t|
+    t.integer  "member_id"
+    t.integer  "team_id"
+    t.date     "joined_on"
+    t.date     "left_on"
+    t.integer  "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_team_members_on_member_id", using: :btree
+    t.index ["team_id"], name: "index_team_members_on_team_id", using: :btree
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "year_group_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["year_group_id"], name: "index_teams_on_year_group_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -32,4 +80,16 @@ ActiveRecord::Schema.define(version: 20161226222341) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "year_groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_year_groups_on_season_id", using: :btree
+  end
+
+  add_foreign_key "team_members", "members"
+  add_foreign_key "team_members", "teams"
+  add_foreign_key "teams", "year_groups"
+  add_foreign_key "year_groups", "seasons"
 end
