@@ -1,0 +1,65 @@
+nl:
+  company:
+    name: Speler Volg Systeem
+    url: https://www.defrog.nl
+    address:
+    zip:
+    city:
+    email: info@defrog.nl
+    phone:
+    contact_name: Thimo Jansen
+  activerecord:
+    attributes:
+      user:
+        first_name: Voornaam
+        middle_name: Tussenvoegsels
+        last_name: Achternaam
+        name: Naam
+        birthdate: Geboortedatum
+        email: E-mail
+        phone: Telefoonnummer
+        zip: Postcode
+        address: Adres
+        city: Woonplaats
+        country: Land
+        password: Wachtwoord
+        password_confirmation: Bevestig wachtwoord
+        remember_me: Login onthouden
+        user_type: Rol
+
+  models:
+    survey_config: Test
+  attributes:
+    user:
+      first_name: "Voornaam"
+      last_name: "Achternaam"
+      name: "Naam"
+      email: "E-mail"
+      password: "Wachtwoord"
+      password_confirmation: "Bevestiging"
+  form:
+    an_error:
+      one: een fout
+      other: enkele fouten
+  enums:
+    agenda_item:
+      booking_type:
+        disabled: Uitgeschakeld
+        internal: Interne aanmelding
+        external: Externe aanmelding (via link)
+    content_page:
+      menu_type:
+        menu_hidden: Niet zichtbaar in navigatie
+        menu_visible: Zichtbaar in navigatie en footer
+    user:
+      user_type:
+        customer: Gebruiker
+        admin: Administrator
+
+  views:
+    pagination:
+      truncate: "..."
+      previous: '<i class="fa fa-angle-left" aria-hidden="true"></i>'
+      first: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      next: '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+      last: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>'
