@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_locale
-  after_action :verify_authorized
+  after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
   # Globally rescue Authorization Errors in controller.
