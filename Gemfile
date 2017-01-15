@@ -19,7 +19,7 @@ gem 'mini_magick',                '>= 4.3.6'
 
 #gem 'bootstrap-sass',             '>= 3.3.6'
 #gem 'bootstrap-datepicker-rails'           # Datepicker for Bootstrap
-gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.4.0'
 end
@@ -38,6 +38,8 @@ gem 'enum_help' #,                  '>= 0.0.14'
 gem 'net-ssh' #,                    '>= 3.0.2'
 gem 'figaro' #,                     '>= 1.1.1'
 gem 'devise'
+gem 'devise-bootstrap-views', git: "https://github.com/hisea/devise-bootstrap-views.git", :branch => 'bootstrap4'
+
 gem 'pundit' #,                     '~> 1.1.0'
 gem 'rolify' #,                     '~> 5.0.0'
 

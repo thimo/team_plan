@@ -1,18 +1,24 @@
 <% unless flash.empty? %>
 <div class="container">
-  <div class="<%= 'alert-popup' if controller.class.parent  == Admin %>">
+  <div class="<%# 'alert-popup' if controller.class.parent  == Admin %>alert-popup row justify-content-end">
     <% flash.each do |message_type, message| %>
-      <div class="alert alert-icon alert-<%= message_type %> alert-dismissible fade in mt-20">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <i class="fa fa-<%= message_type %>"></i>
-        <%= message %>
+      <div class="alert alert-<%= message_type %> d-inline-flex flex-row">
+        <div class="pr-2">
+          <i class="fa fa-<%= message_type %>"></i>
+        </div>
+        <div><%= message %></div>
+        <div class="pl-4">
+          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
     <% end %>
 
     <script>
       window.setTimeout(function() {
-        $(".alert-popup .alert-success").alert('close');
-      }, 10 * 1000);
+        $(".alert-popup .alert-success, .alert-popup .alert-notice").alert('close');
+      }, 4 * 1000);
     </script>
   </div>
 </div>

@@ -2,8 +2,9 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
 
+  before_action :authenticate_user!
   before_action :set_locale
-  after_action :verify_authorized, except: :index
+  after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index
 
   # Globally rescue Authorization Errors in controller.
