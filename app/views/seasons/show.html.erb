@@ -1,2 +1,7 @@
-<h1>Seasons#show</h1>
-<p>Find me in app/views/seasons/show.html.erb</p>
+<h1>Seizoen <%= @season.name %></h1>
+
+<% @season.year_groups.each do |year_group| %>
+<div>
+  <%= link_to year_group.name, year_group %>
+</div>
+<% end %>

@@ -1,4 +1,9 @@
 <div class="container">
-  <h1>Seasons#index</h1>
-  <p>Find me in app/views/seasons/index.html.erb</p>
+  <h1>Seizoenen</h1>
+
+  <div>
+    <% @seasons.each do |season| %>
+      <%= link_to season.name, season %>
+    <% end %>
+  </div>
 </div>

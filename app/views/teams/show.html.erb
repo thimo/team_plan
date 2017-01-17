@@ -1,0 +1,7 @@
+<h1><%= @team.name %></h1>
+
+<% @team.members.each do |member| %>
+<div>
+  <%= link_to member.name, member %>
+</div>
+<% end %>

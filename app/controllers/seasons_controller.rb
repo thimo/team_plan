@@ -1,10 +1,15 @@
 class SeasonsController < ApplicationController
   def index
-    @seasons = policy_scope(Season)
+    @seasons = policy_scope(Season).all
   end
 
   def show
-    @season = Season.find(params[:id])
+    if params[:id].nil?
+      @season = Season.find_by(active: true)
+    else
+      @season = Season.find(params[:id])
+    end
+    authorize @season
   end
 
   def new
