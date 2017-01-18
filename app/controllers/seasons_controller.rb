@@ -10,6 +10,7 @@ class SeasonsController < ApplicationController
       @season = Season.find(params[:id])
     end
     authorize @season
+    add_breadcrumb "#{@season.name}", @season
   end
 
   def new

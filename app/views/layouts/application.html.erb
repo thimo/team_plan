@@ -25,22 +25,20 @@
       </div>
     <% end %>
 
-  	<!-- <div class="wrapper"> -->
-      <%= render 'layouts/header' %>
+    <%= render 'layouts/header' %>
 
-      <%= render 'layouts/flash' %>
+    <%= render 'layouts/flash' %>
 
-      <div class="container">
-        <%= content_for?(:content) ? yield(:content) : yield %>
-      </div>
+    <div class="container">
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </div>
 
-      <%= render 'layouts/footer' %>
+    <%= render 'layouts/footer' %>
 
-      <% if Rails.env.development? %>
-      <div class="container">
-        <%= debug(params)  %>
-      </div>
-      <% end %>
-  	<!-- </div> -->
+    <% if Rails.env.development? %>
+    <div class="m-4">
+      <%= debug(params)  %>
+    </div>
+    <% end %>
   </body>
 </html>

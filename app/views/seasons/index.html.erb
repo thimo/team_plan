@@ -1,9 +1,9 @@
 <div class="container">
   <h1>Seizoenen</h1>
 
+  <% @seasons.each do |season| %>
   <div>
-    <% @seasons.each do |season| %>
-      <%= link_to season.name, season %>
-    <% end %>
+    <%= link_to season.name, season, class: "#{"font-weight-bold" if season.active?}" %>
   </div>
+  <% end %>
 </div>

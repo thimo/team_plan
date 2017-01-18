@@ -2,6 +2,8 @@ class YearGroupsController < ApplicationController
   before_action :set_year_group, only: [:show, :edit, :update]
 
   def show
+    add_breadcrumb "#{@year_group.season.name}", @year_group.season
+    add_breadcrumb "#{@year_group.name}", @year_group
   end
 
   def new
