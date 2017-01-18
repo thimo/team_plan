@@ -41,7 +41,7 @@ gem 'devise'
 gem 'devise-bootstrap-views', git: "https://github.com/hisea/devise-bootstrap-views.git", :branch => 'bootstrap4'
 
 gem 'pundit' #,                     '~> 1.1.0'
-gem 'rolify' #,                     '~> 5.0.0'
+# gem 'rolify' #,                     '~> 5.0.0'
 
 
 group :development, :test do
