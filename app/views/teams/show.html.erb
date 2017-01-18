@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-8">
+  <div class="col-lg-6">
     <h1><%= @team.name %></h1>
 
     <% @team.team_members.each do |team_member| %>
@@ -9,7 +9,7 @@
     <% end %>
   </div>
 
-  <div class="col-4">
+  <div class="col-lg-6">
     <%= render "comments/sidebar" %>
   </div>
 </div>
