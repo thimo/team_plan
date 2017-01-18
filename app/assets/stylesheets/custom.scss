@@ -2,10 +2,17 @@
   color: #a94543;
 }
 
-.field_with_errors input, .has-error input {
+.field_with_errors input, .has-error input, .has-error textarea {
   border-color: #a94543;
 }
 
+// Correct spacing for inline radio buttons
+.form-group span.radio {
+  margin: 0 4px;
+  label input {
+    margin-right: 4px;
+  }
+}
 
 // Extra alert CSS to support Devise
 .alert-alert {

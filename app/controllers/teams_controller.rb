@@ -2,9 +2,9 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update]
 
   def show
-    add_breadcrumb "#{@team.year_group.season.name}", @team.year_group.season
-    add_breadcrumb "#{@team.year_group.name}", @team.year_group
-    add_breadcrumb "#{@team.name}", @team
+    @commentable = @team
+    @comments = @commentable.comments
+    @comment = Comment.new
   end
 
   def new
@@ -23,5 +23,9 @@ class TeamsController < ApplicationController
     def set_team
       @team = Team.find(params[:id])
       authorize @team
+
+      add_breadcrumb "#{@team.year_group.season.name}", @team.year_group.season
+      add_breadcrumb "#{@team.year_group.name}", @team.year_group
+      add_breadcrumb "#{@team.name}", @team
     end
 end

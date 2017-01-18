@@ -6,4 +6,11 @@ class TeamMember < ApplicationRecord
 
   validates_presence_of :team, :member, :joined_on, :role
 
+  def year_group
+    team.year_group
+  end
+
+  def season
+    year_group.season
+  end
 end

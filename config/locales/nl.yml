@@ -28,33 +28,26 @@ nl:
         user_type: Rol
 
   models:
-    survey_config: Test
-  attributes:
-    user:
-      first_name: "Voornaam"
-      last_name: "Achternaam"
-      name: "Naam"
-      email: "E-mail"
-      password: "Wachtwoord"
-      password_confirmation: "Bevestiging"
+
   form:
     an_error:
       one: een fout
       other: enkele fouten
   enums:
-    agenda_item:
-      booking_type:
-        disabled: Uitgeschakeld
-        internal: Interne aanmelding
-        external: Externe aanmelding (via link)
-    content_page:
-      menu_type:
-        menu_hidden: Niet zichtbaar in navigatie
-        menu_visible: Zichtbaar in navigatie en footer
     user:
-      user_type:
-        customer: Gebruiker
-        admin: Administrator
+      role:
+        role_member: Lid
+        role_admin: Administrator
+    team_member:
+      role:
+        role_player: Speler
+        role_coach: Coach
+    comment:
+      comment_type:
+        comment_generic: Algemeen
+        comment_technique: Voetbal
+        comment_behaviour: Gedrag
+        comment_classification: Indeling
 
   views:
     pagination:

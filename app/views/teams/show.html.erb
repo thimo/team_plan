@@ -1,7 +1,15 @@
-<h1><%= @team.name %></h1>
+<div class="row">
+  <div class="col-8">
+    <h1><%= @team.name %></h1>
 
-<% @team.members.each do |member| %>
-<div>
-  <%= link_to member.name, member %>
+    <% @team.team_members.each do |team_member| %>
+    <div>
+      <%= link_to team_member.member.name, team_member.member %>, <%= team_member.role_i18n %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="col-4">
+    <%= render "comments/sidebar" %>
+  </div>
 </div>
-<% end %>

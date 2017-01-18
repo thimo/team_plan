@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   def index
-    @seasons = policy_scope(Season).all
+    @seasons = policy_scope(Season).all.order(created_at: :desc)
   end
 
   def show
@@ -9,6 +9,7 @@ class SeasonsController < ApplicationController
     else
       @season = Season.find(params[:id])
     end
+    
     authorize @season
     add_breadcrumb "#{@season.name}", @season
   end
