@@ -5,6 +5,10 @@
 <% @comments.each do |comment| %>
 <hr />
 <div class="clearfix">
+  <%= link_to edit_comment_path(comment), class: "float-right", title: "Bewerken" do %>
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+  <% end if current_user.role_admin? || comment.user == current_user %>
+
   <div><%= comment.body %></div>
   <div>
     <span class="badge badge-default"><%= comment.comment_type_i18n.downcase %></span>

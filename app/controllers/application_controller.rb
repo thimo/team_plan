@@ -6,9 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index
-
-  add_breadcrumb "Home", :root_path
-  add_breadcrumb "Seizoenen", Season
+  before_action :default_breadcrumb, unless: :devise_controller?
 
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied
@@ -28,4 +26,8 @@ class ApplicationController < ActionController::Base
       I18n.locale = params[:locale] if params[:locale].present?
     end
 
+    def default_breadcrumb
+      add_breadcrumb "Home", :root_path
+      add_breadcrumb "Seizoenen", Season
+    end
 end

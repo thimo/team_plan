@@ -1,7 +1,7 @@
 class BootstrapBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
 
   def render
-    return '' unless @elements.size # fail gracefully if no breadcrumbs
+    return '' unless @elements.size > 0 # fail gracefully if no breadcrumbs
     regular_elements = @elements.dup
     active_element = regular_elements.pop
 

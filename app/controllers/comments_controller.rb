@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:update, :destroy]
-  before_action :load_commentable
+  before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :load_commentable, only: [:create]
 
   def create
     @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
@@ -8,17 +8,19 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: "Opmerking is toegevoegd."
     else
-      # @team = @commentable
-      # @comments = @team.comments
-      # render :template => "teams/show"
       render :new
     end
   end
 
-  # def edit
-  # end
+  def edit
+  end
 
   def update
+    if @comment.update_attributes(comment_params)
+      redirect_to @comment.commentable, notice: "Opmerking is aangepast."
+    else
+      render 'edit'
+    end
   end
 
   def destroy

@@ -2,7 +2,7 @@
   <div class="col-lg-6">
     <h1><%= @team.name %></h1>
 
-    <% @team.team_members.each do |team_member| %>
+    <% @team_members.each do |team_member| %>
     <div>
       <%= link_to team_member.member.name, team_member.member %>, <%= team_member.role_i18n %>
     </div>

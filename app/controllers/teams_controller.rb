@@ -3,7 +3,8 @@ class TeamsController < ApplicationController
 
   def show
     @commentable = @team
-    @comments = @commentable.comments
+    @team_members = @team.team_members.includes(:member)
+    @comments = @commentable.comments.includes(:user)
     @comment = Comment.new
   end
 
