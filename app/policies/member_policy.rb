@@ -1,10 +1,4 @@
-class MemberPolicy < ApplicationPolicy
-  # TODO limit to proper context
-  def index?
-    true
-  end
-
-  # TODO limit to proper context
+class MemberPolicy < AdminPolicy
   def show?
     true
   end

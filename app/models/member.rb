@@ -7,6 +7,6 @@ class Member < ApplicationRecord
   validates_presence_of :first_name, :last_name, :email, :phone
 
   def name
-    "#{first_name} #{middle_name + " " unless middle_name.blank?}#{last_name}"
+    "#{first_name} #{middle_name} #{last_name}".squish
   end
 end

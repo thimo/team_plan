@@ -16,4 +16,12 @@ Rails.application.routes.draw do
   resources :members do
     resources :comments, only: [:new, :create, :edit, :update, :destroy]
   end
+
+  get 'admin' => 'admin#show'
+  namespace :admin do
+    resources :users
+    resources :members
+  end
+
+  get '/check.txt', to: proc {[200, {}, ['it_works']]}
 end

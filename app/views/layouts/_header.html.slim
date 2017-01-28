@@ -10,6 +10,10 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.mb-3
           a.nav-link[href="/"]
             | Home
       ul.navbar-nav.float-xs-right
+        - if policy(:admin).show?
+          li.nav-item
+            = link_to "Admin", admin_path, class: "nav-link"
+          
         li.nav-item.dropdown
           a#dropdown01.nav-link.dropdown-toggle[href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
             = current_user.name

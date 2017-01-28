@@ -15,17 +15,10 @@ nl:
         middle_name: Tussenvoegsels
         last_name: Achternaam
         name: Naam
-        birthdate: Geboortedatum
         email: E-mail
-        phone: Telefoonnummer
-        zip: Postcode
-        address: Adres
-        city: Woonplaats
-        country: Land
         password: Wachtwoord
         password_confirmation: Bevestig wachtwoord
         remember_me: Login onthouden
-        user_type: Rol
       season:
         name: Naam
         active: Actief
@@ -35,8 +28,18 @@ nl:
         year_of_birth_to: Jaartal geboorte t/m
       team:
         name: Naam
-
-  models:
+      member:
+        first_name: Voornaam
+        middle_name: Tussenvoegsels
+        last_name: Achternaam
+        name: Naam
+        email: E-mail
+        birthdate: Geboortedatum
+        phone: Telefoonnummer
+        zip: Postcode
+        address: Adres
+        city: Woonplaats
+        country: Land
 
   form:
     an_error:

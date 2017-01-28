@@ -1,8 +1,10 @@
-.container
+.float-right
   - if policy(Season).create?
-    = link_to new_season_path, class: "float-right", title: "Seizoen toevoegen"
+    = link_to new_season_path, title: "Seizoen toevoegen"
       i.fa.fa-plus
-  h1 Seizoenen
-  - @seasons.each do |season|
-    div
-      = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
+
+h1 Seizoenen
+
+- @seasons.each do |season|
+  div
+    = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
