@@ -8,7 +8,6 @@ class SeasonsController < ApplicationController
   end
 
   def show
-    add_breadcrumb @season.name.to_s, @season
   end
 
   def new; end

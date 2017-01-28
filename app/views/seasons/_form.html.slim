@@ -1,0 +1,5 @@
+= simple_form_for @season do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :active
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-sm'

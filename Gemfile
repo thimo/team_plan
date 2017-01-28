@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+gem 'slim'
 gem 'faker',                      '>= 1.6.0'
 gem 'carrierwave',                '>= 0.10.0'
 gem 'carrierwave-imageoptimizer' # also do: brew install optipng jpegoptim (or via 'apt-get' on Ubuntu)
