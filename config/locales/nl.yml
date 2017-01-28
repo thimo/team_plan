@@ -26,6 +26,15 @@ nl:
         password_confirmation: Bevestig wachtwoord
         remember_me: Login onthouden
         user_type: Rol
+      season:
+        name: Naam
+        active: Actief
+      year_group:
+        name: Naam
+        year_of_birth_from: Jaartal geboorte vanaf
+        year_of_birth_to: Jaartal geboorte t/m
+      team:
+        name: Naam
 
   models:
 

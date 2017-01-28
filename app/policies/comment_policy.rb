@@ -9,7 +9,7 @@ class CommentPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      scope # TODO filter for 'private'
     end
   end
 end

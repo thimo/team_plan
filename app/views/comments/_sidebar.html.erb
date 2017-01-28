@@ -7,7 +7,7 @@
 <div class="clearfix">
   <%= link_to edit_comment_path(comment), class: "float-right", title: "Bewerken" do %>
     <i class="fa fa-pencil" aria-hidden="true"></i>
-  <% end if current_user.role_admin? || comment.user == current_user %>
+  <% end if policy(comment).update? %>
 
   <div><%= comment.body %></div>
   <div>

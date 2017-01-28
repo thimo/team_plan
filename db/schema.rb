@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118152835) do
+ActiveRecord::Schema.define(version: 20170128140801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 20170118152835) do
 
   create_table "seasons", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "active",     default: true
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "active",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "team_members", force: :cascade do |t|
@@ -99,8 +99,10 @@ ActiveRecord::Schema.define(version: 20170118152835) do
   create_table "year_groups", force: :cascade do |t|
     t.string   "name"
     t.integer  "season_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "year_of_birth_from"
+    t.integer  "year_of_birth_to"
     t.index ["season_id"], name: "index_year_groups_on_season_id", using: :btree
   end
 

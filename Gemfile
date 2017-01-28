@@ -17,7 +17,6 @@ gem 'carrierwave',                '>= 0.10.0'
 gem 'carrierwave-imageoptimizer' # also do: brew install optipng jpegoptim (or via 'apt-get' on Ubuntu)
 gem 'mini_magick',                '>= 4.3.6'
 
-#gem 'bootstrap-sass',             '>= 3.3.6'
 #gem 'bootstrap-datepicker-rails'           # Datepicker for Bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
 source 'https://rails-assets.org' do
@@ -62,11 +61,11 @@ group :development do
 
   gem 'letter_opener' # TODO configureren ??
 
-  gem 'capistrano'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rvm'
+  # gem 'capistrano'
+  # gem 'capistrano3-puma'
+  # gem 'capistrano-rails', require: false
+  # gem 'capistrano-bundler', require: false
+  # gem 'capistrano-rvm'
   gem 'meta_request'
   gem 'better_errors' # https://github.com/charliesome/better_errors
   gem 'binding_of_caller'
