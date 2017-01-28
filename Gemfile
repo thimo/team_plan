@@ -59,19 +59,18 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
   gem 'letter_opener' # TODO configureren ??
-
-  # gem 'capistrano'
-  # gem 'capistrano3-puma'
-  # gem 'capistrano-rails', require: false
-  # gem 'capistrano-bundler', require: false
-  # gem 'capistrano-rvm'
   gem 'meta_request'
   gem 'better_errors' # https://github.com/charliesome/better_errors
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'rack-mini-profiler'
+
+  # Adds live-reloading after edit, run with `guard -P livereload`
+  gem "guard", :require => false
+  gem "guard-livereload", :require => false
+  gem "rack-livereload"
+  gem "rb-fsevent", :require => false
 end
 
 group :test do
