@@ -1,0 +1,20 @@
+h2
+  | Opmerkingen
+= render "comments/form"
+- @comments.each do |comment|
+  hr
+  .clearfix
+    - if policy(comment).update?
+      = link_to edit_comment_path(comment), class: "float-right", title: "Bewerken"
+        i.fa.fa-pencil
+      
+    div
+      = comment.body
+    div
+      span.badge.badge-default>
+        = comment.comment_type_i18n.downcase
+      span.badge.badge-primary>
+        = comment.user.name
+      span.badge.badge-info> title="#{I18n.l comment.created_at.localtime, format: :long}"
+        = time_ago_in_words(comment.created_at.localtime)
+        |  geleden 

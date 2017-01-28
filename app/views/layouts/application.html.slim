@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title
+      = full_title(yield(:title))
+    meta[charset="utf-8"]
+    meta name="description" content="#{full_title(yield(:title))}"
+    meta name="author" content="#{I18n.t('company.name')}"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    link rel="shortcut icon" href="#{image_url "favicon.ico"}"
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    
+  body.bg-faded
+    - unless Rails.env.production? || Rails.env.development?
+      div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
+        |  -= #{Rails.env} =- 
+        
+    = render 'layouts/header'
+    = render 'layouts/flash'
+    
+    .container
+      = content_for?(:content) ? yield(:content) : yield
+      
+    = render 'layouts/footer'
+    
+    - if Rails.env.development?
+      .m-4
+        = debug(params)
