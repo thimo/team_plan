@@ -8,6 +8,6 @@
       
 h1
   = @year_group.name
-- @year_group.teams.each do |team|
+- @year_group.teams.asc.each do |team|
   div
     = link_to team.name, team

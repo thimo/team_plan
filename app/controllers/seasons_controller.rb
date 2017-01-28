@@ -4,7 +4,7 @@ class SeasonsController < ApplicationController
   before_action :breadcumbs
 
   def index
-    @seasons = policy_scope(Season).all.order(created_at: :desc)
+    @seasons = policy_scope(Season).all.desc
   end
 
   def show

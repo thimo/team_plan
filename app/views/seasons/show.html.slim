@@ -9,19 +9,20 @@
 h1
   | Seizoen 
   = @season.name
-table.table
-  thead.thead-default
+  
+table.table.table-sm
+  thead
     tr
       th
-      th
+      th.text-center
         | Geboortejaar
       th
   tbody
-    - @season.year_groups.each do |year_group|
+    - @season.year_groups.asc.each do |year_group|
       tr
         td
           = link_to year_group.name, year_group
-        td
+        td.text-center
           - unless year_group.year_of_birth_from.nil? && year_group.year_of_birth_to.nil?
             = year_group.year_of_birth_from
             = '...' if year_group.year_of_birth_from.nil?
