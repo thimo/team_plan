@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170128201140) do
+ActiveRecord::Schema.define(version: 20170130115241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,12 +42,50 @@ ActiveRecord::Schema.define(version: 20170128201140) do
     t.string   "email"
     t.string   "email2"
     t.integer  "gender"
-    t.string   "member_id"
-    t.string   "association_id"
-    t.boolean  "active",         default: true
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "member_number"
+    t.string   "association_number"
+    t.boolean  "active",                default: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "user_id"
+    t.string   "email_2"
+    t.string   "phone_2"
+    t.string   "initials"
+    t.string   "conduct_number"
+    t.string   "sport_category"
+    t.datetime "imported_at"
+    t.string   "status"
+    t.string   "full_name_2"
+    t.string   "place_of_birth"
+    t.string   "country_of_birth"
+    t.string   "nationality"
+    t.string   "nationality_2"
+    t.string   "id_type"
+    t.string   "id_number"
+    t.date     "lasts_change_at"
+    t.string   "privacy_level"
+    t.string   "street"
+    t.string   "house_number"
+    t.string   "house_number_addition"
+    t.string   "phone_home"
+    t.string   "contact_via_parent"
+    t.string   "phone_parent"
+    t.string   "phone_parent_2"
+    t.string   "email_parent"
+    t.string   "email_parent_2"
+    t.string   "bank_account_type"
+    t.string   "bank_account_number"
+    t.string   "bank_bic"
+    t.string   "bank_authorization"
+    t.string   "contribution_category"
+    t.string   "registered_at"
+    t.string   "deregistered_at"
+    t.string   "member_since"
+    t.string   "age_category"
+    t.string   "local_teams"
+    t.string   "club_sports"
+    t.string   "association_sports"
+    t.index ["association_number"], name: "index_members_on_association_number", using: :btree
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 

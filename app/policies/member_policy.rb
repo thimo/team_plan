@@ -3,6 +3,10 @@ class MemberPolicy < AdminPolicy
     true
   end
 
+  def import?
+    create? && update?
+  end
+
   class Scope < Scope
     def resolve
       scope

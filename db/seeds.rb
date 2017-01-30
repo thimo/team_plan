@@ -38,10 +38,10 @@ jo11s.each do |jo11|
   Team.create({name: "ESA JO11-13", year_group: jo11})
 end
 
-player1 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_id: Faker::Code.ean, association_id: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
-player2 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_id: Faker::Code.ean, association_id: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
-player3 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_id: Faker::Code.ean, association_id: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
-coach1 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_id: Faker::Code.ean, association_id: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
+player1 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_number: Faker::Code.ean, association_number: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
+player2 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_number: Faker::Code.ean, association_number: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
+player3 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_number: Faker::Code.ean, association_number: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
+coach1 = Member.create({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_number: Faker::Code.ean, association_number: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
 
 jo11_8s = Team.where({name: "ESA JO11-8"})
 jo11_8s.each do |jo11_8|
