@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: svs_production
-  username: svs
-  password: <%= ENV['SVS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
