@@ -33,7 +33,7 @@ gem 'simple_form' #,                '>= 3.2.0'
 gem 'country_select'
 gem 'autosize-rails' #,             '1.18.17' # Auto-resize textarea's
 
-gem 'breadcrumbs_on_rails' #,       '>= 3.0.1'   # Breadcrumbs in admin
+gem 'breadcrumbs_on_rails' #,       '>= 3.0.1'   # Breadcrumbs
 gem 'enum_help' #,                  '>= 0.0.14'
 gem 'net-ssh' #,                    '>= 3.0.2'
 gem 'figaro' #,                     '>= 1.1.1'
