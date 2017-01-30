@@ -20,14 +20,14 @@ nl:
         password_confirmation: Bevestig wachtwoord
         remember_me: Login onthouden
       season:
-        name: Naam
+        name: Seizoen
         active: Actief
       year_group:
-        name: Naam
+        name: Jaargroep
         year_of_birth_from: Jaartal geboorte vanaf
         year_of_birth_to: Jaartal geboorte t/m
       team:
-        name: Naam
+        name: Team
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
