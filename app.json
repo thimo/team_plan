@@ -1,0 +1,13 @@
+{
+  "name": "SVS",
+  "description": "The SVS",
+  "keywords": [
+    "dokku",
+    "rails"
+  ],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate"
+    }
+  }
+}

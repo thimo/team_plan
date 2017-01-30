@@ -1,0 +1,145 @@
+nl:
+  company:
+    name: Speler Volg Systeem
+    url: https://www.defrog.nl
+    address:
+    zip:
+    city:
+    email: info@defrog.nl
+    phone:
+    contact_name: Thimo Jansen
+  activerecord:
+    attributes:
+      user:
+        first_name: Voornaam
+        middle_name: Tussenvoegsels
+        last_name: Achternaam
+        name: Naam
+        email: E-mail
+        password: Wachtwoord
+        password_confirmation: Bevestig wachtwoord
+        remember_me: Login onthouden
+      season:
+        name: Naam
+        active: Actief
+      year_group:
+        name: Naam
+        year_of_birth_from: Jaartal geboorte vanaf
+        year_of_birth_to: Jaartal geboorte t/m
+      team:
+        name: Naam
+      member:
+        first_name: Voornaam
+        middle_name: Tussenvoegsels
+        last_name: Achternaam
+        name: Naam
+        email: E-mail
+        birthdate: Geboortedatum
+        phone: Telefoonnummer
+        zip: Postcode
+        address: Adres
+        city: Woonplaats
+        country: Land
+
+  form:
+    an_error:
+      one: een fout
+      other: enkele fouten
+  enums:
+    user:
+      role:
+        role_member: Lid
+        role_admin: Administrator
+    team_member:
+      role:
+        role_player: Speler
+        role_coach: Coach
+    comment:
+      comment_type:
+        comment_generic: Algemeen
+        comment_technique: Voetbal
+        comment_behaviour: Gedrag
+        comment_classification: Indeling
+
+  views:
+    pagination:
+      truncate: "..."
+      previous: '<i class="fa fa-angle-left" aria-hidden="true"></i>'
+      first: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+      next: '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+      last: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>'
+  member:
+    import:
+      relatienr: association_number
+      soort_persoon: person_type        # Bondslid, Verenigingslid
+      volledige_naam_(1): full_name     # "Lastname, Initials"
+      voorletters: initials
+      roepnaam: first_name
+      tussenvoegsels: middle_name
+      achternaam: last_name
+      geslacht: gender
+      geb_datum: born_on
+      volledig_adres: address
+      postcode: zipcode
+      woonplaats: city
+      mobiel: phone
+      2e_mobiel: phone_2
+      e-mail: email
+      2e_e-mail: email_2
+      vog-nummer: conduct_number
+      bondssporten: sport_category
+      status: status                    # definitief, af te melden
+      volledige_naam_(2): full_name_2   # "Initials Lastname"
+      geboorteplaats: place_of_birth
+      geboorteland: country_of_birth
+      nationaliteit: nationality
+      2e_nationaliteit: nationality_2
+      legitimatietype: id_type
+      legitimatienr: id_number
+      laatste_wijz: last_change_at
+      privacyniveau: privacy_level
+      straat: street
+      huisnr: house_number
+      huisnr_toev: house_number_addition
+      land: country
+      telefoon: phone_home
+      contact_via_ouder(s)/verzorger(s): contact_via_parent
+      telefoon_ouder/verzorger_1: phone_parent
+      telefoon_ouder/verzorger_2: phone_parent_2
+      e-mail_ouder/verzorger_1: email_parent
+      e-mail_ouder/verzorger_2: email_parent_2
+      bankrek_type: bank_account_type
+      bankrek_nr: bank_account_number
+      bic: bank_bic
+      machtiging?: bank_authorization
+      contrib_cat: contribution_category
+      registratiedatum: registered_at
+      afmelddatum: deregistrated_at
+      lid_sinds: member_since
+      leeftijdscat: age_category
+      lokale_teams: local_teams
+      verenigingssporten: club_sports
+      bondssporten_(elders): association_sports
+
+      # not implemented yet
+      interne_code: internal_number
+      externe_code: external_number
+      wijzig?: wijzig
+      remarks10id: remarks10id
+      rowstatus: rowstatus              # insync, removed
+      bijnaam: nickname
+      overlijdensdatum: date_of_death
+      leeftijd: age
+      heeft_foto?: has_photo
+      bedrijfsnaam: company_name
+      fax: fax
+      aantal_jaar_lid: member_for_years
+      opmerking_indeling: remark_division
+      bijzonderheden: specifics
+      vrij_veld_4: free_entry_4
+      vrij_veld_5: free_entry_5
+      vrij_veld_6: free_entry_6
+      vrij_datumveld_1: free_date_1
+      vrij_datumveld_2: free_date_2
+      vrije_dropdown_1: free_dropdown_1
+      vrije_dropdown_2: free_dropdown_2

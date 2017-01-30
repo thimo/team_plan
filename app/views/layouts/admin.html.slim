@@ -1,0 +1,16 @@
+- content_for :content do
+  .container
+    .row
+      .col-md-9
+        = yield
+      .col-md-3
+        h2
+          | Admin
+        ul.list-unstyled
+          li class="#{'active' if controller.controller_path == 'admin/users'}"
+            = link_to "Gebruikers", admin_users_path
+          li class="#{'active' if controller.controller_path == 'admin/members'}"
+            = link_to "Leden", admin_members_path
+        = yield(:sidebar)
+        
+= render template: "layouts/application"

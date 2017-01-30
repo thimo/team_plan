@@ -1,0 +1,58 @@
+.field_with_errors, .has-error {
+  color: #a94543;
+}
+
+.field_with_errors input, .has-error input, .has-error textarea {
+  border-color: #a94543;
+}
+
+// Correct spacing for inline radio buttons
+.form-group span.radio {
+  margin: 0 4px;
+  label input {
+    margin-right: 4px;
+  }
+}
+
+// Extra alert CSS to support Devise
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #ebcccc;
+  color: #a94442;
+
+  hr {
+    border-top-color: #e4b9b9;
+  }
+  .alert-link {
+    color: #843534;
+  }
+}
+
+.alert-notice {
+  background-color: #dff0d8;
+  border-color: #d0e9c6;
+  color: #3c763d;
+
+  hr {
+    border-top-color: #c1e2b3;
+  }
+  .alert-link {
+    color: #2b542c;
+  }
+}
+
+// Icons voor alerts
+// fa-check
+.fa-success:before, .fa-notice:before {
+  content: "\f00c";
+}
+
+// fa-info-circle
+// .fa-info:before {
+//   content: "\f05a";
+// }
+
+// fa-times
+.fa-danger:before, .fa-alert:before {
+  content: "\f00d";
+}

@@ -1,0 +1,18 @@
+.row
+  .col-lg-6
+    .float-right
+      / - #= link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "btn btn-secondary" do
+      /   - # end
+      - if policy(@team).update?
+        = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn btn-secondary" do
+          i.fa.fa-pencil
+          
+    h1 = @team.name
+    
+    - @team_members.each do |team_member|
+      div
+        = link_to team_member.member.name, team_member.member
+        | , 
+        = team_member.role_i18n
+  .col-lg-6
+    = render "comments/sidebar"

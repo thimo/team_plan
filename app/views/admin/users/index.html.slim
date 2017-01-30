@@ -1,0 +1,20 @@
+.float-right
+  - if policy(User).create?
+    = link_to new_admin_user_path, title: "Gebruiker toevoegen"
+      i.fa.fa-plus
+
+h1 Gebruikers
+
+table.table
+  thead
+    tr
+      th = User.human_attribute_name(:name) 
+      th = User.human_attribute_name(:email)
+  tbody
+    - @users.each do |user|
+      tr
+        td
+          = link_to user.name, [:edit, :admin, user]
+        td 
+          = user.email
+         

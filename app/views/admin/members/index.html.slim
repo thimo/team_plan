@@ -1,0 +1,25 @@
+h1 Leden
+
+table.table
+  thead
+    tr
+      th = Member.human_attribute_name(:name) 
+      th = Member.human_attribute_name(:email)
+  tbody
+    - @members.each do |member|
+      tr
+        td
+          = link_to member.name, [:admin, member]
+        td 
+          = member.email
+         
+h2 Importeer leden
+
+p 
+  | Selecteer een CSV bestand. De waarden moeten zijn gescheiden met komma's, de eerste regel bevat de namen van de kolommen
+
+= form_tag import_admin_members_path, multipart: true do
+  div.m-1
+    = file_field_tag :file
+  div.m-1
+    = submit_tag "Importeren", class: "btn"

@@ -1,0 +1,13 @@
+h1
+  = t('.sign_in', default: 'Sign in')
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
+  = f.error_notification
+  = f.input :email, autofocus: true, class: 'form-control'
+  = f.input :password, autocomplete: 'off', class: 'form-control'
+  - if devise_mapping.rememberable?
+    .form-check
+      = f.label :remember_me, class: 'form-check-label' do
+        = f.check_box :remember_me, class: 'form-check-input'
+        = t('.remember_me', default: 'Remember me')
+  = f.button :submit,  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary'
+= render 'devise/shared/links'
