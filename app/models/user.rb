@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :members
 
-  validates_presence_of :first_name, :last_name, :email
+  # Add conditional validation on first_name and last_name, not executed for devise
+  validates_presence_of :email
 
   enum role: {role_member: 0, role_admin: 1}
 
