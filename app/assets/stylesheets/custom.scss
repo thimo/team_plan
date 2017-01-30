@@ -56,3 +56,24 @@
 .fa-danger:before, .fa-alert:before {
   content: "\f00d";
 }
+
+// Make Bootstrap 4 breadcrumb work nicely with gem
+.breadcrumb li {
+  float: left;
+}
+.breadcrumb li + li::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: #636c72;
+  content: "/";
+}
+.breadcrumb li + li:hover::before {
+  text-decoration: underline;
+}
+.breadcrumb li + li:hover::before {
+  text-decoration: none;
+}
+.breadcrumb li.active {
+  color: #636c72;
+}

@@ -22,4 +22,6 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.mb-3
               | Profiel
             = link_to "Uitloggen", destroy_user_session_path, class: "dropdown-item",  method: :delete
 
-= render_breadcrumbs builder: BootstrapBreadcrumbsBuilder
+.container
+  ol.breadcrumb
+    = render_breadcrumbs :tag => :li, :separator => ""
