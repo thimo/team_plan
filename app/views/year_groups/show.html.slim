@@ -1,13 +1,25 @@
-.float-right
-  - if policy(Team).create?
-    = link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "btn btn-secondary"
-      i.fa.fa-plus
-  - if policy(@year_group).update?
-    = link_to edit_year_group_path(@year_group), title: "Jaargroep aanpassen", class: "btn btn-secondary"
-      i.fa.fa-pencil
-      
-h1
-  = @year_group.name
-- @year_group.teams.asc.each do |team|
-  div
-    = link_to team.name, team
+- provide(:title, "Jaargroep #{@year_group.name}")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@year_group.teams.count} Teams
+      - if policy(Team).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "action-btn"
+            i.fa.fa-plus
+      - if policy(@year_group).update?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to edit_year_group_path(@year_group), title: "Jaargroep aanpassen", class: "action-btn"
+            i.fa.fa-pencil
+  .box-typical-body
+    .table-responsive
+      table.table.table-sm.table-hover
+        thead
+        tbody
+          - @year_group.teams.asc.each do |team|
+            tr
+              td
+                = link_to team.name, team

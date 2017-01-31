@@ -4,6 +4,10 @@ class MemberPolicy < AdminPolicy
   end
 
   def import?
+    process_import?
+  end
+
+  def process_import?
     create? && update?
   end
 

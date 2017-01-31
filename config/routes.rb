@@ -20,12 +20,12 @@ Rails.application.routes.draw do
   get 'admin' => 'admin#show'
   namespace :admin do
     resources :users
-    resources :members do
-      collection do
-        post :import
-      end
+    resources :members
+    resources :members_import, only: [:new] do
+      collection {
+        post :create #, to: 'members_import#create'
+      }
     end
-
   end
 
   get '/check.txt', to: proc {[200, {}, ['it_works']]}

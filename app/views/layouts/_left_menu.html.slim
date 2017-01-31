@@ -1,65 +1,12 @@
 nav.side-menu
   ul.side-menu-list
-    li.grey.with-sub
-      span
-        i.fa.fa-calendar
-        span.lbl
-          | Seizoen 2016 / 2017
-      ul
-        li
-          a[href="index.html"]
-            span.lbl
-              | Default
-            span.label.label-custom.label-pill.label-danger
-              | new
-        li
-          a[href="dashboard-top-menu.html"]
-            span.lbl
-              | Top menu
-        li
-          a[href="side-menu-compact-full.html"]
-            span.lbl
-              | Compact menu
-        li
-          a[href="dashboard-addl-menu.html"]
-            span.lbl
-              | Submenu
-        li
-          a[href="side-menu-avatar.html"]
-            span.lbl
-              | Menu with avatar
-        li
-          a[href="side-menu-avatar.html"]
-            span.lbl
-              | Compact menu with avatar
-        li
-          a[href="dark-menu.html"]
-            span.lbl
-              | Dark menu
-        li
-          a[href="dark-menu-blue.html"]
-            span.lbl
-              | Blue dark menu
-        li
-          a[href="dark-menu-green.html"]
-            span.lbl
-              | Green dark menu
-        li
-          a[href="dark-menu-green-compact.html"]
-            span.lbl
-              | Green compact dark menu
-        li
-          a[href="dark-menu-ultramarine.html"]
-            span.lbl
-              | Ultramarine dark menu
-        li
-          a[href="asphalt-menu.html"]
-            span.lbl
-              | Asphalt top menu
-        li
-          a[href="side-menu-big-icon.html"]
-            span.lbl
-              | Big menu
+    li.grey class="#{'active' if current_page?(root_path)}"
+      a href="/"
+        span
+          i.fa.fa-calendar
+          span.lbl
+            | Seizoen 2016 / 2017
+
     li.brown.with-sub
       span
         i.font-icon.glyphicon.glyphicon-tint
@@ -132,8 +79,8 @@ nav.side-menu
     header.side-menu-title
       | Mijn teams
     ul.side-menu-list
-      li.red
-        a[href="#"]
+      li.red class="#{'active' if current_page?('/teams/87')}"
+        a[href="/teams/87"]
           i.fa.fa-user
           span.lbl
             | ESA JO11-8
@@ -150,13 +97,22 @@ nav.side-menu
       header.side-menu-title
         | Admin
       ul.side-menu-list
-        li.blue
+        li.blue class="#{'active' if controller_name == 'users'}"
           = link_to admin_users_path do
             i.fa.fa-users
             span.lbl
               | Gebruikers
-        li.green
-          = link_to admin_members_path do
+        li.green.with-sub class="#{'opened' if controller_name == 'members'}"
+          span
             i.fa.fa-futbol-o
             span.lbl
               | Leden
+          ul
+            li class="#{'active' if current_page?(admin_members_path)}"
+              = link_to admin_members_path do
+                span.lbl
+                  | Overzicht
+            li
+              = link_to new_admin_members_import_path do
+                span.lbl
+                  | Import uit Sportlink

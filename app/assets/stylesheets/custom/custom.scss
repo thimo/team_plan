@@ -7,6 +7,11 @@
   }
 }
 
+// Highlight navigation
+.side-menu-list .active .lbl {
+  color: black;
+}
+
 .sign-box .list-inline {
   text-align: center;
   li:not(:first-child) a {
