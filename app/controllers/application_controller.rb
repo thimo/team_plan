@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
-  # layout :layout_by_resource
 
   before_action :authenticate_user!
   before_action :set_locale
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index
-  # before_action :default_breadcrumb, unless: :devise_controller?
+  before_action :default_breadcrumb, unless: :devise_controller?
 
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied
@@ -31,12 +30,4 @@ class ApplicationController < ActionController::Base
       add_breadcrumb "Home", :root_path
       add_breadcrumb "Seizoenen", Season unless self.class.parent == Admin
     end
-
-    # def layout_by_resource
-    #   if devise_controller?
-    #     "devise"
-    #   else
-    #     "application"
-    #   end
-    # end
 end
