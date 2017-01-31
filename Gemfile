@@ -50,6 +50,7 @@ group :development, :test do
 
   gem 'awesome_print', require: "awesome_print"
   gem 'pry-byebug'
+  gem 'guard', require: false
 end
 
 group :development do
@@ -67,7 +68,6 @@ group :development do
   gem 'rack-mini-profiler'
 
   # Adds live-reloading after edit, run with `guard -P livereload`
-  gem "guard", :require => false
   gem "guard-livereload", :require => false
   gem "rack-livereload"
   gem "rb-fsevent", :require => false
@@ -76,7 +76,6 @@ end
 group :test do
   gem 'minitest-reporters'
   gem 'mini_backtrace'
-  gem 'guard'
   gem 'guard-minitest'
 end
 
