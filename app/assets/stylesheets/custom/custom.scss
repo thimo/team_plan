@@ -1,0 +1,98 @@
+// Main logo
+.site-header .site-logo {
+  margin-right: 10px;
+  img {
+    height: 60px;
+    top: -10px;
+  }
+}
+
+.sign-box .list-inline {
+  text-align: center;
+  li:not(:first-child) a {
+    padding-left: 5px;
+  }
+  li + li:before {
+    content: "•";
+  }
+}
+
+.field_with_errors, .has-error {
+  color: #a94543;
+}
+
+.field_with_errors input, .has-error input, .has-error textarea {
+  border-color: #a94543;
+}
+
+// Correct spacing for inline radio buttons
+.form-group span.radio {
+  margin: 0 4px;
+  label input {
+    margin-right: 4px;
+  }
+}
+
+// Extra alert CSS to support Devise
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #ebcccc;
+  color: #a94442;
+
+  hr {
+    border-top-color: #e4b9b9;
+  }
+  .alert-link {
+    color: #843534;
+  }
+}
+
+.alert-notice {
+  background-color: #dff0d8;
+  border-color: #d0e9c6;
+  color: #3c763d;
+
+  hr {
+    border-top-color: #c1e2b3;
+  }
+  .alert-link {
+    color: #2b542c;
+  }
+}
+
+// Icons voor alerts
+// fa-check
+.fa-success:before, .fa-notice:before {
+  content: "\f00c";
+}
+
+// fa-info-circle
+// .fa-info:before {
+//   content: "\f05a";
+// }
+
+// fa-times
+.fa-danger:before, .fa-alert:before {
+  content: "\f00d";
+}
+
+// Make Bootstrap 4 breadcrumb work nicely with gem
+.breadcrumb li {
+  float: left;
+}
+.breadcrumb li + li::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: #636c72;
+  content: "/";
+}
+.breadcrumb li + li:hover::before {
+  text-decoration: underline;
+}
+.breadcrumb li + li:hover::before {
+  text-decoration: none;
+}
+.breadcrumb li.active {
+  color: #636c72;
+}

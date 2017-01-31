@@ -91,6 +91,7 @@ nl:
       already_signed_out: Je bent succesvol uitgelogd.
       new:
         sign_in: Inloggen
+        remember_me: Ingelogd blijven
       signed_in: Je bent succesvol ingelogd.
       signed_out: Je bent succesvol uitgelogd.
     shared:

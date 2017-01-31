@@ -1,13 +1,16 @@
-h1
-  = t('.sign_in', default: 'Sign in')
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form', class: "sign-box" }) do |f|
+  .sign-avatar
+    img[src="/startui/img/avatar-sign.png" alt=""]
+  header.sign-title
+    | Inloggen
   = f.error_notification
-  = f.input :email, autofocus: true, class: 'form-control'
-  = f.input :password, autocomplete: 'off', class: 'form-control'
+  = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
+  = f.input :password, autocomplete: 'off', class: 'form-control', placeholder: Member.human_attribute_name(:password), label: false 
   - if devise_mapping.rememberable?
-    .form-check
-      = f.label :remember_me, class: 'form-check-label' do
-        = f.check_box :remember_me, class: 'form-check-input'
-        = t('.remember_me', default: 'Remember me')
+    .form-group
+      .checkbox.float-left
+        = f.check_box :remember_me, class: 'form-check-input', id: 'remember-me'
+        = f.label t('.remember_me', default: 'Remember me'), :remember_me, class: 'form-check-label', for: 'remember-me'
   = f.button :submit,  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary'
-= render 'devise/shared/links'
+  
+  = render 'devise/shared/links'

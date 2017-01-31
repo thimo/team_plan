@@ -1,9 +1,9 @@
+- provide(:title, "Gebruikers")
+
 .float-right
   - if policy(User).create?
     = link_to new_admin_user_path, title: "Gebruiker toevoegen"
       i.fa.fa-plus
-
-h1 Gebruikers
 
 table.table
   thead
