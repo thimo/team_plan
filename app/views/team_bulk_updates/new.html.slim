@@ -1,0 +1,18 @@
+- provide(:title, "Nieuwe tams")
+
+.box-typical.box-typical-padding
+  p Gebruik dit formulier om meerdere teams in één keer aan te maken.
+  
+  p Voer per regel de naam van het team in. Bijvoorbeeld:
+
+  .form-group
+    pre
+      | ESA 4
+        ESA JO11-8
+        
+  hr
+
+  = form_tag year_group_team_bulk_updates_path(@year_group) do
+    .form-group
+      = text_area_tag "teams", nil, class: "form-control", placeholder: "Voer teams in, één per regel"
+    = submit_tag "Aanmaken", class: "btn btn-primary"

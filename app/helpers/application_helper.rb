@@ -14,7 +14,7 @@ module ApplicationHelper
     case message_type
     when "success", "notice"
       1
-    when "alert"
+    when "alert", "warning"
       2
     when "danger", "error"
       3

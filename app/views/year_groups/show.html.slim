@@ -10,6 +10,10 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "action-btn"
             i.fa.fa-plus
+      - if policy(Team).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_year_group_team_bulk_update_path(@year_group), title: "Teams toevoegen", class: "action-btn"
+            i.fa.fa-plus style="text-shadow: 8px -10px #ccc;"
       - if policy(@year_group).update?
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_year_group_path(@year_group), title: "Jaargroep aanpassen", class: "action-btn"

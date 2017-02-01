@@ -10,7 +10,9 @@ Rails.application.routes.draw do
         end
         resources :comments, only: [:new, :create, :edit, :update, :destroy]
       end
+      resources :team_bulk_updates, only: [:new, :create]
     end
+    resources :year_group_bulk_updates, only: [:new, :create]
   end
 
   resources :members do
