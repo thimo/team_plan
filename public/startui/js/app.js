@@ -1,23 +1,4 @@
 $(document).ready(function(){
-/* ==========================================================================
-	Scroll
-	========================================================================== */
-
-	if (!("ontouchstart" in document.documentElement)) {
-
-		document.documentElement.className += " no-touch";
-
-		var jScrollOptions = {
-			autoReinitialise: true,
-			autoReinitialiseDelay: 100
-		};
-
-		$('.scrollable .box-typical-body').jScrollPane(jScrollOptions);
-		$('.side-menu').jScrollPane(jScrollOptions);
-		$('.side-menu-addl').jScrollPane(jScrollOptions);
-		$('.scrollable-block').jScrollPane(jScrollOptions);
-	}
-
 
 /* ==========================================================================
     Header mobile menu
