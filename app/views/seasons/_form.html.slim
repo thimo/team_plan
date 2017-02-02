@@ -1,5 +1,11 @@
 = simple_form_for @season do |f|
   = f.error_notification
   = f.input :name
-  = f.input :active
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-sm'
+  
+  .form-group
+    .checkbox
+      = f.check_box :active, id: :season_active
+      label for="season_active"
+        = Season.human_attribute_name(:active)
+    
+  = f.button :submit, "Opslaan", class: 'btn btn-primary'

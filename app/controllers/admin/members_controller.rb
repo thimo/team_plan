@@ -9,13 +9,6 @@ class Admin::MembersController < AdminController
 
   def show; end
 
-  def import
-    authorize(Member)
-    Member.import(params[:file])
-
-    redirect_to admin_members_path, notice: "Gebruikers zijn geïmporteerd."
-  end
-
   private
 
   def set_member

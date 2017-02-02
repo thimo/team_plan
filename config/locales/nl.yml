@@ -15,10 +15,6 @@ nl:
         middle_name: Tussenvoegsels
         last_name: Achternaam
         name: Naam
-        email: E-mail
-        password: Wachtwoord
-        password_confirmation: Bevestig wachtwoord
-        remember_me: Login onthouden
       season:
         name: Seizoen
         active: Actief

@@ -1,18 +1,32 @@
+- provide(:title, "Team #{@team.name}")
+
 .row
   .col-lg-6
     .float-right
       / - #= link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "btn btn-secondary" do
       /   - # end
-      - if policy(@team).update?
-        = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn btn-secondary" do
-          i.fa.fa-pencil
           
-    h1 = @team.name
-    
-    - @team_members.each do |team_member|
-      div
-        = link_to team_member.member.name, team_member.member
-        | , 
-        = team_member.role_i18n
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | #{@team_members.count} Teamleden
+          - if policy(@team).update?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
+                i.fa.fa-pencil
+      .box-typical-body
+        .table-responsive
+          table.table.table-sm.table-hover
+            thead
+            tbody
+              - @team_members.each do |team_member|
+                tr
+                  td
+                    = link_to team_member.member.name, team_member.member
+                    | , 
+                    = team_member.role_i18n
+                    
   .col-lg-6
     = render "comments/sidebar"

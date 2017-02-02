@@ -55,7 +55,7 @@ class Admin::UsersController < AdminController
       if @user.new_record?
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb @user.name, @user
+        add_breadcrumb @user.name, [:edit, :admin, @user]
       end
     end
   end

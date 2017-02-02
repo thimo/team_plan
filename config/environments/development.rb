@@ -54,4 +54,7 @@ Rails.application.configure do
 
   # Automatically inject JavaScript needed for LiveReload
   config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
+
+  # Indent html for pretty debugging and do not sort attributes
+  Slim::Engine.set_options pretty: true, sort_attrs: false
 end
