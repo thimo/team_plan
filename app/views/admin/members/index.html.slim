@@ -1,14 +1,22 @@
 - provide(:title, "Leden")
 
-table.table
-  thead
-    tr
-      th = Member.human_attribute_name(:name) 
-      th = Member.human_attribute_name(:email)
-  tbody
-    - @members.each do |member|
-      tr
-        td
-          = link_to member.name, [:admin, member]
-        td 
-          = member.email
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@members.count} Leden
+  .box-typical-body
+    .table-responsive
+      table.table.table-sm.table-hover
+        thead
+          tr
+            th = Member.human_attribute_name(:name) 
+            th = Member.human_attribute_name(:email)
+        tbody
+          - @members.each do |member|
+            tr
+              td
+                = link_to member.name, [:admin, member]
+              td 
+                = member.email
