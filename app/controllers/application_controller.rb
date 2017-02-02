@@ -28,6 +28,5 @@ class ApplicationController < ActionController::Base
 
     def default_breadcrumb
       add_breadcrumb "Home", :root_path
-      add_breadcrumb "Seizoenen", Season unless self.class.parent == Admin
     end
 end

@@ -5,6 +5,8 @@ class SeasonsController < ApplicationController
 
   def index
     @seasons = policy_scope(Season).all.desc
+
+    add_breadcrumb "Seizoenen"
   end
 
   def show
@@ -55,9 +57,10 @@ class SeasonsController < ApplicationController
   def breadcumbs
     unless @season.nil?
       if @season.new_record?
+        add_breadcrumb 'Seizoenen', seasons_path
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb @season.name.to_s, @season
+        add_breadcrumb "Seizoen #{@season.name}", @season
       end
     end
   end

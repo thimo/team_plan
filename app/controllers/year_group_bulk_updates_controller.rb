@@ -42,7 +42,7 @@ class YearGroupBulkUpdatesController < ApplicationController
 
 
     def breadcumbs
-      add_breadcrumb @season.name.to_s, @season
+      add_breadcrumb "Seizoen #{@season.name}", @season
       add_breadcrumb 'Nieuw'
     end
 end
