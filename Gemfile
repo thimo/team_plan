@@ -47,7 +47,6 @@ gem 'pundit' #,                     '~> 1.1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-
   gem 'awesome_print', require: "awesome_print"
   gem 'pry-byebug'
   gem 'guard', require: false
@@ -68,15 +67,22 @@ group :development do
   gem 'rack-mini-profiler'
 
   # Adds live-reloading after edit, run with `guard -P livereload`
-  gem "guard-livereload", :require => false
+  gem "guard-livereload", require: false
+  gem 'guard-rspec', require: false
   gem "rack-livereload"
-  gem "rb-fsevent", :require => false
+  gem "rb-fsevent"
+  gem 'spring-commands-rspec'
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
   gem 'minitest-reporters'
   gem 'mini_backtrace'
-  gem 'guard-minitest'
+  gem 'rspec-rails', '~> 3.5'
+
+  gem 'shoulda-matchers', require: false
+  gem 'factory_girl_rails'
+  gem 'webmock'
 end
 
 group :production, :staging do
