@@ -5,7 +5,12 @@ class TeamsController < ApplicationController
 
   def show
     @commentable = @team
-    @team_members = @team.team_members.includes(:member).order("members.first_name")
+
+    @players = @team.players.asc
+    @coaches = @team.coaches.asc
+    @trainers = @team.trainers.asc
+    @team_parents = @team.team_parents.asc
+
     @comments = @commentable.comments.includes(:user)
     @comment = Comment.new
   end

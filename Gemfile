@@ -23,6 +23,7 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.4.0'
 end
+gem 'select2-rails'
 
 gem 'font-awesome-rails'
 gem 'rails-i18n'

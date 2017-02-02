@@ -1,32 +1,58 @@
 - provide(:title, "Team #{@team.name}")
 
-.row
-  .col-lg-6
-    .float-right
-      / - #= link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "btn btn-secondary" do
-      /   - # end
-          
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h3
-              | #{@team_members.count} Teamleden
-          - if policy(@team).update?
-            .tbl-cell.tbl-cell-action-bordered
-              = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
-                i.fa.fa-pencil
-      .box-typical-body
-        .table-responsive
-          table.table.table-sm.table-hover
-            thead
-            tbody
-              - @team_members.each do |team_member|
-                tr
-                  td
-                    = link_to team_member.member.name, team_member.member
-                    | , 
-                    = team_member.role_i18n
-                    
-  .col-lg-6
-    = render "comments/sidebar"
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@team.team_members.count} Teamleden
+      - if policy(TeamMember).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_team_team_member_bulk_update_path(@team), title: "Teamleden toevoegen", class: "action-btn" do
+            i.fa.fa-files-o
+      - if policy(@team).update?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
+            i.fa.fa-pencil
+  .box-typical-body
+    .table-responsive
+      table.table.table-sm.table-hover
+        thead
+          tr
+            th 
+            th Geboortedatum
+        tbody
+          - if @players.size > 0
+            tr
+              td.strong Spelers
+              td
+            - @players.asc.each do |member|
+              tr
+                td = link_to member.name, member
+                td = member.born_on
+          - if @coaches.size > 0
+            tr
+              td.strong Coaches
+              td
+            - @coaches.asc.each do |member|
+              tr
+                td = link_to member.name, member
+                td = member.born_on
+          - if @trainers.size > 0
+            tr
+              td.strong Trainers
+              td
+            - @trainers.asc.each do |member|
+              tr
+                td = link_to member.name, member
+                td = member.born_on
+          - if @team_parents.size > 0
+            tr
+              td.strong Teamouders
+              td
+            - @team_parents.asc.each do |member|
+              tr
+                td = link_to member.name, member
+                td = member.born_on
+                  
+= render "comments/sidebar"

@@ -2,9 +2,14 @@ class TeamMember < ApplicationRecord
   belongs_to :team
   belongs_to :member
 
-  enum role: {role_player: 0, role_coach: 1, role_trainer: 2, role_coach_trainer: 3, role_team_parent: 4}
+  enum role: {role_player: 0, role_coach: 1, role_trainer: 2, role_team_parent: 3}
 
-  validates_presence_of :team, :member, :joined_on, :role
+  validates_presence_of :team, :member, :role
+
+  scope :player, -> { where(role: TeamMember.roles[:role_player])}
+  scope :coach, -> { where(role: TeamMember.roles[:role_coach])}
+  scope :trainer, -> { where(role: TeamMember.roles[:role_trainer])}
+  scope :team_parent, -> { where(role: TeamMember.roles[:role_team_parent])}
 
   def year_group
     team.year_group

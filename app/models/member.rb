@@ -6,6 +6,8 @@ class Member < ApplicationRecord
 
   # validates_presence_of :first_name, :last_name, :email, :phone
 
+  scope :asc, -> { order(last_name: :asc, first_name: :asc) }
+
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
   end

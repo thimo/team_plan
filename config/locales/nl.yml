@@ -50,6 +50,8 @@ nl:
       role:
         role_player: Speler
         role_coach: Coach
+        role_trainer: Trainer
+        role_team_parent: Teamouder
     comment:
       comment_type:
         comment_generic: Algemeen

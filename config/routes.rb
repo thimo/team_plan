@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           resources :comments, only: [:new, :create, :edit, :update, :destroy]
         end
         resources :comments, only: [:new, :create, :edit, :update, :destroy]
+        resources :team_member_bulk_updates, only: [:new, :create]
       end
       resources :team_bulk_updates, only: [:new, :create]
     end
