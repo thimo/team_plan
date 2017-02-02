@@ -9,11 +9,11 @@ section.box-typical
       - if policy(YearGroup).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_season_year_group_path(@season), title: "Jaargroep toevoegen", class: "action-btn"
-            i.fa.fa-plus
+            i.fa.fa-file-o
       - if policy(YearGroup).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_season_year_group_bulk_update_path(@season), title: "Jaargroepen toevoegen", class: "action-btn"
-            i.fa.fa-plus style="text-shadow: 8px -10px #ccc;"
+            i.fa.fa-files-o
       - if policy(@season).update?
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "action-btn"
