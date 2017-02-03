@@ -1,12 +1,13 @@
 - provide(:title, @member.name)
 
-.row
-  label.col-sm-3.col-form-label 
-    = Member.human_attribute_name(:name)
-  p.col-sm-9.form-control-static
-    = @member.name
-.row
-  label.col-sm-3.col-form-label 
-    = Member.human_attribute_name(:email)
-  p.col-sm-9.form-control-static
-    = @member.email
+.box-typical.box-typical-padding
+  .row
+    label.col-sm-3.col-form-label 
+      = Member.human_attribute_name(:name)
+    p.col-sm-9.form-control-static
+      = @member.name
+  .row
+    label.col-sm-3.col-form-label 
+      = Member.human_attribute_name(:email)
+    p.col-sm-9.form-control-static
+      = @member.email
