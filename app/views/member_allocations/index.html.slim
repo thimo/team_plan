@@ -1,0 +1,63 @@
+- provide(:title, "Jaargroep spelersindeling")
+
+
+.row
+  .col-lg-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Teams
+      .box-typical-body
+        .table-responsive
+          table.table.table-sm
+            thead
+            tbody
+              - @teams.asc.each do |team|
+                tr
+                  td
+                    strong = team.name
+                  td
+                  td.text-right
+                    - if team.team_member_players.size > 0
+                      .label.label-pill>
+                        = "#{team.team_member_players.size}"
+                  td.text-right
+                    - if policy(TeamMember).create?
+                      => link_to new_team_team_member_bulk_update_path(team), title: "Teamleden toevoegen", class: "action-btn" do
+                        i.fa.fa-files-o
+                    
+                - team.team_member_players.each do |team_member|
+                  tr
+                    td
+                      = "#{team_member.member.name}"
+                    td 
+                      = l team_member.member.born_on, format: :long
+                    td
+                    td.text-right
+                      - if policy(team_member).destroy?
+                        = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }
+                          i.fa.fa-times
+
+  
+  .col-lg-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Beschikbare leden
+      .box-typical-body
+        .table-responsive
+          table.table.table-sm
+            thead
+            tbody
+              - @available_members.each do |member|
+                - if @year_group.is_not_member(member)
+                  tr
+                    td
+                      = member.name
+                    td 
+                      = l member.born_on, format: :long
+  

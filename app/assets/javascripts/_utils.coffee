@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', ->
   `var fieldTypes`
   $('textarea').autosize()
   if $('.has-error').length > 0
@@ -7,9 +7,7 @@ $ ->
   else
     fieldTypes = 'form input[type=text], form input[type=email], form input[type=number], form textarea'
     $(fieldTypes).filter('[data-provide!=datepicker]').first().focus().select()
-  return
 
-$ ->
   $('table.tr-links > tbody > tr').each ->
     if $(this).find('a').length > 0
       $(this).on 'click', ->

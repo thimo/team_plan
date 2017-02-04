@@ -35,5 +35,6 @@ section.box-typical
                   = year_group.year_of_birth_to
                   = '...' if year_group.year_of_birth_to.nil?
               td.text-right
-                .label.label-pill
-                  = year_group.teams.size
+                - if year_group.teams.size > 0
+                  .label.label-pill
+                    = "#{year_group.teams.size}"

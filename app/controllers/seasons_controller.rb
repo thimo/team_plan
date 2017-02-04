@@ -5,8 +5,6 @@ class SeasonsController < ApplicationController
 
   def index
     @seasons = policy_scope(Season).all.desc
-
-    add_breadcrumb "Seizoenen"
   end
 
   def show

@@ -8,6 +8,10 @@ class Member < ApplicationRecord
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
 
+  scope :from_year, lambda {|year| where("born_on >= ?", "#{year}-01-01")}
+  scope :to_year, lambda {|year| where("born_on <= ?", "#{year}-12-31")}
+  scope :players, -> { where("sport_category <> ''") }
+
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
   end

@@ -20,5 +20,6 @@ section.box-typical
               td
                 = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
               td.text-right
-                .label.label-pill
-                  = season.year_groups.size
+                - if season.year_groups.size > 0
+                  .label.label-pill
+                    = "#{season.year_groups.size}"

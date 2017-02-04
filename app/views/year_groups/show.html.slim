@@ -14,6 +14,10 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_year_group_team_bulk_update_path(@year_group), title: "Teams toevoegen", class: "action-btn"
             i.fa.fa-files-o
+      - if policy(TeamMember).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to year_group_member_allocations_path(@year_group), title: "Spelersindeling", class: "action-btn"
+            i.fa.fa-table
       - if policy(@year_group).update?
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_year_group_path(@year_group), title: "Jaargroep aanpassen", class: "action-btn"
@@ -28,5 +32,6 @@ section.box-typical
               td
                 = link_to team.name, team
               td.text-right
-                .label.label-pill
-                  = team.team_members.size
+                - if team.players.size > 0
+                  .label.label-pill
+                    = "#{team.players.size} / #{team.team_members.size - team.players.size}"

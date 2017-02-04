@@ -3,17 +3,18 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :seasons, shallow: true do
+    resources :year_group_bulk_updates, only: [:new, :create]
     resources :year_groups, shallow: true do
+      resources :team_bulk_updates, only: [:new, :create]
+      resources :member_allocations, only: [:index, :create, :update, :destroy]
       resources :teams, except: [:index], shallow: true do
+        resources :comments, only: [:new, :create, :edit, :update, :destroy]
+        resources :team_member_bulk_updates, only: [:new, :create]
         resources :team_members, except: [:index] do
           resources :comments, only: [:new, :create, :edit, :update, :destroy]
         end
-        resources :comments, only: [:new, :create, :edit, :update, :destroy]
-        resources :team_member_bulk_updates, only: [:new, :create]
       end
-      resources :team_bulk_updates, only: [:new, :create]
     end
-    resources :year_group_bulk_updates, only: [:new, :create]
   end
 
   resources :members do

@@ -21,6 +21,14 @@ tbody tr.clickable {
   }
 }
 
+.bootstrap-table .table a, .fixed-table-body .table a, .table a {
+  border-bottom: none;
+}
+
+a:hover, a:hover:hover {
+  text-decoration: underline;
+}
+
 // Highlight navigation
 .side-menu-list .active .lbl {
   color: black;
