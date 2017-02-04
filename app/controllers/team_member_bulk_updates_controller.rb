@@ -7,44 +7,18 @@ class TeamMemberBulkUpdatesController < ApplicationController
   end
 
   def create
-    players = params[:players]
-    coaches = params[:coaches]
-    trainers = params[:trainers]
-    team_parents = params[:team_parents]
-
     count = 0
 
-    players.each do |id|
-      member = Member.find(id)
-      unless member.nil?
-        @team.team_members.create!(member: member, role: TeamMember.roles[:role_player])
-        count += 1
-      end
-    end unless players.nil?
-
-    coaches.each do |id|
-      member = Member.find(id)
-      unless member.nil?
-        @team.team_members.create!(member: member, role: TeamMember.roles[:role_coach])
-        count += 1
-      end
-    end unless coaches.nil?
-
-    trainers.each do |id|
-      member = Member.find(id)
-      unless member.nil?
-        @team.team_members.create!(member: member, role: TeamMember.roles[:role_trainer])
-        count += 1
-      end
-    end unless trainers.nil?
-
-    team_parents.each do |id|
-      member = Member.find(id)
-      unless member.nil?
-        @team.team_members.create!(member: member, role: TeamMember.roles[:role_team_parent])
-        count += 1
-      end
-    end unless team_parents.nil?
+    %w[player coach trainer team_parent].each do |type|
+      ids = params[type.pluralize]
+      ids.each do |id|
+        member = Member.find(id)
+        unless member.nil?
+          @team.team_members.create!(member: member, role: TeamMember.roles["role_#{type}"])
+          count += 1
+        end
+      end unless ids.nil?
+    end
 
     if count == 0
       flash[:alert] = "Er zijn geen teamleden toegevoegd"
@@ -54,7 +28,12 @@ class TeamMemberBulkUpdatesController < ApplicationController
       flash[:success] = "Er zijn #{count} teamleden toegevoegd"
     end
 
-    redirect_to @team
+    case params[:from]
+    when "member_allocations"
+      redirect_to year_group_member_allocations_path(@team.year_group)
+    else
+      redirect_to @team
+    end
   end
 
   private
