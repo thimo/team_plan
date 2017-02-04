@@ -1,5 +1,5 @@
-$(document).ready(function(){
-
+// $(document).ready(function(){
+$(document).on('turbolinks:load', function() {
 /* ==========================================================================
     Header mobile menu
     ========================================================================== */
