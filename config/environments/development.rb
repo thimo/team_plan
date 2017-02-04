@@ -77,5 +77,15 @@ Rails.application.configure do
     # Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
     # Bullet.stacktrace_excludes = [ 'their_gem', 'their_middleware' ]
     # Bullet.slack = { webhook_url: 'http://some.slack.url', channel: '#default', username: 'notifier' }
+
+    # Detect N+1 queries
+    Bullet.n_plus_one_query_enable     = true
+
+    # Detect eager-loaded associations which are not used
+    Bullet.unused_eager_loading_enable = true
+
+    # Detect unnecessary COUNT queries which could be avoided
+    # with a counter_cache
+    Bullet.counter_cache_enable        = false
   end
 end
