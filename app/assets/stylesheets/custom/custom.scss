@@ -29,9 +29,17 @@ a:hover, a:hover:hover {
   text-decoration: underline;
 }
 
+.w-1 {
+  width: 1px;
+}
+
 // Highlight navigation
 .side-menu-list .active .lbl {
   color: black;
+}
+
+.side-menu a:hover {
+  text-decoration: none;
 }
 
 .sign-box .list-inline {

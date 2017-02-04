@@ -5,7 +5,7 @@
   
   hr
 
-  = form_tag team_team_member_bulk_updates_path(@team) do
+  = form_tag team_team_member_bulk_updates_path(@team, from: params[:from]) do
     .form-group.row
       label.col-sm-2.col-form-label Spelers
       .col-sm-10
@@ -28,5 +28,5 @@
       
       / = text_area_tag "year_groups", nil, class: "form-control", placeholder: "Voer jaargroepen in, één per regel"
     = submit_tag "Toevoegen", class: "btn btn-primary"
-
+    
 / script src="/startui/js/lib/select2/select2.min.js"

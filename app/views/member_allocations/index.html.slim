@@ -1,6 +1,5 @@
 - provide(:title, "Jaargroep spelersindeling")
 
-
 .row
   .col-lg-6
     section.box-typical
@@ -16,29 +15,31 @@
             tbody
               - @teams.asc.each do |team|
                 tr
+                  td.w-1
+                    - if policy(TeamMember).create?
+                      => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
+                        i.fa.fa-files-o.color-blue-grey
                   td
                     strong = team.name
-                  td
-                  td.text-right
                     - if team.team_member_players.size > 0
-                      .label.label-pill>
+                      .label.label-pill.ml-3
                         = "#{team.team_member_players.size}"
-                  td.text-right
-                    - if policy(TeamMember).create?
-                      => link_to new_team_team_member_bulk_update_path(team), title: "Teamleden toevoegen", class: "action-btn" do
-                        i.fa.fa-files-o
+                  td
+                  td
                     
                 - team.team_member_players.each do |team_member|
                   tr
                     td
-                      = "#{team_member.member.name}"
-                    td 
-                      = l team_member.member.born_on, format: :long
                     td
-                    td.text-right
+                      = "#{team_member.member.name}"
+                      .color-blue-grey-lighter.small
+                        = l team_member.member.born_on, format: :long
+                    td 
+                      
+                    td.w-1
                       - if policy(team_member).destroy?
                         = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }
-                          i.fa.fa-times
+                          i.fa.fa-chevron-right
 
   
   .col-lg-6
@@ -47,17 +48,54 @@
         .tbl-row
           .tbl-cell.tbl-cell-title
             h3
-              | Beschikbare leden
+              | #{@available_members.size} Beschikbare leden (TODO: tonen wat filter is)
       .box-typical-body
         .table-responsive
           table.table.table-sm
             thead
             tbody
               - @available_members.each do |member|
-                - if @year_group.is_not_member(member)
-                  tr
-                    td
-                      = member.name
-                    td 
+                tr
+                  td.w-1
+                    - if policy(TeamMember).create?
+                      a [href="" data-toggle="modal" data-target="#exampleModal" data-member-id="#{member.id}" data-member-name="#{member.name}"]
+                        i.fa.fa-chevron-left
+                  td
+                    = member.name
+                    .color-blue-grey-lighter.small
                       = l member.born_on, format: :long
-  
+                  td 
+
+#exampleModal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title
+          | Voeg speler toe aan team:
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+      .modal-body
+        = simple_form_for @team_member do |f|
+          .form-group
+            - @teams.each do |team|
+              .radio
+                = f.radio_button :team_id, "#{team.id}", id: "team_id_#{team.id}"
+                label for="team_id_#{team.id}"
+                  = team.name
+          = f.hidden_field :member_id
+          = hidden_field_tag :year_group_id, "#{@year_group.id}"
+          .modal-footer
+            button.btn.btn-secondary[type="button" data-dismiss="modal"]
+              | Sluiten
+            = f.button :submit, "Toevoegen", class: 'btn btn-primary'
+        
+script
+  | $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var member_id = button.data('member-id')
+      var member_name = button.data('member-name')
+      var modal = $(this)
+      modal.find('.modal-title').text('Voeg ' + member_name + ' toe aan team:')
+      modal.find('.modal-body #team_member_member_id').val(member_id)
+    })

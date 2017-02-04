@@ -10,11 +10,12 @@ Rails.application.routes.draw do
       resources :teams, except: [:index], shallow: true do
         resources :comments, only: [:new, :create, :edit, :update, :destroy]
         resources :team_member_bulk_updates, only: [:new, :create]
-        resources :team_members, except: [:index] do
-          resources :comments, only: [:new, :create, :edit, :update, :destroy]
-        end
       end
     end
+  end
+
+  resources :team_members, only: [:create, :update], shallow: true do
+    resources :comments, only: [:new, :create, :edit, :update, :destroy]
   end
 
   resources :members do

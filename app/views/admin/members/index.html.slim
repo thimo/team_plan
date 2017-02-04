@@ -22,5 +22,7 @@ section.box-typical
             tr
               td
                 = link_to member.name, [:admin, member]
+                .color-blue-grey-lighter.small
+                  = l member.born_on, format: :long unless member.born_on.nil?
               td 
                 = member.email
