@@ -28,12 +28,7 @@ section.box-typical
               td
                 = link_to year_group.name, year_group
               td.text-center
-                - unless year_group.year_of_birth_from.nil? && year_group.year_of_birth_to.nil?
-                  = year_group.year_of_birth_from
-                  = '...' if year_group.year_of_birth_from.nil?
-                  |  - 
-                  = year_group.year_of_birth_to
-                  = '...' if year_group.year_of_birth_to.nil?
+                = year_of_birth_range(year_group)
               td.text-right
                 - if year_group.teams.size > 0
                   .label.label-pill

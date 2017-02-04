@@ -48,7 +48,11 @@
         .tbl-row
           .tbl-cell.tbl-cell-title
             h3
-              | #{@available_members.size} Beschikbare leden (TODO: tonen wat filter is)
+              | #{@available_members.size} Beschikbare leden
+          .tbl-cell.color-blue-grey-lighter
+            - unless @year_group.year_of_birth_from.nil? && @year_group.year_of_birth_to.nil?
+              = year_of_birth_range(@year_group)
+
       .box-typical-body
         .table-responsive
           table.table.table-sm
