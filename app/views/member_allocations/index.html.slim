@@ -39,7 +39,7 @@
                       
                     td.w-1
                       - if policy(team_member).destroy?
-                        = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }
+                        = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
                           i.fa.fa-chevron-right
 
   
@@ -63,7 +63,7 @@
                 tr
                   td.w-1
                     - if policy(TeamMember).create?
-                      a [href="" data-toggle="modal" data-target="#exampleModal" data-member-id="#{member.id}" data-member-name="#{member.name}"]
+                      a [href="" data-toggle="modal" data-target="#exampleModal" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
                         i.fa.fa-chevron-left
                   td
                     = member.name

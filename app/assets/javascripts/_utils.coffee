@@ -15,3 +15,5 @@ $(document).on 'turbolinks:load', ->
         return
       $(this).addClass 'clickable'
     return
+
+  $('[title]').tooltip()
