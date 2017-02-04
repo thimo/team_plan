@@ -11,6 +11,8 @@ class Member < ApplicationRecord
   scope :from_year, lambda {|year| where("born_on >= ?", "#{year}-01-01")}
   scope :to_year, lambda {|year| where("born_on <= ?", "#{year}-12-31")}
   scope :players, -> { where("sport_category <> ''") }
+  scope :male, -> { where(gender: "M") }
+  scope :female, -> { where(gender: "V") }
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
