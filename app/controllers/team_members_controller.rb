@@ -6,7 +6,7 @@ class TeamMembersController < ApplicationController
     @team_member = TeamMember.new(team_member_params.merge(role: TeamMember.roles[:role_player]))
     authorize @team_member
     if @team_member.save
-      redirect_to year_group_member_allocations_path(@year_group), notice: "Speler is aan #{@team_member.team.name} toegevoegd"
+      redirect_to year_group_member_allocations_path(@year_group), notice: "#{@team_member.member.name} is aan #{@team_member.team.name} toegevoegd"
     else
       redirect_to year_group_member_allocations_path(@year_group), alert: "Er is iets mis gegaan, de speler is niet toegevoegd"
     end
