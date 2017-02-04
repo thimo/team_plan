@@ -18,41 +18,44 @@ section.box-typical
     .table-responsive
       table.table.table-sm.tr-links
         thead
-          tr
-            th 
-            th Geboortedatum
         tbody
           - if @players.size > 0
-            tr
-              td.strong Spelers
-              td
             - @players.asc.each do |member|
               tr
-                td = link_to member.name, member
-                td = member.born_on
+                td 
+                  = link_to member.name, member
+                  .color-blue-grey-lighter.small
+                    => l member.born_on, format: :long
+                    = "(#{member.gender})"
           - if @coaches.size > 0
             tr
               td.strong Coaches
-              td
             - @coaches.asc.each do |member|
               tr
-                td = link_to member.name, member
-                td = member.born_on
+                td 
+                  = link_to member.name, member
+                  .color-blue-grey-lighter.small
+                    => l member.born_on, format: :long
+                    = "(#{member.gender})"
           - if @trainers.size > 0
             tr
               td.strong Trainers
-              td
             - @trainers.asc.each do |member|
               tr
-                td = link_to member.name, member
-                td = member.born_on
+                td 
+                  = link_to member.name, member
+                  .color-blue-grey-lighter.small
+                    => l member.born_on, format: :long
+                    = "(#{member.gender})"
           - if @team_parents.size > 0
             tr
               td.strong Teamouders
-              td
             - @team_parents.asc.each do |member|
               tr
-                td = link_to member.name, member
-                td = member.born_on
+                td 
+                  = link_to member.name, member
+                  .color-blue-grey-lighter.small
+                    => l member.born_on, format: :long
+                    = "(#{member.gender})"
                   
 = render "comments/sidebar"
