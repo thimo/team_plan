@@ -45,7 +45,7 @@ class YearGroupsController < ApplicationController
   end
 
   def breadcumbs
-    add_breadcrumb "Seizoen #{@year_group.season.name}", @year_group.season
+    add_breadcrumb "#{@year_group.season.name}", @year_group.season
     if @year_group.new_record?
       add_breadcrumb 'Nieuw'
     else

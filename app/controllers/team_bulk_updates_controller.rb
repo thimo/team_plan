@@ -40,7 +40,7 @@ class TeamBulkUpdatesController < ApplicationController
 
 
     def breadcumbs
-      add_breadcrumb "Seizoen #{@year_group.season.name}", @year_group.season
+      add_breadcrumb "#{@year_group.season.name}", @year_group.season
       add_breadcrumb @year_group.name, @year_group
       add_breadcrumb 'Nieuw'
     end

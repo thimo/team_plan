@@ -55,7 +55,7 @@ class TeamsController < ApplicationController
   end
 
   def breadcumbs
-    add_breadcrumb "Seizoen #{@team.year_group.season.name}", @team.year_group.season
+    add_breadcrumb "#{@team.year_group.season.name}", @team.year_group.season
     add_breadcrumb @team.year_group.name, @team.year_group
     if @team.new_record?
       add_breadcrumb 'Nieuw'

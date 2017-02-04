@@ -60,7 +60,7 @@ class SeasonsController < ApplicationController
         add_breadcrumb 'Seizoenen', seasons_path
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb "Seizoen #{@season.name}", @season
+        add_breadcrumb "#{@season.name}", @season
       end
     end
   end
