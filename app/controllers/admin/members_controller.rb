@@ -4,7 +4,7 @@ class Admin::MembersController < AdminController
   before_action :breadcumbs
 
   def index
-    @members = policy_scope(Member).all
+    @members = policy_scope(Member).asc
   end
 
   def show; end
