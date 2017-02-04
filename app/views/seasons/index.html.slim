@@ -19,3 +19,6 @@ section.box-typical
             tr
               td
                 = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
+              td.text-right
+                .label.label-pill
+                  = season.year_groups.size
