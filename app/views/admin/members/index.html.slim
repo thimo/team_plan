@@ -6,6 +6,10 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         h3
           | #{@members.count} Leden
+      - if policy(YearGroup).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_members_import_path, title: "Importeer leden", class: "action-btn"
+            i.fa.fa-upload
   .box-typical-body
     .table-responsive
       table.table.table-sm.tr-links

@@ -102,17 +102,8 @@ nav.side-menu
             i.fa.fa-users
             span.lbl
               | Gebruikers
-        li.green.with-sub class="#{'opened' if controller_name == 'members'}"
-          span
+        li.green class="#{'active' if controller_name == 'members'}"
+          = link_to admin_members_path do
             i.fa.fa-futbol-o
             span.lbl
               | Leden
-          ul
-            li class="#{'active' if current_page?(admin_members_path)}"
-              = link_to admin_members_path do
-                span.lbl
-                  | Overzicht
-            li
-              = link_to new_admin_members_import_path do
-                span.lbl
-                  | Import uit Sportlink
