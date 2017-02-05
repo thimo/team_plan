@@ -1,4 +1,4 @@
-- provide(:title, "Jaargroep #{@age_group.name}")
+- provide(:title, "Leeftijdsgroep #{@age_group.name}")
 
 section.box-typical
   header.box-typical-header
@@ -20,7 +20,7 @@ section.box-typical
             i.fa.fa-table
       - if policy(@age_group).update?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to edit_age_group_path(@age_group), title: "Jaargroep aanpassen", class: "action-btn"
+          = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "action-btn"
             i.fa.fa-pencil
   .box-typical-body
     .table-responsive

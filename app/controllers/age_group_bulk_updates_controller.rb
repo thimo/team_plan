@@ -24,11 +24,11 @@ class AgeGroupBulkUpdatesController < ApplicationController
     end
 
     if count == 0
-      flash[:alert] = "Er zijn geen jaargroepen aangemaakt"
+      flash[:alert] = "Er zijn geen leeftijdsgroepen aangemaakt"
     elsif count == 1
-      flash[:success] = "Er is 1 jaargroep aangemaakt"
+      flash[:success] = "Er is 1 leeftijdsgroep aangemaakt"
     else
-      flash[:success] = "Er zijn #{count} jaargroepen aangemaakt"
+      flash[:success] = "Er zijn #{count} leeftijdsgroepen aangemaakt"
     end
 
     redirect_to @season

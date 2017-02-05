@@ -9,7 +9,7 @@ class AgeGroupsController < ApplicationController
 
   def create
     if @age_group.save
-      redirect_to @age_group, notice: 'Jaargroep is toegevoegd.'
+      redirect_to @age_group, notice: 'Leeftijdsgroep is toegevoegd.'
     else
       render :new
     end
@@ -19,7 +19,7 @@ class AgeGroupsController < ApplicationController
 
   def update
     if @age_group.update_attributes(age_group_params)
-      redirect_to @age_group, notice: 'Jaargroep is aangepast.'
+      redirect_to @age_group, notice: 'Leeftijdsgroep is aangepast.'
     else
       render 'edit'
     end
