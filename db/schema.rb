@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170205132729) do
+ActiveRecord::Schema.define(version: 20170205140822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170205132729) do
     t.string   "local_teams"
     t.string   "club_sports"
     t.string   "association_sports"
+    t.string   "person_type"
     t.index ["association_number"], name: "index_members_on_association_number", using: :btree
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
