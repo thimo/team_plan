@@ -1,11 +1,14 @@
-= simple_form_for @season do |f|
+= simple_form_for @season, {wrapper: :horizontal_form} do |f|
   = f.error_notification
   = f.input :name
   
-  .form-group
-    .checkbox
-      = f.check_box :active, id: :season_active
-      label for="season_active"
-        = Season.human_attribute_name(:active)
+  .form-group.row class="#{'has-error' if has_error(@season, :active)}"
+    .col-form-legend.col-sm-3
+    .col-sm-9
+      .form-check
+        = f.label :active, class: "form-check-label"
+          => f.check_box :active, class: "form-check-input"
+          = Season.human_attribute_name(:active)
+      = errors_for(@season, :active)
     
   = f.button :submit, "Opslaan", class: 'btn btn-primary'

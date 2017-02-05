@@ -1,4 +1,4 @@
-= simple_form_for [@commentable, @comment] do |f|
+= simple_form_for [@commentable, @comment], {wrapper: :horizontal_form} do |f|
   = f.error_notification
   = f.input :body, label: false, placeholder: "Opmerking"
   .small
