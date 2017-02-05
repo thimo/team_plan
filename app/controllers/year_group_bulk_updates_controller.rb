@@ -16,6 +16,7 @@ class YearGroupBulkUpdatesController < ApplicationController
         year_group.name = parts[0].strip
         year_group.year_of_birth_from = parts[1].to_i unless parts[1].blank?
         year_group.year_of_birth_to = parts[2].to_i unless parts[2].blank?
+        year_group.gender = parts[3] unless parts[3].blank?
         year_group.save
 
         count += 1

@@ -1,6 +1,22 @@
-= simple_form_for [@season, @year_group] do |f|
+= simple_form_for [@season, @year_group], {wrapper: :horizontal_form} do |f|
   = f.error_notification
   = f.input :name
   = f.input :year_of_birth_from, html5: true
   = f.input :year_of_birth_to, html5: true
+  
+  .form-group.row class="#{'has-error' if has_error(@year_group, :gender)}"
+    .col-form-legend.col-sm-3
+      = YearGroup.human_attribute_name(:gender)
+    .col-sm-9
+      .form-check
+        = f.label :gender_m, class: "form-check-label"
+          => f.radio_button :gender, "m", class: "form-check-input"
+          | Man
+      .form-check
+        = f.label :gender_v, class: "form-check-label"
+          => f.radio_button :gender, "v", class: "form-check-input"
+          | Vrouw
+      = errors_for(@year_group, :gender)
+
+
   = f.button :submit, "Opslaan", class: 'btn btn-primary'

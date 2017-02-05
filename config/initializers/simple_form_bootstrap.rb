@@ -53,7 +53,8 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # Fixed for Bootstrap 4 (??)
+  config.wrappers :horizontal_form, tag: 'div', class: 'row form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -61,7 +62,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-md-3 control-label'
+    b.use :label, class: 'col-md-3 col-form-label'
 
     b.wrapper tag: 'div', class: 'col-md-9' do |ba|
       ba.use :input, class: 'form-control'

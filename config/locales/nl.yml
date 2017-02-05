@@ -22,6 +22,7 @@ nl:
         name: Jaargroep
         year_of_birth_from: Jaartal geboorte vanaf
         year_of_birth_to: Jaartal geboorte t/m
+        gender: Geslacht
       team:
         name: Team
       member:

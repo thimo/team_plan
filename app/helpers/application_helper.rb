@@ -22,4 +22,13 @@ module ApplicationHelper
       4
     end
   end
+
+  def errors_for(model, attribute)
+    html_builder = lambda {|error_message| "<div class='help-block'>#{model.class.human_attribute_name(attribute)} #{error_message}</div>" }
+    model.errors[attribute].map { |error_message|  html_builder.call(error_message) }.join(' ').html_safe
+  end
+
+  def has_error(model, attribute)
+    not model.errors[attribute].blank?
+  end
 end

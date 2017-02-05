@@ -54,6 +54,6 @@ class YearGroupsController < ApplicationController
   end
 
   def year_group_params
-    params.require(:year_group).permit(:name, :year_of_birth_from, :year_of_birth_to)
+    params.require(:year_group).permit(:name, :year_of_birth_from, :year_of_birth_to, :gender)
   end
 end
