@@ -38,8 +38,17 @@ a:hover, a:hover:hover {
   color: black;
 }
 
-.side-menu a:hover {
-  text-decoration: none;
+.side-menu {
+  a:hover {
+    text-decoration: none;
+  }
+  .supplier {
+    position: absolute;
+    bottom: 0;
+    img {
+      width: 96px;
+    }
+  }
 }
 
 .sign-box .list-inline {
