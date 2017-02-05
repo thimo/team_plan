@@ -1,6 +1,6 @@
 class AgeGroupsController < ApplicationController
   before_action :create_age_group, only: [:new, :create]
-  before_action :set_age_group, only: [:show, :edit, :update]
+  before_action :set_age_group, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
   def show; end
@@ -23,6 +23,11 @@ class AgeGroupsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    redirect_to @age_group.season, notice: 'Leeftijdsgroep is verwijderd.'
+    @age_group.destroy
   end
 
   private

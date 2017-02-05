@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :create_team, only: [:new, :create]
-  before_action :set_team, only: [:show, :edit, :update]
+  before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
   def show
@@ -33,6 +33,11 @@ class TeamsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    redirect_to @team.age_group, notice: 'Team is verwijderd.'
+    @team.destroy
   end
 
   private

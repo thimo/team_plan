@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   before_action :create_season, only: [:new, :create]
-  before_action :set_season, only: [:show, :edit, :update]
+  before_action :set_season, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
   def index
@@ -28,6 +28,11 @@ class SeasonsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @season.destroy
+    redirect_to seasons_path, notice: 'Seizoen is verwijderd.'
   end
 
   private

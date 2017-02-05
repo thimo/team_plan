@@ -14,6 +14,10 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
             i.fa.fa-pencil
+      - if policy(@team).destroy?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "action-btn"
+            i.fa.fa-trash-o
   .box-typical-body
     .table-responsive
       table.table.table-sm.tr-links

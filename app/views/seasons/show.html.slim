@@ -18,6 +18,10 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "action-btn"
             i.fa.fa-pencil
+      - if policy(@season).destroy?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "action-btn"
+            i.fa.fa-trash-o
   .box-typical-body
     .table-responsive
       table.table.table-sm.tr-links

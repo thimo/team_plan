@@ -7,6 +7,10 @@ class CommentPolicy < ApplicationPolicy
     @user.role_admin? || @record.user = @user
   end
 
+  def destroy?
+    @user.role_admin? || @record.user = @user
+  end
+
   class Scope < Scope
     def resolve
       scope # TODO filter for 'private'

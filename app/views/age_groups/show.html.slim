@@ -22,6 +22,10 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "action-btn"
             i.fa.fa-pencil
+      - if policy(@age_group).destroy?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "action-btn"
+            i.fa.fa-trash-o
   .box-typical-body
     .table-responsive
       table.table.table-sm.tr-links
