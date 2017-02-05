@@ -43,7 +43,7 @@
                           i.fa.fa-bars.p-1
                       - if policy(team_member).destroy?
                         = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
-                          i.fa.fa-chevron-right.p-1
+                          i.fa.fa-times.p-1
 
   
   .col-lg-6
@@ -51,11 +51,15 @@
       header.box-typical-header
         .tbl-row
           .tbl-cell.tbl-cell-title
-            h3
-              | #{@available_members.size} Beschikbare leden
+            .strong
+              | Beschikbare leden
+              - if @available_members.size > 0
+                .label.label-pill.ml-3
+                  = "#{@available_members.size}"
+
           .tbl-cell.color-blue-grey-lighter
-            - unless @age_group.year_of_birth_from.nil? && @age_group.year_of_birth_to.nil?
-              = year_of_birth_range(@age_group)
+            = year_of_birth_range(@age_group)
+            = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
 
       .box-typical-body
         .table-responsive
