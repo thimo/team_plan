@@ -6,8 +6,8 @@ class TeamsController < ApplicationController
   def show
     @commentable = @team
 
-    @players = @team.team_members.players.asc
-    @staff = @team.team_members.staff.asc
+    @players = @team.team_members.players.asc.includes(:member)
+    @staff = @team.team_members.staff.asc.includes(:member)
     # @coaches = @team.team_members.coaches.asc
     # @trainers = @team.team_members.trainers.asc
     # @team_parents = @team.team_members.team_parents.asc
