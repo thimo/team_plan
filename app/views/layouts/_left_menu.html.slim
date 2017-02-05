@@ -1,79 +1,11 @@
 nav.side-menu
   ul.side-menu-list
-    li.grey class="#{'active' if current_page?(root_path)}"
+    li class="#{'active' if current_page?(root_path)}"
       = link_to Season.active.desc.first
         span
           i.fa.fa-calendar
           span.lbl
             | Seizoen #{Season.active.desc.first.name}
-
-    li.brown.with-sub
-      span
-        i.font-icon.glyphicon.glyphicon-tint
-        span.lbl
-          | Skins
-      ul
-        li
-          a[href="theme-side-ebony-clay.html"]
-            span.lbl
-              | Ebony Clay
-        li
-          a[href="theme-side-madison-caribbean.html"]
-            span.lbl
-              | Madison Caribbean
-        li
-          a[href="theme-side-caesium-dark-caribbean.html"]
-            span.lbl
-              | Caesium Dark Caribbean
-        li
-          a[href="theme-side-tin.html"]
-            span.lbl
-              | Tin
-        li
-          a[href="theme-side-litmus-blue.html"]
-            span.lbl
-              | Litmus Blue
-        li
-          a[href="theme-rebecca-purple.html"]
-            span.lbl
-              | Rebecca Purple
-        li
-          a[href="theme-picton-blue.html"]
-            span.lbl
-              | Picton Blue
-        li
-          a[href="theme-picton-blue-white-ebony.html"]
-            span.lbl
-              | Picton Blue White Ebony
-    li.purple.with-sub
-      span
-        i.font-icon.font-icon-comments.active
-        span.lbl
-          | Messages
-      ul
-        li
-          a[href="messenger.html"]
-            span.lbl
-              | Messenger
-        li
-          a[href="chat.html"]
-            span.lbl
-              | Messages
-            span.label.label-custom.label-pill.label-danger
-              | 8
-        li
-          a[href="chat-write.html"]
-            span.lbl
-              | Write Message
-        li
-          a[href="chat-index.html"]
-            span.lbl
-              | Select User
-    li.blue
-      a[href="mail.html"]
-        i.fa.fa-question-circle
-        span.lbl
-          | Support
 
   section
     header.side-menu-title
@@ -107,3 +39,10 @@ nav.side-menu
             i.fa.fa-futbol-o
             span.lbl
               | Leden
+  section
+    ul.side-menu-list
+      li.brown
+        a[href="mail.html"]
+          i.fa.fa-question-circle
+          span.lbl
+            | Support
