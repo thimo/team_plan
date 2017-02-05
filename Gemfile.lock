@@ -74,6 +74,13 @@ GEM
       carrierwave (>= 0.8, < 2.0)
       image_optimizer (~> 1.6)
     coderay (1.1.1)
+    coffee-rails (4.2.1)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.2.x)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.4)
     countries (2.0.6)
       i18n_data (~> 0.7.0)
@@ -364,6 +371,7 @@ DEPENDENCIES
   byebug
   carrierwave (>= 0.10.0)
   carrierwave-imageoptimizer
+  coffee-rails (~> 4.2)
   country_select
   devise
   devise-bootstrap-views!
