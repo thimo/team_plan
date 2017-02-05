@@ -1,4 +1,4 @@
-- provide(:title, "Jaargroep spelersindeling")
+- provide(:title, "Leeftijdsgroep spelersindeling")
 
 .row[data-scroll-position="member_allocations_index"]
   .col-lg-6
@@ -51,8 +51,8 @@
             h3
               | #{@available_members.size} Beschikbare leden
           .tbl-cell.color-blue-grey-lighter
-            - unless @year_group.year_of_birth_from.nil? && @year_group.year_of_birth_to.nil?
-              = year_of_birth_range(@year_group)
+            - unless @age_group.year_of_birth_from.nil? && @age_group.year_of_birth_to.nil?
+              = year_of_birth_range(@age_group)
 
       .box-typical-body
         .table-responsive
@@ -96,7 +96,7 @@
                 label for="team_id_#{team.id}"
                   = team.name
           = f.hidden_field :member_id
-          = hidden_field_tag :year_group_id, "#{@year_group.id}"
+          = hidden_field_tag :age_group_id, "#{@age_group.id}"
           .modal-footer
             button.btn.btn-secondary[type="button" data-dismiss="modal"]
               | Sluiten

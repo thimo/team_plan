@@ -1,33 +1,33 @@
-- provide(:title, "Jaargroep #{@year_group.name}")
+- provide(:title, "Leeftijdsgroep #{@age_group.name}")
 
 section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
         h3
-          | #{@year_group.teams.count} Teams
+          | #{@age_group.teams.count} Teams
       - if policy(Team).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "action-btn"
+          = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
             i.fa.fa-file-o
       - if policy(Team).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_year_group_team_bulk_update_path(@year_group), title: "Teams toevoegen", class: "action-btn"
+          = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
             i.fa.fa-files-o
       - if policy(TeamMember).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to year_group_member_allocations_path(@year_group), title: "Spelersindeling", class: "action-btn"
+          = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "action-btn"
             i.fa.fa-table
-      - if policy(@year_group).update?
+      - if policy(@age_group).update?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to edit_year_group_path(@year_group), title: "Jaargroep aanpassen", class: "action-btn"
+          = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "action-btn"
             i.fa.fa-pencil
   .box-typical-body
     .table-responsive
       table.table.table-sm.tr-links
         thead
         tbody
-          - @year_group.teams.asc.each do |team|
+          - @age_group.teams.asc.each do |team|
             tr
               td
                 = link_to team.name, team

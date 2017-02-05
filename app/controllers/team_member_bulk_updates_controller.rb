@@ -32,7 +32,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
 
     case params[:from]
     when "member_allocations"
-      redirect_to year_group_member_allocations_path(@team.year_group)
+      redirect_to age_group_member_allocations_path(@team.age_group)
     else
       redirect_to @team
     end
@@ -47,8 +47,8 @@ class TeamMemberBulkUpdatesController < ApplicationController
 
 
     def breadcumbs
-      add_breadcrumb "#{@team.year_group.season.name}", @team.year_group.season
-      add_breadcrumb @team.year_group.name, @team.year_group
+      add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
+      add_breadcrumb @team.age_group.name, @team.age_group
       add_breadcrumb @team.name, @team
       add_breadcrumb 'Nieuw'
     end

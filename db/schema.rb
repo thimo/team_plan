@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170205140822) do
+ActiveRecord::Schema.define(version: 20170205174901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "age_groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "season_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "year_of_birth_from"
+    t.integer  "year_of_birth_to"
+    t.string   "gender"
+    t.index ["season_id"], name: "index_age_groups_on_season_id", using: :btree
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -112,10 +123,10 @@ ActiveRecord::Schema.define(version: 20170205140822) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.integer  "year_group_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["year_group_id"], name: "index_teams_on_year_group_id", using: :btree
+    t.integer  "age_group_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["age_group_id"], name: "index_teams_on_age_group_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -139,21 +150,10 @@ ActiveRecord::Schema.define(version: 20170205140822) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "year_groups", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "season_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "year_of_birth_from"
-    t.integer  "year_of_birth_to"
-    t.string   "gender"
-    t.index ["season_id"], name: "index_year_groups_on_season_id", using: :btree
-  end
-
+  add_foreign_key "age_groups", "seasons"
   add_foreign_key "comments", "users"
   add_foreign_key "members", "users"
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
-  add_foreign_key "teams", "year_groups"
-  add_foreign_key "year_groups", "seasons"
+  add_foreign_key "teams", "age_groups"
 end

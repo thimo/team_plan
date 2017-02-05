@@ -26,7 +26,7 @@
       .col-sm-10
         = select_tag :team_parents, options_from_collection_for_select(@members, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_team_parents'
       
-      / = text_area_tag "year_groups", nil, class: "form-control", placeholder: "Voer jaargroepen in, één per regel"
+      / = text_area_tag "age_groups", nil, class: "form-control", placeholder: "Voer leeftijdsgroepen in, één per regel"
     = submit_tag "Toevoegen", class: "btn btn-primary"
     
 / script src="/startui/js/lib/select2/select2.min.js"

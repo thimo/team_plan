@@ -18,8 +18,8 @@ nl:
       season:
         name: Seizoen
         active: Actief
-      year_group:
-        name: Jaargroep
+      age_group:
+        name: Leeftijdsgroep
         year_of_birth_from: Jaartal geboorte vanaf
         year_of_birth_to: Jaartal geboorte t/m
         gender: Geslacht

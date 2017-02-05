@@ -1,5 +1,5 @@
 class TeamBulkUpdatesController < ApplicationController
-  before_action :set_year_group, only: [:new, :create]
+  before_action :set_age_group, only: [:new, :create]
   before_action :breadcumbs
 
   def new
@@ -12,7 +12,7 @@ class TeamBulkUpdatesController < ApplicationController
     teams.each_line do |line|
       parts = line.split(',')
       unless parts[0].blank?
-        team = @year_group.teams.build
+        team = @age_group.teams.build
         team.name = parts[0].strip
         team.save
 
@@ -28,20 +28,20 @@ class TeamBulkUpdatesController < ApplicationController
       flash[:success] = "Er zijn #{count} teams aangemaakt"
     end
 
-    redirect_to @year_group
+    redirect_to @age_group
   end
 
   private
 
-    def set_year_group
-      @year_group = YearGroup.find(params[:year_group_id])
+    def set_age_group
+      @age_group = AgeGroup.find(params[:age_group_id])
       authorize Team
     end
 
 
     def breadcumbs
-      add_breadcrumb "#{@year_group.season.name}", @year_group.season
-      add_breadcrumb @year_group.name, @year_group
+      add_breadcrumb "#{@age_group.season.name}", @age_group.season
+      add_breadcrumb @age_group.name, @age_group
       add_breadcrumb 'Nieuw'
     end
   end
