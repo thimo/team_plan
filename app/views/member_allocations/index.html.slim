@@ -37,10 +37,13 @@
                         = "(#{team_member.member.gender})"
                     td 
                       
-                    td.w-1
+                    td.w-1.nowrap
+                      - if policy(team_member).update?
+                        a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{team_member.member.id}" data-member-name="#{team_member.member.name}" title="Verplaatsen naar team"]
+                          i.fa.fa-bars.p-1
                       - if policy(team_member).destroy?
                         = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
-                          i.fa.fa-chevron-right
+                          i.fa.fa-chevron-right.p-1
 
   
   .col-lg-6
@@ -63,8 +66,8 @@
                 tr
                   td.w-1
                     - if policy(TeamMember).create?
-                      a [href="" data-toggle="modal" data-target="#exampleModal" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
-                        i.fa.fa-chevron-left
+                      a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
+                        i.fa.fa-chevron-left.p-1
                   td
                     = link_to member.name, member
                     .color-blue-grey-lighter.small
@@ -78,11 +81,12 @@
                         = "#{member.local_teams}"
                   td 
 
-#exampleModal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+/ Dialog used for both new and edit actions on team members
+#teamMemberNew.modal.fade[tabindex="-1" role="dialog" aria-labelledby="teamMemberNewLabel" aria-hidden="true"]
   .modal-dialog[role="document"]
     .modal-content
       .modal-header
-        h5#exampleModalLabel.modal-title
+        h5#teamMemberNewLabel.modal-title
           | Voeg speler toe aan team:
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"]
@@ -96,18 +100,10 @@
                 label for="team_id_#{team.id}"
                   = team.name
           = f.hidden_field :member_id
+          = hidden_field_tag :team_member_id
           = hidden_field_tag :age_group_id, "#{@age_group.id}"
           .modal-footer
             button.btn.btn-secondary[type="button" data-dismiss="modal"]
               | Sluiten
             = f.button :submit, "Toevoegen", class: 'btn btn-primary'
-        
-script
-  | $('#exampleModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) // Button that triggered the modal
-      var member_id = button.data('member-id')
-      var member_name = button.data('member-name')
-      var modal = $(this)
-      modal.find('.modal-title').text('Voeg ' + member_name + ' toe aan team:')
-      modal.find('.modal-body #team_member_member_id').val(member_id)
-    })
+            
