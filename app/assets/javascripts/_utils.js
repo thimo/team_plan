@@ -1,3 +1,12 @@
+// Create Turbolinks unload event
+var dispatchUnloadEvent = function() {
+  var event = document.createEvent("Events")
+  event.initEvent("turbolinks:unload", true, false)
+  document.dispatchEvent(event)
+}
+addEventListener("beforeunload", dispatchUnloadEvent)
+addEventListener("turbolinks:before-render", dispatchUnloadEvent)
+
 $(document).on('turbolinks:load', function() {
   var fieldTypes;
   var fieldTypes;
@@ -17,14 +26,20 @@ $(document).on('turbolinks:load', function() {
       $(this).addClass('clickable');
     }
   });
-  return $('.no-touch [title]').tooltip();
+
+  $('.no-touch [title]').tooltip();
+
+  // Restore scroll position
+  scrollPosition = $("[data-scroll-position]").data("scrollPosition")
+  if (!!scrollPosition && !!localStorage.getItem(scrollPosition)) {
+    $(window).scrollTop(localStorage.getItem(scrollPosition));
+  }
 });
 
-var dispatchUnloadEvent = function() {
-  var event = document.createEvent("Events")
-  event.initEvent("turbolinks:unload", true, false)
-  document.dispatchEvent(event)
-}
-
-addEventListener("beforeunload", dispatchUnloadEvent)
-addEventListener("turbolinks:before-render", dispatchUnloadEvent)
+$(document).on('turbolinks:unload', function() {
+  // Store scroll position for pages with data-scroll-position
+  scrollPosition = $("[data-scroll-position]").data("scrollPosition")
+  if (!!scrollPosition) {
+    localStorage.setItem(scrollPosition, $(window).scrollTop());
+  }
+});

@@ -1,11 +1,4 @@
 $(document).on('turbolinks:load', function() {
-  var matchParts;
-  matchParts = function(term, text) {
-    if (text.toUpperCase().indexOf(term.toUpperCase()) === 0) {
-      return true;
-    }
-    return false;
-  };
   $('#team_member_players, #team_member_coaches, #team_member_trainers, #team_member_team_parents').select2({
     placeholder: "Selecteer leden",
     matcher: function(params, data) {
@@ -27,3 +20,11 @@ $(document).on('turbolinks:load', function() {
     }
   });
 });
+
+var matchParts;
+matchParts = function(term, text) {
+  if (text.toUpperCase().indexOf(term.toUpperCase()) === 0) {
+    return true;
+  }
+  return false;
+};
