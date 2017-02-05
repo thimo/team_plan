@@ -16,4 +16,5 @@ $(document).on 'turbolinks:load', ->
       $(this).addClass 'clickable'
     return
 
-  $('[title]').tooltip()
+  # Load tooltips
+  $('.no-touch [title]').tooltip()

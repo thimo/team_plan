@@ -4,6 +4,10 @@ $(document).on('turbolinks:load', function() {
     Header mobile menu
     ========================================================================== */
 
+  if (!("ontouchstart" in document.documentElement)) {
+    document.documentElement.className += " no-touch";
+  }
+
 	// Dropdowns
 	$('.site-header-collapsed .dropdown').each(function(){
 		var parent = $(this),
