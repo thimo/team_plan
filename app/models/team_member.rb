@@ -5,6 +5,7 @@ class TeamMember < ApplicationRecord
   enum role: {role_player: 0, role_coach: 1, role_trainer: 2, role_team_parent: 3}
 
   validates_presence_of :team, :member, :role
+  validates :role, :uniqueness => {:scope => [:team, :member]}
 
   scope :player, -> { where(role: TeamMember.roles[:role_player])}
   scope :coach, -> { where(role: TeamMember.roles[:role_coach])}
