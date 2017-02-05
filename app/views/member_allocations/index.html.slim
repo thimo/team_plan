@@ -31,7 +31,7 @@
                   tr
                     td
                     td
-                      = "#{team_member.member.name}"
+                      = link_to team_member.member.name, team_member.member
                       .color-blue-grey-lighter.small
                         => l team_member.member.born_on, format: :long
                         = "(#{team_member.member.gender})"
@@ -66,10 +66,16 @@
                       a [href="" data-toggle="modal" data-target="#exampleModal" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
                         i.fa.fa-chevron-left
                   td
-                    = member.name
+                    = link_to member.name, member
                     .color-blue-grey-lighter.small
                       => l member.born_on, format: :long
                       = "(#{member.gender})"
+                    - unless member.club_sports.blank?
+                      .color-blue-grey.small
+                        = "#{member.club_sports}"
+                    - unless member.local_teams.blank?
+                      .color-blue-grey.small
+                        = "#{member.local_teams}"
                   td 
 
 #exampleModal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]

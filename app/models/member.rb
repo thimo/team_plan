@@ -10,7 +10,7 @@ class Member < ApplicationRecord
 
   scope :from_year, lambda {|year| where("born_on >= ?", "#{year}-01-01")}
   scope :to_year, lambda {|year| where("born_on <= ?", "#{year}-12-31")}
-  scope :players, -> { where("sport_category <> ''") }
+  scope :active_players, -> {where("sport_category <> ''").where(status: "definitief")}
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
 
