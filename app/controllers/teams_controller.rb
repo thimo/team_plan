@@ -45,8 +45,8 @@ class TeamsController < ApplicationController
             end
     authorize @team
 
-    @year_group = YearGroup.find(params[:year_group_id])
-    @team.year_group = @year_group
+    @age_group = AgeGroup.find(params[:age_group_id])
+    @team.age_group = @age_group
   end
 
   def set_team
@@ -55,8 +55,8 @@ class TeamsController < ApplicationController
   end
 
   def breadcumbs
-    add_breadcrumb "#{@team.year_group.season.name}", @team.year_group.season
-    add_breadcrumb @team.year_group.name, @team.year_group
+    add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
+    add_breadcrumb @team.age_group.name, @team.age_group
     if @team.new_record?
       add_breadcrumb 'Nieuw'
     else

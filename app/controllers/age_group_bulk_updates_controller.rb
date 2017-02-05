@@ -1,4 +1,4 @@
-class YearGroupBulkUpdatesController < ApplicationController
+class AgeGroupBulkUpdatesController < ApplicationController
   before_action :set_season, only: [:new, :create]
   before_action :breadcumbs
 
@@ -6,18 +6,18 @@ class YearGroupBulkUpdatesController < ApplicationController
   end
 
   def create
-    year_groups = params[:year_groups]
+    age_groups = params[:age_groups]
     count = 0
 
-    year_groups.each_line do |line|
+    age_groups.each_line do |line|
       parts = line.split(',')
       unless parts[0].blank?
-        year_group = @season.year_groups.build
-        year_group.name = parts[0].strip
-        year_group.year_of_birth_from = parts[1].to_i unless parts[1].blank?
-        year_group.year_of_birth_to = parts[2].to_i unless parts[2].blank?
-        year_group.gender = parts[3] unless parts[3].blank?
-        year_group.save
+        age_group = @season.age_groups.build
+        age_group.name = parts[0].strip
+        age_group.year_of_birth_from = parts[1].to_i unless parts[1].blank?
+        age_group.year_of_birth_to = parts[2].to_i unless parts[2].blank?
+        age_group.gender = parts[3] unless parts[3].blank?
+        age_group.save
 
         count += 1
       end
@@ -38,7 +38,7 @@ class YearGroupBulkUpdatesController < ApplicationController
 
     def set_season
       @season = Season.find(params[:season_id])
-      authorize YearGroup
+      authorize AgeGroup
     end
 
 

@@ -12,11 +12,11 @@ class TeamMember < ApplicationRecord
   scope :trainer, -> { where(role: TeamMember.roles[:role_trainer])}
   scope :team_parent, -> { where(role: TeamMember.roles[:role_team_parent])}
 
-  def year_group
-    team.year_group
+  def age_group
+    team.age_group
   end
 
   def season
-    year_group.season
+    age_group.season
   end
 end

@@ -1,4 +1,4 @@
-class YearGroupPolicy < ApplicationPolicy
+class AgeGroupPolicy < ApplicationPolicy
   def index?
     true
   end

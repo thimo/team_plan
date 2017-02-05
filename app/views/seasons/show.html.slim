@@ -5,14 +5,14 @@ section.box-typical
     .tbl-row
       .tbl-cell.tbl-cell-title
         h3
-          | #{@season.year_groups.count} Jaargroepen
-      - if policy(YearGroup).create?
+          | #{@season.age_groups.count} Jaargroepen
+      - if policy(AgeGroup).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_season_year_group_path(@season), title: "Jaargroep toevoegen", class: "action-btn"
+          = link_to new_season_age_group_path(@season), title: "Jaargroep toevoegen", class: "action-btn"
             i.fa.fa-file-o
-      - if policy(YearGroup).create?
+      - if policy(AgeGroup).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_season_year_group_bulk_update_path(@season), title: "Jaargroepen toevoegen", class: "action-btn"
+          = link_to new_season_age_group_bulk_update_path(@season), title: "Jaargroepen toevoegen", class: "action-btn"
             i.fa.fa-files-o
       - if policy(@season).update?
         .tbl-cell.tbl-cell-action-bordered
@@ -23,14 +23,14 @@ section.box-typical
       table.table.table-sm.tr-links
         thead
         tbody
-          - @season.year_groups.asc.each do |year_group|
+          - @season.age_groups.asc.each do |age_group|
             tr
               td
-                = link_to year_group.name, year_group
+                = link_to age_group.name, age_group
               td.text-center
-                => year_of_birth_range(year_group)
-                = "(#{year_group.gender})" unless year_group.gender.blank?
+                => year_of_birth_range(age_group)
+                = "(#{age_group.gender})" unless age_group.gender.blank?
               td.text-right
-                - if year_group.teams.size > 0
+                - if age_group.teams.size > 0
                   .label.label-pill
-                    = "#{year_group.teams.size}"
+                    = "#{age_group.teams.size}"

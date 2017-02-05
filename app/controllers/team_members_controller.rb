@@ -2,13 +2,13 @@ class TeamMembersController < ApplicationController
   before_action :set_team_member, only: [:edit, :update, :destroy]
 
   def create
-    @year_group = YearGroup.find(params[:year_group_id])
+    @age_group = AgeGroup.find(params[:age_group_id])
     @team_member = TeamMember.new(team_member_params.merge(role: TeamMember.roles[:role_player]))
     authorize @team_member
     if @team_member.save
-      redirect_to year_group_member_allocations_path(@year_group), notice: "#{@team_member.member.name} is aan #{@team_member.team.name} toegevoegd"
+      redirect_to age_group_member_allocations_path(@age_group), notice: "#{@team_member.member.name} is aan #{@team_member.team.name} toegevoegd"
     else
-      redirect_to year_group_member_allocations_path(@year_group), alert: "Er is iets mis gegaan, de speler is niet toegevoegd"
+      redirect_to age_group_member_allocations_path(@age_group), alert: "Er is iets mis gegaan, de speler is niet toegevoegd"
     end
   end
 

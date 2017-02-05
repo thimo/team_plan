@@ -18,8 +18,8 @@ class MembersController < ApplicationController
     authorize @member
 
     # TODO add breadcrumb for current active team
-    # add_breadcrumb "#{@member.team.year_group.season.name}", @member.team.year_group.season
-    # add_breadcrumb "#{@member.team.year_group.name}", @member.team.year_group
+    # add_breadcrumb "#{@member.team.age_group.season.name}", @member.team.age_group.season
+    # add_breadcrumb "#{@member.team.age_group.name}", @member.team.age_group
     # add_breadcrumb "#{@member.team.name}", @member.team
     add_breadcrumb "#{@member.name}", @member
   end

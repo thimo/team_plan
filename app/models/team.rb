@@ -1,5 +1,5 @@
 class Team < ApplicationRecord
-  belongs_to :year_group
+  belongs_to :age_group
   has_many :team_members, dependent: :destroy
   has_many :members, through: :team_members
   has_many :comments, as: :commentable, dependent: :destroy
@@ -14,7 +14,7 @@ class Team < ApplicationRecord
   has_many :trainers, through: :team_member_trainers, class_name: "Member", source: :member
   has_many :team_parents, through: :team_member_team_parents, class_name: "Member", source: :member
 
-  validates_presence_of :name, :year_group
+  validates_presence_of :name, :age_group
 
   scope :asc, -> { order(:created_at) }
 end

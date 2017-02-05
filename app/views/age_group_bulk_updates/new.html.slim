@@ -13,7 +13,7 @@
         
   hr
 
-  = form_tag season_year_group_bulk_updates_path(@season) do
+  = form_tag season_age_group_bulk_updates_path(@season) do
     .form-group
-      = text_area_tag "year_groups", nil, class: "form-control", placeholder: "Voer jaargroepen in, één per regel"
+      = text_area_tag "age_groups", nil, class: "form-control", placeholder: "Voer jaargroepen in, één per regel"
     = submit_tag "Aanmaken", class: "btn btn-primary"
