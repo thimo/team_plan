@@ -6,10 +6,11 @@ class TeamsController < ApplicationController
   def show
     @commentable = @team
 
-    @players = @team.players.asc
-    @coaches = @team.coaches.asc
-    @trainers = @team.trainers.asc
-    @team_parents = @team.team_parents.asc
+    @players = @team.team_members.players.asc
+    @staff = @team.team_members.staff.asc
+    # @coaches = @team.team_members.coaches.asc
+    # @trainers = @team.team_members.trainers.asc
+    # @team_parents = @team.team_members.team_parents.asc
 
     @comments = @commentable.comments.includes(:user)
     @comment = Comment.new

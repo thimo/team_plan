@@ -4,8 +4,9 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        h3
-          | #{@season.age_groups.count} Leeftijdsgroepen
+        .strong
+          | Leeftijdsgroepen
+          .label.label-pill.ml-3 = @season.age_groups.count
       - if policy(AgeGroup).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_season_age_group_path(@season), title: "Leeftijdsgroep toevoegen", class: "action-btn"

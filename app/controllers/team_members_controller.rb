@@ -21,11 +21,14 @@ class TeamMembersController < ApplicationController
     else
       flash[:alert] = "Er is iets mis gegaan, de speler is niet toegevoegd"
     end
-    
+
     redirect_to age_group_member_allocations_path(@age_group)
   end
 
-  def destroy; end
+  def destroy
+    redirect_to :back, notice: "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
+    @team_member.destroy
+  end
 
   private
 

@@ -4,8 +4,9 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        h3
-          | #{@age_group.teams.count} Teams
+        .strong
+          | Teams
+          .label.label-pill.ml-3 = @age_group.teams.count
       - if policy(Team).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
@@ -36,6 +37,6 @@ section.box-typical
               td
                 = link_to team.name, team
               td.text-right
-                - if team.players.size > 0
+                - if team.team_members.players.size > 0
                   .label.label-pill
-                    = "#{team.players.size} / #{team.team_members.size - team.players.size}"
+                    = "#{team.team_members.players.size} / #{team.team_members.size - team.team_members.players.size}"

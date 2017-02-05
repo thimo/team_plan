@@ -3,7 +3,7 @@ class MemberAllocationsController < ApplicationController
     @team_member = TeamMember.new
 
     @age_group = AgeGroup.find(params[:age_group_id])
-    @teams = policy_scope(Team).where(age_group_id: @age_group.id).includes(:team_member_players).includes(team_member_players: :member)
+    @teams = policy_scope(Team).where(age_group_id: @age_group.id)
 
     members = policy_scope(Member).active_players.asc
     members = members.from_year(@age_group.year_of_birth_from) \
@@ -26,12 +26,11 @@ class MemberAllocationsController < ApplicationController
   def update; end
 
   def destroy
-    team_member = TeamMember.find(params[:id])
-    authorize team_member
-    team_member.destroy
+    @team_member = TeamMember.find(params[:id])
+    authorize @team_member
+    @team_member.destroy
 
-    # redirect_to member_allocation_path(team_member.team.age_group.id)
-    redirect_to :back
+    redirect_to :back, notice: "Teamlid is verwijderd uit het team."
   end
 
   private
