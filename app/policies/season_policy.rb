@@ -13,13 +13,17 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def update?
+    return false if @record.archived?
+    
     # Only by admin
-    @user.admin? && !@record.archived?
+    @user.admin?
   end
 
   def destroy?
+    return false if @record.archived? || @record.active?
+
     # Only by admin
-    @user.admin? && !@record.active? && !@record.archived?
+    @user.admin?
   end
 
   class Scope < Scope

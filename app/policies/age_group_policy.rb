@@ -12,11 +12,15 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.admin? && !@record.archived?
+    return false if @record.archived?
+    
+    @user.admin?
   end
 
   def destroy?
-    @user.admin? && !@record.active? && !@record.archived?
+    return false if @record.archived? || @record.active?
+
+    @user.admin?
   end
 
   class Scope < Scope
