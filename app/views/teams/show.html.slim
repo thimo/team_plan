@@ -30,7 +30,7 @@ section.box-typical
                 td 
                   = link_to team_member.member.name, team_member.member
                   .color-blue-grey-lighter.small
-                    => l team_member.member.born_on, format: :long
+                    => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                     = "(#{team_member.member.gender})"
                 td.w-1
                   - if policy(team_member).destroy?
@@ -46,7 +46,7 @@ section.box-typical
                   = link_to team_member.member.name, team_member.member
                   = team_member.role_i18n
                   .color-blue-grey-lighter.small
-                    => l team_member.member.born_on, format: :long
+                    => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                     = "(#{team_member.member.gender})"
                 td.w-1
                   - if policy(team_member).destroy?
