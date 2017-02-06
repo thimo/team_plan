@@ -8,19 +8,19 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.admin?
+    return false if @record.archived?
+
+    @user.admin? || @user.club_staff?
   end
 
   def update?
-    return false if @record.archived?
-    
-    @user.admin?
+    create?
   end
 
   def destroy?
     return false if @record.archived? || @record.active?
 
-    @user.admin?
+    create?
   end
 
   class Scope < Scope

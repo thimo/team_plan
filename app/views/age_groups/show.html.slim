@@ -7,18 +7,19 @@ section.box-typical
         .strong
           | Teams
           .label.label-pill.ml-3 = @age_group.teams.count
-      - if policy(@age_group).update? && policy(Team).create?
+      - if policy(@age_group.teams.new).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
             i.fa.fa-file-o
-      - if policy(@age_group).update? && policy(Team).create?
+      - if policy(@age_group.teams.new).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
             i.fa.fa-files-o
-      - if policy(@age_group).update? && policy(TeamMember).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "action-btn"
-            i.fa.fa-table
+      - if @age_group.teams.size > 0
+        - if policy(@age_group.teams.first.team_members.new).create?
+          .tbl-cell.tbl-cell-action-bordered
+            = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "action-btn"
+              i.fa.fa-table
       - if policy(@age_group).update?
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "action-btn"

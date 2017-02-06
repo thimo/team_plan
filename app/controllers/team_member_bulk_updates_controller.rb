@@ -42,7 +42,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
 
     def set_team
       @team = Team.find(params[:team_id])
-      authorize TeamMember
+      authorize @team.team_members.new
     end
 
 

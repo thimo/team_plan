@@ -8,15 +8,14 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def create?
+    return false if @record.archived?
+
     # Only by admin
     @user.admin?
   end
 
   def update?
-    return false if @record.archived?
-    
-    # Only by admin
-    @user.admin?
+    create?
   end
 
   def destroy?
