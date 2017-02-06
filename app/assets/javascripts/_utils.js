@@ -9,7 +9,6 @@ addEventListener("turbolinks:before-render", dispatchUnloadEvent)
 
 $(document).on('turbolinks:load', function() {
   var fieldTypes;
-  var fieldTypes;
   $('textarea').autosize();
   if ($('.has-error').length > 0) {
     fieldTypes = '.has-error input[type=text], .has-error input[type=email], .has-error input[type=number], .has-error textarea';

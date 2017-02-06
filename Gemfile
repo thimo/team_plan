@@ -66,7 +66,7 @@ group :development do
   # gem 'binding_of_caller'
   gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'rack-mini-profiler'
-  gem "guard-livereload", require: false # Adds live-reloading after edit, run with `guard -P livereload`
+  gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
   gem 'guard-rspec', require: false
   gem "rack-livereload"
   gem "rb-fsevent"

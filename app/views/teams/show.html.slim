@@ -10,7 +10,7 @@ section.box-typical
       - if policy(TeamMember).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_team_team_member_bulk_update_path(@team), title: "Teamleden toevoegen", class: "action-btn" do
-            i.fa.fa-files-o
+            i.fa.fa-users
       - if policy(@team).update?
         .tbl-cell.tbl-cell-action-bordered
           = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do

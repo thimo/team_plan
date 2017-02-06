@@ -13,7 +13,7 @@ nav.side-menu
     ul.side-menu-list
       li.red class="#{'active' if current_page?('/teams/87')}"
         a[href="/teams/87"]
-          i.fa.fa-user
+          i.fa.fa-futbol-o
           span.lbl
             | ESA JO11-8
       li.gold
@@ -31,12 +31,12 @@ nav.side-menu
       ul.side-menu-list
         li.blue class="#{'active' if controller_name == 'users'}"
           = link_to admin_users_path do
-            i.fa.fa-users
+            i.fa.fa-user
             span.lbl
               | Gebruikers
         li.green class="#{'active' if controller_name == 'members'}"
           = link_to admin_members_path do
-            i.fa.fa-futbol-o
+            i.fa.fa-users
             span.lbl
               | Leden
   section
@@ -47,7 +47,7 @@ nav.side-menu
           span.lbl
             | Support
 
-  section.supplier
+  section.supplier.hidden-sm-down
     ul.side-menu-list
       li.red
         a[href="https://www.defrog.nl/" target="_blank"]

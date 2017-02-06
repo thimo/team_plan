@@ -18,7 +18,7 @@
                   td.w-1
                     - if policy(TeamMember).create?
                       => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
-                        i.fa.fa-files-o.color-blue-grey
+                        i.fa.fa-users.color-blue-grey
                   td
                     strong = team.name
                     - if team.team_members.players.size > 0
