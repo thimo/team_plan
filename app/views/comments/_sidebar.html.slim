@@ -1,5 +1,28 @@
-h2
-  | Opmerkingen
+section.tabs-section
+  .tabs-section-nav.tabs-section-nav-inline
+    ul.nav[role="tablist"]
+      li.nav-item
+        a.nav-link.active[href="#tabs-4-tab-1" role="tab" data-toggle="tab" aria-expanded="true"]
+          | Opmerkingen 
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-2" role="tab" data-toggle="tab" aria-expanded="false"]
+          | Technisch 
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-3" role="tab" data-toggle="tab" aria-expanded="false"]
+          | Gedrag 
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-4" role="tab" data-toggle="tab" aria-expanded="false"]
+          | Indeling 
+  .tab-content
+    #tabs-4-tab-1.tab-pane.fade.active.in[role="tabpanel" aria-expanded="true"]
+      .strong Algemene opmerkingen
+    #tabs-4-tab-2.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+      .strong Voetbaltechnische opmerkingen
+    #tabs-4-tab-3.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+      .strong Opmerkingen over gedrag
+    #tabs-4-tab-4.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+      .strong Verzoeken voor indeling
+
 = render "comments/form"
 - @comments.each do |comment|
   hr
