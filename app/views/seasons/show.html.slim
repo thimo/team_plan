@@ -40,7 +40,6 @@ section.box-typical
                   = link_to age_group.name, age_group
                 td.text-center
                   => year_of_birth_range(age_group)
-                  = "(#{age_group.gender})" unless age_group.gender.blank?
                 td.text-right
                   - if age_group.teams.size > 0
                     .label.label-pill
@@ -61,7 +60,6 @@ section.box-typical
                   = link_to age_group.name, age_group
                 td.text-center
                   => year_of_birth_range(age_group)
-                  = "(#{age_group.gender})" unless age_group.gender.blank?
                 td.text-right
                   - if age_group.teams.size > 0
                     .label.label-pill
