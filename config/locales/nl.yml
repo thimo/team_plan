@@ -59,6 +59,11 @@ nl:
         comment_technique: Voetbal
         comment_behaviour: Gedrag
         comment_classification: Indeling
+    season:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Gearchiveerd
 
   views:
     pagination:

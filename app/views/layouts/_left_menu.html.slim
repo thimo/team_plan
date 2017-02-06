@@ -1,11 +1,12 @@
 nav.side-menu
   ul.side-menu-list
-    li class="#{'active' if current_page?(root_path)}"
-      = link_to Season.active.desc.first
-        span
-          i.fa.fa-calendar
-          span.lbl
-            | Seizoen #{Season.active.desc.first.name}
+    - unless Season.active.desc.first.nil?
+      li class="#{'active' if current_page?(root_path)}"
+        = link_to Season.active.desc.first
+          span
+            i.fa.fa-calendar
+            span.lbl
+              | Seizoen #{Season.active.desc.first.name}
 
   section
     header.side-menu-title

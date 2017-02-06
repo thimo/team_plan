@@ -49,7 +49,7 @@ class SeasonsController < ApplicationController
 
   def set_season
     @season = if params[:id].nil?
-                Season.find_by(active: true)
+                Season.find_by(status: Season.statuses[:active])
               else
                 Season.find(params[:id])
               end
@@ -69,6 +69,6 @@ class SeasonsController < ApplicationController
   end
 
   def season_params
-    params.require(:season).permit(:name, :active)
+    params.require(:season).permit(:name, :status)
   end
 end
