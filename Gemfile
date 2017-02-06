@@ -23,6 +23,7 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.4.0'
 end
+gem 'select2-rails'
 
 gem 'font-awesome-rails'
 gem 'rails-i18n'
@@ -47,37 +48,40 @@ gem 'pundit' #,                     '~> 1.1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-
   gem 'awesome_print', require: "awesome_print"
   gem 'pry-byebug'
+  gem 'guard', require: false
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener' # TODO configureren ??
   gem 'meta_request'
-  gem 'better_errors' # https://github.com/charliesome/better_errors
-  gem 'binding_of_caller'
-  gem 'bullet'
+  # gem 'better_errors' # https://github.com/charliesome/better_errors - Better error page for Rack apps
+  # binding_of_caller is very slow with multiple MB stack trace
+  # gem 'binding_of_caller'
+  gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'rack-mini-profiler'
-
-  # Adds live-reloading after edit, run with `guard -P livereload`
-  gem "guard", :require => false
-  gem "guard-livereload", :require => false
+  gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
+  gem 'guard-rspec', require: false
   gem "rack-livereload"
-  gem "rb-fsevent", :require => false
+  gem "rb-fsevent"
+  gem 'spring-commands-rspec'
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
   gem 'minitest-reporters'
   gem 'mini_backtrace'
-  gem 'guard'
-  gem 'guard-minitest'
+  gem 'rspec-rails', '~> 3.5'
+
+  gem 'shoulda-matchers', require: false
+  gem 'factory_girl_rails'
+  gem 'webmock'
 end
 
 group :production, :staging do

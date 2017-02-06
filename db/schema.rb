@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130115241) do
+ActiveRecord::Schema.define(version: 20170206161904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "age_groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "season_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "year_of_birth_from"
+    t.integer  "year_of_birth_to"
+    t.string   "gender"
+    t.index ["season_id"], name: "index_age_groups_on_season_id", using: :btree
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -41,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170130115241) do
     t.string   "phone2"
     t.string   "email"
     t.string   "email2"
-    t.integer  "gender"
+    t.string   "gender"
     t.string   "member_number"
     t.string   "association_number"
     t.boolean  "active",                default: true
@@ -85,15 +96,16 @@ ActiveRecord::Schema.define(version: 20170130115241) do
     t.string   "local_teams"
     t.string   "club_sports"
     t.string   "association_sports"
+    t.string   "person_type"
     t.index ["association_number"], name: "index_members_on_association_number", using: :btree
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
   create_table "seasons", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "active",     default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 0
   end
 
   create_table "team_members", force: :cascade do |t|
@@ -104,16 +116,17 @@ ActiveRecord::Schema.define(version: 20170130115241) do
     t.integer  "role",       default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["member_id", "team_id", "role"], name: "index_team_members_on_member_id_and_team_id_and_role", unique: true, using: :btree
     t.index ["member_id"], name: "index_team_members_on_member_id", using: :btree
     t.index ["team_id"], name: "index_team_members_on_team_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.integer  "year_group_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["year_group_id"], name: "index_teams_on_year_group_id", using: :btree
+    t.integer  "age_group_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["age_group_id"], name: "index_teams_on_age_group_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -137,20 +150,10 @@ ActiveRecord::Schema.define(version: 20170130115241) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "year_groups", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "season_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "year_of_birth_from"
-    t.integer  "year_of_birth_to"
-    t.index ["season_id"], name: "index_year_groups_on_season_id", using: :btree
-  end
-
+  add_foreign_key "age_groups", "seasons"
   add_foreign_key "comments", "users"
   add_foreign_key "members", "users"
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
-  add_foreign_key "teams", "year_groups"
-  add_foreign_key "year_groups", "seasons"
+  add_foreign_key "teams", "age_groups"
 end

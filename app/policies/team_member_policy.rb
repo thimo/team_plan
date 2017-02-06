@@ -8,11 +8,19 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.role_admin?
+    return false if @record.archived?
+
+    @user.admin? || @user.club_staff?
   end
 
   def update?
-    @user.role_admin?
+    create?
+  end
+
+  def destroy?
+    return false if @record.archived? || @record.active?
+
+    @user.admin? || @user.club_staff?
   end
 
   class Scope < Scope

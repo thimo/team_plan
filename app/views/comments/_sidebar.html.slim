@@ -1,6 +1,44 @@
-h2
-  | Opmerkingen
-= render "comments/form"
+section.tabs-section
+  .tabs-section-nav.tabs-section-nav-inline
+    ul.nav[role="tablist"]
+      li.nav-item
+        a.nav-link.active[href="#tabs-4-tab-1" role="tab" data-toggle="tab" aria-expanded="true"]
+          = "Opmerkingen #{Comment.comment_types_i18n[:generic].downcase}"
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-2" role="tab" data-toggle="tab" aria-expanded="false"]
+          = Comment.comment_types_i18n[:technique]
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-3" role="tab" data-toggle="tab" aria-expanded="false"]
+          = Comment.comment_types_i18n[:behaviour]
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-4" role="tab" data-toggle="tab" aria-expanded="false"]
+          = Comment.comment_types_i18n[:classification]
+  .tab-content
+    #tabs-4-tab-1.tab-pane.active.in[role="tabpanel" aria-expanded="true"]
+      .row
+        .col-sm-6
+
+        .col-sm-6
+          = render "comments/form", comment_type: :generic
+    #tabs-4-tab-2.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+      .row
+        .col-sm-6
+
+        .col-sm-6
+          = render "comments/form", comment_type: :technique
+    #tabs-4-tab-3.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+      .row
+        .col-sm-6
+
+        .col-sm-6
+          = render "comments/form", comment_type: :behaviour
+    #tabs-4-tab-4.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+      .row
+        .col-sm-6
+
+        .col-sm-6
+          = render "comments/form", comment_type: :classification
+
 - @comments.each do |comment|
   hr
   .clearfix

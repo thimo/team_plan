@@ -1,11 +1,17 @@
 class TeamsController < ApplicationController
   before_action :create_team, only: [:new, :create]
-  before_action :set_team, only: [:show, :edit, :update]
+  before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
   def show
     @commentable = @team
-    @team_members = @team.team_members.includes(:member).order("members.first_name")
+
+    @players = @team.team_members.players.asc.includes(:member)
+    @staff = @team.team_members.staff.asc.includes(:member)
+    # @coaches = @team.team_members.coaches.asc
+    # @trainers = @team.team_members.trainers.asc
+    # @team_parents = @team.team_members.team_parents.asc
+
     @comments = @commentable.comments.includes(:user)
     @comment = Comment.new
   end
@@ -30,6 +36,11 @@ class TeamsController < ApplicationController
     end
   end
 
+  def destroy
+    redirect_to @team.age_group, notice: 'Team is verwijderd.'
+    @team.destroy
+  end
+
   private
 
   def create_team
@@ -40,8 +51,8 @@ class TeamsController < ApplicationController
             end
     authorize @team
 
-    @year_group = YearGroup.find(params[:year_group_id])
-    @team.year_group = @year_group
+    @age_group = AgeGroup.find(params[:age_group_id])
+    @team.age_group = @age_group
   end
 
   def set_team
@@ -50,12 +61,12 @@ class TeamsController < ApplicationController
   end
 
   def breadcumbs
-    add_breadcrumb @team.year_group.season.name.to_s, @team.year_group.season
-    add_breadcrumb @team.year_group.name.to_s, @team.year_group
+    add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
+    add_breadcrumb @team.age_group.name, @team.age_group
     if @team.new_record?
       add_breadcrumb 'Nieuw'
     else
-      add_breadcrumb @team.name.to_s, @team
+      add_breadcrumb @team.name, @team
     end
   end
 

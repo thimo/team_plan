@@ -6,9 +6,9 @@ Member.destroy_all
 #TeamMember.destroy_all
 
 seasons = [
-  Season.create({name: '2015 - 2016', active: false}),
-  Season.create({name: '2016 - 2017', active: true}),
-  Season.create({name: '2017 - 2018', active: false})
+  Season.create({name: '2015 - 2016', status: 2}),
+  Season.create({name: '2016 - 2017', status: 1}),
+  Season.create({name: '2017 - 2018', status: 0})
 ]
 
 seasons.each do |season|

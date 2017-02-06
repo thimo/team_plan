@@ -1,0 +1,113 @@
+- provide(:title, "Leeftijdsgroep spelersindeling")
+
+.row[data-scroll-position="member_allocations_index"]
+  .col-lg-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Teams
+      .box-typical-body
+        .table-responsive
+          table.table.table-sm
+            thead
+            tbody
+              - @teams.asc.each do |team|
+                tr
+                  td.w-1
+                    - if policy(TeamMember).create?
+                      => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
+                        i.fa.fa-users.color-blue-grey
+                  td
+                    strong = team.name
+                    - if team.team_members.players.size > 0
+                      .label.label-pill.ml-3
+                        = "#{team.team_members.players.size}"
+                  td
+                  td
+                    
+                - team.team_members.players.each do |team_member|
+                  tr
+                    td
+                    td
+                      = link_to team_member.member.name, team_member.member
+                      .color-blue-grey-lighter.small
+                        => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
+                        = "(#{team_member.member.gender})"
+                    td 
+                      
+                    td.w-1.nowrap
+                      - if policy(team_member).update?
+                        a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{team_member.member.id}" data-member-name="#{team_member.member.name}" title="Verplaatsen naar team"]
+                          i.fa.fa-bars.p-1
+                      - if policy(team_member).destroy?
+                        = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
+                          i.fa.fa-times.p-1
+
+  
+  .col-lg-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            .strong
+              | Beschikbare leden
+              - if @available_members.size > 0
+                .label.label-pill.ml-3
+                  = "#{@available_members.size}"
+
+          .tbl-cell.color-blue-grey-lighter
+            = year_of_birth_range(@age_group)
+            = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
+
+      .box-typical-body
+        .table-responsive
+          table.table.table-sm
+            thead
+            tbody
+              - @available_members.each do |member|
+                tr
+                  td.w-1
+                    - if policy(TeamMember).create?
+                      a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
+                        i.fa.fa-chevron-left.p-1
+                  td
+                    = link_to member.name, member
+                    .color-blue-grey-lighter.small
+                      => l member.born_on, format: :long
+                      = "(#{member.gender})"
+                    - unless member.club_sports.blank?
+                      .color-blue-grey.small
+                        = "#{member.club_sports}"
+                    - unless member.local_teams.blank?
+                      .color-blue-grey.small
+                        = "#{member.local_teams}"
+                  td 
+
+/ Dialog used for both new and edit actions on team members
+#teamMemberNew.modal.fade[tabindex="-1" role="dialog" aria-labelledby="teamMemberNewLabel" aria-hidden="true"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        h5#teamMemberNewLabel.modal-title
+          | Voeg speler toe aan team:
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+      .modal-body
+        = simple_form_for @team_member do |f|
+          .form-group
+            - @teams.each do |team|
+              .radio
+                = f.radio_button :team_id, "#{team.id}", id: "team_id_#{team.id}"
+                label for="team_id_#{team.id}"
+                  = team.name
+          = f.hidden_field :member_id
+          = hidden_field_tag :team_member_id
+          = hidden_field_tag :age_group_id, "#{@age_group.id}"
+          .modal-footer
+            button.btn.btn-secondary[type="button" data-dismiss="modal"]
+              | Sluiten
+            = f.button :submit, "Toevoegen", class: 'btn btn-primary'
+            

@@ -15,19 +15,16 @@ nl:
         middle_name: Tussenvoegsels
         last_name: Achternaam
         name: Naam
-        email: E-mail
-        password: Wachtwoord
-        password_confirmation: Bevestig wachtwoord
-        remember_me: Login onthouden
       season:
-        name: Naam
+        name: Seizoen
         active: Actief
-      year_group:
-        name: Naam
+      age_group:
+        name: Leeftijdsgroep
         year_of_birth_from: Jaartal geboorte vanaf
         year_of_birth_to: Jaartal geboorte t/m
+        gender: Geslacht
       team:
-        name: Naam
+        name: Team
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
@@ -48,18 +45,27 @@ nl:
   enums:
     user:
       role:
-        role_member: Lid
-        role_admin: Administrator
+        admin: Administrator
+        club_staff: Club staf
+        team_staff: Team begeleiding
+        member: Lid
     team_member:
       role:
         role_player: Speler
         role_coach: Coach
+        role_trainer: Trainer
+        role_team_parent: Teamouder
     comment:
       comment_type:
-        comment_generic: Algemeen
-        comment_technique: Voetbal
-        comment_behaviour: Gedrag
-        comment_classification: Indeling
+        generic: Algemeen
+        technique: Voetbal
+        behaviour: Gedrag
+        classification: Indeling
+    season:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Gearchiveerd
 
   views:
     pagination:

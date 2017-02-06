@@ -1,0 +1,32 @@
+- provide(:title, "Selecteer teamleden")
+
+.box-typical.box-typical-padding
+  p Gebruik dit formulier om meerdere teamleden in één keer toe te voegen.
+  
+  hr
+
+  = form_tag team_team_member_bulk_updates_path(@team, from: params[:from]) do
+    .form-group.row
+      label.col-sm-2.col-form-label Spelers
+      .col-sm-10
+        = select_tag :players, options_from_collection_for_select(@members.active_players, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_players'
+      
+    .form-group.row
+      label.col-sm-2.col-form-label Coaches
+      .col-sm-10
+        = select_tag :coaches, options_from_collection_for_select(@members, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_coaches'
+      
+    .form-group.row
+      label.col-sm-2.col-form-label Trainers
+      .col-sm-10
+        = select_tag :trainers, options_from_collection_for_select(@members, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_trainers'
+      
+    .form-group.row
+      label.col-sm-2.col-form-label Teamouders
+      .col-sm-10
+        = select_tag :team_parents, options_from_collection_for_select(@members, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_team_parents'
+      
+      / = text_area_tag "age_groups", nil, class: "form-control", placeholder: "Voer leeftijdsgroepen in, één per regel"
+    = submit_tag "Toevoegen", class: "btn btn-primary"
+    
+/ script src="/startui/js/lib/select2/select2.min.js"

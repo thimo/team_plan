@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   before_action :create_season, only: [:new, :create]
-  before_action :set_season, only: [:show, :edit, :update]
+  before_action :set_season, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
   def index
@@ -8,6 +8,8 @@ class SeasonsController < ApplicationController
   end
 
   def show
+    @age_groups_male = @season.age_groups.male.asc
+    @age_groups_female = @season.age_groups.female.asc
   end
 
   def new; end
@@ -30,6 +32,11 @@ class SeasonsController < ApplicationController
     end
   end
 
+  def destroy
+    @season.destroy
+    redirect_to seasons_path, notice: 'Seizoen is verwijderd.'
+  end
+
   private
 
   def create_season
@@ -44,7 +51,7 @@ class SeasonsController < ApplicationController
 
   def set_season
     @season = if params[:id].nil?
-                Season.find_by(active: true)
+                Season.find_by(status: Season.statuses[:active])
               else
                 Season.find(params[:id])
               end
@@ -55,14 +62,15 @@ class SeasonsController < ApplicationController
   def breadcumbs
     unless @season.nil?
       if @season.new_record?
+        add_breadcrumb 'Seizoenen', seasons_path
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb @season.name.to_s, @season
+        add_breadcrumb "#{@season.name}", @season
       end
     end
   end
 
   def season_params
-    params.require(:season).permit(:name, :active)
+    params.require(:season).permit(:name, :status)
   end
 end

@@ -1,10 +1,17 @@
 class CommentPolicy < ApplicationPolicy
+  def show?
+  end
+
   def create?
     true
   end
 
   def update?
-    @user.role_admin? || @record.user = @user
+    @user.admin? || @record.user = @user
+  end
+
+  def destroy?
+    @user.admin? || @record.user = @user
   end
 
   class Scope < Scope

@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # Add conditional validation on first_name and last_name, not executed for devise
   validates_presence_of :email
 
-  enum role: {role_member: 0, role_admin: 1}
+  enum role: {member: 0, admin: 1, club_staff: 2, team_staff: 3}
 
   # Setter
   def name=(name)

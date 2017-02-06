@@ -1,18 +1,56 @@
-.row
-  .col-lg-6
-    .float-right
-      / - #= link_to new_year_group_team_path(@year_group), title: "Team toevoegen", class: "btn btn-secondary" do
-      /   - # end
+- provide(:title, "Team #{@team.name}")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          | Spelers
+          .label.label-pill.ml-3 = @team.team_members.players.count
+      - if policy(@team.team_members.new).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_team_team_member_bulk_update_path(@team), title: "Teamleden toevoegen", class: "action-btn" do
+            i.fa.fa-users
       - if policy(@team).update?
-        = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn btn-secondary" do
-          i.fa.fa-pencil
-          
-    h1 = @team.name
-    
-    - @team_members.each do |team_member|
-      div
-        = link_to team_member.member.name, team_member.member
-        | , 
-        = team_member.role_i18n
-  .col-lg-6
-    = render "comments/sidebar"
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
+            i.fa.fa-pencil
+      - if policy(@team).destroy?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "action-btn"
+            i.fa.fa-trash-o
+  .box-typical-body
+    .table-responsive
+      table.table.table-sm.tr-links
+        thead
+        tbody
+          - if @players.size > 0
+            - @players.each do |team_member|
+              tr
+                td 
+                  = link_to team_member.member.name, team_member.member
+                  .color-blue-grey-lighter.small
+                    => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
+                    = "(#{team_member.member.gender})"
+                td.w-1
+                  - if policy(team_member).destroy?
+                    = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
+                      i.fa.fa-times.p-1
+          - if @staff.size > 0
+            tr
+              td.strong Begeleiding
+              td
+            - @staff.asc.each do |team_member|
+              tr
+                td 
+                  = link_to team_member.member.name, team_member.member
+                  span.ml-2 = team_member.role_i18n
+                  .color-blue-grey-lighter.small
+                    => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
+                    = "(#{team_member.member.gender})"
+                td.w-1
+                  - if policy(team_member).destroy?
+                    = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
+                      i.fa.fa-times.p-1
+                  
+= render "comments/sidebar"

@@ -1,20 +1,30 @@
+- provide(:title, "Gebruikers")
+
 .float-right
-  - if policy(User).create?
-    = link_to new_admin_user_path, title: "Gebruiker toevoegen"
-      i.fa.fa-plus
 
-h1 Gebruikers
-
-table.table
-  thead
-    tr
-      th = User.human_attribute_name(:name) 
-      th = User.human_attribute_name(:email)
-  tbody
-    - @users.each do |user|
-      tr
-        td
-          = link_to user.name, [:edit, :admin, user]
-        td 
-          = user.email
-         
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@users.count} Gebruikers
+      - if policy(User).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_user_path, title: "Gebruiker toevoegen"
+            i.fa.fa-file-o
+  .box-typical-body
+    .table-responsive
+      table.table.table-sm.tr-links
+        thead
+          tr
+            th = User.human_attribute_name(:name) 
+            th = User.human_attribute_name(:role)
+        tbody
+          - @users.each do |user|
+            tr
+              td
+                = link_to user.name, [:edit, :admin, user]
+                .color-blue-grey-lighter.small
+                  => user.email
+              td 
+               = user.role_i18n

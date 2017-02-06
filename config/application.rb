@@ -19,5 +19,9 @@ module Svs
       Devise::SessionsController.layout "devise"
       Devise::Mailer.layout "mailer" # email.haml or email.erb
     end
+
+    config.generators do |g|
+      g.javascript_engine :js
+    end
   end
 end

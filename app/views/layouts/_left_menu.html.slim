@@ -1,0 +1,58 @@
+nav.side-menu
+  ul.side-menu-list
+    - unless Season.active.desc.first.nil?
+      li class="#{'active' if current_page?(root_path)}"
+        = link_to Season.active.desc.first
+          span
+            i.fa.fa-calendar
+            span.lbl
+              | Seizoen #{Season.active.desc.first.name}
+
+  section
+    header.side-menu-title
+      | Mijn teams
+    ul.side-menu-list
+      li.green class="#{'active' if current_page?('/teams/87')}"
+        a[href="/teams/87"]
+          i.fa.fa-futbol-o
+          span.lbl
+            | ESA JO11-8
+      li.gold
+        a[href="#"]
+          i.fa.fa-star
+          span.lbl
+            | ESA JO9-6
+
+            
+  / TODO current_user check verwijderen zodra Devise met eigen layout werkt
+  - if !current_user.nil? && policy(:admin).show?
+    section
+      header.side-menu-title
+        | Admin
+      ul.side-menu-list
+        li.blue class="#{'active' if controller_name == 'users'}"
+          = link_to admin_users_path do
+            i.fa.fa-user
+            span.lbl
+              | Gebruikers
+        li.green class="#{'active' if controller_name == 'members'}"
+          = link_to admin_members_path do
+            i.fa.fa-users
+            span.lbl
+              | Leden
+  section
+    ul.side-menu-list
+      li.brown
+        a[href="mail.html"]
+          i.fa.fa-question-circle
+          span.lbl
+            | Support
+
+  section.supplier.hidden-sm-down 
+    ul.side-menu-list
+      li.red
+        a[href="https://www.defrog.nl/" target="_blank"]
+          i.fa.fa-heart
+          span.lbl
+            | Handcrafted in Arnhem by 
+            = image_tag 'logo/defrog_wide.svg', alt: "Defrog"

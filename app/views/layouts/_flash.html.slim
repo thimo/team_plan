@@ -1,15 +1,4 @@
 - unless flash.empty?
-  .container
-    .alert-popup.row.justify-content-end
-      - flash.each do |message_type, message|
-        .alert.d-inline-flex.flex-row class="alert alert-#{message_type}"
-          .pr-2
-            i.fa class="fa-#{message_type}"
-          div
-            = message
-          .pl-4
-            button.close[type="button" aria-label="Close" data-dismiss="alert"]
-              span
-                | ×
-  script
-    |  window.setTimeout(function() { $(".alert-popup .alert-success, .alert-popup .alert-notice").alert('close'); }, 4 * 1000); 
+  - flash.each do |message_type, message|
+    script
+      | $(function() {notie.alert(#{notie_type(message_type)}, '#{message}', 2)})

@@ -8,27 +8,39 @@ html
     meta name="author" content="#{I18n.t('company.name')}"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
-    = csrf_meta_tags
+
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    script src="/startui/js/plugins.js"
+    script src="/startui/js/app.js"
     
-  body.bg-faded
+  body.with-side-menu
     - unless Rails.env.production? || Rails.env.development?
       div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
         |  -= #{Rails.env} =- 
         
     = render 'layouts/header'
-    = render 'layouts/flash'
+    = render 'layouts/left_menu'
     
-    .container
-      = content_for?(:content) ? yield(:content) : yield
+    .page-content
+      .container-fluid
+        header.section-header
+          h3 = yield(:title)
+          ol.breadcrumb.breadcrumb-simple
+            = render_breadcrumbs :tag => :li, :separator => ""
+          
+
+        = render 'layouts/flash'
+    
+        = content_for?(:content) ? yield(:content) : yield
       
-    = render 'layouts/footer'
+        = render 'layouts/footer'
     
-    - if Rails.env.development?
-      p.m-4
-        button.btn.btn-primary type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-          | Debug params
-      .collapse#collapseExample
-        .card.card-block
-          = debug(params)
+        - if Rails.env.development?
+          p.mt-4
+            button.btn.btn-secondary-outline type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
+              | Debug params
+          .collapse#collapseExample
+            .card.card-block
+              = debug(params)

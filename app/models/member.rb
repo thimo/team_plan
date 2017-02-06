@@ -6,6 +6,14 @@ class Member < ApplicationRecord
 
   # validates_presence_of :first_name, :last_name, :email, :phone
 
+  scope :asc, -> { order(last_name: :asc, first_name: :asc) }
+
+  scope :from_year, lambda {|year| where("born_on >= ?", "#{year}-01-01")}
+  scope :to_year, lambda {|year| where("born_on <= ?", "#{year}-12-31")}
+  scope :active_players, -> {where("sport_category <> ''").where(status: "definitief")}
+  scope :male, -> { where(gender: "M") }
+  scope :female, -> { where(gender: "V") }
+
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
   end

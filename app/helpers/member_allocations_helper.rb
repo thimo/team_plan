@@ -1,0 +1,2 @@
+module MemberAllocationsHelper
+end

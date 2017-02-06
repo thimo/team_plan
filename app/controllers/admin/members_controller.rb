@@ -4,17 +4,10 @@ class Admin::MembersController < AdminController
   before_action :breadcumbs
 
   def index
-    @members = policy_scope(Member).all
+    @members = policy_scope(Member).asc
   end
 
   def show; end
-
-  def import
-    authorize(Member)
-    Member.import(params[:file])
-
-    redirect_to admin_members_path, notice: "Gebruikers zijn geïmporteerd."
-  end
 
   private
 
