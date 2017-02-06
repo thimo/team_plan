@@ -10,11 +10,13 @@ class MemberAllocationsController < ApplicationController
       unless @age_group.year_of_birth_from.nil?
     members = members.to_year(@age_group.year_of_birth_to) \
       unless @age_group.year_of_birth_to.nil?
-    case @age_group.gender.upcase
-    when "M"
-      members = members.male
-    when "V"
-      members = members.female
+    unless @age_group.gender.nil?
+      case @age_group.gender.upcase
+      when "M"
+        members = members.male
+      when "V"
+        members = members.female
+      end
     end
 
     @available_members = []
