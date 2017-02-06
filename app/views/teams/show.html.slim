@@ -44,7 +44,7 @@ section.box-typical
               tr
                 td 
                   = link_to team_member.member.name, team_member.member
-                  = team_member.role_i18n
+                  span.ml-2 = team_member.role_i18n
                   .color-blue-grey-lighter.small
                     => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                     = "(#{team_member.member.gender})"

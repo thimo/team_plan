@@ -7198,7 +7198,7 @@ a.label-light-grey:hover {
 .fixed-table-body .table a {
   border-bottom: solid 1px rgba(0, 130, 198, 0.5);
   position: relative;
-  top: -1px;
+  /*top: -1px;*/
 }
 .table a:hover,
 .bootstrap-table .table a:hover,
