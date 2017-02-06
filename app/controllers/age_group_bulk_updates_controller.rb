@@ -16,7 +16,7 @@ class AgeGroupBulkUpdatesController < ApplicationController
         age_group.name = parts[0].strip
         age_group.year_of_birth_from = parts[1].to_i unless parts[1].blank?
         age_group.year_of_birth_to = parts[2].to_i unless parts[2].blank?
-        age_group.gender = parts[3] unless parts[3].blank?
+        age_group.gender = parts[3].strip.downcase unless parts[3].blank?
         age_group.save
 
         count += 1
