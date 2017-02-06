@@ -8,15 +8,18 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def create?
+    # Only by admin
     @user.role_admin?
   end
 
   def update?
-    @user.role_admin?
+    # Only by admin
+    @user.role_admin? && !@record.archived?
   end
 
   def destroy?
-    @user.role_admin?
+    # Only by admin
+    @user.role_admin? && !@record.active? && !@record.archived?
   end
 
   class Scope < Scope

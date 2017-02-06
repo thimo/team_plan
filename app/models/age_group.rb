@@ -11,4 +11,17 @@ class AgeGroup < ApplicationRecord
   def is_not_member(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
   end
+
+  def draft?
+    season.draft
+  end
+
+  def active?
+    season.active?
+  end
+
+  def archived?
+    season.archived?
+  end
+
 end

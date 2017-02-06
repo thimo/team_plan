@@ -19,4 +19,16 @@ class TeamMember < ApplicationRecord
   def season
     age_group.season
   end
+
+  def draft?
+    team.age_group.season.draft
+  end
+
+  def active?
+    team.age_group.season.active?
+  end
+
+  def archived?
+    team.age_group.season.archived?
+  end
 end
