@@ -23,12 +23,37 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "action-btn"
             i.fa.fa-trash-o
-  .box-typical-body
-    .table-responsive
+            
+  .row.box-typical-body
+    .table-responsive.col-sm-6
       table.table.table-sm.tr-links
         thead
+          tr
+            th Mannen
+            th
+            th
         tbody
-          - @season.age_groups.asc.each do |age_group|
+          - @season.age_groups.male.asc.each do |age_group|
+            tr
+              td
+                = link_to age_group.name, age_group
+              td.text-center
+                => year_of_birth_range(age_group)
+                = "(#{age_group.gender})" unless age_group.gender.blank?
+              td.text-right
+                - if age_group.teams.size > 0
+                  .label.label-pill
+                    = "#{age_group.teams.size}"
+
+    .table-responsive.col-sm-6
+      table.table.table-sm.tr-links
+        thead
+          tr
+            th Vrouwen
+            th
+            th
+        tbody
+          - @season.age_groups.female.asc.each do |age_group|
             tr
               td
                 = link_to age_group.name, age_group

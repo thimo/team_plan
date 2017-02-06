@@ -4,6 +4,8 @@ class AgeGroup < ApplicationRecord
 
   validates_presence_of :name, :season, :gender
 
+  scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: nil)) }
+  scope :female, -> { where(gender: "v") }
   scope :asc, -> {order(year_of_birth_to: :asc)}
 
   def is_not_member(member)
