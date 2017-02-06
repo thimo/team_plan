@@ -8,6 +8,8 @@ class SeasonsController < ApplicationController
   end
 
   def show
+    @age_groups_male = @season.age_groups.male.asc
+    @age_groups_female = @season.age_groups.female.asc
   end
 
   def new; end
