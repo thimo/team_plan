@@ -18,12 +18,13 @@ section.box-typical
         thead
           tr
             th = User.human_attribute_name(:name) 
-            th = User.human_attribute_name(:email)
+            th = User.human_attribute_name(:role)
         tbody
           - @users.each do |user|
             tr
               td
                 = link_to user.name, [:edit, :admin, user]
+                .color-blue-grey-lighter.small
+                  => user.email
               td 
-                = user.email
-               
+               = user.role_i18n

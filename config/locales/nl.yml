@@ -45,8 +45,10 @@ nl:
   enums:
     user:
       role:
-        role_member: Lid
-        role_admin: Administrator
+        admin: Administrator
+        club_staff: Club staf
+        team_staff: Team begeleiding
+        member: Lid
     team_member:
       role:
         role_player: Speler

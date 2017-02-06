@@ -1,27 +1,27 @@
 class AdminPolicy < ApplicationPolicy
   def index?
-    @user.role_admin?
+    @user.admin?
   end
 
   def create?
-    @user.role_admin?
+    @user.admin?
   end
 
   def show?
-    @user.role_admin?
+    @user.admin?
   end
 
   def update?
-    @user.role_admin?
+    @user.admin?
   end
 
   def destroy?
-    @user.role_admin?
+    @user.admin?
   end
 
   class Scope < Scope
     def resolve
-      scope if @user.role_admin?
+      scope if @user.admin?
     end
   end
 end

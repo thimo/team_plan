@@ -4,11 +4,11 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.role_admin? || @record.user = @user
+    @user.admin? || @record.user = @user
   end
 
   def destroy?
-    @user.role_admin? || @record.user = @user
+    @user.admin? || @record.user = @user
   end
 
   class Scope < Scope
