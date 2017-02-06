@@ -1,7 +1,9 @@
-= simple_form_for [@commentable, @comment], {wrapper: :horizontal_form} do |f|
+- comment_type ||= 'generic'
+
+= simple_form_for [@commentable, @comment] do |f|
   = f.error_notification
-  = f.input :body, label: false, placeholder: "Opmerking"
-  .small
-    = f.input :comment_type, as: :radio_buttons, label: false, wrapper: :vertical_radio_and_checkboxes
-  = f.input :private
+  = f.input :body, label: false, placeholder: "Opmerking toevoegen"
+  .float-right
+    = f.input :private
   = f.button :submit, "Opslaan", class: 'btn btn-primary'
+  = f.hidden_field :comment_type, value: comment_type

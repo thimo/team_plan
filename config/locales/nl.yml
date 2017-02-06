@@ -57,10 +57,10 @@ nl:
         role_team_parent: Teamouder
     comment:
       comment_type:
-        comment_generic: Algemeen
-        comment_technique: Voetbal
-        comment_behaviour: Gedrag
-        comment_classification: Indeling
+        generic: Algemeen
+        technique: Voetbal
+        behaviour: Gedrag
+        classification: Indeling
     season:
       status:
         draft: Concept
