@@ -9,7 +9,7 @@ class Team < ApplicationRecord
   scope :asc, -> { order(:created_at) }
 
   def draft?
-    age_group.season.draft
+    age_group.season.draft?
   end
 
   def active?
