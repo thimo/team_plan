@@ -28,10 +28,14 @@ section.box-typical
             - @players.each do |team_member|
               tr
                 td 
-                  = link_to team_member.member.name, team_member.member
-                  .color-blue-grey-lighter.small
-                    => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
-                    = "(#{team_member.member.gender})"
+                  - if policy(team_member).show_private_data?
+                    = link_to team_member.member.name, team_member
+                  - else
+                    = team_member.member.name
+                  - if policy(team_member).show_private_data?
+                    .color-blue-grey-lighter.small
+                      => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
+                      = "(#{team_member.member.gender})"
                 td.w-1
                   - if policy(team_member).destroy?
                     = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
@@ -43,14 +47,19 @@ section.box-typical
             - @staff.asc.each do |team_member|
               tr
                 td 
-                  = link_to team_member.member.name, team_member.member
+                  - if policy(team_member).show_private_data?
+                    = link_to team_member.member.name, team_member
+                  - else
+                    = team_member.member.name
                   span.ml-2 = team_member.role_i18n
-                  .color-blue-grey-lighter.small
-                    => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
-                    = "(#{team_member.member.gender})"
+                  - if policy(team_member).show_private_data?
+                    .color-blue-grey-lighter.small
+                      => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
+                      = "(#{team_member.member.gender})"
                 td.w-1
                   - if policy(team_member).destroy?
                     = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
                       i.fa.fa-times.p-1
                   
-= render "comments/sidebar"
+- if policy(@team).show_comments?
+  = render "comments/tabs"

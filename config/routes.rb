@@ -14,11 +14,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :team_members, only: [:create, :update, :destroy], shallow: true do
+  resources :team_members, only: [:show, :create, :update, :destroy], shallow: true do
     resources :comments, only: [:new, :create, :edit, :update, :destroy]
   end
 
-  resources :members do
+  resources :members, only: [] do
     resources :comments, only: [:new, :create, :edit, :update, :destroy]
   end
 

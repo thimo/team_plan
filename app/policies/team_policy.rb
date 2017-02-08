@@ -23,6 +23,12 @@ class TeamPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def show_comments?
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_staff_for?(@record)
+  end
+
   class Scope < Scope
     def resolve
       scope
