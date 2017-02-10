@@ -62,4 +62,4 @@ section.box-typical
                       i.fa.fa-times.p-1
                   
 - if policy(@team).show_comments?
-  = render "comments/tabs"
+  = render "comments/tabs", parent: @team

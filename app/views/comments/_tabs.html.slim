@@ -1,58 +1,29 @@
 section.tabs-section
+  h4 Opmerkingen
+
   .tabs-section-nav.tabs-section-nav-inline
     ul.nav[role="tablist"]
-      li.nav-item
-        a.nav-link.active[href="#tabs-4-tab-1" role="tab" data-toggle="tab" aria-expanded="true"]
-          = "Opmerkingen #{Comment.comment_types_i18n[:generic].downcase}"
-      li.nav-item
-        a.nav-link[href="#tabs-4-tab-2" role="tab" data-toggle="tab" aria-expanded="false"]
-          = Comment.comment_types_i18n[:technique]
-      li.nav-item
-        a.nav-link[href="#tabs-4-tab-3" role="tab" data-toggle="tab" aria-expanded="false"]
-          = Comment.comment_types_i18n[:behaviour]
-      li.nav-item
-        a.nav-link[href="#tabs-4-tab-4" role="tab" data-toggle="tab" aria-expanded="false"]
-          = Comment.comment_types_i18n[:classification]
+      - %w(generic technique behaviour classification membership).each_with_index do |comment_type, index|
+        - if policy(Comment).public_send("show_#{comment_type}?")
+          li.nav-item
+            a.nav-link[href="#comments-tab-#{comment_type}" role="tab" data-toggle="tab" aria-expanded="#{if index == 0; 'true'; else; 'false'}" class="#{'active' if index == 0}"]
+              = Comment.comment_types_i18n[comment_type]
+              - count = parent.comments.public_send(comment_type).size
+              - if count > 0
+                .label.label-pill.ml-1
+                  = count
+              
   .tab-content
-    #tabs-4-tab-1.tab-pane.active.in[role="tabpanel" aria-expanded="true"]
-      .row
-        .col-sm-6
+    - %w(generic technique behaviour classification membership).each_with_index do |comment_type, index|
+      - if policy(Comment).public_send("show_#{comment_type}?")
+        .tab-pane[role="tabpanel" aria-expanded="#{if index == 0; 'true'; else; 'false'}" id="comments-tab-#{comment_type}" class="#{if index == 0; 'active in'; else; 'fade'}"]
+          .row
+            .col-sm-8
+              - if parent.comments.public_send(comment_type).size > 0
+                = render parent.comments.public_send(comment_type).includes(:user)
+              - else
+                i Voeg een opmerking toe
 
-        .col-sm-6
-          = render "comments/form", comment_type: :generic
-    #tabs-4-tab-2.tab-pane.fade[role="tabpanel" aria-expanded="false"]
-      .row
-        .col-sm-6
-
-        .col-sm-6
-          = render "comments/form", comment_type: :technique
-    #tabs-4-tab-3.tab-pane.fade[role="tabpanel" aria-expanded="false"]
-      .row
-        .col-sm-6
-
-        .col-sm-6
-          = render "comments/form", comment_type: :behaviour
-    #tabs-4-tab-4.tab-pane.fade[role="tabpanel" aria-expanded="false"]
-      .row
-        .col-sm-6
-
-        .col-sm-6
-          = render "comments/form", comment_type: :classification
-
-- @comments.each do |comment|
-  hr
-  .clearfix
-    - if policy(comment).update?
-      = link_to edit_comment_path(comment), class: "float-right", title: "Bewerken"
-        i.fa.fa-pencil
+            .col-sm-4
+              = render "comments/form", comment_type: comment_type
       
-    div
-      = comment.body
-    div
-      span.badge.badge-default>
-        = comment.comment_type_i18n.downcase
-      span.badge.badge-primary>
-        = comment.user.name
-      span.badge.badge-info> title="#{I18n.l comment.created_at.localtime, format: :long}"
-        = time_ago_in_words(comment.created_at.localtime)
-        |  geleden 

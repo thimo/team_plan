@@ -63,7 +63,7 @@ header.site-header
           - if user_signed_in?
             .dropdown.user-menu[title="Ingelogd als #{current_user.name}"]
               button#dd-user-menu.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-                img[src="/startui/img/avatar-2-64.png" alt=""]
+                = image_tag avatar_url(current_user)
               .dropdown-menu.dropdown-menu-right[aria-labelledby="dd-user-menu"]
                 a.dropdown-item[href="#"]
                   span.font-icon.glyphicon.glyphicon-user

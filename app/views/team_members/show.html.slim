@@ -6,4 +6,4 @@
   - if policy(@team_member).show_comments?
     .row
       .col-lg-12
-        = render "comments/tabs"
+        = render "comments/tabs", parent: @team_member.member
