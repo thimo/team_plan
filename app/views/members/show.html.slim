@@ -1,0 +1,10 @@
+- provide(:title, "#{@member.name}")
+
+.box-typical.box-typical-padding
+  = render "shared/member", member: @member
+  
+  / TODO determine rule to show member comments
+  / - if policy(@team_member).show_comments?
+  /   .row
+  /     .col-lg-12
+  /       = render "comments/tabs"

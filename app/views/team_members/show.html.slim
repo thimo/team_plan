@@ -1,72 +1,9 @@
 - provide(:title, "#{@team_member.member.name}")
 
 .box-typical.box-typical-padding
-  .row
-    .col-lg-12
-      h3 Contactgegevens
-      div
-        => @team_member.member.address
-      div
-        => @team_member.member.zipcode
-        => @team_member.member.city
-      div
-        = "#{@team_member.member.phone}"
-        = " / #{@team_member.member.phone_2}" unless @team_member.member.phone_2.blank?
-      div
-        = mail_to @team_member.member.email, @team_member.member.email
-        - unless @team_member.member.email_2.blank?
-          | / 
-          = mail_to @team_member.member.email_2, @team_member.member.email_2
-              
-      hr
-      
-      h3 Sportlink
-      
-      dl
-        - unless @team_member.member.person_type.blank?
-          dt Soort persoon
-          dd
-            = @team_member.member.person_type
-        - unless @team_member.member.contribution_category.blank?
-          dt Contributie categorie
-          dd
-            = @team_member.member.contribution_category
-        - unless @team_member.member.age_category.blank?
-          dt Leeftijdscategorie
-          dd
-            = @team_member.member.age_category
-        - unless @team_member.member.local_teams.blank?
-          dt Lokale teams
-          dd 
-            = @team_member.member.local_teams
-        - unless @team_member.member.club_sports.blank?
-          dt Verenigingssporten
-          dd
-            = @team_member.member.club_sports
-        - unless @team_member.member.sport_category.blank?
-          dt Bondssporten
-          dd
-            = @team_member.member.sport_category
-        - unless @team_member.member.association_sports.blank?
-          dt Bondssporten (elders)
-          dd
-            = @team_member.member.association_sports
-      
-      hr
-      
-      h2
-        | Teams
-      - @team_member.member.team_members.each do |team_member|
-        div
-          = team_member.season.name
-          |  - 
-          = link_to team_member.team.name, team_member.team
-          | , als 
-          = team_member.role_i18n.downcase
-      hr
-      h2
-        | Beoordelingen
+  = render "shared/member", member: @team_member.member
         
-    - if policy(@team_member).show_comments?
+  - if policy(@team_member).show_comments?
+    .row
       .col-lg-12
         = render "comments/tabs"

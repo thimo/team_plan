@@ -1,0 +1,65 @@
+.row
+  .col-lg-12
+    h3 Contactgegevens
+    div
+      => member.address
+    div
+      => member.zipcode
+      => member.city
+    div
+      = "#{member.phone}"
+      = " / #{member.phone_2}" unless member.phone_2.blank?
+    div
+      = mail_to member.email, member.email
+      - unless member.email_2.blank?
+        | / 
+        = mail_to member.email_2, member.email_2
+            
+    hr
+    
+    h3 Sportlink
+    
+    dl
+      - unless member.person_type.blank?
+        dt Soort persoon
+        dd
+          = member.person_type
+      - unless member.contribution_category.blank?
+        dt Contributie categorie
+        dd
+          = member.contribution_category
+      - unless member.age_category.blank?
+        dt Leeftijdscategorie
+        dd
+          = member.age_category
+      - unless member.local_teams.blank?
+        dt Lokale teams
+        dd 
+          = member.local_teams
+      - unless member.club_sports.blank?
+        dt Verenigingssporten
+        dd
+          = member.club_sports
+      - unless member.sport_category.blank?
+        dt Bondssporten
+        dd
+          = member.sport_category
+      - unless member.association_sports.blank?
+        dt Bondssporten (elders)
+        dd
+          = member.association_sports
+    
+    hr
+    
+    h2
+      | Teams
+    - member.team_members.each do |team_member|
+      div
+        = team_member.season.name
+        |  - 
+        = link_to team_member.team.name, team_member.team
+        | , als 
+        = team_member.role_i18n.downcase
+    hr
+    h2
+      | Beoordelingen
