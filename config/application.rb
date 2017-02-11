@@ -20,6 +20,8 @@ module TeamPlan
       Devise::Mailer.layout "mailer" # email.haml or email.erb
     end
 
+    config.generators.test_framework :rspec
+    
     config.generators do |g|
       g.javascript_engine :js
     end
