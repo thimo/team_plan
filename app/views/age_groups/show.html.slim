@@ -1,5 +1,7 @@
 - provide(:title, "Leeftijdsgroep #{@age_group.name}")
 
+= render "shared/favorite", parent: @age_group
+
 section.box-typical
   header.box-typical-header
     .tbl-row

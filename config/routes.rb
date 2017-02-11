@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :age_groups, shallow: true do
       resources :team_bulk_updates, only: [:new, :create]
       resources :member_allocations, only: [:index, :create, :update, :destroy]
+      resources :favorites, only: [:create, :destroy]
       resources :teams, except: [:index], shallow: true do
         resources :comments, only: [:new, :create, :edit, :update, :destroy]
         resources :favorites, only: [:create, :destroy]

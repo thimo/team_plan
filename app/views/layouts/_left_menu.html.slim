@@ -19,12 +19,23 @@ nav.side-menu
               i.fa.fa-futbol-o
               span.lbl
                 = team.name
+  - if current_user.favorite_teams.size > 0 || current_user.favorite_age_groups.size > 0
+    section
+      header.side-menu-title
+        | Favorieten
+      ul.side-menu-list
         - current_user.favorite_teams.each do |team|
           li.gold
             = link_to team
               i.fa.fa-star
               span.lbl
                 = team.name
+        - current_user.favorite_age_groups.each do |age_group|
+          li.gold
+            = link_to age_group
+              i.fa.fa-star
+              span.lbl
+                = age_group.name
             
   - if policy(:admin).show?
     section
