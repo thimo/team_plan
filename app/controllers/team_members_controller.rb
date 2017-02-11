@@ -49,6 +49,6 @@ class TeamMembersController < ApplicationController
     end
 
     def team_member_params
-      params.require(:team_member).permit(:team_id, :member_id, :role).merge(role: TeamMember.roles[:role_player])
+      params.require(:team_member).permit(:team_id, :member_id, :role).merge(role: TeamMember.roles[:player])
     end
 end

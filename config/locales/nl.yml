@@ -49,13 +49,13 @@ nl:
         club_staff: Club staf
         team_staff: Team begeleiding
         member: Lid
-        
+
     team_member:
       role:
-        role_player: Speler
-        role_coach: Coach
-        role_trainer: Trainer
-        role_team_parent: Teamouder
+        player: Speler
+        coach: Coach
+        trainer: Trainer
+        team_parent: Teamouder
 
     comment:
       comment_type:

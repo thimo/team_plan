@@ -21,13 +21,13 @@
                         i.fa.fa-users.color-blue-grey
                   td
                     strong = team.name
-                    - if team.team_members.players.size > 0
+                    - if team.team_members.player.size > 0
                       .label.label-pill.ml-3
-                        = "#{team.team_members.players.size}"
+                        = "#{team.team_members.player.size}"
                   td
                   td
                     
-                - team.team_members.players.each do |team_member|
+                - team.team_members.player.each do |team_member|
                   tr
                     td
                     td
