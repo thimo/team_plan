@@ -1,5 +1,7 @@
 - provide(:title, "#{@team_member.member.name}")
 
+= render "shared/favorite", parent: @team_member.member
+
 .box-typical.box-typical-padding
   = render "shared/member", member: @team_member.member
         
