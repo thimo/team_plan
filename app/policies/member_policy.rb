@@ -11,6 +11,10 @@ class MemberPolicy < AdminPolicy
     create? && update?
   end
 
+  def show_favorite?
+    @user.admin? || @user.club_staff?
+  end
+
   class Scope < Scope
     def resolve
       scope

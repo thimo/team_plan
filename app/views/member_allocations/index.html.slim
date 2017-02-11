@@ -32,6 +32,7 @@
                     td
                     td
                       = link_to team_member.member.name, team_member
+                      = render "shared/favorite", parent: team_member.member
                       .color-blue-grey-lighter.small
                         => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                         = "(#{team_member.member.gender})"
@@ -74,6 +75,7 @@
                         i.fa.fa-chevron-left.p-1
                   td
                     = link_to member.name, member
+                    = render "shared/favorite", parent: member
                     .color-blue-grey-lighter.small
                       => l member.born_on, format: :long
                       = "(#{member.gender})"

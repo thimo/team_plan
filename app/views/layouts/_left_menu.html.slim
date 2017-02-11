@@ -19,12 +19,12 @@ nav.side-menu
               i.fa.fa-futbol-o
               span.lbl
                 = team.name
-        li.gold
-          a[href="#"]
-            i.fa.fa-star
-            span.lbl
-              | ESA JO9-6
-
+        - current_user.favorite_teams.each do |team|
+          li.gold
+            = link_to team
+              i.fa.fa-star
+              span.lbl
+                = team.name
             
   - if policy(:admin).show?
     section

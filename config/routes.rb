@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :member_allocations, only: [:index, :create, :update, :destroy]
       resources :teams, except: [:index], shallow: true do
         resources :comments, only: [:new, :create, :edit, :update, :destroy]
+        resources :favorites, only: [:create, :destroy]
         resources :team_member_bulk_updates, only: [:new, :create]
       end
     end
@@ -20,7 +21,9 @@ Rails.application.routes.draw do
 
   resources :members, only: [:show] do
     resources :comments, only: [:new, :create, :edit, :update, :destroy]
+    resources :favorites, only: [:create, :destroy]
   end
+
 
   get 'admin' => 'admin#show'
   namespace :admin do

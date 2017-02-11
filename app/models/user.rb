@@ -60,4 +60,9 @@ class User < ApplicationRecord
 
     false
   end
+
+  def favorite_teams
+    # Favorite.where(user: User.first, favorable_type: Team.to_s)
+    Team.joins(:favorites).where(favorites: {user_id: id, favorable_type: Team.to_s})
+  end
 end

@@ -1,5 +1,7 @@
 - provide(:title, "Team #{@team.name}")
 
+= render "shared/favorite", parent: @team
+
 section.box-typical
   header.box-typical-header
     .tbl-row
@@ -19,6 +21,7 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "action-btn"
             i.fa.fa-trash-o
+            
   .box-typical-body
     .table-responsive
       table.table.table-sm.tr-links
@@ -40,6 +43,7 @@ section.box-typical
                   - if policy(team_member).destroy?
                     = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
                       i.fa.fa-times.p-1
+                  = render "shared/favorite", parent: team_member.member
           - if @staff.size > 0
             tr
               td.strong Begeleiding

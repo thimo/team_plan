@@ -1,7 +1,8 @@
 class Member < ApplicationRecord
   has_many :team_members, dependent: :destroy
   has_many :teams, through: :team_members
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :favorites, as: :favorable, dependent: :destroy
 
   # validates_presence_of :first_name, :last_name, :email, :phone
 
@@ -15,6 +16,14 @@ class Member < ApplicationRecord
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
+  end
+
+  def is_favorite?(user)
+    favorites.where(user: user).size > 0
+  end
+
+  def favorite(user)
+    favorites.where(user: user).first
   end
 
   def self.import(file)
