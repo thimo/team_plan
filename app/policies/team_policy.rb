@@ -29,6 +29,10 @@ class TeamPolicy < ApplicationPolicy
     @user.is_team_staff_for?(@record)
   end
 
+  def show_evaluations?
+    show_comments?
+  end
+
   def show_favorite?
     true
   end

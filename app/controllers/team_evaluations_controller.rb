@@ -1,0 +1,2 @@
+class TeamEvaluationsController < ApplicationController
+end

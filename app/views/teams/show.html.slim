@@ -67,3 +67,6 @@ section.box-typical
                   
 - if policy(@team).show_comments?
   = render "comments/tabs", parent: @team
+  
+- if policy(@team).show_evaluations?
+  = render "team_evaluations/index", team: @team
