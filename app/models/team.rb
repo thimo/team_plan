@@ -4,6 +4,7 @@ class Team < ApplicationRecord
   has_many :members, through: :team_members
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
+  has_many :team_evaluations, dependent: :destroy
 
   validates_presence_of :name, :age_group
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210212301) do
+ActiveRecord::Schema.define(version: 20170211220755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,28 @@ ActiveRecord::Schema.define(version: 20170210212301) do
     t.boolean  "private",          default: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer  "team_evaluation_id"
+    t.integer  "member_id"
+    t.string   "field_position"
+    t.string   "prefered_foot"
+    t.string   "advise_next_season"
+    t.string   "behaviour"
+    t.string   "technique"
+    t.string   "handlingspeed"
+    t.string   "insight"
+    t.string   "passes"
+    t.string   "speed"
+    t.string   "locomotion"
+    t.string   "physical"
+    t.string   "endurance"
+    t.string   "duel_strength"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["member_id"], name: "index_evaluations_on_member_id", using: :btree
+    t.index ["team_evaluation_id"], name: "index_evaluations_on_team_evaluation_id", using: :btree
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -118,6 +140,14 @@ ActiveRecord::Schema.define(version: 20170210212301) do
     t.integer  "status",     default: 0
   end
 
+  create_table "team_evaluations", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_evaluations_on_team_id", using: :btree
+  end
+
   create_table "team_members", force: :cascade do |t|
     t.integer  "member_id"
     t.integer  "team_id"
@@ -162,8 +192,11 @@ ActiveRecord::Schema.define(version: 20170210212301) do
 
   add_foreign_key "age_groups", "seasons"
   add_foreign_key "comments", "users"
+  add_foreign_key "evaluations", "members"
+  add_foreign_key "evaluations", "team_evaluations"
   add_foreign_key "favorites", "users"
   add_foreign_key "members", "users"
+  add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
