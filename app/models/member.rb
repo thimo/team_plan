@@ -4,8 +4,6 @@ class Member < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
 
-  # validates_presence_of :first_name, :last_name, :email, :phone
-
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
 
   scope :from_year, lambda {|year| where("born_on >= ?", "#{year}-01-01")}
