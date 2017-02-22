@@ -28,12 +28,9 @@ RSpec.feature "Admin::Members", type: :feature do
     member = create(:member)
     admin = create(:admin)
 
-    logout(:user)
     login_as(admin, scope: :user)
 
     visit admin_members_path
-    ap '#' * 60
-    ap page.body
     within ".section-header h3" do
       expect(page).to have_text "Leden"
     end
