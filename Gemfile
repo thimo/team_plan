@@ -53,6 +53,8 @@ group :development, :test do
   gem 'guard', require: false
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
 end
 
 group :development do
@@ -79,9 +81,7 @@ end
 group :test do
   gem 'minitest-reporters'
   gem 'mini_backtrace'
-  gem 'capybara'
   gem 'shoulda-matchers', require: false
-  gem 'webmock'
   gem 'launchy' # For 'save_and_open_page' debugging during testing
 end
 
