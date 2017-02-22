@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
     get 'admin' => 'admin#show'
     namespace :admin do
-      resources :users
+      resources :users, except: [:show]
       resources :members, only: [:index, :show]
       resources :members_import, only: [:new] do
         collection {
