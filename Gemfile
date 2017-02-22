@@ -51,6 +51,8 @@ group :development, :test do
   gem 'awesome_print', require: "awesome_print"
   gem 'pry-byebug'
   gem 'guard', require: false
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -77,11 +79,10 @@ end
 group :test do
   gem 'minitest-reporters'
   gem 'mini_backtrace'
-  gem 'rspec-rails', '~> 3.5'
-
+  gem 'capybara'
   gem 'shoulda-matchers', require: false
-  gem 'factory_girl_rails'
   gem 'webmock'
+  gem 'launchy' # For 'save_and_open_page' debugging during testing
 end
 
 group :production, :staging do
