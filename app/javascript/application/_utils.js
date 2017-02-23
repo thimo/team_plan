@@ -30,7 +30,7 @@ $(document).on('turbolinks:load', function() {
   $('.no-touch [title]').tooltip();
 
   // Restore scroll position
-  scrollPosition = $("[data-scroll-position]").data("scrollPosition")
+  var scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition && !!localStorage.getItem(scrollPosition)) {
     $(window).scrollTop(localStorage.getItem(scrollPosition));
   }
@@ -38,7 +38,7 @@ $(document).on('turbolinks:load', function() {
 
 $(document).on('turbolinks:unload', function() {
   // Store scroll position for pages with data-scroll-position
-  scrollPosition = $("[data-scroll-position]").data("scrollPosition")
+  var scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition) {
     localStorage.setItem(scrollPosition, $(window).scrollTop());
   }

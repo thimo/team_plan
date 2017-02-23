@@ -1,8 +1,15 @@
-@import "bootstrap";
-@import "font-awesome";
-@import "select2";
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ *= require bootstrap/scss/bootstrap
+ *= require font-awesome/scss/font-awesome
+ *= require font-awesome/scss/font-awesome
+ *= require select2/src/scss/core
+ *= require notie/src/notie
+ */
+
 @import "startui/main";
 @import "startui/chat";
-@import "notie";
 @import "./*";
 @import "custom/*";
