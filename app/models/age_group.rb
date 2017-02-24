@@ -1,6 +1,7 @@
 class AgeGroup < ApplicationRecord
   belongs_to :season
   has_many :teams, dependent: :destroy
+  has_many :favorites, as: :favorable, dependent: :destroy
 
   validates_presence_of :name, :season, :gender
 
@@ -22,6 +23,14 @@ class AgeGroup < ApplicationRecord
 
   def archived?
     season.archived?
+  end
+
+  def is_favorite?(user)
+    favorites.where(user: user).size > 0
+  end
+
+  def favorite(user)
+    favorites.where(user: user).first
   end
 
 end

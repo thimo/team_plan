@@ -1,0 +1,28 @@
+{
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.12.4",
+    "glob": "^7.1.1",
+    "path-complete-extname": "^0.1.0",
+    "rails-erb-loader": "^3.2.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1",
+    "webpack-merge": "^3.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
+    "jquery-autosize": "^1.18.18",
+    "jquery-ujs": "^1.2.2",
+    "notie": "^3.9.5",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "select2": "^4.0.3",
+    "tether": "^1.4.0"
+  }
+}

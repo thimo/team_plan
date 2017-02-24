@@ -8,24 +8,36 @@ nav.side-menu
             span.lbl
               | Seizoen #{Season.active.desc.first.name}
 
-  section
-    header.side-menu-title
-      | Mijn teams
-    ul.side-menu-list
-      li.green class="#{'active' if current_page?('/teams/87')}"
-        a[href="/teams/87"]
-          i.fa.fa-futbol-o
-          span.lbl
-            | ESA JO11-8
-      li.gold
-        a[href="#"]
-          i.fa.fa-star
-          span.lbl
-            | ESA JO9-6
-
+  - if current_user.active_teams.size > 0
+    section
+      header.side-menu-title
+        | Mijn teams
+      ul.side-menu-list
+        - current_user.active_teams.each do |team|
+          li.green class="#{'active' if current_page?(team)}"
+            = link_to team
+              i.fa.fa-futbol-o
+              span.lbl
+                = team.name
+  - if current_user.favorite_teams.size > 0 || current_user.favorite_age_groups.size > 0
+    section
+      header.side-menu-title
+        | Favorieten
+      ul.side-menu-list
+        - current_user.favorite_teams.each do |team|
+          li.gold
+            = link_to team
+              i.fa.fa-star
+              span.lbl
+                = team.name
+        - current_user.favorite_age_groups.each do |age_group|
+          li.gold
+            = link_to age_group
+              i.fa.fa-star
+              span.lbl
+                = age_group.name
             
-  / TODO current_user check verwijderen zodra Devise met eigen layout werkt
-  - if !current_user.nil? && policy(:admin).show?
+  - if policy(:admin).show?
     section
       header.side-menu-title
         | Admin

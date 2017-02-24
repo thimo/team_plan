@@ -8,14 +8,15 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def create?
-    return false if @record.archived?
-
     # Only by admin
     @user.admin?
   end
 
   def update?
-    create?
+    return false if @record.archived?
+
+    # Only by admin
+    @user.admin?
   end
 
   def destroy?
@@ -27,7 +28,11 @@ class SeasonPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      if @user.admin? || @user.club_staff?
+        scope
+      else
+        scope.where(status: [Season.statuses[:archived], Season.statuses[:active]])
+      end
     end
   end
 end

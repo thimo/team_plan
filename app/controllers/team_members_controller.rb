@@ -1,5 +1,16 @@
 class TeamMembersController < ApplicationController
-  before_action :set_team_member, only: [:edit, :update, :destroy]
+  before_action :set_team_member, only: [:show, :edit, :update, :destroy]
+
+  def show
+    @commentable = @team_member.member
+    @comments = @commentable.comments.includes(:user)
+    @comment = Comment.new
+
+    add_breadcrumb "#{@team_member.team.age_group.season.name}", @team_member.team.age_group.season
+    add_breadcrumb "#{@team_member.team.age_group.name}", @team_member.team.age_group
+    add_breadcrumb "#{@team_member.team.name}", @team_member.team
+    add_breadcrumb "#{@team_member.member.name}", @team_member
+  end
 
   def create
     @age_group = AgeGroup.find(params[:age_group_id])
@@ -38,6 +49,6 @@ class TeamMembersController < ApplicationController
     end
 
     def team_member_params
-      params.require(:team_member).permit(:team_id, :member_id, :role).merge(role: TeamMember.roles[:role_player])
+      params.require(:team_member).permit(:team_id, :member_id, :role).merge(role: TeamMember.roles[:player])
     end
 end

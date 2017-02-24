@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Svs
+module TeamPlan
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -20,6 +20,8 @@ module Svs
       Devise::Mailer.layout "mailer" # email.haml or email.erb
     end
 
+    config.generators.test_framework :rspec
+    
     config.generators do |g|
       g.javascript_engine :js
     end

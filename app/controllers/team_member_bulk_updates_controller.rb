@@ -14,7 +14,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
       ids.each do |id|
         member = Member.find(id)
         unless member.nil?
-          @team_member = @team.team_members.new(member: member, role: TeamMember.roles["role_#{type}"])
+          @team_member = @team.team_members.new(member: member, role: TeamMember.roles["#{type}"])
           if @team_member.save
             count += 1
           end

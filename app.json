@@ -1,6 +1,6 @@
 {
-  "name": "SVS",
-  "description": "The SVS",
+  "name": "TeamPlan",
+  "description": "TeamPlan - Team planning and player tracking system for football clubs",
   "keywords": [
     "dokku",
     "rails"

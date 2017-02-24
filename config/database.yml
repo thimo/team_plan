@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: svs_development
+  database: team_plan_development
 
 test:
   <<: *default
-  database: svs_test
+  database: team_plan_test
 
 production:
   <<: *default

@@ -1,10 +1,9 @@
 class Member < ApplicationRecord
   has_many :team_members, dependent: :destroy
   has_many :teams, through: :team_members
-  has_many :comments, as: :commentable
-  belongs_to :user
-
-  # validates_presence_of :first_name, :last_name, :email, :phone
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :favorites, as: :favorable, dependent: :destroy
+  has_many :evaluations, dependent: :destroy
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
 
@@ -16,6 +15,14 @@ class Member < ApplicationRecord
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
+  end
+
+  def is_favorite?(user)
+    favorites.where(user: user).size > 0
+  end
+
+  def favorite(user)
+    favorites.where(user: user).first
   end
 
   def self.import(file)

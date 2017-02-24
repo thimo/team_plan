@@ -35,7 +35,7 @@ class TeamBulkUpdatesController < ApplicationController
 
     def set_age_group
       @age_group = AgeGroup.find(params[:age_group_id])
-      authorize Team
+      authorize @age_group.teams.new
     end
 
 

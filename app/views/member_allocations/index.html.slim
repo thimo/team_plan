@@ -16,22 +16,23 @@
               - @teams.asc.each do |team|
                 tr
                   td.w-1
-                    - if policy(TeamMember).create?
+                    - if policy(team.team_members.new).create?
                       => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
                         i.fa.fa-users.color-blue-grey
                   td
                     strong = team.name
-                    - if team.team_members.players.size > 0
+                    - if team.team_members.player.size > 0
                       .label.label-pill.ml-3
-                        = "#{team.team_members.players.size}"
+                        = "#{team.team_members.player.size}"
                   td
                   td
                     
-                - team.team_members.players.each do |team_member|
+                - team.team_members.player.each do |team_member|
                   tr
                     td
                     td
-                      = link_to team_member.member.name, team_member.member
+                      = link_to team_member.member.name, team_member, target: "_blank"
+                      = render "shared/favorite", parent: team_member.member
                       .color-blue-grey-lighter.small
                         => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                         = "(#{team_member.member.gender})"
@@ -69,11 +70,12 @@
               - @available_members.each do |member|
                 tr
                   td.w-1
-                    - if policy(TeamMember).create?
+                    - if policy(@age_group.teams.first.team_members.new).create?
                       a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
                         i.fa.fa-chevron-left.p-1
                   td
-                    = link_to member.name, member
+                    = link_to member.name, member, target: "_blank"
+                    = render "shared/favorite", parent: member
                     .color-blue-grey-lighter.small
                       => l member.born_on, format: :long
                       = "(#{member.gender})"

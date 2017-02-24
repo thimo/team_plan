@@ -50,11 +50,14 @@ class SeasonsController < ApplicationController
   end
 
   def set_season
-    @season = if params[:id].nil?
-                Season.find_by(status: Season.statuses[:active])
-              else
-                Season.find(params[:id])
-              end
+    # Find season by id in params
+    @season = Season.find(params[:id]) unless params[:id].nil?
+    # Find first active season
+    @season = Season.find_by(status: Season.statuses[:active]) if @season.nil?
+    # Find first draft season
+    @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
+    # Create a new draft season in the database
+    @season = Season.create(name: "Time.current.year / #{Time.current.year + 1}") if @season.nil?
 
     authorize @season
   end

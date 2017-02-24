@@ -1,5 +1,7 @@
 - provide(:title, "Leeftijdsgroep #{@age_group.name}")
 
+= render "shared/favorite", parent: @age_group
+
 section.box-typical
   header.box-typical-header
     .tbl-row
@@ -38,6 +40,6 @@ section.box-typical
               td
                 = link_to team.name, team
               td.text-right
-                - if team.team_members.players.size > 0
+                - if team.team_members.player.size > 0
                   .label.label-pill
-                    = "#{team.team_members.players.size} / #{team.team_members.size - team.team_members.players.size}"
+                    = "#{team.team_members.player.size} / #{team.team_members.size - team.team_members.player.size}"
