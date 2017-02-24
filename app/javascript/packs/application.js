@@ -6,8 +6,6 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
-
 require('../application/_utils')
 require('../application/member_allocations')
 require('../application/team_member_bulk_updates')
