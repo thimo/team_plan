@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 
 class Hello extends React.Component {
   render() {
-    return <div>Hello {this.props.name}!</div>
+    return <div style={{float: 'right', padding: 30}}>Hello {this.props.name}!</div>
   }
 }
 
