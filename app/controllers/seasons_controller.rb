@@ -57,7 +57,7 @@ class SeasonsController < ApplicationController
     # Find first draft season
     @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
     # Create a new draft season in the database
-    @season = Season.create(name: "Time.current.year / #{Time.current.year + 1}") if @season.nil?
+    @season = Season.create(name: "#{Time.current.year} / #{Time.current.year + 1}") if @season.nil?
 
     authorize @season
   end
