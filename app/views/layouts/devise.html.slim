@@ -12,7 +12,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     link[rel="stylesheet" href="/startui/css/separate/pages/login.min.css"]
     = csrf_meta_tags
-    = javascript_include_tag 'jquery'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
     .page-center
@@ -20,4 +20,3 @@ html
         .container-fluid
           = yield
                 
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
