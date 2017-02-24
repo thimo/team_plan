@@ -18,6 +18,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "jquery-autosize": "^1.18.18",
+    "jquery-ujs": "^1.2.2",
     "notie": "^3.9.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

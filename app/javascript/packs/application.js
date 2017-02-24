@@ -8,19 +8,6 @@
 
 console.log('Hello World from Webpacker')
 
-console.log('jquery')
-require('jquery')
-console.log('tether')
-console.log(jQuery)
-require('tether')
-console.log('bootstrap')
-require('bootstrap')
-console.log('select2')
-require('select2')
-console.log('jquery-autosize')
-require('jquery-autosize')
-console.log('')
-
 require('../application/_utils')
 require('../application/member_allocations')
 require('../application/team_member_bulk_updates')

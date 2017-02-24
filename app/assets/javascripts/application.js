@@ -10,12 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// require jquery
-// require tether
-// require bootstrap
-// require jquery_ujs
-// require jquery.autosize
-// require select2
+//= require jquery/dist/jquery.js
+//= require tether/dist/js/tether.js
+//= require bootstrap/dist/js/bootstrap.js
+//= require select2/dist/js/select2.js
+//= require jquery-autosize/jquery.autosize.js
+//= require notie/dist/notie.js
+//= require jquery-ujs/src/rails.js
+
 //= require turbolinks
-// require notie
 //= require_tree .
