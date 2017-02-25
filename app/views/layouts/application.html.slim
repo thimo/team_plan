@@ -28,8 +28,6 @@ html
             = render_breadcrumbs :tag => :li, :separator => ""
           
 
-        = render 'layouts/flash'
-    
         = content_for?(:content) ? yield(:content) : yield
       
         = render 'layouts/footer'
@@ -45,3 +43,4 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-eval': 'false'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': 'false'
     = javascript_pack_tag 'hello_react', 'data-turbolinks-eval': 'false'
+    = render 'layouts/flash'
