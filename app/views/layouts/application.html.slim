@@ -11,11 +11,6 @@ html
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application'
-    script src="/startui/js/plugins.js"
-    script src="/startui/js/app.js"
-    = javascript_pack_tag 'hello_react'
     
   body.with-side-menu
     - unless Rails.env.production? || Rails.env.development?
@@ -46,3 +41,7 @@ html
           .collapse#collapseExample
             .card.card-block
               = debug(params)
+
+    = javascript_include_tag 'application', 'data-turbolinks-eval': 'false'
+    = javascript_pack_tag 'application', 'data-turbolinks-eval': 'false'
+    = javascript_pack_tag 'hello_react', 'data-turbolinks-eval': 'false'

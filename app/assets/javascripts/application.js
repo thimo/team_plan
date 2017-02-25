@@ -19,4 +19,3 @@
 //= require jquery-ujs/src/rails.js
 
 //= require turbolinks
-//= require_tree .
