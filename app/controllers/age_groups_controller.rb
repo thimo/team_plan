@@ -36,7 +36,6 @@ class AgeGroupsController < ApplicationController
     @season = Season.find(params[:season_id])
 
     @age_group = if action_name == 'new'
-                    # AgeGroup.new
                     @season.age_groups.new
                   else
                     AgeGroup.new(age_group_params)
