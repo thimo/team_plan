@@ -33,14 +33,16 @@ class AgeGroupsController < ApplicationController
   private
 
   def create_age_group
+    @season = Season.find(params[:season_id])
+
     @age_group = if action_name == 'new'
-                    AgeGroup.new
+                    # AgeGroup.new
+                    @season.age_groups.new
                   else
                     AgeGroup.new(age_group_params)
                   end
     authorize @age_group
 
-    @season = Season.find(params[:season_id])
     @age_group.season = @season
   end
 
