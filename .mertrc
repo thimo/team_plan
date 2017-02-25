@@ -1,0 +1,22 @@
+layout:
+  -
+    split_strategy: "vertical"
+    tabs:
+      -
+        layout:
+          -
+            - ls
+      -
+        layout:
+        -
+          - ./bin/webpack-watcher
+        -
+          - ls
+      -
+        layout:
+          -
+            - rails s
+          -
+            - guard
+          -
+            - ls

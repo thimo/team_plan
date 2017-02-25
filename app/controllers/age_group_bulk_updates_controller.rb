@@ -38,7 +38,7 @@ class AgeGroupBulkUpdatesController < ApplicationController
 
     def set_season
       @season = Season.find(params[:season_id])
-      authorize AgeGroup
+      authorize @season.age_groups.new
     end
 
 
