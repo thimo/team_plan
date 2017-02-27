@@ -1,0 +1,98 @@
+= simple_form_for [@team, @team_evaluation], {wrapper: :horizontal_form} do |f|
+  = f.error_notification
+  
+  table.table.table-striped.table-sm.table-responsive
+    thead
+      tr
+        th
+          div
+            span
+              | Speler
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:field_position)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:prefered_foot)
+        
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:behaviour)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:technique)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:handlingspeed)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:insight)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:passes)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:speed)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:locomotion)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:physical)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:endurance)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:duel_strength)
+
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:advise_next_season)
+        th.rotate
+          div
+            span = Evaluation.human_attribute_name(:remark)
+    tbody
+    = f.simple_fields_for :evaluations do |e|
+      = e.hidden_field :team_evaluation_id
+      = e.hidden_field :member_id
+      tr
+        td
+          = link_to e.object.member.name, e.object.member, target: "_blank"
+          .color-blue-grey-lighter.small
+            => l e.object.member.born_on, format: :long unless e.object.member.born_on.nil?
+            = "(#{e.object.member.gender})"
+            
+        td
+          = e.select :field_position, field_position_options, {include_blank: true}, {class: "custom-select"}
+        td
+          = e.select :prefered_foot, prefered_foot_options, {include_blank: true}, {class: "custom-select"}
+              
+        td
+          = e.select :behaviour, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :technique, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :handlingspeed, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :insight, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :passes, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :speed, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :locomotion, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :physical, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :endurance, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+        td
+          = e.select :duel_strength, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
+          
+        td
+          = e.select :advise_next_season, advise_next_season_options, {include_blank: true}, {class: "custom-select"}
+        td
+          = e.text_area :remark, {class: "form-control"}
+
+
+  = f.button :submit, "Opslaan", class: 'btn btn-primary'

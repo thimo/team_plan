@@ -4,7 +4,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    index?
   end
 
   def create?
@@ -18,7 +18,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return false if @record.archived? || @record.active?
+    return false unless @record.draft?
 
     @user.admin? || @user.club_staff?
   end

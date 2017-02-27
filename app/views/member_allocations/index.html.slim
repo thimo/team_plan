@@ -16,7 +16,7 @@
               - @teams.asc.each do |team|
                 tr
                   td.w-1
-                    - if policy(team.team_members.new).create?
+                    - if policy(TeamMember.new(team: team)).create?
                       => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
                         i.fa.fa-users.color-blue-grey
                   td
@@ -70,7 +70,7 @@
               - @available_members.each do |member|
                 tr
                   td.w-1
-                    - if policy(@age_group.teams.first.team_members.new).create?
+                    - if policy(TeamMember.new(@age_group.teams.first)).create?
                       a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
                         i.fa.fa-chevron-left.p-1
                   td

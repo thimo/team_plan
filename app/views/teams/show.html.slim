@@ -11,7 +11,7 @@
             .strong
               | Spelers
               .label.label-pill.ml-3 = @team.team_members.player.count
-          - if policy(@team.team_members.new).create?
+          - if policy(TeamMember.new(team: @team)).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_team_team_member_bulk_update_path(@team), title: "Teamleden toevoegen", class: "action-btn" do
                 i.fa.fa-users

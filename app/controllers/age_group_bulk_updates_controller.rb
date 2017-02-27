@@ -38,9 +38,8 @@ class AgeGroupBulkUpdatesController < ApplicationController
 
     def set_season
       @season = Season.find(params[:season_id])
-      authorize @season.age_groups.new
+      authorize AgeGroup.new(season: @season)
     end
-
 
     def breadcumbs
       add_breadcrumb "#{@season.name}", @season

@@ -50,15 +50,20 @@ class User < ApplicationRecord
   end
 
   def is_team_staff_for?(record)
-    if record.class == Team
-      return self.members.joins(:team_members).where(team_members: {team_id: record.id, role: [1, 2, 3]}).size > 0
+    team_id = 0
+
+    case record.class
+    when Team
+      team_id = record.id
+    when TeamMember
+      team_id = record.team_id
+    when TeamEvaluation
+      team_id = record.team_id
+    when Evaluation
+      team_id = record.team_evaluation.team_id
     end
 
-    if record.class == TeamMember
-      return self.members.joins(:team_members).where(team_members: {team_id: record.team_id, role: [1, 2, 3]}).size > 0
-    end
-
-    false
+    return team_id > 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, role: [1, 2, 3]}).size > 0
   end
 
   def favorite_teams

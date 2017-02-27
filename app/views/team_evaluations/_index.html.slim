@@ -6,8 +6,9 @@ section.box-typical
           |  Evaluaties 
           .label.label-pill.ml-3
       .tbl-cell.tbl-cell-action-bordered
-        = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
-          i.fa.fa-file-o
+        - if policy(TeamEvaluation.new(team: team)).create?
+          = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
+            i.fa.fa-file-o
           
   .box-typical-body
     .table-responsive
@@ -15,10 +16,18 @@ section.box-typical
         - if team.team_evaluations.size > 0
           thead
           tbody
-            - team.team_evaluations.each do |team_evaluation|
+            - team.team_evaluations.desc.each do |team_evaluation|
               tr.clickable
                 td
-                  = team_evaluation.created_at
+                  = link_to edit_team_evaluation_path(team_evaluation)
+                    = l team_evaluation.created_at, format: :long
+                td 
+                  - if team_evaluation.finished_at.present?
+                    | Ingevuld
+                  - elsif team_evaluation.invited_at.present?
+                    | Open
+                  - else
+                    | Te versturen
         - else 
           tbody
             tr

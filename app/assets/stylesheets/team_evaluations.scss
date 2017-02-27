@@ -1,3 +1,22 @@
-// Place all the styles related to the TeamEvaluations controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+th.rotate {
+  height: 140px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform:
+    translate(0, 0)
+    rotate(-45deg);
+  width: 30px;
+}
+th.rotate > div > span {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+select.evaluation-rating {
+  width: 60px;
+  &.custom-select {
+    padding: 0.375rem;
+  }
+}
