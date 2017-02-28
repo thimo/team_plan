@@ -20,7 +20,7 @@ section.box-typical
               tr.clickable
                 td
                   = link_to edit_team_evaluation_path(team_evaluation)
-                    = l team_evaluation.created_at, format: :long
+                    = l team_evaluation.created_at.to_date, format: :long
                 td 
                   - if team_evaluation.finished_at.present?
                     | Ingevuld

@@ -22,7 +22,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return false if @record.finished_at.present?
+    return false if @record.new_record? || @record.finished_at.present?
 
     @user.admin? || @user.club_staff?
   end

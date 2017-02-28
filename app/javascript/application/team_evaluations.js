@@ -1,21 +1,36 @@
-$('select.evaluation-rating').on('change', (e) => {
-  console.log('change')
-  console.log(e.target.value)
-  $(e.target).attr('class', 'custom-select evaluation-rating')
-  if (!!e.target.value) {
-    switch (e.target.value) {
-      case 'goed':
-        $(e.target).addClass('btn btn-success')
+function setEvaluationClass(target) {
+  let evaluationClass = 'custom-select evaluation-rating'
+  if (!!target.value) {
+    switch (target.value) {
+      case '10':
+      case '9':
+      case '8':
+        evaluationClass += ' btn btn-success'
         break;
-      case 'voldoende':
-        $(e.target).addClass('btn')
+      case '7':
+      case '6':
+        evaluationClass += ' btn'
         break;
-      case 'matig':
-        $(e.target).addClass('btn btn-warning')
+      case '5':
+        evaluationClass += ' btn btn-warning'
         break;
-      case 'onvoldoende':
-        $(e.target).addClass('btn btn-danger')
+      case '4':
+      case '3':
+      case '2':
+      case '1':
+        evaluationClass += ' btn btn-danger'
         break;
     }
   }
+  $(target).attr('class', evaluationClass)
+}
+
+$(() => {
+  $('.evaluation-rating').each((index, target) => {
+    setEvaluationClass(target)
+  })
+})
+
+$('select.evaluation-rating').on('change', (e) => {
+  setEvaluationClass(e.target)
 })

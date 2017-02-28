@@ -1,98 +1,114 @@
 = simple_form_for [@team, @team_evaluation], {wrapper: :horizontal_form} do |f|
   = f.error_notification
-  
-  table.table.table-striped.table-sm.table-responsive
-    thead
-      tr
-        th
-          div
-            span
-              | Speler
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:field_position)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:prefered_foot)
+
+  section.box-typical
+    header.box-typical-header
+      .tbl-row
+        .tbl-cell.tbl-cell-title
+          .strong
+            | Team evaluatie #{@team_evaluation.team.name}
+            div.color-blue-grey-lighter.small
+              = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record?
+        - if policy(@team_evaluation).destroy?
+          .tbl-cell.tbl-cell-action-bordered
+            = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Team evaluatie wordt verwijderd. Doorgaan?' }, title: "Team evaluatie verwijderen", class: "action-btn"
+              i.fa.fa-trash-o
         
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:behaviour)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:technique)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:handlingspeed)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:insight)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:passes)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:speed)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:locomotion)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:physical)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:endurance)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:duel_strength)
-
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:advise_next_season)
-        th.rotate
-          div
-            span = Evaluation.human_attribute_name(:remark)
-    tbody
-    = f.simple_fields_for :evaluations do |e|
-      = e.hidden_field :team_evaluation_id
-      = e.hidden_field :member_id
-      tr
-        td
-          = link_to e.object.member.name, e.object.member, target: "_blank"
-          .color-blue-grey-lighter.small
-            => l e.object.member.born_on, format: :long unless e.object.member.born_on.nil?
-            = "(#{e.object.member.gender})"
-            
-        td
-          = e.select :field_position, field_position_options, {include_blank: true}, {class: "custom-select"}
-        td
-          = e.select :prefered_foot, prefered_foot_options, {include_blank: true}, {class: "custom-select"}
+    .box-typical-body
+      .table-responsive  
+        table.table.table-striped.table-xs
+          thead
+            tr
+              th
+                div
+                  span
+                    | Speler
+              th
+                div
+                  span = Evaluation.human_attribute_name(:field_position)
+              th
+                div
+                  span = Evaluation.human_attribute_name(:prefered_foot)
               
-        td
-          = e.select :behaviour, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :technique, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :handlingspeed, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :insight, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :passes, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :speed, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :locomotion, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :physical, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :endurance, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-        td
-          = e.select :duel_strength, rating_options, {include_blank: true}, {class: "custom-select evaluation-rating"}
-          
-        td
-          = e.select :advise_next_season, advise_next_season_options, {include_blank: true}, {class: "custom-select"}
-        td
-          = e.text_area :remark, {class: "form-control"}
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:behaviour)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:technique)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:handlingspeed)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:insight)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:passes)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:speed)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:locomotion)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:physical)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:endurance)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:duel_strength)
 
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:advise_next_season)
+              th
+                div
+                  span = Evaluation.human_attribute_name(:remark)
+          tbody
+          = f.simple_fields_for :evaluations, @evaluations do |e|
+            = e.hidden_field :id
+            = e.hidden_field :member_id
+            
+            tr
+              td.member_name
+                = link_to e.object.member.name, e.object.member, target: "_blank"
+                .color-blue-grey-lighter.small
+                  => l e.object.member.born_on, format: :long unless e.object.member.born_on.nil?
+                  = "(#{e.object.member.gender})"
+                  
+              td
+                = e.select :field_position, grouped_options_for_select(Evaluation::FIELD_POSITION_OPTIONS, e.object.field_position), {include_blank: true}, {class: "custom-select field_position"}
+              td
+                = e.select :prefered_foot, Evaluation::PREFERED_FOOT_OPTIONS, {include_blank: true}, {class: "custom-select"}
+                    
+              td
+                = e.select :behaviour, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :technique, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :handlingspeed, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :insight, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :passes, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :speed, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :locomotion, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :physical, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :endurance, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+              td
+                = e.select :duel_strength, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "custom-select evaluation-rating"}
+                
+              td
+                = e.select :advise_next_season, Evaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "custom-select"}
+              td.remark
+                = e.text_area :remark, {class: "form-control"}
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary'
+    footer.box-typical-footer
+      = f.button :submit, "Opslaan", class: 'btn btn-primary'

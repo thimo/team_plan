@@ -1,15 +1,15 @@
 class TeamEvaluationsController < ApplicationController
-  # before_action :set_team, only: [:new, :create]
   before_action :create_team_evaluation, only: [:new, :create]
   before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
   def new
     # Create team evaluation
-    @team.team_members.player.asc.each do |player|
+    @team_evaluation.team.team_members.player.asc.each do |player|
       # TODO add previous filled in values for player (field_position, prefered_foot)
       @team_evaluation.evaluations.build(member: player.member)
     end
+    @evaluations = @team_evaluation.evaluations
   end
 
   def create
@@ -20,15 +20,22 @@ class TeamEvaluationsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @evaluations = @team_evaluation.evaluations.asc
+  end
 
   def update
     # TODO Add validatie indien af te ronden
-    if @team_evaluation.save
+    if @team_evaluation.update_attributes(team_evaluation_params)
       redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen.'
     else
       render :new
     end
+  end
+
+  def destroy
+    redirect_to @team_evaluation.team, notice: 'Team evaluatie is verwijderd.'
+    @team_evaluation.destroy
   end
 
   private
@@ -63,7 +70,7 @@ class TeamEvaluationsController < ApplicationController
     end
 
     def team_evaluation_params
-      params.require(:team_evaluation).permit(evaluations_attributes: [ :id, :member_id, :field_position, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark ])
+      params.require(:team_evaluation).permit(evaluations_attributes: [:id, :member_id, :field_position, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark])
     end
 
 end
