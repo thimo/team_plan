@@ -10,6 +10,8 @@
             div.color-blue-grey-lighter.small
               = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record? || @team_evaluation.finished_at.present?
               = l @team_evaluation.finished_at.to_date, format: :long if @team_evaluation.finished_at.present?
+              |  - 
+              = @team_evaluation.status
         - if policy(@team_evaluation).destroy?
           .tbl-cell.tbl-cell-action-bordered
             = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Team evaluatie wordt verwijderd. Doorgaan?' }, title: "Team evaluatie verwijderen", class: "action-btn"

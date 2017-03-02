@@ -23,12 +23,7 @@ section.box-typical
                   = link_to url
                     = l team_evaluation.created_at.to_date, format: :long
                 td 
-                  - if team_evaluation.finished_at.present?
-                    | Afgerond
-                  - elsif team_evaluation.invited_at.present?
-                    | In behandeling
-                  - else
-                    | Te versturen
+                  = team_evaluation.status
         - else 
           tbody
             tr

@@ -31,4 +31,14 @@ class TeamEvaluation < ApplicationRecord
     self.update_attribute(:finished_by, current_user)
     self.update_attribute(:finished_at, DateTime.now)
   end
+
+  def status
+    if finished_at.present?
+      "Afgerond"
+    elsif invited_at.present?
+      "In behandeling"
+    else
+      "Te versturen"
+    end
+  end
 end
