@@ -7,9 +7,7 @@ class TeamMember < ApplicationRecord
   validates_presence_of :team, :member, :role
   validates :role, :uniqueness => {scope: [:team, :member]}
 
-  # scope :players, -> { where(role: TeamMember.roles[:player]).includes(:member) }
   scope :staff, -> { where.not(role: TeamMember.roles[:player]).includes(:member) }
-
   scope :asc, -> {joins(:member).order('members.last_name ASC, members.first_name ASC') }
 
   def age_group
@@ -21,7 +19,7 @@ class TeamMember < ApplicationRecord
   end
 
   def draft?
-    team.age_group.season.draft
+    team.age_group.season.draft?
   end
 
   def active?

@@ -2,11 +2,14 @@
 
 = render "shared/favorite", parent: @member
 
-.box-typical.box-typical-padding
-  = render "shared/member", member: @member
+.row
+  .col-xl-6
+    .box-typical.box-typical-padding
+      = render "shared/member", member: @member
   
-  / TODO determine rule to show member comments
-  / - if policy(@team_member).show_comments?
-  /   .row
-  /     .col-lg-12
-  /       = render "comments/tabs"
+  .col-xl-6
+    - if policy(@member).show_comments?
+      = render "comments/tabs", parent: @member
+
+    - if policy(@member).show_evaluations?
+      = render "evaluations/member", member: @member

@@ -20,9 +20,7 @@ Rails.application.routes.draw do
 
     resources :team_evaluations, only: [:show, :edit, :update]
 
-    resources :team_members, only: [:show, :create, :update, :destroy], shallow: true do
-      resources :comments, only: [:new, :create, :edit, :update, :destroy]
-    end
+    resources :team_members, only: [:create, :update, :destroy]
 
     resources :members, only: [:show] do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]

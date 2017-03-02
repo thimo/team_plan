@@ -7,6 +7,8 @@ class MembersController < ApplicationController
     @commentable = @member
     @comments = @commentable.comments.includes(:user)
     @comment = Comment.new
+
+    @evaluations = @member.evaluations.finished_desc
   end
 
   def edit
@@ -17,10 +19,14 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     authorize @member
 
-    # TODO add breadcrumb for current active team
-    # add_breadcrumb "#{@member.team.age_group.season.name}", @member.team.age_group.season
-    # add_breadcrumb "#{@member.team.age_group.name}", @member.team.age_group
-    # add_breadcrumb "#{@member.team.name}", @member.team
+    team = @member.active_team # default
+    team = @member.active_team_member.team unless @member.active_team_member.nil?
+
+    if team.present?
+      add_breadcrumb "#{team.age_group.season.name}", team.age_group.season
+      add_breadcrumb "#{team.age_group.name}", team.age_group
+      add_breadcrumb "#{team.name}", team
+    end
     add_breadcrumb "#{@member.name}", @member
   end
 

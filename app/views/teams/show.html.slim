@@ -33,11 +33,11 @@
                 - @players.each do |team_member|
                   tr
                     td 
-                      - if policy(team_member).show_private_data?
-                        = link_to team_member.member.name, team_member
+                      - if policy(team_member.member).show_private_data?
+                        = link_to team_member.member.name, team_member.member
                       - else
                         = team_member.member.name
-                      - if policy(team_member).show_private_data?
+                      - if policy(team_member.member).show_private_data?
                         .color-blue-grey-lighter.small
                           => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                           = "(#{team_member.member.gender})"
@@ -53,12 +53,12 @@
                 - @staff.asc.each do |team_member|
                   tr
                     td 
-                      - if policy(team_member).show_private_data?
-                        = link_to team_member.member.name, team_member
+                      - if policy(team_member.member).show_private_data?
+                        = link_to team_member.member.name, team_member.member
                       - else
                         = team_member.member.name
                       span.ml-2 = team_member.role_i18n
-                      - if policy(team_member).show_private_data?
+                      - if policy(team_member.member).show_private_data?
                         .color-blue-grey-lighter.small
                           => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                           = "(#{team_member.member.gender})"
