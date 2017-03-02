@@ -13,33 +13,7 @@
           table.table.table-sm
             thead
             tbody
-              - @teams.asc.each do |team|
-                tr
-                  td.w-1
-                    - if policy(TeamMember.new(team: team)).create?
-                      => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
-                        i.fa.fa-users.color-blue-grey
-                  td
-                    strong = team.name
-                    - if team.team_members.player.size > 0
-                      .label.label-pill.ml-3
-                        = "#{team.team_members.player.size}"
-                  td
-                  td
-                    
-                - team.team_members.player.each do |team_member|
-                  tr
-                    td
-                    = render "member", member: team_member.member
-                      
-                    td.w-1.nowrap
-                      - if policy(team_member).update?
-                        a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{team_member.member.id}" data-member-name="#{team_member.member.name}" title="Verplaatsen naar team"]
-                          i.fa.fa-bars.p-1
-                      - if policy(team_member).destroy?
-                        = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
-                          i.fa.fa-times.p-1
-
+              = render partial: 'team', collection: @teams
   
   .col-lg-6
     section.box-typical
@@ -61,13 +35,7 @@
           table.table.table-sm
             thead
             tbody
-              - @available_members.each do |member|
-                tr
-                  td.w-1
-                    - if policy(TeamMember.new(team: @age_group.teams.first)).create?
-                      a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
-                        i.fa.fa-chevron-left.p-1
-                  = render "member", member: member
+              = render partial: 'available_member', collection: @available_members
 
 / Dialog used for both new and edit actions on team members
 #teamMemberNew.modal.fade[tabindex="-1" role="dialog" aria-labelledby="teamMemberNewLabel" aria-hidden="true"]

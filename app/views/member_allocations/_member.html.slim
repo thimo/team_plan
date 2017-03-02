@@ -1,34 +1,36 @@
-td
-  = link_to member.name, member, target: "_blank"
-  - if current_user.has_favorite?(member)
-    i.fa.fa-star.favorable.selected.pl-2
+- cache [member]
+  td
+    = link_to member.name, member, target: "_blank"
+    - if current_user.has_favorite?(member)
+      i.fa.fa-star.favorable.selected.pl-2
 
-  .color-blue-grey-lighter.small
-    => l member.born_on, format: :long unless member.born_on.nil?
-    = "(#{member.gender})"
-  - unless member.club_sports.blank?
-    .color-blue-grey.small
-      = "#{member.club_sports}"
-  - unless member.local_teams.blank?
-    .color-blue-grey.small
-      = "#{member.local_teams}"
-td.color-blue-grey.small
-  - last_eval = member.evaluations.finished_desc.first
-  - if last_eval.present?
-    span[title="Evaluatie #{l last_eval.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_eval.advise_next_season}"]
-      strong
-        = "#{last_eval.team_evaluation.team.name}"
-      span.ml-1
-        = "#{last_eval.field_position.capitalize}"
-      span.ml-1
-        i.fa[class="#{last_eval.advise_to_icon_class}"]
-  - elsif member.active_team.present?
-    span[title="Huidige team #{member.active_team.name}"]
-      strong
-        = "#{member.active_team.name}"
-    
+    .color-blue-grey-lighter.small
+      => l member.born_on, format: :long unless member.born_on.nil?
+      = "(#{member.gender})"
+    - unless member.club_sports.blank?
+      .color-blue-grey.small
+        = "#{member.club_sports}"
+    - unless member.local_teams.blank?
+      .color-blue-grey.small
+        = "#{member.local_teams}"
+        
+  td.color-blue-grey.small
+    - last_eval = member.evaluations.finished_desc.first
+    - if last_eval.present?
+      span[title="Evaluatie #{l last_eval.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_eval.advise_next_season}"]
+        strong
+          = "#{last_eval.team_evaluation.team.name}"
+        span.ml-1
+          = "#{last_eval.field_position.capitalize}"
+        span.ml-1
+          i.fa[class="#{last_eval.advise_to_icon_class}"]
+    - elsif member.active_team.present?
+      span[title="Huidige team #{member.active_team.name}"]
+        strong
+          = "#{member.active_team.name}"
+      
 
-  - last_comment_classification = member.comments.classification.desc.first
-  - if last_comment_classification.present?
-    div[title="Indelingsverzoek #{l last_comment_classification.created_at.to_date, format: :long}"]
-      = last_comment_classification.body
+    - last_comment_classification = member.comments.classification.desc.first
+    - if last_comment_classification.present?
+      div[title="Indelingsverzoek #{l last_comment_classification.created_at.to_date, format: :long}"]
+        = last_comment_classification.body

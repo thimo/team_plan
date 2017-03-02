@@ -1,0 +1,15 @@
+- cache [team, team.team_members]
+  tr
+    td.w-1
+      - if policy(TeamMember.new(team: team)).create?
+        => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
+          i.fa.fa-users.color-blue-grey
+    td
+      strong = team.name
+      - if team.team_members.player.size > 0
+        .label.label-pill.ml-3
+          = "#{team.team_members.player.size}"
+    td
+    td
+      
+  = render partial: 'team_member', collection: team.team_members.player, cached: true
