@@ -27,6 +27,11 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def show_evaluations?
+    @user.admin? ||
+    @user.club_staff?
+end
+
   class Scope < Scope
     def resolve
       scope

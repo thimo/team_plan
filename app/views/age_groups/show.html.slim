@@ -47,29 +47,5 @@
                         = "#{team.team_members.player.size} / #{team.team_members.size - team.team_members.player.size}"
 
   .col-xl-6
-    - if @open_team_evaluations.present?
-      section.box-typical
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              .strong
-                |  Openstaande evaluaties 
-                
-        .box-typical-body
-          .table-responsive
-            table.table.table-sm.tr-links
-                thead
-                  th Team
-                  th Datum
-                  th Status
-                tbody
-                  - @open_team_evaluations.each do |team_evaluation|
-                    tr.clickable
-                      td
-                        - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
-                        = link_to url
-                          = team_evaluation.team.name
-                      td
-                        = l team_evaluation.created_at.to_date, format: :long
-                      td 
-                        = team_evaluation.status
+    - if @open_team_evaluations.present? && policy(@age_group).show_evaluations?
+      = render "team_evaluations/list", team: nil, team_evaluations: @open_team_evaluations

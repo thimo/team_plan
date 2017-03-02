@@ -72,4 +72,4 @@
       = render "comments/tabs", parent: @team
       
     - if policy(@team).show_evaluations?
-      = render "team_evaluations/index", team: @team
+      = render "team_evaluations/list", team: @team, team_evaluations: @team.team_evaluations.desc

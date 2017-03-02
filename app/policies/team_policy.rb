@@ -30,7 +30,9 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_evaluations?
-    show_comments?
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_staff_for?(@record)
   end
 
   def show_favorite?
