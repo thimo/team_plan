@@ -8,8 +8,10 @@ class TeamEvaluationsController < ApplicationController
   def new
     # Create team evaluation
     @team_evaluation.team.team_members.player.asc.each do |player|
-      # TODO add previous filled in values for player (field_position, prefered_foot)
-      @team_evaluation.evaluations.build(member: player.member)
+      defaults = {member: player.member}
+      last_eval = player.member.last_evaluation
+      defaults.merge!(field_position: last_eval.field_position, prefered_foot: last_eval.prefered_foot) unless last_eval.nil?
+      @team_evaluation.evaluations.build(defaults)
     end
   end
 
