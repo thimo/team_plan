@@ -1,0 +1,94 @@
+- provide(:title, "Team evaluatie")
+
+.team_evaluation
+  section.box-typical
+    header.box-typical-header
+      .tbl-row
+        .tbl-cell.tbl-cell-title
+          .strong
+            | Team evaluatie #{@team_evaluation.team.name}
+            div.color-blue-grey-lighter.small
+              = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record? || @team_evaluation.finished_at.present?
+              = l @team_evaluation.finished_at.to_date, format: :long if @team_evaluation.finished_at.present?
+        - if policy(@team_evaluation).destroy?
+          .tbl-cell.tbl-cell-action-bordered
+            = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Team evaluatie wordt verwijderd. Doorgaan?' }, title: "Team evaluatie verwijderen", class: "action-btn"
+              i.fa.fa-trash-o
+        
+    .box-typical-body
+      .table-responsive  
+        table.table.table-striped.table-xs
+          thead
+            tr
+              th
+                div
+                  span
+                    | Speler
+              th
+                div
+                  span = Evaluation.human_attribute_name(:field_position)
+              th
+                div
+                  span = Evaluation.human_attribute_name(:prefered_foot)
+              
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:behaviour)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:technique)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:handlingspeed)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:insight)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:passes)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:speed)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:locomotion)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:physical)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:endurance)
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:duel_strength)
+
+              th.rotate
+                div
+                  span = Evaluation.human_attribute_name(:advise_next_season)
+              th
+                div
+                  span = Evaluation.human_attribute_name(:remark)
+          tbody
+            - @team_evaluation.evaluations.each do |evaluation|
+              
+              tr
+                td.member_name
+                  = link_to evaluation.member.name, evaluation.member, target: "_blank"
+                  .color-blue-grey-lighter.small
+                    => l evaluation.member.born_on, format: :long unless evaluation.member.born_on.nil?
+                    = "(#{evaluation.member.gender})"
+                    
+                td
+                  = evaluation.field_position
+                td
+                  = evaluation.prefered_foot
+                
+                - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
+                  td
+                    = evaluation[field_name]
+                td
+                  = evaluation.advise_next_season
+                td.remark
+                  = evaluation.remark
+
+    footer.box-typical-footer

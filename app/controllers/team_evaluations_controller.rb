@@ -3,6 +3,8 @@ class TeamEvaluationsController < ApplicationController
   before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
+  def show;end
+
   def new
     # Create team evaluation
     @team_evaluation.team.team_members.player.asc.each do |player|
