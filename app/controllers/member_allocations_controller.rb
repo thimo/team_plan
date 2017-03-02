@@ -21,6 +21,7 @@ class MemberAllocationsController < ApplicationController
     end
 
     @available_members = []
+    # Filter out members who have already been assigned to a team
     members.each do |member|
       @available_members << member if @age_group.is_not_member(member)
     end
