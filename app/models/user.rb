@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :favorites, dependent: :destroy
+
   # Add conditional validation on first_name and last_name, not executed for devise
   validates_presence_of :email
 
@@ -74,5 +76,10 @@ class User < ApplicationRecord
 
   def favorite_age_groups
     AgeGroup.joins(:favorites).where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
+  end
+
+  def has_favorite?(member)
+    @favorite_members ||= favorites.where(favorable_type: Member.to_s).pluck(:id)
+    @favorite_members.include?(member.id)
   end
 end
