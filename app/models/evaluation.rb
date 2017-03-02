@@ -13,7 +13,7 @@ class Evaluation < ApplicationRecord
   belongs_to :team_evaluation, required: true
   belongs_to :member, required: true
 
-  scope :asc, -> {joins(:member).order('members.last_name ASC, members.first_name ASC') }
+  default_scope -> {joins(:member).order('members.last_name ASC, members.first_name ASC') }
 
   def draft?
     team_evaluation.draft?
