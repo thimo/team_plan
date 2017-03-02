@@ -3,7 +3,7 @@ class MemberAllocationsController < ApplicationController
     @team_member = TeamMember.new
 
     @age_group = AgeGroup.find(params[:age_group_id])
-    @teams = policy_scope(Team).where(age_group_id: @age_group.id).asc
+    @teams = policy_scope(Team).where(age_group_id: @age_group.id).asc.includes(:age_group)
 
     # All active players
     members = policy_scope(Member).active_players.asc

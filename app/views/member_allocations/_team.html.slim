@@ -1,4 +1,4 @@
-- cache [team, team.team_members]
+- cache [team, team.team_members.player.asc]
   tr
     td.w-1
       - if policy(TeamMember.new(team: team)).create?
@@ -12,4 +12,4 @@
     td
     td
       
-  = render partial: 'team_member', collection: team.team_members.player, cached: true
+  = render partial: 'team_member', collection: team.team_members.player.asc, cached: true

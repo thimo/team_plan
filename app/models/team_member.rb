@@ -8,7 +8,7 @@ class TeamMember < ApplicationRecord
   validates :role, :uniqueness => {scope: [:team, :member]}
 
   scope :staff, -> { where.not(role: TeamMember.roles[:player]).includes(:member) }
-  scope :asc, -> {joins(:member).order('members.last_name ASC, members.first_name ASC') }
+  scope :asc, -> {includes(:member).order('members.last_name ASC, members.first_name ASC').includes(:team) }
 
   def age_group
     team.age_group
