@@ -1,6 +1,8 @@
 td
   = link_to member.name, member, target: "_blank"
-  = render "shared/favorite", parent: member
+  - if member.is_favorite?(current_user)
+    i.fa.fa-star.favorable.selected.pl-2
+
   .color-blue-grey-lighter.small
     => l member.born_on, format: :long unless member.born_on.nil?
     = "(#{member.gender})"
