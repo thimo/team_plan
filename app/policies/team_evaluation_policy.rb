@@ -27,6 +27,18 @@ class TeamEvaluationPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def send_invite?
+    return false if @record.invited_at.present?
+
+    @user.admin? || @user.club_staff?
+  end
+
+  def finish_evaluation?
+    return false if @record.new_record? || @record.finished_at.present?
+
+    @user.admin? || @user.club_staff?
+  end
+
   class Scope < Scope
     def resolve
       scope
