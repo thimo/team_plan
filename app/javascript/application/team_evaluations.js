@@ -1,36 +1,37 @@
 function setEvaluationClass(target) {
-  let evaluationClass = 'custom-select evaluation-rating'
+  $(target).removeClass('btn').removeClass('btn-success').removeClass('btn-warning').removeClass('btn-danger')
   if (!!target.value) {
+    $(target).removeClass('form-control-error')
+
     switch (target.value) {
       case '10':
       case '9':
       case '8':
-        evaluationClass += ' btn btn-success'
+        $(target).addClass('btn').addClass('btn-success')
         break;
       case '7':
       case '6':
-        evaluationClass += ' btn'
+        $(target).addClass('btn').addClass('btn-primary')
         break;
       case '5':
-        evaluationClass += ' btn btn-warning'
+        $(target).addClass('btn').addClass('btn-warning')
         break;
       case '4':
       case '3':
       case '2':
       case '1':
-        evaluationClass += ' btn btn-danger'
+        $(target).addClass('btn').addClass('btn-danger')
         break;
     }
   }
-  $(target).attr('class', evaluationClass)
 }
 
 $(() => {
-  $('.evaluation-rating').each((index, target) => {
+  $('.team_evaluation select').each((index, target) => {
     setEvaluationClass(target)
   })
 })
 
-$('select.evaluation-rating').on('change', (e) => {
+$('.team_evaluation select').on('change', (e) => {
   setEvaluationClass(e.target)
 })
