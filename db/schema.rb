@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227114741) do
+ActiveRecord::Schema.define(version: 20170302100722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,10 @@ ActiveRecord::Schema.define(version: 20170227114741) do
     t.datetime "updated_at", null: false
     t.datetime "invited_at"
     t.datetime "finished_at"
+    t.bigint "invited_by_id"
+    t.bigint "finished_by_id"
+    t.index ["finished_by_id"], name: "index_team_evaluations_on_finished_by_id"
+    t.index ["invited_by_id"], name: "index_team_evaluations_on_invited_by_id"
     t.index ["team_id"], name: "index_team_evaluations_on_team_id"
   end
 
@@ -199,6 +203,8 @@ ActiveRecord::Schema.define(version: 20170227114741) do
   add_foreign_key "favorites", "users"
   add_foreign_key "members", "users"
   add_foreign_key "team_evaluations", "teams"
+  add_foreign_key "team_evaluations", "users", column: "finished_by_id"
+  add_foreign_key "team_evaluations", "users", column: "invited_by_id"
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
