@@ -6,8 +6,9 @@ class Evaluation < ApplicationRecord
       "Verdediging" => ["linksachter", "voorstopper", "rechtsachter", "laatste man", "keeper"],
       "As" => ["linker as", "centrale as", "rechter as"],
       "Linie" => ["aanvaller", "middenvelder", "verdediger"],
+      "Overig" => ["geen voorkeur"]
     }
-  PREFERED_FOOT_OPTIONS = %w(linksbenig rechtsbenig tweebenig)
+  PREFERED_FOOT_OPTIONS = %w(rechtsbenig linksbenig tweebenig onbekend)
   ADVISE_NEXT_SEASON_OPTIONS = %w(hoger zelfde lager)
 
   belongs_to :team_evaluation, required: true
