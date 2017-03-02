@@ -2,10 +2,12 @@
   .sign-avatar
     img[src="/startui/img/avatar-sign.png" alt=""]
   header.sign-title
-    | Inloggen
+    = t('.sign_in', default: 'Sign in')
+    
   = f.error_notification
+  
   = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
-  = f.input :password, autocomplete: 'off', class: 'form-control', placeholder: Member.human_attribute_name(:password), label: false 
+  = f.input :password, autocomplete: 'off', class: 'form-control', placeholder: User.human_attribute_name(:password), label: false 
   - if devise_mapping.rememberable?
     .form-group
       .checkbox.float-left
