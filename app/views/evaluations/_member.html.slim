@@ -1,0 +1,28 @@
+section.box-typical.evaluation
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          |  Evaluaties 
+          .label.label-pill.ml-3
+          
+  .box-typical-body
+    .table-responsive
+      table.table.table-sm.tr-links
+        - if member.evaluations.finished_desc.size > 0
+          thead
+            th
+            = render "evaluations/th_columns"
+          tbody
+            - member.evaluations.finished_desc.each do |evaluation|
+              tr.clickable
+                td.nowrap
+                  = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
+                  .color-blue-grey-lighter.small
+                    = l evaluation.team_evaluation.finished_at.to_date, format: :long
+                = render "evaluations/td_columns", evaluation: evaluation
+        - else 
+          tbody
+            tr
+              td
+                i Geen evaluaties gevonden

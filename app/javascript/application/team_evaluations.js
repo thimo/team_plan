@@ -32,14 +32,14 @@ function apply_class_for_rating(target, rating) {
 
 
 $(() => {
-  $('.team_evaluation select').each((index, target) => {
+  $('.evaluation select').each((index, target) => {
     setEvaluationClass(target)
   })
-  $('.team_evaluation div.evaluation-rating').each((index, target) => {
+  $('.evaluation div.evaluation-rating').each((index, target) => {
     apply_class_for_rating(target, target.dataset.evaluationValue)
   })
 })
 
-$('.team_evaluation select').on('change', (e) => {
+$('.evaluation select').on('change', (e) => {
   setEvaluationClass(e.target)
 })

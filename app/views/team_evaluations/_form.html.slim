@@ -29,25 +29,9 @@
                 div
                   span
                     | Speler
-              th
-                div
-                  span = Evaluation.human_attribute_name(:field_position)
-              th
-                div
-                  span = Evaluation.human_attribute_name(:prefered_foot)
+                    
+              = render "evaluations/th_columns"
               
-              - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
-                th.rotate
-                  div
-                    span = Evaluation.human_attribute_name(field_name)
-
-
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:advise_next_season)
-              th
-                div
-                  span = Evaluation.human_attribute_name(:remark)
           tbody
             = f.simple_fields_for :evaluations do |e|
               = e.hidden_field :id

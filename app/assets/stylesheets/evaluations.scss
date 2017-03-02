@@ -1,3 +1,43 @@
-// Place all the styles related to the evaluations controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.evaluation {
+  th.rotate {
+    height: 140px;
+    white-space: nowrap;
+
+    > div {
+      transform:
+        translate(0, 0)
+        rotate(-45deg);
+      width: 30px;
+
+      > span {
+        border-bottom: 1px solid #ccc;
+        padding: 5px 10px;
+      }
+    }
+  }
+
+
+  select.evaluation-rating {
+    max-width: 60px;
+    &.custom-select {
+      padding: 0.375rem;
+    }
+  }
+
+  select.field_position {
+    max-width: 160px;
+  }
+
+  td.member_name, td.remark {
+    min-width: 160px;
+  }
+
+  div.evaluation-rating {
+    width: 60px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

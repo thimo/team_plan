@@ -6,6 +6,8 @@ class TeamMembersController < ApplicationController
     @comments = @commentable.comments.includes(:user)
     @comment = Comment.new
 
+    @evaluations = @team_member.member.evaluations.finished_desc
+
     add_breadcrumb "#{@team_member.team.age_group.season.name}", @team_member.team.age_group.season
     add_breadcrumb "#{@team_member.team.age_group.name}", @team_member.team.age_group
     add_breadcrumb "#{@team_member.team.name}", @team_member.team

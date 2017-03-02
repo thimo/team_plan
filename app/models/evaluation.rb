@@ -16,7 +16,9 @@ class Evaluation < ApplicationRecord
 
   validates_presence_of :field_position, :prefered_foot, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, if: ->{ team_evaluation.enable_validation? }
 
-  default_scope -> {joins(:member).order('members.last_name ASC, members.first_name ASC') }
+  default_scope -> { joins(:member).order('members.last_name ASC, members.first_name ASC') }
+  scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }
+  scope :finished_desc, -> { finished.joins(:team_evaluation).order('team_evaluations.finished_at DESC') }
 
   def draft?
     team_evaluation.draft?
