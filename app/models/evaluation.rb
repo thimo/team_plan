@@ -29,4 +29,12 @@ class Evaluation < ApplicationRecord
   def archived?
     team_evaluation.archived?
   end
+
+  def self.human_value_name_for_rating(rating)
+    Evaluation::RATING_OPTIONS.each do |item|
+      return item[0] if item.size >= 2 && item[1] == rating
+    end
+
+    return rating
+  end
 end

@@ -31,4 +31,13 @@
   td.member_name, td.remark {
     min-width: 160px;
   }
+
+  div.evaluation-rating {
+    width: 60px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

@@ -33,36 +33,10 @@
                 div
                   span = Evaluation.human_attribute_name(:prefered_foot)
               
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:behaviour)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:technique)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:handlingspeed)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:insight)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:passes)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:speed)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:locomotion)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:physical)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:endurance)
-              th.rotate
-                div
-                  span = Evaluation.human_attribute_name(:duel_strength)
+              - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
+                th.rotate
+                  div
+                    span = Evaluation.human_attribute_name(field_name)
 
               th.rotate
                 div
@@ -87,7 +61,8 @@
                 
                 - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
                   td
-                    = evaluation[field_name]
+                    .evaluation-rating[data-evaluation-value="#{evaluation[field_name]}" title="#{Evaluation.human_value_name_for_rating(evaluation[field_name])}"]
+                      = Evaluation.human_value_name_for_rating(evaluation[field_name])
                 td
                   = evaluation.advise_next_season
                 td.remark
