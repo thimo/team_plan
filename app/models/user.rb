@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :favorites, dependent: :destroy
+
   # Add conditional validation on first_name and last_name, not executed for devise
   validates_presence_of :email
 
@@ -42,23 +44,30 @@ class User < ApplicationRecord
   end
 
   def is_team_member_for?(record)
-    if record.class == TeamMember
-      return self.members.joins(:team_members).where(team_members: {team_id: record.team_id}).size > 0
+    if record.class == Member
+      # Find overlap in teams between current user and given member
+      team_ids = record.team_members.pluck(:team_id).uniq
+      return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
     end
 
     false
   end
 
   def is_team_staff_for?(record)
-    if record.class == Team
-      return self.members.joins(:team_members).where(team_members: {team_id: record.id, role: [1, 2, 3]}).size > 0
+    team_id = 0
+
+    case record.class
+    when Team
+      team_id = record.id
+    when Member
+      team_id = record.team_members.pluck(:team_id).uniq
+    when TeamEvaluation
+      team_id = record.team_id
+    when Evaluation
+      team_id = record.team_evaluation.team_id
     end
 
-    if record.class == TeamMember
-      return self.members.joins(:team_members).where(team_members: {team_id: record.team_id, role: [1, 2, 3]}).size > 0
-    end
-
-    false
+    return team_id > 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, role: [1, 2, 3]}).size > 0
   end
 
   def favorite_teams
@@ -67,5 +76,10 @@ class User < ApplicationRecord
 
   def favorite_age_groups
     AgeGroup.joins(:favorites).where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
+  end
+
+  def has_favorite?(member)
+    @favorite_members ||= favorites.where(favorable_type: Member.to_s).pluck(:id)
+    @favorite_members.include?(member.id)
   end
 end

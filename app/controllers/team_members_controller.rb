@@ -1,17 +1,6 @@
 class TeamMembersController < ApplicationController
   before_action :set_team_member, only: [:show, :edit, :update, :destroy]
 
-  def show
-    @commentable = @team_member.member
-    @comments = @commentable.comments.includes(:user)
-    @comment = Comment.new
-
-    add_breadcrumb "#{@team_member.team.age_group.season.name}", @team_member.team.age_group.season
-    add_breadcrumb "#{@team_member.team.age_group.name}", @team_member.team.age_group
-    add_breadcrumb "#{@team_member.team.name}", @team_member.team
-    add_breadcrumb "#{@team_member.member.name}", @team_member
-  end
-
   def create
     @age_group = AgeGroup.find(params[:age_group_id])
 

@@ -1,0 +1,67 @@
+= simple_form_for [@team, @team_evaluation], {wrapper: :horizontal_form} do |f|
+  = f.error_notification
+  / - if @team_evaluation.errors.any?
+  /   ul
+  /     - @team_evaluation.errors.full_messages.each do |msg|
+  /       li = msg
+
+  section.box-typical
+    header.box-typical-header
+      .tbl-row
+        .tbl-cell.tbl-cell-title
+          .strong
+            | Team evaluatie #{@team_evaluation.team.name}
+            div.color-blue-grey-lighter.small
+              = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record?
+              |  - 
+              = @team_evaluation.status
+        - if policy(@team_evaluation).destroy?
+          .tbl-cell.tbl-cell-action-bordered
+            = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Team evaluatie wordt verwijderd. Doorgaan?' }, title: "Team evaluatie verwijderen", class: "action-btn"
+              i.fa.fa-trash-o
+        
+    .box-typical-body
+      .table-responsive  
+        table.table.table-striped.table-xs
+          thead
+            tr
+              th
+                div
+                  span
+                    | Speler
+                    
+              = render "evaluations/th_columns"
+              
+          tbody
+            = f.simple_fields_for :evaluations do |e|
+              = e.hidden_field :id
+              = e.hidden_field :member_id
+              
+              tr
+                td.member_name
+                  = link_to e.object.member.name, e.object.member, target: "_blank"
+                  .color-blue-grey-lighter.small
+                    => l e.object.member.born_on, format: :long unless e.object.member.born_on.nil?
+                    = "(#{e.object.member.gender})"
+                    
+                td
+                  = e.select :field_position, grouped_options_for_select(Evaluation::FIELD_POSITION_OPTIONS, e.object.field_position), {include_blank: true}, {class: "form-control custom-select field_position #{'form-control-error' if e.error(:field_position).present?}"}
+                td
+                  = e.select :prefered_foot, Evaluation::PREFERED_FOOT_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if e.error(:prefered_foot).present?}"}
+                
+                - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
+                  td
+                    = e.select field_name.to_s, Evaluation::RATING_OPTIONS, {include_blank: true}, {class: "form-control custom-select evaluation-rating #{'form-control-error' if e.error(field_name.to_s).present?}"}
+                  
+                td
+                  = e.select :advise_next_season, Evaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if e.error(:advise_next_season).present?}"}
+                td.remark
+                  = e.text_area :remark, {class: "form-control"}
+
+    footer.box-typical-footer
+      = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+      - if policy(@team_evaluation).send_invite?
+        = f.button :submit, "Uitnodiging versturen", name: "send_invite", class: 'btn btn-inline'
+      - if policy(@team_evaluation).finish_evaluation?
+        = f.button :submit, "Evaluatie afronden", name: "finish_evaluation", class: 'btn btn-inline'
+          

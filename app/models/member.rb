@@ -25,6 +25,18 @@ class Member < ApplicationRecord
     favorites.where(user: user).first
   end
 
+  def last_evaluation
+    evaluations.finished_desc.first
+  end
+
+  def active_team
+    teams.joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).first
+  end
+
+  def active_team_member
+    team_members.player.joins(team: {age_group: :season}).where(seasons: {status: Season.statuses[:active]}).first
+  end
+
   def self.import(file)
     CSV.foreach(file.path, :headers => true,
                            :header_converters => lambda { |h| I18n.t("member.import.#{h.downcase.gsub(' ', '_')}") }

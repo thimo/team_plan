@@ -1,0 +1,12 @@
+- cache [team_member]
+  tr
+    td
+    = render "member", member: team_member.member, cached: true
+      
+    td.w-1.nowrap
+      - if policy(team_member).update?
+        a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{team_member.member.id}" data-member-name="#{team_member.member.name}" title="Verplaatsen naar team"]
+          i.fa.fa-bars.p-1
+      - if policy(team_member).destroy?
+        = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
+          i.fa.fa-times.p-1

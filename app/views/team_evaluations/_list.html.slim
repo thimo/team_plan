@@ -1,0 +1,38 @@
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          |  Evaluaties 
+      .tbl-cell.tbl-cell-action-bordered
+        - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
+          = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
+            i.fa.fa-file-o
+        - if defined?(age_group).present? && policy(TeamEvaluation.new(team: age_group.teams.first)).create?
+          / = link_to new_age_group_team_evaluation_path(age_group), title: "Evaluaties toevoegen", class: "action-btn"
+          i.fa.fa-files-o
+          
+  .box-typical-body
+    .table-responsive
+      table.table.table-sm.tr-links
+        - if team_evaluations.size > 0
+          thead
+            th Team
+            th Datum
+            th Status
+          tbody
+            - team_evaluations.each do |team_evaluation|
+              tr.clickable
+                td 
+                  = team_evaluation.team.name
+                td
+                  - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
+                  = link_to url
+                    = l team_evaluation.created_at.to_date, format: :long
+                td 
+                  = team_evaluation.status
+        - else 
+          tbody
+            tr
+              td
+                i Geen evaluaties gevonden

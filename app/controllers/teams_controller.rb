@@ -41,14 +41,15 @@ class TeamsController < ApplicationController
   private
 
   def create_team
+    @age_group = AgeGroup.find(params[:age_group_id])
+
     @team = if action_name == 'new'
-              Team.new
+              @age_group.teams.new
             else
               Team.new(team_params)
             end
     authorize @team
 
-    @age_group = AgeGroup.find(params[:age_group_id])
     @team.age_group = @age_group
   end
 

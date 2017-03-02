@@ -3,13 +3,14 @@ class MemberAllocationsController < ApplicationController
     @team_member = TeamMember.new
 
     @age_group = AgeGroup.find(params[:age_group_id])
-    @teams = policy_scope(Team).where(age_group_id: @age_group.id)
+    @teams = policy_scope(Team).where(age_group_id: @age_group.id).asc
 
+    # All active players
     members = policy_scope(Member).active_players.asc
-    members = members.from_year(@age_group.year_of_birth_from) \
-      unless @age_group.year_of_birth_from.nil?
-    members = members.to_year(@age_group.year_of_birth_to) \
-      unless @age_group.year_of_birth_to.nil?
+    # Filter on year of birth
+    members = members.from_year(@age_group.year_of_birth_from) unless @age_group.year_of_birth_from.nil?
+    members = members.to_year(@age_group.year_of_birth_to) unless @age_group.year_of_birth_to.nil?
+    # Filter on gender
     unless @age_group.gender.nil?
       case @age_group.gender.upcase
       when "M"
@@ -20,6 +21,7 @@ class MemberAllocationsController < ApplicationController
     end
 
     @available_members = []
+    # Filter out members who have already been assigned to a team
     members.each do |member|
       @available_members << member if @age_group.is_not_member(member)
     end

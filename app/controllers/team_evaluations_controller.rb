@@ -1,7 +1,83 @@
 class TeamEvaluationsController < ApplicationController
+  before_action :create_team_evaluation, only: [:new, :create]
+  before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy]
+  before_action :breadcumbs
+
+  def show;end
 
   def new
     # Create team evaluation
-    # Add evaluations for each player
+    @team_evaluation.team.team_members.player.asc.each do |player|
+      defaults = {member: player.member}
+      last_eval = player.member.last_evaluation
+      defaults.merge!(field_position: last_eval.field_position, prefered_foot: last_eval.prefered_foot) unless last_eval.nil?
+      @team_evaluation.evaluations.build(defaults)
+    end
   end
+
+  def create
+    if @team_evaluation.save
+      redirect_to @team_evaluation.team, notice: 'Team evaluatie is toegevoegd.'
+    else
+      render :new
+    end
+  end
+
+  def edit;end
+
+  def update
+    finish_evaluation = params[:finish_evaluation].present?
+    @team_evaluation.enable_validation = finish_evaluation
+    if @team_evaluation.update_attributes(team_evaluation_params)
+      if finish_evaluation
+        @team_evaluation.finish_evaluation(current_user)
+        redirect_to @team_evaluation.team, notice: 'Team evaluatie is afgerond.'
+      else
+        redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen.'
+      end
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    redirect_to @team_evaluation.team, notice: 'Team evaluatie is verwijderd.'
+    @team_evaluation.destroy
+  end
+
+  private
+
+    def create_team_evaluation
+      @team = Team.find(params[:team_id])
+
+      @team_evaluation = if action_name == 'new'
+                @team.team_evaluations.new
+              else
+                TeamEvaluation.new(team_evaluation_params)
+              end
+      @team_evaluation.team = @team
+      authorize @team_evaluation
+    end
+
+    def set_team_evaluation
+      @team_evaluation = TeamEvaluation.find(params[:id])
+      authorize @team_evaluation
+    end
+
+    def breadcumbs
+      # TODO Currently not working, age_group is null. Could be Rails 5.1 problem
+      add_breadcrumb @team_evaluation.team.age_group.season.name, @team_evaluation.team.age_group.season unless @team_evaluation.team.age_group.nil?
+      add_breadcrumb @team_evaluation.team.age_group.name, @team_evaluation.team.age_group unless @team_evaluation.team.age_group.nil?
+      add_breadcrumb @team_evaluation.team.name, @team_evaluation.team
+      if @team_evaluation.new_record?
+        add_breadcrumb 'Nieuw'
+      else
+        add_breadcrumb 'Team evaluatie'
+      end
+    end
+
+    def team_evaluation_params
+      params.require(:team_evaluation).permit(evaluations_attributes: [:id, :member_id, :field_position, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark])
+    end
+
 end

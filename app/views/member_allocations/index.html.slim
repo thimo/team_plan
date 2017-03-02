@@ -13,39 +13,7 @@
           table.table.table-sm
             thead
             tbody
-              - @teams.asc.each do |team|
-                tr
-                  td.w-1
-                    - if policy(team.team_members.new).create?
-                      => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
-                        i.fa.fa-users.color-blue-grey
-                  td
-                    strong = team.name
-                    - if team.team_members.player.size > 0
-                      .label.label-pill.ml-3
-                        = "#{team.team_members.player.size}"
-                  td
-                  td
-                    
-                - team.team_members.player.each do |team_member|
-                  tr
-                    td
-                    td
-                      = link_to team_member.member.name, team_member, target: "_blank"
-                      = render "shared/favorite", parent: team_member.member
-                      .color-blue-grey-lighter.small
-                        => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
-                        = "(#{team_member.member.gender})"
-                    td 
-                      
-                    td.w-1.nowrap
-                      - if policy(team_member).update?
-                        a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{team_member.member.id}" data-member-name="#{team_member.member.name}" title="Verplaatsen naar team"]
-                          i.fa.fa-bars.p-1
-                      - if policy(team_member).destroy?
-                        = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
-                          i.fa.fa-times.p-1
-
+              = render partial: 'team', collection: @teams
   
   .col-lg-6
     section.box-typical
@@ -67,25 +35,7 @@
           table.table.table-sm
             thead
             tbody
-              - @available_members.each do |member|
-                tr
-                  td.w-1
-                    - if policy(@age_group.teams.first.team_members.new).create?
-                      a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
-                        i.fa.fa-chevron-left.p-1
-                  td
-                    = link_to member.name, member, target: "_blank"
-                    = render "shared/favorite", parent: member
-                    .color-blue-grey-lighter.small
-                      => l member.born_on, format: :long
-                      = "(#{member.gender})"
-                    - unless member.club_sports.blank?
-                      .color-blue-grey.small
-                        = "#{member.club_sports}"
-                    - unless member.local_teams.blank?
-                      .color-blue-grey.small
-                        = "#{member.local_teams}"
-                  td 
+              = render partial: 'available_member', collection: @available_members
 
 / Dialog used for both new and edit actions on team members
 #teamMemberNew.modal.fade[tabindex="-1" role="dialog" aria-labelledby="teamMemberNewLabel" aria-hidden="true"]

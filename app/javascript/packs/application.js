@@ -7,6 +7,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 require('../startui/app.js')
-require('../application/_utils')
-require('../application/member_allocations')
-require('../application/team_member_bulk_updates')
+
+var requireApplication = require.context('../application', true, /\.js$/);
+requireApplication.keys().forEach(requireApplication);
+// Which will recursively load all modules within the current folder that end in .js.
