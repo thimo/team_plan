@@ -3,7 +3,9 @@ class AgeGroupsController < ApplicationController
   before_action :set_age_group, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
-  def show; end
+  def show
+    @open_team_evaluations = TeamEvaluation.where(finished_at: nil).joins(:team).where(teams: {age_group: @age_group}).asc
+  end
 
   def new; end
 

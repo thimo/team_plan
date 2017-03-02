@@ -9,6 +9,7 @@ class TeamEvaluation < ApplicationRecord
   accepts_nested_attributes_for :evaluations
   validates_associated :evaluations
 
+  scope :asc, -> { order(created_at: :asc) }
   scope :desc, -> { order(created_at: :desc) }
 
   def draft?

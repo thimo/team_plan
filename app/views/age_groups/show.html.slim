@@ -2,44 +2,74 @@
 
 = render "shared/favorite", parent: @age_group
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        .strong
-          | Teams
-          .label.label-pill.ml-3 = @age_group.teams.count
-      - if policy(Team.new(age_group: @age_group)).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
-            i.fa.fa-file-o
-      - if policy(Team.new(age_group: @age_group)).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
-            i.fa.fa-files-o
-      - if @age_group.teams.size > 0
-        - if policy(TeamMember.new(team: @age_group.teams.first)).create?
-          .tbl-cell.tbl-cell-action-bordered
-            = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "action-btn"
-              i.fa.fa-table
-      - if policy(@age_group).update?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "action-btn"
-            i.fa.fa-pencil
-      - if policy(@age_group).destroy?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "action-btn"
-            i.fa.fa-trash-o
-  .box-typical-body
-    .table-responsive
-      table.table.table-sm.tr-links
-        thead
-        tbody
-          - @age_group.teams.asc.each do |team|
-            tr
-              td
-                = link_to team.name, team
-              td.text-right
-                - if team.team_members.player.size > 0
-                  .label.label-pill
-                    = "#{team.team_members.player.size} / #{team.team_members.size - team.team_members.player.size}"
+.row
+  .col-xl-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            .strong
+              | Teams
+              .label.label-pill.ml-3 = @age_group.teams.count
+          - if policy(Team.new(age_group: @age_group)).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
+                i.fa.fa-file-o
+          - if policy(Team.new(age_group: @age_group)).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
+                i.fa.fa-files-o
+          - if @age_group.teams.size > 0
+            - if policy(TeamMember.new(team: @age_group.teams.first)).create?
+              .tbl-cell.tbl-cell-action-bordered
+                = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "action-btn"
+                  i.fa.fa-table
+          - if policy(@age_group).update?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "action-btn"
+                i.fa.fa-pencil
+          - if policy(@age_group).destroy?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "action-btn"
+                i.fa.fa-trash-o
+      .box-typical-body
+        .table-responsive
+          table.table.table-sm.tr-links
+            thead
+            tbody
+              - @age_group.teams.asc.each do |team|
+                tr
+                  td
+                    = link_to team.name, team
+                  td.text-right
+                    - if team.team_members.player.size > 0
+                      .label.label-pill
+                        = "#{team.team_members.player.size} / #{team.team_members.size - team.team_members.player.size}"
+
+  .col-xl-6
+    - if @open_team_evaluations.present?
+      section.box-typical
+        header.box-typical-header
+          .tbl-row
+            .tbl-cell.tbl-cell-title
+              .strong
+                |  Openstaande evaluaties 
+                
+        .box-typical-body
+          .table-responsive
+            table.table.table-sm.tr-links
+                thead
+                  th Team
+                  th Aangemaakt
+                  th Status
+                tbody
+                  - @open_team_evaluations.each do |team_evaluation|
+                    tr.clickable
+                      td
+                        - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
+                        = link_to url
+                          = team_evaluation.team.name
+                      td
+                        = l team_evaluation.created_at.to_date, format: :long
+                      td 
+                        = team_evaluation.status
