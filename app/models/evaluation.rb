@@ -13,6 +13,8 @@ class Evaluation < ApplicationRecord
   belongs_to :team_evaluation, required: true
   belongs_to :member, required: true
 
+  validates_presence_of :field_position, :prefered_foot, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, if: ->{ team_evaluation.enable_validation? }
+
   default_scope -> {joins(:member).order('members.last_name ASC, members.first_name ASC') }
 
   def draft?
