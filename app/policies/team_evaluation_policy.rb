@@ -18,7 +18,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def update?
     return false if @record.finished_at.present?
 
-    create?
+    create? || @user.is_team_staff_for?(@record)
   end
 
   def destroy?
