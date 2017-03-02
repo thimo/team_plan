@@ -70,7 +70,7 @@
               - @available_members.each do |member|
                 tr
                   td.w-1
-                    - if policy(TeamMember.new(@age_group.teams.first)).create?
+                    - if policy(TeamMember.new(team: @age_group.teams.first)).create?
                       a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
                         i.fa.fa-chevron-left.p-1
                   td
