@@ -30,7 +30,6 @@
 
           tbody
             - @team_evaluation.evaluations.each do |evaluation|
-              
               tr
                 td.member_name
                   = link_to evaluation.member.name, evaluation.member, target: "_blank"

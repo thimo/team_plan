@@ -9,13 +9,7 @@
             
   .col-xl-6
     - if policy(@team_member).show_comments?
-      .row
-        .col-lg-12
-          = render "comments/tabs", parent: @team_member.member
+      = render "comments/tabs", parent: @team_member.member
 
-
-.row
-  .col-12
     - if policy(@team_member).show_evaluations?
       = render "evaluations/member", member: @team_member.member
-    
