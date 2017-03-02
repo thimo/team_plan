@@ -23,9 +23,9 @@ section.box-typical
                     = l team_evaluation.created_at.to_date, format: :long
                 td 
                   - if team_evaluation.finished_at.present?
-                    | Ingevuld
+                    | Afgerond
                   - elsif team_evaluation.invited_at.present?
-                    | Open
+                    | In behandeling
                   - else
                     | Te versturen
         - else 
