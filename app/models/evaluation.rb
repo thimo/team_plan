@@ -32,6 +32,17 @@ class Evaluation < ApplicationRecord
     team_evaluation.archived?
   end
 
+  def advise_to_icon_class
+    case advise_next_season
+    when Evaluation::ADVISE_NEXT_SEASON_OPTIONS[0]
+      "fa-chevron-up"
+    when Evaluation::ADVISE_NEXT_SEASON_OPTIONS[1]
+      "fa-minus"
+    when Evaluation::ADVISE_NEXT_SEASON_OPTIONS[2]
+      "fa-chevron-down"
+    end
+  end
+
   def self.human_value_name_for_rating(rating)
     Evaluation::RATING_OPTIONS.each do |item|
       return item[0] if item.size >= 2 && item[1] == rating

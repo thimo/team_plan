@@ -30,13 +30,7 @@
                 - team.team_members.player.each do |team_member|
                   tr
                     td
-                    td
-                      = link_to team_member.member.name, team_member, target: "_blank"
-                      = render "shared/favorite", parent: team_member.member
-                      .color-blue-grey-lighter.small
-                        => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
-                        = "(#{team_member.member.gender})"
-                    td 
+                    = render "member", member: team_member.member
                       
                     td.w-1.nowrap
                       - if policy(team_member).update?
@@ -73,19 +67,7 @@
                     - if policy(TeamMember.new(team: @age_group.teams.first)).create?
                       a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Toevoegen aan team"]
                         i.fa.fa-chevron-left.p-1
-                  td
-                    = link_to member.name, member, target: "_blank"
-                    = render "shared/favorite", parent: member
-                    .color-blue-grey-lighter.small
-                      => l member.born_on, format: :long
-                      = "(#{member.gender})"
-                    - unless member.club_sports.blank?
-                      .color-blue-grey.small
-                        = "#{member.club_sports}"
-                    - unless member.local_teams.blank?
-                      .color-blue-grey.small
-                        = "#{member.local_teams}"
-                  td 
+                  = render "member", member: member
 
 / Dialog used for both new and edit actions on team members
 #teamMemberNew.modal.fade[tabindex="-1" role="dialog" aria-labelledby="teamMemberNewLabel" aria-hidden="true"]
