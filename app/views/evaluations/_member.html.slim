@@ -8,14 +8,14 @@ section.box-typical.evaluation
           
   .box-typical-body
     .table-responsive
-      table.table.table-sm.tr-links
+      table.table.table-sm
         - if member.evaluations.finished_desc.size > 0
           thead
             th
             = render "evaluations/th_columns"
           tbody
             - member.evaluations.finished_desc.each do |evaluation|
-              tr.clickable
+              tr.test
                 td.nowrap
                   = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
                   .color-blue-grey-lighter.small
