@@ -11,7 +11,6 @@ class TeamEvaluationsController < ApplicationController
       # TODO add previous filled in values for player (field_position, prefered_foot)
       @team_evaluation.evaluations.build(member: player.member)
     end
-    @evaluations = @team_evaluation.evaluations
   end
 
   def create
@@ -22,14 +21,18 @@ class TeamEvaluationsController < ApplicationController
     end
   end
 
-  def edit
-    @evaluations = @team_evaluation.evaluations.asc
-  end
+  def edit;end
 
   def update
-    # TODO Add validatie indien af te ronden
+    finish_evaluation = params[:finish_evaluation].present?
+    @team_evaluation.enable_validation = finish_evaluation
     if @team_evaluation.update_attributes(team_evaluation_params)
-      redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen.'
+      if finish_evaluation
+        @team_evaluation.finish_evaluation(current_user)
+        redirect_to @team_evaluation.team, notice: 'Team evaluatie is afgerond.'
+      else
+        redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen.'
+      end
     else
       render :new
     end
