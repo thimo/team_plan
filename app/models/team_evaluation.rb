@@ -5,6 +5,7 @@ class TeamEvaluation < ApplicationRecord
   has_many :evaluations, dependent: :destroy
 
   accepts_nested_attributes_for :evaluations
+  validates_associated :evaluations
 
   scope :desc, -> { order(created_at: :desc) }
 
