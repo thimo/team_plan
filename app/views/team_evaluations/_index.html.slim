@@ -14,6 +14,8 @@ section.box-typical
       table.table.table-sm.tr-links
         - if team.team_evaluations.size > 0
           thead
+            th Datum
+            th Status
           tbody
             - team.team_evaluations.desc.each do |team_evaluation|
               tr.clickable
