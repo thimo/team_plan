@@ -14,4 +14,6 @@ $(document).on('turbolinks:load', function() {
      modal.find('.modal-body #team_member_member_id').val(member_id)
      modal.find('.modal-body #team_member_id').val(team_member_id)
    });
+
+   $("#member_allocation_filters_field_position").select2({placeholder: "Filter op veldpositie"});
  })

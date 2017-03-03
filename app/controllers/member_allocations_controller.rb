@@ -2,6 +2,7 @@ class MemberAllocationsController < ApplicationController
   def index
     @age_group = AgeGroup.find(params[:age_group_id])
     @teams = policy_scope(Team).where(age_group_id: @age_group.id).asc.includes(:age_group)
+    @filter_field_position = session[:filter_field_position]
 
     # All active players
     members = policy_scope(Member).active_players.asc

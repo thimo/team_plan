@@ -29,6 +29,16 @@
           .tbl-cell.color-blue-grey-lighter.text-right
             = year_of_birth_range(@age_group)
             = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
+      .box-typical-header
+        .tbl-row
+          .tbl-cell
+            = simple_form_for :member_allocation_filters, {url: member_allocation_filters_path} do |f|
+              .input-group
+                = f.select :field_position, grouped_options_for_select(Evaluation::FIELD_POSITION_OPTIONS, @filter_field_position), {include_blank: true}, {class: "form-control custom-select field_position", multiple: "multiple"}
+                = f.button :button, class: 'input-group-addon', title: 'Filter toepassen' do
+                  i.fa.fa-search
+                = link_to member_allocation_filter_path(0),  method: :delete, title: "Filters verwijderen", class: "input-group-addon"
+                  i.fa.fa-trash-o
 
       .box-typical-body
         .table-responsive
