@@ -26,7 +26,7 @@
                 .label.label-pill.ml-3
                   = "#{@available_members.size}"
 
-          .tbl-cell.color-blue-grey-lighter
+          .tbl-cell.color-blue-grey-lighter.text-right
             = year_of_birth_range(@age_group)
             = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
 
