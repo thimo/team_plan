@@ -16,7 +16,7 @@ function apply_class_for_rating(target, rating) {
       break;
     case '7':
     case '6':
-      $(target).addClass('btn').addClass('btn-primary')
+      $(target).addClass('btn').addClass('btn-secondary')
       break;
     case '5':
       $(target).addClass('btn').addClass('btn-warning')
