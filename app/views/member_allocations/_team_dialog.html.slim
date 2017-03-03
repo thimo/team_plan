@@ -9,7 +9,7 @@
           span[aria-hidden="true"]
             | ×
       .modal-body
-        = simple_form_for team_member do |f|
+        = simple_form_for TeamMember.new do |f|
           .form-group
             - teams.each do |team|
               .radio

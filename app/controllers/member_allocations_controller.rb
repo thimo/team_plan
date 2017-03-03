@@ -1,7 +1,5 @@
 class MemberAllocationsController < ApplicationController
   def index
-    @team_member = TeamMember.new
-
     @age_group = AgeGroup.find(params[:age_group_id])
     @teams = policy_scope(Team).where(age_group_id: @age_group.id).asc.includes(:age_group)
 
