@@ -1,26 +1,29 @@
 - provide(:title, "Seizoenen")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        .strong
-          | Seizoenen
-          .label.label-pill.ml-3 = @seasons.count
-      - if policy(Season).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
-            i.fa.fa-file-o
-  .box-typical-body
-    .table-responsive
-      table.table.table-sm.tr-links
-        thead
-        tbody
-          - @seasons.each do |season|
-            tr
-              td
-                = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
-              td.text-right
-                - if season.age_groups.size > 0
-                  .label.label-pill
-                    = "#{season.age_groups.size}"
+
+.row
+  .col-xl-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            .strong
+              | Seizoenen
+              .label.label-pill.ml-3 = @seasons.count
+          - if policy(Season).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
+                i.fa.fa-file-o
+      .box-typical-body
+        .table-responsive
+          table.table.table-sm.tr-links
+            thead
+            tbody
+              - @seasons.each do |season|
+                tr
+                  td
+                    = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
+                  td.text-right
+                    - if season.age_groups.size > 0
+                      .label.label-pill
+                        = "#{season.age_groups.size}"
