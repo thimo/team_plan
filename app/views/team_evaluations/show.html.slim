@@ -29,10 +29,10 @@
               = render "evaluations/th_columns"
 
           tbody
-            - @team_evaluation.evaluations.each do |evaluation|
+            - @team_evaluation.evaluations.includes_member.each do |evaluation|
               tr
                 td.member_name
-                  = link_to evaluation.member.name, evaluation.member, target: "_blank"
+                  = link_to evaluation.member.name, evaluation.member
                   .color-blue-grey-lighter.small
                     => l evaluation.member.born_on, format: :long unless evaluation.member.born_on.nil?
                     = "(#{evaluation.member.gender})"
