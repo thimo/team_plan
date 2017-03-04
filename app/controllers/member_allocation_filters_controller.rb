@@ -2,7 +2,7 @@ class MemberAllocationFiltersController < ApplicationController
   after_action :skip_authorization
 
   def create
-    session[:filter_field_position] = filter_params[:field_position]
+    session[:filter_field_position] = filter_params[:field_position].reject(&:empty?)
     redirect_to :back, notice: "Filter is toegepast."
   end
 
