@@ -14,7 +14,7 @@ class AgeGroup < ApplicationRecord
   end
 
   def draft?
-    season.draft
+    season.draft?
   end
 
   def active?
