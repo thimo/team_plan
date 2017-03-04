@@ -38,6 +38,9 @@ $(() => {
   $('.evaluation div.evaluation-rating').each((index, target) => {
     apply_class_for_rating(target, target.dataset.evaluationValue)
   })
+  if ($('.sidebar-hidden').length) {
+    $('body').addClass('sidebar-hidden');
+  }
 })
 
 $('.evaluation select').on('change', (e) => {
