@@ -47,5 +47,5 @@
                         = "#{team.team_members.player.size} / #{team.team_members.size - team.team_members.player.size}"
 
   .col-xl-6
-    - if @open_team_evaluations.present? && policy(@age_group).show_evaluations?
+    - if policy(@age_group).show_evaluations?
       = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations
