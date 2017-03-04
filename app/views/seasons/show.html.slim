@@ -6,7 +6,6 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         .strong
           | Leeftijdsgroepen
-          .label.label-pill.ml-3 = @season.age_groups.count
       - if policy(AgeGroup.new(season: @season)).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_season_age_group_path(@season), title: "Leeftijdsgroep toevoegen", class: "action-btn"

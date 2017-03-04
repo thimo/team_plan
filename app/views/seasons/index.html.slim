@@ -9,7 +9,6 @@
           .tbl-cell.tbl-cell-title
             .strong
               | Seizoenen
-              .label.label-pill.ml-3 = @seasons.count
           - if policy(Season).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
