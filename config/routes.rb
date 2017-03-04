@@ -29,13 +29,16 @@ Rails.application.routes.draw do
 
     get 'admin' => 'admin#show'
     namespace :admin do
-      resources :users, except: [:show]
+      resources :users, except: [:show], shallow: true do
+        resources :email_logs, only: [:index, :show]
+      end
       resources :members, only: [:index, :show]
       resources :members_import, only: [:new] do
         collection {
           post :create #, to: 'members_import#create'
         }
       end
+      resources :email_logs, only: [:index, :show]
     end
   end
 

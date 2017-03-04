@@ -19,7 +19,7 @@ section.box-typical.evaluation
                 td.nowrap
                   = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
                   .color-blue-grey-lighter.small
-                    = l evaluation.team_evaluation.finished_at.to_date, format: :long
+                    = l evaluation.team_evaluation.finished_at.localtime.to_date, format: :long
                 = render "evaluations/td_columns", evaluation: evaluation
         - else 
           tbody

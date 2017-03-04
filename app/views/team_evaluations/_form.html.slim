@@ -12,7 +12,7 @@
           .strong
             | Team evaluatie #{@team_evaluation.team.name}
             div.color-blue-grey-lighter.small
-              = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record?
+              = l @team_evaluation.created_at.localtime.to_date, format: :long unless @team_evaluation.new_record?
               |  - 
               = @team_evaluation.status
         - if policy(@team_evaluation).destroy?

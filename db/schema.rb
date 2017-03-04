@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302100722) do
+ActiveRecord::Schema.define(version: 20170304174406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,18 @@ ActiveRecord::Schema.define(version: 20170302100722) do
     t.boolean "private", default: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "email_logs", force: :cascade do |t|
+    t.string "from"
+    t.string "to"
+    t.string "subject"
+    t.text "body"
+    t.text "body_plain"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_email_logs_on_user_id"
   end
 
   create_table "evaluations", id: :serial, force: :cascade do |t|
@@ -198,6 +210,7 @@ ActiveRecord::Schema.define(version: 20170302100722) do
 
   add_foreign_key "age_groups", "seasons"
   add_foreign_key "comments", "users"
+  add_foreign_key "email_logs", "users"
   add_foreign_key "evaluations", "members"
   add_foreign_key "evaluations", "team_evaluations"
   add_foreign_key "favorites", "users"

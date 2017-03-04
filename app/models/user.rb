@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :favorites, dependent: :destroy
+  has_many :email_logs, dependent: :destroy
 
   # Add conditional validation on first_name and last_name, not executed for devise
   validates_presence_of :email

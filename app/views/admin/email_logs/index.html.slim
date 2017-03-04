@@ -1,0 +1,15 @@
+- provide(:title, 'E-mail log')
+
+table.table
+  thead
+    tr
+      th
+        | Verzonden
+      th
+        | Aan
+      th
+        | Onderwerp
+      th
+  tbody
+    = render @email_logs
+= paginate @email_logs

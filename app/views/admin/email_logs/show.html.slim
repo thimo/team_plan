@@ -1,0 +1,86 @@
+- provide(:title, "E-mail log")
+
+.container
+  #container
+    #message_headers
+      dl
+        dt
+          | Afzender:
+        dd
+          = @email_log.from
+        dt
+          | Onderwerp:
+        dd
+          strong
+            = @email_log.subject
+        dt
+          | Datum:
+        dd
+          = @email_log.created_at.localtime
+        dt
+          | Aan:
+        dd
+          - if @email_log.user
+            = link_to @email_log.to, [:admin, @email_log.user]
+          - else
+            = @email_log.to
+    iframe[seamless="seamless" srcdoc="#{@email_log.body}" onload="resizeIframe(this)"]
+
+
+<style media="screen">
+#container {
+  margin: 10px auto;
+}
+#message_headers {
+  background: #fff;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+
+#message_headers dl {
+  float: left;
+  line-height: 1.3em;
+  padding: 0;
+}
+
+#message_headers dt {
+  width: 130px;
+  margin: 0;
+  float: left;
+  text-align: right;
+  color: #7f7f7f;
+}
+
+#message_headers dd {
+  margin: 0 0 0 140px;
+}
+
+#message_headers p.alternate {
+  float: right;
+  margin: 0;
+}
+
+#message_headers p.alternate a {
+  color: #09c;
+}
+
+pre#message_body {
+  padding: 4px;
+  white-space: pre-wrap;
+  border: 1px solid #eee;
+  background-color: #fcfcfc;
+}
+
+iframe {
+  border: 0;
+  width: 100%;
+}
+</style>
+
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>

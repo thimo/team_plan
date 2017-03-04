@@ -17,7 +17,7 @@
   td.color-blue-grey.small
     - last_eval = member.evaluations.finished_desc.first
     - if last_eval.present?
-      span[title="Evaluatie #{l last_eval.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_eval.advise_next_season}"]
+      span[title="Evaluatie #{l last_eval.team_evaluation.finished_at.localtime.to_date, format: :long}, advies: #{last_eval.advise_next_season}"]
         strong
           = "#{last_eval.team_evaluation.team.name}"
         span.ml-1
@@ -32,5 +32,5 @@
 
     - last_comment_classification = member.comments.classification.desc.first
     - if last_comment_classification.present?
-      div[title="Indelingsverzoek #{l last_comment_classification.created_at.to_date, format: :long}"]
+      div[title="Indelingsverzoek #{l last_comment_classification.created_at.localtime.to_date, format: :long}"]
         = last_comment_classification.body
