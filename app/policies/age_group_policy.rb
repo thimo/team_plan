@@ -28,9 +28,10 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_evaluations?
-    @user.admin? ||
-    @user.club_staff?
-end
+    return false if @record.draft?
+
+    @user.admin? || @user.club_staff?
+  end
 
   class Scope < Scope
     def resolve
