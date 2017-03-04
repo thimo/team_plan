@@ -10,7 +10,7 @@ RSpec.feature "Devises", type: :feature do
       visit '/users/sign_in'
       within("#new_user") do
         fill_in 'Email', with: 'user@example.com'
-        fill_in 'Password', with: 'password'
+        fill_in 'Wachtwoord', with: 'password'
       end
       click_button 'Inloggen'
       # expect(page).to have_content 'Success'
