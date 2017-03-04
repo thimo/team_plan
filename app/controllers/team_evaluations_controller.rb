@@ -27,11 +27,15 @@ class TeamEvaluationsController < ApplicationController
 
   def update
     finish_evaluation = params[:finish_evaluation].present?
+    send_invite = params[:send_invite].present?
     @team_evaluation.enable_validation = finish_evaluation
     if @team_evaluation.update_attributes(team_evaluation_params)
       if finish_evaluation
         @team_evaluation.finish_evaluation(current_user)
         redirect_to @team_evaluation.team, notice: 'Team evaluatie is afgerond.'
+      elsif send_invite
+        @team_evaluation.send_invite(current_user)
+        redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen en uitnodiging verstuurd.'
       else
         redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen.'
       end

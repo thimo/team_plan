@@ -28,9 +28,16 @@ class TeamEvaluation < ApplicationRecord
     enable_validation || false
   end
 
-  def finish_evaluation(current_user)
-    self.update_attribute(:finished_by, current_user)
+  def finish_evaluation(user)
+    self.update_attribute(:finished_by, user)
     self.update_attribute(:finished_at, DateTime.now)
+  end
+
+  def send_invite(user)
+    # TODO invite all team staff members. Create accounts if needed
+    TeamEvaluationMailer.invite(user, self).deliver_now
+    self.update_attribute(:invited_by, user)
+    self.update_attribute(:invited_at, DateTime.now)
   end
 
   def status

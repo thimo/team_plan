@@ -1,3 +1,54 @@
 // Place all the styles related to the admin/email_logs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.email-log {
+  margin: 10px auto;
+
+  .message_headers {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    border-bottom: 1px solid #dedede;
+    margin-bottom: 10px;
+    overflow: auto;
+    padding-bottom: 20px;
+
+    dl {
+      float: left;
+      line-height: 1.3em;
+      padding: 0;
+    }
+
+    dt {
+      width: 130px;
+      margin: 0;
+      float: left;
+      text-align: right;
+      color: #7f7f7f;
+    }
+
+    dd {
+      margin: 0 0 0 140px;
+    }
+
+    p.alternate {
+      float: right;
+      margin: 0;
+    }
+
+    p.alternate a {
+      color: #09c;
+    }
+  }
+
+  pre#message_body {
+    padding: 4px;
+    white-space: pre-wrap;
+    border: 1px solid #eee;
+    background-color: #fcfcfc;
+  }
+
+  iframe {
+    border: 0;
+    width: 100%;
+  }
+}

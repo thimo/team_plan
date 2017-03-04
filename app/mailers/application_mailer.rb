@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: '"TeamPlan" <teamplan@esa-rijkerswoerd.nl>'
   layout 'mailer'
 
   ActionMailer::Base.register_observer(::MailLoggerObserver)
