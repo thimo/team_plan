@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TeamEvaluationsPolicy do
+RSpec.describe EvaluationPolicy do
 
   let(:user) { User.new }
 
