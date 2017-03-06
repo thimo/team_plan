@@ -37,9 +37,9 @@ nl:
         address: Adres
         city: Woonplaats
         country: Land
-      evaluation:
-        field_position: Positie
-        prefered_foot: L/R benig
+      player_evaluation:
+        # field_position: Positie
+        # prefered_foot: L/R benig
         advise_next_season: Volgend seizoen
         remark: Opmerking
         behaviour: Gedrag

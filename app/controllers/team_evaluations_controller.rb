@@ -8,10 +8,7 @@ class TeamEvaluationsController < ApplicationController
   def new
     # Create team evaluation
     @team_evaluation.team.team_members.player.asc.each do |player|
-      defaults = {member: player.member}
-      last_eval = player.member.last_evaluation
-      defaults.merge!(field_position: last_eval.field_position, prefered_foot: last_eval.prefered_foot) unless last_eval.nil?
-      @team_evaluation.evaluations.build(defaults)
+      @team_evaluation.player_evaluations.build(team_member: player)
     end
   end
 
@@ -81,7 +78,7 @@ class TeamEvaluationsController < ApplicationController
     end
 
     def team_evaluation_params
-      params.require(:team_evaluation).permit(evaluations_attributes: [:id, :member_id, :field_position, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark])
+      params.require(:team_evaluation).permit(player_evaluations_attributes: [:id, :team_member_id, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark])
     end
 
 end

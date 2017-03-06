@@ -26,7 +26,7 @@
                 div
                   span
                     | Speler
-              = render "evaluations/th_columns"
+              = render "player_evaluations/th_columns"
 
           tbody
             - @team_evaluation.evaluations.includes_member.each do |evaluation|
@@ -37,6 +37,6 @@
                     => l evaluation.member.born_on, format: :long unless evaluation.member.born_on.nil?
                     = "(#{evaluation.member.gender})"
                 
-                = render "evaluations/td_columns", evaluation: evaluation
+                = render "player_evaluations/td_columns", evaluation: evaluation
 
     footer.box-typical-footer

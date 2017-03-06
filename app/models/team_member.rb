@@ -1,6 +1,17 @@
 class TeamMember < ApplicationRecord
+  FIELD_POSITION_OPTIONS = {
+      "Aanval" => ["linksbuiten", "spits", "rechtsbuiten"],
+      "Middenveld" => ["linkshalf", "centrale middenvelder", "rechtshalf"],
+      "Verdediging" => ["linksachter", "voorstopper", "rechtsachter", "laatste man", "keeper"],
+      "As" => ["linker as", "centrale as", "rechter as"],
+      "Linie" => ["aanvaller", "middenvelder", "verdediger"],
+      "Overig" => ["geen voorkeur"]
+    }
+  PREFERED_FOOT_OPTIONS = %w(rechtsbenig linksbenig tweebenig onbekend)
+
   belongs_to :team
   belongs_to :member
+  has_many :evaluations, dependent: :destroy
 
   enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3}
 

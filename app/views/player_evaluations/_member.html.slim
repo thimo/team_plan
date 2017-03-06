@@ -12,7 +12,7 @@ section.box-typical.evaluation
         - if member.evaluations.finished_desc.size > 0
           thead
             th
-            = render "evaluations/th_columns"
+            = render "player_evaluations/th_columns"
           tbody
             - member.evaluations.finished_desc.each do |evaluation|
               tr.test
@@ -20,7 +20,7 @@ section.box-typical.evaluation
                   = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
                   .color-blue-grey-lighter.small
                     = l evaluation.team_evaluation.finished_at.localtime.to_date, format: :long
-                = render "evaluations/td_columns", evaluation: evaluation
+                = render "player_evaluations/td_columns", evaluation: evaluation
         - else 
           tbody
             tr

@@ -3,7 +3,7 @@ class Member < ApplicationRecord
   has_many :teams, through: :team_members
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
-  has_many :evaluations, dependent: :destroy
+  has_many :evaluations, through: :team_members
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
 

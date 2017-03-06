@@ -2,12 +2,12 @@ class TeamEvaluation < ApplicationRecord
   belongs_to :team, required: true
   belongs_to :invited_by, class_name: "User", required: false
   belongs_to :finished_by, class_name: "User", required: false
-  has_many :evaluations, dependent: :destroy
+  has_many :player_evaluations, dependent: :destroy
 
   attr_accessor :enable_validation
 
-  accepts_nested_attributes_for :evaluations
-  validates_associated :evaluations
+  accepts_nested_attributes_for :player_evaluations
+  validates_associated :player_evaluations
 
   scope :asc, -> { order(created_at: :asc) }
   scope :desc, -> { order(created_at: :desc) }

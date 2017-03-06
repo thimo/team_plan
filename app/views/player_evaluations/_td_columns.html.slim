@@ -1,0 +1,13 @@
+/ td
+/   = evaluation.field_position
+/ td
+/   = evaluation.prefered_foot
+
+- %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
+  td
+    .evaluation-rating[data-evaluation-value="#{evaluation[field_name]}" title="#{PlayerEvaluation.human_value_name_for_rating(evaluation[field_name])}"]
+      = PlayerEvaluation.human_value_name_for_rating(evaluation[field_name])
+td
+  = evaluation.advise_next_season
+td.remark
+  = evaluation.remark

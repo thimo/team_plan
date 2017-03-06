@@ -1,25 +1,16 @@
-class Evaluation < ApplicationRecord
+class PlayerEvaluation < ApplicationRecord
   RATING_OPTIONS = [["goed", "8"], ["voldoende", "6"], ["matig", "5"], ["onvoldoende", "4"]]
-  FIELD_POSITION_OPTIONS = {
-      "Aanval" => ["linksbuiten", "spits", "rechtsbuiten"],
-      "Middenveld" => ["linkshalf", "centrale middenvelder", "rechtshalf"],
-      "Verdediging" => ["linksachter", "voorstopper", "rechtsachter", "laatste man", "keeper"],
-      "As" => ["linker as", "centrale as", "rechter as"],
-      "Linie" => ["aanvaller", "middenvelder", "verdediger"],
-      "Overig" => ["geen voorkeur"]
-    }
-  PREFERED_FOOT_OPTIONS = %w(rechtsbenig linksbenig tweebenig onbekend)
   ADVISE_NEXT_SEASON_OPTIONS = %w(hoger zelfde lager)
 
   belongs_to :team_evaluation, required: true
-  belongs_to :member, required: true
+  belongs_to :team_member, required: true
 
-  validates_presence_of :field_position, :prefered_foot, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, if: ->{ team_evaluation.enable_validation? }
+  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, if: ->{ team_evaluation.enable_validation? }
 
-  default_scope -> { joins(:member).order('members.last_name ASC, members.first_name ASC') }
+  default_scope -> { joins(team_member: :member).order('members.last_name ASC, members.first_name ASC') }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }
   scope :finished_desc, -> { finished.joins(:team_evaluation).order('team_evaluations.finished_at DESC') }
-  scope :includes_member, -> {includes(:member)}
+  scope :includes_member, -> {includes(:team_member).includes(team_member: :member)}
 
   def draft?
     team_evaluation.draft?

@@ -1,4 +1,4 @@
-class EvaluationPolicy < ApplicationPolicy
+class PlayerEvaluationPolicy < ApplicationPolicy
   def index?
     @user.admin? ||
     @user.club_staff? ||
