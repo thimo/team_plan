@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304174406) do
+ActiveRecord::Schema.define(version: 20170306072110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,29 +49,6 @@ ActiveRecord::Schema.define(version: 20170304174406) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_email_logs_on_user_id"
-  end
-
-  create_table "evaluations", id: :serial, force: :cascade do |t|
-    t.integer "team_evaluation_id"
-    t.integer "member_id"
-    t.string "field_position"
-    t.string "prefered_foot"
-    t.string "advise_next_season"
-    t.string "behaviour"
-    t.string "technique"
-    t.string "handlingspeed"
-    t.string "insight"
-    t.string "passes"
-    t.string "speed"
-    t.string "locomotion"
-    t.string "physical"
-    t.string "endurance"
-    t.string "duel_strength"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "remark"
-    t.index ["member_id"], name: "index_evaluations_on_member_id"
-    t.index ["team_evaluation_id"], name: "index_evaluations_on_team_evaluation_id"
   end
 
   create_table "favorites", id: :serial, force: :cascade do |t|
@@ -146,6 +123,27 @@ ActiveRecord::Schema.define(version: 20170304174406) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "player_evaluations", id: :serial, force: :cascade do |t|
+    t.integer "team_evaluation_id"
+    t.string "advise_next_season"
+    t.string "behaviour"
+    t.string "technique"
+    t.string "handlingspeed"
+    t.string "insight"
+    t.string "passes"
+    t.string "speed"
+    t.string "locomotion"
+    t.string "physical"
+    t.string "endurance"
+    t.string "duel_strength"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "remark"
+    t.bigint "team_member_id"
+    t.index ["team_evaluation_id"], name: "index_player_evaluations_on_team_evaluation_id"
+    t.index ["team_member_id"], name: "index_player_evaluations_on_team_member_id"
+  end
+
   create_table "seasons", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -174,6 +172,8 @@ ActiveRecord::Schema.define(version: 20170304174406) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "field_position"
+    t.string "prefered_foot"
     t.index ["member_id", "team_id", "role"], name: "index_team_members_on_member_id_and_team_id_and_role", unique: true
     t.index ["member_id"], name: "index_team_members_on_member_id"
     t.index ["team_id"], name: "index_team_members_on_team_id"
@@ -211,10 +211,10 @@ ActiveRecord::Schema.define(version: 20170304174406) do
   add_foreign_key "age_groups", "seasons"
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
-  add_foreign_key "evaluations", "members"
-  add_foreign_key "evaluations", "team_evaluations"
   add_foreign_key "favorites", "users"
   add_foreign_key "members", "users"
+  add_foreign_key "player_evaluations", "team_evaluations"
+  add_foreign_key "player_evaluations", "team_members"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"
