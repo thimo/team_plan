@@ -9,12 +9,12 @@ section.box-typical.evaluation
   .box-typical-body
     .table-responsive
       table.table.table-sm
-        - if member.evaluations.finished_desc.size > 0
+        - if member.player_evaluations.finished_desc.size > 0
           thead
             th
             = render "player_evaluations/th_columns"
           tbody
-            - member.evaluations.finished_desc.each do |evaluation|
+            - member.player_evaluations.finished_desc.each do |evaluation|
               tr.test
                 td.nowrap
                   = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
