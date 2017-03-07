@@ -15,19 +15,20 @@
         = "#{member.local_teams}"
         
   td.color-blue-grey.small
-    - last_evaluation = member.last_evaluation
-    - if last_evaluation.present?
-      span[title="Evaluatie #{l last_eval.team_evaluation.finished_at.localtime.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
-        strong
-          = "#{last_evaluation.team_evaluation.team.name}"
-        span.ml-1
-          = "#{last_evaluation.field_position.capitalize}"
-        span.ml-1
-          i.fa[class="#{last_evaluation.advise_to_icon_class}"]
-    - elsif member.active_team.present?
+    - if member.active_team.present?
       span[title="Huidige team #{member.active_team.name}"]
         strong
           = "#{member.active_team.name}"
+    - if member.active_team_member.present?
+      - if member.active_team_member.field_position.present?
+        span.ml-1
+          = "#{member.active_team_member.field_position.capitalize}"
+    
+    - last_evaluation = member.last_evaluation
+    - if last_evaluation.present?
+      span[title="Evaluatie #{l last_evaluation.team_evaluation.finished_at.localtime.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
+        span.ml-1
+          i.fa[class="#{last_evaluation.advise_to_icon_class}"]
       
 
     - last_comment_classification = member.comments.classification.desc.first
