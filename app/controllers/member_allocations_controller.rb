@@ -23,7 +23,7 @@ class MemberAllocationsController < ApplicationController
     # Filter out members who have already been assigned to a team
     members.each do |member|
       if session[:filter_field_position].nil? ||
-          member.last_evaluation.present? && session[:filter_field_position].include?(member.last_evaluation.field_position)
+          member.active_team_member.present? && session[:filter_field_position].include?(member.active_team_member.field_position)
         @available_members << member if @age_group.is_not_member(member)
       end
     end
