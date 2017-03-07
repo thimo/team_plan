@@ -11,7 +11,7 @@ class TeamMember < ApplicationRecord
 
   belongs_to :team
   belongs_to :member
-  has_many :evaluations, dependent: :destroy
+  has_many :player_evaluations, dependent: :destroy
 
   enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3}
 

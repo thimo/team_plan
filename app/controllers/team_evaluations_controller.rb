@@ -66,7 +66,6 @@ class TeamEvaluationsController < ApplicationController
     end
 
     def breadcumbs
-      # TODO Currently not working, age_group is null. Could be Rails 5.1 problem
       add_breadcrumb @team_evaluation.team.age_group.season.name, @team_evaluation.team.age_group.season unless @team_evaluation.team.age_group.nil?
       add_breadcrumb @team_evaluation.team.age_group.name, @team_evaluation.team.age_group unless @team_evaluation.team.age_group.nil?
       add_breadcrumb @team_evaluation.team.name, @team_evaluation.team

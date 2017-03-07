@@ -38,8 +38,8 @@
               = e.hidden_field :team_member_id
               
               tr
-                td.member_name
-                - member = e.object.team_member.member
+                td.member_name                
+                  - member = e.object.team_member.member
                   = link_to member.name, member, target: "_blank"
                   .color-blue-grey-lighter.small
                     => l member.born_on, format: :long unless member.born_on.nil?
