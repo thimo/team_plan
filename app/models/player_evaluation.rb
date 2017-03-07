@@ -2,6 +2,9 @@ class PlayerEvaluation < ApplicationRecord
   RATING_OPTIONS = [["goed", "8"], ["voldoende", "6"], ["matig", "5"], ["onvoldoende", "4"]]
   ADVISE_NEXT_SEASON_OPTIONS = %w(hoger zelfde lager)
 
+  # copy field_position and prefered_foot to team_member on after_validation because after_save only gets triggered when PlayerEvaluation values have been updated
+  after_validation :copy_to_team_member
+
   belongs_to :team_evaluation, required: true
   belongs_to :team_member, required: true
 
@@ -44,4 +47,12 @@ class PlayerEvaluation < ApplicationRecord
 
     return rating
   end
+
+  private
+
+    def copy_to_team_member
+      team_member.update_attribute(:prefered_foot, prefered_foot) if prefered_foot.present? && team_member.prefered_foot != prefered_foot
+      team_member.update_attribute(:field_position, field_position) if field_position.present? && team_member.field_position != field_position
+      true
+    end
 end
