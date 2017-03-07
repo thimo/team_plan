@@ -5,7 +5,9 @@ class PlayerEvaluation < ApplicationRecord
   belongs_to :team_evaluation, required: true
   belongs_to :team_member, required: true
 
-  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, if: ->{ team_evaluation.enable_validation? }
+  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :field_position, :prefered_foot, if: ->{ team_evaluation.enable_validation? }
+
+  attr_accessor :prefered_foot, :field_position
 
   default_scope -> { joins(team_member: :member).order('members.last_name ASC, members.first_name ASC') }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }

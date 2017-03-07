@@ -1,9 +1,9 @@
-/ th
-/   div
-/     span = PlayerEvaluation.human_attribute_name(:field_position)
-/ th
-/   div
-/     span = PlayerEvaluation.human_attribute_name(:prefered_foot)
+th
+  div
+    span = TeamMember.human_attribute_name(:field_position)
+th
+  div
+    span = TeamMember.human_attribute_name(:prefered_foot)
 
 - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
   th.rotate

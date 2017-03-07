@@ -44,11 +44,11 @@
                   .color-blue-grey-lighter.small
                     => l member.born_on, format: :long unless member.born_on.nil?
                     = "(#{member.gender})"
-                    
-                / td
-                /   = e.select :field_position, grouped_options_for_select(TeamMember::FIELD_POSITION_OPTIONS, e.object.field_position), {include_blank: true}, {class: "form-control custom-select field_position #{'form-control-error' if e.error(:field_position).present?}"}
-                / td
-                /   = e.select :prefered_foot, TeamMember::PREFERED_FOOT_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if e.error(:prefered_foot).present?}"}
+                
+                td
+                  = e.select :field_position, grouped_options_for_select(TeamMember::FIELD_POSITION_OPTIONS, e.object.field_position), {include_blank: true}, {class: "form-control custom-select field_position #{'form-control-error' if e.error(:field_position).present?}"}
+                td
+                  = e.select :prefered_foot, TeamMember::PREFERED_FOOT_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if e.error(:prefered_foot).present?}"}
                 
                 - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
                   td

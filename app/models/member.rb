@@ -25,16 +25,16 @@ class Member < ApplicationRecord
     favorites.where(user: user).first
   end
 
-  def last_evaluation
-    evaluations.finished_desc.first
-  end
-
   def active_team
     teams.joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).first
   end
 
   def active_team_member
     team_members.player.joins(team: {age_group: :season}).where(seasons: {status: Season.statuses[:active]}).first
+  end
+
+  def last_evaluation
+    active_team_member.player_evaluations.finished_desc.first if active_team_member.present?
   end
 
   def self.import(file)

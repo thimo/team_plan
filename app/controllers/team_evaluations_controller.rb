@@ -77,7 +77,7 @@ class TeamEvaluationsController < ApplicationController
     end
 
     def team_evaluation_params
-      params.require(:team_evaluation).permit(player_evaluations_attributes: [:id, :team_member_id, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark])
+      params.require(:team_evaluation).permit(player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :field_position, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark])
     end
 
 end
