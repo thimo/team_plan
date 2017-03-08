@@ -46,7 +46,7 @@
                     = "(#{member.gender})"
                 
                 td
-                  = e.select :field_position, grouped_options_for_select(TeamMember::FIELD_POSITION_OPTIONS, e.object.team_member.field_position), {include_blank: true}, {class: "form-control custom-select field_position #{'form-control-error' if e.error(:field_position).present?}"}
+                  = e.select :field_position, options_for_select(TeamMember::FIELD_POSITION_OPTIONS, e.object.team_member.field_position), {include_blank: true}, {class: "form-control custom-select field_position #{'form-control-error' if e.error(:field_position).present?}"}
                 td
                   = e.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, e.object.team_member.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if e.error(:prefered_foot).present?}"}
                 

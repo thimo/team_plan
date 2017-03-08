@@ -1,12 +1,26 @@
 class TeamMember < ApplicationRecord
-  FIELD_POSITION_OPTIONS = {
-      "Aanval" => ["linksbuiten", "spits", "rechtsbuiten"],
-      "Middenveld" => ["linkshalf", "centrale middenvelder", "rechtshalf"],
-      "Verdediging" => ["linksachter", "voorstopper", "rechtsachter", "laatste man", "keeper"],
-      "As" => ["linker as", "centrale as", "rechter as"],
-      "Linie" => ["aanvaller", "middenvelder", "verdediger"],
-      "Overig" => ["geen voorkeur"]
-    }
+  FIELD_POSITION_OPTIONS = [
+      "aanvaller",
+      ["- linker aanvaller", "linker aanvaller"],
+      ["- centrale aanvaller", "centrale aanvaller"],
+      ["- rechter aanvaller", "rechter aanvaller"],
+      "middenvelder",
+      ["- linker middenvelder", "linker middenvelder"],
+      ["- centrale middenvelder", "centrale middenvelder"],
+      ["- rechter middenvelder", "rechter middenvelder"],
+      "verdediger",
+      ["- linker verdediger", "linker verdediger"],
+      ["- centrale verdediger", "centrale verdediger"],
+      ["- vrije verdediger", "vrije verdediger"],
+      ["- rechter verdediger", "rechter verdediger"],
+      "keeper",
+      ["---", ""],
+      "links",
+      "as",
+      "rechts",
+      ["---", ""],
+      "geen voorkeur",
+    ]
   PREFERED_FOOT_OPTIONS = %w(rechtsbenig linksbenig tweebenig onbekend)
 
   before_save :inherit_fields
