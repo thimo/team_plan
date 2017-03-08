@@ -51,6 +51,10 @@ class PlayerEvaluation < ApplicationRecord
   private
 
     def copy_to_team_member
+      ap '#'*80
+      ap "copy_to_team_member for #{team_member.member.name}"
+      ap "prefered_foot #{prefered_foot}"
+      ap "field_position #{field_position}"
       team_member.update_attribute(:prefered_foot, prefered_foot) if prefered_foot.present? && team_member.prefered_foot != prefered_foot
       team_member.update_attribute(:field_position, field_position) if field_position.present? && team_member.field_position != field_position
       true
