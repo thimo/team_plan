@@ -29,7 +29,7 @@
               = render "player_evaluations/th_columns"
 
           tbody
-            - @team_evaluation.evaluations.includes_member.each do |evaluation|
+            - @team_evaluation.player_evaluations.includes_member.each do |evaluation|
               tr
                 td.member_name
                   = link_to evaluation.member.name, evaluation.member
