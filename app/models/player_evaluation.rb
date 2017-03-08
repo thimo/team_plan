@@ -31,11 +31,11 @@ class PlayerEvaluation < ApplicationRecord
 
   def advise_to_icon_class
     case advise_next_season
-    when Evaluation::ADVISE_NEXT_SEASON_OPTIONS[0]
+    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[0]
       "fa-chevron-up"
-    when Evaluation::ADVISE_NEXT_SEASON_OPTIONS[1]
+    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[1]
       "fa-minus"
-    when Evaluation::ADVISE_NEXT_SEASON_OPTIONS[2]
+    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[2]
       "fa-chevron-down"
     end
   end
