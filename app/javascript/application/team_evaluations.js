@@ -31,7 +31,7 @@ function apply_class_for_rating(target, rating) {
 }
 
 
-$(() => {
+$(document).on('turbolinks:load', function() {
   $('.evaluation select').each((index, target) => {
     setEvaluationClass(target)
   })
@@ -41,8 +41,7 @@ $(() => {
   if ($('.sidebar-hidden').length) {
     $('body').addClass('sidebar-hidden');
   }
-})
-
-$('.evaluation select').on('change', (e) => {
-  setEvaluationClass(e.target)
+  $('.evaluation select').on('change', (e) => {
+    setEvaluationClass(e.target)
+  })
 })
