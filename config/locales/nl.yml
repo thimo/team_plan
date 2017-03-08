@@ -53,6 +53,8 @@ nl:
         physical: Fysiek
         endurance: Uithoudingsvermogen
         duel_strength: Duelkracht
+      comment:
+        private: Privé
 
   form:
     an_error:
