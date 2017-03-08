@@ -15,23 +15,20 @@
         = "#{member.local_teams}"
         
   td.color-blue-grey.small
-    - if member.active_team.present?
-      span[title="Huidige team #{member.active_team.name}"]
+    - if (active_team = member.active_team).present?
+      span[title="Huidige team #{active_team.name}"]
         strong
-          = "#{member.active_team.name}"
-    - if member.active_team_member.present?
-      - if member.active_team_member.field_position.present?
+          = "#{active_team.name}"
+    - if (active_team_member = member.active_team_member).present?
+      - if active_team_member.field_position.present?
         span.ml-1
-          = "#{member.active_team_member.field_position.capitalize}"
+          = "#{active_team_member.field_position.capitalize}"
     
-    - last_evaluation = member.last_evaluation
-    - if last_evaluation.present?
+    - if (last_evaluation = member.last_evaluation).present?
       span[title="Evaluatie #{l last_evaluation.team_evaluation.finished_at.localtime.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
         span.ml-1
           i.fa[class="#{last_evaluation.advise_to_icon_class}"]
       
-
-    - last_comment_classification = member.comments.classification.desc.first
-    - if last_comment_classification.present?
+    - if (last_comment_classification = member.comments.classification.desc.first).present?
       div[title="Indelingsverzoek #{l last_comment_classification.created_at.localtime.to_date, format: :long}"]
         = last_comment_classification.body
