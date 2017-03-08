@@ -1,27 +1,31 @@
 section.tabs-section
   .tabs-section-nav.tabs-section-nav-inline
     ul.nav[role="tablist"]
-      - %w(generic technique behaviour classification membership).each_with_index do |comment_type, index|
-        - if policy(Comment).public_send("show_#{comment_type}?")
+      - Comment.comment_types.each do |comment_type|
+        - if policy(Comment).public_send("show_#{comment_type.first}?")
           li.nav-item
-            a.nav-link[href="#comments-tab-#{comment_type}" role="tab" data-toggle="tab" aria-expanded="#{if index == 0; 'true'; else; 'false'}" class="#{'active' if index == 0}"]
-              = Comment.comment_types_i18n[comment_type]
-              - count = parent.comments.public_send(comment_type).size
-              - if count > 0
+            a.nav-link[href="#comments-tab-#{comment_type.first}" role="tab" data-toggle="tab" aria-expanded="#{if comment_type.first == 'generic'; 'true'; else; 'false'}" class="#{'active' if comment_type.first == 'generic'}"]
+              = Comment.comment_types_i18n[comment_type.first]
+              - if (count = parent.comments.public_send(comment_type.first).size) > 0
                 .label.label-pill.ml-1
                   = count
               
   .tab-content
-    - %w(generic technique behaviour classification membership).each_with_index do |comment_type, index|
-      - if policy(Comment).public_send("show_#{comment_type}?")
-        .tab-pane[role="tabpanel" aria-expanded="#{if index == 0; 'true'; else; 'false'}" id="comments-tab-#{comment_type}" class="#{if index == 0; 'active in'; else; 'fade'}"]
+    - Comment.comment_types.each do |comment_type|
+      - if policy(Comment).public_send("show_#{comment_type.first}?")
+        .tab-pane[role="tabpanel" aria-expanded="#{if comment_type.first == 'generic'; 'true'; else; 'false'}" id="comments-tab-#{comment_type.first}" class="#{if comment_type.first == 'generic'; 'active in'; else; 'fade'}"]
           .row
             .col-sm-8
-              - if parent.comments.public_send(comment_type).size > 0
-                = render parent.comments.public_send(comment_type).includes(:user)
+              - if parent.comments.public_send(comment_type.first).size > 0
+                = render parent.comments.public_send(comment_type.first).includes(:user)
               - else
                 i Voeg een opmerking toe
 
             .col-sm-4
-              = render "comments/form", comment_type: comment_type
+              = simple_form_for [parent, Comment.new] do |f|
+                = f.input :body, label: false, placeholder: "Opmerking toevoegen"
+                .float-right
+                  = f.input :private
+                = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm'
+                = f.hidden_field :comment_type, value: comment_type.first
       

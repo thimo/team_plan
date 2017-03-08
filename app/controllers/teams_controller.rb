@@ -4,13 +4,8 @@ class TeamsController < ApplicationController
   before_action :breadcumbs
 
   def show
-    @commentable = @team
-
     @players = @team.team_members.player.asc.includes(:member).includes(:team)
     @staff = @team.team_members.staff.asc.includes(:member).includes(:team)
-
-    @comments = @commentable.comments.includes(:user)
-    @comment = Comment.new
   end
 
   def new; end

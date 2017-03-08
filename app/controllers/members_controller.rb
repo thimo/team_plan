@@ -3,10 +3,6 @@ class MembersController < ApplicationController
 
   def show
     @team_members = @member.team_members.order(created_at: :desc)
-
-    @commentable = @member
-    @comments = @commentable.comments.includes(:user)
-    @comment = Comment.new
   end
 
   def edit
