@@ -11,6 +11,8 @@ function apply_class_for_rating(target, rating) {
   switch (rating) {
     case '10':
     case '9':
+      $(target).addClass('btn').addClass('btn-primary')
+      break;
     case '8':
       $(target).addClass('btn').addClass('btn-success')
       break;

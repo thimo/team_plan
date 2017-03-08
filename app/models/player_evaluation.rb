@@ -1,5 +1,5 @@
 class PlayerEvaluation < ApplicationRecord
-  RATING_OPTIONS = [["goed", "8"], ["voldoende", "6"], ["matig", "5"], ["onvoldoende", "4"]]
+  RATING_OPTIONS = [["zeer goed", "9"], ["goed", "8"], ["voldoende", "6"], ["matig", "5"], ["onvoldoende", "4"]]
   ADVISE_NEXT_SEASON_OPTIONS = %w(hoger zelfde lager)
 
   # copy field_position and prefered_foot to team_member on after_validation because after_save only gets triggered when PlayerEvaluation values have been updated
