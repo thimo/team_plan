@@ -32,10 +32,11 @@
             - @team_evaluation.player_evaluations.includes_member.each do |evaluation|
               tr
                 td.member_name
-                  = link_to evaluation.member.name, evaluation.member
+                  - member = evaluation.team_member.member
+                  = link_to member.name, member
                   .color-blue-grey-lighter.small
-                    => l evaluation.member.born_on, format: :long unless evaluation.member.born_on.nil?
-                    = "(#{evaluation.member.gender})"
+                    => l member.born_on, format: :long unless member.born_on.nil?
+                    = "(#{member.gender})"
                 
                 = render "player_evaluations/td_columns", evaluation: evaluation
 
