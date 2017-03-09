@@ -8,7 +8,7 @@ class Team < ApplicationRecord
 
   validates_presence_of :name, :age_group
 
-  scope :asc, -> { order(:created_at) }
+  scope :asc, -> { order(:name) }
 
   def draft?
     age_group.draft?

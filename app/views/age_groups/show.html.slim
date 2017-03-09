@@ -36,7 +36,7 @@
           table.table.table-sm.tr-links
             thead
             tbody
-              - @age_group.teams.asc.each do |team|
+              - @teams.each do |team|
                 tr
                   td
                     = link_to team.name, team

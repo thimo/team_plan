@@ -1,10 +1,13 @@
 class AgeGroupsController < ApplicationController
+  include SortHelper
+
   before_action :create_age_group, only: [:new, :create]
   before_action :set_age_group, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs
 
   def show
     @open_team_evaluations = TeamEvaluation.where(finished_at: nil).joins(:team).where(teams: {age_group: @age_group}).asc
+    @teams = human_sort(@age_group.teams, :name)
   end
 
   def new; end

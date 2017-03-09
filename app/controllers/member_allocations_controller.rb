@@ -1,7 +1,9 @@
 class MemberAllocationsController < ApplicationController
+  include SortHelper
+
   def index
     @age_group = AgeGroup.find(params[:age_group_id])
-    @teams = policy_scope(Team).where(age_group_id: @age_group.id).asc.includes(:age_group)
+    @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
     @filter_field_position = session[:filter_field_position]
 
     # All active players

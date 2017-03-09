@@ -32,5 +32,4 @@ class AgeGroup < ApplicationRecord
   def favorite(user)
     favorites.where(user: user).first
   end
-
 end
