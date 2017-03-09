@@ -16,8 +16,8 @@ section.tabs-section
         .tab-pane[role="tabpanel" aria-expanded="#{if comment_type.first == 'generic'; 'true'; else; 'false'}" id="comments-tab-#{comment_type.first}" class="#{if comment_type.first == 'generic'; 'active in'; else; 'fade'}"]
           .row
             .col-sm-8
-              - if parent.comments.public_send(comment_type.first).size > 0
-                = render parent.comments.public_send(comment_type.first).includes(:user)
+              - if (comments = parent.comments.public_send(comment_type.first).includes(:user)).present?
+                = render comments
               - else
                 i Voeg een opmerking toe
 
