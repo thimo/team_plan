@@ -11,15 +11,15 @@ class Team < ApplicationRecord
   scope :asc, -> { order(:created_at) }
 
   def draft?
-    age_group.season.draft?
+    age_group.draft?
   end
 
   def active?
-    age_group.season.active?
+    age_group.active?
   end
 
   def archived?
-    age_group.season.archived?
+    age_group.archived?
   end
 
   def is_favorite?(user)

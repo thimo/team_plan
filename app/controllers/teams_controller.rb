@@ -43,9 +43,9 @@ class TeamsController < ApplicationController
             else
               Team.new(team_params)
             end
-    authorize @team
-
     @team.age_group = @age_group
+    
+    authorize @team
   end
 
   def set_team
