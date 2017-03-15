@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'webpacker'
+gem 'webpacker-react'
 
 gem 'slim'
 gem 'faker',                      '>= 1.6.0'
