@@ -17,5 +17,4 @@
 //= require jquery-autosize/jquery.autosize.min.js
 //= require notie/dist/notie.min.js
 //= require jquery-ujs/src/rails.js
-
 //= require turbolinks

@@ -39,7 +39,10 @@ html
         /   .collapse#collapseExample
         /     .card.card-block
         /       = debug(params)
-
     = javascript_include_tag 'application', 'data-turbolinks-eval': 'false'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': 'false'
     = render 'layouts/flash'
+
+    = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
+    = react_component('Copyright', year: '2018')
+    
