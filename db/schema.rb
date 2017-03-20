@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306072110) do
+ActiveRecord::Schema.define(version: 20170320210001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,21 @@ ActiveRecord::Schema.define(version: 20170306072110) do
     t.datetime "updated_at", null: false
     t.index ["favorable_type", "favorable_id"], name: "index_favorites_on_favorable_type_and_favorable_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "field_positions", force: :cascade do |t|
+    t.string "name"
+    t.integer "position", default: 0
+    t.boolean "indent_in_select", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "field_positions_team_members", id: false, force: :cascade do |t|
+    t.integer "field_position_id", null: false
+    t.integer "team_member_id", null: false
+    t.index ["field_position_id", "team_member_id"], name: "position_member_index"
+    t.index ["team_member_id", "field_position_id"], name: "member_position_index"
   end
 
   create_table "members", id: :serial, force: :cascade do |t|
@@ -172,7 +187,6 @@ ActiveRecord::Schema.define(version: 20170306072110) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "field_position"
     t.string "prefered_foot"
     t.index ["member_id", "team_id", "role"], name: "index_team_members_on_member_id_and_team_id_and_role", unique: true
     t.index ["member_id"], name: "index_team_members_on_member_id"
