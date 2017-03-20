@@ -2,15 +2,12 @@ class PlayerEvaluation < ApplicationRecord
   RATING_OPTIONS = [["zeer goed", "9"], ["goed", "8"], ["voldoende", "6"], ["matig", "5"], ["onvoldoende", "4"]]
   ADVISE_NEXT_SEASON_OPTIONS = %w(hoger zelfde lager)
 
-  # copy field_position and prefered_foot to team_member on after_validation because after_save only gets triggered when PlayerEvaluation values have been updated
-  after_validation :copy_to_team_member
-
   belongs_to :team_evaluation, required: true
   belongs_to :team_member, required: true
 
-  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :field_position, :prefered_foot, if: ->{ team_evaluation.enable_validation? }
+  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :field_position, :prefered_foot, if: -> { team_evaluation.enable_validation? }
 
-  attr_accessor :prefered_foot, :field_position
+  delegate :prefered_foot, :field_position, to: :team_member
 
   default_scope -> { joins(team_member: :member).order('members.last_name ASC, members.first_name ASC') }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }
@@ -27,6 +24,14 @@ class PlayerEvaluation < ApplicationRecord
 
   def archived?
     team_evaluation.archived?
+  end
+
+  def prefered_foot=(prefered_foot)
+    team_member.update_columns(prefered_foot: prefered_foot) if team_member.prefered_foot != prefered_foot
+  end
+
+  def field_position=(field_position)
+    team_member.update_columns(field_position: field_position) if team_member.field_position != field_position
   end
 
   def advise_to_icon_class
@@ -48,11 +53,4 @@ class PlayerEvaluation < ApplicationRecord
     return rating
   end
 
-  private
-
-    def copy_to_team_member
-      team_member.update_columns(prefered_foot: prefered_foot) if prefered_foot.present? && team_member.prefered_foot != prefered_foot
-      team_member.update_columns(field_position: field_position) if field_position.present? && team_member.field_position != field_position
-      true
-    end
 end
