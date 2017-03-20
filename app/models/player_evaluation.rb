@@ -5,9 +5,11 @@ class PlayerEvaluation < ApplicationRecord
   belongs_to :team_evaluation, required: true
   belongs_to :team_member, required: true
 
-  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :field_position, :prefered_foot, if: -> { team_evaluation.enable_validation? }
+  # TODO validate presense of field positions
+  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :prefered_foot, if: -> { team_evaluation.enable_validation? }
 
-  delegate :prefered_foot, :field_position, to: :team_member
+  # TODO
+  delegate :prefered_foot, to: :team_member
 
   default_scope -> { joins(team_member: :member).order('members.last_name ASC, members.first_name ASC') }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }
@@ -30,9 +32,10 @@ class PlayerEvaluation < ApplicationRecord
     team_member.update_columns(prefered_foot: prefered_foot) if team_member.prefered_foot != prefered_foot
   end
 
-  def field_position=(field_position)
-    team_member.update_columns(field_position: field_position) if team_member.field_position != field_position
-  end
+  # TODO make sure selected field positions are linked to team members
+  # def field_position=(field_position)
+  #   team_member.update_columns(field_position: field_position) if team_member.field_position != field_position
+  # end
 
   def advise_to_icon_class
     case advise_next_season

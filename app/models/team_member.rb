@@ -1,26 +1,26 @@
 class TeamMember < ApplicationRecord
-  FIELD_POSITION_OPTIONS = [
-      "aanvaller",
-      ["- linker aanvaller", "linker aanvaller"],
-      ["- centrale aanvaller", "centrale aanvaller"],
-      ["- rechter aanvaller", "rechter aanvaller"],
-      "middenvelder",
-      ["- linker middenvelder", "linker middenvelder"],
-      ["- centrale middenvelder", "centrale middenvelder"],
-      ["- rechter middenvelder", "rechter middenvelder"],
-      "verdediger",
-      ["- linker verdediger", "linker verdediger"],
-      ["- centrale verdediger", "centrale verdediger"],
-      ["- vrije verdediger", "vrije verdediger"],
-      ["- rechter verdediger", "rechter verdediger"],
-      "keeper",
-      ["---", ""],
-      "links",
-      "as",
-      "rechts",
-      ["---", ""],
-      "geen voorkeur",
-    ]
+  # FIELD_POSITION_OPTIONS = [
+  #     "aanvaller",
+  #     ["- linker aanvaller", "linker aanvaller"],
+  #     ["- centrale aanvaller", "centrale aanvaller"],
+  #     ["- rechter aanvaller", "rechter aanvaller"],
+  #     "middenvelder",
+  #     ["- linker middenvelder", "linker middenvelder"],
+  #     ["- centrale middenvelder", "centrale middenvelder"],
+  #     ["- rechter middenvelder", "rechter middenvelder"],
+  #     "verdediger",
+  #     ["- linker verdediger", "linker verdediger"],
+  #     ["- centrale verdediger", "centrale verdediger"],
+  #     ["- vrije verdediger", "vrije verdediger"],
+  #     ["- rechter verdediger", "rechter verdediger"],
+  #     "keeper",
+  #     ["---", ""],
+  #     "links",
+  #     "as",
+  #     "rechts",
+  #     ["---", ""],
+  #     "geen voorkeur",
+  #   ]
   PREFERED_FOOT_OPTIONS = %w(rechtsbenig linksbenig tweebenig onbekend)
 
   before_save :inherit_fields
@@ -28,6 +28,7 @@ class TeamMember < ApplicationRecord
   belongs_to :team
   belongs_to :member, required: true
   has_many :player_evaluations, dependent: :destroy
+  has_and_belongs_to_many :field_positions
 
   enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3}
 
@@ -63,7 +64,9 @@ class TeamMember < ApplicationRecord
     def inherit_fields
       if member.active_team_member.present?
         self.prefered_foot = member.active_team_member.prefered_foot
-        self.field_position = member.active_team_member.field_position
+        # TODO inherit all existing field positions from HABTM
+        # TODO also only do on create
+        # self.field_position = member.active_team_member.field_position
       end
     end
 end
