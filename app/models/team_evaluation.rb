@@ -35,7 +35,7 @@ class TeamEvaluation < ApplicationRecord
 
   def send_invite(user)
     # TODO Invite all team staff members. Create accounts if needed
-    # Error if no team staff was found
+    # TODO Error if no team staff was found
     TeamEvaluationMailer.invite(user, self).deliver_now
     self.update_attribute(:invited_by, user)
     self.update_attribute(:invited_at, DateTime.now)

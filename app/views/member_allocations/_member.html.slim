@@ -20,9 +20,10 @@
         strong
           = "#{active_team.name}"
     - if (active_team_member = member.active_team_member).present?
-      - if active_team_member.field_position.present?
+      - if (field_positions = active_team_member.field_positions).present?
         span.ml-1
-          = "#{active_team_member.field_position.capitalize}"
+          - field_positions.each do |field_position|
+            = "#{field_position.name}"
     
     - if (last_evaluation = member.last_evaluation).present?
       span[title="Evaluatie #{l last_evaluation.team_evaluation.finished_at.localtime.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]

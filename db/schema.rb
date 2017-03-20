@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320210001) do
+ActiveRecord::Schema.define(version: 20170320211831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170320210001) do
     t.boolean "indent_in_select", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "blank", default: false
   end
 
   create_table "field_positions_team_members", id: false, force: :cascade do |t|
