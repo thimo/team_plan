@@ -47,7 +47,9 @@
                           => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                           = "(#{team_member.member.gender})"
                     td
-                      = team_member.field_position
+                      - team_member.field_positions.each do |field_position|
+                        div
+                          = field_position.name
                     td
                       = team_member.prefered_foot
                     td.w-1.nowrap

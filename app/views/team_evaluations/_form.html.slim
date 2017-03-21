@@ -33,31 +33,32 @@
               = render "player_evaluations/th_columns"
               
           tbody
-            = f.simple_fields_for :player_evaluations do |e|
-              = e.hidden_field :id
-              = e.hidden_field :team_member_id
+            = f.simple_fields_for :player_evaluations do |pe|
+              = pe.hidden_field :id
+              = pe.hidden_field :team_member_id
               
               tr
                 td.member_name                
-                  - member = e.object.team_member.member
+                  - member = pe.object.team_member.member
                   = link_to member.name, member, target: "_blank"
                   .color-blue-grey-lighter.small
                     => l member.born_on, format: :long unless member.born_on.nil?
                     = "(#{member.gender})"
                 
                 td
-                  = e.select :field_position, options_for_select(TeamMember::FIELD_POSITION_OPTIONS, e.object.field_position), {include_blank: true}, {class: "form-control custom-select field_position #{'form-control-error' if e.error(:field_position).present?}"}
+                  = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
+                    = tm.association :field_positions, label: false
                 td
-                  = e.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, e.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if e.error(:prefered_foot).present?}"}
+                  = pe.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:prefered_foot).present?}"}
                 
-                - %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
+                - PlayerEvaluation::RATING_FIELDS.each do |field_name|
                   td
-                    = e.select field_name.to_s, PlayerEvaluation::RATING_OPTIONS, {include_blank: true}, {class: "form-control custom-select evaluation-rating #{'form-control-error' if e.error(field_name.to_s).present?}"}
+                    = pe.select field_name.to_s, PlayerEvaluation::RATING_OPTIONS, {include_blank: true}, {class: "form-control custom-select evaluation-rating #{'form-control-error' if pe.error(field_name.to_s).present?}"}
                   
                 td
-                  = e.select :advise_next_season, PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if e.error(:advise_next_season).present?}"}
+                  = pe.select :advise_next_season, PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:advise_next_season).present?}"}
                 td.remark
-                  = e.text_area :remark, {class: "form-control"}
+                  = pe.text_area :remark, {class: "form-control"}
 
     footer.box-typical-footer
       = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'

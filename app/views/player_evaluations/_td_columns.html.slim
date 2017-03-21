@@ -3,7 +3,7 @@ td
 td
   = evaluation.team_member.prefered_foot
 
-- %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength).each do |field_name|
+- PlayerEvaluation::RATING_FIELDS.each do |field_name|
   td
     .evaluation-rating[data-evaluation-value="#{evaluation[field_name]}" title="#{PlayerEvaluation.human_value_name_for_rating(evaluation[field_name])}"]
       = PlayerEvaluation.human_value_name_for_rating(evaluation[field_name])

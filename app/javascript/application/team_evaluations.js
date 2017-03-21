@@ -32,9 +32,8 @@ function apply_class_for_rating(target, rating) {
   }
 }
 
-
 $(document).on('turbolinks:load', function() {
-  $('.evaluation select').each((index, target) => {
+  $('.evaluation select.evaluation-rating').each((index, target) => {
     setEvaluationClass(target)
   })
   $('.evaluation div.evaluation-rating').each((index, target) => {
@@ -43,7 +42,7 @@ $(document).on('turbolinks:load', function() {
   if ($('.sidebar-hidden').length) {
     $('body').addClass('sidebar-hidden');
   }
-  $('.evaluation select').on('change', (e) => {
+  $('.evaluation select.evaluation-rating').on('change', (e) => {
     setEvaluationClass(e.target)
   })
 })

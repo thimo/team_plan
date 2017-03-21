@@ -1,4 +1,5 @@
 class PlayerEvaluation < ApplicationRecord
+  RATING_FIELDS = %w(behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength)
   RATING_OPTIONS = [["zeer goed", "9"], ["goed", "8"], ["voldoende", "6"], ["matig", "5"], ["onvoldoende", "4"]]
   ADVISE_NEXT_SEASON_OPTIONS = %w(hoger zelfde lager)
 
@@ -8,8 +9,8 @@ class PlayerEvaluation < ApplicationRecord
   # TODO validate presense of field positions
   validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :prefered_foot, if: -> { team_evaluation.enable_validation? }
 
-  # TODO
   delegate :prefered_foot, to: :team_member
+  accepts_nested_attributes_for :team_member
 
   default_scope -> { joins(team_member: :member).order('members.last_name ASC, members.first_name ASC') }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }

@@ -58,9 +58,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
   gem 'meta_request'
-  # gem 'better_errors' # https://github.com/charliesome/better_errors - Better error page for Rack apps
-  # binding_of_caller is very slow with multiple MB stack trace
-  # gem 'binding_of_caller'
   gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'rack-mini-profiler'
   gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
