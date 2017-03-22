@@ -49,35 +49,35 @@ class TeamEvaluationsController < ApplicationController
 
   private
 
-  def create_team_evaluation
-    @team = Team.find(params[:team_id])
+    def create_team_evaluation
+      @team = Team.find(params[:team_id])
 
-    @team_evaluation = if action_name == 'new'
-                         @team.team_evaluations.new
-                       else
-                         TeamEvaluation.new(team_evaluation_params)
-            end
-    @team_evaluation.team = @team
-    authorize @team_evaluation
-  end
-
-  def set_team_evaluation
-    @team_evaluation = TeamEvaluation.find(params[:id])
-    authorize @team_evaluation
-  end
-
-  def breadcumbs
-    add_breadcrumb @team_evaluation.team.age_group.season.name, @team_evaluation.team.age_group.season unless @team_evaluation.team.age_group.nil?
-    add_breadcrumb @team_evaluation.team.age_group.name, @team_evaluation.team.age_group unless @team_evaluation.team.age_group.nil?
-    add_breadcrumb @team_evaluation.team.name, @team_evaluation.team
-    if @team_evaluation.new_record?
-      add_breadcrumb 'Nieuw'
-    else
-      add_breadcrumb 'Team evaluatie'
+      @team_evaluation = if action_name == 'new'
+                           @team.team_evaluations.new
+                         else
+                           TeamEvaluation.new(team_evaluation_params)
+              end
+      @team_evaluation.team = @team
+      authorize @team_evaluation
     end
-  end
 
-  def team_evaluation_params
-    params.require(:team_evaluation).permit(player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark, team_member_attributes: [:id, field_position_ids: []]])
-  end
+    def set_team_evaluation
+      @team_evaluation = TeamEvaluation.find(params[:id])
+      authorize @team_evaluation
+    end
+
+    def breadcumbs
+      add_breadcrumb @team_evaluation.team.age_group.season.name, @team_evaluation.team.age_group.season unless @team_evaluation.team.age_group.nil?
+      add_breadcrumb @team_evaluation.team.age_group.name, @team_evaluation.team.age_group unless @team_evaluation.team.age_group.nil?
+      add_breadcrumb @team_evaluation.team.name, @team_evaluation.team
+      if @team_evaluation.new_record?
+        add_breadcrumb 'Nieuw'
+      else
+        add_breadcrumb 'Team evaluatie'
+      end
+    end
+
+    def team_evaluation_params
+      params.require(:team_evaluation).permit(player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark, team_member_attributes: [:id, field_position_ids: []]])
+    end
 end
