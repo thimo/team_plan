@@ -6,8 +6,9 @@ class PlayerEvaluation < ApplicationRecord
   belongs_to :team_evaluation, required: true
   belongs_to :team_member, required: true
 
-  # TODO validate presense of field positions
   validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :prefered_foot, if: -> { team_evaluation.enable_validation? }
+  # Make sure linked team member has field positions filled in
+  validate :team_member_has_field_positions, if: -> { team_evaluation.enable_validation? }
 
   delegate :prefered_foot, to: :team_member
   accepts_nested_attributes_for :team_member
@@ -33,11 +34,6 @@ class PlayerEvaluation < ApplicationRecord
     team_member.update_columns(prefered_foot: prefered_foot) if team_member.prefered_foot != prefered_foot
   end
 
-  # TODO make sure selected field positions are linked to team members
-  # def field_position=(field_position)
-  #   team_member.update_columns(field_position: field_position) if team_member.field_position != field_position
-  # end
-
   def advise_to_icon_class
     case advise_next_season
     when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[0]
@@ -56,5 +52,11 @@ class PlayerEvaluation < ApplicationRecord
 
     return rating
   end
+
+  private
+
+    def team_member_has_field_positions
+      errors.add('field_positions', 'Team member heeft geen field position') if team_member.field_positions.blank?
+    end
 
 end

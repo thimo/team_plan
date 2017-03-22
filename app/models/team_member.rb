@@ -1,26 +1,4 @@
 class TeamMember < ApplicationRecord
-  # FIELD_POSITION_OPTIONS = [
-  #     "aanvaller",
-  #     ["- linker aanvaller", "linker aanvaller"],
-  #     ["- centrale aanvaller", "centrale aanvaller"],
-  #     ["- rechter aanvaller", "rechter aanvaller"],
-  #     "middenvelder",
-  #     ["- linker middenvelder", "linker middenvelder"],
-  #     ["- centrale middenvelder", "centrale middenvelder"],
-  #     ["- rechter middenvelder", "rechter middenvelder"],
-  #     "verdediger",
-  #     ["- linker verdediger", "linker verdediger"],
-  #     ["- centrale verdediger", "centrale verdediger"],
-  #     ["- vrije verdediger", "vrije verdediger"],
-  #     ["- rechter verdediger", "rechter verdediger"],
-  #     "keeper",
-  #     ["---", ""],
-  #     "links",
-  #     "as",
-  #     "rechts",
-  #     ["---", ""],
-  #     "geen voorkeur",
-  #   ]
   PREFERED_FOOT_OPTIONS = %w(rechtsbenig linksbenig tweebenig onbekend)
 
   before_save :inherit_fields
@@ -62,11 +40,11 @@ class TeamMember < ApplicationRecord
   private
 
     def inherit_fields
-      if member.active_team_member.present?
-        self.prefered_foot = member.active_team_member.prefered_foot
-        # TODO inherit all existing field positions from HABTM
-        # TODO also only do on create
-        # self.field_position = member.active_team_member.field_position
+      if (team_member = member.active_team_member).present?
+        self.prefered_foot = team_member.prefered_foot
+        team_member.field_positions.each do |field_position|
+          self.field_positions << field_position
+        end
       end
     end
 end

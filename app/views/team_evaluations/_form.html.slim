@@ -36,7 +36,7 @@
             = f.simple_fields_for :player_evaluations do |pe|
               = pe.hidden_field :id
               = pe.hidden_field :team_member_id
-              
+
               tr
                 td.member_name                
                   - member = pe.object.team_member.member
@@ -46,8 +46,9 @@
                     = "(#{member.gender})"
                 
                 td
-                  = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
-                    = tm.select :field_position_ids, options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
+                  div[class="#{'form-control-error' if pe.error("field_positions").present?}"]
+                    = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
+                      = tm.select :field_position_ids, options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
                 td
                   = pe.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:prefered_foot).present?}"}
                 

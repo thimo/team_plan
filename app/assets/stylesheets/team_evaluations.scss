@@ -16,4 +16,11 @@
       border-top-width: 1px;
     }
   }
+
+  div.form-control-error {
+    background-color: #fff6f6;
+    border: solid 1px #fa424a;
+    color: #fa424a !important;
+    border-radius: 4px;
+  }
 }
