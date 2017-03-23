@@ -8,10 +8,10 @@ layout:
             - ls
       -
         layout:
-        -
-          - ./bin/webpack-watcher
-        -
-          - ls
+          -
+            - ./bin/webpack-watcher
+          -
+            - ls
       -
         layout:
           -

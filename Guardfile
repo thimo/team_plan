@@ -54,6 +54,8 @@
 #   watch(%r{config/locales/.+\.yml})
 # end
 
+notification :terminal_notifier if `uname` =~ /Darwin/
+
 guard :livereload do
   watch(%r{app/views/.+\.(erb|haml|slim)$})
   watch(%r{app/helpers/.+\.rb})
