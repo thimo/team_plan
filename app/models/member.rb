@@ -7,8 +7,8 @@ class Member < ApplicationRecord
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
 
-  scope :from_year, lambda {|year| where("born_on >= ?", "#{year}-01-01")}
-  scope :to_year, lambda {|year| where("born_on <= ?", "#{year}-12-31")}
+  scope :from_year, -> (year) {where("born_on >= ?", "#{year}-01-01")}
+  scope :to_year, -> (year) {where("born_on <= ?", "#{year}-12-31")}
   scope :active_players, -> {where("sport_category <> ''").where(status: "definitief")}
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
@@ -36,6 +36,14 @@ class Member < ApplicationRecord
   def last_evaluation
     active_team_member.player_evaluations.finished_desc.first if active_team_member.present?
   end
+
+  def active?
+    active_team_member.present?
+  end
+
+  def has_active_field_position?(field_positions)
+     active? && (field_positions & active_team_member.field_positions.map(&:id)).present?
+   end
 
   def self.import(file)
     CSV.foreach(file.path, :headers => true,

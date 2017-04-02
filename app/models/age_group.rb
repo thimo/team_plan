@@ -32,4 +32,21 @@ class AgeGroup < ApplicationRecord
   def favorite(user)
     favorites.where(user: user).first
   end
+
+  def active_members
+    # All active players
+    members = Member.active_players.asc
+    # Filter on year of birth
+    members = members.from_year(year_of_birth_from) unless year_of_birth_from.nil?
+    members = members.to_year(year_of_birth_to) unless year_of_birth_to.nil?
+    # Filter on gender
+    unless gender.nil?
+      case gender.upcase
+      when "M"
+        members = members.male
+      when "V"
+        members = members.female
+      end
+    end
+  end
 end

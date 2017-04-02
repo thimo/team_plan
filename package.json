@@ -23,6 +23,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "select2": "^4.0.3",
+    "selectize": "^0.12.4",
     "tether": "^1.4.0",
     "webpacker-react": "^0.2.1"
   }

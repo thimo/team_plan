@@ -6,26 +6,12 @@ class MemberAllocationsController < ApplicationController
     @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
     @filter_field_position = session[:filter_field_position]
 
-    # All active players
-    members = policy_scope(Member).active_players.asc
-    # Filter on year of birth
-    members = members.from_year(@age_group.year_of_birth_from) unless @age_group.year_of_birth_from.nil?
-    members = members.to_year(@age_group.year_of_birth_to) unless @age_group.year_of_birth_to.nil?
-    # Filter on gender
-    unless @age_group.gender.nil?
-      case @age_group.gender.upcase
-      when "M"
-        members = members.male
-      when "V"
-        members = members.female
-      end
-    end
+    members = @age_group.active_members
 
     @available_members = []
     # Filter out members who have already been assigned to a team
     members.each do |member|
-      if session[:filter_field_position].nil? ||
-          member.active_team_member.present? && session[:filter_field_position].include?(member.active_team_member.field_position)
+      if (field_positions = session[:filter_field_position]).blank? || member.has_active_field_position?(field_positions)
         @available_members << member if @age_group.is_not_member(member)
       end
     end
