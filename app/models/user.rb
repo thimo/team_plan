@@ -64,7 +64,7 @@ class User < ApplicationRecord
       team_id = record.team_members.pluck(:team_id).uniq
     when TeamEvaluation
       team_id = record.team_id
-    when Evaluation
+    when PlayerEvaluation
       team_id = record.team_evaluation.team_id
     end
 
