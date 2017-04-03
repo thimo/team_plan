@@ -1,6 +1,6 @@
 - provide(:title, 'E-mail log')
 
-table.table
+table.table.tr-links
   thead
     tr
       th
@@ -12,4 +12,5 @@ table.table
       th
   tbody
     = render @email_logs
+    
 = paginate @email_logs
