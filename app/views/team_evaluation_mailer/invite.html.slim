@@ -1,8 +1,8 @@
 / - provide(:title, "Uitnodiging")
 
-p Hallo #{@user.name}, 
+p Hallo <%= @user.name %>, 
 
-p We hebben een evaluatie klaargezet voor #{@team_evaluation.team.name} en vragen je in te loggen en deze in te vullen.
+p We hebben een evaluatie klaargezet voor <%= @team_evaluation.team.name %> en vragen je in te loggen en deze in te vullen.
 
 p
   = link_to "Teamevaluatie #{@team_evaluation.team.name}", edit_team_evaluation_url(@team_evaluation)

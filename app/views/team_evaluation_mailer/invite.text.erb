@@ -1,5 +1,5 @@
-Hallo #{@user.name},
+Hallo <%= @user.name %>,
 
-We hebben een evaluatie klaargezet voor #{@team_evaluation.team.name} en vragen je in te loggen en deze in te vullen.
+We hebben een evaluatie klaargezet voor <%= @team_evaluation.team.name %> en vragen je in te loggen en deze in te vullen.
 
 = link_to "Teamevaluatie #{@team_evaluation.team.name}", edit_team_evaluation_url(@team_evaluation)
