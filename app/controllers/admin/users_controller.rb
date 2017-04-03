@@ -47,7 +47,7 @@ class Admin::UsersController < AdminController
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :middle_name, :last_name, :email)
+      params.require(:user).permit(:first_name, :middle_name, :last_name, :email, :role)
     end
 
     def breadcumbs
