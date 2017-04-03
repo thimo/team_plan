@@ -83,4 +83,19 @@ class User < ApplicationRecord
     @favorite_members ||= favorites.where(favorable_type: Member.to_s).pluck(:id)
     @favorite_members.include?(member.id)
   end
+
+  def invite(password)
+    UserMailer.new_account_notification(self, password).deliver_now
+  end
+
+  def self.find_or_create_and_invite(email)
+    user = User.where(email: email).first_or_initialize(password: (generated_password = Devise.friendly_token.first(8)))
+
+    if user.new_record?
+      user.save
+      user.invite(generated_password)
+    end
+
+    user
+  end
 end

@@ -33,12 +33,23 @@ class TeamEvaluation < ApplicationRecord
     self.update_attribute(:finished_at, DateTime.now)
   end
 
-  def send_invite(user)
-    # TODO Invite all team staff members. Create accounts if needed
-    # TODO Error if no team staff was found
-    TeamEvaluationMailer.invite(user, self).deliver_now
-    self.update_attribute(:invited_by, user)
-    self.update_attribute(:invited_at, DateTime.now)
+  def send_invites(user)
+    mail_count = 0
+
+    team.team_members.staff.each do |team_member|
+      # Check account
+      user = User.find_or_create_and_invite(team_member.member.email)
+      TeamEvaluationMailer.invite(user, self).deliver_now
+
+      mail_count += 1
+    end
+
+    if mail_count > 0
+      self.update_attribute(:invited_by, user)
+      self.update_attribute(:invited_at, DateTime.now)
+    end
+
+    return mail_count
   end
 
   def status

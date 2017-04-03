@@ -1,11 +1,11 @@
 nl:
   company:
-    name: Team Plan
-    url: https://www.defrog.nl
+    name: ESA TeamPlan
+    url: https://teamplan.esa-rijkerswoerd.nl
     address:
     zip:
     city:
-    email: info@defrog.nl
+    email: helpdesk@defrog.nl
     phone:
     contact_name: Thimo Jansen
   activerecord:
@@ -171,3 +171,7 @@ nl:
       vrij_datumveld_2: free_date_2
       vrije_dropdown_1: free_dropdown_1
       vrije_dropdown_2: free_dropdown_2
+
+  invites_sent:
+    one: er is 1 uitnodiging verstuurd
+    other: er zijn %{count} uitnodigingen verstuurd

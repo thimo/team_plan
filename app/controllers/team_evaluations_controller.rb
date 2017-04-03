@@ -30,13 +30,21 @@ class TeamEvaluationsController < ApplicationController
     if @team_evaluation.update_attributes(team_evaluation_params)
       if finish_evaluation
         @team_evaluation.finish_evaluation(current_user)
-        redirect_to @team_evaluation.team, notice: 'Team evaluatie is afgerond.'
+        flash[:success] = 'De team evaluatie is afgerond.'
       elsif send_invite
-        @team_evaluation.send_invite(current_user)
-        redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen en uitnodiging verstuurd.'
+        mail_count = @team_evaluation.send_invites(current_user)
+
+        if mail_count == 0
+          flash[:alert] = "De team evaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
+        else
+          flash[:success] = "De team evaluatie is opgeslagen en <%= t(:invites_sent, count: mail_count) %>."
+        end
+
       else
-        redirect_to @team_evaluation.team, notice: 'Team evaluatie is opgeslagen.'
+        flash[:success] = 'De team evaluatie is opgeslagen.'
       end
+
+      redirect_to @team_evaluation.team
     else
       render :new
     end
@@ -56,7 +64,7 @@ class TeamEvaluationsController < ApplicationController
                            @team.team_evaluations.new
                          else
                            TeamEvaluation.new(team_evaluation_params)
-              end
+                         end
       @team_evaluation.team = @team
       authorize @team_evaluation
     end

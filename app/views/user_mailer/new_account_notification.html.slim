@@ -1,0 +1,15 @@
+- provide(:title, "Account aangemaakt")
+
+p
+  |  Hallo #{@user.name},
+  
+p
+  |  We hebben een account voor je aangemaakt. Je kunt 
+  = link_to "inloggen op de #{I18n.t("company.name")} website", new_user_session_url
+  | met de volgende gegevens: 
+  
+ul
+  li
+    | E-mail: #{@user.email}
+  li
+    | Wachtwoord: #{@generated_password}
