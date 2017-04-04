@@ -16,7 +16,7 @@ class PlayerEvaluation < ApplicationRecord
   default_scope -> { joins(team_member: :member).order('members.last_name ASC, members.first_name ASC') }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }
   scope :finished_desc, -> { finished.joins(:team_evaluation).order('team_evaluations.finished_at DESC') }
-  scope :includes_member, -> {includes(:team_member).includes(team_member: :member)}
+  scope :includes_member, -> {includes(:team_member).includes(team_member: :member).includes(team_member: :field_positions)}
 
   def draft?
     team_evaluation.draft?
