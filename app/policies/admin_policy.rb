@@ -16,7 +16,7 @@ class AdminPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.admin?
+    @user.admin? && @record.persisted?
   end
 
   class Scope < Scope

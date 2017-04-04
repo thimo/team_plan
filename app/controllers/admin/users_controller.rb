@@ -1,6 +1,6 @@
 class Admin::UsersController < AdminController
   before_action :create_user, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :resend_password]
+  before_action :set_user, only: [:show, :edit, :update, :resend_password, :destroy]
   before_action :breadcumbs
 
   def index
@@ -38,6 +38,11 @@ class Admin::UsersController < AdminController
       flash[:alert] = 'Er kon geen nieuw wachtwoord worden verstuurd.'
       render 'edit'
     end
+  end
+
+  def destroy
+    redirect_to admin_users_path, notice: 'Gebruiker is verwijderd.'
+    @user.destroy
   end
 
   private

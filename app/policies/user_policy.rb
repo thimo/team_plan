@@ -1,5 +1,5 @@
 class UserPolicy < AdminPolicy
   def resend_password?
-    @user.admin?
+    @record.persisted? && @user.admin?
   end
 end
