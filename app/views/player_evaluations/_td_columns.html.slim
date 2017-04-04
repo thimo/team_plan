@@ -1,5 +1,7 @@
 td
-  = evaluation.team_member.field_position
+  - evaluation.team_member.field_positions.each do |field_position|
+    div
+      = field_position.name
 td
   = evaluation.team_member.prefered_foot
 
