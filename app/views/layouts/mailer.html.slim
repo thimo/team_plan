@@ -5,17 +5,18 @@ html
     style
       |  /* Email styles need to be inline */ 
 
-  body
+  body[style="font-family:helvetica, Arial, sans-serif;"]
     = yield
 
     p
       | Met vriendelijke groet,
 
     p 
-      address
-        strong 
-          | ESA Rijkerswoerd
-        br
-        | De Pas 44
-        br
-        | 6836 BK  Arnhem
+      | De E-mail Robot
+    p 
+      strong 
+        | ESA Rijkerswoerd
+      br
+      | De Pas 44
+      br
+      | 6836 BK  Arnhem

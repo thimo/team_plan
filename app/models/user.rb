@@ -28,7 +28,11 @@ class User < ApplicationRecord
   end
 
   def email_with_name
-    %("#{self.name}" <#{self.email}>)
+    if self.name == self.email
+      self.email
+    else
+      %("#{self.name}" <#{self.email}>)
+    end
   end
 
   def members
@@ -101,7 +105,7 @@ class User < ApplicationRecord
 
     if user.new_record?
       user.save
-      user.invite(generated_password)
+      user.send_new_account(generated_password)
     end
 
     user
