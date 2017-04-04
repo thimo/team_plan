@@ -84,8 +84,16 @@ class User < ApplicationRecord
     @favorite_members.include?(member.id)
   end
 
-  def invite(password)
+  def reset_password
+    self.password = Devise.friendly_token.first(8)
+  end
+
+  def send_new_account(password)
     UserMailer.new_account_notification(self, password).deliver_now
+  end
+
+  def send_password_reset(password)
+    UserMailer.password_reset(self, password).deliver_now
   end
 
   def self.find_or_create_and_invite(email)

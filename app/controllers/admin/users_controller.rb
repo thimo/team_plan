@@ -1,6 +1,6 @@
 class Admin::UsersController < AdminController
   before_action :create_user, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :resend_password]
   before_action :breadcumbs
 
   def index
@@ -10,11 +10,10 @@ class Admin::UsersController < AdminController
   def new; end
 
   def create
-    @user.password = (generated_password = Devise.friendly_token.first(8))
+    generated_password = @user.reset_password
     if @user.save
+      @user.send_new_account(generated_password)
       redirect_to admin_users_path, notice: 'Gebruiker is toegevoegd.'
-
-      @user.invite(generated_password)
     else
       render :new
     end
@@ -26,6 +25,17 @@ class Admin::UsersController < AdminController
     if @user.update_attributes(user_params)
       redirect_to admin_users_path, notice: 'Gebruiker is aangepast.'
     else
+      render 'edit'
+    end
+  end
+
+  def resend_password
+    generated_password = @user.reset_password
+    if @user.save
+      @user.send_password_reset(generated_password)
+      redirect_to admin_users_path, notice: 'Er is een nieuw wachtwoord aan de gebruiker verstuurd.'
+    else
+      flash[:alert] = 'Er kon geen nieuw wachtwoord worden verstuurd.'
       render 'edit'
     end
   end

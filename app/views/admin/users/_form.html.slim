@@ -1,8 +1,12 @@
 = simple_form_for [:admin, @user], {wrapper: :horizontal_form} do |f|
   = f.error_notification
+  
   = f.input :first_name
   = f.input :middle_name
   = f.input :last_name
   = f.input :email
   = f.input :role
-  = f.button :submit, "Opslaan", class: 'btn btn-primary'
+  
+  div
+    = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+    = link_to "Nieuw wachtwoord versturen", resend_password_admin_user_path(@user), class: 'btn btn-secondary-outline btn-inline' if @user.persisted?

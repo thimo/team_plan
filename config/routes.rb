@@ -34,12 +34,15 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users, except: [:show], shallow: true do
         resources :email_logs, only: [:index, :show]
+        member do
+          get :resend_password
+        end
       end
       resources :members, only: [:index, :show]
       resources :members_import, only: [:new] do
-        collection {
+        collection do
           post :create #, to: 'members_import#create'
-        }
+        end
       end
       resources :email_logs, only: [:index, :show]
     end
