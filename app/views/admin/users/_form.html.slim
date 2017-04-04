@@ -10,6 +10,6 @@
   div
     = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
     - if policy(@user).resend_password?
-      = link_to "Nieuw wachtwoord versturen", resend_password_admin_user_path(@user), class: 'btn btn-secondary-outline btn-inline'
+      = link_to "Nieuw wachtwoord versturen", resend_password_admin_user_path(@user), class: 'btn btn-secondary btn-inline'
     - if policy(@user).destroy?
-      = link_to "Verwijderen", admin_user_path(@user),  method: :delete, data: { confirm: 'Gebruiker wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger-outline btn-inline'
+      = link_to "Verwijderen", admin_user_path(@user),  method: :delete, data: { confirm: 'Gebruiker wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
