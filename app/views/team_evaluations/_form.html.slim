@@ -62,7 +62,9 @@
                   = pe.text_area :remark, {class: "form-control"}
 
     footer.box-typical-footer
-      = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+      - if policy(@team_evaluation).update?
+        = f.button :submit, "Opslaan", name: "save_and_stay_open", class: 'btn btn-primary btn-inline'
+        = f.button :submit, "Opslaan en Sluiten", name: "save", class: 'btn btn-inline'
       - if policy(@team_evaluation).send_invite?
         = f.button :submit, "Uitnodiging versturen", name: "send_invite", class: 'btn btn-inline'
       - if policy(@team_evaluation).finish_evaluation?

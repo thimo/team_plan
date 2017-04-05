@@ -14,7 +14,13 @@ class TeamEvaluationsController < ApplicationController
 
   def create
     if @team_evaluation.save
-      redirect_to @team_evaluation.team, notice: 'Team evaluatie is toegevoegd.'
+      flash[:success] = 'De team evaluatie is toegevoegd.'
+
+      if stay_open?
+        redirect_to [:edit, @team_evaluation]
+      else
+        redirect_to @team_evaluation.team
+      end
     else
       render :new
     end
@@ -23,15 +29,13 @@ class TeamEvaluationsController < ApplicationController
   def edit; end
 
   def update
-    finish_evaluation = params[:finish_evaluation].present?
-    send_invite = params[:send_invite].present?
+    @team_evaluation.enable_validation = finish_evaluation?
 
-    @team_evaluation.enable_validation = finish_evaluation
     if @team_evaluation.update_attributes(team_evaluation_params)
-      if finish_evaluation
+      if finish_evaluation?
         @team_evaluation.finish_evaluation(current_user)
         flash[:success] = 'De team evaluatie is afgerond.'
-      elsif send_invite
+      elsif send_invite?
         mail_count = @team_evaluation.send_invites(current_user)
 
         if mail_count == 0
@@ -44,7 +48,11 @@ class TeamEvaluationsController < ApplicationController
         flash[:success] = 'De team evaluatie is opgeslagen.'
       end
 
-      redirect_to @team_evaluation.team
+      if stay_open?
+        redirect_to [:edit, @team_evaluation]
+      else
+        redirect_to @team_evaluation.team
+      end
     else
       render :new
     end
@@ -87,5 +95,17 @@ class TeamEvaluationsController < ApplicationController
 
     def team_evaluation_params
       params.require(:team_evaluation).permit(player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark, team_member_attributes: [:id, field_position_ids: []]])
+    end
+
+    def finish_evaluation?
+      params[:finish_evaluation].present?
+    end
+
+    def send_invite?
+      params[:send_invite].present?
+    end
+
+    def stay_open?
+      params[:save_and_stay_open].present?
     end
 end
