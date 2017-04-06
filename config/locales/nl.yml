@@ -142,7 +142,7 @@ nl:
       machtiging?: bank_authorization
       contrib_cat: contribution_category
       registratiedatum: registered_at
-      afmelddatum: deregistrated_at
+      afmelddatum: deregistered_at
       lid_sinds: member_since
       leeftijdscat: age_category
       lokale_teams: local_teams
