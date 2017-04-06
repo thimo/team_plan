@@ -14,7 +14,7 @@ nav.side-menu
         | Mijn teams
       ul.side-menu-list
         - current_user.active_teams.each do |team|
-          li.green class="#{'active' if current_page?(team)}"
+          li.green class="#{'active' if current_page?(team_path(team))}"
             = link_to team
               i.fa.fa-futbol-o
               span.lbl
