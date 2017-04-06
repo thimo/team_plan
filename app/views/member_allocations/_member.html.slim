@@ -13,7 +13,9 @@
     - unless member.local_teams.blank?
       .color-blue-grey.small
         = "#{member.local_teams}"
-        
+    - unless member.deregistered_at.blank?
+      .color-blue-grey.small
+        | Afmelddatum #{member.deregistered_at}
   td.color-blue-grey.small
     - if (active_team = member.active_team).present?
       .mb-1[title="Huidige team #{active_team.name}"]
