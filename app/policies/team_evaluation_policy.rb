@@ -36,7 +36,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def finish_evaluation?
     return false if @record.new_record? || @record.finished_at.present?
 
-    @user.admin? || @user.club_staff?
+    update?
   end
 
   class Scope < Scope
