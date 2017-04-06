@@ -39,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def active_teams
-    member_ids = members.map(&:id)
+    member_ids = members.map(&:id).uniq
     Team.joins(:team_members).where(team_members: {member_id: member_ids}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct.asc
   end
 
