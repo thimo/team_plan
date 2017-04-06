@@ -11,5 +11,7 @@
     - if policy(@member).show_comments?
       = render "comments/tabs", parent: @member
 
-    - if policy(@member).show_evaluations?
+- if policy(@member).show_evaluations?
+  .row
+    .col-12
       = render "player_evaluations/member", member: @member
