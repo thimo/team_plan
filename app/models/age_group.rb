@@ -37,10 +37,10 @@ class AgeGroup < ApplicationRecord
     # All active players
     members = Member.active_players.asc
     # Filter on year of birth
-    members = members.from_year(year_of_birth_from) unless year_of_birth_from.nil?
-    members = members.to_year(year_of_birth_to) unless year_of_birth_to.nil?
+    members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
+    members = members.to_year(year_of_birth_to) if year_of_birth_to.present?
     # Filter on gender
-    unless gender.nil?
+    if gender.present?
       case gender.upcase
       when "M"
         members = members.male
