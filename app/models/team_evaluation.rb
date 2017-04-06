@@ -57,7 +57,7 @@ class TeamEvaluation < ApplicationRecord
     if finished_at.present?
       "Afgerond"
     elsif invited_at.present?
-      "In behandeling"
+      "Open bij team"
     else
       "Te versturen"
     end

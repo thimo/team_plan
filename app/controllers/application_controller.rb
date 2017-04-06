@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
 
     def permission_denied
       flash[:danger] = "Je hebt niet genoeg rechten om deze pagina te bekijken."
-      # this is giving a redirect loop error
-      # redirect_to(request.referrer || root_path)
       redirect_to root_path
     end
 
