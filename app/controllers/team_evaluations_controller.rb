@@ -14,7 +14,18 @@ class TeamEvaluationsController < ApplicationController
 
   def create
     if @team_evaluation.save
-      flash[:success] = 'De team evaluatie is toegevoegd.'
+      # FIXME DRY up this code (same as in update)
+      if send_invite?
+        mail_count = @team_evaluation.send_invites(current_user)
+
+        if mail_count == 0
+          flash[:alert] = "De team evaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
+        else
+          flash[:success] = "De team evaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
+        end
+      else
+        flash[:success] = 'De team evaluatie is toegevoegd.'
+      end
 
       if stay_open?
         redirect_to [:edit, @team_evaluation]
@@ -41,9 +52,8 @@ class TeamEvaluationsController < ApplicationController
         if mail_count == 0
           flash[:alert] = "De team evaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
         else
-          flash[:success] = "De team evaluatie is opgeslagen en <%= t(:invites_sent, count: mail_count) %>."
+          flash[:success] = "De team evaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
         end
-
       else
         flash[:success] = 'De team evaluatie is opgeslagen.'
       end
