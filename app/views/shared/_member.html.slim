@@ -1,5 +1,5 @@
 .row
-  .col-lg-12
+  .col-lg-6
     h3 Contactgegevens
     div
       => member.address
@@ -19,36 +19,78 @@
     
     h3 Sportlink
     
-    dl
-      - unless member.person_type.blank?
-        dt Soort persoon
-        dd
+    - unless member.person_type.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Soort persoon
+        .col-6
           = member.person_type
-      - unless member.contribution_category.blank?
-        dt Contributie categorie
-        dd
+          
+    - unless member.contribution_category.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Contributie categorie
+        .col-6
           = member.contribution_category
-      - unless member.age_category.blank?
-        dt Leeftijdscategorie
-        dd
+    - unless member.age_category.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Leeftijdscategorie
+        .col-6
           = member.age_category
-      - unless member.local_teams.blank?
-        dt Lokale teams
-        dd 
+    - unless member.local_teams.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Lokale teams
+        .col-6
           = member.local_teams
-      - unless member.club_sports.blank?
-        dt Verenigingssporten
-        dd
+    - unless member.club_sports.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Verenigingssporten
+        .col-6
           = member.club_sports
-      - unless member.sport_category.blank?
-        dt Bondssporten
-        dd
+    - unless member.sport_category.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Bondssporten
+        .col-6
           = member.sport_category
-      - unless member.association_sports.blank?
-        dt Bondssporten (elders)
-        dd
+    - unless member.association_sports.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Bondssporten (elders)
+        .col-6
           = member.association_sports
-    
+    - unless member.member_since.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Lid sinds
+        .col-6
+          = member.member_since
+    - unless member.registered_at.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Registratiedatum
+        .col-6
+          = member.registered_at
+    - unless member.deregistered_at.blank?
+      .row
+        .col-6
+          label.semibold 
+            | Afmelddatum
+        .col-6
+          = member.deregistered_at
+
     hr
     
     h2
