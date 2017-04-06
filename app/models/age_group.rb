@@ -48,5 +48,6 @@ class AgeGroup < ApplicationRecord
         members = members.female
       end
     end
+    members
   end
 end
