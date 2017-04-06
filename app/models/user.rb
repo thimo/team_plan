@@ -76,7 +76,7 @@ class User < ApplicationRecord
       team_id = record.team_evaluation.team_id
     end
 
-    return team_id > 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, role: [1, 2, 3]}).size > 0
+    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, role: [1, 2, 3]}).size > 0
   end
 
   def favorite_teams
