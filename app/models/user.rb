@@ -104,8 +104,13 @@ class User < ApplicationRecord
     UserMailer.password_reset(self, password).deliver_now
   end
 
-  def self.find_or_create_and_invite(email)
-    user = User.where(email: email).first_or_initialize(password: (generated_password = Devise.friendly_token.first(8)))
+  def self.find_or_create_and_invite(member)
+    user = User.where(email: member.email).first_or_initialize(
+      password: (generated_password = Devise.friendly_token.first(8)),
+      first_name: member.first_name,
+      middle_name: member.middle_name,
+      last_name: member.last_name
+    )
 
     if user.new_record?
       user.save
