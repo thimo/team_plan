@@ -12,7 +12,7 @@
           .strong
             | Team evaluatie #{@team_evaluation.team.name}
             div.color-blue-grey-lighter.small
-              = l @team_evaluation.created_at.localtime.to_date, format: :long unless @team_evaluation.new_record?
+              = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record?
               |  - 
               = @team_evaluation.status
         - if policy(@team_evaluation).destroy?
@@ -38,14 +38,14 @@
               = pe.hidden_field :team_member_id
 
               tr
-                td.member_name                
+                td.member-name                
                   - member = pe.object.team_member.member
                   = link_to member.name, member, target: "_blank"
                   .color-blue-grey-lighter.small
                     => l member.born_on, format: :long unless member.born_on.nil?
                     = "(#{member.gender})"
                 
-                td
+                td.field-positions
                   div[class="#{'form-control-error' if pe.error("field_positions").present?}"]
                     = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
                       = tm.select :field_position_ids, options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}

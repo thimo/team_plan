@@ -20,7 +20,7 @@
         strong
           = "#{active_team.name}"
         - if (last_evaluation = member.last_evaluation).present?
-          span.ml-1[title="Evaluatie #{l last_evaluation.team_evaluation.finished_at.localtime.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
+          span.ml-1[title="Evaluatie #{l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
             i.fa[class="#{last_evaluation.advise_to_icon_class}"]
           
 
@@ -31,5 +31,5 @@
             div = "#{field_position.name}"
     
     - if (last_comment_classification = member.comments.classification.desc.first).present?
-      .mb-1[title="Indelingsverzoek #{l last_comment_classification.created_at.localtime.to_date, format: :long}"]
+      .mb-1[title="Indelingsverzoek #{l last_comment_classification.created_at.to_date, format: :long}"]
         = last_comment_classification.body

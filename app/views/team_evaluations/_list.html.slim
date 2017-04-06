@@ -28,7 +28,7 @@ section.box-typical
                 td
                   - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
                   = link_to url
-                    = l team_evaluation.created_at.localtime.to_date, format: :long
+                    = l team_evaluation.created_at.to_date, format: :long
                 td 
                   = team_evaluation.status
         - else 

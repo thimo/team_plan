@@ -21,9 +21,11 @@ module TeamPlan
     end
 
     config.generators.test_framework :rspec
-    
+
     config.generators do |g|
       g.javascript_engine :js
     end
+
+    config.time_zone = 'Amsterdam'
   end
 end

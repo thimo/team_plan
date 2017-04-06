@@ -6,8 +6,8 @@
       .tbl-cell.tbl-cell-name
         = comment.user.name
       .tbl-cell.tbl-cell-date
-        span[title="#{l comment.created_at.localtime.to_date, format: :long}"]
-          = time_ago_in_words(comment.created_at.localtime)
+        span[title="#{l comment.created_at.to_date, format: :long}"]
+          = time_ago_in_words(comment.created_at)
           |  geleden 
         - if policy(comment).update?
           = link_to edit_comment_path(comment), title: "Bewerken", class: "pl-2"
