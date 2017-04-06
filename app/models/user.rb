@@ -65,14 +65,14 @@ class User < ApplicationRecord
   def is_team_staff_for?(record)
     team_id = 0
 
-    case record.class
-    when Team
+    case [record.class]
+    when [Team]
       team_id = record.id
-    when Member
+    when [Member]
       team_id = record.team_members.pluck(:team_id).uniq
-    when TeamEvaluation
+    when [TeamEvaluation]
       team_id = record.team_id
-    when PlayerEvaluation
+    when [PlayerEvaluation]
       team_id = record.team_evaluation.team_id
     end
 
