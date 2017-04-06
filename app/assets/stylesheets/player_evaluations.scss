@@ -24,11 +24,11 @@
     }
   }
 
-  select.field_position {
-    max-width: 160px;
+  td.field-positions {
+    min-width: 160px;
   }
 
-  td.member_name, td.remark {
+  td.member-name, td.remark {
     min-width: 160px;
   }
 
