@@ -11,6 +11,7 @@ class TeamEvaluation < ApplicationRecord
 
   scope :asc, -> { order(created_at: :asc) }
   scope :desc, -> { order(created_at: :desc) }
+  scope :open, -> { where(finished_at: nil).where.not(invited_at: nil) }
 
   def draft?
     team.draft?

@@ -43,6 +43,11 @@ class User < ApplicationRecord
     Team.joins(:team_members).where(team_members: {member_id: member_ids}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct.asc
   end
 
+  def teams_as_staff_in_season(season)
+    member_ids = members.map(&:id).uniq
+    Team.joins(:team_members).where(team_members: {member_id: member_ids, role: [1, 2, 3]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
+  end
+
   def has_member?(member)
     self.members.where(id: member.id).size > 0
   end
