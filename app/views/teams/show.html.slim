@@ -61,24 +61,27 @@
                 thead
                   tr
                     th[colspan="4"] Begeleiding
-                - @staff.asc.each do |team_member|
+                - @staff.each do |member, team_members|
                   tr
                     td 
-                      - if policy(team_member.member).show_private_data?
-                        = link_to team_member.member.name, team_member.member
+                      - if policy(member).show_private_data?
+                        = link_to member.name, member
                       - else
-                        = team_member.member.name
-                      span.ml-2 = team_member.role_i18n
-                      - if policy(team_member.member).show_private_data?
+                        = member.name
+                      - if policy(member).show_private_data?
                         .color-blue-grey-lighter.small
-                          => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
-                          = "(#{team_member.member.gender})"
+                          => l member.born_on, format: :long unless member.born_on.nil?
+                          = "(#{member.gender})"
                     td
+                      - team_members.each do |team_member|
+                        div 
+                          = team_member.role_i18n
                     td
                     td.w-1
-                      - if policy(team_member).destroy?
-                        = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-                          i.fa.fa-times.p-1
+                      - team_members.each do |team_member|
+                        - if policy(team_member).destroy?
+                          = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
+                            i.fa.fa-times.p-1
 
   .col-xl-6
     - if policy(@team).show_comments?
