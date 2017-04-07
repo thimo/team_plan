@@ -12,6 +12,8 @@ class Member < ApplicationRecord
   scope :active_players, -> {where("sport_category <> ''").where(status: "definitief")}
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
+  scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
+  scope :team_staff, -> { joins(:team_members).where(team_members: {role: [1,2,3]}) }
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish

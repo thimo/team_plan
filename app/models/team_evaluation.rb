@@ -37,9 +37,9 @@ class TeamEvaluation < ApplicationRecord
   def send_invites(user)
     mail_count = 0
 
-    team.team_members.staff.each do |team_member|
+    Member.by_team(team).team_staff.distinct.each do |member|
       # Check account
-      user = User.find_or_create_and_invite(team_member.member)
+      user = User.find_or_create_and_invite(member)
       TeamEvaluationMailer.invite(user, self).deliver_now
 
       mail_count += 1
