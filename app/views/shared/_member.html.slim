@@ -73,21 +73,21 @@ h3 Sportlink
       label.semibold 
         | Lid sinds
     .col-6
-      = member.member_since
+      = I18n.l member.member_since, format: :long
 - unless member.registered_at.blank?
   .row
     .col-6
       label.semibold 
         | Registratiedatum
     .col-6
-      = member.registered_at
+      = I18n.l member.registered_at, format: :long
 - unless member.deregistered_at.blank?
   .row
     .col-6
       label.semibold 
         | Afmelddatum
     .col-6
-      = member.deregistered_at
+      = I18n.l member.deregistered_at, format: :long
 
 hr
 

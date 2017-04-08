@@ -33,7 +33,7 @@ FactoryGirl.define do
     nationality_2 {  }
     id_type {  }
     id_number {  }
-    lasts_change_at {  }
+    last_change_at {  }
     privacy_level {  }
     street {  }
     house_number {  }

@@ -55,8 +55,14 @@ class Member < ApplicationRecord
       association_number = row_hash["association_number"]
       member = Member.find_or_initialize_by(association_number: association_number)
 
-      row_hash.each do |k, v|
-        member.send("#{k}=", v) if Member.column_names.include?(k) && !v.blank?
+      row_hash.each do |key, value|
+        if Member.column_names.include?(key) && !value.blank?
+          if key.ends_with?("_at") || key.ends_with?("_since")
+            member.send("#{key}=", value.to_date)
+          else
+            member.send("#{key}=", value)
+          end
+        end
       end
 
       member.imported_at = DateTime.now

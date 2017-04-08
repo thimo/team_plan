@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320211831) do
+ActiveRecord::Schema.define(version: 20170408143141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20170320211831) do
     t.string "nationality_2"
     t.string "id_type"
     t.string "id_number"
-    t.date "lasts_change_at"
+    t.date "last_change_at"
     t.string "privacy_level"
     t.string "street"
     t.string "house_number"
@@ -127,9 +127,9 @@ ActiveRecord::Schema.define(version: 20170320211831) do
     t.string "bank_bic"
     t.string "bank_authorization"
     t.string "contribution_category"
-    t.string "registered_at"
-    t.string "deregistered_at"
-    t.string "member_since"
+    t.date "registered_at"
+    t.date "deregistered_at"
+    t.date "member_since"
     t.string "age_category"
     t.string "local_teams"
     t.string "club_sports"
