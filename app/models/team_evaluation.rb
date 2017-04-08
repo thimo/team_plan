@@ -37,20 +37,19 @@ class TeamEvaluation < ApplicationRecord
   def send_invites(user)
     mail_count = 0
 
+    users = []
     Member.by_team(team).team_staff.distinct.each do |member|
       # Check account
-      user = User.find_or_create_and_invite(member)
-      TeamEvaluationMailer.invite(user, self).deliver_now
-
-      mail_count += 1
+      users << User.find_or_create_and_invite(member)
     end
 
-    if mail_count > 0
+    if users.any?
+      TeamEvaluationMailer.invite(users, self).deliver_now
       self.update_attribute(:invited_by, user)
       self.update_attribute(:invited_at, DateTime.now)
     end
 
-    return mail_count
+    return users.size
   end
 
   def status
