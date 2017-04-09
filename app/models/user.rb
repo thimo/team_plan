@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Filterable
+
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
@@ -10,6 +12,9 @@ class User < ApplicationRecord
   validates_presence_of :email
 
   enum role: {member: 0, admin: 1, club_staff: 2}
+
+  scope :role, -> (role) { where(role: role) }
+  scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
 
   # Setter
   def name=(name)

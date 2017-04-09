@@ -8,10 +8,15 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         h3
           | #{@users.count} Gebruikers
+          
+      .tbl-cell.text-right
+        = text_field_tag "query"
+        = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Filter op rol", ""]))
       - if policy(User).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_admin_user_path, title: "Gebruiker toevoegen"
             i.fa.fa-file-o
+            
   .box-typical-body
     .table-responsive
       table.table.table-sm.tr-links
@@ -19,6 +24,7 @@ section.box-typical
           tr
             th = User.human_attribute_name(:name) 
             th = User.human_attribute_name(:role)
+            
         tbody
           - @users.each do |user|
             tr
@@ -26,5 +32,6 @@ section.box-typical
                 = link_to user.name, [:edit, :admin, user]
                 .color-blue-grey-lighter.small
                   => user.email
+                  
               td 
                = user.role_i18n

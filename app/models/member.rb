@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  include Filterable
+
   has_many :team_members, dependent: :destroy
   has_many :teams, through: :team_members
   has_many :comments, as: :commentable, dependent: :destroy
@@ -15,6 +17,7 @@ class Member < ApplicationRecord
   scope :female, -> { where(gender: "V") }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
   scope :team_staff, -> { joins(:team_members).where(team_members: {role: TeamMember::STAFF_ROLES}) }
+  scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
