@@ -1,4 +1,5 @@
 - title ||= 'Evaluaties'
+- hide_status ||= false
 
 section.box-typical
   header.box-typical-header
@@ -21,7 +22,8 @@ section.box-typical
           thead
             th Team
             th Datum
-            th Status
+            - unless hide_status
+              th Status
           tbody
             - team_evaluations.each do |team_evaluation|
               tr.clickable
@@ -31,8 +33,9 @@ section.box-typical
                   - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
                   = link_to url
                     = l team_evaluation.created_at.to_date, format: :long
-                td 
-                  = team_evaluation.status
+                - unless hide_status
+                  td 
+                    = team_evaluation.status
         - else 
           tbody
             tr
