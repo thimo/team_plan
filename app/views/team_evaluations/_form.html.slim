@@ -20,49 +20,48 @@
             = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Team evaluatie wordt verwijderd. Doorgaan?' }, title: "Team evaluatie verwijderen", class: "action-btn"
               i.fa.fa-trash-o
         
-    / .box-typical-body
-  .table-responsive  
-    table.table.table-striped.table-xxs
-      thead
-        tr
-          th
-            div
-              span
-                | Speler
+    .box-typical-body
+      .table-responsive  
+        table.table.table-striped.table-xxs
+          thead
+            tr
+              th
+                div
+                  span
+                    | Speler
+                    
+              = render "player_evaluations/th_columns"
+              
+          tbody
+            = f.simple_fields_for :player_evaluations do |pe|
+              = pe.hidden_field :id
+              = pe.hidden_field :team_member_id
+
+              tr
+                td.member-name                
+                  - member = pe.object.team_member.member
+                  = link_to member.name, member, target: "_blank"
+                  .color-blue-grey-lighter.small
+                    => l member.born_on, format: :long unless member.born_on.nil?
+                    = "(#{member.gender})"
                 
-          = render "player_evaluations/th_columns"
-          
-      tbody
-        = f.simple_fields_for :player_evaluations do |pe|
-          = pe.hidden_field :id
-          = pe.hidden_field :team_member_id
+                td.field-positions
+                  div[class="#{'form-control-error' if pe.error("field_positions").present?}"]
+                    = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
+                      = tm.select :field_position_ids, options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
+                td.prefered-foot
+                  = pe.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:prefered_foot).present?}"}
+                
+                - PlayerEvaluation::RATING_FIELDS.each do |field_name|
+                  td.evaluation-rating
+                    = pe.select field_name.to_s, PlayerEvaluation::RATING_OPTIONS, {include_blank: true}, {class: "form-control custom-select evaluation-rating #{'form-control-error' if pe.error(field_name.to_s).present?}"}
+                  
+                td.advise-next-season
+                  = pe.select :advise_next_season, PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:advise_next_season).present?}"}
+                  
+                td.remark
+                  = pe.text_area :remark, {class: "form-control"}
 
-          tr
-            td.member-name                
-              - member = pe.object.team_member.member
-              = link_to member.name, member, target: "_blank"
-              .color-blue-grey-lighter.small
-                => l member.born_on, format: :long unless member.born_on.nil?
-                = "(#{member.gender})"
-            
-            td.field-positions
-              div[class="#{'form-control-error' if pe.error("field_positions").present?}"]
-                = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
-                  = tm.select :field_position_ids, options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
-            td.prefered-foot
-              = pe.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:prefered_foot).present?}"}
-            
-            - PlayerEvaluation::RATING_FIELDS.each do |field_name|
-              td.evaluation-rating
-                = pe.select field_name.to_s, PlayerEvaluation::RATING_OPTIONS, {include_blank: true}, {class: "form-control custom-select evaluation-rating #{'form-control-error' if pe.error(field_name.to_s).present?}"}
-              
-            td.advise-next-season
-              = pe.select :advise_next_season, PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:advise_next_season).present?}"}
-              
-            td.remark
-              = pe.text_area :remark, {class: "form-control"}
-
-  section.box-typical
     footer.box-typical-footer
       - if policy(@team_evaluation).update?
         = f.button :submit, "Opslaan", name: "save_and_stay_open", class: 'btn btn-primary btn-inline'
