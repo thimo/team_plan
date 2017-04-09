@@ -16,14 +16,6 @@
     }
   }
 
-
-  select.evaluation-rating {
-    max-width: 60px;
-    &.custom-select {
-      padding: 0.375rem;
-    }
-  }
-
   td {
     &.field-positions {
       max-width: 260px;
@@ -37,6 +29,9 @@
       width: 100px;
     }
     &.advise-next-season {
+      width: 60px;
+    }
+    &.evaluation-rating {
       width: 60px;
     }
   }

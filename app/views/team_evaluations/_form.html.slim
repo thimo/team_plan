@@ -53,7 +53,7 @@
               = pe.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:prefered_foot).present?}"}
             
             - PlayerEvaluation::RATING_FIELDS.each do |field_name|
-              td
+              td.evaluation-rating
                 = pe.select field_name.to_s, PlayerEvaluation::RATING_OPTIONS, {include_blank: true}, {class: "form-control custom-select evaluation-rating #{'form-control-error' if pe.error(field_name.to_s).present?}"}
               
             td.advise-next-season
