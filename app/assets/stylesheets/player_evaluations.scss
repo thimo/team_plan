@@ -24,14 +24,23 @@
     }
   }
 
-  td.field-positions {
-    min-width: 160px;
-    max-width: 260px;
+  td {
+    &.field-positions {
+      max-width: 260px;
+      min-width: 160px;
+    }
+    &.member-name,
+    &.remark {
+      min-width: 160px;
+    }
+    &.prefered-foot {
+      width: 100px;
+    }
+    &.advise-next-season {
+      width: 60px;
+    }
   }
 
-  td.member-name, td.remark {
-    min-width: 160px;
-  }
 
   div.evaluation-rating {
     width: 60px;
