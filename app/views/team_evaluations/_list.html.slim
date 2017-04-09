@@ -1,16 +1,18 @@
+- title ||= 'Evaluaties'
+
 section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
         .strong
-          |  Evaluaties 
+          = title
       .tbl-cell.tbl-cell-action-bordered
         - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
           = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
             i.fa.fa-file-o
-        - if defined?(age_group).present? && policy(TeamEvaluation.new(team: age_group.teams.first)).create?
+        / - if defined?(age_group).present? && policy(TeamEvaluation.new(team: age_group.teams.first)).create?
           / = link_to new_age_group_team_evaluation_path(age_group), title: "Evaluaties toevoegen", class: "action-btn"
-          i.fa.fa-files-o
+          / i.fa.fa-files-o
           
   .box-typical-body
     .table-responsive

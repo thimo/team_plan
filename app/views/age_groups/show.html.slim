@@ -47,4 +47,5 @@
 
   .col-xl-6
     - if policy(@age_group).show_evaluations? && @open_team_evaluations.present?
-      = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations
+      = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties"
+      = render "team_evaluations/list", team_evaluations: @finished_team_evaluations, title: "Afgeronde teamevaluaties"

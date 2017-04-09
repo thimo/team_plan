@@ -12,6 +12,9 @@ class TeamEvaluation < ApplicationRecord
   scope :asc, -> { order(created_at: :asc) }
   scope :desc, -> { order(created_at: :desc) }
   scope :open, -> { where(finished_at: nil).where.not(invited_at: nil) }
+  scope :finished, -> { where.not(finished_at: nil) }
+  scope :desc_finished, -> { order(finished_at: :desc) }
+  scope :by_age_group, -> (age_group) { joins(:team).where(teams: {age_group: age_group}) }
 
   def draft?
     team.draft?
@@ -35,8 +38,6 @@ class TeamEvaluation < ApplicationRecord
   end
 
   def send_invites(user)
-    mail_count = 0
-
     users = []
     Member.by_team(team).team_staff.distinct.each do |member|
       # Check account

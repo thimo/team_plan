@@ -11,55 +11,6 @@ header.site-header
     .site-header-content
       .site-header-content-in
         .site-header-shown
-          / .dropdown.dropdown-notification.notif
-          /   a#dd-notification.header-alarm.dropdown-toggle.active[href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-          /     i.font-icon-alarm
-            / .dropdown-menu.dropdown-menu-right.dropdown-menu-notif[aria-labelledby="dd-notification"]
-            /   .dropdown-menu-notif-header
-            /     |  Notifications 
-            /     span.label.label-pill.label-danger
-            /       | 4
-            /   .dropdown-menu-notif-list
-            /     .dropdown-menu-notif-item
-            /       .dot
-            /       a[href="#"]
-            /         | Morgan
-            /       |  was bothering about something 
-            /       .color-blue-grey-lighter
-            /         | 7 hours ago
-            /     .dropdown-menu-notif-item
-            /       .dot
-            /       a[href="#"]
-            /         | Lioneli
-            /       |  had commented on this 
-            /       a[href="#"]
-            /         | Super Important Thing
-            /       .color-blue-grey-lighter
-            /         | 7 hours ago
-            /     .dropdown-menu-notif-item
-            /       .dot
-            /       a[href="#"]
-            /         | Xavier
-            /       |  had commented on the 
-            /       a[href="#"]
-            /         | Movie title
-            /       .color-blue-grey-lighter
-            /         | 7 hours ago
-            /     .dropdown-menu-notif-item
-            /       a[href="#"]
-            /         | Lionely
-            /       |  wants to go to 
-            /       a[href="#"]
-            /         | Cinema
-            /       |  with you to see 
-            /       a[href="#"]
-            /         | This Movie
-            /       .color-blue-grey-lighter
-            /         | 7 hours ago
-            /   .dropdown-menu-notif-more
-            /     a[href="#"]
-            /       | See more
-
           - if user_signed_in?
             .dropdown.user-menu[title="Ingelogd als #{current_user.name}"]
               button#dd-user-menu.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
@@ -78,17 +29,5 @@ header.site-header
                 = link_to destroy_user_session_path, class: "dropdown-item",  method: :delete do
                   span.font-icon.glyphicon.glyphicon-log-out
                   | Uitloggen
-                
-          / button.burger-right[type="button"]
-          /   i.font-icon-menu-addl
-        / .mobile-menu-right-overlay
-        / .site-header-collapsed
-        /   .site-header-collapsed-in
-        /     .site-header-search-container
-        /       form.site-header-search.closed
-        /         input[type="text" placeholder="Search"]
-        /         button[type="submit"]
-        /           span.font-icon-search
-        /         .overlay
                 
 .mobile-menu-left-overlay
