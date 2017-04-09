@@ -3,10 +3,10 @@ class FieldPosition < ApplicationRecord
 
   default_scope {order(position: :asc)}
 
-
   def self.options_for_select
     all.collect do |pos|
-      name = "#{'- ' if pos.indent_in_select}#{pos.name}"
+      # name = "#{'- ' if pos.indent_in_select}#{pos.name}"
+      name = "#{pos.name}"
       id = pos.blank? ? '' : pos.id
       [ name, id ]
     end
