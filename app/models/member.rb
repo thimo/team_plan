@@ -7,9 +7,10 @@ class Member < ApplicationRecord
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
 
-  scope :from_year, -> (year) {where("born_on >= ?", "#{year}-01-01")}
-  scope :to_year, -> (year) {where("born_on <= ?", "#{year}-12-31")}
-  scope :active_players, -> {where("sport_category <> ''").where(status: "definitief")}
+  scope :from_year, -> (year) { where("born_on >= ?", Date.new(year).beginning_of_year) }
+  scope :to_year, -> (year) { where("born_on <= ?", Date.new(year).end_of_year) }
+  scope :active, -> { where(status: "definitief").or(where("deregistered_at > ?", Date.today)) }
+  scope :player, -> { where("sport_category <> ''") }
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }

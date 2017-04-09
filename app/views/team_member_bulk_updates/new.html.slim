@@ -1,4 +1,5 @@
 - provide(:title, "Selecteer teamleden")
+- active_members_as_options = options_from_collection_for_select(@members.active, "id", "name")
 
 .box-typical.box-typical-padding
   p Gebruik dit formulier om meerdere teamleden in één keer toe te voegen.
@@ -9,22 +10,22 @@
     .form-group.row
       label.col-sm-2.col-form-label Spelers
       .col-sm-10
-        = select_tag :players, options_from_collection_for_select(@members.active_players, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_players'
+        = select_tag :players, options_from_collection_for_select(@members.active.player, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_players'
       
     .form-group.row
       label.col-sm-2.col-form-label Coaches
       .col-sm-10
-        = select_tag :coaches, options_from_collection_for_select(@members, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_coaches'
+        = select_tag :coaches, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_coaches'
       
     .form-group.row
       label.col-sm-2.col-form-label Trainers
       .col-sm-10
-        = select_tag :trainers, options_from_collection_for_select(@members, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_trainers'
+        = select_tag :trainers, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_trainers'
       
     .form-group.row
       label.col-sm-2.col-form-label Teamouders
       .col-sm-10
-        = select_tag :team_parents, options_from_collection_for_select(@members, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_team_parents'
+        = select_tag :team_parents, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_team_parents'
       
     = submit_tag "Toevoegen", class: "btn btn-primary"
     
