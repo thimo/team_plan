@@ -1,5 +1,5 @@
 - provide(:title, "Selecteer teamleden")
-- active_members_as_options = options_from_collection_for_select(@members.active, "id", "name")
+- active_members_as_options = options_from_collection_for_select(@members.active, :id, :name_and_born_on)
 
 .box-typical.box-typical-padding
   p Gebruik dit formulier om meerdere teamleden in één keer toe te voegen.
@@ -10,7 +10,7 @@
     .form-group.row
       label.col-sm-2.col-form-label Spelers
       .col-sm-10
-        = select_tag :players, options_from_collection_for_select(@members.active.player, "id", "name"), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_players'
+        = select_tag :players, options_from_collection_for_select(@members.active.player, :id, :name_and_born_on), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_players'
       
     .form-group.row
       label.col-sm-2.col-form-label Coaches

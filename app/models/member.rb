@@ -20,6 +20,10 @@ class Member < ApplicationRecord
     "#{first_name} #{middle_name} #{last_name}".squish
   end
 
+  def name_and_born_on
+    "#{name} (#{I18n.l(born_on, format: :long)})"
+  end
+
   def is_favorite?(user)
     favorites.where(user: user).size > 0
   end
