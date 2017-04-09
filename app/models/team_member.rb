@@ -8,7 +8,8 @@ class TeamMember < ApplicationRecord
   has_many :player_evaluations, dependent: :destroy
   has_and_belongs_to_many :field_positions
 
-  enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3}
+  enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3, manager: 4}
+  STAFF_ROLES = [1, 2, 3, 4]
 
   validates_presence_of :team, :member, :role
   validates :role, :uniqueness => {scope: [:team, :member]}

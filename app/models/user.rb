@@ -45,7 +45,7 @@ class User < ApplicationRecord
 
   def teams_as_staff_in_season(season)
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids, role: [1, 2, 3]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
+    Team.joins(:team_members).where(team_members: {member_id: member_ids, role: TeamMember::STAFF_ROLES}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
   end
 
   def has_member?(member)
@@ -76,7 +76,7 @@ class User < ApplicationRecord
       team_id = record.team_evaluation.team_id
     end
 
-    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, role: [1, 2, 3]}).size > 0
+    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, role: TeamMember::STAFF_ROLES}).size > 0
   end
 
   def favorite_teams

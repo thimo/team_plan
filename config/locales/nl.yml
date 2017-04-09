@@ -75,6 +75,7 @@ nl:
         coach: Coach
         trainer: Trainer
         team_parent: Teamouder
+        manager: Teammanager
 
     comment:
       comment_type:

@@ -13,7 +13,7 @@ class Member < ApplicationRecord
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
-  scope :team_staff, -> { joins(:team_members).where(team_members: {role: [1,2,3]}) }
+  scope :team_staff, -> { joins(:team_members).where(team_members: {role: TeamMember::STAFF_ROLES}) }
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
