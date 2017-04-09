@@ -45,9 +45,4 @@ $(document).on('turbolinks:load', function() {
   $('.evaluation select.evaluation-rating').on('change', (e) => {
     setEvaluationClass(e.target)
   })
-
-  $('.evaluation select.field_positions').each((index, target) => {
-    $(target).select2({placeholder: "Veldpositie"});
-  })
-
 })

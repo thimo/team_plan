@@ -38,7 +38,8 @@ nl:
         city: Woonplaats
         country: Land
       team_member:
-        field_position: Positie
+        name: Naam
+        field_positions: Positie
         prefered_foot: L/R benig
       player_evaluation:
         advise_next_season: Volgend seizoen

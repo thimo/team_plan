@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
 
     resources :team_evaluations, only: [:show, :edit, :update]
-    resources :team_members, only: [:create, :update, :destroy]
+    resources :team_members, only: [:show, :create, :edit, :update, :destroy]
     resources :member_allocation_filters, only: [:create, :destroy]
 
     resources :members, only: [:show] do

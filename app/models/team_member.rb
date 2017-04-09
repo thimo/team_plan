@@ -1,7 +1,7 @@
 class TeamMember < ApplicationRecord
   PREFERED_FOOT_OPTIONS = %w(rechtsbenig linksbenig tweebenig onbekend)
 
-  before_save :inherit_fields
+  before_create :inherit_fields
 
   belongs_to :team
   belongs_to :member, required: true
@@ -41,10 +41,10 @@ class TeamMember < ApplicationRecord
 
     def inherit_fields
       if (team_member = member.active_team_member).present?
-        self.prefered_foot = team_member.prefered_foot
+        self.prefered_foot = team_member.prefered_foot if self.prefered_foot.nil?
         team_member.field_positions.each do |field_position|
           self.field_positions << field_position
-        end
+        end if self.field_positions.empty?
       end
     end
 end
