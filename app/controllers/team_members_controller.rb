@@ -54,7 +54,7 @@ class TeamMembersController < ApplicationController
 
     def team_member_params
       params_permitted = [:team_id, :member_id, :prefered_foot, field_position_ids: []]
-      params_permitted << :role if policy(@team_member).set_role?
+      params_permitted << :role if policy(@team_member || TeamMember).set_role?
 
       params.require(:team_member).permit(params_permitted)
     end
