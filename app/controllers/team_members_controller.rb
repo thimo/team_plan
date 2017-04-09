@@ -1,6 +1,6 @@
 class TeamMembersController < ApplicationController
   before_action :set_team_member, only: [:show, :edit, :update, :destroy]
-  before_action :breadcumbs
+  before_action :breadcumbs, only: [:edit]
 
   def show
     redirect_to @team_member.member
