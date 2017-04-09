@@ -90,9 +90,13 @@
                     td
                     td.w-1
                       - team_members.each do |team_member|
-                        - if policy(team_member).destroy?
-                          = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-                            i.fa.fa-times.p-1
+                        .text-right
+                          - if policy(team_member).edit?
+                            = link_to edit_team_member_path(team_member), title: "Bewerken"
+                              i.fa.fa-pencil.p-1.pl-2
+                          - if policy(team_member).destroy?
+                            = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
+                              i.fa.fa-times.p-1
 
   .col-xl-6
     - if policy(@team).show_comments?

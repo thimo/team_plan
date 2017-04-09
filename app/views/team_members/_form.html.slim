@@ -1,9 +1,13 @@
 = simple_form_for @team_member, {wrapper: :horizontal_form} do |f|
   = f.error_notification
+  
   .form-group.row
     = f.label :name, class: "col-md-3 col-form-label"
     .col-md-9.form-control-static
       = @team_member.member.name
+  
+  - if policy(@team_member).set_role?
+    = f.input :role
       
   .form-group.row[class="#{'form-control-error' if f.error("field_position_ids").present?}"]
     = f.label :field_position_ids, class: "col-md-3 col-form-label"

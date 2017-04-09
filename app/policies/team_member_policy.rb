@@ -14,7 +14,11 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    create? || @user.is_team_staff_for?(@record)
+  end
+
+  def set_role?
+    @user.admin? || @user.club_staff?
   end
 
   def destroy?

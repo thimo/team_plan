@@ -38,6 +38,7 @@ nl:
         city: Woonplaats
         country: Land
       team_member:
+        role: Rol
         name: Naam
         field_positions: Positie
         prefered_foot: L/R benig
