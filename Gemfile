@@ -25,7 +25,6 @@ gem 'kaminari' #,                   '>= 0.16.3'  # Paging
 
 gem 'simple_form' #,                '>= 3.2.0'
 gem 'country_select'
-# gem 'autosize-rails' #,             '1.18.17' # Auto-resize textarea's
 
 gem 'breadcrumbs_on_rails' #,       '>= 3.0.1'   # Breadcrumbs
 gem 'enum_help' #,                  '>= 0.0.14'
@@ -40,7 +39,6 @@ gem 'awesome_print', require: "awesome_print"
 
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'pry-byebug'
   gem 'guard', require: false
