@@ -41,9 +41,9 @@ nl:
         role: Rol
         name: Naam
         field_positions: Positie
-        prefered_foot: L/R benig
+        prefered_foot: Links-/rechtsbenig
       player_evaluation:
-        advise_next_season: Volgend seizoen
+        advise_next_season: Advies volgend seizoen
         remark: Opmerking
         behaviour: Gedrag
         technique: Techniek
