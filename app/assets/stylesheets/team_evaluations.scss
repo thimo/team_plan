@@ -34,12 +34,26 @@
 
   .table-xxs {
     td {
-      padding: 2px 2px;
+      height: 20px;
+      padding: 2px;
+
       &:first-child {
-        padding-left: 4px;
+        padding-left: 15px;
       }
       &:last-child {
-        padding-right: 4px;
+        padding-right: 15px;
+      }
+    }
+
+    th {
+      padding-left: 2px;
+      padding-right: 2px;
+
+      &:first-child {
+        padding-left: 15px;
+      }
+      &:last-child {
+        padding-right: 15px;
       }
     }
   }
