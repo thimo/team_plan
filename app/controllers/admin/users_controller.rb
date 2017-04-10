@@ -10,7 +10,7 @@ class Admin::UsersController < AdminController
   def new; end
 
   def create
-    generated_password = @user.reset_password
+    generated_password = @user.set_new_password
     if @user.save
       @user.send_new_account(generated_password)
       redirect_to admin_users_path, notice: 'Gebruiker is toegevoegd.'
@@ -30,7 +30,7 @@ class Admin::UsersController < AdminController
   end
 
   def resend_password
-    generated_password = @user.reset_password
+    generated_password = @user.set_new_password
     if @user.save
       @user.send_password_reset(generated_password)
       redirect_to admin_users_path, notice: 'Er is een nieuw wachtwoord aan de gebruiker verstuurd.'

@@ -97,7 +97,7 @@ class User < ApplicationRecord
     @favorite_members.include?(member.id)
   end
 
-  def reset_password
+  def set_new_password
     self.password = Devise.friendly_token.first(8)
   end
 
