@@ -7,8 +7,11 @@ class FieldPosition < ApplicationRecord
     all.collect do |pos|
       # name = "#{'- ' if pos.indent_in_select}#{pos.name}"
       name = "#{pos.name}"
-      id = pos.blank? ? '' : pos.id
-      [ name, id ]
+      # Hide blank field positions for now
+      unless pos.blank?
+        id = pos.blank? ? '' : pos.id
+        [ name, id ]
+      end
     end
   end
 end
