@@ -10,6 +10,7 @@ html
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
     
   body.with-side-menu[class="#{yield(:body_class)}"]
