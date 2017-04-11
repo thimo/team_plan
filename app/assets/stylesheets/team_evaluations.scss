@@ -4,32 +4,18 @@
       display: none;
     }
     &.custom-select {
-      // padding: 0.375rem 1.5rem 0.375rem 0.5rem;
-      padding: 0.375rem;
       background-image: none;
+      padding: .375rem;
     }
   }
 
-
-  .select2-container--default .select2-selection {
-    background-color: inherit;
-    border-width: 0;
-  }
-  .select2-container--default.select2-container--open {
-    &.select2-container--below .select2-selection {
-      border-bottom-width: 1px;
+  div {
+    &.form-control-error {
+      background-color: #fff6f6;
+      border: solid 1px #fa424a;
+      border-radius: 4px;
+      color: #fa424a !important;
     }
-
-    &.select2-container--above .select2-selection {
-      border-top-width: 1px;
-    }
-  }
-
-  div.form-control-error {
-    background-color: #fff6f6;
-    border: solid 1px #fa424a;
-    border-radius: 4px;
-    color: #fa424a !important;
   }
 
   .table-xxs {
@@ -56,5 +42,96 @@
         padding-right: 15px;
       }
     }
+  }
+
+  th {
+    &.rotate {
+      height: 140px;
+      white-space: nowrap;
+
+      > div {
+        transform: translate(0, 0) rotate(-45deg);
+        width: 30px;
+
+        > span {
+          border-bottom: 1px solid #ccc;
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+
+  td {
+    &.field-positions {
+      max-width: 220px;
+      min-width: 160px;
+    }
+
+    &.member-name,
+    &.remark {
+      min-width: 160px;
+    }
+
+    &.prefered-foot {
+      width: 100px;
+    }
+
+    &.advise-next-season {
+      width: 60px;
+    }
+
+    &.evaluation-rating {
+      width: 60px;
+    }
+  }
+
+  div.evaluation-rating {
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 60px;
+  }
+
+  .select2-container--default .select2-selection {
+    background-color: inherit;
+    // border-width: 0;
+  }
+  .select2-container--default.select2-container--open {
+    &.select2-container--below .select2-selection {
+      border-bottom-width: 1px;
+    }
+
+    &.select2-container--above .select2-selection {
+      border-top-width: 1px;
+    }
+  }
+
+  .select2-selection {
+    .select2-selection__choice {
+      background: none;
+      color: #343434;
+      font-weight: normal;
+      height: inherit;
+      line-height: 20px;
+      margin-right: 2px;
+      margin-top: 0;
+      padding: 0 25px 0 0;
+    }
+    .select2-selection__choice__remove {
+      color: #343434 !important;
+      font-weight: normal;
+      font-size: 1.4rem;
+    }
+  }
+
+  .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    margin-top: 8px;
+  }
+
+  .select2-container .select2-search--inline .select2-search__field {
+    margin-top: 0;
+    height: 20px;
   }
 }
