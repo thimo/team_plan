@@ -52,7 +52,7 @@ class Member < ApplicationRecord
   end
 
   def has_active_field_position?(field_positions)
-     active? && (field_positions & active_team_member.field_positions.map(&:id)).present?
+    active? && (field_positions & active_team_member.field_positions.map(&:id)).present?
   end
 
   def self.import(file)

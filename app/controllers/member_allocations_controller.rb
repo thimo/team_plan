@@ -10,8 +10,9 @@ class MemberAllocationsController < ApplicationController
 
     @available_members = []
     # Filter out members who have already been assigned to a team
+    field_positions = session[:filter_field_position].map(&:to_i) if session[:filter_field_position].present?
     members.each do |member|
-      if (field_positions = session[:filter_field_position]).blank? || member.has_active_field_position?(field_positions)
+      if field_positions.blank? || member.has_active_field_position?(field_positions)
         @available_members << member if @age_group.is_not_member(member)
       end
     end
