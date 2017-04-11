@@ -7,22 +7,21 @@ section.box-typical.evaluation
           .label.label-pill.ml-3
           
   .box-typical-body
-    .table-responsive
-      table.table.table-sm
-        - if member.player_evaluations.finished_desc.size > 0
-          thead
-            th
-            = render "player_evaluations/th_columns"
-          tbody
-            - member.player_evaluations.finished_desc.each do |evaluation|
-              tr.test
-                td.nowrap
-                  = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
-                  .color-blue-grey-lighter.small
-                    = l evaluation.team_evaluation.finished_at.to_date, format: :long
-                = render "player_evaluations/td_columns", evaluation: evaluation
-        - else 
-          tbody
-            tr
-              td
-                i Geen evaluaties gevonden
+    table.table.table-sm
+      - if member.player_evaluations.finished_desc.size > 0
+        thead
+          th
+          = render "player_evaluations/th_columns"
+        tbody
+          - member.player_evaluations.finished_desc.each do |evaluation|
+            tr.test
+              td.nowrap
+                = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
+                .color-blue-grey-lighter.small
+                  = l evaluation.team_evaluation.finished_at.to_date, format: :long
+              = render "player_evaluations/td_columns", evaluation: evaluation
+      - else 
+        tbody
+          tr
+            td
+              i Geen evaluaties gevonden

@@ -33,18 +33,17 @@
                 i.fa.fa-trash-o
                 
       .box-typical-body
-        .table-responsive
-          table.table.table-sm.tr-links
-            thead
-            tbody
-              - @teams.each do |team|
-                tr
-                  td
-                    = link_to team.name, team
-                  td.text-right
-                    - if team.team_members.player.size > 0
-                      .label.label-pill
-                        = "#{team.team_members.player.size} / #{team.team_members.staff.pluck(:member_id).uniq.size}"
+        table.table.table-sm.tr-links
+          thead
+          tbody
+            - @teams.each do |team|
+              tr
+                td
+                  = link_to team.name, team
+                td.text-right
+                  - if team.team_members.player.size > 0
+                    .label.label-pill
+                      = "#{team.team_members.player.size} / #{team.team_members.staff.pluck(:member_id).uniq.size}"
 
   .col-xl-6
     - if policy(@age_group).show_evaluations?

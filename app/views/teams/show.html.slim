@@ -24,79 +24,78 @@
                 i.fa.fa-trash-o
           
       .box-typical-body
-        .table-responsive
-          table.table.table-sm.tr-links
-            thead
-              th 
-                | Spelers
-                .label.label-pill.ml-3 = @team.team_members.player.count
-              th Positie
-              th Voet
-              th
-              
-            tbody
-              - if @players.size > 0
-                - @players.each do |team_member|
-                  tr
-                    td 
-                      - if policy(team_member.member).show_private_data?
-                        = link_to team_member.member.name, team_member.member
-                      - else
-                        = team_member.member.name
+        table.table.table-sm.tr-links
+          thead
+            th 
+              | Spelers
+              .label.label-pill.ml-3 = @team.team_members.player.count
+            th Positie
+            th Voet
+            th
+            
+          tbody
+            - if @players.size > 0
+              - @players.each do |team_member|
+                tr
+                  td 
+                    - if policy(team_member.member).show_private_data?
+                      = link_to team_member.member.name, team_member.member
+                    - else
+                      = team_member.member.name
+                      
+                    - if policy(team_member.member).show_private_data?
+                      .color-blue-grey-lighter.small
+                        => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
+                        = "(#{team_member.member.gender})"
                         
-                      - if policy(team_member.member).show_private_data?
-                        .color-blue-grey-lighter.small
-                          => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
-                          = "(#{team_member.member.gender})"
-                          
-                    td
-                      - team_member.field_positions.each do |field_position|
-                        div
-                          = field_position.name
-                          
-                    td
-                      = team_member.prefered_foot
-                      
-                    td.w-1.nowrap
-                      = render "shared/favorite", parent: team_member.member
-                      
-                      - if policy(team_member).edit?
-                        = link_to edit_team_member_path(team_member), title: "Bewerken"
-                          i.fa.fa-pencil.p-1.pl-2
-                      
-                      - if policy(team_member).destroy?
-                        = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-                          i.fa.fa-times.p-1.pl-2
-                          
-              - if @staff.size > 0
-                thead
-                  tr
-                    th[colspan="4"] Begeleiding
-                - @staff.each do |member, team_members|
-                  tr
-                    td 
-                      - if policy(member).show_private_data?
-                        = link_to member.name, member
-                      - else
-                        = member.name
-                      - if policy(member).show_private_data?
-                        .color-blue-grey-lighter.small
-                          => l member.born_on, format: :long unless member.born_on.nil?
-                          = "(#{member.gender})"
-                    td
-                      - team_members.each do |team_member|
-                        div 
-                          = team_member.role_i18n
-                    td
-                    td.w-1
-                      - team_members.each do |team_member|
-                        .text-right
-                          - if policy(team_member).edit?
-                            = link_to edit_team_member_path(team_member), title: "Bewerken"
-                              i.fa.fa-pencil.p-1.pl-2
-                          - if policy(team_member).destroy?
-                            = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-                              i.fa.fa-times.p-1
+                  td
+                    - team_member.field_positions.each do |field_position|
+                      div
+                        = field_position.name
+                        
+                  td
+                    = team_member.prefered_foot
+                    
+                  td.w-1.nowrap
+                    = render "shared/favorite", parent: team_member.member
+                    
+                    - if policy(team_member).edit?
+                      = link_to edit_team_member_path(team_member), title: "Bewerken"
+                        i.fa.fa-pencil.p-1.pl-2
+                    
+                    - if policy(team_member).destroy?
+                      = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
+                        i.fa.fa-times.p-1.pl-2
+                        
+            - if @staff.size > 0
+              thead
+                tr
+                  th[colspan="4"] Begeleiding
+              - @staff.each do |member, team_members|
+                tr
+                  td 
+                    - if policy(member).show_private_data?
+                      = link_to member.name, member
+                    - else
+                      = member.name
+                    - if policy(member).show_private_data?
+                      .color-blue-grey-lighter.small
+                        => l member.born_on, format: :long unless member.born_on.nil?
+                        = "(#{member.gender})"
+                  td
+                    - team_members.each do |team_member|
+                      div 
+                        = team_member.role_i18n
+                  td
+                  td.w-1
+                    - team_members.each do |team_member|
+                      .text-right
+                        - if policy(team_member).edit?
+                          = link_to edit_team_member_path(team_member), title: "Bewerken"
+                            i.fa.fa-pencil.p-1.pl-2
+                        - if policy(team_member).destroy?
+                          = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
+                            i.fa.fa-times.p-1
 
   .col-xl-6
     - if policy(@team).show_comments?

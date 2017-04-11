@@ -18,20 +18,19 @@ section.box-typical
             i.fa.fa-file-o
             
   .box-typical-body
-    .table-responsive
-      table.table.table-sm.tr-links
-        thead
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th = User.human_attribute_name(:name) 
+          th = User.human_attribute_name(:role)
+          
+      tbody
+        - @users.each do |user|
           tr
-            th = User.human_attribute_name(:name) 
-            th = User.human_attribute_name(:role)
-            
-        tbody
-          - @users.each do |user|
-            tr
-              td
-                = link_to user.name, [:edit, :admin, user]
-                .color-blue-grey-lighter.small
-                  => user.email
-                  
-              td 
-               = user.role_i18n
+            td
+              = link_to user.name, [:edit, :admin, user]
+              .color-blue-grey-lighter.small
+                => user.email
+                
+            td 
+             = user.role_i18n

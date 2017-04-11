@@ -18,28 +18,27 @@
               i.fa.fa-trash-o
         
     .box-typical-body
-      .table-responsive  
-        table.table.table-striped.table-xxs
-          thead
+      table.table.table-striped.table-xxs
+        thead
+          tr
+            th
+              div
+                span
+                  | Speler
+            = render "player_evaluations/th_columns"
+
+        tbody
+          - @team_evaluation.player_evaluations.includes_member.each_with_index do |evaluation, index|
+            = render "inbetween_header" if index > 0 && index % 4 == 0
+
             tr
-              th
-                div
-                  span
-                    | Speler
-              = render "player_evaluations/th_columns"
-
-          tbody
-            - @team_evaluation.player_evaluations.includes_member.each_with_index do |evaluation, index|
-              = render "inbetween_header" if index > 0 && index % 4 == 0
-
-              tr
-                td.member-name
-                  - member = evaluation.team_member.member
-                  = link_to member.name, member
-                  .color-blue-grey-lighter.small
-                    => l member.born_on, format: :long unless member.born_on.nil?
-                    = "(#{member.gender})"
-                
-                = render "player_evaluations/td_columns", evaluation: evaluation
+              td.member-name
+                - member = evaluation.team_member.member
+                = link_to member.name, member
+                .color-blue-grey-lighter.small
+                  => l member.born_on, format: :long unless member.born_on.nil?
+                  = "(#{member.gender})"
+              
+              = render "player_evaluations/td_columns", evaluation: evaluation
 
     footer.box-typical-footer

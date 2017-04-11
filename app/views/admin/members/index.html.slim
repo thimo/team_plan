@@ -11,18 +11,17 @@ section.box-typical
           = link_to new_admin_members_import_path, title: "Importeer leden", class: "action-btn"
             i.fa.fa-upload
   .box-typical-body
-    .table-responsive
-      table.table.table-sm.tr-links
-        thead
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th = Member.human_attribute_name(:name) 
+          th = Member.human_attribute_name(:email)
+      tbody
+        - @members.each do |member|
           tr
-            th = Member.human_attribute_name(:name) 
-            th = Member.human_attribute_name(:email)
-        tbody
-          - @members.each do |member|
-            tr
-              td
-                = link_to member.name, [:admin, member]
-                .color-blue-grey-lighter.small
-                  = l member.born_on, format: :long unless member.born_on.nil?
-              td 
-                = member.email
+            td
+              = link_to member.name, [:admin, member]
+              .color-blue-grey-lighter.small
+                = l member.born_on, format: :long unless member.born_on.nil?
+            td 
+              = member.email

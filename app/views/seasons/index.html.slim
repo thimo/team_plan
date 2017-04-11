@@ -14,15 +14,14 @@
               = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
                 i.fa.fa-file-o
       .box-typical-body
-        .table-responsive
-          table.table.table-sm.tr-links
-            thead
-            tbody
-              - @seasons.each do |season|
-                tr
-                  td
-                    = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
-                  td.text-right
-                    - if season.age_groups.size > 0
-                      .label.label-pill
-                        = "#{season.age_groups.size}"
+        table.table.table-sm.tr-links
+          thead
+          tbody
+            - @seasons.each do |season|
+              tr
+                td
+                  = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
+                td.text-right
+                  - if season.age_groups.size > 0
+                    .label.label-pill
+                      = "#{season.age_groups.size}"

@@ -9,11 +9,10 @@
             h3
               | Teams
       .box-typical-body
-        .table-responsive
-          table.table.table-sm
-            thead
-            tbody
-              = render partial: 'team', collection: @teams
+        table.table.table-sm
+          thead
+          tbody
+            = render partial: 'team', collection: @teams
   
   .col-lg-6
     section.box-typical
@@ -42,10 +41,9 @@
                   i.fa.fa-trash-o
 
       .box-typical-body
-        .table-responsive
-          table.table.table-sm
-            thead
-            tbody
-              = render partial: 'available_member', collection: @available_members
+        table.table.table-sm
+          thead
+          tbody
+            = render partial: 'available_member', collection: @available_members
 
 = render 'team_dialog', age_group: @age_group, teams: @teams, cached: true            
