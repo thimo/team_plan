@@ -37,22 +37,7 @@
               = pe.hidden_field :id
               = pe.hidden_field :team_member_id
               
-              - if pe.index > 0 && pe.index % 4 == 0
-                tr
-                  td
-                  td 
-                  td 
-                    .evaluation-rating.small.color-blue-grey
-                      = TeamMember.human_attribute_name(:prefered_foot)
-                  - PlayerEvaluation::RATING_FIELDS.each do |field_name|
-                    td
-                      .evaluation-rating.small.color-blue-grey
-                        = PlayerEvaluation.human_attribute_name(field_name)
-                  td 
-                    .evaluation-rating.small.color-blue-grey
-                      = PlayerEvaluation.human_attribute_name(:advise_next_season)
-                      
-                  td 
+              = render "inbetween_header" if pe.index > 0 && pe.index % 4 == 0
 
               tr
                 td.member-name                

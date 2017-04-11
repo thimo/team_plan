@@ -19,7 +19,7 @@
         
     .box-typical-body
       .table-responsive  
-        table.table.table-striped.table-xs
+        table.table.table-striped.table-xxs
           thead
             tr
               th
@@ -29,7 +29,9 @@
               = render "player_evaluations/th_columns"
 
           tbody
-            - @team_evaluation.player_evaluations.includes_member.each do |evaluation|
+            - @team_evaluation.player_evaluations.includes_member.each_with_index do |evaluation, index|
+              = render "inbetween_header" if index > 0 && index % 4 == 0
+
               tr
                 td.member-name
                   - member = evaluation.team_member.member
