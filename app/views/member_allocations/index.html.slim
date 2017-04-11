@@ -28,11 +28,11 @@
           .tbl-cell.color-blue-grey-lighter.text-right
             = year_of_birth_range(@age_group)
             = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
+            
       .box-typical-header
         .tbl-row
           .tbl-cell
             = simple_form_for :member_allocation_filters, {url: member_allocation_filters_path} do |f|
-              / .input-group
               div[style="display: flex;flex-grow: 100;justify-content: space-between;"]
                 = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), {include_blank: true}, {class: "form-control custom-select field_position", multiple: "multiple"}
                 = f.button :button, title: 'Filter toepassen' do
