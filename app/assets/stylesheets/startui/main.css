@@ -14138,18 +14138,18 @@ body.sidebar-hidden .page-content {
   .dark-theme .page-content {
     padding-top: 15px;
   }
-  .chrome-browser.with-side-menu .page-content {
+  /*.chrome-browser.with-side-menu .page-content {
     padding-left: 255px;
     margin-left: -255px;
-  }
-  .chrome-browser.with-side-menu-compact .page-content {
+  }*/
+  /*.chrome-browser.with-side-menu-compact .page-content {
     padding-left: 115px;
     margin-left: -115px;
-  }
-  .chrome-browser.with-side-menu-addl .page-content {
+  }*/
+  /*.chrome-browser.with-side-menu-addl .page-content {
     padding-left: 335px;
     margin-left: -335px;
-  }
+  }*/
   .box-typical {
     padding: 0 !important;
     border: none !important;

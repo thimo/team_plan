@@ -1,11 +1,19 @@
-.site-header,
-.side-menu,
+.box-typical-header,
 .section-header,
-.box-typical-header {
+.side-menu,
+.site-header,
+[data-is-bullet-footer],
+.profiler-results {
   display: none;
 }
 
-.page-content,
-.container-fluid {
+.container-fluid,
+.page-content {
   padding: 0;
+}
+
+@page {
+  max-height: 100%;
+  max-width: 100%;
+  size: A4 landscape;
 }
