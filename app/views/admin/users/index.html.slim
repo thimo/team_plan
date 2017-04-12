@@ -23,6 +23,7 @@ section.box-typical
         tr
           th = User.human_attribute_name(:name) 
           th = User.human_attribute_name(:role)
+          th = User.human_attribute_name(:current_sign_in_at)
           
       tbody
         - @users.each do |user|
@@ -31,6 +32,7 @@ section.box-typical
               = link_to user.name, [:edit, :admin, user]
               .color-blue-grey-lighter.small
                 => user.email
-                
             td 
-             = user.role_i18n
+              = user.role_i18n
+            td
+              = I18n.l user.current_sign_in_at, format: :long if user.current_sign_in_at.present?

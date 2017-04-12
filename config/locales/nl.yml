@@ -15,6 +15,8 @@ nl:
         middle_name: Tussenvoegsels
         last_name: Achternaam
         name: Naam
+        role: Rol
+        current_sign_in_at: Laatste login
       season:
         name: Seizoen
         active: Actief
