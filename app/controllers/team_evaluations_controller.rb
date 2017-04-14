@@ -19,12 +19,12 @@ class TeamEvaluationsController < ApplicationController
         mail_count = @team_evaluation.send_invites(current_user)
 
         if mail_count == 0
-          flash[:alert] = "De team evaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
+          flash[:alert] = "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
         else
-          flash[:success] = "De team evaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
+          flash[:success] = "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
         end
       else
-        flash[:success] = 'De team evaluatie is toegevoegd.'
+        flash[:success] = 'De teamevaluatie is toegevoegd.'
       end
 
       if stay_open?
@@ -45,17 +45,17 @@ class TeamEvaluationsController < ApplicationController
     if @team_evaluation.update_attributes(team_evaluation_params)
       if finish_evaluation?
         @team_evaluation.finish_evaluation(current_user)
-        flash[:success] = 'De team evaluatie is afgerond.'
+        flash[:success] = 'De teamevaluatie is afgerond.'
       elsif send_invite?
         mail_count = @team_evaluation.send_invites(current_user)
 
         if mail_count == 0
-          flash[:alert] = "De team evaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
+          flash[:alert] = "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
         else
-          flash[:success] = "De team evaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
+          flash[:success] = "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
         end
       else
-        flash[:success] = 'De team evaluatie is opgeslagen.'
+        flash[:success] = 'De teamevaluatie is opgeslagen.'
       end
 
       if stay_open?
@@ -69,7 +69,7 @@ class TeamEvaluationsController < ApplicationController
   end
 
   def destroy
-    redirect_to @team_evaluation.team, notice: 'Team evaluatie is verwijderd.'
+    redirect_to @team_evaluation.team, notice: 'Teamevaluatie is verwijderd.'
     @team_evaluation.destroy
   end
 
@@ -99,7 +99,7 @@ class TeamEvaluationsController < ApplicationController
       if @team_evaluation.new_record?
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb 'Team evaluatie'
+        add_breadcrumb 'Teamevaluatie'
       end
     end
 

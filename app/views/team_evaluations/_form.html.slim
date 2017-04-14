@@ -10,14 +10,14 @@
       .tbl-row
         .tbl-cell.tbl-cell-title
           .strong
-            | Team evaluatie #{@team_evaluation.team.name}
+            | Teamevaluatie #{@team_evaluation.team.name}
             div.color-blue-grey-lighter.small
               = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record?
               |  - 
               = @team_evaluation.status
         - if policy(@team_evaluation).destroy?
           .tbl-cell.tbl-cell-action-bordered
-            = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Team evaluatie wordt verwijderd. Doorgaan?' }, title: "Team evaluatie verwijderen", class: "action-btn"
+            = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "action-btn"
               i.fa.fa-trash-o
         
     .box-typical-body

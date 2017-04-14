@@ -1,8 +1,8 @@
 = simple_form_for [@commentable, @comment] do |f|
   = f.error_notification
   = f.input :body, label: false, placeholder: "Opmerking toevoegen"
-  .float-right
-    = f.input :private
+  / .float-right
+  /   = f.input :private
   = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm'
   - if f.object.comment_type.blank?
     = f.hidden_field :comment_type
