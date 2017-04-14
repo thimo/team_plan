@@ -7,8 +7,8 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         .strong
           = title
-      .tbl-cell.tbl-cell-action-bordered
-        - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
+      - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
+        .tbl-cell.tbl-cell-action-bordered
           = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
             i.fa.fa-file-o
         / - if defined?(age_group).present? && policy(TeamEvaluation.new(team: age_group.teams.first)).create?

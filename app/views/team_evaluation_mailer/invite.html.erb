@@ -4,9 +4,6 @@
 
 <p>
   We hebben een evaluatie klaargezet voor <%= @team_evaluation.team.name %> en vragen je in te loggen en deze in te vullen.
-</p>
-
-<p>
   Als de evaluatie volledig is ingevuld vragen we je deze terug te sturen naar ESA door op de knop "Evaluatie afronden" te klikken.
 </p>
 
@@ -16,4 +13,8 @@
 
 <p>
   Als het goed is heb je eerder al een gegevens ontvangen van ESA om mee in te loggen. Zo niet, stuur een mail naar <%= mail_to "helpdesk@defrog.nl" %>.
+</p>
+
+<p>
+  Meer weten? Lees <%= link_to "de beknopte handleiding", "https://#{ActionMailer::Base.default_url_options[:host]}/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf" %> die we speciaal hebben gemaakt vor het invullen van de teamevaluatie.
 </p>
