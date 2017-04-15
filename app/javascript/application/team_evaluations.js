@@ -36,9 +36,7 @@ $(document).on('turbolinks:load', function() {
   $('.evaluation select.evaluation-rating').each((index, target) => {
     setEvaluationClass(target)
   })
-  console.log($('.evaluation div.evaluation-rating[data-evaluation-value]'))
   $('.evaluation div.evaluation-rating[data-evaluation-value]').each((index, target) => {
-    console.log(target)
     apply_class_for_rating(target, target.dataset.evaluationValue)
   })
   $('.evaluation select.evaluation-rating').on('change', (e) => {
