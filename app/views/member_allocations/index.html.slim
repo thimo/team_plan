@@ -1,18 +1,8 @@
 - provide(:title, "Leeftijdsgroep spelersindeling")
 
 .row[data-scroll-position="member_allocations_index"]
-  .col-lg-6
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h3
-              | Teams
-      .box-typical-body
-        table.table.table-sm
-          thead
-          tbody
-            = render partial: 'team', collection: @teams
+  .col-lg-6#teams
+    = render "teams"
   
   .col-lg-6
     section.box-typical
@@ -33,8 +23,9 @@
         .tbl-row
           .tbl-cell
             = simple_form_for :member_allocation_filters, {url: member_allocation_filters_path} do |f|
+              = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), {include_blank: true}, {class: "form-control custom-select field_position", multiple: "multiple", placeholder: "Filter op veldpositie"}
               div[style="display: flex;flex-grow: 100;justify-content: space-between;"]
-                = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), {include_blank: true}, {class: "form-control custom-select field_position", multiple: "multiple"}
+                = f.select :team, options_for_select(@teams_for_filter, @filter_team), {}, {class: "form-control custom-select"}
                 = f.button :button, title: 'Filter toepassen' do
                   i.fa.fa-search
                 = link_to member_allocation_filter_path(0),  method: :delete, title: "Filters verwijderen", class: "input-group-addon"
@@ -44,6 +35,6 @@
         table.table.table-sm
           thead
           tbody
-            = render partial: 'available_member', collection: @available_members
+            = render partial: 'member_allocations/available_member', collection: @available_members
 
 = render 'team_dialog', age_group: @age_group, teams: @teams, cached: true            

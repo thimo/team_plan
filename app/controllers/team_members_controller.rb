@@ -1,4 +1,6 @@
 class TeamMembersController < ApplicationController
+  include SortHelper
+
   before_action :set_team_member, only: [:show, :edit, :update, :destroy]
   before_action :breadcumbs, only: [:edit]
 
@@ -27,7 +29,15 @@ class TeamMembersController < ApplicationController
       flash[:alert] = "Er is iets mis gegaan, de speler is niet toegevoegd"
     end
 
-    redirect_to age_group_member_allocations_path(@age_group)
+    respond_to do |format|
+      format.html {
+        redirect_to age_group_member_allocations_path(@age_group)
+      }
+      format.js {
+        @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
+        render "create"
+      }
+    end
   end
 
   def edit;end

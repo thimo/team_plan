@@ -1,0 +1,11 @@
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | Teams
+  .box-typical-body
+    table.table.table-sm
+      thead
+      tbody
+        = render partial: 'member_allocations/team', collection: @teams

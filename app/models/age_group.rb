@@ -50,4 +50,8 @@ class AgeGroup < ApplicationRecord
     end
     members
   end
+
+  def assigned_active_members
+    active_members.by_season(season)
+  end
 end

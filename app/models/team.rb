@@ -9,6 +9,8 @@ class Team < ApplicationRecord
   validates_presence_of :name, :age_group
 
   scope :asc, -> { order(:name) }
+  scope :for_members, -> (members) { joins(:team_members).where(team_members: { member_id: members }) }
+  scope :for_season, -> (season) { joins(:age_group).where(age_groups: { season_id: season }) }
 
   def draft?
     age_group.draft?
