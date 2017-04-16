@@ -18,6 +18,8 @@ class Member < ApplicationRecord
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
   scope :team_staff, -> { joins(:team_members).where(team_members: {role: TeamMember::STAFF_ROLES}) }
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
+  scope :by_season, -> (season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
+  scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
