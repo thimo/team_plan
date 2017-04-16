@@ -1,12 +1,12 @@
 = simple_form_for [:admin, @version_update], {wrapper: :horizontal_form} do |f|
   = f.error_notification
 
-  = f.input :released_at, as: :string, placeholder: "dd-mm-jjjj", input_html: {data: {provide: "datepicker", "date-format": "dd-mm-yyyy", "date-language": "nl"}}
   = f.input :name
   = f.input :body
+  = f.input :released_at, as: :string, placeholder: "dd-mm-jjjj", input_html: {data: {provide: "datepicker", "date-format": "dd-mm-yyyy", "date-language": "nl"}}
   = f.input :for_role
   
   div
     = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
     - if policy(@version_update).destroy?
-      = link_to "Verwijderen", admin_user_path(@version_update),  method: :delete, data: { confirm: 'Gebruiker wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+      = link_to "Verwijderen", admin_version_update_path(@version_update),  method: :delete, data: { confirm: 'Versie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

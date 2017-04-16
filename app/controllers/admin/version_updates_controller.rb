@@ -28,7 +28,10 @@ class Admin::VersionUpdatesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    redirect_to admin_version_updates_path, notice: 'Versie is verwijderd.'
+    @version_update.destroy
+  end
 
   private
 

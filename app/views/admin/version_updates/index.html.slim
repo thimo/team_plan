@@ -23,7 +23,7 @@ section.box-typical
         - @version_updates.each do |version_update|
           tr
             td
-              = link_to version_update.name, [:admin, version_update]
+              = link_to version_update.name, edit_admin_version_update_path(version_update)
               .color-blue-grey-lighter.small
                 = l version_update.released_at.to_date, format: :long unless version_update.released_at.nil?
             td 
