@@ -18,8 +18,8 @@
         | Afmelddatum #{member.deregistered_at}
   td.color-blue-grey.small
     - if (active_team = member.active_team).present?
-      .mb-1[title="Huidige team #{active_team.name}"]
-        strong
+      .mb-1
+        strong[title="Huidige team #{active_team.name}"]
           = "#{active_team.name}"
         - if (last_evaluation = member.last_evaluation).present?
           span.ml-1[title="Evaluatie #{l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
