@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
   def show
     @players = @team.team_members.player.asc.includes(:member).includes(:team)
     @staff = @team.team_members.staff.asc.includes(:member).includes(:team).group_by(&:member)
+    @team_evaluations = policy_scope(TeamEvaluation).by_team(@team).desc
   end
 
   def new; end

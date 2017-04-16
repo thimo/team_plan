@@ -11,9 +11,11 @@ class TeamEvaluation < ApplicationRecord
 
   scope :asc, -> { order(created_at: :asc) }
   scope :desc, -> { order(created_at: :desc) }
+  scope :invited, -> { where.not(invited_at: nil) }
   scope :open, -> { where(finished_at: nil).where.not(invited_at: nil) }
   scope :finished, -> { where.not(finished_at: nil) }
   scope :desc_finished, -> { order(finished_at: :desc) }
+  scope :by_team, -> (team) { where(team: team) }
   scope :by_age_group, -> (age_group) { joins(:team).where(teams: {age_group: age_group}) }
 
   def draft?
