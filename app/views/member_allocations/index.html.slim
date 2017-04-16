@@ -2,17 +2,7 @@
 
 .row[data-scroll-position="member_allocations_index"]
   .col-lg-6
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h3
-              | Teams
-      .box-typical-body
-        table.table.table-sm
-          thead
-          tbody
-            = render partial: 'team', collection: @teams
+    = render "teams"
   
   .col-lg-6
     section.box-typical
@@ -44,6 +34,6 @@
         table.table.table-sm
           thead
           tbody
-            = render partial: 'available_member', collection: @available_members
+            = render partial: 'member_allocations/available_member', collection: @available_members
 
 = render 'team_dialog', age_group: @age_group, teams: @teams, cached: true            

@@ -9,7 +9,7 @@
           span[aria-hidden="true"]
             | ×
       .modal-body
-        = simple_form_for TeamMember.new do |f|
+        = simple_form_for TeamMember.new, remote: true do |f|
           .form-group
             - teams.each do |team|
               .radio
@@ -19,6 +19,7 @@
           = f.hidden_field :member_id
           = hidden_field_tag :team_member_id
           = hidden_field_tag :age_group_id, "#{age_group.id}"
+          
           .modal-footer
             button.btn.btn-secondary[type="button" data-dismiss="modal"]
               | Sluiten

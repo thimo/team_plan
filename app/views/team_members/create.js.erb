@@ -1,0 +1,3 @@
+$('#teams').html("<%= j render('member_allocations/teams') %>");
+$('#teamMemberNew').modal('hide');
+$('#available_member_<%= @team_member.member.id %>').hide()

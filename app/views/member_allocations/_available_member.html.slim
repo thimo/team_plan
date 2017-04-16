@@ -1,5 +1,5 @@
 - cache [available_member]
-  tr
+  tr[id="available_member_#{available_member.id}"]
     td.w-1
       - if policy(TeamMember.new(team: @age_group.teams.first)).create?
         a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{available_member.id}" data-member-name="#{available_member.name}" title="Toevoegen aan team"]
