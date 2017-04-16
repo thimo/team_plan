@@ -11,3 +11,4 @@ $('#teamMemberNew').modal('hide');
 <% flash.each do |message_type, message| %>
   $(function() {notie.alert(<%= notie_type(message_type) %>, "<%= message %>", 2)})
 <% end %>
+<% flash.clear %>
