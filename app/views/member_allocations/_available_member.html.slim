@@ -4,4 +4,5 @@
       - if policy(TeamMember.new(team: @age_group.teams.first)).create?
         a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{available_member.id}" data-member-name="#{available_member.name}" title="Toevoegen aan team"]
           i.fa.fa-chevron-left.p-1
+          
     = render "member", member: available_member, cached: true

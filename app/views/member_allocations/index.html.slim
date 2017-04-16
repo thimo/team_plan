@@ -23,8 +23,9 @@
         .tbl-row
           .tbl-cell
             = simple_form_for :member_allocation_filters, {url: member_allocation_filters_path} do |f|
+              = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), {include_blank: true}, {class: "form-control custom-select field_position", multiple: "multiple", placeholder: "Filter op veldpositie"}
               div[style="display: flex;flex-grow: 100;justify-content: space-between;"]
-                = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), {include_blank: true}, {class: "form-control custom-select field_position", multiple: "multiple"}
+                = f.select :team, options_for_select(@teams_for_filter, @filter_team), {}, {class: "form-control custom-select"}
                 = f.button :button, title: 'Filter toepassen' do
                   i.fa.fa-search
                 = link_to member_allocation_filter_path(0),  method: :delete, title: "Filters verwijderen", class: "input-group-addon"

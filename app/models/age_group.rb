@@ -54,8 +54,4 @@ class AgeGroup < ApplicationRecord
   def assigned_active_members
     active_members.by_season(season)
   end
-
-  def active_members_by_field_position(field_position_ids)
-    active_members.by_season(Season.active.last).by_field_position(field_position_ids)
-  end
 end
