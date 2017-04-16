@@ -7,7 +7,7 @@ const dispatchUnloadEvent = function() {
 addEventListener("beforeunload", dispatchUnloadEvent)
 addEventListener("turbolinks:before-render", dispatchUnloadEvent)
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', () => {
   // Restore scroll position
   const scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition && !!localStorage.getItem(scrollPosition)) {
@@ -15,10 +15,10 @@ $(document).on('turbolinks:load', function() {
   }
 });
 
-$(document).on('turbolinks:unload', function() {
+$(document).on('turbolinks:unload', () => {
   // Store scroll position for pages with data-scroll-position
   const scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition) {
-    localStorage.setItem(scrollPosition, $(window).scrollTop());
+    localStorage.setItem(scrollPosition, $(window).scrollTop())
   }
-});
+})

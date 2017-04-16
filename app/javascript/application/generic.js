@@ -35,3 +35,9 @@ $(document).on('turbolinks:load', function() {
     $(target).select2({placeholder: "Veldpositie"});
   })
 });
+
+$(document).on('turbolinks:before-cache', function() {
+  $('select.field_positions').each((index, target) => {
+    $(target).select2('destroy');
+  })
+})
