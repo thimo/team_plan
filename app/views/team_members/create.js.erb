@@ -1,3 +1,13 @@
-$('#teams').html("<%= j render('member_allocations/teams') %>");
 $('#teamMemberNew').modal('hide');
-$('#available_member_<%= @team_member.member.id %>').hide()
+
+<% if @teams.present? %>
+  $('#teams').html("<%= j render('member_allocations/teams') %>");
+<% end %>
+
+<% if @team_member.present? && @team_member.member.present? %>
+  $('#available_member_<%= @team_member.member.id %>').hide()
+<% end %>
+
+<% flash.each do |message_type, message| %>
+  $(function() {notie.alert(<%= notie_type(message_type) %>, "<%= message %>", 2)})
+<% end %>
