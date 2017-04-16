@@ -73,6 +73,8 @@ class User < ApplicationRecord
     case [record.class]
     when [Team]
       team_id = record.id
+    when [TeamMember]
+      team_id = record.team_id
     when [Member]
       team_id = record.team_members.pluck(:team_id).uniq
     when [TeamEvaluation]
