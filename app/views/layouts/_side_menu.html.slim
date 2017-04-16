@@ -57,6 +57,11 @@ nav.side-menu
             i.fa.fa-envelope
             span.lbl
               | E-mail log
+        li.magenta class="#{'active' if controller_name == 'version_updates'}"
+          = link_to admin_version_updates_path do
+            i.fa.fa-code-fork
+            span.lbl
+              | Versies
   section
     ul.side-menu-list
       li.brown

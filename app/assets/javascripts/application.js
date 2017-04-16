@@ -18,4 +18,5 @@
 //= require notie/dist/notie.min.js
 //= require jquery-ujs/src/rails.js
 //= require selectize/dist/js/standalone/selectize.min.js
+//= require bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js
 //= require turbolinks

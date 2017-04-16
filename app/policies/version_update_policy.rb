@@ -1,0 +1,2 @@
+class VersionUpdatePolicy < AdminPolicy
+end
