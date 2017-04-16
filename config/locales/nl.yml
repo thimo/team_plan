@@ -59,6 +59,11 @@ nl:
         duel_strength: Duelkracht
       comment:
         private: Privé
+      version_update:
+        released_at: Datum
+        name: Titel
+        body: Beschrijving
+        for_role: Toon aan
 
   form:
     an_error:

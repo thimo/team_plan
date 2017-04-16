@@ -1,0 +1,32 @@
+- provide(:title, "Versies")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | Versies
+      - if policy(VersionUpdate).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_version_update_path, title: "Toevoegen", class: "action-btn"
+            i.fa.fa-file-o
+            
+  .box-typical-body
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th = VersionUpdate.human_attribute_name(:name)
+          th = VersionUpdate.human_attribute_name(:body)
+          th = VersionUpdate.human_attribute_name(:for_role)
+          
+      tbody
+        - @version_updates.each do |version_update|
+          tr
+            td
+              = link_to version_update.name, [:admin, version_update]
+              .color-blue-grey-lighter.small
+                = l version_update.released_at.to_date, format: :long unless version_update.released_at.nil?
+            td 
+              = version_update.body
+            td 
+              = version_update.for_role
