@@ -1,6 +1,6 @@
 nav.side-menu
   ul.side-menu-list
-    li.grey class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
+    li.dirty-blue class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
       = link_to dashboard_index_path
         span
           i.fa.fa-dashboard
@@ -8,7 +8,7 @@ nav.side-menu
             | Dashboard
     - season = Season.active.last
     - unless season.nil?
-      li class="#{'active' if current_page?(season_path(season))}"
+      li.aquamarine class="#{'active' if current_page?(season_path(season))}"
         = link_to season
           span
             i.fa.fa-calendar
