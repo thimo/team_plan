@@ -28,8 +28,6 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_evaluations?
-    return false if @record.draft?
-
     @user.admin? || @user.club_staff?
   end
 
