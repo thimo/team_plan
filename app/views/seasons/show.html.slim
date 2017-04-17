@@ -67,7 +67,3 @@ section.box-typical
                       = "#{age_group.teams.size}"
                   - if policy(age_group).show_status?
                     .fa.p-1.pl-2.color-blue-grey-lighter[class="#{age_group.status_to_icon_class}", title="Status: #{age_group.status_i18n}"]
-
-
-- if @open_team_evaluations.size > 0
-  = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Openstaande teamevaluaties"

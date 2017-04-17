@@ -1,0 +1,90 @@
+- provide(:title, "Dashboard")
+
+.dashboard
+  .row
+    .col-sm-6
+      section.box-typical
+        header.box-typical-header
+          .tbl-row
+            .tbl-cell.tbl-cell-title
+              .strong
+                | Seizoen #{@season.name}
+
+        .row
+          .col-sm-6
+            .box-typical-body
+              - if @age_groups_male.size > 0
+                header.box-typical-header
+                  .tbl-row
+                    .tbl-cell.tbl-cell-title
+                      .strong
+                        | Mannen
+                ul.side-menu-list
+                  - @age_groups_male.each do |age_group|
+                    li.green
+                      = link_to age_group
+                        i.fa.fa-group
+                        span.lbl
+                          = age_group.name
+          .col-sm-6
+            .box-typical-body
+              - if @age_groups_female.size > 0
+                header.box-typical-header
+                  .tbl-row
+                    .tbl-cell.tbl-cell-title
+                      .strong
+                        | Vrouwen
+                ul.side-menu-list
+                  - @age_groups_female.each do |age_group|
+                    li.green
+                      = link_to age_group
+                        i.fa.fa-group
+                        span.lbl
+                          = age_group.name
+
+    .col-sm-6
+      - if (active_teams = current_user.active_teams).present?
+        section.box-typical
+          header.box-typical-header
+            .tbl-row
+              .tbl-cell.tbl-cell-title
+                .strong
+                  | Mijn teams
+                    
+          .box-typical-body
+            ul.side-menu-list
+              - active_teams.each do |team|
+                li.green class="#{'active' if current_page?(team_path(team))}"
+                  = link_to team
+                    i.fa.fa-futbol-o
+                    span.lbl
+                      = team.name
+                    
+      - if current_user.favorite_teams.present? || current_user.favorite_age_groups.present?
+        section.box-typical
+          header.box-typical-header
+            .tbl-row
+              .tbl-cell.tbl-cell-title
+                .strong
+                  | Favorieten
+                    
+          .box-typical-body
+            ul.side-menu-list
+              - current_user.favorite_teams.each do |team|
+                li.gold
+                  = link_to team
+                    i.fa.fa-star
+                    span.lbl
+                      = team.name
+              - current_user.favorite_age_groups.each do |age_group|
+                li.gold
+                  = link_to age_group
+                    i.fa.fa-star
+                    span.lbl
+                      = age_group.name
+                    
+      - if @open_team_evaluations.present?
+        = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
+
+      - if @version_updates.present?
+        = render "version_updates/list", version_updates: @version_updates, disable_header: true

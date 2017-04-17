@@ -1,12 +1,19 @@
 nav.side-menu
   ul.side-menu-list
-    - unless Season.active.desc.first.nil?
-      li class="#{'active' if current_page?(root_path)}"
-        = link_to Season.active.desc.first
+    li.grey class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
+      = link_to dashboard_index_path
+        span
+          i.fa.fa-dashboard
+          span.lbl
+            | Dashboard
+    - season = Season.active.last
+    - unless season.nil?
+      li class="#{'active' if current_page?(season_path(season))}"
+        = link_to season
           span
             i.fa.fa-calendar
             span.lbl
-              | Seizoen #{Season.active.desc.first.name}
+              | Seizoen #{season.name}
 
   - if current_user.active_teams.size > 0
     section
@@ -19,19 +26,21 @@ nav.side-menu
               i.fa.fa-futbol-o
               span.lbl
                 = team.name
+                
   - if current_user.favorite_teams.size > 0 || current_user.favorite_age_groups.size > 0
     section
       header.side-menu-title
         | Favorieten
       ul.side-menu-list
         - current_user.favorite_teams.each do |team|
-          li.gold
+          li.gold class="#{'active' if current_page?(team_path(team))}"
             = link_to team
               i.fa.fa-star
               span.lbl
                 = team.name
+                
         - current_user.favorite_age_groups.each do |age_group|
-          li.gold
+          li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
             = link_to age_group
               i.fa.fa-star
               span.lbl

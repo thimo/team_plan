@@ -1,0 +1,32 @@
+- title ||= 'Nieuw in TeamPlan'
+- disable_header ||= false
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          = title
+      - if policy(VersionUpdate).create?
+        .tbl-cell.tbl-cell-actions
+          = link_to new_admin_version_update_path, title: "Versie toevoegen", class: "action-btn"
+            i.fa.fa-file-o
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if version_updates.present?
+        - version_updates.each do |version_update|
+          .comment-row-item.no-photo
+            .tbl.comment-row-item-header
+              .tbl-row
+                .tbl-cell.tbl-cell-name
+                  = version_update.name
+                .tbl-cell.tbl-cell-date
+                  = l version_update.released_at.to_date, format: :long
+            .comment-row-item-content
+              = version_update.body
+      - else 
+        tbody
+          tr
+            td
+              i Geen versies gevonden

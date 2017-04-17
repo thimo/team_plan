@@ -1,5 +1,6 @@
-- title ||= 'Evaluaties'
+- title ||= 'Teamevaluaties'
 - hide_status ||= false
+- disable_header ||= false
 
 section.box-typical
   header.box-typical-header
@@ -11,18 +12,16 @@ section.box-typical
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
             i.fa.fa-file-o
-        / - if defined?(age_group).present? && policy(TeamEvaluation.new(team: age_group.teams.first)).create?
-          / = link_to new_age_group_team_evaluation_path(age_group), title: "Evaluaties toevoegen", class: "action-btn"
-          / i.fa.fa-files-o
           
   .box-typical-body
     table.table.table-sm.tr-links
       - if team_evaluations.size > 0
-        thead
-          th Team
-          th Datum
-          - unless hide_status
-            th Status
+        - unless disable_header
+          thead
+            th Team
+            th Datum
+            - unless hide_status
+              th Status
         tbody
           - team_evaluations.each do |team_evaluation|
             tr.clickable
@@ -39,4 +38,4 @@ section.box-typical
         tbody
           tr
             td
-              i Geen evaluaties gevonden
+              i Geen teamevaluaties gevonden
