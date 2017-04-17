@@ -1,8 +1,4 @@
 .favorite {
-  position: absolute;
-  right: 16px;
-  top: 5px;
-
   .favorable {
     color: #919fa9; // color-blue-grey-lighter
     opacity: .25;
@@ -10,5 +6,10 @@
       color: #f29824;
       opacity: 1;
     }
+  }
+  &.top-right {
+    position: absolute;
+    right: 10px;
+    top: 5px;
   }
 }
