@@ -1,6 +1,6 @@
 - provide(:title, "Leeftijdsgroep spelersindeling")
 
-.row[data-scroll-position="member_allocations_index"]
+.row.member_allocations[data-scroll-position="member_allocations_index"]
   .col-lg-6#teams
     = render "teams"
   
@@ -21,7 +21,7 @@
             
       .box-typical-header
         .tbl-row
-          .tbl-cell
+          .tbl-cell.pt-0
             = simple_form_for :member_allocation_filters, {url: member_allocation_filters_path} do |f|
               = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), {include_blank: true}, {class: "form-control custom-select field_position", multiple: "multiple", placeholder: "Filter op veldpositie"}
               div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
