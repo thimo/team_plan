@@ -27,18 +27,6 @@ class TeamMember < ApplicationRecord
     age_group.season
   end
 
-  def draft?
-    team.age_group.season.draft?
-  end
-
-  def active?
-    team.age_group.season.active?
-  end
-
-  def archived?
-    team.age_group.season.archived?
-  end
-
   private
 
     def inherit_fields
