@@ -10,6 +10,7 @@ class TeamMember < ApplicationRecord
 
   enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3, manager: 4}
   STAFF_ROLES = [1, 2, 3, 4]
+  enum status: {draft: 0, active: 1, archived: 2}
 
   validates_presence_of :team, :member, :role
   validates :role, :uniqueness => {scope: [:team, :member]}
@@ -24,18 +25,6 @@ class TeamMember < ApplicationRecord
 
   def season
     age_group.season
-  end
-
-  def draft?
-    team.age_group.season.draft?
-  end
-
-  def active?
-    team.age_group.season.active?
-  end
-
-  def archived?
-    team.age_group.season.archived?
   end
 
   private
