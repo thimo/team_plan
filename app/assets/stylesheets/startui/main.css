@@ -7095,7 +7095,7 @@ a.label-light-grey:hover {
 .bootstrap-table .table td,
 .fixed-table-body .table td {
   vertical-align: middle;
-  border-top-color: #d8e2e7;
+  /*border-top-color: #d8e2e7;*/
   padding: 11px 10px 10px;
 }
 .table th,

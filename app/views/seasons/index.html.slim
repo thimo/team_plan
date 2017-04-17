@@ -1,6 +1,5 @@
 - provide(:title, "Seizoenen")
 
-
 .row
   .col-xl-6
     section.box-typical
@@ -20,8 +19,10 @@
             - @seasons.each do |season|
               tr
                 td
-                  = link_to season.name, season, class: "#{"font-weight-bold" if season.active?}"
+                  = link_to season.name, season, class: "#{"font-weight-bold" if season.active?} #{"font-italic" if season.draft?}"
                 td.text-right
                   - if season.age_groups.size > 0
                     .label.label-pill
                       = "#{season.age_groups.size}"
+                  - if policy(season).show_status?
+                    .fa.p-1.pl-2.color-blue-grey-lighter[class="#{season.status_to_icon_class}", title="Status: #{season.status_i18n}"]

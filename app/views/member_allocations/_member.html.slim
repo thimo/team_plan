@@ -22,7 +22,7 @@
         strong[title="Huidige team #{active_team.name}"]
           = "#{active_team.name}"
         - if (last_evaluation = member.last_evaluation).present?
-          span.ml-1[title="Evaluatie #{l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
+          span.ml-1[title="Evaluatie #{I18n.l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
             i.fa[class="#{last_evaluation.advise_to_icon_class}"]
           
 

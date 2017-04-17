@@ -1,9 +1,9 @@
 class AgeGroup < ApplicationRecord
+  include Statussable
+
   belongs_to :season
   has_many :teams, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
-
-  enum status: {draft: 0, active: 1, archived: 2}
 
   validates_presence_of :name, :season, :gender
 

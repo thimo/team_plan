@@ -1,12 +1,12 @@
 class Team < ApplicationRecord
+  include Statussable
+
   belongs_to :age_group
   has_many :team_members, dependent: :destroy
   has_many :members, through: :team_members
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :team_evaluations, dependent: :destroy
-
-  enum status: {draft: 0, active: 1, archived: 2}
 
   validates_presence_of :name, :age_group
 

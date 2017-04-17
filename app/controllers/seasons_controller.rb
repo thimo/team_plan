@@ -10,9 +10,6 @@ class SeasonsController < ApplicationController
   def show
     @age_groups_male = @season.age_groups.male.asc
     @age_groups_female = @season.age_groups.female.asc
-
-    team_ids = current_user.teams_as_staff_in_season(@season).collect(&:id).uniq
-    @open_team_evaluations = TeamEvaluation.open.where(team_id: team_ids)
   end
 
   def new; end

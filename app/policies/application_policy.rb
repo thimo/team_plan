@@ -36,6 +36,10 @@ class ApplicationPolicy
     false
   end
 
+  def show_status?
+    @user.admin? || @user.club_staff?
+  end
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end

@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   get 'support', to: 'static_pages#support'
   get 'about', to: 'static_pages#about'
 
-  root to: "seasons#show"
+  root to: "dashboards#index"
   devise_for :users
 
   authenticate :user do
+    resources :dashboard, only: [:index], controller: :dashboards
     resources :seasons, shallow: true do
       resources :age_group_bulk_updates, only: [:new, :create]
       resources :age_groups, shallow: true do

@@ -39,6 +39,12 @@ class TeamPolicy < ApplicationPolicy
     true
   end
 
+  def show_status?
+    return false if @record.status == @record.age_group.status
+
+    @user.admin? || @user.club_staff?
+  end
+
   class Scope < Scope
     def resolve
       scope
