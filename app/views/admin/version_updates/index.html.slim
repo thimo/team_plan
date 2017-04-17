@@ -17,7 +17,7 @@ section.box-typical
         .tbl.comment-row-item-header
           .tbl-row
             .tbl-cell.tbl-cell-name
-              = version_update.name
+              = link_to version_update.name, edit_admin_version_update_path(version_update)
               small.pl-3
                 | #{version_update.for_role_i18n}
             .tbl-cell.tbl-cell-date
