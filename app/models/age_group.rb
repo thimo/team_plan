@@ -3,6 +3,8 @@ class AgeGroup < ApplicationRecord
   has_many :teams, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
 
+  enum status: {draft: 0, active: 1, archived: 2}
+
   validates_presence_of :name, :season, :gender
 
   scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: nil)) }
