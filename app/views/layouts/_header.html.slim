@@ -22,7 +22,7 @@ header.site-header
                 a.dropdown-item[href="#"]
                   span.font-icon.glyphicon.glyphicon-cog
                   | Settings
-                a.dropdown-item[href="#"]
+                = link_to support_path, class: "dropdown-item" do
                   span.font-icon.glyphicon.glyphicon-question-sign
                   | Help
                 .dropdown-divider
