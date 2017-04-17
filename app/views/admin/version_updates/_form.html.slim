@@ -2,7 +2,7 @@
   = f.error_notification
 
   = f.input :name
-  = f.input :body
+  = f.input :body, hint: 'Gebruik <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="_new">Markdown</a> bij het opmaken van de tekst'.html_safe
   = f.input :released_at, as: :string, placeholder: "dd-mm-jjjj", input_html: {data: {provide: "datepicker", "date-format": "dd-mm-yyyy", "date-language": "nl"}}
   = f.input :for_role
   
