@@ -99,6 +99,24 @@ nl:
         active: Actief
         archived: Gearchiveerd
 
+    age_group:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Gearchiveerd
+
+    team:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Gearchiveerd
+
+    team_member:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Gearchiveerd
+
   views:
     pagination:
       truncate: "..."
