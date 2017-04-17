@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   before_action :breadcumbs
 
   def show
-    @players = @team.team_members.player.asc.includes(:member).includes(:team)
+    @players = @team.team_members.player.asc.includes(:member).includes(:team).includes(:field_positions)
     @staff = @team.team_members.staff.asc.includes(:member).includes(:team).group_by(&:member)
     @team_evaluations = policy_scope(TeamEvaluation).by_team(@team).desc
   end
