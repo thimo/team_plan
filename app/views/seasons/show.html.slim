@@ -43,6 +43,8 @@ section.box-typical
                   - if age_group.teams.size > 0
                     .label.label-pill
                       = "#{age_group.teams.size}"
+                  - if policy(age_group).show_status?
+                    .fa.p-1.pl-2.color-blue-grey-lighter[class="#{age_group.status_to_icon_class}", title="Status: #{age_group.status_i18n}"]
 
     - if @age_groups_female.size > 0
       .col-sm-6
@@ -63,6 +65,8 @@ section.box-typical
                   - if age_group.teams.size > 0
                     .label.label-pill
                       = "#{age_group.teams.size}"
+                  - if policy(age_group).show_status?
+                    .fa.p-1.pl-2.color-blue-grey-lighter[class="#{age_group.status_to_icon_class}", title="Status: #{age_group.status_i18n}"]
 
 
 - if @open_team_evaluations.size > 0

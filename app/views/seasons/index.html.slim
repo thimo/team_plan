@@ -24,4 +24,5 @@
                   - if season.age_groups.size > 0
                     .label.label-pill
                       = "#{season.age_groups.size}"
-                  .fa.p-1.pl-2.color-blue-grey-lighter[class="#{season.status_to_icon_class}", title="Status: #{season.status_i18n}"]
+                  - if policy(season).show_status?
+                    .fa.p-1.pl-2.color-blue-grey-lighter[class="#{season.status_to_icon_class}", title="Status: #{season.status_i18n}"]

@@ -67,6 +67,9 @@
                       = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
                         i.fa.fa-times.p-1.pl-2
                         
+                    - if policy(team_member).show_status?
+                      .fa.p-1.pl-2.color-blue-grey-lighter[class="#{team_member.status_to_icon_class}", title="Status: #{team_member.status_i18n}"]
+                        
             - if @staff.size > 0
               thead
                 tr
@@ -93,9 +96,13 @@
                         - if policy(team_member).edit?
                           = link_to edit_team_member_path(team_member), title: "Bewerken"
                             i.fa.fa-pencil.p-1.pl-2
+                            
                         - if policy(team_member).destroy?
                           = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
                             i.fa.fa-times.p-1
+
+                        - if policy(team_member).show_status?
+                          .fa.p-1.pl-2.color-blue-grey-lighter[class="#{team_member.status_to_icon_class}", title="Status: #{team_member.status_i18n}"]
 
   .col-xl-6
     - if policy(@team).show_comments?
