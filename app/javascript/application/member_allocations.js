@@ -16,10 +16,11 @@ $(document).on('turbolinks:load', () => {
   });
 
   $('#member_allocation_filters_field_position').selectize();
+  $('#member_allocation_filters_team').selectize();
 })
 
 $(document).on('turbolinks:before-cache', () => {
-  $('#member_allocation_filters_field_position').each((index, target) => {
+  $('.selectized').each((index, target) => {
     target.selectize.destroy()
   })
 })
