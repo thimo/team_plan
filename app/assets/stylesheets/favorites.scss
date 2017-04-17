@@ -1,18 +1,14 @@
-.favorable {
-  color: #919fa9; // color-blue-grey-lighter
-  opacity: 0.25;
-  &.selected {
-    color: #f29824;
-    opacity: 1;
-  }
-}
+.favorite {
+  position: absolute;
+  right: 16px;
+  top: 5px;
 
-.container-fluid {
-  > a > .favorable {
-    font-size: 22px;
-    position: absolute;
-    top: 5px;
-    right: 32px;
-    opacity: 1;
+  .favorable {
+    color: #919fa9; // color-blue-grey-lighter
+    opacity: .25;
+    &.selected {
+      color: #f29824;
+      opacity: 1;
+    }
   }
 }
