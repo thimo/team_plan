@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417094858) do
+ActiveRecord::Schema.define(version: 20170417144632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170417094858) do
     t.integer "year_of_birth_from"
     t.integer "year_of_birth_to"
     t.string "gender"
-    t.integer "status"
+    t.integer "status", default: 0
     t.date "started_on"
     t.date "ended_on"
     t.index ["season_id"], name: "index_age_groups_on_season_id"
