@@ -38,4 +38,9 @@ module ApplicationHelper
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     "https://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=#{CGI.escape(default_url)}"
   end
+
+  def markdown(content)
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true, fenced_code_blocks: true)
+    @markdown.render(content)
+  end
 end

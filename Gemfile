@@ -36,7 +36,7 @@ gem 'devise-bootstrap-views', git: "https://github.com/hisea/devise-bootstrap-vi
 gem 'pundit' #,                     '~> 1.1.0'
 # gem 'rolify' #,                     '~> 5.0.0'
 gem 'awesome_print', require: "awesome_print"
-
+gem 'redcarpet' #,                  '3.3.4' # Markdown parser
 
 group :development, :test do
   gem 'byebug', platform: :mri
