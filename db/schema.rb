@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413154252) do
+ActiveRecord::Schema.define(version: 20170417094451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,8 @@ ActiveRecord::Schema.define(version: 20170413154252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.date "started_on"
+    t.date "ended_on"
   end
 
   create_table "team_evaluations", id: :serial, force: :cascade do |t|
@@ -189,6 +191,9 @@ ActiveRecord::Schema.define(version: 20170413154252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "prefered_foot"
+    t.integer "status", default: 0
+    t.date "started_on"
+    t.date "ended_on"
     t.index ["member_id", "team_id", "role"], name: "index_team_members_on_member_id_and_team_id_and_role", unique: true
     t.index ["member_id"], name: "index_team_members_on_member_id"
     t.index ["team_id"], name: "index_team_members_on_team_id"
@@ -199,6 +204,9 @@ ActiveRecord::Schema.define(version: 20170413154252) do
     t.integer "age_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.date "started_on"
+    t.date "ended_on"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
   end
 
