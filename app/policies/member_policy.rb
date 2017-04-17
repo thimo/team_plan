@@ -25,7 +25,7 @@ class MemberPolicy < AdminPolicy
     @user.admin? ||
     @user.club_staff? ||
     @user.is_team_staff_for?(@record) ||
-    @user.has_member?(@record.member)
+    @user.has_member?(@record)
   end
 
   def show_evaluations?
@@ -33,7 +33,7 @@ class MemberPolicy < AdminPolicy
     @user.club_staff? ||
     @user.is_team_staff_for?(@record)
   end
-  
+
   class Scope < Scope
     def resolve
       scope
