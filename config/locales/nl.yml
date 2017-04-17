@@ -76,7 +76,6 @@ nl:
         club_staff: Club staf
         team_staff: Team begeleiding
         member: Lid
-
     team_member:
       role:
         player: Speler
@@ -84,7 +83,11 @@ nl:
         trainer: Trainer
         team_parent: Teamouder
         manager: Teammanager
-
+    version_update:
+      for_role:
+        admin: Administrator
+        club_staff: Club staf
+        member: Lid
     comment:
       comment_type:
         generic: Algemeen
@@ -92,25 +95,21 @@ nl:
         behaviour: Gedrag
         classification: Indeling
         membership: Lidmaatschap
-
     season:
       status:
         draft: Concept
         active: Actief
         archived: Gearchiveerd
-
     age_group:
       status:
         draft: Concept
         active: Actief
         archived: Gearchiveerd
-
     team:
       status:
         draft: Concept
         active: Actief
         archived: Gearchiveerd
-
     team_member:
       status:
         draft: Concept
