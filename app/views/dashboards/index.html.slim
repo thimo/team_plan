@@ -21,7 +21,7 @@
                         | Mannen
                 ul.side-menu-list
                   - @age_groups_male.each do |age_group|
-                    li.green
+                    li
                       = link_to age_group
                         i.fa.fa-group
                         span.lbl
@@ -36,7 +36,7 @@
                         | Vrouwen
                 ul.side-menu-list
                   - @age_groups_female.each do |age_group|
-                    li.green
+                    li
                       = link_to age_group
                         i.fa.fa-group
                         span.lbl
