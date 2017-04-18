@@ -10,7 +10,7 @@
               .strong
                 | Seizoen #{@season.name}
 
-        .row
+        .row.mb-3
           .col-sm-6
             .box-typical-body
               - if @age_groups_male.size > 0
@@ -51,7 +51,7 @@
                 .strong
                   | Mijn teams
                     
-          .box-typical-body
+          .box-typical-body.mb-3
             ul.side-menu-list
               - active_teams.each do |team|
                 li.green class="#{'active' if current_page?(team_path(team))}"
@@ -68,7 +68,7 @@
                 .strong
                   | Favorieten
                     
-          .box-typical-body
+          .box-typical-body.mb-3
             ul.side-menu-list
               - current_user.favorite_teams.each do |team|
                 li.gold

@@ -1,6 +1,6 @@
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form', class: "sign-box" }) do |f|
   .sign-avatar
-    img[src="/assets/startui/avatar-sign.png" alt=""]
+    = image_tag "startui/avatar-sign.png"
   header.sign-title
     = t('.sign_up', default: 'Sign up')
     
