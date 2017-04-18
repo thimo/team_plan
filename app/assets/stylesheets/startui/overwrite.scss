@@ -1,0 +1,23 @@
+.page-content {
+  ul {
+    list-style: inherit;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    
+    &.side-menu-list {
+      list-style: none;
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+.comment-row-item {
+  &.no-photo {
+    padding-left: 15px;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+}
