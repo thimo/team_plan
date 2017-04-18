@@ -27,5 +27,7 @@ module TeamPlan
     end
 
     config.time_zone = 'Amsterdam'
+
+    config.assets.paths << Rails.root.join("vendor", "assets", "images")
   end
 end
