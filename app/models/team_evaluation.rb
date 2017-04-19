@@ -3,6 +3,7 @@ class TeamEvaluation < ApplicationRecord
   belongs_to :invited_by, class_name: "User", required: false
   belongs_to :finished_by, class_name: "User", required: false
   has_many :player_evaluations, dependent: :destroy
+  has_paper_trail
 
   attr_accessor :enable_validation
 

@@ -7,6 +7,7 @@ class Team < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :team_evaluations, dependent: :destroy
+  has_paper_trail
 
   validates_presence_of :name, :age_group
 

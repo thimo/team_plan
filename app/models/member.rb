@@ -6,6 +6,7 @@ class Member < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
+  has_paper_trail
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
 

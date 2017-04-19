@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index
   before_action :default_breadcrumb #, unless: :devise_controller?
+  before_action :set_paper_trail_whodunnit
 
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied

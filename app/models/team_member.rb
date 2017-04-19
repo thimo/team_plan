@@ -9,6 +9,7 @@ class TeamMember < ApplicationRecord
   belongs_to :member, required: true
   has_many :player_evaluations, dependent: :destroy
   has_and_belongs_to_many :field_positions
+  has_paper_trail
 
   enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3, manager: 4}
   STAFF_ROLES = [1, 2, 3, 4]
