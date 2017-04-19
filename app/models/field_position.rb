@@ -1,5 +1,6 @@
 class FieldPosition < ApplicationRecord
   has_and_belongs_to_many :team_members
+  has_paper_trail
 
   default_scope {order(position: :asc)}
 

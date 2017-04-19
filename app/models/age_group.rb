@@ -4,6 +4,7 @@ class AgeGroup < ApplicationRecord
   belongs_to :season
   has_many :teams, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
+  has_paper_trail
 
   validates_presence_of :name, :season, :gender
 
