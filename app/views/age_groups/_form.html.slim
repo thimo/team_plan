@@ -18,4 +18,5 @@
           | Vrouw
       = errors_for(@age_group, :gender)
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary'
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-secondary-outline btn-inline'

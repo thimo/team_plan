@@ -20,4 +20,5 @@
           = Season.statuses_i18n[:archived]
       = errors_for(@season, :status)
     
-  = f.button :submit, "Opslaan", class: 'btn btn-primary'
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @season.new_record? ? Season : @season, class: 'btn btn-secondary-outline btn-inline'

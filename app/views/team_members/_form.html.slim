@@ -20,4 +20,5 @@
       = f.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, f.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if f.error(:prefered_foot).present?}"}
 
       
-  = f.button :submit, "Opslaan", class: 'btn btn-primary'
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @team_member.new_record? ? @team : @team_member.team, class: 'btn btn-secondary-outline btn-inline'
