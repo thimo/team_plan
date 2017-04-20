@@ -25,7 +25,11 @@ class SeasonsController < ApplicationController
   def edit; end
 
   def update
-    if @season.update_attributes(season_params)
+    old_status = @season.status
+
+    if @season.update_attributes(permitted_attributes(@season))
+      @season.transmit_status(@season.status, old_status)
+      
       redirect_to @season, notice: 'Seizoen is aangepast.'
     else
       render 'edit'
@@ -43,7 +47,7 @@ class SeasonsController < ApplicationController
     @season = if action_name == 'new'
                 Season.new
               else
-                Season.new(season_params)
+                Season.new(permitted_attributes(@season))
               end
 
     authorize @season
@@ -71,9 +75,5 @@ class SeasonsController < ApplicationController
         add_breadcrumb "#{@season.name}", @season
       end
     end
-  end
-
-  def season_params
-    params.require(:season).permit(:name, :status)
   end
 end

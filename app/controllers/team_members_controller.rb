@@ -13,14 +13,14 @@ class TeamMembersController < ApplicationController
 
     if params[:team_member_id].blank?
       # A new assignment
-      @team_member = TeamMember.new(team_member_params.merge(role: TeamMember.roles[:player]))
+      @team_member = TeamMember.new(permitted_attributes(@team_member))
       authorize @team_member
       save_success = @team_member.save
     else
       # Move a player to another team
       @team_member = TeamMember.find(params[:team_member_id])
       authorize @team_member
-      save_success = @team_member.update_attributes(team_member_params.merge(role: TeamMember.roles[:player]))
+      save_success = @team_member.update_attributes(permitted_attributes(@team_member))
     end
 
     if save_success
@@ -43,7 +43,11 @@ class TeamMembersController < ApplicationController
   def edit;end
 
   def update
-    if @team_member.update_attributes(team_member_params)
+    old_status = @team_member.status
+
+    if @team_member.update_attributes(permitted_attributes(@team_member))
+      @team_member.transmit_status(@team_member.status, old_status)
+
       redirect_to @team_member.team, notice: 'Teamlid is aangepast.'
     else
       render 'edit'
@@ -60,13 +64,6 @@ class TeamMembersController < ApplicationController
     def set_team_member
       @team_member = TeamMember.find(params[:id])
       authorize @team_member
-    end
-
-    def team_member_params
-      params_permitted = [:team_id, :member_id, :prefered_foot, field_position_ids: []]
-      params_permitted << :role if policy(@team_member || TeamMember).set_role?
-
-      params.require(:team_member).permit(params_permitted)
     end
 
     def breadcumbs

@@ -8,7 +8,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def create?
-    return false if @record.archived?
+    return false if @record.season.archived?
 
     @user.admin? || @user.club_staff?
   end
@@ -35,6 +35,17 @@ class AgeGroupPolicy < ApplicationPolicy
     return false if @record.status == @record.season.status
 
     @user.admin? || @user.club_staff?
+  end
+
+  def set_status?
+    return false if @record.new_record? || @record.season.archived?
+
+    @user.admin?
+  end
+
+  def permitted_attributes
+    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender]
+    attributes << :status if set_status?
   end
 
   class Scope < Scope

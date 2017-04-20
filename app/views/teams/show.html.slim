@@ -108,5 +108,5 @@
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
-    - if policy(@team).show_evaluations? && @team_evaluations.present?
+    - if policy(@team).show_evaluations?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations

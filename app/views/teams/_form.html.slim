@@ -1,5 +1,10 @@
 = simple_form_for [@age_group, @team], {wrapper: :horizontal_form} do |f|
   = f.error_notification
+
   = f.input :name
-  = f.button :submit, "Opslaan", class: 'btn btn-primary'
+  
+  - if policy(@team).set_status?
+    = f.input :status
+  
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team.new_record? ? @age_group : @team, class: 'btn btn-secondary-outline btn-inline'

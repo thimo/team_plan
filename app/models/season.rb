@@ -9,4 +9,8 @@ class Season < ApplicationRecord
   scope :asc, -> { order(name: :asc) }
   scope :desc, -> { order(name: :desc) }
 
+  def status_children
+    age_groups
+  end
+
 end
