@@ -3,8 +3,9 @@
     list-style: inherit;
     margin-bottom: 1rem;
     padding-left: 2rem;
-    
-    &.side-menu-list {
+
+    &.side-menu-list,
+    &.nav {
       list-style: none;
       margin-bottom: 0;
       padding-left: 0;
