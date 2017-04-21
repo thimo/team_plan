@@ -22,7 +22,11 @@ class TeamsController < ApplicationController
   def edit; end
 
   def update
-    if @team.update_attributes(team_params)
+    old_status = @team.status
+
+    if @team.update_attributes(permitted_attributes(@team))
+      @team.transmit_status(@team.status, old_status)
+
       redirect_to @team, notice: 'Team is aangepast.'
     else
       render 'edit'
@@ -42,7 +46,7 @@ class TeamsController < ApplicationController
       @team = if action_name == 'new'
                 @age_group.teams.new
               else
-                Team.new(team_params)
+                Team.new(permitted_attributes(@team))
               end
       @team.age_group = @age_group
 
@@ -62,9 +66,5 @@ class TeamsController < ApplicationController
       else
         add_breadcrumb @team.name, @team
       end
-    end
-
-    def team_params
-      params.require(:team).permit(:name)
     end
 end

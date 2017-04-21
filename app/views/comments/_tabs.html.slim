@@ -7,7 +7,7 @@ section.tabs-section
             a.nav-link[href="#comments-tab-#{comment_type.first}" role="tab" data-toggle="tab" aria-expanded="#{if comment_type.first == 'generic'; 'true'; else; 'false'}" class="#{'active' if comment_type.first == 'generic'}"]
               = Comment.comment_types_i18n[comment_type.first]
               - if (count = parent.comments.public_send(comment_type.first).size) > 0
-                .label.label-pill.ml-1
+                .label.label-one-number.ml-1
                   = count
               
   .tab-content

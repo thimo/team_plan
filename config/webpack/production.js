@@ -1,16 +1,20 @@
-// Note: You must restart bin/webpack-watcher for changes to take effect
+/* eslint global-require: 0 */
+// Note: You must run bin/webpack for changes to take effect
 
-var webpack = require('webpack')
-var merge   = require('webpack-merge')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const CompressionPlugin = require('compression-webpack-plugin')
+const sharedConfig = require('./shared.js')
 
-var sharedConfig = require('./shared.js')
-
-module.exports = merge(sharedConfig.config, {
-  output: { filename: '[name]-[hash].js' },
+module.exports = merge(sharedConfig, {
+  output: { filename: '[name]-[chunkhash].js' },
 
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
+    new webpack.optimize.UglifyJsPlugin(),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.(js|css|svg|eot|ttf|woff|woff2)$/
     })
   ]
 })

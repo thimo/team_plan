@@ -24,7 +24,12 @@ html
     .page-content
       .container-fluid
         header.section-header
-          h3 = yield(:title)
+          h3 
+            = yield(:title)
+            - if (label_object = @season || @age_group || @team || @team_member).present? && label_object.draft?
+              span.ml-3.label[class="#{label_object.color_class_for_status}"]
+                = label_object.status_i18n
+                
           ol.breadcrumb.breadcrumb-simple
             = render_breadcrumbs :tag => :li, :separator => ""
           

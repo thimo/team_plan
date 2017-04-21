@@ -12,7 +12,7 @@ class PlayerEvaluationPolicy < ApplicationPolicy
   end
 
   def create?
-    return false unless @record.active?
+    return false unless @record.team_evaluation.active?
 
     @user.admin? || @user.club_staff?
   end

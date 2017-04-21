@@ -45,4 +45,9 @@ class AgeGroup < ApplicationRecord
   def assigned_active_members
     active_members.by_season(season)
   end
+
+  def status_children
+    teams
+  end
+
 end

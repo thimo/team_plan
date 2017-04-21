@@ -24,7 +24,11 @@ class AgeGroupsController < ApplicationController
   def edit; end
 
   def update
-    if @age_group.update_attributes(age_group_params)
+    old_status = @age_group.status
+
+    if @age_group.update_attributes(permitted_attributes(@age_group))
+      @age_group.transmit_status(@age_group.status, old_status)
+
       redirect_to @age_group, notice: 'Leeftijdsgroep is aangepast.'
     else
       render 'edit'
@@ -44,7 +48,7 @@ class AgeGroupsController < ApplicationController
       @age_group = if action_name == 'new'
                       @season.age_groups.new
                     else
-                      AgeGroup.new(age_group_params)
+                      AgeGroup.new(permitted_attributes(@age_group))
                     end
       @age_group.season = @season
 
@@ -65,7 +69,8 @@ class AgeGroupsController < ApplicationController
       end
     end
 
-    def age_group_params
-      params.require(:age_group).permit(:name, :year_of_birth_from, :year_of_birth_to, :gender)
-    end
+    # def age_group_params
+    #   params.require(:age_group).permit(:name, :year_of_birth_from, :year_of_birth_to, :gender)
+    #   # :status if policy change status
+    # end
 end

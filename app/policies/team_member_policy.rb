@@ -8,7 +8,7 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def create?
-    return false if @record.archived?
+    return false if @record.team.archived?
 
     @user.admin? || @user.club_staff?
   end
@@ -32,6 +32,18 @@ class TeamMemberPolicy < ApplicationPolicy
     return false if @record.status == @record.team.status
 
     @user.admin? || @user.club_staff?
+  end
+
+  def set_status?
+    return false if @record.new_record? || @record.team.archived?
+
+    @user.admin?
+  end
+
+  def permitted_attributes
+    attributes = [:team_id, :member_id, :prefered_foot, field_position_ids: []]
+    attributes << :role if set_role?
+    attributes << :status if set_status?
   end
 
   class Scope < Scope

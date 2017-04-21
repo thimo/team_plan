@@ -28,7 +28,7 @@
           thead
             th 
               | Spelers
-              .label.label-pill.ml-3 = @team.team_members.player.count
+              .label.label-one-number.ml-3 = @team.team_members.player.count
             th Positie
             th Voet
             th
@@ -68,7 +68,7 @@
                         i.fa.fa-times.p-1.pl-2
                         
                     - if policy(team_member).show_status?
-                      .fa.p-1.pl-2.color-blue-grey-lighter[class="#{team_member.status_to_icon_class}", title="Status: #{team_member.status_i18n}"]
+                      = team_member.status_to_label.html_safe
                         
             - if @staff.size > 0
               thead
@@ -102,11 +102,11 @@
                             i.fa.fa-times.p-1
 
                         - if policy(team_member).show_status?
-                          .fa.p-1.pl-2.color-blue-grey-lighter[class="#{team_member.status_to_icon_class}", title="Status: #{team_member.status_i18n}"]
+                          = team_member.status_to_label.html_safe
 
   .col-xl-6
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
-    - if policy(@team).show_evaluations? && @team_evaluations.present?
+    - if policy(@team).show_evaluations?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations

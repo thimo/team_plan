@@ -2,22 +2,25 @@
   = f.error_notification
   = f.input :name
   
-  .form-group.row class="#{'has-error' if has_error(@season, :status)}"
-    .col-form-legend.col-sm-3
-      = f.label :status
-    .col-sm-9
-      .form-check
-        = f.label :status_draft, class: "form-check-label"
-          => f.radio_button :status, :draft, class: "form-check-input"
-          = Season.statuses_i18n[:draft]
-      .form-check
-        = f.label :status_active, class: "form-check-label"
-          => f.radio_button :status, :active, class: "form-check-input"
-          = Season.statuses_i18n[:active]
-      .form-check
-        = f.label :status_archived, class: "form-check-label"
-          => f.radio_button :status, :archived, class: "form-check-input"
-          = Season.statuses_i18n[:archived]
-      = errors_for(@season, :status)
+  / TODO convert to partial and use on AgeGroup and Team
+  - if policy(@season).set_status?
+    .form-group.row class="#{'has-error' if has_error(@season, :status)}"
+      .col-form-legend.col-sm-3
+        = f.label :status
+      .col-sm-9
+        .form-check
+          = f.label :status_draft, class: "form-check-label"
+            => f.radio_button :status, :draft, class: "form-check-input"
+            = Season.statuses_i18n[:draft]
+        .form-check
+          = f.label :status_active, class: "form-check-label"
+            => f.radio_button :status, :active, class: "form-check-input"
+            = Season.statuses_i18n[:active]
+        .form-check
+          = f.label :status_archived, class: "form-check-label"
+            => f.radio_button :status, :archived, class: "form-check-input"
+            = Season.statuses_i18n[:archived]
+        = errors_for(@season, :status)
     
-  = f.button :submit, "Opslaan", class: 'btn btn-primary'
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @season.new_record? ? Season : @season, class: 'btn btn-secondary-outline btn-inline'

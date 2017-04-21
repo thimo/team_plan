@@ -22,4 +22,9 @@ class Team < ApplicationRecord
   def favorite(user)
     favorites.where(user: user).first
   end
+
+  def status_children
+    team_members
+  end
+
 end

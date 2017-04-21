@@ -83,6 +83,10 @@ nl:
         trainer: Trainer
         team_parent: Teamouder
         manager: Teammanager
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
     version_update:
       for_role:
         admin: Administrator
@@ -99,22 +103,17 @@ nl:
       status:
         draft: Concept
         active: Actief
-        archived: Gearchiveerd
+        archived: Archief
     age_group:
       status:
         draft: Concept
         active: Actief
-        archived: Gearchiveerd
+        archived: Archief
     team:
       status:
         draft: Concept
         active: Actief
-        archived: Gearchiveerd
-    team_member:
-      status:
-        draft: Concept
-        active: Actief
-        archived: Gearchiveerd
+        archived: Archief
 
   views:
     pagination:

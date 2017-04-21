@@ -26,6 +26,17 @@ class SeasonPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def set_status?
+    return false if @record.new_record?
+
+    @user.admin?
+  end
+
+  def permitted_attributes
+    attributes = [:name]
+    attributes << :status if set_status?
+  end
+
   class Scope < Scope
     def resolve
       if @user.admin? || @user.club_staff?
