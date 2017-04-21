@@ -28,7 +28,7 @@ module Statussable
   def color_class_for_status
     return color_class = 'label-warning' if draft?
     return color_class = 'label-success' if active?
-    return color_class = 'label-default' if archived?
+    return color_class = 'label-light-grey' if archived?
   end
 
   private
