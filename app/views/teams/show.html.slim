@@ -68,7 +68,7 @@
                         i.fa.fa-times.p-1.pl-2
                         
                     - if policy(team_member).show_status?
-                      .fa.p-1.pl-2.color-blue-grey-lighter[class="#{team_member.status_to_icon_class}", title="Status: #{team_member.status_i18n}"]
+                      = team_member.status_to_label.html_safe
                         
             - if @staff.size > 0
               thead
@@ -102,7 +102,7 @@
                             i.fa.fa-times.p-1
 
                         - if policy(team_member).show_status?
-                          .fa.p-1.pl-2.color-blue-grey-lighter[class="#{team_member.status_to_icon_class}", title="Status: #{team_member.status_i18n}"]
+                          = team_member.status_to_label.html_safe
 
   .col-xl-6
     - if policy(@team).show_comments?
