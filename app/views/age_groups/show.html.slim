@@ -42,7 +42,7 @@
                   = link_to team.name, team
                 td.text-right
                   - if team.team_members.player.size > 0
-                    .label.label-pill
+                    .label.label-two-numbers
                       = "#{team.team_members.player.size} / #{team.team_members.staff.pluck(:member_id).uniq.size}"
                   - if policy(team).show_status?
                     .fa.p-1.pl-2.color-blue-grey-lighter[class="#{team.status_to_icon_class}", title="Status: #{team.status_i18n}"]

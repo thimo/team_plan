@@ -22,3 +22,12 @@
     margin-bottom: 1rem;
   }
 }
+
+.label {
+  &.label-one-number {
+    min-width: 26px;
+  }
+  &.label-two-numbers {
+    min-width: 48px;
+  }
+}

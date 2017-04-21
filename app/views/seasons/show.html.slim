@@ -41,7 +41,7 @@ section.box-typical
                   => year_of_birth_range(age_group)
                 td.text-right
                   - if age_group.teams.size > 0
-                    .label.label-pill
+                    .label.label-one-number
                       = "#{age_group.teams.size}"
                   - if policy(age_group).show_status?
                     .fa.p-1.pl-2.color-blue-grey-lighter[class="#{age_group.status_to_icon_class}", title="Status: #{age_group.status_i18n}"]
@@ -63,7 +63,7 @@ section.box-typical
                   => year_of_birth_range(age_group)
                 td.text-right
                   - if age_group.teams.size > 0
-                    .label.label-pill
+                    .label.label-one-number
                       = "#{age_group.teams.size}"
                   - if policy(age_group).show_status?
                     .fa.p-1.pl-2.color-blue-grey-lighter[class="#{age_group.status_to_icon_class}", title="Status: #{age_group.status_i18n}"]

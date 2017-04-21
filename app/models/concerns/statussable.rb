@@ -5,10 +5,8 @@ module Statussable
     enum status: {draft: 0, active: 1, archived: 2}
   end
 
-  def status_to_icon_class
-    return 'fa-pencil-square-o' if draft?
-    return 'fa-check-square-o' if active?
-    return 'fa-share-square-o' if archived?
+  def status_to_label
+    return "<span class=\"label #{color_class_for_status}\">#{status_i18n}</span>"
   end
 
   def transmit_status(new_status, old_status = nil)
@@ -25,6 +23,12 @@ module Statussable
         end
       end
     end
+  end
+
+  def color_class_for_status
+    return color_class = 'label-warning' if draft?
+    return color_class = 'label-success' if active?
+    return color_class = 'label-default' if archived?
   end
 
   private
