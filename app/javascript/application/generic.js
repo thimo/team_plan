@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', () => {
   // Auto-size all textarea's
   $('textarea').autosize();
 
@@ -36,7 +36,7 @@ $(document).on('turbolinks:load', function() {
   })
 });
 
-$(document).on('turbolinks:before-cache', function() {
+$(document).on('turbolinks:before-cache', () => {
   $('select.field_positions').each((index, target) => {
     $(target).select2('destroy');
   })
