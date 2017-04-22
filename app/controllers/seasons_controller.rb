@@ -29,7 +29,7 @@ class SeasonsController < ApplicationController
 
     if @season.update_attributes(permitted_attributes(@season))
       @season.transmit_status(@season.status, old_status)
-      
+
       redirect_to @season, notice: 'Seizoen is aangepast.'
     else
       render 'edit'
@@ -47,7 +47,7 @@ class SeasonsController < ApplicationController
     @season = if action_name == 'new'
                 Season.new
               else
-                Season.new(permitted_attributes(@season))
+                Season.new(permitted_attributes(Season))
               end
 
     authorize @season

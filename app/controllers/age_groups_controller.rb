@@ -48,7 +48,7 @@ class AgeGroupsController < ApplicationController
       @age_group = if action_name == 'new'
                       @season.age_groups.new
                     else
-                      AgeGroup.new(permitted_attributes(@age_group))
+                      AgeGroup.new(permitted_attributes(AgeGroup))
                     end
       @age_group.season = @season
 
