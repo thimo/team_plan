@@ -6,8 +6,14 @@ nav.side-menu
           i.fa.fa-dashboard
           span.lbl
             | Dashboard
-    - season = Season.active.last
-    - unless season.nil?
+    - if (season = policy_scope(Season).draft.last).present?
+      li.gold class="#{'active' if current_page?(season_path(season))}"
+        = link_to season
+          span
+            i.fa.fa-calendar
+            span.lbl
+              | Seizoen #{season.name}
+    - if (season = policy_scope(Season).active.last).present?
       li.aquamarine class="#{'active' if current_page?(season_path(season))}"
         = link_to season
           span
