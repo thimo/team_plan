@@ -54,6 +54,7 @@ class TeamPolicy < ApplicationPolicy
   def permitted_attributes
     attributes = [:name]
     attributes << :status if set_status?
+    return attributes
   end
 
   class Scope < Scope
