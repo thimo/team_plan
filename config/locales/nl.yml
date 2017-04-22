@@ -42,7 +42,8 @@ nl:
       team_member:
         role: Rol
         name: Naam
-        field_positions: Positie
+        field_positions: Veldpositie
+        field_position_ids: Veldpositie
         prefered_foot: Links-/rechtsbenig
       player_evaluation:
         advise_next_season: Advies volgend seizoen
