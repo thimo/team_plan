@@ -12,9 +12,14 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
 
-  body
+  body.devise
     .page-center
       .page-center-in
-        .container-fluid
+        .container-fluid.text-center
+          - if flash.present?
+            - flash.each do |message_type, message|
+              .alert.alert-fill[role="alert" class="alert-#{message_type}"]
+                | #{message}
+
           = yield
                 

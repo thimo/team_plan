@@ -12,8 +12,14 @@ class ApplicationController < ActionController::Base
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied
   rescue_from Pundit::NotAuthorizedError, with: :permission_denied
+  rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_auth_token
 
   private
+
+    def invalid_auth_token
+      flash[:danger] = "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer."
+      redirect_to :back
+    end
 
     def permission_denied
       flash[:danger] = "Je hebt niet genoeg rechten om deze pagina te bekijken."

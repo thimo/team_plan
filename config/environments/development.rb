@@ -60,7 +60,7 @@ Rails.application.configure do
   config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
 
   # Indent html for pretty debugging and do not sort attributes
-  Slim::Engine.set_options pretty: true, sort_attrs: false
+  Slim::Engine.set_options pretty: false, sort_attrs: false
 
   config.after_initialize do
     Bullet.enable = true

@@ -31,3 +31,20 @@
     min-width: 48px;
   }
 }
+
+// .sign-avatar.sign-logo
+.sign-box {
+  .sign-avatar {
+    &.sign-logo {
+      img {
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.devise {
+  .alert {
+    display: inline-block;
+  }
+}

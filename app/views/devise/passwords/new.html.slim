@@ -1,6 +1,6 @@
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, role: 'form', class: "sign-box" }) do |f|
-  .sign-avatar
-    = image_tag "startui/avatar-sign.png"
+  .sign-avatar.sign-logo
+    = image_tag "logo/esa_light_blue.svg"
   header.sign-title
     = t('.forgot_your_password', default: 'Forgot your password?')
     
