@@ -21,6 +21,6 @@
           = hidden_field_tag :age_group_id, "#{age_group.id}"
           
           .modal-footer
-            button.btn.btn-secondary[type="button" data-dismiss="modal"]
-              | Sluiten
             = f.button :submit, "Toevoegen", class: 'btn btn-primary'
+            button.btn.btn-secondary-outline[type="button" data-dismiss="modal"]
+              | Annuleren
