@@ -46,6 +46,7 @@ class AgeGroupPolicy < ApplicationPolicy
   def permitted_attributes
     attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender]
     attributes << :status if set_status?
+    return attributes
   end
 
   class Scope < Scope
