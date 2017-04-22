@@ -44,6 +44,7 @@ class TeamMemberPolicy < ApplicationPolicy
     attributes = [:team_id, :member_id, :prefered_foot, field_position_ids: []]
     attributes << :role if set_role?
     attributes << :status if set_status?
+    return attributes
   end
 
   class Scope < Scope

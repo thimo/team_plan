@@ -46,7 +46,7 @@ class TeamsController < ApplicationController
       @team = if action_name == 'new'
                 @age_group.teams.new
               else
-                Team.new(permitted_attributes(Team))
+                Team.new(permitted_attributes(Team.new))
               end
       @team.age_group = @age_group
 

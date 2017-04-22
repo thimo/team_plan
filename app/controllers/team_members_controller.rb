@@ -13,7 +13,7 @@ class TeamMembersController < ApplicationController
 
     if params[:team_member_id].blank?
       # A new assignment
-      @team_member = TeamMember.new(permitted_attributes(TeamMember))
+      @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
       authorize @team_member
       save_success = @team_member.save
     else

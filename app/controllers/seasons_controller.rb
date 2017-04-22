@@ -47,7 +47,7 @@ class SeasonsController < ApplicationController
     @season = if action_name == 'new'
                 Season.new
               else
-                Season.new(permitted_attributes(Season))
+                Season.new(permitted_attributes(Season.new))
               end
 
     authorize @season
