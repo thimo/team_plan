@@ -57,7 +57,7 @@ section.box-typical
               - if show_progress
                 td 
                   .progress
-                    .progress-bar[role="progressbar" style="width: #{progress = (100 * team_evaluation.progress).round}%" aria-valuenow="#{progress}" aria-valuemin="0" aria-valuemax="100" title="#{progress}%"]
+                    .progress-bar[role="progressbar" style="width: #{progress = team_evaluation.progress}%" aria-valuenow="#{progress}" aria-valuemin="0" aria-valuemax="100" title="#{progress}%"]
 
       - else 
         tbody
