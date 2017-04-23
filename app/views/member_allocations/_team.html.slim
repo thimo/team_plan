@@ -6,6 +6,7 @@
           i.fa.fa-users.color-blue-grey
     td
       strong = team.name
+      small.pl-1 = team.division
       - if team.team_members.player.size > 0
         .label.label-one-number.ml-3
           = "#{team.team_members.player.size}"

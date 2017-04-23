@@ -52,7 +52,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    attributes = [:name]
+    attributes = [:name, :division]
     attributes << :status if set_status?
     return attributes
   end
