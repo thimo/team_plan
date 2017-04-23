@@ -1,6 +1,8 @@
 - title ||= 'Teamevaluaties'
 - hide_status ||= false
 - disable_header ||= false
+- show_finished_by ||= false
+- show_last_modified ||= false
 
 section.box-typical
   header.box-typical-header
@@ -22,6 +24,10 @@ section.box-typical
             th Datum
             - unless hide_status
               th Status
+            - if show_finished_by
+              th Afgerond door
+            - if show_last_modified
+              th Laatste aanpassing
         tbody
           - team_evaluations.each do |team_evaluation|
             tr.clickable
@@ -30,10 +36,21 @@ section.box-typical
               td
                 - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
                 = link_to url
-                  = l team_evaluation.created_at.to_date, format: :long
+                  - if team_evaluation.finished_at.present?
+                    = l team_evaluation.finished_at.to_date, format: :long
+                  - elsif team_evaluation.invited_at.present?
+                    = l team_evaluation.invited_at.to_date, format: :long
+                  - else 
+                    = l team_evaluation.created_at.to_date, format: :long
               - unless hide_status
                 td 
                   = team_evaluation.status
+              - if show_finished_by
+                td 
+                  = team_evaluation.finished_by.name
+              - if show_last_modified
+                td 
+                  = l team_evaluation.updated_at.to_date, format: :long
       - else 
         tbody
           tr
