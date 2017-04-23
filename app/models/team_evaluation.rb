@@ -67,6 +67,8 @@ class TeamEvaluation < ApplicationRecord
   end
 
   def progress
+    return @calculated_progress if @calculated_progress.present?
+
     filled_fields = 0
 
     player_evaluations.each do |player_evaluation|
@@ -78,7 +80,7 @@ class TeamEvaluation < ApplicationRecord
 
     total_field_count = player_evaluations.size * (PlayerEvaluation::RATING_FIELDS.size + 1)
 
-    (100 * filled_fields) / total_field_count
+    @calculated_progress = (100 * filled_fields) / total_field_count
   end
 
   def last_modified
