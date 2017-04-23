@@ -26,6 +26,8 @@ html
         header.section-header
           h3 
             = yield(:title)
+            small.pl-2.color-blue-grey
+              = yield(:subtitle)
             - if (label_object = @season || @age_group || @team || @team_member).present? && label_object.draft?
               span.ml-3.label[class="#{label_object.color_class_for_status}"]
                 = label_object.status_i18n
