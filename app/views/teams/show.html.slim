@@ -1,4 +1,4 @@
-- provide(:title, "Team #{@team.name}")
+- provide(:title, "Team #{@team.name} <small>#{@team.division}</small>".html_safe)
 
 = render "shared/favorite", parent: @team, styleClass: 'fa-2x top-right'
 

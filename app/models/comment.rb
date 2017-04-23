@@ -8,4 +8,5 @@ class Comment < ApplicationRecord
   validates_presence_of :body
 
   scope :desc, -> { order(created_at: :desc) }
+  scope :half_year, -> { where("created_at >= ?", 6.months.ago) }
 end

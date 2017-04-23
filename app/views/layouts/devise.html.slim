@@ -18,7 +18,7 @@ html
         .container-fluid.text-center
           - if flash.present?
             - flash.each do |message_type, message|
-              .alert.alert-fill[role="alert" class="alert-#{message_type}"]
+              .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
                 | #{message}
 
           = yield

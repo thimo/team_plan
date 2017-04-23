@@ -40,6 +40,8 @@
               tr
                 td
                   = link_to team.name, team
+                td 
+                  = team.division
                 td.text-right
                   - if team.team_members.player.size > 0
                     .label.label-two-numbers>
