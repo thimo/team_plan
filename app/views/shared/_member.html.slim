@@ -39,13 +39,13 @@ h3 Sportlink
 /         | Leeftijdscategorie
 /     .col-6
 /       = member.age_category
-/ - unless member.local_teams.blank?
-/   .row
-/     .col-6
-/       label.semibold 
-/         | Lokale teams
-/     .col-6
-/       = member.local_teams
+- unless member.local_teams.blank?
+  .row
+    .col-6
+      label.semibold 
+        | Lokale teams
+    .col-6
+      = member.local_teams
 / - unless member.club_sports.blank?
 /   .row
 /     .col-6

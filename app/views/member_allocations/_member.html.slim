@@ -7,9 +7,9 @@
     .color-blue-grey-lighter.small
       => l member.born_on, format: :long unless member.born_on.nil?
       = "(#{member.gender})"
-    - unless member.club_sports.blank?
-      .color-blue-grey.small
-        = "#{member.club_sports}"
+    / - unless member.club_sports.blank?
+    /   .color-blue-grey.small
+    /     = "#{member.club_sports}"
     - unless member.local_teams.blank?
       .color-blue-grey.small
         = "#{member.local_teams}"
@@ -18,20 +18,20 @@
         | Afmelddatum #{member.deregistered_at}
   td.color-blue-grey.small
     - if (active_team = member.active_team).present?
-      .mb-1
+      div
         strong[title="Huidige team #{active_team.name}"]
           = "#{active_team.name}"
         - if (last_evaluation = member.last_evaluation).present?
           span.ml-1[title="Evaluatie #{I18n.l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
             i.fa[class="#{last_evaluation.advise_to_icon_class}"]
           
-
     - if (active_team_member = member.active_team_member).present?
       - if (field_positions = active_team_member.field_positions).present?
         .mb-1
           - field_positions.each do |field_position|
             div = "#{field_position.name}"
     
-    - if (last_comment_classification = member.comments.classification.desc.first).present?
-      .mb-1[title="Indelingsverzoek #{l last_comment_classification.created_at.to_date, format: :long}"]
-        = last_comment_classification.body
+    - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
+      - last_comments.each do |last_comment|
+        div[title="Indelingsverzoek #{l last_comment.created_at.to_date, format: :long}, #{last_comment.user.name}"]
+          = last_comment.body
