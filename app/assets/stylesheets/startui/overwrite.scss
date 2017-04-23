@@ -48,3 +48,39 @@
     display: inline-block;
   }
 }
+
+.show-hide-sidebar {
+  float: left;
+  margin: 0 12px 0 0;
+}
+
+.site-header {
+  h1 {
+    color: #adb7be;
+    float: left;
+    font-size: 1.8rem;
+    font-weight: 100;
+    line-height: 2.5rem;
+  }
+
+  .hamburger {
+    margin: 0 12px 0 0;
+  }
+
+  .site-header-content {
+    width: inherit;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    h1 {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+abbr[title] {
+  border: 0;
+  text-decoration: none;
+}

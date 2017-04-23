@@ -25,34 +25,34 @@ h3 Sportlink
     .col-6
       = member.person_type
       
-- unless member.contribution_category.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Contributie categorie
-    .col-6
-      = member.contribution_category
-- unless member.age_category.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Leeftijdscategorie
-    .col-6
-      = member.age_category
-- unless member.local_teams.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Lokale teams
-    .col-6
-      = member.local_teams
-- unless member.club_sports.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Verenigingssporten
-    .col-6
-      = member.club_sports
+/ - unless member.contribution_category.blank?
+/   .row
+/     .col-6
+/       label.semibold 
+/         | Contributie categorie
+/     .col-6
+/       = member.contribution_category
+/ - unless member.age_category.blank?
+/   .row
+/     .col-6
+/       label.semibold 
+/         | Leeftijdscategorie
+/     .col-6
+/       = member.age_category
+/ - unless member.local_teams.blank?
+/   .row
+/     .col-6
+/       label.semibold 
+/         | Lokale teams
+/     .col-6
+/       = member.local_teams
+/ - unless member.club_sports.blank?
+/   .row
+/     .col-6
+/       label.semibold 
+/         | Verenigingssporten
+/     .col-6
+/       = member.club_sports
 - unless member.sport_category.blank?
   .row
     .col-6

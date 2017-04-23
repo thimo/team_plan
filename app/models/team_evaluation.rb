@@ -76,4 +76,8 @@ class TeamEvaluation < ApplicationRecord
     end
     1.0 * filled_fields / (player_evaluations.size * (PlayerEvaluation::RATING_FIELDS.size + 1))
   end
+
+  def last_modified
+    [updated_at, player_evaluations.maximum(:updated_at)].max
+  end
 end
