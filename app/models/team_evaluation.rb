@@ -65,4 +65,15 @@ class TeamEvaluation < ApplicationRecord
       "Te versturen"
     end
   end
+
+  def progress
+    filled_fields = 0
+    player_evaluations.each do |player_evaluation|
+      PlayerEvaluation::RATING_FIELDS.each do |rating_field|
+        filled_fields += 1 if player_evaluation[rating_field].present?
+      end
+      filled_fields += 1 if player_evaluation.advise_next_season.present?
+    end
+    1.0 * filled_fields / (player_evaluations.size * (PlayerEvaluation::RATING_FIELDS.size + 1))
+  end
 end

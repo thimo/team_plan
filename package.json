@@ -41,5 +41,8 @@
     "tether": "^1.4.0",
     "webpack-manifest-plugin": "^1.1.0",
     "webpacker-react": "^0.2.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "^1.1.1"
   }
 }
