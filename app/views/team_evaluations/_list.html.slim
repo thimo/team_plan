@@ -3,6 +3,7 @@
 - disable_header ||= false
 - show_finished_by ||= false
 - show_last_modified ||= false
+- show_progress ||= false
 
 section.box-typical
   header.box-typical-header
@@ -28,6 +29,8 @@ section.box-typical
               th Afgerond door
             - if show_last_modified
               th Laatste aanpassing
+            - if show_progress
+              th.text-center Voortgang
         tbody
           - team_evaluations.each do |team_evaluation|
             tr.clickable
@@ -51,6 +54,9 @@ section.box-typical
               - if show_last_modified
                 td 
                   = l team_evaluation.updated_at.to_date, format: :long
+              - if show_progress
+                td.text-center
+                  = "#{(100 * team_evaluation.progress).round}%"
       - else 
         tbody
           tr
