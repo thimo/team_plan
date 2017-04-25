@@ -40,13 +40,6 @@ html
       
         = render 'layouts/footer'
     
-        / - if Rails.env.development?
-        /   p.mt-4
-        /     button.btn.btn-secondary-outline type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-        /       | Debug params
-        /   .collapse#collapseExample
-        /     .card.card-block
-        /       = debug(params)
     = javascript_include_tag 'application', 'data-turbolinks-eval': 'false'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': 'false'
     = render 'layouts/flash'
