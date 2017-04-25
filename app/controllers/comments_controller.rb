@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    redirect_to @comment.commentable, notice: "Opmerking is verwijderd."
     @comment.destroy
   end
 
