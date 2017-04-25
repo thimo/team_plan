@@ -23,7 +23,7 @@ section.tabs-section
 
             .col-sm-4
               = simple_form_for [parent, Comment.new] do |f|
-                = f.input :body, label: false, placeholder: "Opmerking toevoegen"
+                = f.input :body, label: false, placeholder: "Opmerking"
                 / .float-right
                 /   = f.input :private
                 = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm'
