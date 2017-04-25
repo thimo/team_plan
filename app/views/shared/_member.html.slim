@@ -98,5 +98,6 @@ h2
     = team_member.season.name
     |  - 
     = link_to team_member.team.name, team_member.team
+    = " (#{team_member.team.division})" if team_member.team.division.present?
     | , als 
     = team_member.role_i18n.downcase
