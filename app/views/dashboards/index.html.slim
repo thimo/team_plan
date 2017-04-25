@@ -11,7 +11,7 @@
                 | Seizoen #{@season.name}
 
         .row.mb-3
-          .col-sm-6
+          .col-6
             .box-typical-body
               - if @age_groups_male.size > 0
                 header.box-typical-header
@@ -26,7 +26,7 @@
                         i.fa.fa-group
                         span.lbl
                           = age_group.name
-          .col-sm-6
+          .col-6
             .box-typical-body
               - if @age_groups_female.size > 0
                 header.box-typical-header
