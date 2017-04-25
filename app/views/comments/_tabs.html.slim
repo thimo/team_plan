@@ -4,7 +4,8 @@ section.tabs-section
       - Comment.comment_types.each do |comment_type|
         - if policy(Comment).public_send("show_#{comment_type.first}?")
           li.nav-item
-            a.nav-link[href="#comments-tab-#{comment_type.first}" role="tab" data-toggle="tab" aria-expanded="#{if comment_type.first == 'generic'; 'true'; else; 'false'}" class="#{'active' if comment_type.first == 'generic'}"]
+            - is_active = params[:comment].present? ? comment_type.first == params[:comment] : comment_type.first == 'generic'
+            a.nav-link[href="#comments-tab-#{comment_type.first}" role="tab" data-toggle="tab" aria-expanded="#{is_active}" class="#{'active' if is_active}"]
               = Comment.comment_types_i18n[comment_type.first]
               - if (count = parent.comments.public_send(comment_type.first).size) > 0
                 .label.label-one-number.ml-1
@@ -13,15 +14,16 @@ section.tabs-section
   .tab-content
     - Comment.comment_types.each do |comment_type|
       - if policy(Comment).public_send("show_#{comment_type.first}?")
-        .tab-pane[role="tabpanel" aria-expanded="#{if comment_type.first == 'generic'; 'true'; else; 'false'}" id="comments-tab-#{comment_type.first}" class="#{if comment_type.first == 'generic'; 'active in'; else; 'fade'}"]
+        - is_active = params[:comment].present? ? comment_type.first == params[:comment] : comment_type.first == 'generic'
+        .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type.first}" class="#{is_active ? 'active in' : 'fade'}"]
           .row
-            .col-sm-8
+            .col-md-8
               - if (comments = parent.comments.public_send(comment_type.first).includes(:user)).present?
                 = render comments
               - else
                 i Voeg een opmerking toe
 
-            .col-sm-4
+            .col-md-4
               = simple_form_for [parent, Comment.new] do |f|
                 = f.input :body, label: false, placeholder: "Opmerking"
                 / .float-right
