@@ -72,6 +72,11 @@
   }
 }
 
+abbr[title] {
+  border: 0;
+  text-decoration: none;
+}
+
 @media (max-width: 767px) {
   .site-header {
     h1 {
@@ -80,7 +85,12 @@
   }
 }
 
-abbr[title] {
-  border: 0;
-  text-decoration: none;
+@media (max-width: 1056px) {
+  body {
+    &.sidebar-hidden {
+      .page-content {
+        padding-left: 0;
+      }
+    }
+  }
 }
