@@ -5,8 +5,12 @@ div
   => member.zipcode
   => member.city
 div
-  = "#{member.phone}"
-  = " / #{member.phone_2}" unless member.phone_2.blank?
+  a[href="tel://#{member.phone}"]
+    = member.phone
+  - unless member.phone_2.blank?
+    |  / 
+    a[href="tel://#{member.phone_2}"]
+      = member.phone_2
 div
   = mail_to member.email, member.email
   - unless member.email_2.blank?
