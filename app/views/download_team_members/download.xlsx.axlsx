@@ -1,0 +1,51 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Teamleden") do |sheet|
+  columns = [
+    Season.human_attribute_name(:name),
+    AgeGroup.human_attribute_name(:name),
+    Team.human_attribute_name(:name),
+    Member.human_attribute_name(:name),
+    Member.human_attribute_name(:born_on),
+    TeamMember.human_attribute_name(:role),
+    Member.human_attribute_name(:address),
+    Member.human_attribute_name(:zipcode),
+    Member.human_attribute_name(:city),
+    Member.human_attribute_name(:phone),
+    Member.human_attribute_name(:email),
+  ]
+  sheet.add_row columns
+  @teams.each do |team|
+    team[:players].each do |team_member|
+      columns = [
+        team[:season],
+        team[:age_group],
+        team[:team],
+        team_member.member.name,
+        team_member.member.born_on,
+        team_member.role_i18n,
+        team_member.member.address,
+        team_member.member.zipcode,
+        team_member.member.city,
+        team_member.member.phone,
+        team_member.member.email,
+      ]
+      sheet.add_row columns
+    end
+    team[:staff].each do |team_member|
+      columns = [
+        team[:season],
+        team[:age_group],
+        team[:team],
+        team_member.member.name,
+        team_member.member.born_on,
+        team_member.role_i18n,
+        team_member.member.address,
+        team_member.member.zipcode,
+        team_member.member.city,
+        team_member.member.phone,
+        team_member.member.email,
+      ]
+      sheet.add_row columns
+    end
+  end
+end
