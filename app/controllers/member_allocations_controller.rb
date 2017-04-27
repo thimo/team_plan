@@ -31,7 +31,8 @@ class MemberAllocationsController < ApplicationController
     authorize @team_member
     @team_member.destroy
 
-    redirect_to :back, notice: 'Teamlid is verwijderd uit het team.'
+    @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
+    redirect_to :back, notice: "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
   end
 
   private

@@ -16,11 +16,15 @@ class TeamMembersController < ApplicationController
       @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
       authorize @team_member
       save_success = @team_member.save
+
+      @team_member.member.logs << Log.new(body: "Toegevoegd aan #{@team_member.team.name}.", user: current_user)
     else
       # Move a player to another team
       @team_member = TeamMember.find(params[:team_member_id])
       authorize @team_member
       save_success = @team_member.update_attributes(permitted_attributes(@team_member))
+
+      @team_member.member.logs << Log.new(body: "Verplaatst naar #{@team_member.team.name}.", user: current_user)
     end
 
     if save_success
@@ -56,6 +60,8 @@ class TeamMembersController < ApplicationController
 
   def destroy
     redirect_to :back, notice: "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
+    @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
+
     @team_member.destroy
   end
 
