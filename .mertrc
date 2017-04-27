@@ -9,7 +9,7 @@ layout:
       -
         layout:
           -
-            - ./bin/webpack-watcher
+            - ./bin/webpack-dev-server
           -
             - ls
       -

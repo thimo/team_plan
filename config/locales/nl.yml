@@ -34,9 +34,9 @@ nl:
         last_name: Achternaam
         name: Naam
         email: E-mail
-        birthdate: Geboortedatum
+        born_on: Geboortedatum
         phone: Telefoonnummer
-        zip: Postcode
+        zipcode: Postcode
         address: Adres
         city: Woonplaats
         country: Land

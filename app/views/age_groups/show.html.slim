@@ -10,6 +10,10 @@
           .tbl-cell.tbl-cell-title
             .strong
               | Teams
+          - if policy(@age_group).download_team_members?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to age_group_download_team_members_path(@age_group, format: "xlsx"), title: "Download teams naar Excel", class: "action-btn"
+                i.fa.fa-file-excel-o
           - if policy(Team.new(age_group: @age_group)).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"

@@ -1,9 +1,11 @@
 = simple_form_for [@commentable, @comment] do |f|
   = f.error_notification
-  = f.input :body, label: false, placeholder: "Opmerking toevoegen"
+  = f.input :body, label: false, placeholder: "Opmerking"
   / .float-right
   /   = f.input :private
-  = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-inline'
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   - if f.object.comment_type.blank?
     = f.hidden_field :comment_type
   = link_to "Annuleren", @comment.new_record? ? @commentable : @comment.commentable, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@comment).destroy?
+    = link_to "Verwijderen", comment_path(@comment),  method: :delete, data: { confirm: 'Opmerking wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

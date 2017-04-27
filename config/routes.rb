@@ -9,15 +9,18 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index], controller: :dashboards
     resources :seasons, shallow: true do
       resources :age_group_bulk_updates, only: [:new, :create]
+      resources :download_team_members, only: [:index]
       resources :age_groups, shallow: true do
         resources :team_bulk_updates, only: [:new, :create]
         resources :member_allocations, only: [:index, :create, :update, :destroy]
         resources :favorites, only: [:create, :destroy]
+        resources :download_team_members, only: [:index]
         resources :teams, except: [:index], shallow: true do
           resources :comments, only: [:new, :create, :edit, :update, :destroy]
           resources :favorites, only: [:create, :destroy]
           resources :team_member_bulk_updates, only: [:new, :create]
           resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]
+          resources :download_team_members, only: [:index]
         end
       end
     end

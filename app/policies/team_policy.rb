@@ -51,6 +51,12 @@ class TeamPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def download_team_members?
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_staff_for?(@record)
+  end
+
   def permitted_attributes
     attributes = [:name, :division]
     attributes << :status if set_status?

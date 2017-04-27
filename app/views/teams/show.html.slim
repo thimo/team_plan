@@ -11,6 +11,10 @@
           .tbl-cell.tbl-cell-title
             .strong
               | Teamleden
+          - if policy(@team).download_team_members?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to team_download_team_members_path(@team, format: "xlsx"), title: "Download team naar Excel", class: "action-btn"
+                i.fa.fa-file-excel-o
           - if policy(TeamMember.new(team: @team)).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_team_team_member_bulk_update_path(@team), title: "Teamleden toevoegen", class: "action-btn" do
@@ -57,7 +61,7 @@
                   td
                     = team_member.prefered_foot
                     
-                  td.w-1.nowrap
+                  td.w-1.nowrap.text-right
                     = render "shared/favorite", parent: team_member.member
                     
                     - if policy(team_member).edit?

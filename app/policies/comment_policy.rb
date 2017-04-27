@@ -32,7 +32,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.admin? || @record.user = @user
+    update?
   end
 
   class Scope < Scope

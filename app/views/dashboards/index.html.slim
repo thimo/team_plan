@@ -2,7 +2,50 @@
 
 .dashboard
   .row
-    .col-sm-6
+    .col-sm-6.col-md-4
+      - if @active_teams.present? || @favorite_teams.present? || @favorite_age_groups.present?
+        section.box-typical
+          .row.mb-3
+            - if @active_teams.present?
+              .col-6
+                header.box-typical-header
+                  .tbl-row
+                    .tbl-cell.tbl-cell-title
+                      .strong
+                        | Mijn teams
+                          
+                .box-typical-body.mb-3
+                  ul.side-menu-list
+                    - @active_teams.each do |team|
+                      li.green class="#{'active' if current_page?(team_path(team))}"
+                        = link_to team
+                          i.fa.fa-futbol-o
+                          span.lbl
+                            = team.name
+                        
+            - if @favorite_teams.present? || @favorite_age_groups.present?
+              .col-6
+                header.box-typical-header
+                  .tbl-row
+                    .tbl-cell.tbl-cell-title
+                      .strong
+                        | Favorieten
+                          
+                .box-typical-body.mb-3
+                  ul.side-menu-list
+                    - @favorite_teams.each do |team|
+                      li.gold
+                        = link_to team
+                          i.fa.fa-star
+                          span.lbl
+                            = team.name
+                    - @favorite_age_groups.each do |age_group|
+                      li.gold
+                        = link_to age_group
+                          i.fa.fa-star
+                          span.lbl
+                            = age_group.name
+                    
       section.box-typical
         header.box-typical-header
           .tbl-row
@@ -11,7 +54,7 @@
                 | Seizoen #{@season.name}
 
         .row.mb-3
-          .col-sm-6
+          .col-6
             .box-typical-body
               - if @age_groups_male.size > 0
                 header.box-typical-header
@@ -26,7 +69,7 @@
                         i.fa.fa-group
                         span.lbl
                           = age_group.name
-          .col-sm-6
+          .col-6
             .box-typical-body
               - if @age_groups_female.size > 0
                 header.box-typical-header
@@ -43,46 +86,6 @@
                           = age_group.name
 
     .col-sm-6
-      - if (active_teams = current_user.active_teams).present?
-        section.box-typical
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                .strong
-                  | Mijn teams
-                    
-          .box-typical-body.mb-3
-            ul.side-menu-list
-              - active_teams.each do |team|
-                li.green class="#{'active' if current_page?(team_path(team))}"
-                  = link_to team
-                    i.fa.fa-futbol-o
-                    span.lbl
-                      = team.name
-                    
-      - if current_user.favorite_teams.present? || current_user.favorite_age_groups.present?
-        section.box-typical
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                .strong
-                  | Favorieten
-                    
-          .box-typical-body.mb-3
-            ul.side-menu-list
-              - current_user.favorite_teams.each do |team|
-                li.gold
-                  = link_to team
-                    i.fa.fa-star
-                    span.lbl
-                      = team.name
-              - current_user.favorite_age_groups.each do |age_group|
-                li.gold
-                  = link_to age_group
-                    i.fa.fa-star
-                    span.lbl
-                      = age_group.name
-                    
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
 

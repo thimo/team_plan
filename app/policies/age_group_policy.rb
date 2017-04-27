@@ -43,6 +43,10 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def download_team_members?
+    @user.admin? || @user.club_staff?
+  end
+
   def permitted_attributes
     attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender]
     attributes << :status if set_status?
