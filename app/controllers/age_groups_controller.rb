@@ -6,7 +6,7 @@ class AgeGroupsController < ApplicationController
   before_action :breadcumbs
 
   def show
-    @open_team_evaluations = TeamEvaluation.open.by_age_group(@age_group).asc
+    @open_team_evaluations = TeamEvaluation.open_at_team.by_age_group(@age_group).asc
     @finished_team_evaluations = TeamEvaluation.finished.desc_finished.by_age_group(@age_group)
     @teams = human_sort(@age_group.teams, :name)
   end

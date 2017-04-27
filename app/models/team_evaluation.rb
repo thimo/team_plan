@@ -13,7 +13,7 @@ class TeamEvaluation < ApplicationRecord
   scope :asc, -> { order(created_at: :asc) }
   scope :desc, -> { order(created_at: :desc) }
   scope :invited, -> { where.not(invited_at: nil) }
-  scope :open, -> { where(finished_at: nil).where.not(invited_at: nil) }
+  scope :open_at_team, -> { where(finished_at: nil).where.not(invited_at: nil) }
   scope :finished, -> { where.not(finished_at: nil) }
   scope :desc_finished, -> { order(finished_at: :desc) }
   scope :by_team, -> (team) { includes(:team).where(team: team) }
