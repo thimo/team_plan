@@ -35,7 +35,7 @@
               | Spelers
               .label.label-one-number.ml-3 = @team.team_members.player.count
             th Positie
-            th Voet
+            th.hidden-xs-down Voet
             th
             
           tbody
@@ -57,8 +57,11 @@
                     - team_member.field_positions.each do |field_position|
                       div
                         = field_position.name
+                    .hidden-sm-up.color-blue-grey-lighter.small
+                      = team_member.prefered_foot
+                          
                         
-                  td
+                  td.hidden-xs-down
                     = team_member.prefered_foot
                     
                   td.w-1.nowrap.text-right
@@ -73,9 +76,11 @@
                         i.fa.fa-times.p-1.pl-2
                         
                     - if policy(team_member).show_status?
-                      = team_member.status_to_label.html_safe
+                      .hidden-xs-down
+                        = team_member.status_to_label.html_safe
                         
-            - if @staff.size > 0
+          - if @staff.size > 0
+            table.table.table-sm.tr-links
               thead
                 tr
                   th[colspan="4"] Begeleiding
@@ -94,8 +99,7 @@
                     - team_members.each do |team_member|
                       div 
                         = team_member.role_i18n
-                  td
-                  td.w-1
+                  td.w-1.nowrap
                     - team_members.each do |team_member|
                       .text-right
                         - if policy(team_member).edit?
@@ -107,7 +111,8 @@
                             i.fa.fa-times.p-1
 
                         - if policy(team_member).show_status?
-                          => team_member.status_to_label.html_safe
+                          .hidden-xs-down
+                            => team_member.status_to_label.html_safe
 
   .col-xl-6
     - if policy(@team).show_comments?

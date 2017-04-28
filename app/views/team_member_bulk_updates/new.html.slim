@@ -27,5 +27,5 @@
       .col-sm-10
         = select_tag :team_parents, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_team_parents'
       
-    = submit_tag "Toevoegen", class: "btn btn-primary"
-    
+    = submit_tag "Toevoegen", class: "btn btn-primary btn-inline"
+    = link_to "Annuleren", @team, class: 'btn btn-secondary-outline btn-inline'

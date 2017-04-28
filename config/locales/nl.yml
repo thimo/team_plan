@@ -21,13 +21,17 @@ nl:
       season:
         name: Seizoen
         active: Actief
+        status: Status
       age_group:
         name: Leeftijdsgroep
         year_of_birth_from: Jaartal geboorte vanaf
         year_of_birth_to: Jaartal geboorte t/m
         gender: Geslacht
+        status: Status
       team:
         name: Team
+        division: Klasse
+        status: Status
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
@@ -46,6 +50,7 @@ nl:
         field_positions: Veldpositie
         field_position_ids: Veldpositie
         prefered_foot: Links-/rechtsbenig
+        status: Status
       player_evaluation:
         advise_next_season: Advies volgend seizoen
         remark: Opmerking
