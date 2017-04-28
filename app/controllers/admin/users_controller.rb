@@ -1,6 +1,6 @@
 class Admin::UsersController < AdminController
   before_action :create_user, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :resend_password, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :resend_password, :destroy, :impersonate]
   before_action :breadcumbs
 
   def index
@@ -43,6 +43,11 @@ class Admin::UsersController < AdminController
   def destroy
     redirect_to admin_users_path, notice: 'Gebruiker is verwijderd.'
     @user.destroy
+  end
+
+  def impersonate
+    impersonate_user(@user)
+    redirect_to root_path
   end
 
   private

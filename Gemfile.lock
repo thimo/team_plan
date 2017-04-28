@@ -218,6 +218,8 @@ GEM
       activerecord (>= 4.0, < 5.2)
       request_store (~> 1.1)
     pg (0.20.0)
+    pretender (0.2.1)
+      actionpack
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -405,6 +407,7 @@ DEPENDENCIES
   net-ssh
   paper_trail
   pg (~> 0.18)
+  pretender
   pry-byebug
   puma (~> 3.0)
   pundit

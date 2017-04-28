@@ -24,12 +24,16 @@ header.site-header
                 a.dropdown-item[href="#"]
                   span.font-icon.glyphicon.glyphicon-cog
                   | Settings
-                = link_to support_path, class: "dropdown-item" do
+                = link_to support_path, class: "dropdown-item"
                   span.font-icon.glyphicon.glyphicon-question-sign
                   | Help
                 .dropdown-divider
-                = link_to destroy_user_session_path, class: "dropdown-item",  method: :delete do
+                = link_to destroy_user_session_path,  method: :delete, class: "dropdown-item"
                   span.font-icon.glyphicon.glyphicon-log-out
                   | Uitloggen
+                - if current_user != true_user
+                  = link_to stop_impersonating_users_path, method: :post, class: "dropdown-item"
+                    span.font-icon.glyphicon.glyphicon-log-in
+                    | Terug naar admin
                 
 .mobile-menu-left-overlay

@@ -38,11 +38,10 @@ gem 'pundit' #,                     '~> 1.1.0'
 gem 'awesome_print', require: "awesome_print"
 gem 'redcarpet' #,                  '3.3.4' # Markdown parser
 gem 'paper_trail'
-# gem 'axlsx',                      git: 'https://github.com/randym/axlsx.git' # Generate XLSX
-# gem 'axlsx_rails',                '0.4.0'
 gem 'rubyzip', '~> 1.1.0'
 gem 'axlsx', '2.1.0.pre'
 gem 'axlsx_rails'
+gem 'pretender'
 
 group :development, :test do
   gem 'byebug', platform: :mri

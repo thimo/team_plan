@@ -33,6 +33,9 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
     end
+    resources :users, only: [] do
+      post :stop_impersonating, on: :collection
+    end
 
     get 'admin' => 'admin#show'
     namespace :admin do
@@ -40,6 +43,7 @@ Rails.application.routes.draw do
         resources :email_logs, only: [:index, :show]
         member do
           get :resend_password
+          post :impersonate
         end
       end
       resources :members, only: [:index, :show]

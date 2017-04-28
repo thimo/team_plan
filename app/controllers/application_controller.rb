@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
+  impersonates :user
 
   before_action :authenticate_user!
   before_action :set_locale
