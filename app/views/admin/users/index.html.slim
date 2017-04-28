@@ -18,12 +18,12 @@ section.box-typical
             i.fa.fa-file-o
             
   .box-typical-body
-    table.table.table-sm.tr-links
+    table.table.table-sm.tr-links.table-responsive
       thead
         tr
           th = User.human_attribute_name(:name) 
           th = User.human_attribute_name(:role)
-          th = User.human_attribute_name(:current_sign_in_at)
+          th.hidden-xs-down = User.human_attribute_name(:current_sign_in_at)
           th
           
       tbody
@@ -35,7 +35,7 @@ section.box-typical
                 => user.email
             td 
               = user.role_i18n
-            td
+            td.hidden-xs-down
               = I18n.l user.current_sign_in_at, format: :long if user.current_sign_in_at.present?
             td.text-right
               - if current_user != user

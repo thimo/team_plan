@@ -19,68 +19,24 @@ div
     | / 
     = mail_to member.email_2, member.email_2
         
-hr
-
-h3 Sportlink
-
 - unless member.person_type.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Soort persoon
-    .col-6
-      = member.person_type
-      
-/ - unless member.contribution_category.blank?
+  .row.pt-4
+    .col-12
+      div
+        = "#{member.person_type}: "
+        = "#{member.local_teams}"
+        = "#{member.sport_category}"
+      div
+        | Sinds #{I18n.l member.member_since, format: :long}
+
+/ - unless member.member_since.blank?
 /   .row
 /     .col-6
 /       label.semibold 
-/         | Contributie categorie
+/         | Lid sinds
 /     .col-6
-/       = member.contribution_category
-/ - unless member.age_category.blank?
-/   .row
-/     .col-6
-/       label.semibold 
-/         | Leeftijdscategorie
-/     .col-6
-/       = member.age_category
-- unless member.local_teams.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Lokale teams
-    .col-6
-      = member.local_teams
-/ - unless member.club_sports.blank?
-/   .row
-/     .col-6
-/       label.semibold 
-/         | Verenigingssporten
-/     .col-6
-/       = member.club_sports
-- unless member.sport_category.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Bondssporten
-    .col-6
-      = member.sport_category
-- unless member.association_sports.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Bondssporten (elders)
-    .col-6
-      = member.association_sports
-- unless member.member_since.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Lid sinds
-    .col-6
-      = I18n.l member.member_since, format: :long
-- unless member.registered_at.blank?
+/       = 
+- unless member.registered_at.blank? || member.registered_at == member.member_since
   .row
     .col-6
       label.semibold 
