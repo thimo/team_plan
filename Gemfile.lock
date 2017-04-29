@@ -59,6 +59,9 @@ GEM
       axlsx (>= 2.0.1)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bootstrap4-kaminari-views (1.0.0)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     bullet (5.5.1)
@@ -376,6 +379,7 @@ DEPENDENCIES
   awesome_print
   axlsx (= 2.1.0.pre)
   axlsx_rails
+  bootstrap4-kaminari-views
   breadcrumbs_on_rails
   bullet
   byebug

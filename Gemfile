@@ -21,7 +21,8 @@ gem 'mini_magick',                '>= 4.3.6'
 
 gem 'rails-i18n'
 gem 'kaminari' #,                   '>= 0.16.3'  # Paging
-#gem 'kaminari-bootstrap' #,         '>= 3.0.1'   # Bootstrap templates for paging
+# gem 'kaminari-bootstrap' #,         '>= 3.0.1'   # Bootstrap templates for paging
+gem 'bootstrap4-kaminari-views'
 
 gem 'simple_form' #,                '>= 3.2.0'
 gem 'country_select'
