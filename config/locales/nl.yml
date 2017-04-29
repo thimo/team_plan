@@ -1,14 +1,4 @@
 nl:
-  company:
-    name: TeamPlan · ESA Rijkerswoerd
-    club: ESA Rijkerswoerd
-    url: https://teamplan.esa-rijkerswoerd.nl
-    address:
-    zip:
-    city:
-    email: helpdesk@defrog.nl
-    phone:
-    contact_name: Thimo Jansen
   activerecord:
     attributes:
       user:

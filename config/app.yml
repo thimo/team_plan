@@ -1,0 +1,20 @@
+# config/app.yml for rails-settings-cached
+defaults: &defaults
+  application.name: TeamPlan
+  club.name: Defrog
+  club.hostname: teamplan.defrog.nl
+  club.address:
+  club.zip:
+  club.city: Arnhem
+  club.email: helpdesk@defrog.nl
+  club.phone:
+  club.contact_name: Thimo Jansen
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

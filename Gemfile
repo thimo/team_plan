@@ -33,6 +33,7 @@ gem 'net-ssh' #,                    '>= 3.0.2'
 gem 'figaro' #,                     '>= 1.1.1'
 gem 'devise'
 gem 'devise-bootstrap-views', git: "https://github.com/hisea/devise-bootstrap-views.git", :branch => 'bootstrap4'
+gem 'rails-settings-cached'
 
 gem 'pundit' #,                     '~> 1.1.0'
 # gem 'rolify' #,                     '~> 5.0.0'

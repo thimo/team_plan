@@ -27,7 +27,7 @@ class DownloadTeamMembersController < ApplicationController
     end
 
     respond_to do |format|
-       format.xlsx {render xlsx: 'download', filename: "#{I18n.t 'company.name'} - #{@season.name} #{ " - #{@team.name}" if @team.present? } - #{Time.now}.xlsx"}
+       format.xlsx {render xlsx: 'download', filename: "#{Setting['company.name'] - #{@season.name} #{ " - #{@team.name}" if @team.present? } - #{Time.now}.xlsx"}
     end
   end
 

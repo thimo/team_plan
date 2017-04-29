@@ -1,7 +1,5 @@
 - provide(:title, "Gebruikers")
 
-.float-right
-
 section.box-typical
   header.box-typical-header
     .tbl-row
@@ -18,7 +16,7 @@ section.box-typical
             i.fa.fa-file-o
             
   .box-typical-body
-    table.table.table-sm.tr-links.table-responsive
+    table.table.table-sm.tr-links
       thead
         tr
           th = User.human_attribute_name(:name) 

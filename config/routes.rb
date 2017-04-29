@@ -54,6 +54,8 @@ Rails.application.routes.draw do
       end
       resources :email_logs, only: [:index, :show]
       resources :version_updates
+      resources :settings,
+        :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
     end
   end
 

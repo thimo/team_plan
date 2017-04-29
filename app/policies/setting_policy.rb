@@ -1,0 +1,2 @@
+class SettingPolicy < AdminPolicy
+end

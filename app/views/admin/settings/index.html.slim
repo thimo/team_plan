@@ -1,0 +1,32 @@
+- provide(:title, "Instellingen")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | Instellingen
+          
+      / .tbl-cell.text-right
+      /   = text_field_tag "query"
+      /   = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Filter op rol", ""]))
+      / - if policy(User).create?
+      /   .tbl-cell.tbl-cell-action-bordered
+      /     = link_to new_admin_user_path, title: "Gebruiker toevoegen"
+      /       i.fa.fa-file-o
+            
+  .box-typical-body
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th
+            | Naam
+          th
+            | Waarde
+      tbody
+        - @settings.each do |key, value|
+          tr
+            td
+              = link_to key, edit_admin_setting_path(key)
+            td
+              = value

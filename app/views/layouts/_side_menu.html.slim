@@ -74,9 +74,14 @@ nav.side-menu
               | E-mail log
         li.magenta class="#{'active' if controller_name == 'version_updates'}"
           = link_to admin_version_updates_path do
-            i.fa.fa-code-fork
+            i.fa.fa-code-fork.pl-1
             span.lbl
               | Versies
+        li.red class="#{'active' if controller_name == 'settings'}"
+          = link_to admin_settings_path do
+            i.fa.fa-sliders
+            span.lbl
+              | Instellingen
   section
     ul.side-menu-list
       li.brown
