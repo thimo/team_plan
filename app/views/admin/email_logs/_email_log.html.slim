@@ -1,7 +1,7 @@
 tr
   td
-    = I18n.l email_log.created_at, format: :long
-  td
-    = email_log.to
-  td
     = link_to email_log.subject, [:admin, email_log]
+    .color-blue-grey.small
+      = email_log.to
+  td
+    = I18n.l email_log.created_at, format: :long
