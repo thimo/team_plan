@@ -33,7 +33,7 @@
           thead
             th 
               | Spelers
-              .label.label-one-number.ml-3 = @team.team_members.player.count
+              .label.label-one-number.ml-3 = policy_scope(@team.team_members).player.size
             th Positie
             th.hidden-xs-down Voet
             th

@@ -41,7 +41,6 @@ class TeamEvaluationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
       if user.admin? || user.club_staff?
         scope.all
       else

@@ -8,8 +8,8 @@ class SeasonsController < ApplicationController
   end
 
   def show
-    @age_groups_male = @season.age_groups.male.asc
-    @age_groups_female = @season.age_groups.female.asc
+    @age_groups_male = policy_scope(@season.age_groups).male.asc
+    @age_groups_female = policy_scope(@season.age_groups).female.asc
   end
 
   def new; end
@@ -43,37 +43,37 @@ class SeasonsController < ApplicationController
 
   private
 
-  def create_season
-    @season = if action_name == 'new'
-                Season.new
-              else
-                Season.new(permitted_attributes(Season.new))
-              end
+    def create_season
+      @season = if action_name == 'new'
+                  Season.new
+                else
+                  Season.new(permitted_attributes(Season.new))
+                end
 
-    authorize @season
-  end
+      authorize @season
+    end
 
-  def set_season
-    # Find season by id in params
-    @season = Season.find(params[:id]) unless params[:id].nil?
-    # Find first active season
-    @season = Season.find_by(status: Season.statuses[:active]) if @season.nil?
-    # Find first draft season
-    @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
-    # Create a new draft season in the database
-    @season = Season.create(name: "#{Time.current.year} / #{Time.current.year + 1}") if @season.nil?
+    def set_season
+      # Find season by id in params
+      @season = Season.find(params[:id]) unless params[:id].nil?
+      # Find first active season
+      @season = Season.find_by(status: Season.statuses[:active]) if @season.nil?
+      # Find first draft season
+      @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
+      # Create a new draft season in the database
+      @season = Season.create(name: "#{Time.current.year} / #{Time.current.year + 1}") if @season.nil?
 
-    authorize @season
-  end
+      authorize @season
+    end
 
-  def breadcumbs
-    unless @season.nil?
-      if @season.new_record?
-        add_breadcrumb 'Seizoenen', seasons_path
-        add_breadcrumb 'Nieuw'
-      else
-        add_breadcrumb "#{@season.name}", @season
+    def breadcumbs
+      unless @season.nil?
+        if @season.new_record?
+          add_breadcrumb 'Seizoenen', seasons_path
+          add_breadcrumb 'Nieuw'
+        else
+          add_breadcrumb "#{@season.name}", @season
+        end
       end
     end
-  end
 end

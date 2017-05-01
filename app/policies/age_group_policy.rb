@@ -55,7 +55,11 @@ class AgeGroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      if @user.admin? || @user.club_staff?
+        scope
+      else
+        scope.where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]])
+      end
     end
   end
 end
