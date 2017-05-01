@@ -25,7 +25,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :team_evaluations, only: [:show, :edit, :update]
+    resources :team_evaluations, only: [:show, :edit, :update] do
+      member do
+        post :re_open
+      end
+    end
     resources :team_members, only: [:show, :create, :edit, :update, :destroy]
     resources :member_allocation_filters, only: [:create, :destroy]
 

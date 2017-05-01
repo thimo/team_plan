@@ -39,6 +39,12 @@ class TeamEvaluationPolicy < ApplicationPolicy
     update?
   end
 
+  def re_open?
+    return false if @record.archived? || @record.new_record? || @record.finished_at.nil?
+
+    @user.admin? || @user.club_staff?
+  end
+
   class Scope < Scope
     def resolve
       if user.admin? || user.club_staff?

@@ -1,6 +1,6 @@
 class TeamEvaluationsController < ApplicationController
   before_action :create_team_evaluation, only: [:new, :create]
-  before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy]
+  before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy, :re_open]
   before_action :breadcumbs
 
   def show; end
@@ -35,6 +35,12 @@ class TeamEvaluationsController < ApplicationController
   def destroy
     redirect_to @team_evaluation.team, notice: 'Teamevaluatie is verwijderd.'
     @team_evaluation.destroy
+  end
+
+  def re_open
+    @team_evaluation.update_columns(finished_at: nil)
+    flash[:success] = 'De teamevaluatie staat weer open voor wijzigingen.'
+    redirect_to [:edit, @team_evaluation]
   end
 
   private
