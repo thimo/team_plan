@@ -7,31 +7,14 @@ class TeamEvaluationsController < ApplicationController
 
   def new
     # Create team evaluation
-    @team_evaluation.team.team_members.player.asc.each do |player|
+    @team_evaluation.team.team_members.active.player.asc.each do |player|
       @team_evaluation.player_evaluations.build(team_member: player)
     end
   end
 
   def create
     if @team_evaluation.save
-      # FIXME DRY up this code (same as in update)
-      if send_invite?
-        mail_count = @team_evaluation.send_invites(current_user)
-
-        if mail_count == 0
-          flash[:alert] = "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
-        else
-          flash[:success] = "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
-        end
-      else
-        flash[:success] = 'De teamevaluatie is toegevoegd.'
-      end
-
-      if stay_open?
-        redirect_to [:edit, @team_evaluation]
-      else
-        redirect_to @team_evaluation.team
-      end
+      post_save_actions
     else
       render :new
     end
@@ -43,26 +26,7 @@ class TeamEvaluationsController < ApplicationController
     @team_evaluation.enable_validation = finish_evaluation?
 
     if @team_evaluation.update_attributes(team_evaluation_params)
-      if finish_evaluation?
-        @team_evaluation.finish_evaluation(current_user)
-        flash[:success] = 'De teamevaluatie is afgerond.'
-      elsif send_invite?
-        mail_count = @team_evaluation.send_invites(current_user)
-
-        if mail_count == 0
-          flash[:alert] = "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
-        else
-          flash[:success] = "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
-        end
-      else
-        flash[:success] = 'De teamevaluatie is opgeslagen.'
-      end
-
-      if stay_open?
-        redirect_to [:edit, @team_evaluation]
-      else
-        redirect_to @team_evaluation.team
-      end
+      post_save_actions
     else
       render :new
     end
@@ -117,5 +81,28 @@ class TeamEvaluationsController < ApplicationController
 
     def stay_open?
       params[:save_and_stay_open].present?
+    end
+
+    def post_save_actions
+      if finish_evaluation?
+        @team_evaluation.finish_evaluation(current_user)
+        flash[:success] = 'De teamevaluatie is afgerond.'
+      elsif send_invite?
+        mail_count = @team_evaluation.send_invites(current_user)
+
+        if mail_count == 0
+          flash[:alert] = "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
+        else
+          flash[:success] = "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
+        end
+      else
+        flash[:success] = 'De teamevaluatie is opgeslagen.'
+      end
+
+      if stay_open?
+        redirect_to [:edit, @team_evaluation]
+      else
+        redirect_to @team_evaluation.team
+      end
     end
 end
