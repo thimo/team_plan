@@ -7,9 +7,9 @@ class PlayerEvaluation < ApplicationRecord
   belongs_to :team_member, required: true
   has_paper_trail
 
-  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :prefered_foot, if: -> { team_evaluation.enable_validation? }
+  validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :prefered_foot, if: -> { team_evaluation.enable_validation? && team_member.active? }
   # Make sure linked team member has field positions filled in
-  validate :team_member_has_field_positions, if: -> { team_evaluation.enable_validation? }
+  validate :team_member_has_field_positions, if: -> { team_evaluation.enable_validation? && team_member.active? }
 
   delegate :prefered_foot, to: :team_member
   accepts_nested_attributes_for :team_member

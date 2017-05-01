@@ -20,7 +20,9 @@ class TeamEvaluationsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    update_team_members
+  end
 
   def update
     @team_evaluation.enable_validation = finish_evaluation?
@@ -110,5 +112,17 @@ class TeamEvaluationsController < ApplicationController
       else
         redirect_to @team_evaluation.team
       end
+    end
+
+    def update_team_members
+      player_evaluations = @team_evaluation.player_evaluations
+      @team_evaluation.team.team_members.active.player.asc.each do |player|
+        unless player_evaluations.any?{|player_evaluation| player_evaluation.team_member_id == player.id}
+          debugger
+          @team_evaluation.player_evaluations.build(team_member: player)
+        end
+      end
+
+      # remove archived
     end
 end
