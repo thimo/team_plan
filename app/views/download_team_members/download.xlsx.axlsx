@@ -31,19 +31,19 @@ wb.add_worksheet(name: "Teamleden") do |sheet|
       ]
       sheet.add_row columns
     end
-    team[:staff].each do |team_member|
+    team[:staff].group_by(&:member).each do |member, team_members|
       columns = [
         team[:season],
         team[:age_group],
         team[:team],
-        team_member.member.name,
-        team_member.member.born_on,
-        team_member.role_i18n,
-        team_member.member.address,
-        team_member.member.zipcode,
-        team_member.member.city,
-        team_member.member.phone,
-        team_member.member.email,
+        member.name,
+        member.born_on,
+        team_members.map(&:role_i18n).join(', '),
+        member.address,
+        member.zipcode,
+        member.city,
+        member.phone,
+        member.email,
       ]
       sheet.add_row columns
     end
