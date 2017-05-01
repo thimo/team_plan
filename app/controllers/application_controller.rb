@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
     def invalid_auth_token
       flash[:danger] = "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer."
-      redirect_to :back
+      redirect_to back_url
     end
 
     def permission_denied
