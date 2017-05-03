@@ -5,8 +5,8 @@ class TeamMember < ApplicationRecord
 
   before_create :inherit_fields
 
-  belongs_to :team
-  belongs_to :member, required: true
+  belongs_to :team, touch: true
+  belongs_to :member, required: true, touch: true
   has_many :player_evaluations, dependent: :destroy
   has_and_belongs_to_many :field_positions
   has_paper_trail

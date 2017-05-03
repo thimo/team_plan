@@ -1,26 +1,27 @@
-/ Dialog used for both new and edit actions on team members
-#teamMemberNew.modal.fade[tabindex="-1" role="dialog" aria-labelledby="teamMemberNewLabel" aria-hidden="true"]
-  .modal-dialog[role="document"]
-    .modal-content
-      .modal-header
-        h5#teamMemberNewLabel.modal-title
-          | Voeg speler toe aan team:
-        button.close[type="button" data-dismiss="modal" aria-label="Close"]
-          span[aria-hidden="true"]
-            | ×
-      .modal-body
-        = simple_form_for TeamMember.new, remote: true do |f|
-          .form-group
-            - teams.each do |team|
-              .radio
-                = f.radio_button :team_id, "#{team.id}", id: "team_id_#{team.id}"
-                label for="team_id_#{team.id}"
-                  = team.name
-          = f.hidden_field :member_id
-          = hidden_field_tag :team_member_id
-          = hidden_field_tag :age_group_id, "#{age_group.id}"
-          
-          .modal-footer
-            = f.button :submit, "Toevoegen", class: 'btn btn-primary'
-            button.btn.btn-secondary-outline[type="button" data-dismiss="modal"]
-              | Annuleren
+- cache @age_group, @teams
+  / Dialog used for both new and edit actions on team members
+  #teamMemberNew.modal.fade[tabindex="-1" role="dialog" aria-labelledby="teamMemberNewLabel" aria-hidden="true"]
+    .modal-dialog[role="document"]
+      .modal-content
+        .modal-header
+          h5#teamMemberNewLabel.modal-title
+            | Voeg speler toe aan team:
+          button.close[type="button" data-dismiss="modal" aria-label="Close"]
+            span[aria-hidden="true"]
+              | ×
+        .modal-body
+          = simple_form_for TeamMember.new, remote: true do |f|
+            .form-group
+              - teams.each do |team|
+                .radio
+                  = f.radio_button :team_id, "#{team.id}", id: "team_id_#{team.id}"
+                  label for="team_id_#{team.id}"
+                    = team.name
+            = f.hidden_field :member_id
+            = hidden_field_tag :team_member_id
+            = hidden_field_tag :age_group_id, "#{age_group.id}"
+            
+            .modal-footer
+              = f.button :submit, "Toevoegen", class: 'btn btn-primary'
+              button.btn.btn-secondary-outline[type="button" data-dismiss="modal"]
+                | Annuleren

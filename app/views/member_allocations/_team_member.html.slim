@@ -1,7 +1,7 @@
 - cache [team_member]
   tr
     td
-    = render "member_allocations/member", member: team_member.member, cached: true
+    = render "member_allocations/member", member: team_member.member
       
     td.w-1.nowrap
       - if policy(team_member).update?

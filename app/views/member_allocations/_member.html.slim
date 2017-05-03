@@ -19,13 +19,15 @@
   td.color-blue-grey.small
     - if (active_team = member.active_team).present?
       div
-        strong[title="Huidige team #{active_team.name}"]
+        strong[title="Huidig team"]
           = "#{active_team.name}"
         span.pl-1
           = "#{active_team.division}"
         - if (last_evaluation = member.last_evaluation).present?
           span.ml-1[title="Evaluatie #{I18n.l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
             i.fa[class="#{last_evaluation.advise_to_icon_class}"]
+          - if last_evaluation.remark.present?
+            i.fa.fa-info-circle.blue.ml-1[title="#{last_evaluation.remark}"]
           
     - if (active_team_member = member.active_team_member).present?
       - if (field_positions = active_team_member.field_positions).present?
@@ -35,5 +37,5 @@
     
     - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
       - last_comments.each do |last_comment|
-        div[title="Indelingsverzoek #{l last_comment.created_at.to_date, format: :long}, #{last_comment.user.name}"]
+        .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at.to_date, format: :short})"]
           = last_comment.body
