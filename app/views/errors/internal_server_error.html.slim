@@ -1,0 +1,16 @@
+- provide(:title, "Server fout")
+
+h1
+  | Oeps!
+
+p
+  |  Er is iets fout gegaan op de server bij het verwerken van je aanvraag of opdracht. 
+p.small
+  |  We willen het probleem graag oplossen. Je kunt ons hierbij helpen door een beschrijving van het probeem te geven via een 
+  a[href="mailto:#{Setting['club.helpdesk_email']}?subject=500"]
+    | mailtje aan de beheerder
+  | . We zien graag een screenshot van de pagina voordat het probleem optrad, de URL van die pagina en een korte beschrijving van wat je hebt gedaan voordat het probleem optrad. 
+
+= link_to root_path, class: "btn btn-default  btn-lg" do
+  i.fa.fa-dashboard.pr-2
+  |  Naar Dashboard

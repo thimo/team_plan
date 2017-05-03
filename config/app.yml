@@ -9,6 +9,7 @@ defaults: &defaults
   club.email: helpdesk@defrog.nl
   club.phone:
   club.contact_name: Thimo Jansen
+  club.helpdesk_email: helpdesk@defrog.nl
 
 development:
   <<: *defaults
