@@ -42,7 +42,7 @@
             = render "inbetween_header" if index > 0 && index % 4 == 0
 
             tr
-              td.member-name[class="#{'line-through' if pe.object.team_member.archived?}"]
+              td.member-name[class="#{'line-through' if evaluation.object.team_member.archived?}"]
                 - member = evaluation.team_member.member
                 = link_to member.name, member
                 .color-blue-grey-lighter.small
