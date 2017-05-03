@@ -1,11 +1,8 @@
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form', class: "sign-box" }) do |f|
-  .sign-avatar.sign-logo
-    = image_tag "logo/esa_light_blue.svg"
-  header.sign-title
-    = t('.sign_in', default: 'Sign in')
-    
+- provide(:title, t('.sign_in', default: 'Sign in'))
+
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
   = f.error_notification
-  
+
   = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
   = f.input :password, autocomplete: 'off', class: 'form-control', placeholder: User.human_attribute_name(:password), label: false 
   - if devise_mapping.rememberable?
@@ -14,5 +11,5 @@
         = f.check_box :remember_me, class: 'form-check-input', id: 'remember-me'
         = f.label t('.remember_me', default: 'Remember me'), :remember_me, class: 'form-check-label', for: 'remember-me'
   = f.button :submit,  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary'
-  
+
   = render 'devise/shared/links'

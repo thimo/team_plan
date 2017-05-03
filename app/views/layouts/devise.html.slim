@@ -21,5 +21,11 @@ html
               .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
                 | #{message}
 
-          = yield
+          .sign-box
+            .sign-avatar.sign-logo.mt-2.mb-5
+              = image_tag "logo/esa_light_blue.svg"
+            header.sign-title
+              = yield(:title)
+              
+            = yield
                 

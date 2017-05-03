@@ -1,9 +1,6 @@
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: 'form', class: "sign-box" }) do |f|
-  .sign-avatar.sign-logo
-    = image_tag "logo/esa_light_blue.svg"
-  header.sign-title
-    = t('.change_your_password', default: 'Change your password')
-    
+- provide(:title, t('.change_my_password', default: 'Change my password'))
+
+= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: 'form' }) do |f|
   = f.error_notification
   
   = f.hidden_field :reset_password_token
