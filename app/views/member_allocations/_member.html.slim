@@ -19,8 +19,7 @@
   td.color-blue-grey.small
     - if (active_team = member.active_team).present?
       div
-        strong[title="Huidig team"]
-          = "#{active_team.name}"
+        = link_to active_team.name, active_team, target: '_blank', class: 'strong', title: 'Huidig team'
         span.pl-1
           = "#{active_team.division}"
         - if (last_evaluation = member.last_evaluation).present?
