@@ -80,6 +80,8 @@ group :test do
   gem 'mini_backtrace'
   gem 'shoulda-matchers', require: false
   gem 'launchy' # For 'save_and_open_page' debugging during testing
+  gem 'minitest'
+  gem 'minitest-rails'
 end
 
 group :production, :staging do
