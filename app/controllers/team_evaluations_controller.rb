@@ -118,7 +118,6 @@ class TeamEvaluationsController < ApplicationController
       player_evaluations = @team_evaluation.player_evaluations
       @team_evaluation.team.team_members.active.player.asc.each do |player|
         unless player_evaluations.any?{|player_evaluation| player_evaluation.team_member_id == player.id}
-          debugger
           @team_evaluation.player_evaluations.build(team_member: player)
         end
       end
