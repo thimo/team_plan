@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.4.0'
 
-gem 'rails', '>= 5.1.0.rc2'
+gem 'rails', '>= 5.1.0'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
@@ -24,14 +24,16 @@ gem 'kaminari' #,                   '>= 0.16.3'  # Paging
 # gem 'kaminari-bootstrap' #,         '>= 3.0.1'   # Bootstrap templates for paging
 gem 'bootstrap4-kaminari-views'
 
-gem 'simple_form' #,                '>= 3.2.0'
+# gem 'simple_form' #,                '>= 3.2.0'
+gem 'simple_form', github: 'elsurudo/simple_form', branch: 'rails-5.1.0' # Change back to normal simple_form gem after May 10th ??
 gem 'country_select'
 
 gem 'breadcrumbs_on_rails' #,       '>= 3.0.1'   # Breadcrumbs
 gem 'enum_help' #,                  '>= 0.0.14'
 gem 'net-ssh' #,                    '>= 3.0.2'
 gem 'figaro' #,                     '>= 1.1.1'
-gem 'devise'
+gem 'devise', github: 'plataformatec/devise' # Remove github dependency after May 10th
+# gem 'erubis'
 gem 'devise-bootstrap-views', git: "https://github.com/hisea/devise-bootstrap-views.git", :branch => 'bootstrap4'
 gem 'rails-settings-cached'
 
