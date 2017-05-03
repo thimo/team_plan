@@ -4,6 +4,7 @@
   = f.input :name
   = f.input :division, as: :select, collection: Team::DIVISION_OPTIONS
   /  = pe.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:prefered_foot).present?}", title: TeamMember.human_attribute_name(:prefered_foot)}
+  = f.input :remark
   
   - if policy(@team).set_status?
     = f.input :status

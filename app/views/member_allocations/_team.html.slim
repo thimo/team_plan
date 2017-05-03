@@ -5,11 +5,14 @@
         => link_to new_team_team_member_bulk_update_path(team, from: :member_allocations), title: "Teamleden toevoegen", class: "action-btn"
           i.fa.fa-users.color-blue-grey
     td[colspan="2"]
-      strong = team.name
+      = link_to team.name, team, target: '_blank', class: 'strong'
       small.pl-1 = team.division
       - if team.team_members.player.size > 0
         .label.label-one-number.ml-3
           = "#{team.team_members.player.size}"
+      - if team.remark.present?
+        .color-blue-grey.small
+          = team.remark
     td
       
   = render partial: 'member_allocations/team_member', collection: team.team_members.player.asc, cached: true
