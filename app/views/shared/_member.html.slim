@@ -1,7 +1,12 @@
 h3 Contactgegevens
+
 div.strong
   => member.name
-div
+  .color-blue-grey-lighter.small
+    => l member.born_on, format: :long unless member.born_on.nil?
+    = "(#{member.gender})"
+
+div.pt-2
   => member.address
 div
   => member.zipcode
@@ -24,8 +29,8 @@ div
     .col-12
       div
         = "#{member.person_type}: "
-        = "#{member.local_teams}"
-        = "#{member.sport_category}"
+        = "#{member.local_teams} "
+        = "#{member.sport_category} "
       div
         | Sinds #{I18n.l member.member_since, format: :long}
 
