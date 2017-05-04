@@ -1,8 +1,12 @@
+- name_prefix ||= ''
+
 - cache [member]
   td
+    - if name_prefix.present?
+      = "#{name_prefix}: "
     = link_to member.name, member, target: "_blank"
-    - if current_user.has_favorite?(member)
-      i.fa.fa-star.favorable.selected.pl-2
+    / - if current_user.has_favorite?(member)
+    /   i.fa.fa-star.favorable.selected.pl-2
 
     .color-blue-grey-lighter.small
       => l member.born_on, format: :long unless member.born_on.nil?

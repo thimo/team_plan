@@ -1,7 +1,7 @@
 - cache [team_member]
   tr
     td
-    = render "member_allocations/member", member: team_member.member
+    = render "member_allocations/member", member: team_member.member, name_prefix: (team_member.player? ? '' : team_member.role_i18n)
       
     td.w-1.nowrap
       - if policy(team_member).update?
