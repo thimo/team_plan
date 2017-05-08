@@ -16,3 +16,5 @@
     td
       
   = render partial: 'member_allocations/team_member', collection: team.team_members.player.asc, cached: true
+  / TODO combine to single members or maybe just show role(s)
+  = render partial: 'member_allocations/team_member', collection: team.team_members.staff.asc, cached: true

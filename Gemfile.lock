@@ -214,6 +214,9 @@ GEM
     mini_magick (4.7.0)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    minitest-rails (3.0.0)
+      minitest (~> 5.8)
+      railties (~> 5.0)
     minitest-reporters (1.1.14)
       ansi
       builder
@@ -421,6 +424,8 @@ DEPENDENCIES
   meta_request
   mini_backtrace
   mini_magick (>= 4.3.6)
+  minitest
+  minitest-rails
   minitest-reporters
   net-ssh
   paper_trail
