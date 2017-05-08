@@ -88,7 +88,6 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
-    callsite (0.0.11)
     capybara (2.13.0)
       addressable
       mime-types (>= 1.16)
@@ -200,10 +199,6 @@ GEM
     lumberjack (1.0.11)
     mail (2.6.5)
       mime-types (>= 1.16, < 4)
-    meta_request (0.3.0)
-      callsite
-      rack-contrib
-      railties
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -252,8 +247,6 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.1)
-    rack-contrib (1.2.0)
-      rack (>= 0.9.1)
     rack-livereload (0.3.16)
       rack
     rack-mini-profiler (0.10.2)
@@ -421,7 +414,6 @@ DEPENDENCIES
   launchy
   letter_opener
   listen (~> 3.0.5)
-  meta_request
   mini_backtrace
   mini_magick (>= 4.3.6)
   minitest

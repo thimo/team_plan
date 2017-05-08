@@ -7,15 +7,16 @@ class MemberAllocationsController < ApplicationController
     @filter_field_position = session[:filter_field_position]
     @filter_team = session[:filter_team]
 
-    members = @age_group.active_members
-    members = members.by_season(Season.active.last).by_field_position(field_positions) if field_positions.present?
-    members = members.by_team(session[:filter_team]) if session[:filter_team].present?
-
+    active_members = @age_group.active_members
     assigned_members = @age_group.assigned_active_members
+    @available_members = active_members - assigned_members
 
-    @available_members = members - assigned_members
+    @teams_for_filter = [["Filter op team", ""]] + human_sort(Team.for_members(@available_members).for_season(Season.active.last).distinct, :name).map{|team| [team.name, team.id]}
 
-    @teams_for_filter = [["Filter op team", ""]] + human_sort(Team.for_members(@age_group.active_members).for_season(Season.active.last).distinct, :name).map{|team| [team.name, team.id]}
+    filtered_members = active_members
+    filtered_members = filtered_members.by_season(Season.active.last).by_field_position(field_positions) if field_positions.present?
+    filtered_members = filtered_members.by_team(session[:filter_team]) if session[:filter_team].present?
+    @filtered_available_members = filtered_members - assigned_members
 
     add_breadcrumb @age_group.season.name.to_s, @age_group.season
     add_breadcrumb @age_group.name.to_s, @age_group
