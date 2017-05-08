@@ -3,7 +3,7 @@ class Team < ApplicationRecord
 
   DIVISION_OPTIONS = %w(2e\ divisie 3e\ divisie 4e\ divisie Hoofdklasse 1e\ klasse 2e\ klasse 3e\ klasse 4e\ klasse 5e\ klasse 6e\ klasse)
 
-  belongs_to :age_group
+  belongs_to :age_group, touch: true
   has_many :team_members, dependent: :destroy
   has_many :members, through: :team_members
   has_many :comments, as: :commentable, dependent: :destroy
