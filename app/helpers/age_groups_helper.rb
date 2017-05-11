@@ -11,7 +11,7 @@ module AgeGroupsHelper
         range += " - "
       end
       if age_group.year_of_birth_to.nil?
-        range += " en ouder"
+        range += " en jonger"
       else
         range += "#{age_group.year_of_birth_to}"
       end
