@@ -2,7 +2,15 @@ class Member < ApplicationRecord
   include Filterable
 
   has_many :team_members, dependent: :destroy
+  has_many :team_members_as_player, -> { where(role: TeamMember.roles[:player]) }, class_name: 'TeamMember'
   has_many :teams, through: :team_members
+  has_many :teams_as_player, through: :team_members_as_player, class_name: 'Team', source: :team
+
+  has_many :game_users
+  has_many :game_likes, -> { where like: true }, class_name: 'GameUser'
+  has_many :liked_games, :through => :game_likes, class_name: 'Game', :source => :game
+
+
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
@@ -40,7 +48,7 @@ class Member < ApplicationRecord
   end
 
   def active_team
-    teams.joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).first
+    teams_as_player.for_active_season.first || teams.for_active_season.first
   end
 
   def active_team_member
