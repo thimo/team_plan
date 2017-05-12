@@ -64,7 +64,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
-  # gem 'meta_request'
   gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'rack-mini-profiler'
   gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
@@ -73,6 +72,7 @@ group :development do
   gem "rb-fsevent"
   gem 'spring-commands-rspec'
   gem 'terminal-notifier-guard'
+  gem 'meta_request' # RailsPanel is a Chrome extension for Rails development that will end your tailing of development.log
 end
 
 group :test do
