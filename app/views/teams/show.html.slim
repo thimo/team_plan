@@ -34,6 +34,8 @@
             th[colspan="2"]
               | Spelers
               .label.label-one-number.ml-3 = policy_scope(@team.team_members).player.size
+            - if @team.draft?
+              th Huidig team 
             th Positie
             th.hidden-xs-down Voet
             th
@@ -55,7 +57,14 @@
                         .color-blue-grey-lighter.small
                           => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
                           = "(#{team_member.member.gender})"
-                          
+                    - if @team.draft?
+                      td 
+                        - if (active_team = team_member.member.active_team).present?
+                          div
+                            = link_to active_team.name, active_team, target: '_blank'
+                          .small
+                            = "#{active_team.division}"
+                        
                     td
                       - team_member.field_positions.each do |field_position|
                         div
