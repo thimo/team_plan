@@ -15,6 +15,9 @@
           = team.remark
     td
       
-  = render partial: 'member_allocations/team_member', collection: team.team_members.player.asc, cached: true
-  / TODO combine to single members or maybe just show role(s)
-  = render partial: 'member_allocations/team_member', collection: team.team_members.staff.asc, cached: true
+  - TeamMember.players_by_year(team.team_members).each do |year, team_members|
+    - team_members.each_with_index do |team_member, index|
+      = render 'member_allocations/team_member', member: team_member.member, team_members: [team_member], first_column: (year if index == 0)
+  
+  - TeamMember.staff_by_member(team.team_members).each do |member, team_members|
+    = render 'member_allocations/team_member', member: member, team_members: team_members

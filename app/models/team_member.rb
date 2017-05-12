@@ -17,9 +17,9 @@ class TeamMember < ApplicationRecord
   validates_presence_of :team, :member, :role
   validates :role, :uniqueness => {scope: [:team, :member]}
 
-  scope :staff, -> {where.not(role: TeamMember.roles[:player]).includes(:member)}
-  scope :asc, -> {includes(:member).order('members.last_name ASC, members.first_name ASC').includes(:team)}
-  scope :includes_parents, -> {includes(:team).includes(team: :age_group).includes(team: {age_group: :season})}
+  scope :staff, -> { where.not(role: TeamMember.roles[:player]).includes(:member) }
+  scope :asc, -> { includes(:member).order('members.last_name ASC, members.first_name ASC').includes(:team) }
+  scope :includes_parents, -> { includes(:team).includes(team: :age_group).includes(team: {age_group: :season}) }
 
   def age_group
     team.age_group
@@ -27,6 +27,15 @@ class TeamMember < ApplicationRecord
 
   def season
     age_group.season
+  end
+
+  def self.players_by_year(team_members_scope)
+    # used to include includes(:member).includes(:team).includes(:field_positions).
+    team_members_scope.player.asc.group_by{ |team_member| team_member.member.born_on.year }.sort_by{|year, team_members| year}.reverse
+  end
+
+  def self.staff_by_member(team_members_scope)
+    team_members_scope.staff.asc.includes(:member).includes(:team).group_by(&:member)
   end
 
   private
