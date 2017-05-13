@@ -80,7 +80,7 @@
                       = render "shared/favorite", parent: team_member.member
                       
                       - if policy(team_member).edit?
-                        = link_to edit_team_member_path(team_member), title: "Bewerken"
+                        = link_to edit_team_member_path(team_member), title: "Aanpassen"
                           i.fa.fa-pencil.p-1.pl-2
                       
                       - if policy(team_member).destroy?
@@ -115,7 +115,7 @@
                     - team_members.each do |team_member|
                       .text-right
                         - if policy(team_member).edit?
-                          => link_to edit_team_member_path(team_member), title: "Bewerken"
+                          => link_to edit_team_member_path(team_member), title: "Aanpassen"
                             i.fa.fa-pencil.p-1.pl-2
                             
                         - if policy(team_member).destroy?
