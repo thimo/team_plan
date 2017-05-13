@@ -88,7 +88,7 @@
                           i.fa.fa-times.p-1.pl-2
                           
                       - if policy(team_member).show_status?
-                        .hidden-xs-down
+                        div
                           = team_member.status_to_label.html_safe
                         
           - if @staff.size > 0
