@@ -6,7 +6,8 @@ module Statussable
   end
 
   def status_to_label
-    return "<span class=\"label #{color_class_for_status}\">#{status_i18n}</span>"
+    title = ended_on.present? ? "Per #{I18n.l(ended_on, format: :long)}" : ''
+    return "<span class=\"label #{color_class_for_status}\" title=\"#{title}\">#{status_i18n}</span>"
   end
 
   def transmit_status(new_status, old_status = nil)

@@ -60,9 +60,15 @@ class TeamMembersController < ApplicationController
 
   def destroy
     redirect_to :back, notice: "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
-    @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
 
-    @team_member.destroy
+    if @team_member.active?
+      # Place team member in archive
+      @team_member.member.logs << Log.new(body: "Gearchiveerd vanuit #{@team_member.team.name}.", user: current_user)
+      @team_member.update_columns(status: TeamMember.statuses[:archived], ended_on: Date.today)
+    else
+      @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
+      @team_member.destroy
+    end
   end
 
   private
