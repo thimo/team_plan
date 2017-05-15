@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503205739) do
+ActiveRecord::Schema.define(version: 20170515200126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,8 +209,6 @@ ActiveRecord::Schema.define(version: 20170503205739) do
   create_table "team_members", id: :serial, force: :cascade do |t|
     t.integer "member_id"
     t.integer "team_id"
-    t.date "joined_on"
-    t.date "left_on"
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
