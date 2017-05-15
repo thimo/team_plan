@@ -45,7 +45,7 @@ class TeamMembersController < ApplicationController
   end
 
   def activate
-    # Place team member in archive
+    # TODO send notification to member administration
     @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)
     @team_member.update_columns(status: TeamMember.statuses[:active], started_on: Date.today, ended_on: nil)
 
@@ -70,6 +70,7 @@ class TeamMembersController < ApplicationController
     redirect_to :back, notice: "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
 
     if @team_member.active?
+      # TODO send notification to member administration
       # Place team member in archive
       @team_member.member.logs << Log.new(body: "Gearchiveerd vanuit #{@team_member.team.name}.", user: current_user)
       @team_member.update_columns(status: TeamMember.statuses[:archived], ended_on: Date.today)

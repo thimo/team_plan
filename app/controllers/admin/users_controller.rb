@@ -4,7 +4,7 @@ class Admin::UsersController < AdminController
   before_action :breadcumbs
 
   def index
-    @users = policy_scope(User).filter(params.slice(:role, :query))
+    @users = policy_scope(User).asc.filter(params.slice(:role, :query))
   end
 
   def new; end

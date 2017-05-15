@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
   enum role: {member: 0, admin: 1, club_staff: 2}
 
+  scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :role, -> (role) { where(role: role) }
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
 
