@@ -1,7 +1,7 @@
 class TeamMembersController < ApplicationController
   include SortHelper
 
-  before_action :set_team_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_team_member, only: [:show, :edit, :update, :destroy, :activate]
   before_action :breadcumbs, only: [:edit]
 
   def show
@@ -42,6 +42,14 @@ class TeamMembersController < ApplicationController
         render "create"
       }
     end
+  end
+
+  def activate
+    # Place team member in archive
+    @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)
+    @team_member.update_columns(status: TeamMember.statuses[:active], started_on: Date.today, ended_on: nil)
+
+    redirect_to @team_member.team
   end
 
   def edit;end

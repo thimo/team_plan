@@ -26,9 +26,15 @@ class TeamMemberPolicy < ApplicationPolicy
   def destroy?
     return false if @record.team.archived? # Never edit a team member for an archived team
     return true if @record.active? && @user.admin? # Admin can always remove team members in an active season
-    return false if @record.archived?
 
-    @user.admin? || @user.club_staff?
+    (@record.draft? || @record.active?) && (@user.admin? || @user.club_staff?)
+  end
+
+  def activate?
+    # Only activate for active teams
+    return false unless @record.team.active?
+
+    @record.draft? && (@user.admin? || @user.club_staff?)
   end
 
   def show_status?

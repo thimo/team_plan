@@ -30,7 +30,11 @@ Rails.application.routes.draw do
         post :re_open
       end
     end
-    resources :team_members, only: [:show, :create, :edit, :update, :destroy]
+    resources :team_members, only: [:show, :create, :edit, :update, :destroy] do
+      member do
+        post :activate
+      end
+    end
     resources :member_allocation_filters, only: [:create, :destroy]
 
     resources :members, only: [:show] do
