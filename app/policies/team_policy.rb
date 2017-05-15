@@ -36,6 +36,8 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_favorite?
+    return false if @record.draft?
+    
     true
   end
 

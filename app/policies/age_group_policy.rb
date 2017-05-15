@@ -24,6 +24,8 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_favorite?
+    return false if @record.draft?
+    
     @user.admin? || @user.club_staff?
   end
 
