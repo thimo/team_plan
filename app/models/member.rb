@@ -68,6 +68,8 @@ class Member < ApplicationRecord
   end
 
   def self.import(file)
+    result = { counters: { imported: 0, changed: 0, created: 0 } }
+
     CSV.foreach(file.path, :headers => true,
                            :header_converters => lambda { |h| I18n.t("member.import.#{h.downcase.gsub(' ', '_')}") }
                            ) do |row|
@@ -85,8 +87,17 @@ class Member < ApplicationRecord
         end
       end
 
+      result[:counters][:imported] += 1
+      if member.new_record?
+        result[:counters][:created] += 1
+      elsif member.changed?
+        result[:counters][:changed] += 1
+      end
+
       member.imported_at = DateTime.now
       member.save!
     end
+
+    result
   end
 end

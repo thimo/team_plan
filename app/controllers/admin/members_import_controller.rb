@@ -18,9 +18,9 @@ class Admin::MembersImportController < AdminController
       render :new
 
     else
-      Member.import(params[:file])
+      result = Member.import(params[:file])
 
-      redirect_to admin_members_path, notice: "De gebruikers zijn geïmporteerd."
+      redirect_to admin_members_path, notice: "#{result[:counters][:imported]} gebruikers zijn geïmporteerd waarvan #{result[:counters][:created]} nieuw, #{result[:counters][:changed]} aangepast."
     end
   end
 end
