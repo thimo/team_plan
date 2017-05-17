@@ -44,6 +44,9 @@
               tr
                 td
                   = link_to team.name, team
+                  - if team.draft?
+                    .color-blue-grey.small
+                      = team.remark
                 td 
                   = team.division
                 td.text-right
