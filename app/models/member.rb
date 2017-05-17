@@ -48,11 +48,11 @@ class Member < ApplicationRecord
   end
 
   def active_team
-    teams_as_player.for_active_season.first || teams.for_active_season.first
+    @active_team ||= teams_as_player.for_active_season.first || teams.for_active_season.first
   end
 
   def active_team_member
-    team_members.player.joins(team: {age_group: :season}).where(seasons: {status: Season.statuses[:active]}).first
+    @active_team_member ||= team_members.player.joins(team: {age_group: :season}).where(seasons: {status: Season.statuses[:active]}).first
   end
 
   def last_evaluation
