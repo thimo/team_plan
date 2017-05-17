@@ -16,7 +16,7 @@ class MemberAllocationsController < ApplicationController
     filtered_members = active_members
     filtered_members = filtered_members.by_season(Season.active.last).by_field_position(field_positions) if field_positions.present?
     filtered_members = filtered_members.by_team(session[:filter_team]) if session[:filter_team].present?
-    @filtered_available_members = filtered_members - assigned_members
+    @filtered_available_members = (filtered_members - assigned_members).group_by(&:active_team).sort_by{|team, members| team.present? ? team.name : "ZZZ"}
 
     add_breadcrumb @age_group.season.name.to_s, @age_group.season
     add_breadcrumb @age_group.name.to_s, @age_group

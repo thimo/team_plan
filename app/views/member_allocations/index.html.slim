@@ -36,6 +36,12 @@
         table.table.table-sm
           thead
           tbody
-            = render partial: 'member_allocations/available_member', collection: @filtered_available_members
+            - @filtered_available_members.each do |team, members|
+              tr
+                th
+                th[colspan="2"]
+                  = team.name if team.present?
+                  = "Nieuwe spelers" if team.nil?
+              = render partial: 'member_allocations/available_member', collection: members
 
 = render 'team_dialog', age_group: @age_group, teams: @teams
