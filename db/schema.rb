@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515200126) do
+ActiveRecord::Schema.define(version: 20170517193234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,10 @@ ActiveRecord::Schema.define(version: 20170515200126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "blank", default: false
+    t.bigint "line_parent_id"
+    t.bigint "axis_parent_id"
+    t.index ["axis_parent_id"], name: "index_field_positions_on_axis_parent_id"
+    t.index ["line_parent_id"], name: "index_field_positions_on_line_parent_id"
   end
 
   create_table "field_positions_team_members", id: false, force: :cascade do |t|
@@ -278,6 +282,8 @@ ActiveRecord::Schema.define(version: 20170515200126) do
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
   add_foreign_key "favorites", "users"
+  add_foreign_key "field_positions", "field_positions", column: "axis_parent_id"
+  add_foreign_key "field_positions", "field_positions", column: "line_parent_id"
   add_foreign_key "logs", "users"
   add_foreign_key "members", "users"
   add_foreign_key "player_evaluations", "team_evaluations"

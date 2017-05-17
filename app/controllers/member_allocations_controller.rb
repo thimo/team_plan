@@ -11,7 +11,7 @@ class MemberAllocationsController < ApplicationController
     assigned_members = @age_group.assigned_active_members
     @available_members = active_members - assigned_members
 
-    @teams_for_filter = [["Filter op team", ""]] + human_sort(Team.for_members(@available_members).for_season(Season.active.last).distinct, :name).map{|team| [team.name, team.id]}
+    @teams_for_filter = human_sort(Team.for_members(@available_members).for_season(Season.active.last).distinct, :name).map{|team| [team.name, team.id]}
 
     filtered_members = active_members
     filtered_members = filtered_members.by_season(Season.active.last).by_field_position(field_positions) if field_positions.present?
@@ -39,6 +39,18 @@ class MemberAllocationsController < ApplicationController
   private
 
     def field_positions
-      session[:filter_field_position].map(&:to_i) if session[:filter_field_position].present?
+      @field_positions ||= init_field_positions
+    end
+
+    def init_field_positions
+      positions = []
+      if (id = session[:filter_field_position]).present?
+        positions << id
+        ids = FieldPosition.find(id).axis_children.pluck(:id)
+        positions << ids if ids.present?
+        ids = FieldPosition.find(id).line_children.pluck(:id)
+        positions << ids if ids.present?
+      end
+      positions.flatten
     end
 end
