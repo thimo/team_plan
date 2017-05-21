@@ -35,5 +35,19 @@ header.site-header
                   = link_to stop_impersonating_users_path, method: :post, class: "dropdown-item"
                     span.font-icon.glyphicon.glyphicon-log-in
                     | Terug naar admin
-                
+            button.burger-right[type="button"]
+              i.font-icon-menu-addl
+
+                    
+        .mobile-menu-right-overlay
+        .site-header-collapsed
+          .site-header-collapsed-in
+            .site-header-search-container
+              form.site-header-search.closed
+                input[type="text" placeholder="Search"]
+                button[type="submit"]
+                  span.font-icon-search
+                .overlay
+
+        
 .mobile-menu-left-overlay

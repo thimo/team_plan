@@ -73,7 +73,11 @@
   }
 
   .site-header-content {
-    width: inherit;
+    margin-left: -240px;
+
+    .site-header-content-in {
+      margin-left: 240px;
+    }
   }
 }
 
