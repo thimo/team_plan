@@ -54,7 +54,7 @@ Rails.application.routes.draw do
           post :impersonate
         end
       end
-      resources :members, only: [:index, :show]
+      resources :members, only: [:index]
       resources :members_import, only: [:new] do
         collection do
           post :create #, to: 'members_import#create'
