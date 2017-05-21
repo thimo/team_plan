@@ -10,6 +10,8 @@ defaults: &defaults
   club.phone:
   club.contact_name: Thimo Jansen
   club.helpdesk_email: helpdesk@defrog.nl
+  clubdata.urls.competities: https://data.sportlink.com/teams?competitieperiode=ALLES&teamsoort=bond&geslacht=alles&spelsoort=alles&competitiesoort=alles&leeftijdscategorie=alles&gebruiklokaleteamgegevens=NEE
+  clubdata.client_id: 123456
 
 development:
   <<: *defaults
