@@ -3,7 +3,7 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update]
 
   def show
-    @team_members = @member.team_members.order(created_at: :desc)
+    @team_members = @member.team_members.recent_first
   end
 
   def edit

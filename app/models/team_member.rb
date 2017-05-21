@@ -20,6 +20,7 @@ class TeamMember < ApplicationRecord
   scope :staff, -> { where.not(role: TeamMember.roles[:player]).includes(:member) }
   scope :asc, -> { includes(:member).order('members.last_name ASC, members.first_name ASC').includes(:team) }
   scope :includes_parents, -> { includes(:team).includes(team: :age_group).includes(team: {age_group: :season}) }
+  scope :recent_first, -> { order(created_at: :desc) }
 
   def age_group
     team.age_group
