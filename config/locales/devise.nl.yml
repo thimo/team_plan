@@ -26,7 +26,8 @@ nl:
       locked: Je account is vergrendeld.
       not_found_in_database: Ongeldig e-mail of wachtwoord.
       timeout: Je sessie is verlopen, meld je opnieuw aan om door te gaan.
-      unauthenticated: Log in om door te gaan.
+      # unauthenticated: Log in om door te gaan.
+      unauthenticated: ''
       unconfirmed: Bevestig eerst je account.
     mailer:
       confirmation_instructions:
@@ -92,8 +93,10 @@ nl:
       new:
         sign_in: Inloggen
         remember_me: Ingelogd blijven
-      signed_in: Je bent succesvol ingelogd.
-      signed_out: Je bent succesvol uitgelogd.
+      # signed_in: Je bent succesvol ingelogd.
+      signed_in: ''
+      # signed_out: Je bent succesvol uitgelogd.
+      signed_out: ''
     shared:
       links:
         back: Terug
