@@ -82,6 +82,17 @@ nav.side-menu
             i.fa.fa-sliders
             span.lbl
               | Instellingen
+
+  - if policy(:club_data_dashboard).show?
+    section
+      header.side-menu-title
+        | Club Data
+      ul.side-menu-list
+        li.blue class="#{'active' if controller_path == 'admin/club_data/dashboards'}"
+          = link_to admin_club_data_dashboards_path do
+            i.fa.fa-dashboard
+            span.lbl
+              | Dashboard
   section
     ul.side-menu-list
       li.brown

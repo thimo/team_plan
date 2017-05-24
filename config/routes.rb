@@ -62,8 +62,10 @@ Rails.application.routes.draw do
       end
       resources :email_logs, only: [:index, :show]
       resources :version_updates
-      resources :settings,
-        :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
+      resources :settings, :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
+      namespace :club_data do
+        resources :dashboards
+      end
     end
   end
 
