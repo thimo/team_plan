@@ -67,6 +67,14 @@ class Member < ApplicationRecord
     active? && (field_positions & active_team_member.field_positions.map(&:id)).present?
   end
 
+  def status_definitief?
+    status == 'definitief'
+  end
+
+  def status_af_te_melden?
+    status == 'af te melden'
+  end
+
   def self.import(file)
     result = { counters: { imported: 0, changed: 0, created: 0 } }
 

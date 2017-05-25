@@ -8,9 +8,20 @@
     - unless member.local_teams.blank?
       .color-blue-grey.small
         = "#{member.local_teams}"
-    - unless member.deregistered_at.blank?
+    - if member.status_af_te_melden?
       .color-blue-grey.small
-        | Afmelddatum #{member.deregistered_at}
+        = member.status.capitalize
+        - if member.deregistered_at.present?
+          |  per 
+          = I18n.l member.deregistered_at, format: :long
+    - else  
+      - unless member.status_definitief? 
+        .color-blue-grey.small
+          = member.status.capitalize
+      - unless member.deregistered_at.blank?
+        .color-blue-grey.small
+          | Afmelddatum: 
+            = I18n.l member.deregistered_at, format: :long
         
   td.color-blue-grey.small
     - if (active_team = member.active_team).present?
