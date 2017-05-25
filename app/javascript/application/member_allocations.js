@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', () => {
     var member_name = button.data('member-name')
     var team_member_id = button.data('team-member-id')
 
-    var modal = $(this)
+    var modal = $('#teamMemberNew')
     if (!!team_member_id) {
      modal.find('.modal-title').text('Verplaats ' + member_name + ' naar team:')
     } else {
