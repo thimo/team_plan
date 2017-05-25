@@ -1,19 +1,19 @@
-- cache [member]
-  - first_column ||= ''
-  tr
-    td.small.strong.color-blue-grey-lighter
-      = first_column
-      - team_members.each do |team_member|
-        div
-          = team_member.role_i18n unless team_member.player?
-    = render "member_allocations/member", member: member
-      
-    td.w-1.nowrap
-      - team_members.each do |team_member|
-        div
-          - if policy(team_member).update?
-            a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Verplaatsen naar team"]
-              i.fa.fa-bars.p-1
-          - if policy(team_member).destroy?
-            = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
-              i.fa.fa-times.p-1
+/ - cache [member]
+- first_column ||= ''
+tr
+  td.small.strong.color-blue-grey-lighter
+    = first_column
+    - team_members.each do |team_member|
+      div
+        = team_member.role_i18n unless team_member.player?
+  = render "member_allocations/member", member: member
+    
+  td.w-1.nowrap
+    - team_members.each do |team_member|
+      div
+        - if policy(team_member).update?
+          a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Verplaatsen naar team"]
+            i.fa.fa-bars.p-1
+        - if policy(team_member).destroy?
+          = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
+            i.fa.fa-times.p-1
