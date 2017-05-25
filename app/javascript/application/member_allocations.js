@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', () => {
-  $('#teamMemberNew').on('show.bs.modal', function (event) {
+  $('#teamMemberNew').on('show.bs.modal', (event) => {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var member_id = button.data('member-id')
     var member_name = button.data('member-name')
@@ -13,7 +13,9 @@ $(document).on('turbolinks:load', () => {
     }
     modal.find('.modal-body #team_member_member_id').val(member_id)
     modal.find('.modal-body #team_member_id').val(team_member_id)
-  });
+  }).on('shown.bs.modal', (event) => {
+    $('#teamMemberNew input[type=submit]').focus();
+  })
 
   $('#member_allocation_filters_field_position').selectize();
   $('#member_allocation_filters_team').selectize();
