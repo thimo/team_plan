@@ -1,0 +1,54 @@
+- provide(:title, "Club Data Dashboard")
+
+.dashboard
+  .row
+    .col-sm-6
+      section.box-typical
+        .row.mb-3
+          .col-6
+            header.box-typical-header
+              .tbl-row
+                .tbl-cell.tbl-cell-title
+                  .strong
+                    | Teams
+                      
+            .box-typical-body.mb-3
+              ul.side-menu-list
+                    
+          .col-6
+            header.box-typical-header
+              .tbl-row
+                .tbl-cell.tbl-cell-title
+                  .strong
+                    | Favorieten
+                      
+            .box-typical-body.mb-3
+              ul.side-menu-list
+  
+    .col-sm-6
+      section.box-typical
+        .row.mb-3
+          .col-6
+            header.box-typical-header
+              .tbl-row
+                .tbl-cell.tbl-cell-title
+                  .strong
+                    | Update
+                      
+            .box-typical-body.mb-3
+              ul.side-menu-list
+                li.green
+                  = link_to root_path
+                    i.fa.fa-futbol-o
+                    span.lbl
+                      = root_path
+                    
+          .col-6
+            header.box-typical-header
+              .tbl-row
+                .tbl-cell.tbl-cell-title
+                  .strong
+                    | Favorieten
+                      
+            .box-typical-body.mb-3
+              ul.side-menu-list

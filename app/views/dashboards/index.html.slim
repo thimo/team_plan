@@ -17,7 +17,7 @@
                 .box-typical-body.mb-3
                   ul.side-menu-list
                     - @active_teams.each do |team|
-                      li.green class="#{'active' if current_page?(team_path(team))}"
+                      li.green
                         = link_to team
                           i.fa.fa-futbol-o
                           span.lbl
