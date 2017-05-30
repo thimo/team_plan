@@ -65,6 +65,9 @@ Rails.application.routes.draw do
       resources :settings, :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
       namespace :club_data do
         resources :dashboards
+        resources :teams, shallow: true do
+          resources :competities
+        end
       end
     end
   end

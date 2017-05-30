@@ -83,7 +83,7 @@ nav.side-menu
             span.lbl
               | Instellingen
 
-  - if policy(:club_data_dashboard).show?
+  - if policy(:club_data_dashboard).index?
     section
       header.side-menu-title
         | Club Data
@@ -93,6 +93,12 @@ nav.side-menu
             i.fa.fa-dashboard
             span.lbl
               | Dashboard
+        li.blue class="#{'active' if controller_path == 'admin/club_data/teams'}"
+          = link_to admin_club_data_teams_path do
+            i.fa.fa-dashboard
+            span.lbl
+              | Teams
+              
   section
     ul.side-menu-list
       li.brown
