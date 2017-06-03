@@ -36,8 +36,7 @@
               .label.label-one-number.ml-3 = policy_scope(@team.team_members).player.size
             - if @team.draft?
               th Huidig team 
-            th Positie
-            th.hidden-xs-down Voet
+            th
             th
             
           tbody
@@ -69,13 +68,9 @@
                       - team_member.field_positions.each do |field_position|
                         div
                           = field_position.name
-                      .hidden-sm-up.color-blue-grey-lighter.small
+                      .color-blue-grey-lighter.small
                         = team_member.prefered_foot
-                            
-                          
-                    td.hidden-xs-down
-                      = team_member.prefered_foot
-                      
+                                              
                     td.w-1.nowrap.text-right
                       = render "shared/favorite", parent: team_member.member
                       
