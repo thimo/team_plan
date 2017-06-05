@@ -22,7 +22,7 @@ nl:
         name: Team
         division: Klasse
         status: Status
-        remark: Opmerking
+        remark: Opmerking/aantekening
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
