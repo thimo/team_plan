@@ -10,6 +10,14 @@
           .tbl-cell.tbl-cell-title
             .strong
               | Teams
+          - if policy(@age_group).bulk_email?
+            .tbl-cell.tbl-cell-action-bordered
+              a.action-btn[href="mailto:#{@age_group.members.team_staff.distinct.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan de teamleiding van alle teams"]
+                i.fa.fa-envelope-o
+          - if policy(@age_group).bulk_email?
+            .tbl-cell.tbl-cell-action-bordered
+              a.action-btn[href="mailto:#{@age_group.members.distinct.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan de teamleden van alle teams"]
+                i.fa.fa-envelope
           - if policy(@age_group).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
               = link_to age_group_download_team_members_path(@age_group, format: "xlsx"), title: "Download teams naar Excel", class: "action-btn"

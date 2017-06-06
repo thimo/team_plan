@@ -11,6 +11,14 @@
           .tbl-cell.tbl-cell-title
             .strong
               | Teamleden
+          - if policy(@team).bulk_email?
+            .tbl-cell.tbl-cell-action-bordered
+              a.action-btn[href="mailto:#{@team.members.team_staff.distinct.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan de teamleiding"]
+                i.fa.fa-envelope-o
+          - if policy(@team).bulk_email?
+            .tbl-cell.tbl-cell-action-bordered
+              a.action-btn[href="mailto:#{@team.members.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan alle teamleden"]
+                i.fa.fa-envelope
           - if policy(@team).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
               = link_to team_download_team_members_path(@team, format: "xlsx"), title: "Download team naar Excel", class: "action-btn"
