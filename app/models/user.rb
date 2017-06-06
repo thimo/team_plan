@@ -90,11 +90,11 @@ class User < ApplicationRecord
   end
 
   def favorite_teams
-    Team.joins(:favorites).where(favorites: {user_id: id, favorable_type: Team.to_s})
+    @favorite_teams ||= Team.joins(:favorites).where(favorites: {user_id: id, favorable_type: Team.to_s})
   end
 
   def favorite_age_groups
-    AgeGroup.joins(:favorites).where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
+    @favorite_age_groups ||= AgeGroup.joins(:favorites).where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
   end
 
   def has_favorite?(member)
