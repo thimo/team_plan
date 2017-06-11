@@ -119,10 +119,11 @@ class User < ApplicationRecord
       password: (generated_password = Devise.friendly_token.first(8)),
       first_name: member.first_name,
       middle_name: member.middle_name,
-      last_name: member.last_name
+      last_name: member.last_name,
     )
 
     if user.new_record?
+      user.skip_confirmation!
       user.save
       user.send_new_account(generated_password)
     end
