@@ -1,13 +1,13 @@
-- provide(:title, t('.change_my_password', default: 'Change my password'))
+- provide(:title, t('.title', default: "Edit account"))
 
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = f.error_notification
 
-  / = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
+  = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
   = f.input :password, class: 'form-control', placeholder: t('.new_password'), label: false, autocomplete: "off"
   = f.input :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name(:password_confirmation), label: false, autocomplete: "off", hint: t('.leave_blank_if_you_don_t_want_to_change_it', default: "Leave blank if you don't want to change it")
   = f.input :current_password, class: 'form-control', placeholder: t('.current_password'), label: false, autocomplete: "off", hint: t('.we_need_your_current_password_to_confirm_your_changes', default: 'We need your current password to confirm your changes')
   
   = f.button :submit, t('.update', default: 'Update'), class: 'btn btn-primary'
   
-  = render 'devise/shared/links'
+  / = render 'devise/shared/links'
