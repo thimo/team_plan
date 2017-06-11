@@ -1,7 +1,7 @@
 section.tabs-section
   .tabs-section-nav.tabs-section-nav-inline
     ul.nav[role="tablist"]
-      - Comment.comment_types.each do |comment_type|
+      - parent.comment_types.each do |comment_type|
         - if policy(Comment).public_send("show_#{comment_type.first}?")
           li.nav-item
             - is_active = params[:comment].present? ? comment_type.first == params[:comment] : comment_type.first == 'generic'
@@ -12,7 +12,7 @@ section.tabs-section
                   = count
               
   .tab-content
-    - Comment.comment_types.each do |comment_type|
+    - parent.comment_types.each do |comment_type|
       - if policy(Comment).public_send("show_#{comment_type.first}?")
         - is_active = params[:comment].present? ? comment_type.first == params[:comment] : comment_type.first == 'generic'
         .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type.first}" class="#{is_active ? 'active in' : 'fade'}"]
@@ -26,8 +26,6 @@ section.tabs-section
             .col-md-4
               = simple_form_for [parent, Comment.new] do |f|
                 = f.input :body, label: false, placeholder: "Opmerking"
-                / .float-right
-                /   = f.input :private
                 = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm'
                 = f.hidden_field :comment_type, value: comment_type.first
       

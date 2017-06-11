@@ -1,6 +1,6 @@
 class Member < ApplicationRecord
   include Filterable
-  
+
   STATUS_DEFINITIEF = 'definitief'
   STATUS_AF_TE_MELDEN = 'af te melden'
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = 'overschrijving spelactiviteit'
@@ -77,6 +77,10 @@ class Member < ApplicationRecord
 
   def status_af_te_melden?
     status == STATUS_AF_TE_MELDEN
+  end
+
+  def comment_types
+    Comment.comment_types
   end
 
   def self.import(file)
