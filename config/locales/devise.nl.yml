@@ -74,11 +74,14 @@ nl:
         are_you_sure: Weet je het zeker?
         cancel_my_account: Annuleer mijn account
         currently_waiting_confirmation_for_email: 'Aan het wachten op de bevestiging voor: %{email}'
-        leave_blank_if_you_don_t_want_to_change_it: laat leeg als je het niet wilt wijzigen
+        leave_blank_if_you_don_t_want_to_change_it: Laat leeg als je het niet wilt wijzigen
         title: Bewerk %{resource}
         unhappy: Niet blij
         update: Bijwerken
-        we_need_your_current_password_to_confirm_your_changes: we hebben je huidige wachtwoord nodig om je veranderingen te bevestigen
+        we_need_your_current_password_to_confirm_your_changes: Je huidige wachtwoord is nodig om de veranderingen te bevestigen
+        change_my_password: Verander mijn wachtwoord
+        current_password: Huidig wachtwoord
+        new_password: Nieuw wachtwoord
       new:
         sign_up: Maak account aan
       signed_up: Je bent ingeschreven.

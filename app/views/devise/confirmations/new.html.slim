@@ -1,7 +1,8 @@
-h1
-  = t('.resend_confirmation_instructions', default: 'Resend confirmation instructions')
+- provide(:title, t('.resend_confirmation_instructions', default: 'Resend confirmation instructions'))
+
 = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, role: 'form' }) do |f|
   = f.error_notification
-  = f.input :email, autofocus: true, class: "form-control"
+  = f.input :email, autofocus: true, class: "form-control", placeholder: User.human_attribute_name(:email), label: false
   = f.button :submit, t('.resend_confirmation_instructions', default: 'Resend confirmation instructions'), class: 'btn btn-primary'
+  
 = render 'devise/shared/links'

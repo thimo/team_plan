@@ -39,12 +39,18 @@
 
 // .sign-avatar.sign-logo
 .sign-box {
+  max-width: 420px;
+
   .sign-avatar {
     &.sign-logo {
       img {
         border-radius: 0;
       }
     }
+  }
+
+  a:hover, a:hover:hover {
+    text-decoration: none;
   }
 }
 
