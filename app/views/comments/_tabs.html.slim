@@ -16,16 +16,12 @@ section.tabs-section
       - if policy(Comment).public_send("show_#{comment_type.first}?")
         - is_active = params[:comment].present? ? comment_type.first == params[:comment] : comment_type.first == 'generic'
         .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type.first}" class="#{is_active ? 'active in' : 'fade'}"]
-          .row
-            .col-md-8
-              - if (comments = policy_scope(parent.comments).public_send(comment_type.first).includes(:user)).present?
-                = render comments
-              - else
-                i Voeg een opmerking toe
+          = simple_form_for [parent, Comment.new], html: { class: 'clearfix' } do |f|
+            = f.input :body, label: false, placeholder: "Opmerking", wrapper_html: { class: 'mb-1' }, input_html: { rows: 1 }
+            = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm float-right'
+            = f.hidden_field :comment_type, value: comment_type.first
 
-            .col-md-4
-              = simple_form_for [parent, Comment.new] do |f|
-                = f.input :body, label: false, placeholder: "Opmerking"
-                = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm'
-                = f.hidden_field :comment_type, value: comment_type.first
-      
+          - if (comments = policy_scope(parent.comments).public_send(comment_type.first).includes(:user)).present?
+            = render comments
+          - else
+            i Voeg een opmerking toe
