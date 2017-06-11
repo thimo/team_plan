@@ -2,8 +2,8 @@ class User < ApplicationRecord
   include Filterable
 
   # Include default devise modules. Others available are:
-  # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :registerable, :confirmable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
