@@ -15,4 +15,4 @@
 
   .chat-message-content
     .chat-message-txt
-      = comment.body
+      = markdown(comment.body).html_safe
