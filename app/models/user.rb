@@ -2,8 +2,8 @@ class User < ApplicationRecord
   include Filterable
 
   # Include default devise modules. Others available are:
-  # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :registerable, :confirmable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
@@ -119,10 +119,11 @@ class User < ApplicationRecord
       password: (generated_password = Devise.friendly_token.first(8)),
       first_name: member.first_name,
       middle_name: member.middle_name,
-      last_name: member.last_name
+      last_name: member.last_name,
     )
 
     if user.new_record?
+      user.skip_confirmation!
       user.save
       user.send_new_account(generated_password)
     end
