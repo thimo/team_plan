@@ -6,7 +6,7 @@ class CreateNotes < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.references :team, foreign_key: true
       t.references :member, foreign_key: true
-      t.integer :visibility
+      t.integer :visibility, default: 0
 
       t.timestamps
     end

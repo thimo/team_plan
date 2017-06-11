@@ -6,7 +6,8 @@ class TeamsController < ApplicationController
   def show
     @players = TeamMember.players_by_year(policy_scope(@team.team_members))
     @staff = TeamMember.staff_by_member(policy_scope(@team.team_members))
-    @team_evaluations = policy_scope(TeamEvaluation).by_team(@team).desc
+    @team_evaluations = policy_scope(@team.team_evaluations).desc
+    @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
   end
 
   def new; end

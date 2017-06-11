@@ -24,6 +24,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
+    # TODO should this not check what your rights are? I.e. at least team staff
     true
   end
 
