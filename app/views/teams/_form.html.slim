@@ -6,7 +6,7 @@
   = f.input :remark, hint: 'Wordt alleen getoond bij teams in concept status, bijvoorbeeld bij het maken van nieuwe indelingen'
   
   - if policy(@team).set_status?
-    = f.input :status
+    = render 'shared/enum_radio_buttons', f: f, field: :status
   
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team.new_record? ? @age_group : @team, class: 'btn btn-secondary-outline btn-inline'
