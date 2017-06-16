@@ -35,6 +35,12 @@ class TeamPolicy < ApplicationPolicy
     @user.is_team_staff_for?(@record)
   end
 
+  def show_notes?
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record)
+  end
+
   def show_favorite?
     return false if @record.draft?
 

@@ -1,0 +1,23 @@
+- provide(:title, "Notitie - #{@note.title}")
+
+.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          = @note.title
+          - if @note.member.present?
+            small
+              = " - #{@note.member.name}"
+              
+        .color-blue-grey-lighter.small
+          = "#{l @note.created_at.to_date, format: :long}"
+          = " (aangepast op #{l @note.updated_at.to_date, format: :long})" if @note.created_at.to_date != @note.updated_at.to_date
+          = ", #{@note.user.name}"
+      .tbl-cell.tbl-cell-actions
+        = link_to edit_note_path(@note), class: "action-btn", title: "Aanpassen"
+          i.fa.fa-pencil
+          
+  .box-typical-body
+    .comment-row-item.no-photo
+      = @note.body.html_safe

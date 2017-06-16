@@ -1,10 +1,20 @@
 class NotePolicy < ApplicationPolicy
   def show?
+    return true if @record.self? && @record.user = @user
+    return true if @record.staff? && (@user.admin? || @user.club_staff? || @user.is_team_staff_for(@record.team))
+    return true if @record.member? && @record.member = @user
+
     false
   end
 
+  def new?
+    create?
+  end
+
   def create?
-    true
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record.team)
   end
 
   def update?
@@ -19,15 +29,7 @@ class NotePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? # || @user.club_staff?
-        scope
-      else
-        new_scope = scope.own #.or(scope.for_staff).or(scope.for_member(@))
-        if @user.club_staff?
-          new_scope = new_scope.or(scope.for_staff)
-          # elsif @user.is_team_staff_for()
-        end
-      end
+      scope
     end
   end
 end

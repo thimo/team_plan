@@ -61,13 +61,17 @@ class User < ApplicationRecord
   end
 
   def is_team_member_for?(record)
-    if record.class == Member
+    case [record.class]
+    when [Member]
       # Find overlap in teams between current user and given member
       team_ids = record.team_members.pluck(:team_id).uniq
       return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
+    when [Team]
+      team_ids = record.id
+      return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
+    else
+      false
     end
-
-    false
   end
 
   def is_team_staff_for?(record)

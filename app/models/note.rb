@@ -6,18 +6,22 @@ class Note < ApplicationRecord
 
   enum visibility: { self: 0, staff: 1, member: 2 }
 
-  validates_presence_of :title, :body
+  validates_presence_of :title, :body, :visibility
 
   scope :desc, -> { order(created_at: :desc) }
-  # scope :own, -> (user) { where(visibility: Note.visibilities[:self], user: user) }
 
-  def for_user(scope, team, user)
+  def self.for_user(scope, team, user)
+    # TODO would prefer to do this through NotePolicy scope, but not sure how to pass team as parameter
+    # Own notes
     note_scope = scope.self.where(user: user)
 
-    note_scope = note_scope.or(scope.staff) if user.club_staff? || user.is_team_staff_for?(team)
+    # Notes visible for staff (either club or team)
+    note_scope = note_scope.or(scope.staff) if user.admin? || user.club_staff? || user.is_team_staff_for?(team)
 
+    # Notes written for a member
     note_scope = note_scope.or(scope.member.where(member: user.members))
 
+    note_scope
   end
 
 end

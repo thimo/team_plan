@@ -24,8 +24,9 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    # TODO should this not check what your rights are? I.e. at least team staff
-    true
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record)
   end
 
   def update?
