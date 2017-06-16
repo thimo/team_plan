@@ -1,0 +1,19 @@
+= simple_form_for [@team, @note], {wrapper: :horizontal_form} do |f|
+  = f.error_notification
+
+  = f.input :title
+  
+  .row.form-group class="#{'has-error' if has_error(f.object, :body)}"
+    label.col-md-3.col-form-label.text.required[for="note_body"]
+      = f.label :body
+    .col-md-9
+      = f.trix_editor :body
+      = errors_for(f.object, :body)
+
+  = f.input :member_id, as: :select, collection: @note.team.members, prompt: "-- Selecteer een teamgenoot", hint: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
+  = render 'shared/enum_radio_buttons', f: f, field: :visibility
+  
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@note).destroy?
+    = link_to "Verwijderen", note_path(@note), method: :delete, data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

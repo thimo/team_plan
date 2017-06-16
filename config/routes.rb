@@ -3,7 +3,14 @@ Rails.application.routes.draw do
   get 'about', to: 'static_pages#about'
 
   root to: "dashboards#index"
-  devise_for :users
+
+  # Devise setup, with limit on creating new accounts
+  devise_for :users, :skip => [:registrations]
+  as :user do
+    get 'users/new' => 'devise/registrations#new', :as => 'new_user_registration'
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  end
 
   authenticate :user do
     resources :dashboard, only: [:index], controller: :dashboards
@@ -17,6 +24,7 @@ Rails.application.routes.draw do
         resources :download_team_members, only: [:index]
         resources :teams, except: [:index], shallow: true do
           resources :comments, only: [:new, :create, :edit, :update, :destroy]
+          resources :notes, only: [:show, :new, :create, :edit, :update, :destroy]
           resources :favorites, only: [:create, :destroy]
           resources :team_member_bulk_updates, only: [:new, :create]
           resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]

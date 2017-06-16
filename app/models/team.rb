@@ -8,6 +8,7 @@ class Team < ApplicationRecord
   has_many :team_members, dependent: :destroy
   has_many :members, through: :team_members
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :team_evaluations, dependent: :destroy
   has_paper_trail
@@ -29,6 +30,10 @@ class Team < ApplicationRecord
 
   def status_children
     team_members
+  end
+
+  def comment_types
+    Comment.comment_types.except(:membership)
   end
 
 end

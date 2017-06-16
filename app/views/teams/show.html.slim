@@ -11,6 +11,14 @@
           .tbl-cell.tbl-cell-title
             .strong
               | Teamleden
+          - if policy(@team).bulk_email?
+            .tbl-cell.tbl-cell-action-bordered
+              a.action-btn[href="mailto:#{@team.members.team_staff.distinct.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan de teamleiding"]
+                i.fa.fa-envelope-o
+          - if policy(@team).bulk_email?
+            .tbl-cell.tbl-cell-action-bordered
+              a.action-btn[href="mailto:#{@team.members.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan alle teamleden"]
+                i.fa.fa-envelope
           - if policy(@team).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
               = link_to team_download_team_members_path(@team, format: "xlsx"), title: "Download team naar Excel", class: "action-btn"
@@ -36,8 +44,7 @@
               .label.label-one-number.ml-3 = policy_scope(@team.team_members).player.size
             - if @team.draft?
               th Huidig team 
-            th Positie
-            th.hidden-xs-down Voet
+            th
             th
             
           tbody
@@ -69,13 +76,9 @@
                       - team_member.field_positions.each do |field_position|
                         div
                           = field_position.name
-                      .hidden-sm-up.color-blue-grey-lighter.small
+                      .color-blue-grey-lighter.small
                         = team_member.prefered_foot
-                            
-                          
-                    td.hidden-xs-down
-                      = team_member.prefered_foot
-                      
+                                              
                     td.w-1.nowrap.text-right
                       = render "shared/favorite", parent: team_member.member
                       
@@ -138,3 +141,6 @@
       
     - if policy(@team).show_evaluations?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations
+      
+    - if policy(@team).show_notes?
+      = render "notes/list", team: @team, notes: @notes

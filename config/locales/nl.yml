@@ -22,7 +22,7 @@ nl:
         name: Team
         division: Klasse
         status: Status
-        remark: Opmerking
+        remark: Opmerking/aantekening
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
@@ -58,6 +58,12 @@ nl:
         duel_strength: Duelkracht
       comment:
         private: Privé
+      note:
+        title: Titel
+        body: Tekst
+        member: Teamgenoot
+        member_id: Teamgenoot
+        visibility: Zichtbaar voor
       version_update:
         released_at: Datum
         name: Titel
@@ -98,6 +104,11 @@ nl:
         behaviour: Gedrag
         classification: Indeling
         membership: Lidmaatschap
+    note:
+      visibility:
+        self: Zelf
+        staff: Teamleiding
+        member: Teamgenoot
     season:
       status:
         draft: Concept

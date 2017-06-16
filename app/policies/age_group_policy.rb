@@ -25,7 +25,7 @@ class AgeGroupPolicy < ApplicationPolicy
 
   def show_favorite?
     return false if @record.draft?
-    
+
     @user.admin? || @user.club_staff?
   end
 
@@ -47,6 +47,10 @@ class AgeGroupPolicy < ApplicationPolicy
 
   def download_team_members?
     @user.admin? || @user.club_staff?
+  end
+
+  def bulk_email?
+    download_team_members?
   end
 
   def permitted_attributes

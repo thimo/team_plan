@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521140336) do
+ActiveRecord::Schema.define(version: 20170611194722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,20 @@ ActiveRecord::Schema.define(version: 20170521140336) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.bigint "member_id"
+    t.integer "visibility", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_notes_on_member_id"
+    t.index ["team_id"], name: "index_notes_on_team_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_evaluation_id"
     t.string "advise_next_season"
@@ -286,6 +300,11 @@ ActiveRecord::Schema.define(version: 20170521140336) do
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -318,6 +337,9 @@ ActiveRecord::Schema.define(version: 20170521140336) do
   add_foreign_key "field_positions", "field_positions", column: "line_parent_id"
   add_foreign_key "logs", "users"
   add_foreign_key "members", "users"
+  add_foreign_key "notes", "members"
+  add_foreign_key "notes", "teams"
+  add_foreign_key "notes", "users"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
   add_foreign_key "team_evaluations", "teams"
