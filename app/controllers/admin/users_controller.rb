@@ -11,6 +11,7 @@ class Admin::UsersController < AdminController
 
   def create
     generated_password = @user.set_new_password
+    @user.skip_confirmation!
     if @user.save
       @user.send_new_account(generated_password)
       redirect_to admin_users_path, notice: 'Gebruiker is toegevoegd.'
