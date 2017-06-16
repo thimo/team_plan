@@ -28,7 +28,7 @@
               i.fa.fa-trash-o
         
     .box-typical-body.table-responsive
-      table.table.table-striped.table-xxs
+      table.table.table-xxs
         thead
           tr
             th
@@ -42,7 +42,7 @@
             = render "inbetween_header" if index > 0 && index % 4 == 0
 
             tr
-              td.member-name[class="#{'line-through' if evaluation.team_member.archived?}"]
+              td.member-name[class="#{'line-through' if evaluation.team_member.archived?}", rowspan="2"]
                 - member = evaluation.team_member.member
                 = link_to member.name, member
                 .color-blue-grey-lighter.small
@@ -50,5 +50,10 @@
                   = "(#{member.gender})"
               
               = render "player_evaluations/td_columns", evaluation: evaluation
+              
+            tr
+              td.color-blue-grey[colspan="11", style="border-top: none; padding-left: 2px;"]
+                = evaluation.remark
+
 
     footer.box-typical-footer

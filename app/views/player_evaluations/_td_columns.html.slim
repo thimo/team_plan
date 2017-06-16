@@ -1,15 +1,13 @@
-td
+td[rowspan="2"]
   - evaluation.team_member.field_positions.each do |field_position|
-    div
+    div.nowrap
       = field_position.name
-td
-  = evaluation.team_member.prefered_foot
-
+  .color-blue-grey-lighter.small
+    = evaluation.team_member.prefered_foot
+  
 - PlayerEvaluation::RATING_FIELDS.each do |field_name|
   td
     .evaluation-rating[data-evaluation-value="#{evaluation[field_name]}" title="#{PlayerEvaluation.human_attribute_name(field_name)}"]
       = PlayerEvaluation.human_value_name_for_rating(evaluation[field_name])
-td
+td.advise-next-season
   = evaluation.advise_next_season
-td.remark
-  = evaluation.remark

@@ -13,12 +13,17 @@ section.box-typical.evaluation
           = render "player_evaluations/th_columns"
         tbody
           - member.player_evaluations.finished_desc.each do |evaluation|
-            tr.test
-              td.nowrap
+            tr
+              td.nowrap[rowspan="2"]
                 = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
                 .color-blue-grey-lighter.small
                   = l evaluation.team_evaluation.finished_at.to_date, format: :long
               = render "player_evaluations/td_columns", evaluation: evaluation
+            - if evaluation.remark.present?
+              tr
+                td.color-blue-grey[colspan="11" style="border-top: none;"]
+                  = evaluation.remark
+
       - else 
         tbody
           tr

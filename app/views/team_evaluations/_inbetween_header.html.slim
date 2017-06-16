@@ -1,9 +1,12 @@
+- show_prefered_foot ||= false
+
 tr
   td
   td 
-  td 
-    .evaluation-rating.small.color-blue-grey
-      = TeamMember.human_attribute_name(:prefered_foot)
+  - if show_prefered_foot
+    td 
+      .evaluation-rating.small.color-blue-grey
+        = TeamMember.human_attribute_name(:prefered_foot)
   - PlayerEvaluation::RATING_FIELDS.each do |field_name|
     td
       .evaluation-rating.small.color-blue-grey
@@ -11,5 +14,3 @@ tr
   td 
     .evaluation-rating.small.color-blue-grey
       = PlayerEvaluation.human_attribute_name(:advise_next_season)
-      
-  td 

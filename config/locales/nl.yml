@@ -44,7 +44,7 @@ nl:
         prefered_foot: Links-/rechtsbenig
         status: Status
       player_evaluation:
-        advise_next_season: Advies volgend seizoen
+        advise_next_season: Advies niveau
         remark: Opmerking
         behaviour: Gedrag
         technique: Techniek

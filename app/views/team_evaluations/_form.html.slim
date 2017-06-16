@@ -27,7 +27,7 @@
               i.fa.fa-trash-o
         
     .box-typical-body
-      table.table.table-striped.table-xxs
+      table.table.table-xxs
         thead
           tr
             th
@@ -35,24 +35,24 @@
                 span
                   | Speler
                   
-            = render "player_evaluations/th_columns"
+            = render "player_evaluations/th_columns", show_prefered_foot: true
             
         tbody
           = f.simple_fields_for :player_evaluations do |pe|
             = pe.hidden_field :id
             = pe.hidden_field :team_member_id
             
-            = render "inbetween_header" if pe.index > 0 && pe.index % 4 == 0
+            = render "inbetween_header", show_prefered_foot: true if pe.index > 0 && pe.index % 4 == 0
 
             tr
-              td.member-name[class="#{'line-through' if pe.object.team_member.archived?}"]
+              td.member-name[class="#{'line-through' if pe.object.team_member.archived?}" rowspan="2"]
                 - member = pe.object.team_member.member
                 = link_to member.name, member, target: "_blank"
                 .color-blue-grey-lighter.small
                   => l member.born_on, format: :long unless member.born_on.nil?
                   = "(#{member.gender})"
               
-              td.field-positions
+              td.field-positions[rowspan="2"]
                 div[class="#{'form-control-error' if pe.error("field_positions").present?}"]
                   = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
                     = tm.select :field_position_ids, options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
@@ -67,8 +67,9 @@
               td.advise-next-season
                 = pe.select :advise_next_season, PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:advise_next_season).present?}", title: PlayerEvaluation.human_attribute_name(:advise_next_season)}
                 
-              td.remark
-                = pe.text_area :remark, {class: "form-control"}
+            tr
+              td[colspan="12" style="border-top: none; padding-left: 2px;"]
+                = pe.text_area :remark, class: "form-control", placeholder: PlayerEvaluation.human_attribute_name(:remark)
 
     footer.box-typical-footer
       - if policy(@team_evaluation).update?
