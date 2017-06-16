@@ -6072,7 +6072,7 @@ var.result-container {
    Grids
    ========================================================================== */
 .page-content {
-  padding: 107px 15px 10px;
+  padding: 25px 15px 10px;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -10934,7 +10934,7 @@ body {
    Site Header
    ========================================================================== */
 .site-header {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -10993,7 +10993,7 @@ body {
 @media (max-width: 767px) {
   .site-header .site-logo img {
     height: auto;
-    width: 35px;
+    width: 50px;
     top: 6px;
   }
 }
