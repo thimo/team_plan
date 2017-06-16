@@ -21,7 +21,7 @@ section.box-typical.evaluation
               = render "player_evaluations/td_columns", evaluation: evaluation
             - if evaluation.remark.present?
               tr
-                td.color-blue-grey[colspan="11" style="border-top: none;"]
+                td.color-blue-grey.b-t-0[colspan="11"]
                   = evaluation.remark
 
       - else 

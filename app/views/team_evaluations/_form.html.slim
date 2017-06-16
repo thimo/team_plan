@@ -68,7 +68,7 @@
                 = pe.select :advise_next_season, PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:advise_next_season).present?}", title: PlayerEvaluation.human_attribute_name(:advise_next_season)}
                 
             tr
-              td[colspan="12" style="border-top: none; padding-left: 2px;"]
+              td.b-t-0[colspan="12" style="padding-left: 2px;"]
                 = pe.text_area :remark, class: "form-control", placeholder: PlayerEvaluation.human_attribute_name(:remark)
 
     footer.box-typical-footer
