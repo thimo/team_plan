@@ -24,7 +24,9 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record)
   end
 
   def update?

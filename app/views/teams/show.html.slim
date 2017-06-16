@@ -141,3 +141,6 @@
       
     - if policy(@team).show_evaluations?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations
+      
+    - if policy(@team).show_notes?
+      = render "notes/list", team: @team, notes: @notes
