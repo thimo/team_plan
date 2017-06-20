@@ -7,17 +7,21 @@ class DownloadTeamMembersController < ApplicationController
       @season = policy_scope(Season).find(params[:season_id])
 
       policy_scope(@season.age_groups).male.asc.each do |age_group|
-        @teams += teams_for(age_group)
+        @teams += hashes_for(age_group.teams)
       end
       policy_scope(@season.age_groups).female.asc.each do |age_group|
-        @teams += teams_for(age_group)
+        @teams += hashes_for(age_group.teams)
       end
 
     elsif params[:age_group_id].present?
       @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
       @season = @age_group.season
 
-      @teams += teams_for(@age_group)
+      if params[:team_ids].present?
+        @teams += hashes_for(@age_group.teams.where(id: params[:team_ids]))
+      else
+        @teams += hashes_for(@age_group.teams)
+      end
 
     elsif params[:team_id].present?
       @team = policy_scope(Team).find(params[:team_id])
@@ -33,12 +37,12 @@ class DownloadTeamMembersController < ApplicationController
 
   private
 
-    def teams_for(age_group)
-      teams = []
-      human_sort(policy_scope(age_group.teams), :name).each do |team|
-        teams << team_hash(team)
+    def hashes_for(teams)
+      team_hashes = []
+      human_sort(policy_scope(teams), :name).each do |team|
+        team_hashes << team_hash(team)
       end
-      teams
+      team_hashes
     end
 
     def team_hash(team)

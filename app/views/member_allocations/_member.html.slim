@@ -21,7 +21,7 @@
       - unless member.deregistered_at.blank?
         .color-blue-grey.small
           | Afmelddatum: 
-            = I18n.l member.deregistered_at, format: :long
+          = I18n.l member.deregistered_at, format: :long
         
   td.color-blue-grey.small
     - if (active_team = member.active_team).present?
