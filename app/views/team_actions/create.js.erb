@@ -1,0 +1,4 @@
+$('#generic-modal').modal('hide');
+<% if @redirect.present? %>
+document.location = "<%= @redirect %>"
+<% end %>

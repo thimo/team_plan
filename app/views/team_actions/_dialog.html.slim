@@ -1,0 +1,50 @@
+.modal-dialog[role="document"]
+  .modal-content
+    = form_with url: age_group_team_actions_path(@age_group), method: :post do |f|
+      = f.hidden_field :type, value: params[:type]
+      .modal-header
+        h5#exampleModalLabel.modal-title
+          = @title
+        button.close[type="button" data-dismiss="modal" aria-label="Sluiten"]
+          span[aria-hidden="true"]
+            | ×
+      .modal-body
+        .form-check
+          label.form-check-label
+            input.form-check-input.team-select-toggle[type="checkbox" checked="checked"]
+            strong
+              |  Teams
+            
+        - @teams.each do |team|
+          .form-check
+            label.form-check-label
+              = f.check_box 'team_ids[]', { checked: true, class: 'form-check-input team-select' }, team.id, nil
+              = " #{team.name}"
+        - if params[:type] == 'email'
+          | Selecteer de e-mailadressen van:
+          .form-check
+            label.form-check-label
+              input.form-check-input[type="radio" name="email_selection" value="all" checked]
+              |  Alle teamleden
+          .form-check
+            label.form-check-label
+              input.form-check-input[type="radio" name="email_selection" value="player"]
+              |  Spelers
+          .form-check
+            label.form-check-label
+              input.form-check-input[type="radio" name="email_selection" value="staff"]
+              |  Teamleiding
+
+
+      .modal-footer
+        button.btn.btn-secondary[type="button" data-dismiss="modal"]
+          | Annuleren
+        = f.submit @button_label, class: "btn btn-primary"
+
+script
+  | $('.team-select-toggle').change(function() {
+  |   checkedValue = this.checked;
+  |   $('input.team-select').each(function(index) {
+  |     this.checked = checkedValue
+  |   })
+  | })
