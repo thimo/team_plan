@@ -30,8 +30,13 @@ class DownloadTeamMembersController < ApplicationController
       @teams << team_hash(@team)
     end
 
+    filename = "#{Setting['club.name']}_#{@season.name}"
+    filename += "_#{@age_group.name}" if @age_group.present?
+    filename += "_#{@team.name}" if @team.present?
+    filename += "_#{Time.now}.xlsx"
+
     respond_to do |format|
-       format.xlsx {render xlsx: 'download', filename: "#{Setting['club.name']}_#{@season.name}#{"_#{@team.name}" if @team.present?}_#{Time.now}.xlsx".gsub(' ', '')}
+       format.xlsx {render xlsx: 'download', filename: filename.gsub(' ', '')}
     end
   end
 
