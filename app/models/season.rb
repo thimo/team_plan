@@ -10,7 +10,8 @@ class Season < ApplicationRecord
   scope :desc, -> { order(name: :desc) }
 
   def status_children
-    age_groups
+    # Only propagate status when archiving
+    age_groups if archived?
   end
 
 end
