@@ -40,7 +40,19 @@
                 label.form-check-label
                   input.form-check-input[type="radio" name="email_selection" value="player"]
                   |  Spelers
-
+            - if params[:type] == 'download_team_members'
+              .form-check
+                strong 
+                  | Status van teams
+              .form-check
+                label.form-check-label
+                  input.form-check-input[type="radio" name="status" value=""]
+                  |  Alle statussen
+              - AgeGroup.statuses.each do |status, index|
+                .form-check
+                  label.form-check-label
+                    input.form-check-input[type="radio" name="status" value="#{status}"]
+                    |  #{AgeGroup.statuses_i18n[status]}
 
       .modal-footer
         button.btn.btn-secondary[type="button" data-dismiss="modal"]

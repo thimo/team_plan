@@ -16,11 +16,13 @@ class DownloadTeamMembersController < ApplicationController
     elsif params[:age_group_id].present?
       @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
       @season = @age_group.season
+      teams = @age_group.teams
+      teams = teams.where(status: params[:status].to_sym) if params[:status].present?
 
       if params[:team_ids].present?
-        @teams += hashes_for(@age_group.teams.where(id: params[:team_ids]))
+        @teams += hashes_for(teams.where(id: params[:team_ids]))
       else
-        @teams += hashes_for(@age_group.teams)
+        @teams += hashes_for(teams)
       end
 
     elsif params[:team_id].present?

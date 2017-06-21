@@ -32,7 +32,7 @@ class TeamActionsController < ApplicationController
       # Collect email addresses
       @redirect = "mailto:#{email_addresses.uniq.join(',')}"
     when 'download_team_members'
-      @redirect = age_group_download_team_members_path(@age_group, format: "xlsx", team_ids: params[:team_ids])
+      @redirect = age_group_download_team_members_path(@age_group, format: "xlsx", team_ids: params[:team_ids], status: params[:status])
     end
 
   end
