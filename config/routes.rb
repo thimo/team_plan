@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         resources :team_actions, only: [:new, :create]
         resources :select_teams
         resources :teams, except: [:index], shallow: true do
+          resources :team_members, only: [:new, :create]
           resources :comments, only: [:new, :create, :edit, :update, :destroy]
           resources :notes, only: [:show, :new, :create, :edit, :update, :destroy]
           resources :favorites, only: [:create, :destroy]

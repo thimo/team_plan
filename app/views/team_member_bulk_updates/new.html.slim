@@ -1,8 +1,8 @@
-- provide(:title, "Selecteer teamleden")
+- provide(:title, "Selecteer teamgenoten")
 - active_members_as_options = options_from_collection_for_select(@members.active, :id, :name_and_born_on)
 
 .box-typical.box-typical-padding
-  p Gebruik dit formulier om meerdere teamleden in één keer toe te voegen.
+  p Gebruik dit formulier om meerdere teamgenoten in één keer toe te voegen. Niet genoemde rollen (hoofdcoach, teamouder, teammanager, etc.) kun je vanuit #{link_to "het individuele formulier", new_team_team_member_path(@team)} toevoegen.
   
   hr
 
@@ -21,11 +21,6 @@
       label.col-sm-2.col-form-label Trainers
       .col-sm-10
         = select_tag :trainers, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_trainers'
-      
-    .form-group.row
-      label.col-sm-2.col-form-label Teamouders
-      .col-sm-10
-        = select_tag :team_parents, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_team_parents'
-      
+            
     = submit_tag "Toevoegen", class: "btn btn-primary btn-inline"
     = link_to "Annuleren", @team, class: 'btn btn-secondary-outline btn-inline'

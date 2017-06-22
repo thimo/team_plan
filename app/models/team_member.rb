@@ -11,10 +11,10 @@ class TeamMember < ApplicationRecord
   has_and_belongs_to_many :field_positions
   has_paper_trail
 
-  enum role: {player: 0, coach: 1, trainer: 2, team_parent: 3, manager: 4}
-  STAFF_ROLES = [1, 2, 3, 4]
+  enum role: {player: 0, head_coach: 5, coach: 1, trainer: 2, team_parent: 3, manager: 4, physio: 6}
+  STAFF_ROLES = [1, 2, 3, 4, 5, 6]
 
-  validates_presence_of :team, :member, :role
+  validates_presence_of :team_id, :member_id, :role
   validates :role, :uniqueness => {scope: [:team, :member]}
 
   delegate :email, to: :member

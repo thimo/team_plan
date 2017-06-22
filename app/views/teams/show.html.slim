@@ -10,14 +10,14 @@
         .tbl-row
           .tbl-cell.tbl-cell-title
             .strong
-              | Teamleden
+              | Teamgenoten
           - if policy(@team).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
               a.action-btn[href="mailto:#{@team.members.team_staff.distinct.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan de teamleiding"]
                 i.fa.fa-envelope-o
           - if policy(@team).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
-              a.action-btn[href="mailto:#{@team.members.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan alle teamleden"]
+              a.action-btn[href="mailto:#{@team.members.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan alle teamgenoten"]
                 i.fa.fa-envelope
           - if policy(@team).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
@@ -25,7 +25,11 @@
                 i.fa.fa-file-excel-o
           - if policy(TeamMember.new(team: @team)).create?
             .tbl-cell.tbl-cell-action-bordered
-              = link_to new_team_team_member_bulk_update_path(@team), title: "Teamleden toevoegen", class: "action-btn" do
+              = link_to new_team_team_member_path(@team), title: "Teamgenoot toevoegen", class: "action-btn" do
+                i.fa.fa-user
+          - if policy(TeamMember.new(team: @team)).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_team_team_member_bulk_update_path(@team), title: "Teamgenoten toevoegen", class: "action-btn" do
                 i.fa.fa-users
           - if policy(@team).update?
             .tbl-cell.tbl-cell-action-bordered

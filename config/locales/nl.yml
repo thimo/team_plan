@@ -39,6 +39,7 @@ nl:
       team_member:
         role: Rol
         name: Naam
+        member_id: Teamgenoot
         field_positions: Veldpositie
         field_position_ids: Veldpositie
         prefered_foot: Links-/rechtsbenig
@@ -84,10 +85,12 @@ nl:
     team_member:
       role:
         player: Speler
+        head_coach: Hoofdcoach
         coach: Coach
         trainer: Trainer
         team_parent: Teamouder
         manager: Teammanager
+        physio: Fysiotherapeut
       status:
         draft: Concept
         active: Actief

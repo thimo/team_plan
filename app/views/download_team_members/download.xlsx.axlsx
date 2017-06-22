@@ -1,5 +1,5 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: "Teamleden") do |sheet|
+wb.add_worksheet(name: "Teamgenoten") do |sheet|
   columns = [
     Season.human_attribute_name(:name),
     AgeGroup.human_attribute_name(:name),
