@@ -66,7 +66,7 @@ hr
 
 h2
   | Teams
-- member.team_members.includes_parents.each do |team_member|
+- @team_members.each do |team_member|
   div
     = team_member.season.name
     |  - 
