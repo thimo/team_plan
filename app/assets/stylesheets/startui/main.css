@@ -2389,7 +2389,7 @@ video {
 }
 .no-border,
 .b-a-0 {
-  border: none;
+  border: none !important;
 }
 .b-a {
   border: solid 1px #d8e2e7;
@@ -2407,10 +2407,10 @@ video {
   border-bottom: solid 1px #d8e2e7;
 }
 .b-t-0 {
-  border-top: none;
+  border-top: none !important;
 }
 .b-r-0 {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 .border-primary {
   border-color: #00a8ff;
