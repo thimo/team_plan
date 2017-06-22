@@ -47,7 +47,10 @@ class TeamMembersController < ApplicationController
   def activate
     # TODO send notification to member administration
     @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)
-    @team_member.update_columns(status: TeamMember.statuses[:active], started_on: Date.today, ended_on: nil)
+    columns = { status: TeamMember.statuses[:active], ended_on: nil }
+    columns[:started_on] = Date.today if @team_member.draft?
+
+    @team_member.update_columns(columns)
 
     redirect_to @team_member.team
   end

@@ -74,3 +74,10 @@ h2
     = " (#{team_member.team.division})" if team_member.team.division.present?
     | , als 
     = team_member.role_i18n.downcase
+    - if team_member.started_on.present?
+      .small.color-blue-grey
+        | Vanaf #{ I18n.l team_member.started_on, format: :long }
+    - if team_member.ended_on.present?
+      .small.color-blue-grey
+        | Tot #{ I18n.l team_member.ended_on, format: :long }
+      

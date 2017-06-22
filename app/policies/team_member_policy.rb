@@ -33,8 +33,9 @@ class TeamMemberPolicy < ApplicationPolicy
   def activate?
     # Only activate for active teams
     return false unless @record.team.active?
+    return false if @record.active?
 
-    @record.draft? && (@user.admin? || @user.club_staff?)
+    @user.admin? || @user.club_staff?
   end
 
   def show_status?
