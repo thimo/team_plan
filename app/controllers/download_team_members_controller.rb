@@ -57,8 +57,8 @@ class DownloadTeamMembersController < ApplicationController
         season: team.age_group.season.name,
         age_group: team.age_group.name,
         team: team.name,
-        players: team.team_members.player.asc,
-        staff: team.team_members.staff.asc
+        players: team.team_members.active_for_team(team).player.asc,
+        staff: team.team_members.active_for_team(team).staff.asc
       }
     end
 end
