@@ -53,7 +53,7 @@
                 td 
                   = team.division
                 td.text-right
-                  - if (size = policy_scope(team.team_members).player.size) > 0
+                  - if (size = policy_scope(team.team_members).active_for_team(team).player.size) > 0
                     .label.label-two-numbers>
                       = "#{size} / #{policy_scope(team.team_members).staff.pluck(:member_id).uniq.size}"
                   - if policy(team).show_status?

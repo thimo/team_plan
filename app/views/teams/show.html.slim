@@ -45,7 +45,7 @@
           thead
             th[colspan="2"]
               | Spelers
-              .label.label-one-number.ml-3 = policy_scope(@team.team_members).player.size
+              .label.label-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
             - if @team.draft?
               th Huidig team 
             th
