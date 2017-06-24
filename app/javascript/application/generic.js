@@ -12,7 +12,7 @@ $(document).on('turbolinks:load', () => {
   } else {
     // Set focus on first input field
     const fieldTypes = 'form input[type=text], form input[type=email], form input[type=number]';
-    $(fieldTypes).first().focus().select();
+    $(fieldTypes).not('header input').first().focus().select();
   }
 
   // Make rows clickable
