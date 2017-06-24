@@ -2,8 +2,8 @@ class User < ApplicationRecord
   include Filterable
 
   # Include default devise modules. Others available are:
-  # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :registerable, :confirmable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
@@ -61,13 +61,17 @@ class User < ApplicationRecord
   end
 
   def is_team_member_for?(record)
-    if record.class == Member
+    case [record.class]
+    when [Member]
       # Find overlap in teams between current user and given member
       team_ids = record.team_members.pluck(:team_id).uniq
       return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
+    when [Team]
+      team_ids = record.id
+      return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
+    else
+      false
     end
-
-    false
   end
 
   def is_team_staff_for?(record)
@@ -90,11 +94,11 @@ class User < ApplicationRecord
   end
 
   def favorite_teams
-    Team.joins(:favorites).where(favorites: {user_id: id, favorable_type: Team.to_s})
+    @favorite_teams ||= Team.joins(:favorites).where(favorites: {user_id: id, favorable_type: Team.to_s})
   end
 
   def favorite_age_groups
-    AgeGroup.joins(:favorites).where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
+    @favorite_age_groups ||= AgeGroup.joins(:favorites).where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
   end
 
   def has_favorite?(member)
@@ -119,10 +123,11 @@ class User < ApplicationRecord
       password: (generated_password = Devise.friendly_token.first(8)),
       first_name: member.first_name,
       middle_name: member.middle_name,
-      last_name: member.last_name
+      last_name: member.last_name,
     )
 
     if user.new_record?
+      user.skip_confirmation!
       user.save
       user.send_new_account(generated_password)
     end

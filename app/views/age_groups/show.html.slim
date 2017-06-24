@@ -10,9 +10,13 @@
           .tbl-cell.tbl-cell-title
             .strong
               | Teams
+          - if policy(@age_group).bulk_email?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_age_group_team_action_path(@age_group, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
+                i.fa.fa-envelope-o
           - if policy(@age_group).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
-              = link_to age_group_download_team_members_path(@age_group, format: "xlsx"), title: "Download teams naar Excel", class: "action-btn"
+              = link_to new_age_group_team_action_path(@age_group, type: :download_team_members), title: "Download teams naar Excel", class: "action-btn", remote: true
                 i.fa.fa-file-excel-o
           - if policy(Team.new(age_group: @age_group)).create?
             .tbl-cell.tbl-cell-action-bordered
@@ -38,7 +42,6 @@
                 
       .box-typical-body
         table.table.table-sm.tr-links
-          thead
           tbody
             - @teams.each do |team|
               tr
@@ -50,7 +53,7 @@
                 td 
                   = team.division
                 td.text-right
-                  - if (size = policy_scope(team.team_members).player.size) > 0
+                  - if (size = policy_scope(team.team_members).active_for_team(team).player.size) > 0
                     .label.label-two-numbers>
                       = "#{size} / #{policy_scope(team.team_members).staff.pluck(:member_id).uniq.size}"
                   - if policy(team).show_status?

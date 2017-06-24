@@ -5,7 +5,7 @@ html
       = full_title(yield(:title))
     meta[charset="utf-8"]
     meta name="description" content="#{full_title(yield(:title))}"
-    meta name="author" content="#{Setting['company.name']}"
+    meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
 
@@ -46,4 +46,6 @@ html
 
     / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
     / = react_component('Copyright', year: Date.today.year)
+    
+    #generic-modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
     

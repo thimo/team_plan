@@ -20,3 +20,4 @@
 //= require selectize/dist/js/standalone/selectize.min.js
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js
 //= require turbolinks
+//= require trix

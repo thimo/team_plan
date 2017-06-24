@@ -8,7 +8,7 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def create?
-    return false if @record.team.archived?
+    return false if @record.team.present? && @record.team.archived?
 
     @user.admin? || @user.club_staff?
   end
@@ -33,8 +33,9 @@ class TeamMemberPolicy < ApplicationPolicy
   def activate?
     # Only activate for active teams
     return false unless @record.team.active?
+    return false if @record.active?
 
-    @record.draft? && (@user.admin? || @user.club_staff?)
+    @user.admin? || @user.club_staff?
   end
 
   def show_status?

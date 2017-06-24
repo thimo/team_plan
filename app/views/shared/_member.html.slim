@@ -24,43 +24,49 @@ div
     | / 
     = mail_to member.email_2, member.email_2
         
+div.pt-4
 - unless member.person_type.blank?
-  .row.pt-4
-    .col-12
-      div
-        = "#{member.person_type}: "
-        = "#{member.local_teams} "
-        = "#{member.sport_category} "
-      div
-        | Sinds #{I18n.l member.member_since, format: :long}
+  div
+    span.color-blue-grey
+      = "#{member.person_type}: "
+    = "#{member.local_teams} "
+    = "#{member.sport_category} "
+  div
+    span.color-blue-grey
+      | Lid sinds: 
+    = I18n.l member.member_since, format: :long
 
-/ - unless member.member_since.blank?
-/   .row
-/     .col-6
-/       label.semibold 
-/         | Lid sinds
-/     .col-6
-/       = 
 - unless member.registered_at.blank? || member.registered_at == member.member_since
-  .row
-    .col-6
-      label.semibold 
-        | Registratiedatum
-    .col-6
-      = I18n.l member.registered_at, format: :long
-- unless member.deregistered_at.blank?
-  .row
-    .col-6
-      label.semibold 
-        | Afmelddatum
-    .col-6
+  div
+    span.color-blue-grey
+      | Registratiedatum: 
+    = I18n.l member.registered_at, format: :long
+
+- if member.status_af_te_melden?
+  div
+    span.color-blue-grey
+      | Status: 
+    = member.status.capitalize
+    - if member.deregistered_at.present?
+      |  per 
+      = I18n.l member.deregistered_at, format: :long
+- else  
+  - unless member.status_definitief? 
+    div
+      span.color-blue-grey
+        | Status: 
+      = member.status.capitalize
+  - unless member.deregistered_at.blank?
+    div
+      span.color-blue-grey
+        | Afmelddatum: 
       = I18n.l member.deregistered_at, format: :long
 
 hr
 
 h2
   | Teams
-- member.team_members.includes_parents.each do |team_member|
+- @team_members.each do |team_member|
   div
     = team_member.season.name
     |  - 
@@ -68,3 +74,10 @@ h2
     = " (#{team_member.team.division})" if team_member.team.division.present?
     | , als 
     = team_member.role_i18n.downcase
+    - if team_member.started_on.present?
+      .small.color-blue-grey
+        | Vanaf #{ I18n.l team_member.started_on, format: :long }
+    - if team_member.ended_on.present?
+      .small.color-blue-grey
+        | Tot #{ I18n.l team_member.ended_on, format: :long }
+      

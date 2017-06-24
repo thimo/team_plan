@@ -1,6 +1,10 @@
 class Member < ApplicationRecord
   include Filterable
 
+  STATUS_DEFINITIEF = 'definitief'
+  STATUS_AF_TE_MELDEN = 'af te melden'
+  STATUS_OVERSCHRIJVING_SPELACTIVITEIT = 'overschrijving spelactiviteit'
+
   has_many :team_members, dependent: :destroy
   has_many :team_members_as_player, -> { where(role: TeamMember.roles[:player]) }, class_name: 'TeamMember'
   has_many :teams, through: :team_members
@@ -21,8 +25,8 @@ class Member < ApplicationRecord
 
   scope :from_year, -> (year) { where("born_on >= ?", Date.new(year).beginning_of_year) }
   scope :to_year, -> (year) { where("born_on <= ?", Date.new(year).end_of_year) }
-  scope :active, -> { where(status: "definitief").or(where("deregistered_at > ?", Date.today)) }
-  scope :player, -> { where("sport_category <> ''") }
+  scope :active, -> { where(status: [STATUS_OVERSCHRIJVING_SPELACTIVITEIT, STATUS_DEFINITIEF]).or(where("deregistered_at > ?", Date.today)) }
+  scope :player, -> { where("sport_category <> ''").or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)) }
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
@@ -65,6 +69,18 @@ class Member < ApplicationRecord
 
   def has_active_field_position?(field_positions)
     active? && (field_positions & active_team_member.field_positions.map(&:id)).present?
+  end
+
+  def status_definitief?
+    status == STATUS_DEFINITIEF
+  end
+
+  def status_af_te_melden?
+    status == STATUS_AF_TE_MELDEN
+  end
+
+  def comment_types
+    Comment.comment_types
   end
 
   def self.import(file)

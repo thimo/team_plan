@@ -1,25 +1,29 @@
-= simple_form_for @team_member, {wrapper: :horizontal_form} do |f|
+= simple_form_for [@team, @team_member], {wrapper: :horizontal_form} do |f|
   = f.error_notification
   
-  .form-group.row
-    = f.label :name, class: "col-md-3 col-form-label"
-    .col-md-9.form-control-static
-      = @team_member.member.name
+  - if @team_member.persisted?
+    .form-group.row
+      = f.label :name, class: "col-md-3 col-form-label"
+      .col-md-9.form-control-static
+        = @team_member.member.name 
+  - else 
+    = f.input :member_id, collection: Member.active.asc, value_method: :id, label_method: :name_and_born_on, id: :team_member_member_id
   
-  - if policy(@team_member).set_role? && ! @team_member.player?
+  - if policy(@team_member).set_role?
     = f.input :role
   
-  - if @team_member.player?
-    .form-group.row[class="#{'form-control-error' if f.error("field_position_ids").present?}"]
-      = f.label :field_position_ids, class: "col-md-3 col-form-label"
-      .col-md-9
-        = f.select :field_position_ids, options_for_select(FieldPosition.options_for_select, f.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
-  
-  - if @team_member.player?
-    .form-group.row[class="#{'form-control-error' if f.error("prefered_foot").present?}"]
-      = f.label :prefered_foot, class: "col-md-3 col-form-label"
-      .col-md-9
-        = f.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, f.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if f.error(:prefered_foot).present?}"}
+  - if @team_member.persisted?
+    - if @team_member.player?
+      .form-group.row[class="#{'form-control-error' if f.error("field_position_ids").present?}"]
+        = f.label :field_position_ids, class: "col-md-3 col-form-label"
+        .col-md-9
+          = f.select :field_position_ids, options_for_select(FieldPosition.options_for_select, f.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
+    
+    - if @team_member.player?
+      .form-group.row[class="#{'form-control-error' if f.error("prefered_foot").present?}"]
+        = f.label :prefered_foot, class: "col-md-3 col-form-label"
+        .col-md-9
+          = f.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, f.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if f.error(:prefered_foot).present?}"}
 
   - if policy(@team_member).set_status?
     = f.input :status

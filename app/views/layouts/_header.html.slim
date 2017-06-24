@@ -6,8 +6,8 @@ header.site-header
     button.hamburger.hamburger--htla
       span
         | toggle menu
-    a.site-logo[href="/" alt="#{Setting['company.name']}"]
-      img[src="#{asset_path 'logo/esa_light_blue.svg'}" alt=""]
+    a.site-logo[href="/" alt="#{Setting['club.name']} #{Setting['application.name']}"]
+      img[src="#{asset_path 'logo/esa_logo.svg'}" alt=""]
       h1 TeamPlan
     
     .site-header-content
@@ -18,9 +18,9 @@ header.site-header
               button#dd-user-menu.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
                 = image_tag avatar_url(current_user)
               .dropdown-menu.dropdown-menu-right[aria-labelledby="dd-user-menu"]
-                / a.dropdown-item[href="#"]
-                /   span.font-icon.glyphicon.glyphicon-user
-                /   | Profile
+                = link_to edit_registration_path(current_user), class: "dropdown-item"
+                  span.font-icon.glyphicon.glyphicon-user
+                  | Account aanpassen
                 / a.dropdown-item[href="#"]
                 /   span.font-icon.glyphicon.glyphicon-cog
                 /   | Settings

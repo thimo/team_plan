@@ -1,8 +1,9 @@
 class MembersController < ApplicationController
+  before_action :breadcumbs
   before_action :set_member, only: [:show, :edit, :update]
 
   def show
-    @team_members = @member.team_members.order(created_at: :desc)
+    @team_members = @member.team_members.recent_first.includes_parents
   end
 
   def edit
@@ -15,7 +16,7 @@ class MembersController < ApplicationController
       authorize @member
 
       team = @member.active_team # default
-      team = @member.active_team_member.team unless @member.active_team_member.nil?
+      team = @member.active_team_member.team if @member.active_team_member.present?
 
       if team.present?
         add_breadcrumb "#{team.age_group.season.name}", team.age_group.season
@@ -23,6 +24,10 @@ class MembersController < ApplicationController
         add_breadcrumb "#{team.name}", team
       end
       add_breadcrumb "#{@member.name}", @member
+    end
+
+    def breadcumbs
+      add_breadcrumb "Leden"
     end
 
 end

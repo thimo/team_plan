@@ -35,9 +35,15 @@ class TeamPolicy < ApplicationPolicy
     @user.is_team_staff_for?(@record)
   end
 
+  def show_notes?
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record)
+  end
+
   def show_favorite?
     return false if @record.draft?
-    
+
     true
   end
 
@@ -57,6 +63,10 @@ class TeamPolicy < ApplicationPolicy
     @user.admin? ||
     @user.club_staff? ||
     @user.is_team_staff_for?(@record)
+  end
+
+  def bulk_email?
+    download_team_members?
   end
 
   def permitted_attributes

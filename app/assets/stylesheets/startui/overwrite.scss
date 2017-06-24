@@ -39,12 +39,18 @@
 
 // .sign-avatar.sign-logo
 .sign-box {
+  max-width: 420px;
+
   .sign-avatar {
     &.sign-logo {
       img {
         border-radius: 0;
       }
     }
+  }
+
+  a:hover, a:hover:hover {
+    text-decoration: none;
   }
 }
 
@@ -109,5 +115,12 @@ abbr[title] {
     .tbl-cell.tbl-cell-title {
       padding-right: 15px;
     }
+  }
+}
+
+th {
+  .action-btn {
+    color: #6c7a86;
+    padding: 8px;
   }
 }

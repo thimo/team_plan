@@ -4,6 +4,7 @@
 - show_finished_by ||= false
 - show_last_modified ||= false
 - show_progress ||= false
+- hide_team ||= false
 
 section.box-typical
   header.box-typical-header
@@ -21,7 +22,8 @@ section.box-typical
       - if team_evaluations.size > 0
         - unless disable_header
           thead
-            th Team
+            - unless hide_team
+              th Team
             th Datum
             - unless hide_status
               th Status
@@ -34,8 +36,9 @@ section.box-typical
         tbody
           - team_evaluations.each do |team_evaluation|
             tr.clickable
-              td 
-                = team_evaluation.team.name
+              - unless hide_team
+                td 
+                  = team_evaluation.team.name
               td
                 - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
                 = link_to url

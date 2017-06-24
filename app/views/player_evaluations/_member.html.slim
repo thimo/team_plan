@@ -5,7 +5,7 @@ section.box-typical.evaluation
         .strong
           |  Evaluaties 
           
-  .box-typical-body
+  .box-typical-body.table-responsive
     table.table.table-sm
       - if member.player_evaluations.finished_desc.size > 0
         thead
@@ -13,12 +13,17 @@ section.box-typical.evaluation
           = render "player_evaluations/th_columns"
         tbody
           - member.player_evaluations.finished_desc.each do |evaluation|
-            tr.test
-              td.nowrap
+            tr
+              td.nowrap[rowspan="2"]
                 = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
                 .color-blue-grey-lighter.small
                   = l evaluation.team_evaluation.finished_at.to_date, format: :long
               = render "player_evaluations/td_columns", evaluation: evaluation
+            - if evaluation.remark.present?
+              tr
+                td.color-blue-grey.b-t-0[colspan="11"]
+                  = evaluation.remark
+
       - else 
         tbody
           tr

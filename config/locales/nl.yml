@@ -22,7 +22,7 @@ nl:
         name: Team
         division: Klasse
         status: Status
-        remark: Opmerking
+        remark: Opmerking/aantekening
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
@@ -39,12 +39,13 @@ nl:
       team_member:
         role: Rol
         name: Naam
+        member_id: Teamgenoot
         field_positions: Veldpositie
         field_position_ids: Veldpositie
         prefered_foot: Links-/rechtsbenig
         status: Status
       player_evaluation:
-        advise_next_season: Advies volgend seizoen
+        advise_next_season: Advies niveau
         remark: Opmerking
         behaviour: Gedrag
         technique: Techniek
@@ -58,6 +59,12 @@ nl:
         duel_strength: Duelkracht
       comment:
         private: Privé
+      note:
+        title: Titel
+        body: Tekst
+        member: Teamgenoot
+        member_id: Teamgenoot
+        visibility: Zichtbaar voor
       version_update:
         released_at: Datum
         name: Titel
@@ -78,10 +85,12 @@ nl:
     team_member:
       role:
         player: Speler
+        head_coach: Hoofdcoach
         coach: Coach
         trainer: Trainer
         team_parent: Teamouder
         manager: Teammanager
+        physio: Fysiotherapeut
       status:
         draft: Concept
         active: Actief
@@ -98,6 +107,11 @@ nl:
         behaviour: Gedrag
         classification: Indeling
         membership: Lidmaatschap
+    note:
+      visibility:
+        self: Zelf
+        staff: Teamleiding
+        member: Teamgenoot
     season:
       status:
         draft: Concept

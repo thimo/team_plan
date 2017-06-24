@@ -1,0 +1,33 @@
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          | Notities
+        small
+          | Zoals gespreksverslagen en teambesprekingen
+      - if policy(Note.new(team: team)).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "action-btn"
+            i.fa.fa-file-o
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if notes.size > 0
+        tbody
+          - notes.each do |note|
+            tr.clickable
+              td 
+                = link_to note_path(note)
+                  = note.title
+                = " - #{note.member.name}" if note.member.present?
+                .color-blue-grey-lighter.small
+                  = l note.updated_at.to_date, format: :long
+                  = ", #{note.user.name}"
+                
+
+      - else 
+        tbody
+          tr
+            td
+              i Geen notities gevonden

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517193234) do
+ActiveRecord::Schema.define(version: 20170611194722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,35 @@ ActiveRecord::Schema.define(version: 20170517193234) do
     t.date "started_on"
     t.date "ended_on"
     t.index ["season_id"], name: "index_age_groups_on_season_id"
+  end
+
+  create_table "club_data_competities", force: :cascade do |t|
+    t.integer "poulecode", null: false
+    t.string "competitienaam"
+    t.string "klasse"
+    t.string "poule"
+    t.string "klassepoule"
+    t.string "competitiesoort"
+    t.bigint "club_data_team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_data_team_id"], name: "index_club_data_competities_on_club_data_team_id"
+    t.index ["poulecode"], name: "index_club_data_competities_on_poulecode", unique: true
+  end
+
+  create_table "club_data_teams", force: :cascade do |t|
+    t.integer "teamcode", null: false
+    t.string "teamnaam"
+    t.string "spelsoort"
+    t.string "geslacht"
+    t.string "teamsoort"
+    t.string "leeftijdscategorie"
+    t.string "kalespelsoort"
+    t.string "speeldag"
+    t.string "speeldagteam"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -157,6 +186,20 @@ ActiveRecord::Schema.define(version: 20170517193234) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.bigint "member_id"
+    t.integer "visibility", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_notes_on_member_id"
+    t.index ["team_id"], name: "index_notes_on_team_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_evaluation_id"
     t.string "advise_next_season"
@@ -235,7 +278,9 @@ ActiveRecord::Schema.define(version: 20170517193234) do
     t.date "ended_on"
     t.string "division"
     t.text "remark"
+    t.bigint "club_data_teams_id"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
+    t.index ["club_data_teams_id"], name: "index_teams_on_club_data_teams_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -255,6 +300,11 @@ ActiveRecord::Schema.define(version: 20170517193234) do
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -279,6 +329,7 @@ ActiveRecord::Schema.define(version: 20170517193234) do
   end
 
   add_foreign_key "age_groups", "seasons"
+  add_foreign_key "club_data_competities", "club_data_teams"
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
   add_foreign_key "favorites", "users"
@@ -286,6 +337,9 @@ ActiveRecord::Schema.define(version: 20170517193234) do
   add_foreign_key "field_positions", "field_positions", column: "line_parent_id"
   add_foreign_key "logs", "users"
   add_foreign_key "members", "users"
+  add_foreign_key "notes", "members"
+  add_foreign_key "notes", "teams"
+  add_foreign_key "notes", "users"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
   add_foreign_key "team_evaluations", "teams"
@@ -294,4 +348,5 @@ ActiveRecord::Schema.define(version: 20170517193234) do
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
+  add_foreign_key "teams", "club_data_teams", column: "club_data_teams_id"
 end

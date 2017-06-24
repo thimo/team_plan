@@ -1,6 +1,7 @@
 class TeamMembersController < ApplicationController
   include SortHelper
 
+  # before_action :create_team_member, only: [:new, :create]
   before_action :set_team_member, only: [:show, :edit, :update, :destroy, :activate]
   before_action :breadcumbs, only: [:edit]
 
@@ -8,46 +9,72 @@ class TeamMembersController < ApplicationController
     redirect_to @team_member.member
   end
 
+  def new
+    @team = Team.find(params[:team_id])
+
+    @team_member = @team.team_members.new
+    # @team_member.team = @team
+
+    authorize @team_member
+  end
+
   def create
-    @age_group = AgeGroup.find(params[:age_group_id])
+    if params[:age_group_id].present?
+      # Action from member allocations
+      @age_group = AgeGroup.find(params[:age_group_id])
 
-    if params[:team_member_id].blank?
-      # A new assignment
+      if params[:team_member_id].blank?
+        # A new assignment
+        @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
+        authorize @team_member
+        save_success = @team_member.save
+
+        @team_member.member.logs << Log.new(body: "Toegevoegd aan #{@team_member.team.name}.", user: current_user) if save_success
+      else
+        # Move a player to another team
+        @team_member = TeamMember.find(params[:team_member_id])
+        authorize @team_member
+        save_success = @team_member.update_attributes(permitted_attributes(@team_member))
+
+        @team_member.member.logs << Log.new(body: "Verplaatst naar #{@team_member.team.name}.", user: current_user) if save_success
+      end
+
+      if save_success
+        flash[:success] = "#{@team_member.member.name} is aan #{@team_member.team.name} toegevoegd"
+      else
+        flash[:alert] = "Er is iets mis gegaan, de speler is niet toegevoegd"
+      end
+
+      respond_to do |format|
+        format.html {
+          redirect_to age_group_member_allocations_path(@age_group)
+        }
+        format.js {
+          @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
+          render "create"
+        }
+      end
+    else
+      @team = Team.find(params[:team_id])
       @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
+      @team_member.team ||= @team
       authorize @team_member
-      save_success = @team_member.save
 
-      @team_member.member.logs << Log.new(body: "Toegevoegd aan #{@team_member.team.name}.", user: current_user)
-    else
-      # Move a player to another team
-      @team_member = TeamMember.find(params[:team_member_id])
-      authorize @team_member
-      save_success = @team_member.update_attributes(permitted_attributes(@team_member))
-
-      @team_member.member.logs << Log.new(body: "Verplaatst naar #{@team_member.team.name}.", user: current_user)
-    end
-
-    if save_success
-      flash[:success] = "#{@team_member.member.name} is aan #{@team_member.team.name} toegevoegd"
-    else
-      flash[:alert] = "Er is iets mis gegaan, de speler is niet toegevoegd"
-    end
-
-    respond_to do |format|
-      format.html {
-        redirect_to age_group_member_allocations_path(@age_group)
-      }
-      format.js {
-        @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
-        render "create"
-      }
+      if @team_member.save
+        return redirect_to @team
+      else
+        render :new
+      end
     end
   end
 
   def activate
     # TODO send notification to member administration
     @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)
-    @team_member.update_columns(status: TeamMember.statuses[:active], started_on: Date.today, ended_on: nil)
+    columns = { status: TeamMember.statuses[:active], ended_on: nil }
+    columns[:started_on] = Date.today if @team_member.draft?
+
+    @team_member.update_columns(columns)
 
     redirect_to @team_member.team
   end
@@ -60,7 +87,7 @@ class TeamMembersController < ApplicationController
     if @team_member.update_attributes(permitted_attributes(@team_member))
       @team_member.transmit_status(@team_member.status, old_status)
 
-      redirect_to @team_member.team, notice: 'Teamlid is aangepast.'
+      redirect_to @team_member.team, notice: 'Teamgenoot is aangepast.'
     else
       render 'edit'
     end
@@ -81,6 +108,19 @@ class TeamMembersController < ApplicationController
   end
 
   private
+
+    # def create_team_member
+    #   @team = Team.find(params[:team_id])
+    #
+    #   @team_member = if action_name == 'new'
+    #             @team.team_members.new
+    #           else
+    #             TeamMember.new(permitted_attributes(TeamMember.new))
+    #           end
+    #   @team_member.team = @team
+    #
+    #   authorize @team_member
+    # end
 
     def set_team_member
       @team_member = TeamMember.find(params[:id])

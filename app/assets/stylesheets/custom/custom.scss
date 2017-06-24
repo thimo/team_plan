@@ -122,6 +122,19 @@ a:hover, a:hover:hover {
     color: #2b542c;
   }
 }
+
+.alert {
+  &.alert-notice {
+    &.alert-fill {
+      background-color: #46c35f;
+
+      .alert-btns .btn:hover {
+        color: #46c35f !important;
+      }
+    }
+  }
+}
+
 // Icons voor alerts
 // fa-check
 

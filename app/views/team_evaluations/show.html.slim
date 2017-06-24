@@ -27,8 +27,8 @@
             = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "action-btn"
               i.fa.fa-trash-o
         
-    .box-typical-body
-      table.table.table-striped.table-xxs
+    .box-typical-body.table-responsive
+      table.table.table-xxs
         thead
           tr
             th
@@ -42,7 +42,7 @@
             = render "inbetween_header" if index > 0 && index % 4 == 0
 
             tr
-              td.member-name[class="#{'line-through' if evaluation.team_member.archived?}"]
+              td.member-name[class="#{'line-through' if evaluation.team_member.archived?}", rowspan="2"]
                 - member = evaluation.team_member.member
                 = link_to member.name, member
                 .color-blue-grey-lighter.small
@@ -50,5 +50,10 @@
                   = "(#{member.gender})"
               
               = render "player_evaluations/td_columns", evaluation: evaluation
+              
+            tr
+              td.color-blue-grey.b-t-0[colspan="11", style="padding-left: 2px;"]
+                = evaluation.remark
+
 
     footer.box-typical-footer

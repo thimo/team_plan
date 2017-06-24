@@ -33,7 +33,7 @@
                 = f.select :team, options_for_select(@teams_for_filter, @filter_team), { include_blank: true }, { class: "form-control custom-select", placeholder: "Filter op team", onchange: "$('#filter-button').click()" }
 
       .box-typical-body
-        table.table.table-sm
+        table.table.table-sm.table-responsive
           thead
           tbody
             - @filtered_available_members.each do |team, members|
