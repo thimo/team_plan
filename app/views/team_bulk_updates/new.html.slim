@@ -12,7 +12,7 @@
         
   hr
 
-  = form_tag age_group_team_bulk_updates_path(@age_group) do
+  = form_with url: age_group_team_bulk_updates_path(@age_group), method: :post do
     .form-group
       = text_area_tag "teams", nil, class: "form-control", placeholder: "Voer teams in, één per regel"
     = submit_tag "Aanmaken", class: "btn btn-primary"
