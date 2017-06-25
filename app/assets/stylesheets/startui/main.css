@@ -11583,7 +11583,7 @@ body {
 }
 @media (max-width: 1199px) {
   .site-header .site-header-search-container {
-    width: 110px;
+    /*width: 110px;*/
   }
 }
 @media (max-width: 1056px) {
