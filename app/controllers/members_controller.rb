@@ -3,7 +3,7 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update]
 
   def show
-    @team_members = @member.team_members.recent_first.includes_parents
+    @team_members = policy_scope(@member.team_members).recent_first.includes_parents
   end
 
   def edit

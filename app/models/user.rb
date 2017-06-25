@@ -64,7 +64,9 @@ class User < ApplicationRecord
     case [record.class]
     when [Member]
       # Find overlap in teams between current user and given member
-      team_ids = record.team_members.pluck(:team_id).uniq
+      team_members = record.team_members
+      team_members = team_members.active_or_archived if member?
+      team_ids = team_members.pluck(:team_id).uniq
       return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
     when [Team]
       team_ids = record.id
@@ -83,7 +85,9 @@ class User < ApplicationRecord
     when [TeamMember]
       team_id = record.team_id
     when [Member]
-      team_id = record.team_members.pluck(:team_id).uniq
+      team_members = record.team_members
+      team_members = team_members.active_or_archived if member?
+      team_id = team_members.pluck(:team_id).uniq
     when [TeamEvaluation]
       team_id = record.team_id
     when [PlayerEvaluation]
