@@ -1,5 +1,6 @@
 class Member < ApplicationRecord
   include Filterable
+  include PgSearch
 
   STATUS_DEFINITIEF = 'definitief'
   STATUS_AF_TE_MELDEN = 'af te melden'
@@ -14,7 +15,6 @@ class Member < ApplicationRecord
   has_many :game_likes, -> { where like: true }, class_name: 'GameUser'
   has_many :liked_games, :through => :game_likes, class_name: 'Game', :source => :game
 
-
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
@@ -22,7 +22,6 @@ class Member < ApplicationRecord
   has_paper_trail
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
-
   scope :from_year, -> (year) { where("born_on >= ?", Date.new(year).beginning_of_year) }
   scope :to_year, -> (year) { where("born_on <= ?", Date.new(year).end_of_year) }
   scope :active, -> { where(status: [STATUS_OVERSCHRIJVING_SPELACTIVITEIT, STATUS_DEFINITIEF]).or(where("deregistered_at > ?", Date.today)) }
@@ -34,6 +33,13 @@ class Member < ApplicationRecord
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
   scope :by_season, -> (season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
   scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
+
+  pg_search_scope :search_by_name,
+    against: [:first_name, :middle_name, :last_name, :email, :email2],
+    using:  {
+              tsearch: {prefix: true}
+            },
+    ignoring: :accents
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish

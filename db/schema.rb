@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611194722) do
+ActiveRecord::Schema.define(version: 20170625104951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "fuzzystrmatch"
+  enable_extension "unaccent"
+  enable_extension "pg_trgm"
 
   create_table "age_groups", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -27,35 +30,6 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.date "started_on"
     t.date "ended_on"
     t.index ["season_id"], name: "index_age_groups_on_season_id"
-  end
-
-  create_table "club_data_competities", force: :cascade do |t|
-    t.integer "poulecode", null: false
-    t.string "competitienaam"
-    t.string "klasse"
-    t.string "poule"
-    t.string "klassepoule"
-    t.string "competitiesoort"
-    t.bigint "club_data_team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["club_data_team_id"], name: "index_club_data_competities_on_club_data_team_id"
-    t.index ["poulecode"], name: "index_club_data_competities_on_poulecode", unique: true
-  end
-
-  create_table "club_data_teams", force: :cascade do |t|
-    t.integer "teamcode", null: false
-    t.string "teamnaam"
-    t.string "spelsoort"
-    t.string "geslacht"
-    t.string "teamsoort"
-    t.string "leeftijdscategorie"
-    t.string "kalespelsoort"
-    t.string "speeldag"
-    t.string "speeldagteam"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -107,8 +81,8 @@ ActiveRecord::Schema.define(version: 20170611194722) do
   end
 
   create_table "field_positions_team_members", id: false, force: :cascade do |t|
-    t.integer "field_position_id", null: false
-    t.integer "team_member_id", null: false
+    t.bigint "field_position_id", null: false
+    t.bigint "team_member_id", null: false
     t.index ["field_position_id", "team_member_id"], name: "position_member_index"
     t.index ["team_member_id", "field_position_id"], name: "member_position_index"
   end
@@ -278,9 +252,7 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.date "ended_on"
     t.string "division"
     t.text "remark"
-    t.bigint "club_data_teams_id"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
-    t.index ["club_data_teams_id"], name: "index_teams_on_club_data_teams_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -329,7 +301,6 @@ ActiveRecord::Schema.define(version: 20170611194722) do
   end
 
   add_foreign_key "age_groups", "seasons"
-  add_foreign_key "club_data_competities", "club_data_teams"
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
   add_foreign_key "favorites", "users"
@@ -348,5 +319,4 @@ ActiveRecord::Schema.define(version: 20170611194722) do
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
-  add_foreign_key "teams", "club_data_teams", column: "club_data_teams_id"
 end

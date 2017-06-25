@@ -43,11 +43,10 @@ header.site-header
         .site-header-collapsed
           .site-header-collapsed-in
             .site-header-search-container
-              form.site-header-search.closed
-                input[type="text" placeholder="Search"]
-                button[type="submit"]
+              = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
+                = f.text_field :query, placeholder: 'Zoeken', value: @query
+                = f.button
                   span.font-icon-search
                 .overlay
-
         
 .mobile-menu-left-overlay
