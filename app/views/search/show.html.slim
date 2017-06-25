@@ -17,8 +17,9 @@ section.box-typical
           tr
             td
               = link_to member.name, [member]
-              .color-blue-grey.small
-                = l member.born_on, format: :long unless member.born_on.nil?
+              - if policy(member).show_private_data?
+                .color-blue-grey.small
+                  = l member.born_on, format: :long unless member.born_on.nil?
             td 
               = member.email
         - if @members.size == 0

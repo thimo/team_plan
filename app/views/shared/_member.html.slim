@@ -2,65 +2,67 @@ h3 Contactgegevens
 
 div.strong
   => member.name
-  .color-blue-grey-lighter.small
-    => l member.born_on, format: :long unless member.born_on.nil?
-    = "(#{member.gender})"
+  - if policy(member).show_private_data?
+    .color-blue-grey-lighter.small
+      => l member.born_on, format: :long unless member.born_on.nil?
+      = "(#{member.gender})"
 
-div.pt-2
-  => member.address
-div
-  => member.zipcode
-  => member.city
-div
-  a[href="tel://#{member.phone}"]
-    = member.phone
-  - unless member.phone_2.blank?
-    |  / 
-    a[href="tel://#{member.phone_2}"]
-      = member.phone_2
-div
-  = mail_to member.email, member.email
-  - unless member.email_2.blank?
-    | / 
-    = mail_to member.email_2, member.email_2
-        
-div.pt-4
-- unless member.person_type.blank?
+- if policy(member).show_private_data?
+  div.pt-2
+    => member.address
   div
-    span.color-blue-grey
-      = "#{member.person_type}: "
-    = "#{member.local_teams} "
-    = "#{member.sport_category} "
+    => member.zipcode
+    => member.city
   div
-    span.color-blue-grey
-      | Lid sinds: 
-    = I18n.l member.member_since, format: :long
+    a[href="tel://#{member.phone}"]
+      = member.phone
+    - unless member.phone_2.blank?
+      |  / 
+      a[href="tel://#{member.phone_2}"]
+        = member.phone_2
+  div
+    = mail_to member.email, member.email
+    - unless member.email_2.blank?
+      | / 
+      = mail_to member.email_2, member.email_2
+          
+  div.pt-4
+  - unless member.person_type.blank?
+    div
+      span.color-blue-grey
+        = "#{member.person_type}: "
+      = "#{member.local_teams} "
+      = "#{member.sport_category} "
+    div
+      span.color-blue-grey
+        | Lid sinds: 
+      = I18n.l member.member_since, format: :long
 
-- unless member.registered_at.blank? || member.registered_at == member.member_since
-  div
-    span.color-blue-grey
-      | Registratiedatum: 
-    = I18n.l member.registered_at, format: :long
+  - unless member.registered_at.blank? || member.registered_at == member.member_since
+    div
+      span.color-blue-grey
+        | Registratiedatum: 
+      = I18n.l member.registered_at, format: :long
 
-- if member.status_af_te_melden?
-  div
-    span.color-blue-grey
-      | Status: 
-    = member.status.capitalize
-    - if member.deregistered_at.present?
-      |  per 
-      = I18n.l member.deregistered_at, format: :long
-- else  
-  - unless member.status_definitief? 
+  - if member.status_af_te_melden?
     div
       span.color-blue-grey
         | Status: 
       = member.status.capitalize
-  - unless member.deregistered_at.blank?
-    div
-      span.color-blue-grey
-        | Afmelddatum: 
-      = I18n.l member.deregistered_at, format: :long
+      - if member.deregistered_at.present?
+        |  per 
+        = I18n.l member.deregistered_at, format: :long
+  - else  
+    - unless member.status_definitief? 
+      div
+        span.color-blue-grey
+          | Status: 
+        = member.status.capitalize
+    - unless member.deregistered_at.blank?
+      div
+        span.color-blue-grey
+          | Afmelddatum: 
+        = I18n.l member.deregistered_at, format: :long
 
 hr
 
