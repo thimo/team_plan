@@ -1,9 +1,9 @@
 class MembersController < ApplicationController
-  before_action :breadcumbs
+  before_action :add_breadcrumbs
   before_action :set_member, only: [:show, :edit, :update]
 
   def show
-    @team_members = @member.team_members.recent_first.includes_parents
+    @team_members = policy_scope(@member.team_members).recent_first.includes_parents
   end
 
   def edit
@@ -26,7 +26,7 @@ class MembersController < ApplicationController
       add_breadcrumb "#{@member.name}", @member
     end
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb "Leden"
     end
 

@@ -6,7 +6,7 @@
   
   hr
 
-  = form_tag team_team_member_bulk_updates_path(@team, from: params[:from]) do
+  = form_with url: team_team_member_bulk_updates_path(@team, from: params[:from]), method: :post do
     .form-group.row
       label.col-sm-2.col-form-label Spelers
       .col-sm-10

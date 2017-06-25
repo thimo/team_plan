@@ -64,7 +64,7 @@ class AgeGroupPolicy < ApplicationPolicy
       if @user.admin? || @user.club_staff?
         scope
       else
-        scope.where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]])
+        scope.active_or_archived
       end
     end
   end

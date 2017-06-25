@@ -1,5 +1,5 @@
 class Admin::MembersController < AdminController
-  before_action :breadcumbs
+  before_action :add_breadcrumbs
 
   def index
     @members = policy_scope(Member).asc.filter(params.slice(:query))
@@ -7,7 +7,7 @@ class Admin::MembersController < AdminController
 
   private
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb 'Leden', admin_members_path
       unless @member.nil?
         if @member.new_record?

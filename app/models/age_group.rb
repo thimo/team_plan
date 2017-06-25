@@ -13,6 +13,7 @@ class AgeGroup < ApplicationRecord
   scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: nil)) }
   scope :female, -> { where(gender: "v") }
   scope :asc, -> {order(year_of_birth_to: :asc)}
+  scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) } 
 
   def is_not_member(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?

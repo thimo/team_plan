@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     resources :users, only: [] do
       post :stop_impersonating, on: :collection
     end
+    resources :search
 
     get 'admin' => 'admin#show'
     namespace :admin do
@@ -68,7 +69,7 @@ Rails.application.routes.draw do
       resources :members, only: [:index]
       resources :members_import, only: [:new] do
         collection do
-          post :create #, to: 'members_import#create'
+          post :create
         end
       end
       resources :email_logs, only: [:index, :show]

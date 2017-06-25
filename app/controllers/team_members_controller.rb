@@ -3,7 +3,7 @@ class TeamMembersController < ApplicationController
 
   # before_action :create_team_member, only: [:new, :create]
   before_action :set_team_member, only: [:show, :edit, :update, :destroy, :activate]
-  before_action :breadcumbs, only: [:edit]
+  before_action :add_breadcrumbs, only: [:edit]
 
   def show
     redirect_to @team_member.member
@@ -127,7 +127,7 @@ class TeamMembersController < ApplicationController
       authorize @team_member
     end
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb "#{@team_member.team.age_group.season.name}", @team_member.team.age_group.season
       add_breadcrumb @team_member.team.age_group.name, @team_member.team.age_group
       add_breadcrumb @team_member.team.name, @team_member.team

@@ -1,6 +1,6 @@
 class TeamBulkUpdatesController < ApplicationController
   before_action :set_age_group, only: [:new, :create]
-  before_action :breadcumbs
+  before_action :add_breadcrumbs
 
   def new
   end
@@ -39,7 +39,7 @@ class TeamBulkUpdatesController < ApplicationController
     end
 
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb "#{@age_group.season.name}", @age_group.season
       add_breadcrumb @age_group.name, @age_group
       add_breadcrumb 'Nieuw'

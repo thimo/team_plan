@@ -11552,7 +11552,7 @@ body {
   margin-right: -199px;
 }
 .site-header .site-header-collapsed .site-header-collapsed-in {
-  margin-right: 199px;
+  margin-right: 65px;
   zoom: 1;
   *zoom: 1;
 }
@@ -11583,7 +11583,7 @@ body {
 }
 @media (max-width: 1199px) {
   .site-header .site-header-search-container {
-    width: 110px;
+    /*width: 110px;*/
   }
 }
 @media (max-width: 1056px) {

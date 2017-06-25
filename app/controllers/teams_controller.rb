@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   before_action :create_team, only: [:new, :create]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
-  before_action :breadcumbs
+  before_action :add_breadcrumbs
 
   def show
     @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions))
@@ -59,7 +59,7 @@ class TeamsController < ApplicationController
       authorize @team
     end
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
       add_breadcrumb @team.age_group.name, @team.age_group
       if @team.new_record?

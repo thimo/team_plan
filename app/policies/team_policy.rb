@@ -80,7 +80,7 @@ class TeamPolicy < ApplicationPolicy
       if @user.admin? || @user.club_staff?
         scope
       else
-        scope.where(status: [Team.statuses[:archived], Team.statuses[:active]])
+        scope.active_or_archived
       end
     end
   end

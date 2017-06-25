@@ -1,6 +1,6 @@
 class TeamMemberBulkUpdatesController < ApplicationController
   before_action :set_team, only: [:new, :create]
-  before_action :breadcumbs
+  before_action :add_breadcrumbs
 
   def new
     @members = Member.asc.all
@@ -46,7 +46,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
     end
 
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
       add_breadcrumb @team.age_group.name, @team.age_group
       add_breadcrumb @team.name, @team
