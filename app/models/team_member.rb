@@ -24,6 +24,7 @@ class TeamMember < ApplicationRecord
   scope :includes_parents, -> { includes(:team).includes(team: :age_group).includes(team: {age_group: :season}) }
   scope :recent_first, -> { order(created_at: :desc) }
   scope :active_for_team, -> (team) { where(status: team.status, ended_on: nil) }
+  scope :active_or_archived, -> { where(status: [TeamMember.statuses[:archived], TeamMember.statuses[:active]], ended_on: nil) }
 
   def age_group
     team.age_group

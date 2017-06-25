@@ -47,7 +47,7 @@ class SeasonPolicy < ApplicationPolicy
       if @user.admin? || @user.club_staff?
         scope
       else
-        scope.where(status: [Season.statuses[:archived], Season.statuses[:active]])
+        scope.active_or_archived
       end
     end
   end

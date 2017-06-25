@@ -18,6 +18,7 @@ class Team < ApplicationRecord
   scope :for_members, -> (members) { joins(:team_members).where(team_members: { member_id: members }) }
   scope :for_season, -> (season) { joins(:age_group).where(age_groups: { season_id: season }) }
   scope :for_active_season, -> { joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}) }
+  scope :active_or_archived, -> { where(status: [Team.statuses[:archived], Team.statuses[:active]]) }
 
   def is_favorite?(user)
     favorites.where(user: user).size > 0

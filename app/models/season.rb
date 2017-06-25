@@ -8,6 +8,7 @@ class Season < ApplicationRecord
 
   scope :asc, -> { order(name: :asc) }
   scope :desc, -> { order(name: :desc) }
+  scope :active_or_archived, -> { where(status: [Season.statuses[:archived], Season.statuses[:active]]) }
 
   def status_children
     # Only propagate status when archiving
