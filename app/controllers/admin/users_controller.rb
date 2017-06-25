@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminController
   before_action :create_user, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :resend_password, :destroy, :impersonate]
-  before_action :breadcumbs
+  before_action :breadcrumbs
 
   def index
     @users = policy_scope(User).asc.filter(params.slice(:role, :query))
@@ -71,7 +71,7 @@ class Admin::UsersController < AdminController
       params.require(:user).permit(:first_name, :middle_name, :last_name, :email, :role)
     end
 
-    def breadcumbs
+    def breadcrumbs
       add_breadcrumb 'Gebruikers', admin_users_path
       unless @user.nil?
         if @user.new_record?

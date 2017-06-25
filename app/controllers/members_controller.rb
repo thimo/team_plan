@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :breadcumbs
+  before_action :breadcrumbs
   before_action :set_member, only: [:show, :edit, :update]
 
   def show
@@ -26,7 +26,7 @@ class MembersController < ApplicationController
       add_breadcrumb "#{@member.name}", @member
     end
 
-    def breadcumbs
+    def breadcrumbs
       add_breadcrumb "Leden"
     end
 

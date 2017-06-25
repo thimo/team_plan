@@ -1,6 +1,6 @@
 class AgeGroupBulkUpdatesController < ApplicationController
   before_action :set_season, only: [:new, :create]
-  before_action :breadcumbs
+  before_action :breadcrumbs
 
   def new
   end
@@ -41,7 +41,7 @@ class AgeGroupBulkUpdatesController < ApplicationController
       authorize AgeGroup.new(season: @season)
     end
 
-    def breadcumbs
+    def breadcrumbs
       add_breadcrumb "#{@season.name}", @season
       add_breadcrumb 'Nieuw'
     end

@@ -1,7 +1,7 @@
 class SeasonsController < ApplicationController
   before_action :create_season, only: [:new, :create]
   before_action :set_season, only: [:show, :edit, :update, :destroy]
-  before_action :breadcumbs
+  before_action :breadcrumbs
 
   def index
     @seasons = policy_scope(Season).all.desc
@@ -66,7 +66,7 @@ class SeasonsController < ApplicationController
       authorize @season
     end
 
-    def breadcumbs
+    def breadcrumbs
       unless @season.nil?
         if @season.new_record?
           add_breadcrumb 'Seizoenen', seasons_path

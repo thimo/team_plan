@@ -1,7 +1,7 @@
 class Admin::VersionUpdatesController < AdminController
   before_action :create_version_update, only: [:new, :create]
   before_action :set_version_update, only: [:show, :edit, :update, :destroy]
-  before_action :breadcumbs
+  before_action :breadcrumbs
 
   def index
     # TODO: add paging
@@ -53,7 +53,7 @@ class Admin::VersionUpdatesController < AdminController
       params.require(:version_update).permit(:released_at, :name, :body, :for_role)
     end
 
-    def breadcumbs
+    def breadcrumbs
       add_breadcrumb 'Versies', admin_version_updates_path
       unless @version_update.nil?
         if @version_update.new_record?
