@@ -1,7 +1,7 @@
 class TeamEvaluationsController < ApplicationController
   before_action :create_team_evaluation, only: [:new, :create]
   before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy, :re_open]
-  before_action :breadcrumbs
+  before_action :add_breadcrumbs
 
   def show; end
 
@@ -64,7 +64,7 @@ class TeamEvaluationsController < ApplicationController
       authorize @team_evaluation
     end
 
-    def breadcrumbs
+    def add_breadcrumbs
       add_breadcrumb @team_evaluation.team.age_group.season.name, @team_evaluation.team.age_group.season unless @team_evaluation.team.age_group.nil?
       add_breadcrumb @team_evaluation.team.age_group.name, @team_evaluation.team.age_group unless @team_evaluation.team.age_group.nil?
       add_breadcrumb @team_evaluation.team.name, @team_evaluation.team

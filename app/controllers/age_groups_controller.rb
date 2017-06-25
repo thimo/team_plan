@@ -3,7 +3,7 @@ class AgeGroupsController < ApplicationController
 
   before_action :create_age_group, only: [:new, :create]
   before_action :set_age_group, only: [:show, :edit, :update, :destroy]
-  before_action :breadcrumbs
+  before_action :add_breadcrumbs
 
   def show
     @open_team_evaluations = TeamEvaluation.open_at_team.by_age_group(@age_group).asc
@@ -60,7 +60,7 @@ class AgeGroupsController < ApplicationController
       authorize @age_group
     end
 
-    def breadcrumbs
+    def add_breadcrumbs
       add_breadcrumb "#{@age_group.season.name}", @age_group.season
       if @age_group.new_record?
         add_breadcrumb 'Nieuw'

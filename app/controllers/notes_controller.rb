@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   before_action :set_team, only: [:new, :create]
   before_action :create_note, only: [:new, :create]
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  before_action :breadcrumbs
+  before_action :add_breadcrumbs
 
   def show; end
 
@@ -62,7 +62,7 @@ class NotesController < ApplicationController
       params.require(:note).permit(:title, :body, :team_id, :member_id, :visibility)
     end
 
-    def breadcrumbs
+    def add_breadcrumbs
       add_breadcrumb "#{@note.team.age_group.season.name}", @note.team.age_group.season
       add_breadcrumb @note.team.age_group.name, @note.team.age_group
       add_breadcrumb @note.team.name, @note.team
