@@ -22,6 +22,8 @@ class TeamActionsController < ApplicationController
 
     case params[:type]
     when 'email'
+      current_user.settings.update_attribute(:email_separator, params[:email_separator])
+
       @teams = policy_scope(Team).where(id: params[:team_ids])
       email_addresses = []
       @teams.each do |team|
@@ -31,7 +33,7 @@ class TeamActionsController < ApplicationController
       end
 
       # Collect email addresses
-      @redirect = "mailto:#{email_addresses.uniq.join(',')}"
+      @redirect = "mailto:#{email_addresses.uniq.join(current_user.settings.email_separator)}"
     when 'download_team_members'
       @redirect = age_group_download_team_members_path(@age_group, format: "xlsx", team_ids: params[:team_ids], status: params[:status])
     end

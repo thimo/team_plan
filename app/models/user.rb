@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
   has_many :logs, dependent: :destroy
+  has_one :user_setting
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise
@@ -137,5 +138,10 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  def settings
+    # Auto-create user_setting
+    user_setting || self.create_user_setting
   end
 end

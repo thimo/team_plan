@@ -13,7 +13,7 @@
           .col-sm-6
             .form-check
               label.form-check-label
-                input.form-check-input.team-select-toggle[type="checkbox" checked="checked"]
+                input.form-check-input.team-select-toggle[type="checkbox" checked]
                 strong
                   |  Teams
                 
@@ -30,7 +30,7 @@
                   | Selectie e-mailadressen
               .form-check
                 label.form-check-label
-                  input.form-check-input[type="radio" name="email_selection" value="all" checked]
+                  input.form-check-input[type="radio" name="email_selection" value="all" checked="true"]
                   |  Alle teamgenoten
               .form-check
                 label.form-check-label
@@ -40,6 +40,19 @@
                 label.form-check-label
                   input.form-check-input[type="radio" name="email_selection" value="player"]
                   |  Spelers
+              .form-check
+                strong 
+                  | Voor gebruik met
+              .form-check
+                label.form-check-label
+                  => f.radio_button :email_separator, ";", class: "form-check-input", checked: current_user.settings.email_separator == ';'
+                  | Outlook
+              .form-check
+                label.form-check-label
+                  => f.radio_button :email_separator, ",", class: "form-check-input", checked: current_user.settings.email_separator == ','
+                  | Apple Mail, Gmail
+
+                  
             - if params[:type] == 'download_team_members'
               .form-check
                 strong 

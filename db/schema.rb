@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625104951) do
+ActiveRecord::Schema.define(version: 20170626190711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,6 +255,14 @@ ActiveRecord::Schema.define(version: 20170625104951) do
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
   end
 
+  create_table "user_settings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "email_separator", default: ";"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -319,4 +327,5 @@ ActiveRecord::Schema.define(version: 20170625104951) do
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
+  add_foreign_key "user_settings", "users"
 end

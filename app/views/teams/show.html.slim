@@ -13,11 +13,11 @@
               | Teamgenoten
           - if policy(@team).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
-              a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan de teamleiding"]
+              a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
                 i.fa.fa-envelope-o
           - if policy(@team).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
-              a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(',')}", title="Stuur een e-mail aan alle teamgenoten"]
+              a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan alle teamgenoten"]
                 i.fa.fa-envelope
           - if policy(@team).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
