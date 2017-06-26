@@ -38,14 +38,14 @@ nav.side-menu
       header.side-menu-title
         | Favorieten
       ul.side-menu-list
-        - current_user.favorite_teams.each do |team|
+        - human_sort(current_user.favorite_teams, :name).each do |team|
           li.gold class="#{'active' if current_page?(team_path(team))}"
             = link_to team
               i.fa.fa-star
               span.lbl
                 = team.name
                 
-        - current_user.favorite_age_groups.each do |age_group|
+        - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
           li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
             = link_to age_group
               i.fa.fa-star
