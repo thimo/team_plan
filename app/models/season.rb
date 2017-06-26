@@ -12,7 +12,7 @@ class Season < ApplicationRecord
 
   def status_children
     # Only propagate status when archiving
-    age_groups if archived?
+    archived? ? age_groups : []
   end
 
 end
