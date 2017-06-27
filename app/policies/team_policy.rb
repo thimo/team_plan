@@ -53,6 +53,12 @@ class TeamPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def show_previous_team?
+    return false if @record.archived?
+
+    @user.admin? || @user.club_staff?
+  end
+
   def set_status?
     return false if @record.new_record? || @record.age_group.archived?
 

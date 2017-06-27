@@ -7,6 +7,9 @@ class MemberAllocationsController < ApplicationController
     @filter_field_position = session[:filter_field_position]
     @filter_team = session[:filter_team]
 
+    @season = @age_group.season
+    @previous_season = @season.previous
+
     active_members = @age_group.active_members
     assigned_members = @age_group.assigned_active_members
     @available_members = active_members - assigned_members

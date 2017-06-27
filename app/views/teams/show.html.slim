@@ -49,6 +49,8 @@
             - if @team.draft?
               th Huidig team 
             th
+            - if policy(@team).show_previous_team?
+              th
             th
             
           tbody
@@ -83,6 +85,15 @@
                       .color-blue-grey-lighter.small
                         = team_member.prefered_foot
                                               
+                    - if policy(@team).show_previous_team?
+                      td.small
+                        - if (previous_teams = team_member.member.teams_for_season(@previous_season)).present?
+                          - previous_teams.each do |previous_team|
+                            div
+                              = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
+                            div.color-blue-grey-lighter
+                              = "#{previous_team.division}"
+
                     td.w-1.nowrap.text-right
                       = render "shared/favorite", parent: team_member.member
                       

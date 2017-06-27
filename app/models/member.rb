@@ -57,6 +57,10 @@ class Member < ApplicationRecord
     favorites.where(user: user).first
   end
 
+  def teams_for_season(season)
+    Team.for_season(season).for_members(self)
+  end
+
   def active_team
     @active_team ||= teams_as_player.for_active_season.first || teams.for_active_season.first
   end

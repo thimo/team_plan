@@ -24,16 +24,17 @@
           = I18n.l member.deregistered_at, format: :long
         
   td.color-blue-grey.small
-    - if (active_team = member.active_team).present?
-      div
-        = link_to active_team.name, active_team, target: '_blank', class: 'strong', title: 'Huidig team'
-        span.pl-1
-          = "#{active_team.division}"
-        - if (last_evaluation = member.last_evaluation).present?
-          span.ml-1[title="Evaluatie #{I18n.l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
-            i.fa[class="#{last_evaluation.advise_to_icon_class}"]
-          - if last_evaluation.remark.present?
-            i.fa.fa-info-circle.blue.ml-1[title="#{last_evaluation.remark}"]
+    - if (previous_teams = member.teams_for_season(@previous_season)).present?
+      - previous_teams.each do |previous_team|
+        div
+          = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
+          span.pl-1
+            = "#{previous_team.division}"
+          - if (last_evaluation = member.last_evaluation).present?
+            span.ml-1[title="Evaluatie #{I18n.l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
+              i.fa[class="#{last_evaluation.advise_to_icon_class}"]
+            - if last_evaluation.remark.present?
+              i.fa.fa-info-circle.blue.ml-1[title="#{last_evaluation.remark}"]
           
     - if (active_team_member = member.active_team_member).present?
       - if (field_positions = active_team_member.field_positions).present?

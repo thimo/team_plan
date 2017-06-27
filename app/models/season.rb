@@ -15,4 +15,14 @@ class Season < ApplicationRecord
     archived? ? age_groups : []
   end
 
+  def previous
+    # TODO properly policy_scope
+    self.class.where("created_at < ?", created_at).order(created_at: :asc).last
+  end
+
+  def next
+    # TODO properly policy_scope
+    self.class.where("created_at > ?", created_at).order(created_at: :asc).first
+  end
+
 end
