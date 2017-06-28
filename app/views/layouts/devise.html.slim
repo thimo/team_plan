@@ -18,8 +18,9 @@ html
         .container-fluid.text-center
           - if flash.present?
             - flash.each do |message_type, message|
-              .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
-                | #{message}
+              - if message.present?
+                .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
+                  | #{message}
 
           .sign-box
             .sign-avatar.sign-logo.mt-2.mb-5
