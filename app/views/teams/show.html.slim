@@ -60,7 +60,7 @@
                   tr
                     td.strong.small.color-blue-grey-lighter
                       = year if index == 0
-                    td 
+                    td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
                       - if policy(team_member.member).show_private_data?
                         = link_to team_member.member.name, team_member.member
                       - else

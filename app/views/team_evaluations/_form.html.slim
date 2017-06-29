@@ -45,7 +45,7 @@
             = render "inbetween_header", show_prefered_foot: true if pe.index > 0 && pe.index % 4 == 0
 
             tr
-              td.member-name[class="#{'line-through' if pe.object.team_member.ended_on.present?}" rowspan="2"]
+              td.member-name[class="#{'line-through' if pe.object.team_member.inactive_for?(@team_evaluation)}" rowspan="2"]
                 - member = pe.object.team_member.member
                 = link_to member.name, member, target: "_blank"
                 .color-blue-grey-lighter.small

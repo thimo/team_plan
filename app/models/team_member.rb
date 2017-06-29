@@ -43,6 +43,23 @@ class TeamMember < ApplicationRecord
     team_members_scope.staff.asc.includes(:member).includes(:team).group_by(&:member)
   end
 
+  def inactive_for?(record)
+    # TeamMember never has archived status if draft or active or no end date is filled in
+    return false if draft? || active? || ended_on.blank?
+
+    case [record.class]
+    when [TeamEvaluation]
+      # For finished team evaluations, compare end date of TeamMember to the finish date of TeamEvaluation
+      if record.finished?
+        return record.finished_at > ended_on
+      else
+        return true
+      end
+    when [Team]
+      true
+    end
+  end
+
   private
 
     def inherit_fields

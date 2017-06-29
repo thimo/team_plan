@@ -56,10 +56,22 @@ class TeamEvaluation < ApplicationRecord
     return users.size
   end
 
+  def finished?
+    finished_at.present?
+  end
+
+  def invited?
+    invited_at.present?
+  end
+
+  def open?
+    !invited? && !finished?
+  end
+
   def status
-    if finished_at.present?
+    if finished?
       "Afgerond"
-    elsif invited_at.present?
+    elsif invited?
       "Open bij team"
     else
       "Te versturen"
