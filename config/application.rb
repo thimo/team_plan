@@ -29,5 +29,9 @@ module TeamPlan
     config.time_zone = 'Amsterdam'
 
     config.assets.paths << Rails.root.join("vendor", "assets", "images")
+
+    console do
+      ActiveRecord::Base.connection
+    end
   end
 end
