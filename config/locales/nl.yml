@@ -27,7 +27,8 @@ nl:
         first_name: Voornaam
         middle_name: Tussenvoegsels
         last_name: Achternaam
-        name: Naam
+        name: Volledige naam
+        reversed_name: Achternaam, voornaam
         email: E-mail
         born_on: Geboortedatum
         phone: Telefoonnummer
