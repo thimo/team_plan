@@ -45,6 +45,10 @@ class Member < ApplicationRecord
     "#{first_name} #{middle_name} #{last_name}".squish
   end
 
+  def reversed_name
+    "#{last_name}, #{first_name} #{middle_name}".squish
+  end
+
   def name_and_born_on
     "#{name} (#{I18n.l(born_on, format: :long)})"
   end
