@@ -14,7 +14,7 @@ class MemberAllocationsController < ApplicationController
     assigned_members = @age_group.assigned_active_members
     @available_members = active_members - assigned_members
 
-    @teams_for_filter = human_sort(Team.for_members(@available_members).for_season(Season.active.last).distinct, :name).map{|team| [team.name, team.id]}
+    @teams_for_filter = human_sort(Team.for_members(@available_members).as_player.for_season(@season.previous).distinct, :name).map{|team| [team.name, team.id]}
 
     filtered_members = active_members
     filtered_members = filtered_members.by_season(Season.active.last).by_field_position(field_positions) if field_positions.present?
