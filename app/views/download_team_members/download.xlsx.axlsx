@@ -48,6 +48,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
         team[:team],
         member.association_number,
         member.name,
+        member.reversed_name,
         member.last_name,
         member.first_name,
         member.middle_name,
