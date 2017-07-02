@@ -70,13 +70,18 @@ class TeamMembersController < ApplicationController
 
   def activate
     # TODO send notification to member administration
-    @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)
-    columns = { status: TeamMember.statuses[:active], ended_on: nil }
-    columns[:started_on] = Date.today if @team_member.draft?
+    @team_member.status = TeamMember.statuses[:active]
+    @team_member.ended_on = nil
+    @team_member.started_on = Date.today if @team_member.draft?
 
-    @team_member.update_columns(columns)
+    if @team_member.save
+      @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)
+      flash[:success] = "#{@team_member.member.name} is geactiveerd voor #{@team_member.team.name}."
+    else
+      flash[:alert] = "Er is iets mis gegaan, de teamgenoot is niet geactiveerd"
+    end
 
-    redirect_to @team_member.team
+    redirect_to back_url
   end
 
   def edit;end
@@ -94,17 +99,22 @@ class TeamMembersController < ApplicationController
   end
 
   def destroy
-    redirect_to :back, notice: "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
-
     if @team_member.active?
       # TODO send notification to member administration
+      @team_member.status = TeamMember.statuses[:archived]
+      @team_member.ended_on = Date.today
+      @team_member.save
+
       # Place team member in archive
       @team_member.member.logs << Log.new(body: "Gearchiveerd vanuit #{@team_member.team.name}.", user: current_user)
-      @team_member.update_columns(status: TeamMember.statuses[:archived], ended_on: Date.today)
     else
-      @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
       @team_member.destroy
+
+      @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
     end
+
+    flash[:success] = "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
+    redirect_to back_url
   end
 
   private
