@@ -24,14 +24,16 @@ class Member < ApplicationRecord
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :from_year, -> (year) { where("born_on >= ?", Date.new(year).beginning_of_year) }
   scope :to_year, -> (year) { where("born_on <= ?", Date.new(year).end_of_year) }
-  scope :active, -> { where(status: [STATUS_OVERSCHRIJVING_SPELACTIVITEIT, STATUS_DEFINITIEF]).or(where("deregistered_at > ?", Date.today)) }
-  scope :player, -> { where("sport_category <> ''").or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)) }
+  scope :sportlink_active, -> { where(status: [STATUS_OVERSCHRIJVING_SPELACTIVITEIT, STATUS_DEFINITIEF]).or(where("deregistered_at > ?", Date.today)) }
+  scope :sportlink_player, -> { where("sport_category <> ''").or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)) }
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
   scope :team_staff, -> { joins(:team_members).where(team_members: {role: TeamMember::STAFF_ROLES}) }
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
   scope :by_season, -> (season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
+  # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that it's renamed everywhere
+  scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
 
   pg_search_scope :search_by_name,

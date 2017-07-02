@@ -13,7 +13,7 @@ class AgeGroup < ApplicationRecord
   scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: nil)) }
   scope :female, -> { where(gender: "v") }
   scope :asc, -> {order(year_of_birth_to: :asc)}
-  scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) } 
+  scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
 
   def is_not_member(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
@@ -29,7 +29,7 @@ class AgeGroup < ApplicationRecord
 
   def active_members
     # All active players
-    members = Member.active.player.asc
+    members = Member.sportlink_active.sportlink_player.asc
     # Filter on year of birth
     members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
     members = members.to_year(year_of_birth_to) if year_of_birth_to.present?
@@ -46,7 +46,7 @@ class AgeGroup < ApplicationRecord
   end
 
   def assigned_active_members
-    active_members.by_season(season)
+    active_members.by_season(season).as_player
   end
 
   def status_children
