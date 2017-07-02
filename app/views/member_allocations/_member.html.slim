@@ -24,7 +24,7 @@
           = I18n.l member.deregistered_at, format: :long
         
   td.color-blue-grey.small
-    - if (previous_teams = member.teams_for_season(@previous_season)).present?
+    - if (previous_teams = member.teams_for_season(@previous_season).as_player).present?
       - previous_teams.each do |previous_team|
         div
           = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
