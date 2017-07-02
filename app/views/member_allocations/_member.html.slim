@@ -30,11 +30,11 @@
           = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
           span.pl-1
             = "#{previous_team.division}"
-          - if (last_evaluation = member.last_evaluation).present?
-            span.ml-1[title="Evaluatie #{I18n.l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
-              i.fa[class="#{last_evaluation.advise_to_icon_class}"]
-            - if last_evaluation.remark.present?
-              i.fa.fa-info-circle.blue.ml-1[title="#{last_evaluation.remark}"]
+          - if (evaluation = member.evaluation_for_season(@previous_season)).present?
+            span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{evaluation.advise_next_season}"]
+              i.fa[class="#{evaluation.advise_to_icon_class}"]
+            - if evaluation.remark.present?
+              i.fa.fa-info-circle.blue.ml-1[title="#{evaluation.remark}"]
           
     - if (active_team_member = member.active_team_member).present?
       - if (field_positions = active_team_member.field_positions).present?
