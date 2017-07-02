@@ -7,7 +7,7 @@
       .col-md-9.form-control-static
         = @team_member.member.name 
   - else 
-    = f.input :member_id, collection: Member.active.asc, value_method: :id, label_method: :name_and_born_on, id: :team_member_member_id
+    = f.input :member_id, collection: Member.sportlink_active.asc, value_method: :id, label_method: :name_and_born_on, id: :team_member_member_id
   
   - if policy(@team_member).set_role?
     = f.input :role
