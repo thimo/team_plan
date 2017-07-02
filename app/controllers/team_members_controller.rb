@@ -108,9 +108,9 @@ class TeamMembersController < ApplicationController
       # Place team member in archive
       @team_member.member.logs << Log.new(body: "Gearchiveerd vanuit #{@team_member.team.name}.", user: current_user)
     else
-      @team_member.destroy
-
+      # Log first...
       @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
+      @team_member.destroy
     end
 
     flash[:success] = "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
