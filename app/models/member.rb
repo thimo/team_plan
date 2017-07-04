@@ -107,11 +107,11 @@ class Member < ApplicationRecord
       member = Member.find_or_initialize_by(association_number: association_number)
 
       row_hash.each do |key, value|
-        if Member.column_names.include?(key) && !value.blank?
+        if Member.column_names.include?(key)
           if key.ends_with?("_at") || key.ends_with?("_since")
             member.send("#{key}=", value.to_date)
           else
-            member.send("#{key}=", value)
+            member.send("#{key}=", value || nil)
           end
         end
       end
