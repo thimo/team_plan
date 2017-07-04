@@ -87,7 +87,7 @@
                                               
                     - if policy(@team).show_previous_team?
                       td.small
-                        - if (previous_teams = team_member.member.teams_for_season(@previous_season)).present?
+                        - if (previous_teams = team_member.member.teams_for_season(@previous_season).as_player.distinct).present?
                           - previous_teams.each do |previous_team|
                             div
                               = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
