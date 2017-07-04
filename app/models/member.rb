@@ -30,6 +30,7 @@ class Member < ApplicationRecord
   scope :by_season, -> (season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
   # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that it's renamed everywhere
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
+  scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }  
   scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
 
   pg_search_scope :search_by_name,
