@@ -111,7 +111,7 @@ class Member < ApplicationRecord
           if key.ends_with?("_at") || key.ends_with?("_since")
             member.send("#{key}=", value.to_date)
           else
-            member.send("#{key}=", value || nil)
+            member.send("#{key}=", value.present? ? value : nil)
           end
         end
       end
