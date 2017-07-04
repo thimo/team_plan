@@ -20,6 +20,11 @@ class Admin::MembersImportController < AdminController
     else
       result = Member.import(params[:file])
 
+      # After an import with at least one member, cleanup members that were last imported 7 days ago
+      if result[:counters][:imported] > 0
+        Member.cleanup(7.days.ago)
+      end
+
       redirect_to admin_members_path, notice: "#{result[:counters][:imported]} gebruikers zijn geïmporteerd waarvan #{result[:counters][:created]} nieuw, #{result[:counters][:changed]} aangepast."
     end
   end

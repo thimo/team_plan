@@ -129,4 +129,11 @@ class Member < ApplicationRecord
 
     result
   end
+
+  def self.cleanup(imported_before)
+    Member.where(deregistered_at: nil).where('imported_at < ?', imported_before).each do |member|
+      member.deregistered_at = member.imported_at
+      member.save
+    end
+  end
 end
