@@ -44,11 +44,11 @@ section.box-typical
                 td.text-center
                   => year_of_birth_range(age_group)
                 td.text-right
+                  - if policy(age_group).show_status?
+                    => age_group.status_to_label.html_safe
                   - if (size = policy_scope(age_group.teams).size) > 0
                     .label.label-one-number>
                       = "#{size}"
-                  - if policy(age_group).show_status?
-                    => age_group.status_to_label.html_safe
 
     - if @age_groups_female.size > 0
       .col-sm-6
@@ -66,8 +66,8 @@ section.box-typical
                 td.text-center
                   => year_of_birth_range(age_group)
                 td.text-right
-                  - if age_group.teams.size > 0
-                    .label.label-one-number>
-                      = "#{age_group.teams.size}"
                   - if policy(age_group).show_status?
                     => age_group.status_to_label.html_safe
+                  - if (size = policy_scope(age_group.teams).size) > 0
+                    .label.label-one-number>
+                      = "#{size}"
