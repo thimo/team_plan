@@ -75,7 +75,7 @@ nl:
         are_you_sure: Weet je het zeker?
         cancel_my_account: Annuleer mijn account
         currently_waiting_confirmation_for_email: 'Aan het wachten op de bevestiging voor: %{email}'
-        leave_blank_if_you_don_t_want_to_change_it: Laat leeg als je het niet wilt wijzigen
+        leave_blank_if_you_don_t_want_to_change_it: Alleen invullen als je je wachtwoord wilt wijzigen
         title: Account aanpassen
         unhappy: Niet blij
         update: Bijwerken
