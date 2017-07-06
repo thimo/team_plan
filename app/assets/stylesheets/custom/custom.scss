@@ -49,9 +49,15 @@ a:hover, a:hover:hover {
   a:hover {
     text-decoration: none;
   }
-  .supplier {
-    position: absolute;
-    bottom: 0;
+}
+
+.supplier {
+  bottom: 0;
+  position: absolute;
+
+  .side-menu-list {
+    margin-bottom: 10px;
+
     img {
       width: 96px;
     }
