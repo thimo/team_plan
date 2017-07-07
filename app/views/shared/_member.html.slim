@@ -77,7 +77,9 @@ h3
           td.pr-3
             - if index == 0
               = link_to team.name, team
-              = " (#{team.division})" if team.division.present?
+          td.pr-3.color-blue-grey
+            - if index == 0
+              = "#{team.division}" if team.division.present?
           td.pr-3
             = team_member.role_i18n
           td
