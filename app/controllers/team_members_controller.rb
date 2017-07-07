@@ -33,6 +33,7 @@ class TeamMembersController < ApplicationController
       else
         # Move a player to another team
         @team_member = TeamMember.find(params[:team_member_id])
+        @team_member.status = TeamMember.statuses[:draft]
         authorize @team_member
         save_success = @team_member.update_attributes(permitted_attributes(@team_member))
 
