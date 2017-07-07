@@ -31,7 +31,9 @@ html
             - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.draft?
               span.ml-3.label[class="#{label_object.color_class_for_status}"]
                 = label_object.status_i18n
-                
+          .color-blue-grey.small
+            = yield(:hint)
+
           ol.breadcrumb.breadcrumb-simple
             = render_breadcrumbs :tag => :li, :separator => ""
           

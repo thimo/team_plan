@@ -3,7 +3,7 @@
 
   = f.input :name
   = f.input :division, as: :select, collection: Team::DIVISION_OPTIONS
-  = f.input :remark, hint: 'Wordt alleen getoond bij teams in concept status, bijvoorbeeld bij het maken van nieuwe indelingen'
+  = f.input :remark
   
   - if policy(@team).set_status?
     = render 'shared/enum_radio_buttons', f: f, field: :status
