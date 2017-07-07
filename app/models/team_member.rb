@@ -60,6 +60,22 @@ class TeamMember < ApplicationRecord
     end
   end
 
+  def deactivate(user: nil)
+    if active?
+      # TODO send notification to member administration
+      self.status = TeamMember.statuses[:archived]
+      self.ended_on = Date.today
+      save
+
+      # Place team member in archive
+      self.member.logs << Log.new(body: "Gearchiveerd vanuit #{team.name}.", user: user)
+    else
+      # Log first...
+      self.member.logs << Log.new(body: "Verwijderd uit #{team.name}.", user: user)
+      self.destroy
+    end
+  end
+
   private
 
     def inherit_fields

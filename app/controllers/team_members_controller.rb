@@ -23,24 +23,18 @@ class TeamMembersController < ApplicationController
       # Action from member allocations
       @age_group = AgeGroup.find(params[:age_group_id])
 
-      if params[:team_member_id].blank?
-        # A new assignment
-        @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
-        authorize @team_member
-        save_success = @team_member.save
-
-        @team_member.member.logs << Log.new(body: "Toegevoegd aan #{@team_member.team.name}.", user: current_user) if save_success
-      else
-        # Move a player to another team
+      if params[:team_member_id].present?
+        # Remove player from previous team
         @team_member = TeamMember.find(params[:team_member_id])
-        @team_member.status = TeamMember.statuses[:draft]
         authorize @team_member
-        save_success = @team_member.update_attributes(permitted_attributes(@team_member))
-
-        @team_member.member.logs << Log.new(body: "Verplaatst naar #{@team_member.team.name}.", user: current_user) if save_success
+        @team_member.deactivate
       end
 
-      if save_success
+      @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
+      authorize @team_member
+
+      if @team_member.save
+        @team_member.member.logs << Log.new(body: "Toegevoegd aan #{@team_member.team.name}.", user: current_user)
         flash[:success] = "#{@team_member.member.name} is aan #{@team_member.team.name} toegevoegd"
       else
         flash[:alert] = "Er is iets mis gegaan, de speler is niet toegevoegd"
@@ -100,19 +94,7 @@ class TeamMembersController < ApplicationController
   end
 
   def destroy
-    if @team_member.active?
-      # TODO send notification to member administration
-      @team_member.status = TeamMember.statuses[:archived]
-      @team_member.ended_on = Date.today
-      @team_member.save
-
-      # Place team member in archive
-      @team_member.member.logs << Log.new(body: "Gearchiveerd vanuit #{@team_member.team.name}.", user: current_user)
-    else
-      # Log first...
-      @team_member.member.logs << Log.new(body: "Verwijderd uit #{@team_member.team.name}.", user: current_user)
-      @team_member.destroy
-    end
+    @team_member.deactivate(user: current_user)
 
     flash[:success] = "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
     redirect_to back_url
