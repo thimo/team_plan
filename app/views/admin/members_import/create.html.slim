@@ -1,0 +1,47 @@
+- provide(:title, "Importeer leden - Resultaat")
+
+- if @import_result.present?
+  section.box-typical
+    header.box-typical-header
+      .tbl-row
+        .tbl-cell.tbl-cell-title
+          h3
+            | #{@import_result[:counters][:imported]} Leden geïmporteerd, #{@import_result[:created].size} aangemaakt
+    .box-typical-body.table-responsive
+      table.table.table-sm.tr-links
+        thead
+          tr
+            th = Member.human_attribute_name(:name) 
+            th = Member.human_attribute_name(:email)
+        tbody
+          - @import_result[:created].each do |member|
+            tr
+              td
+                = link_to member.name, [member]
+                .color-blue-grey.small
+                  = l member.born_on, format: :long unless member.born_on.nil?
+              td 
+                = member.email
+                
+- if @cleanup_result.present?
+  section.box-typical
+    header.box-typical-header
+      .tbl-row
+        .tbl-cell.tbl-cell-title
+          h3
+            | #{@cleanup_result[:deregistered].size} Leden verwijderd
+    .box-typical-body.table-responsive
+      table.table.table-sm.tr-links
+        thead
+          tr
+            th = Member.human_attribute_name(:name) 
+            th = Member.human_attribute_name(:email)
+        tbody
+          - @cleanup_result[:deregistered].each do |member|
+            tr
+              td
+                = link_to member.name, [member]
+                .color-blue-grey.small
+                  = l member.born_on, format: :long unless member.born_on.nil?
+              td 
+                = member.email
