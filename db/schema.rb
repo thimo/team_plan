@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626190711) do
+ActiveRecord::Schema.define(version: 20170709101523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "fuzzystrmatch"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "age_groups", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -255,6 +255,19 @@ ActiveRecord::Schema.define(version: 20170626190711) do
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
   end
 
+  create_table "todos", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "body"
+    t.boolean "waiting", default: false
+    t.boolean "finished", default: false
+    t.string "todoable_type"
+    t.bigint "todoable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable_type_and_todoable_id"
+    t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
   create_table "user_settings", force: :cascade do |t|
     t.bigint "user_id"
     t.string "email_separator", default: ";"
@@ -327,5 +340,6 @@ ActiveRecord::Schema.define(version: 20170626190711) do
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
+  add_foreign_key "todos", "users"
   add_foreign_key "user_settings", "users"
 end
