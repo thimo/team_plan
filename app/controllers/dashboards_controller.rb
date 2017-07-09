@@ -13,6 +13,7 @@ class DashboardsController < ApplicationController
     @open_team_evaluations = policy_scope(TeamEvaluation).desc.where(team_id: team_ids)
 
     @version_updates = policy_scope(VersionUpdate).desc.limit(10)
+    @todos = policy_scope(Todo).asc.open
 
     skip_policy_scope
   end

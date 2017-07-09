@@ -1,0 +1,7 @@
+= simple_form_for [@todoable, @todo] do |f|
+  = f.error_notification
+  = f.input :body, label: false, placeholder: "Todo"
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @todo.new_record? ? @todoable : @todo.todoable, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@todo).destroy?
+    = link_to "Verwijderen", todo_path(@todo),  method: :delete, data: { confirm: 'Todo wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

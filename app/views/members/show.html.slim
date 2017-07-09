@@ -11,6 +11,9 @@
     - if policy(@member).show_comments?
       = render "comments/tabs", parent: @member
 
+    - if policy(@member).show_todos?
+      = render "todos/list", todos: @todos, new_path: new_member_todo_path(@member)
+
 - if policy(@member).show_evaluations?
   .row
     .col-12

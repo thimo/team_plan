@@ -47,6 +47,10 @@ class TeamPolicy < ApplicationPolicy
     true
   end
 
+  def show_todos?
+    !@record.archived?
+  end
+
   def show_status?
     return false if @record.status == @record.age_group.status
 

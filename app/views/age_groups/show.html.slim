@@ -65,3 +65,6 @@
         = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties", hide_status: true, show_last_modified: true, show_progress: true
       - if @finished_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @finished_team_evaluations, title: "Afgeronde teamevaluaties", hide_status: true, show_finished_by: true
+        
+    - if policy(@age_group).show_todos?
+      = render "todos/list", todos: @todos, new_path: new_age_group_todo_path(@age_group)
