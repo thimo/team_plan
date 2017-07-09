@@ -9,6 +9,7 @@ class AgeGroupsController < ApplicationController
     @open_team_evaluations = TeamEvaluation.open_at_team.by_age_group(@age_group).asc
     @finished_team_evaluations = TeamEvaluation.finished.desc_finished.by_age_group(@age_group)
     @teams = human_sort(policy_scope(@age_group.teams), :name)
+    @todos = policy_scope(@age_group.todos).open
   end
 
   def new; end

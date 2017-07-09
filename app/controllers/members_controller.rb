@@ -4,6 +4,7 @@ class MembersController < ApplicationController
 
   def show
     @team_members = policy_scope(@member.team_members).recent_first.includes_parents
+    @todos = policy_scope(@member.todos).open
   end
 
   def edit

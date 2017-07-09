@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
   has_many :logs, dependent: :destroy
+  has_many :todos
   has_one :user_setting
   has_paper_trail
 

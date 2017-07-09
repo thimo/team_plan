@@ -85,6 +85,8 @@
                         span.lbl
                           = age_group.name
 
+      = render "todos/list", todos: @todos
+
     .col-sm-6
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true

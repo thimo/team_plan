@@ -28,6 +28,10 @@ class MemberPolicy < AdminPolicy
     @user.has_member?(@record)
   end
 
+  def show_todos?
+    true
+  end
+
   def show_evaluations?
     @user.admin? ||
     @user.club_staff? ||

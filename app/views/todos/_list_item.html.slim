@@ -1,0 +1,7 @@
+.actions
+= link_to [:toggle, todo], method: :post, remote: true
+  i.fa[class="#{todo.finished? ? 'fa-check-square-o' : 'fa-square-o'}"]
+  span.lbl
+    = todo.body
+    .color-blue-grey.small
+      = todo.todoable.name if todo.todoable.present?

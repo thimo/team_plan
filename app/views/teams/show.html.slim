@@ -145,6 +145,9 @@
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
+    - if policy(@team).show_todos?
+      = render "todos/list", todos: @todos, new_path: new_team_todo_path(@team)
+      
     - if policy(@team).show_evaluations?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
       
