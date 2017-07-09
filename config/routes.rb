@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         resources :download_team_members, only: [:index]
         resources :team_actions, only: [:new, :create]
         resources :select_teams
+        resources :todos, only: [:new, :create]
         resources :teams, except: [:index], shallow: true do
           resources :team_members, only: [:new, :create]
           resources :comments, only: [:new, :create, :edit, :update, :destroy]
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
           resources :team_member_bulk_updates, only: [:new, :create]
           resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]
           resources :download_team_members, only: [:index]
+          resources :todos, only: [:new, :create]
         end
       end
     end
@@ -51,11 +53,17 @@ Rails.application.routes.draw do
     resources :members, only: [:show] do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
+      resources :todos, only: [:new, :create]
     end
     resources :users, only: [] do
       post :stop_impersonating, on: :collection
     end
     resources :search
+    resources :todos do
+      member do
+        post :toggle
+      end
+    end
 
     get 'admin' => 'admin#show'
     namespace :admin do

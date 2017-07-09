@@ -9,6 +9,7 @@ class TeamsController < ApplicationController
     @team_evaluations = policy_scope(@team.team_evaluations).desc
     @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
     @previous_season = @team.age_group.season.previous
+    @todos = policy_scope(@team.todos).open
   end
 
   def new; end

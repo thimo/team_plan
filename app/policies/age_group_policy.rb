@@ -33,6 +33,10 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def show_todos?
+    !@record.archived?
+  end
+
   def show_status?
     return false if @record.status == @record.season.status
 
