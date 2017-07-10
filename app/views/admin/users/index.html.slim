@@ -31,6 +31,8 @@ section.box-typical
               = link_to user.name, [:edit, :admin, user]
               .color-blue-grey.small
                 => user.email
+                - if user.unconfirmed_email.present?
+                  |  (wijziging naar #{user.unconfirmed_email} nog niet bevestigd)
             td 
               = user.role_i18n
             td.hidden-xs-down

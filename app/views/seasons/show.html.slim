@@ -6,6 +6,10 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         .strong
           | Leeftijdsgroepen
+      - if policy(@season).bulk_email?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_season_team_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
+            i.fa.fa-envelope-o
       - if policy(@season).download_team_members?
         .tbl-cell.tbl-cell-action-bordered
           = link_to season_download_team_members_path(@season, format: "xlsx"), title: "Download teams naar Excel", class: "action-btn"

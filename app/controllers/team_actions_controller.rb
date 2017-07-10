@@ -1,11 +1,8 @@
 class TeamActionsController < ApplicationController
   include SortHelper
+  before_action :set_base, only: [:new, :create]
 
   def new
-    @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
-    @teams = human_sort(policy_scope(@age_group.teams), :name)
-    authorize :team_action
-
     case params[:type]
     when 'email'
       @title = "Stuur e-mail aan teams"
@@ -17,14 +14,11 @@ class TeamActionsController < ApplicationController
   end
 
   def create
-    @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
-    authorize :team_action
-
     case params[:type]
     when 'email'
       current_user.settings.update_attribute(:email_separator, params[:email_separator])
 
-      @teams = policy_scope(Team).where(id: params[:team_ids])
+      # @teams = policy_scope(Team).where(id: params[:team_ids])
       email_addresses = []
       @teams.each do |team|
         active_members = team.team_members.active_for_team(team)
@@ -33,13 +27,49 @@ class TeamActionsController < ApplicationController
       end
 
       # Collect email addresses
-      @redirect = "mailto:#{email_addresses.uniq.join(current_user.settings.email_separator)}"
+      emails = email_addresses.uniq.join(current_user.settings.email_separator)
+      case params[:to_field]
+      when "cc"
+        @redirect = "mailto:?cc=#{emails}"
+      when "bcc"
+        @redirect = "mailto:?bcc=#{emails}"
+      else
+        @redirect = "mailto:#{emails}"
+      end
     when 'download_team_members'
       @redirect = age_group_download_team_members_path(@age_group, format: "xlsx", team_ids: params[:team_ids], status: params[:status])
     end
   end
 
   private
+
+    def set_base
+      if params[:age_group_id].present?
+        @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
+        @base_class = @age_group.class
+        if params[:team_ids].present?
+          @teams = policy_scope(Team).where(id: params[:team_ids])
+        else
+          @teams = human_sort(policy_scope(@age_group.teams), :name)
+        end
+
+      elsif params[:season_id].present?
+        @season = policy_scope(Season).find(params[:season_id])
+        @base_class = @season.class
+
+        if params[:age_group_ids].present?
+          # @age_groups = policy_scope(AgeGroup).where(id: params[:age_group_ids])
+          @teams = policy_scope(Team).where(age_group: params[:age_group_ids])
+        else
+          @age_groups_male = policy_scope(@season.age_groups).male.asc
+          @age_groups_female = policy_scope(@season.age_groups).female.asc
+          @teams = policy_scope(Team).includes(:age_group).where(age_groups: {season: @season})
+        end
+
+
+      end
+      authorize :team_action
+    end
 
     def include_staff?
       params[:email_selection] == 'all' || params[:email_selection] == 'staff'

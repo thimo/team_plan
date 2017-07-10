@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :seasons, shallow: true do
       resources :age_group_bulk_updates, only: [:new, :create]
       resources :download_team_members, only: [:index]
+      resources :team_actions, only: [:new, :create]
       resources :age_groups, shallow: true do
         resources :team_bulk_updates, only: [:new, :create]
         resources :member_allocations, only: [:index, :create, :update, :destroy]

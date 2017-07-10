@@ -36,6 +36,10 @@ class SeasonPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def bulk_email?
+    download_team_members?
+  end
+
   def permitted_attributes
     attributes = [:name]
     attributes << :status if set_status?
