@@ -4,7 +4,7 @@
   = f.input :first_name
   = f.input :middle_name
   = f.input :last_name
-  = f.input :email
+  = f.input :email, hint: "Wijziging naar #{@user.unconfirmed_email} nog niet bevestigd" if @user.unconfirmed_email.present?
   = f.input :role
   
   div
