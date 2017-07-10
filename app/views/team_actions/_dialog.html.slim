@@ -1,6 +1,10 @@
-.modal-dialog[role="document"]
+- column_class = @base_class == Season ? "col-sm-4" : "col-sm-6"
+- url = @base_class == Season ? season_team_actions_path(@season) : age_group_team_actions_path(@age_group)
+- modal_size = @base_class == Season ? 'modal-lg' : ''
+
+.modal-dialog[role="document" class="#{modal_size}"]
   .modal-content
-    = form_with url: age_group_team_actions_path(@age_group), method: :post do |f|
+    = form_with url: url, method: :post do |f|
       = f.hidden_field :type, value: params[:type]
       .modal-header
         h5#exampleModalLabel.modal-title
@@ -10,72 +14,12 @@
             | ×
       .modal-body
         .row
-          .col-sm-6
-            .form-check
-              label.form-check-label
-                input.form-check-input.team-select-toggle[type="checkbox" checked]
-                strong
-                  |  Teams
-                
-            - @teams.each do |team|
-              .form-check
-                label.form-check-label
-                  = f.check_box 'team_ids[]', { checked: true, class: 'form-check-input team-select' }, team.id, nil
-                  = " #{team.name}"
-                  
-          .col-sm-6
-            - if params[:type] == 'email'
-              .form-check
-                strong 
-                  | Selectie e-mailadressen
-              .form-check
-                label.form-check-label
-                  input.form-check-input[type="radio" name="email_selection" value="all" checked="true"]
-                  |  Alle teamgenoten
-              .form-check
-                label.form-check-label
-                  input.form-check-input[type="radio" name="email_selection" value="staff"]
-                  |  Teamleiding
-              .form-check
-                label.form-check-label
-                  input.form-check-input[type="radio" name="email_selection" value="player"]
-                  |  Spelers
-              .form-check
-                strong 
-                  | Voor gebruik met
-              .form-check
-                label.form-check-label
-                  => f.radio_button :email_separator, ";", class: "form-check-input", checked: current_user.settings.email_separator == ';'
-                  | Outlook
-              .form-check
-                label.form-check-label
-                  => f.radio_button :email_separator, ",", class: "form-check-input", checked: current_user.settings.email_separator == ','
-                  | Apple Mail, Gmail
-
-                  
-            - if params[:type] == 'download_team_members'
-              .form-check
-                strong 
-                  | Status van teams
-              .form-check
-                label.form-check-label
-                  input.form-check-input[type="radio" name="status" value="" checked]
-                  |  Alle statussen
-              - AgeGroup.statuses.each do |status, index|
-                .form-check
-                  label.form-check-label
-                    input.form-check-input[type="radio" name="status" value="#{status}"]
-                    |  #{AgeGroup.statuses_i18n[status]}
+          = render 'dialog_age_groups', f: f, column_class: column_class if @base_class == Season
+          = render 'dialog_teams', f: f, column_class: column_class if @base_class == AgeGroup
+          
+          = render 'team_actions/dialog_options', f: f, column_class: column_class
 
       .modal-footer
         button.btn.btn-secondary[type="button" data-dismiss="modal"]
           | Annuleren
         = f.submit @button_label, class: "btn btn-primary"
-
-script
-  | $('.team-select-toggle').change(function() {
-  |   checkedValue = this.checked;
-  |   $('input.team-select').each(function(index) {
-  |     this.checked = checkedValue
-  |   })
-  | })

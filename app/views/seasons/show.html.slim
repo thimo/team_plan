@@ -8,7 +8,7 @@ section.box-typical
           | Leeftijdsgroepen
       - if policy(@season).bulk_email?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_season_age_group_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
+          = link_to new_season_team_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
             i.fa.fa-envelope-o
       - if policy(@season).download_team_members?
         .tbl-cell.tbl-cell-action-bordered

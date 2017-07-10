@@ -1,0 +1,35 @@
+div[class="#{column_class}"]
+  .form-check
+    label.form-check-label.strong
+      input.form-check-input.age-groups-male-select-toggle[type="checkbox" checked]
+      |  Mannen
+  - @age_groups_male.each do |age_group|
+    .form-check
+      label.form-check-label
+        = f.check_box 'age_group_ids[]', { checked: true, class: 'form-check-input age-groups-male-select' }, age_group.id, nil
+        = " #{age_group.name}"
+        
+div[class="#{column_class}"]
+  .form-check
+    label.form-check-label.strong
+      input.form-check-input.age-groups-female-select-toggle[type="checkbox" checked]
+      |  Vrouwen
+  - @age_groups_female.each do |age_group|
+    .form-check
+      label.form-check-label
+        = f.check_box 'age_group_ids[]', { checked: true, class: 'form-check-input age-groups-female-select' }, age_group.id, nil
+        = " #{age_group.name}"
+
+script
+  | $('.age-groups-male-select-toggle').change(function() {
+  |   checkedValue = this.checked;
+  |   $('input.age-groups-male-select').each(function(index) {
+  |     this.checked = checkedValue
+  |   })
+  | });
+  | $('.age-groups-female-select-toggle').change(function() {
+  |   checkedValue = this.checked;
+  |   $('input.age-groups-female-select').each(function(index) {
+  |     this.checked = checkedValue
+  |   })
+  | })
