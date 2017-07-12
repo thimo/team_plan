@@ -98,7 +98,7 @@ class Member < ApplicationRecord
   end
 
   def self.import(file)
-    result = { counters: { imported: 0, changed: 0 }, created: [] }
+    result = { counters: { imported: 0, changed: 0 }, created: [], activated: [] }
 
     CSV.foreach(file.path, :headers => true,
                            :header_converters => lambda { |h| I18n.t("member.import.#{h.downcase.gsub(' ', '_')}") }
@@ -108,6 +108,7 @@ class Member < ApplicationRecord
       member = Member.find_or_initialize_by(association_number: association_number)
       result[:created] << member if member.new_record?
 
+      old_deregistered_at = member.deregistered_at
       row_hash.each do |key, value|
         if Member.column_names.include?(key)
           if key.ends_with?("_at") || key.ends_with?("_since")
@@ -122,6 +123,7 @@ class Member < ApplicationRecord
       if member.changed?
         result[:counters][:changed] += 1
       end
+      result[:activated] << member if old_deregistered_at.present? && member.deregistered_at.nil?
 
       member.imported_at = DateTime.now
       member.save!
