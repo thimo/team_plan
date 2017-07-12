@@ -1,5 +1,6 @@
 = simple_form_for [:admin, @user], {wrapper: :horizontal_form} do |f|
   = f.error_notification
+  = hidden_field_tag :member, params[:member]
   
   = f.input :first_name
   = f.input :middle_name

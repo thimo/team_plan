@@ -25,6 +25,15 @@ div.strong
     - unless member.email_2.blank?
       |  / 
       = mail_to member.email_2, member.email_2
+
+  - if current_user.admin?
+    div.mt-2
+      span.color-blue-grey
+        | Login: 
+      - if member.user.present?
+        = link_to member.user.name, [:edit, :admin, member.user]
+      - else 
+        = link_to "Aanmaken", new_admin_user_path(member: member)
           
   div.pt-4
   - unless member.person_type.blank?

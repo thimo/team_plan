@@ -7,14 +7,21 @@ class Admin::UsersController < AdminController
     @users = policy_scope(User).asc.filter(params.slice(:role, :query))
   end
 
-  def new; end
+  def new
+    prefill_from_member
+  end
 
   def create
     generated_password = @user.set_new_password
     @user.skip_confirmation!
     if @user.save
       @user.send_new_account(generated_password)
-      redirect_to admin_users_path, notice: 'Gebruiker is toegevoegd.'
+      flash[:success] = 'Gebruiker is toegevoegd.'
+      if params[:member].present?
+        redirect_to policy_scope(Member).find(params[:member])
+      else
+        redirect_to admin_users_path
+      end
     else
       render :new
     end
@@ -80,6 +87,16 @@ class Admin::UsersController < AdminController
         else
           add_breadcrumb @user.email, [:edit, :admin, @user]
         end
+      end
+    end
+
+    def prefill_from_member
+      if params[:member].present?
+        member = policy_scope(Member).find(params[:member])
+        @user.first_name = member.first_name
+        @user.middle_name = member.middle_name
+        @user.last_name = member.last_name
+        @user.email = member.email
       end
     end
 end

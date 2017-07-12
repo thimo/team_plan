@@ -97,6 +97,10 @@ class Member < ApplicationRecord
     Comment.comment_types
   end
 
+  def user
+    @user ||= User.where("lower(email) = ?", email.downcase).first
+  end
+
   def self.import(file)
     result = { counters: { imported: 0, changed: 0 }, created: [], activated: [] }
 
