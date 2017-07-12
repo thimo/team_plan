@@ -76,11 +76,7 @@ Rails.application.routes.draw do
         end
       end
       resources :members, only: [:index]
-      resources :members_import, only: [:new] do
-        collection do
-          post :create
-        end
-      end
+      resources :members_import, only: [:new, :create]
       resources :email_logs, only: [:index, :show]
       resources :version_updates
       resources :settings,

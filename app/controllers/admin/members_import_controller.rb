@@ -1,4 +1,6 @@
 class Admin::MembersImportController < AdminController
+  before_action :add_breadcrumbs
+
   def new
     authorize(Member)
 
@@ -18,14 +20,20 @@ class Admin::MembersImportController < AdminController
       render :new
 
     else
-      result = Member.import(params[:file])
+      @import_result = Member.import(params[:file])
 
       # After an import with at least one member, cleanup members that were last imported 7 days ago
-      if result[:counters][:imported] > 0
-        Member.cleanup(7.days.ago)
+      if @import_result[:counters][:imported] > 0
+        @cleanup_result = Member.cleanup(7.days.ago)
       end
 
-      redirect_to admin_members_path, notice: "#{result[:counters][:imported]} gebruikers zijn geïmporteerd waarvan #{result[:counters][:created]} nieuw, #{result[:counters][:changed]} aangepast."
     end
   end
+
+  private
+
+    def add_breadcrumbs
+      add_breadcrumb 'Leden', admin_members_path
+    end
+
 end
