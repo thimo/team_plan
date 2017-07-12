@@ -17,6 +17,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
     Member.human_attribute_name(:city),
     Member.human_attribute_name(:phone),
     Member.human_attribute_name(:email),
+    Member.human_attribute_name(:member_since),
   ]
   sheet.add_row columns
   @teams.each do |team|
@@ -38,6 +39,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
         team_member.member.city,
         team_member.member.phone,
         team_member.member.email,
+        team_member.member.member_since,
       ]
       sheet.add_row columns
     end
@@ -59,6 +61,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
         member.city,
         member.phone,
         member.email,
+        member.member_since,
       ]
       sheet.add_row columns
     end
