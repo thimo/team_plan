@@ -37,6 +37,7 @@ nl:
         city: Woonplaats
         country: Land
         association_number: KNVB nummer
+        member_since: Lid sinds
       team_member:
         role: Rol
         name: Naam
