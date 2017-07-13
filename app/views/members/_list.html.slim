@@ -1,0 +1,42 @@
+- title ||= 'Leden'
+- disable_header ||= false
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          = title
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if members.size > 0
+        - unless disable_header
+          thead
+            th Naam
+            th Geboortdatum
+            th 
+            th
+            
+        tbody
+          - members.each do |member|
+            tr.clickable
+              td 
+                = link_to member.name, member
+              td
+                = l member.born_on.to_date, format: :long
+              td
+                = l member.registered_at.to_date, format: :long
+              td
+                - if member.reactivated?
+                  i.fa.fa-recycle.pl-2.color-green[title="Opnieuw geactiveerd" data-placement="left"] 
+
+
+      - else 
+        tbody
+          tr
+            td
+              i Geen leden gevonden
+              
+  .box-typical-footer
+    = paginate members, param_name: 'member_page'

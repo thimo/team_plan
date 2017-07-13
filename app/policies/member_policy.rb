@@ -38,6 +38,11 @@ class MemberPolicy < AdminPolicy
     @user.is_team_staff_for?(@record)
   end
 
+  def show_new_members?
+    @user.admin? ||
+    @user.club_staff?
+  end
+
   class Scope < Scope
     def resolve
       scope

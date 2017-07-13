@@ -91,5 +91,8 @@
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
 
+      - if @new_members.present?
+        = render "members/list", members: @new_members, title: "Nieuwe leden"
+
       - if @version_updates.present?
         = render "version_updates/list", version_updates: @version_updates, disable_header: true

@@ -33,6 +33,7 @@ class Member < ApplicationRecord
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
+  scope :recent_members, -> (days_ago) { where("registered_at >= ?", days_ago.days.ago.to_date).order(registered_at: :desc) }
 
   pg_search_scope :search_by_name,
     against: [:first_name, :middle_name, :last_name, :email, :email2],
@@ -99,6 +100,10 @@ class Member < ApplicationRecord
 
   def user
     @user ||= User.where("lower(email) = ?", email.downcase).first
+  end
+
+  def reactivated?
+    (registered_at - member_since).to_i > 30
   end
 
   def self.import(file)

@@ -11,3 +11,15 @@
 .line-through {
   text-decoration: line-through;
 }
+
+.box-typical-footer {
+  .pagination {
+    margin: 0;
+
+    a, span.current {
+      padding: 4px;
+    }
+  }
+
+
+}

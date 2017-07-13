@@ -14,6 +14,7 @@ class DashboardsController < ApplicationController
 
     @version_updates = policy_scope(VersionUpdate).desc.limit(10)
     @todos = policy_scope(Todo).asc.open
+    @new_members = policy_scope(Member).recent_members(30).page(params[:member_page]).per(10) if policy(Member).show_new_members?
 
     skip_policy_scope
   end
