@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20170709102623) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "fuzzystrmatch"
-  enable_extension "pg_trgm"
   enable_extension "unaccent"
+  enable_extension "pg_trgm"
 
   create_table "age_groups", id: :serial, force: :cascade do |t|
     t.string "name"
