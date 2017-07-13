@@ -93,10 +93,7 @@ class Admin::UsersController < AdminController
     def prefill_from_member
       if params[:member].present?
         member = policy_scope(Member).find(params[:member])
-        @user.first_name = member.first_name
-        @user.middle_name = member.middle_name
-        @user.last_name = member.last_name
-        @user.email = member.email
+        @user.prefill(member)
       end
     end
 end

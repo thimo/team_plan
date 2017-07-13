@@ -26,14 +26,16 @@ div.strong
       |  / 
       = mail_to member.email_2, member.email_2
 
-  - if current_user.admin?
+  - if policy(Member).show_login?
     div.mt-2
-      span.color-blue-grey
-        | Login: 
       - if member.user.present?
-        = link_to member.user.name, [:edit, :admin, member.user]
+        .color-blue-grey
+          | Heeft toegang tot TeamPlan
+        = link_to "Nieuw wachtwoord versturen", resend_password_member_path(member), method: :post, class: "btn btn-sm", data: { confirm: 'Let op: het oude wachtwoord van de gebruiker is hierna niet meer te gebruiken. Doorgaan?' }
       - else 
-        = link_to "Aanmaken", new_admin_user_path(member: member)
+        .color-blue-grey
+          | Heeft geen toegang tot TeamPlan
+        = link_to "Login aanmaken en versturen", create_login_member_path(member), method: :post, class: "btn btn-sm"
           
   div.pt-4
   - unless member.person_type.blank?

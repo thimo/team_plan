@@ -113,7 +113,11 @@ class User < ApplicationRecord
   end
 
   def set_new_password
-    self.password = Devise.friendly_token.first(8)
+    self.password = User.password
+  end
+
+  def self.password
+    Password.pronounceable(8) + rand(100).to_s
   end
 
   def send_new_account(password)
@@ -124,9 +128,16 @@ class User < ApplicationRecord
     UserMailer.password_reset(self, password).deliver_now
   end
 
+  def prefill(member)
+    self.first_name = member.first_name
+    self.middle_name = member.middle_name
+    self.last_name = member.last_name
+    self.email = member.email
+  end
+
   def self.find_or_create_and_invite(member)
     user = User.where(email: member.email).first_or_initialize(
-      password: (generated_password = Devise.friendly_token.first(8)),
+      password: (generated_password = User.password),
       first_name: member.first_name,
       middle_name: member.middle_name,
       last_name: member.last_name,

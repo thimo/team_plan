@@ -327,6 +327,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+    simple-password-gen (0.1.5)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -445,6 +446,7 @@ DEPENDENCIES
   rubyzip (~> 1.1.0)
   sass-rails (~> 5.0)
   shoulda-matchers
+  simple-password-gen
   simple_form (~> 3.5.0)
   slim
   spring

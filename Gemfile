@@ -47,6 +47,7 @@ gem 'axlsx_rails'
 gem 'pretender'
 gem 'trix'
 gem 'pg_search'
+gem 'simple-password-gen'
 
 group :development, :test do
   gem 'byebug', platform: :mri

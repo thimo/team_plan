@@ -52,6 +52,10 @@ Rails.application.routes.draw do
     resources :member_allocation_filters, only: [:create, :destroy]
 
     resources :members, only: [:show] do
+      member do
+        post :create_login
+        post :resend_password
+      end
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
       resources :todos, only: [:new, :create]
