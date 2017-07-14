@@ -87,6 +87,18 @@
   }
 }
 
+@media (max-width: 544px) {
+  .site-header {
+    .site-header-content {
+      margin-left: -180px;
+
+      .site-header-content-in {
+        margin-left: 180px;
+      }
+    }
+  }
+}
+
 abbr[title] {
   border: 0;
   text-decoration: none;
