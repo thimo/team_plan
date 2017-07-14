@@ -1,7 +1,15 @@
 - provide(:title, "Team #{@team.name}")
 - provide(:subtitle, "#{@team.division}")
 - provide(:hint, "#{@team.remark}") if @team.remark.present?
-- provide(:action_buttons, render("shared/favorite", parent: @team))
+
+- content_for :action_buttons
+  - if policy(@team).update?
+    = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
+      i.fa.fa-pencil
+  - if policy(@team).destroy?
+    = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "action-btn"
+      i.fa.fa-trash-o  
+  = render("shared/favorite", parent: @team)
 
 .row
   .col-xl-6
@@ -31,14 +39,6 @@
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_team_team_member_bulk_update_path(@team), title: "Teamgenoten toevoegen", class: "action-btn" do
                 i.fa.fa-users
-          - if policy(@team).update?
-            .tbl-cell.tbl-cell-action-bordered
-              = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
-                i.fa.fa-pencil
-          - if policy(@team).destroy?
-            .tbl-cell.tbl-cell-action-bordered
-              = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "action-btn"
-                i.fa.fa-trash-o
           
       .box-typical-body.table-responsive
         table.table.table-sm.tr-links
