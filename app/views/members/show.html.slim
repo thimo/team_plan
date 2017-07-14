@@ -1,6 +1,5 @@
 - provide(:title, "#{@member.name}")
-
-= render "shared/favorite", parent: @member, styleClass: 'fa-2x top-right'
+- provide(:action_buttons, render("shared/favorite", parent: @member))
 
 .row
   .col-xl-6

@@ -1,6 +1,5 @@
 - provide(:title, "Leeftijdsgroep #{@age_group.name}")
-
-= render "shared/favorite", parent: @age_group, styleClass: 'fa-2x top-right'
+- provide(:action_buttons, render("shared/favorite", parent: @age_group))
 
 .row
   .col-xl-6

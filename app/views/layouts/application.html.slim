@@ -24,6 +24,8 @@ html
     .page-content
       .container-fluid
         header.section-header
+          div.fa-2x.float-right
+            = yield(:action_buttons)
           h3 
             = yield(:title)
             small.pl-2.color-blue-grey

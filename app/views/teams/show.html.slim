@@ -1,8 +1,7 @@
 - provide(:title, "Team #{@team.name}")
 - provide(:subtitle, "#{@team.division}")
 - provide(:hint, "#{@team.remark}") if @team.remark.present?
-
-= render "shared/favorite", parent: @team, styleClass: 'fa-2x top-right'
+- provide(:action_buttons, render("shared/favorite", parent: @team))
 
 .row
   .col-xl-6
