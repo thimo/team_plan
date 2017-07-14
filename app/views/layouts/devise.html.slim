@@ -17,10 +17,11 @@ html
       .page-center-in
         .container-fluid
           - if flash.present?
-            - flash.each do |message_type, message|
-              - if message.present?
-                .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
-                  | #{message}
+            .text-center
+              - flash.each do |message_type, message|
+                - if message.present?
+                  .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
+                    | #{message}
 
           .sign-box
             .sign-avatar.sign-logo.mt-2.mb-5
