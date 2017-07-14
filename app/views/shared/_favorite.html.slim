@@ -3,8 +3,8 @@
 - if policy(parent).show_favorite?
   span.favorite.p-1.pl-2[class="#{styleClass}"]
     - if parent.is_favorite?(current_user)
-      = link_to parent.favorite(current_user), method: :delete, title: "Favoriet verwijderen"
+      = link_to parent.favorite(current_user), method: :delete, title: "Favoriet verwijderen", data: {placement: "left"}
         i.fa.fa-star.favorable.selected
     - else
-      = link_to [parent, Favorite], method: :post, title: "Favoriet toevoegen"
+      = link_to [parent, Favorite], method: :post, title: "Favoriet toevoegen", data: {placement: "left"}
         i.fa.fa-star-o.favorable
