@@ -57,16 +57,16 @@ nav.side-menu
       header.side-menu-title
         | Admin
       ul.side-menu-list
-        li.blue class="#{'active' if controller_name == 'users'}"
-          = link_to admin_users_path do
-            i.fa.fa-user
-            span.lbl
-              | Gebruikers
         li.green class="#{'active' if controller_name == 'members'}"
           = link_to admin_members_path do
             i.fa.fa-users
             span.lbl
               | Leden
+        li.blue class="#{'active' if controller_name == 'users'}"
+          = link_to admin_users_path do
+            i.fa.fa-user
+            span.lbl
+              | Gebruikers
         li.grey class="#{'active' if controller_name == 'email_logs'}"
           = link_to admin_email_logs_path do
             i.fa.fa-envelope

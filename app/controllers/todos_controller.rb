@@ -5,13 +5,9 @@ class TodosController < ApplicationController
   before_action :add_breadcrumbs
 
   def new
-    # @todo = Todo.new(todoable: @todoable, user: current_user)
-    # authorize @todo
   end
 
   def create
-    # @todo = Todo.new(todo_params.merge(todoable: @todoable, user: current_user))
-    # authorize @todo
     if @todo.save
       flash[:success] = "Todo is toegevoegd."
       if @todo.todoable.nil?

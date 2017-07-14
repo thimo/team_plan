@@ -1,5 +1,23 @@
 - provide(:title, "Leeftijdsgroep #{@age_group.name}")
-- provide(:action_buttons, render("shared/favorite", parent: @age_group))
+
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group
+      - if @age_group.teams.size > 0
+        - if policy(TeamMember.new(team: @age_group.teams.first)).create?
+          = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn btn-secondary"
+            i.fa.fa-table
+      - if policy(@age_group).update?
+        = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "btn btn-secondary"
+          i.fa.fa-pencil
+      - if policy(@age_group).destroy?
+        = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "btn btn-secondary"
+          i.fa.fa-trash-o
+    .btn-group.ml-1
+      - if policy(Todo).create? && policy(@age_group).show_todos?
+        = link_to new_age_group_todo_path(@age_group), title: "Todo toevoegen", class: "btn btn-secondary"
+          i.fa.fa-check-square-o
+      = render "shared/favorite", parent: @age_group, styleClass: "btn btn-secondary"
 
 .row
   .col-xl-6
@@ -25,19 +43,6 @@
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
                 i.fa.fa-files-o
-          - if @age_group.teams.size > 0
-            - if policy(TeamMember.new(team: @age_group.teams.first)).create?
-              .tbl-cell.tbl-cell-action-bordered
-                = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "action-btn"
-                  i.fa.fa-table
-          - if policy(@age_group).update?
-            .tbl-cell.tbl-cell-action-bordered
-              => link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "action-btn"
-                i.fa.fa-pencil
-          - if policy(@age_group).destroy?
-            .tbl-cell.tbl-cell-action-bordered
-              => link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "action-btn"
-                i.fa.fa-trash-o
                 
       .box-typical-body
         table.table.table-sm.tr-links
@@ -65,5 +70,5 @@
       - if @finished_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @finished_team_evaluations, title: "Afgeronde teamevaluaties", hide_status: true, show_finished_by: true
         
-    - if policy(@age_group).show_todos?
+    - if policy(@age_group).show_todos? && @todos.present?
       = render "todos/list", todos: @todos, new_path: new_age_group_todo_path(@age_group)

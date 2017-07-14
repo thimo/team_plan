@@ -3,13 +3,19 @@
 - provide(:hint, "#{@team.remark}") if @team.remark.present?
 
 - content_for :action_buttons
-  - if policy(@team).update?
-    = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
-      i.fa.fa-pencil
-  - if policy(@team).destroy?
-    = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "action-btn"
-      i.fa.fa-trash-o  
-  = render("shared/favorite", parent: @team)
+  .btn-toolbar
+    .btn-group
+      - if policy(@team).update?
+        = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn btn-secondary" do
+          i.fa.fa-pencil
+      - if policy(@team).destroy?
+        = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "btn btn-secondary"
+          i.fa.fa-trash-o  
+    .btn-group.ml-1
+      - if policy(Todo).create? && policy(@team).show_todos?
+        = link_to new_team_todo_path(@team), title: "Todo toevoegen", class: "btn btn-secondary"
+          i.fa.fa-check-square-o
+      = render "shared/favorite", parent: @team, styleClass: "btn btn-secondary"
 
 .row
   .col-xl-6
@@ -85,7 +91,7 @@
                               = "#{previous_team.division}"
 
                     td.w-1.nowrap.text-right
-                      = render "shared/favorite", parent: team_member.member
+                      = render "shared/favorite", parent: team_member.member, styleClass: "p-1 pl-2"
                       
                       - if policy(team_member).edit?
                         = link_to edit_team_member_path(team_member), title: "Aanpassen"
@@ -144,10 +150,10 @@
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
-    - if policy(@team).show_todos?
+    - if policy(@team).show_todos? && @notes.present?
       = render "todos/list", todos: @todos, new_path: new_team_todo_path(@team)
       
-    - if policy(@team).show_evaluations?
+    - if policy(@team).show_evaluations? && @team_evaluations.present?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
       
     - if policy(@team).show_notes?

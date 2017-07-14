@@ -1,5 +1,12 @@
 - provide(:title, "#{@member.name}")
-- provide(:action_buttons, render("shared/favorite", parent: @member))
+
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group
+      - if policy(Todo).create? && policy(@member).show_todos?
+        = link_to new_member_todo_path(@member), title: "Todo toevoegen", class: "btn btn-secondary"
+          i.fa.fa-check-square-o
+      = render "shared/favorite", parent: @member, styleClass: "btn btn-secondary"
 
 .row
   .col-xl-6
@@ -10,7 +17,7 @@
     - if policy(@member).show_comments?
       = render "comments/tabs", parent: @member
 
-    - if policy(@member).show_todos?
+    - if policy(@member).show_todos? && @todos.present?
       = render "todos/list", todos: @todos, new_path: new_member_todo_path(@member)
 
 - if policy(@member).show_evaluations?

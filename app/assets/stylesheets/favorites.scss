@@ -1,10 +1,14 @@
-.favorite {
+.favorable {
+  opacity: .25;
+
+  &.selected {
+    color: #f29824;
+    opacity: 1;
+  }
+}
+
+.btn {
   .favorable {
-    color: #919fa9; // color-blue-grey-lighter
-    opacity: .25;
-    &.selected {
-      color: #f29824;
-      opacity: 1;
-    }
+    opacity: 1;
   }
 }
