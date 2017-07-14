@@ -150,7 +150,7 @@
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
-    - if policy(@team).show_todos? && @notes.present?
+    - if policy(@team).show_todos? && @todos.present?
       = render "todos/list", todos: @todos, new_path: new_team_todo_path(@team)
       
     - if policy(@team).show_evaluations? && @team_evaluations.present?
