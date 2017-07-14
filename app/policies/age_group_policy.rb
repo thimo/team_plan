@@ -34,7 +34,9 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_todos?
-    !@record.archived?
+    return false if @record.archived?
+
+    @user.admin? || @user.club_staff?
   end
 
   def show_status?

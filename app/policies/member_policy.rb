@@ -29,7 +29,9 @@ class MemberPolicy < AdminPolicy
   end
 
   def show_todos?
-    true
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record)
   end
 
   def show_evaluations?

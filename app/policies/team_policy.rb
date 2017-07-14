@@ -48,7 +48,11 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_todos?
-    !@record.archived?
+    return false if @record.archived?
+
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record)
   end
 
   def show_status?
