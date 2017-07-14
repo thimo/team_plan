@@ -99,7 +99,7 @@ class Member < ApplicationRecord
   end
 
   def user
-    @user ||= User.where("lower(email) = ?", email.downcase).first
+    @user ||= User.where("lower(email) = ?", email.downcase).first if email.present?
   end
 
   def reactivated?
