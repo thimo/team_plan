@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
       resources :todos, only: [:new, :create]
+      resources :injuries, only: [:new, :create, :edit, :update, :destroy]
     end
     resources :users, only: [] do
       post :stop_impersonating, on: :collection

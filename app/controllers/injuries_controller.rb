@@ -1,0 +1,2 @@
+class InjuriesController < ApplicationController
+end
