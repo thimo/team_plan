@@ -29,6 +29,9 @@ class TodosController < ApplicationController
   end
 
   def destroy
+    flash[:success] =  "Todo is verwijderd."
+    redirect_to @todo.todoable.present? ? @todo.todoable : root_path
+    @todo.destroy
   end
 
   def toggle
