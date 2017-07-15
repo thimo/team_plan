@@ -10,3 +10,39 @@
     padding: 6px;
   }
 }
+
+.todo {
+  .chat-message-photo {
+    .fa {
+      color: #919fa9;
+      font-size: 1.0625rem;
+      padding: 2px 15px;
+
+      &:hover {
+        // background-color: #ecf2f5;
+        color: #0082c6;
+      }
+    }
+  }
+  &.comment {
+    &.chat-message {
+      padding-bottom: 11px;
+      padding-right: 16px;
+
+      .chat-message-photo {
+        top: 0;
+      }
+
+      .chat-message-header {
+        .tbl-cell-name {
+          font-weight: normal;
+        }
+      }
+      .chat-message-txt {
+        a {
+          color: #919fa9;
+        }
+      }
+    }
+  }
+}

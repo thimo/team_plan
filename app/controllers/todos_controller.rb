@@ -10,11 +10,7 @@ class TodosController < ApplicationController
   def create
     if @todo.save
       flash[:success] = "Todo is toegevoegd."
-      if @todo.todoable.nil?
-        redirect_to root_path
-      else
-        redirect_to @todo.todoable
-      end
+      redirect_to @todo.todoable.present? ? @todo.todoable : root_path
     else
       render :new
     end
@@ -24,6 +20,12 @@ class TodosController < ApplicationController
   end
 
   def update
+    if @todo.update_attributes(todo_params)
+      flash[:success] =  "Todo is aangepast."
+      redirect_to @todo.todoable.present? ? @todo.todoable : root_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy

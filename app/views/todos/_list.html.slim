@@ -7,13 +7,12 @@ section.box-typical
         .strong
           = "Todo's"
       - if policy(Todo).create?
-        .tbl-cell.tbl-cell-action-bordered
+        .tbl-cell.tbl-cell-actions
           = link_to new_path, title: "Todo toevoegen", class: "action-btn"
             i.fa.fa-check-square-o
           
   .box-typical-body
     - if todos.present?
-      ul.side-menu-list
-        - todos.each do |todo|
-          li.grey[id="todo-#{todo.id}"]
-            = render 'todos/list_item', todo: todo
+      - todos.each do |todo|
+        div[id="todo-#{todo.id}"]
+          = render 'todos/list_item', todo: todo

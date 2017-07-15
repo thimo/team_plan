@@ -4,13 +4,14 @@
     margin-bottom: 1rem;
     padding-left: 2rem;
 
-    &.side-menu-list,
-    &.nav {
+    &.nav,
+    &.side-menu-list {
       list-style: none;
       margin-bottom: 0;
       padding-left: 0;
     }
   }
+
   nav {
     ul {
       padding-left: 0;
@@ -28,15 +29,27 @@
   }
 }
 
+.comment {
+  &.chat-message {
+    min-height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .chat-message-photo {
+      top: 4px;
+    }
+  }
+}
+
 .label {
   &.label-one-number {
     min-width: 26px;
   }
+
   &.label-two-numbers {
     min-width: 48px;
   }
 }
-
 // .sign-avatar.sign-logo
 .sign-box {
   max-width: 420px;
@@ -49,7 +62,8 @@
     }
   }
 
-  a:hover, a:hover:hover {
+  a:hover,
+  a:hover:hover {
     text-decoration: none;
   }
 }
@@ -86,7 +100,6 @@
     }
   }
 }
-
 @media (max-width: 544px) {
   .site-header {
     .site-header-content {
@@ -103,7 +116,6 @@ abbr[title] {
   border: 0;
   text-decoration: none;
 }
-
 @media (max-width: 767px) {
   .site-header {
     h1 {
@@ -111,7 +123,6 @@ abbr[title] {
     }
   }
 }
-
 @media (max-width: 1056px) {
   body {
     &.sidebar-hidden {
