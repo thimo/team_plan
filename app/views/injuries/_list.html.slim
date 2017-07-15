@@ -29,5 +29,6 @@ section.box-typical
             td
               i Geen notities gevonden
 
-  .box-typical-footer
-    = paginate injuries, param_name: 'injury_page'
+  - if injuries.total_pages > 1
+    .box-typical-footer
+      = paginate injuries, param_name: 'injury_page'

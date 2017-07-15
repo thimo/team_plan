@@ -3,6 +3,9 @@
 
   = f.input :title
   
+  = f.input :started_on, as: :string, placeholder: "dd-mm-jjjj", input_html: {data: {provide: "datepicker", "date-format": "dd-mm-yyyy", "date-today-highlight": true, "date-autoclose": true, "date-language": "nl"}}
+  = f.input :ended_on, as: :string, placeholder: "dd-mm-jjjj", input_html: {data: {provide: "datepicker", "date-format": "dd-mm-yyyy", "date-today-highlight": true, "date-autoclose": true, "date-language": "nl"}}, hint: "Alleen invullen bij een meerdaags item"
+
   .row.form-group class="#{'has-error' if has_error(f.object, :body)}"
     label.col-md-3.col-form-label.text.required[for="injury_body"]
       = f.label :body

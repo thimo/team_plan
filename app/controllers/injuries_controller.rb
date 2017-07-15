@@ -45,9 +45,9 @@ class InjuriesController < ApplicationController
 
     def create_injury
       @injury = if action_name == 'new'
-                  @member.injuries.new
+                  @member.injuries.new(started_on: Date.today)
                 else
-                Injury.new(injury_params.merge(user: current_user, started_on: Date.today))
+                  Injury.new(injury_params.merge(user: current_user))
                 end
       @injury.member = @member
 
@@ -60,7 +60,7 @@ class InjuriesController < ApplicationController
     end
 
     def injury_params
-      params.require(:injury).permit(:title, :body, :member_id)
+      params.require(:injury).permit(:title, :body, :member_id, :started_on, :ended_on)
     end
 
     def add_breadcrumbs
