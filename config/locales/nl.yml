@@ -72,6 +72,11 @@ nl:
         name: Titel
         body: Beschrijving
         for_role: Toon aan
+      injury:
+         title: Beschrijving
+         body: Omschrijving / behandeling
+         started_on: Begindatum
+         ended_on: Einddatum
 
   form:
     an_error:

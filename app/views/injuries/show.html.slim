@@ -1,0 +1,22 @@
+- provide(:title, "Blessure - #{@injury.title}")
+
+.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          = @injury.title
+          small
+            = " - #{@injury.member.name}"
+              
+        .color-blue-grey-lighter.small
+          = "#{l @injury.created_at.to_date, format: :long}"
+          = " (aangepast op #{l @injury.updated_at.to_date, format: :long})" if @injury.created_at.to_date != @injury.updated_at.to_date
+          = ", #{@injury.user.name}"
+      .tbl-cell.tbl-cell-actions
+        = link_to edit_injury_path(@injury), class: "action-btn", title: "Aanpassen"
+          i.fa.fa-pencil
+          
+  .box-typical-body
+    .comment-row-item.no-photo
+      = @injury.body.html_safe

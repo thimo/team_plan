@@ -5,6 +5,7 @@ class MembersController < ApplicationController
   def show
     @team_members = policy_scope(@member.team_members).recent_first.includes_parents
     @todos = policy_scope(@member.todos).open
+    @injuries = policy_scope(@member.injuries).page(params[:injury_page]).per(3)
   end
 
   def edit

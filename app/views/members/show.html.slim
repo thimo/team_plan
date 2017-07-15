@@ -3,6 +3,9 @@
 - content_for :action_buttons
   .btn-toolbar
     .btn-group
+      - if policy(Injury).create? && policy(@member).show_injuries?
+        = link_to new_member_injury_path(@member), title: "Blessure toevoegen", class: "btn btn-secondary"
+          i.fa.fa-medkit
       - if policy(Todo).create? && policy(@member).show_todos?
         = link_to new_member_todo_path(@member), title: "Todo toevoegen", class: "btn btn-secondary"
           i.fa.fa-check-square-o
@@ -19,6 +22,9 @@
 
     - if policy(@member).show_todos? && @todos.present?
       = render "todos/list", todos: @todos, new_path: new_member_todo_path(@member)
+
+    - if policy(@member).show_injuries? && @injuries.present?
+      = render "injuries/list", injuries: @injuries, member: @member
 
 - if policy(@member).show_evaluations?
   .row

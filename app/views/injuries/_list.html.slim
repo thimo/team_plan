@@ -1,0 +1,33 @@
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          | Blessures
+      - if policy(Injury.new(member: member)).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "action-btn"
+            i.fa.fa-medkit
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if injuries.size > 0
+        tbody
+          - injuries.each do |injury|
+            tr.clickable
+              td 
+                = link_to injury
+                  = injury.title
+                = " - #{injury.member.name}"
+                .color-blue-grey-lighter.small
+                  = l injury.started_on.to_date, format: :long
+                  = ", #{injury.user.name}"
+                
+      - else 
+        tbody
+          tr
+            td
+              i Geen notities gevonden
+
+  .box-typical-footer
+    = paginate injuries, param_name: 'injury_page'

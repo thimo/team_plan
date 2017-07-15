@@ -51,7 +51,7 @@ Rails.application.routes.draw do
     end
     resources :member_allocation_filters, only: [:create, :destroy]
 
-    resources :members, only: [:show] do
+    resources :members, only: [:show], shallow: true do
       member do
         post :create_login
         post :resend_password
@@ -59,7 +59,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
       resources :todos, only: [:new, :create]
-      resources :injuries, only: [:new, :create, :edit, :update, :destroy]
+      resources :injuries, only: [:show, :new, :create, :edit, :update, :destroy]
     end
     resources :users, only: [] do
       post :stop_impersonating, on: :collection
