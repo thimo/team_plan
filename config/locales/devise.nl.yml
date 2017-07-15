@@ -32,7 +32,7 @@ nl:
     mailer:
       confirmation_instructions:
         action: Bevestig mijn account
-        greeting: Welkom %{recipient}!
+        greeting: Welkom %{recipient},
         instruction: 'Je kunt je email bevestigen via onderstaande link:'
         subject: Bevestiging
       password_change:
@@ -41,14 +41,14 @@ nl:
         subject:
       reset_password_instructions:
         action: Verander mijn wachtwoord
-        greeting: Hallo %{recipient}!
+        greeting: Hallo %{recipient},
         instruction: Iemand heeft een link gevraagd om je wachtwoord te wijzigen; dit kan via onderstaande link.
         instruction_2: Als je dit niet hebt gedaan, negeer deze mail alstublieft.
         instruction_3: Je wachtwoord zal niet wijzigen totdat je bovenstaande link hebt gevolgd en een nieuw wachtwoord hebt aangevraagd.
         subject: Instructies om je wachtwoord opnieuw in te stellen
       unlock_instructions:
         action: Ontgrendel mijn account
-        greeting: Hallo %{recipient}!
+        greeting: Hallo %{recipient},
         instruction: 'Je kunt je account ontgrendelen via onderstaande link:'
         message: Je account is vergrendeld wegens te veel mislukte pogingen in te loggen.
         subject: Ontgrendelinstructies
