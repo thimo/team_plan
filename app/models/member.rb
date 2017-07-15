@@ -6,7 +6,7 @@ class Member < ApplicationRecord
   STATUS_AF_TE_MELDEN = 'af te melden'
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = 'overschrijving spelactiviteit'
 
-  EXPORT_COLUMNS = %w(season age_group team association_number name reversed_name last_name first_name middle_name born_on role address zipcode city phone email member_since)
+  EXPORT_COLUMNS = %w(season age_group team association_number name reversed_name last_name first_name middle_name born_on role address zipcode city phone email member_since previous_team)
   DEFAULT_COLUMNS = %w(team name born_on role address zipcode city phone email)
 
   has_many :team_members, dependent: :destroy

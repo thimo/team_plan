@@ -18,6 +18,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
   columns << Member.human_attribute_name(:phone) if @export_columns.include? 'phone'
   columns << Member.human_attribute_name(:email) if @export_columns.include? 'email'
   columns << Member.human_attribute_name(:member_since) if @export_columns.include? 'member_since'
+  columns << I18n.t(:previous_team) if @export_columns.include? 'previous_team'
 
   sheet.add_row columns
 
@@ -41,6 +42,9 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
       columns << team_member.member.phone if @export_columns.include? 'phone'
       columns << team_member.member.email if @export_columns.include? 'email'
       columns << team_member.member.member_since if @export_columns.include? 'member_since'
+      if @export_columns.include?('previous_team') && @previous_season.present?
+        columns << team_member.member.teams_for_season(@previous_season).as_player.distinct.map(&:name).join(',')
+      end
 
       sheet.add_row columns
     end
@@ -63,6 +67,9 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
       columns << member.phone if @export_columns.include? 'phone'
       columns << member.email if @export_columns.include? 'email'
       columns << member.member_since if @export_columns.include? 'member_since'
+      if @export_columns.include? 'previous_team' && @previous_season.present?
+        columns << ''
+      end
 
       sheet.add_row columns
     end

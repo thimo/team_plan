@@ -19,6 +19,8 @@ class DownloadTeamMembersController < ApplicationController
         end
       end
 
+      @previous_season = @season.previous
+
     elsif params[:age_group_id].present?
       @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
       @season = @age_group.season
@@ -31,11 +33,15 @@ class DownloadTeamMembersController < ApplicationController
         @teams += hashes_for(teams)
       end
 
+      @previous_season = @age_group.season.previous
+
     elsif params[:team_id].present?
       @team = policy_scope(Team).find(params[:team_id])
       @season = @team.age_group.season
 
       @teams << team_hash(@team)
+
+      @previous_season = @team.age_group.season.previous
     end
 
     @export_columns = current_user.export_columns
