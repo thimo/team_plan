@@ -6,11 +6,17 @@ class DownloadTeamMembersController < ApplicationController
     if params[:season_id].present?
       @season = policy_scope(Season).find(params[:season_id])
 
-      policy_scope(@season.age_groups).male.asc.each do |age_group|
-        @teams += hashes_for(age_group.teams)
-      end
-      policy_scope(@season.age_groups).female.asc.each do |age_group|
-        @teams += hashes_for(age_group.teams)
+      if params[:age_group_ids].present?
+        AgeGroup.where(id: params[:age_group_ids]).each do |age_group|
+          @teams += hashes_for(age_group.teams)
+        end
+      else
+        policy_scope(@season.age_groups).male.asc.each do |age_group|
+          @teams += hashes_for(age_group.teams)
+        end
+        policy_scope(@season.age_groups).female.asc.each do |age_group|
+          @teams += hashes_for(age_group.teams)
+        end
       end
 
     elsif params[:age_group_id].present?
@@ -31,6 +37,8 @@ class DownloadTeamMembersController < ApplicationController
 
       @teams << team_hash(@team)
     end
+
+    @export_columns = current_user.export_columns
 
     filename = "#{Setting['club.name']}_#{@season.name}"
     filename += "_#{@age_group.name}" if @age_group.present?

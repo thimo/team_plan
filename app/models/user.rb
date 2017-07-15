@@ -156,4 +156,8 @@ class User < ApplicationRecord
     # Auto-create user_setting
     user_setting || self.create_user_setting
   end
+
+  def export_columns
+    @export_columns ||= (columns = settings.export_columns).present? ? columns : Member::DEFAULT_COLUMNS
+  end
 end

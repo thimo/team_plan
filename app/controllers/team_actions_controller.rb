@@ -37,7 +37,11 @@ class TeamActionsController < ApplicationController
         @redirect = "mailto:#{emails}"
       end
     when 'download_team_members'
-      @redirect = age_group_download_team_members_path(@age_group, format: "xlsx", team_ids: params[:team_ids], status: params[:status])
+      current_user.settings.export_columns = params[:columns]
+      current_user.settings.save
+
+      @redirect = age_group_download_team_members_path(@age_group, format: "xlsx", team_ids: params[:team_ids], status: params[:status]) if @age_group.present?
+      @redirect = season_download_team_members_path(@season, format: "xlsx", age_group_ids: params[:age_group_ids], status: params[:status]) if @season.present?
     end
   end
 

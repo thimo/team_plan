@@ -58,3 +58,11 @@ div[class="#{column_class}"]
         label.form-check-label
           input.form-check-input[type="radio" name="status" value="#{status}"]
           |  #{AgeGroup.statuses_i18n[status]}
+    .form-check
+      strong 
+        | Kolommen
+    - Member::EXPORT_COLUMNS.each do |column, index|
+      .form-check
+        label.form-check-label
+          => f.check_box 'columns[]', { checked: current_user.export_columns.include?(column.to_s), class: 'form-check-input' }, column.to_s, nil
+          | #{t column}

@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709102623) do
+ActiveRecord::Schema.define(version: 20170715142252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "fuzzystrmatch"
-  enable_extension "unaccent"
   enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "age_groups", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(version: 20170709102623) do
     t.string "email_separator", default: ";"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "export_columns", default: [], array: true
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 

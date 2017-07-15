@@ -216,3 +216,21 @@ nl:
   invites_sent:
     one: er is 1 uitnodiging verstuurd
     other: er zijn %{count} uitnodigingen verstuurd
+
+  season: Seizoen
+  age_group: Leeftijdsgroep
+  team: Team
+  association_number: KNVB nummer
+  name: Naam
+  reversed_name: Achternaam, voornaam
+  last_name: Achternaam
+  first_name: Voornaam
+  middle_name: Tussenvoegsels
+  born_on: Geboortedatum
+  role: Rol
+  address: Adres
+  zipcode: Postcode
+  city: Woonplaats
+  phone: Telefoonnummer
+  email: E-mail
+  member_since: Lid sinds
