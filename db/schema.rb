@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170715142252) do
+ActiveRecord::Schema.define(version: 20170716191309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,19 @@ ActiveRecord::Schema.define(version: 20170715142252) do
     t.index ["team_member_id", "field_position_id"], name: "member_position_index"
   end
 
+  create_table "injuries", force: :cascade do |t|
+    t.date "started_on"
+    t.date "ended_on"
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_injuries_on_member_id"
+    t.index ["user_id"], name: "index_injuries_on_user_id"
+  end
+
   create_table "logs", force: :cascade do |t|
     t.string "logable_type"
     t.bigint "logable_id"
@@ -156,6 +169,7 @@ ActiveRecord::Schema.define(version: 20170715142252) do
     t.string "club_sports"
     t.string "association_sports"
     t.string "person_type"
+    t.boolean "injured", default: false
     t.index ["association_number"], name: "index_members_on_association_number"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
@@ -330,6 +344,8 @@ ActiveRecord::Schema.define(version: 20170715142252) do
   add_foreign_key "favorites", "users"
   add_foreign_key "field_positions", "field_positions", column: "axis_parent_id"
   add_foreign_key "field_positions", "field_positions", column: "line_parent_id"
+  add_foreign_key "injuries", "members"
+  add_foreign_key "injuries", "users"
   add_foreign_key "logs", "users"
   add_foreign_key "members", "users"
   add_foreign_key "notes", "members"
