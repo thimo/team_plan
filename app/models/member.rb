@@ -110,6 +110,10 @@ class Member < ApplicationRecord
     (registered_at - member_since).to_i > 30
   end
 
+  def update_injured
+    update_columns(injured: injuries.active.any?)
+  end
+
   def self.import(file)
     result = { counters: { imported: 0, changed: 0 }, created: [], activated: [] }
 

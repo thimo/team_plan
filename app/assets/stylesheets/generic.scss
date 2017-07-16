@@ -29,3 +29,9 @@
 .datepicker{
   z-index: 100 !important;
 }
+
+.fa {
+  &.red {
+    color: #da211d;
+  }
+}

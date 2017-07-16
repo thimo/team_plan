@@ -1,6 +1,8 @@
 - cache [member]
   td
     = link_to member.name, member, target: "_blank"
+    - if member.injured?
+      i.fa.fa-medkit.p-1.pl-2.red[title="Geblesseerd"]
 
     .color-blue-grey-lighter.small
       => l member.born_on, format: :long unless member.born_on.nil?

@@ -69,6 +69,8 @@
                         = link_to team_member.member.name, team_member.member
                       - else
                         = team_member.member.name
+                      - if team_member.member.injured?
+                        i.fa.fa-medkit.p-1.pl-2.red[title="Geblesseerd"]
                         
                       - if policy(team_member.member).show_private_data?
                         .color-blue-grey-lighter.small
@@ -90,7 +92,7 @@
                             div.color-blue-grey-lighter
                               = "#{previous_team.division}"
 
-                    td.w-1.nowrap.text-right
+                    td.w-1.nowrap.text-right                        
                       = render "shared/favorite", parent: team_member.member, styleClass: "p-1 pl-2"
                       
                       - if policy(team_member).edit?
