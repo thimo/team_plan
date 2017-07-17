@@ -86,6 +86,9 @@ Rails.application.routes.draw do
       resources :version_updates
       resources :settings,
         :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
+      resources :soccer_fields, shallow: true do
+        resources :soccer_field_parts
+      end
     end
   end
 

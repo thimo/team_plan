@@ -73,10 +73,14 @@ nl:
         body: Beschrijving
         for_role: Toon aan
       injury:
-         title: Beschrijving
-         body: Omschrijving / behandeling
-         started_on: Begindatum
-         ended_on: Einddatum
+        title: Beschrijving
+        body: Omschrijving / behandeling
+        started_on: Begindatum
+        ended_on: Einddatum
+      soccer_field:
+        name: Veldnaam
+        match: Wedstrijdveld
+        training: Trainingsveld
 
   form:
     an_error:
@@ -243,3 +247,6 @@ nl:
   email: E-mail
   member_since: Lid sinds
   previous_team: Vorig team
+
+  "false": "Nee"
+  "true": "Ja"

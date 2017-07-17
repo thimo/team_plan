@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716191309) do
+ActiveRecord::Schema.define(version: 20170717181322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,6 +228,22 @@ ActiveRecord::Schema.define(version: 20170716191309) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
+  create_table "soccer_field_parts", force: :cascade do |t|
+    t.string "name"
+    t.bigint "soccer_field_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["soccer_field_id"], name: "index_soccer_field_parts_on_soccer_field_id"
+  end
+
+  create_table "soccer_fields", force: :cascade do |t|
+    t.string "name"
+    t.boolean "training", default: false
+    t.boolean "match", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "team_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_id"
     t.datetime "created_at", null: false
@@ -353,6 +369,7 @@ ActiveRecord::Schema.define(version: 20170716191309) do
   add_foreign_key "notes", "users"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
+  add_foreign_key "soccer_field_parts", "soccer_fields"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"

@@ -67,6 +67,11 @@ nav.side-menu
             i.fa.fa-user
             span.lbl
               | Gebruikers
+        li.aquamarine class="#{'active' if controller_name == 'soccer_fields' || controller_name == 'soccer_field_parts'}"
+          = link_to admin_soccer_fields_path do
+            i.fa.fa-leaf
+            span.lbl
+              | Velden
         li.grey class="#{'active' if controller_name == 'email_logs'}"
           = link_to admin_email_logs_path do
             i.fa.fa-envelope
