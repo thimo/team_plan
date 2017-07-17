@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717181322) do
+ActiveRecord::Schema.define(version: 20170717190840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,14 +228,6 @@ ActiveRecord::Schema.define(version: 20170717181322) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
-  create_table "soccer_field_parts", force: :cascade do |t|
-    t.string "name"
-    t.bigint "soccer_field_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["soccer_field_id"], name: "index_soccer_field_parts_on_soccer_field_id"
-  end
-
   create_table "soccer_fields", force: :cascade do |t|
     t.string "name"
     t.boolean "training", default: false
@@ -298,6 +290,20 @@ ActiveRecord::Schema.define(version: 20170717181322) do
     t.date "ends_on"
     t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable_type_and_todoable_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
+  create_table "training_schedules", force: :cascade do |t|
+    t.integer "day"
+    t.time "present_time"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "field_part"
+    t.bigint "soccer_field_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["soccer_field_id"], name: "index_training_schedules_on_soccer_field_id"
+    t.index ["team_id"], name: "index_training_schedules_on_team_id"
   end
 
   create_table "user_settings", force: :cascade do |t|
@@ -369,7 +375,6 @@ ActiveRecord::Schema.define(version: 20170717181322) do
   add_foreign_key "notes", "users"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
-  add_foreign_key "soccer_field_parts", "soccer_fields"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"
@@ -377,5 +382,7 @@ ActiveRecord::Schema.define(version: 20170717181322) do
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
   add_foreign_key "todos", "users"
+  add_foreign_key "training_schedules", "soccer_fields"
+  add_foreign_key "training_schedules", "teams"
   add_foreign_key "user_settings", "users"
 end

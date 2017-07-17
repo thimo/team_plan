@@ -4,7 +4,6 @@ class Admin::SoccerFieldsController < ApplicationController
   before_action :add_breadcrumbs
 
   def index
-    # TODO: add paging
     @soccer_fields = policy_scope(SoccerField).asc
   end
 

@@ -1,5 +1,5 @@
 class SoccerField < ApplicationRecord
-  has_many :soccer_field_parts, dependent: :destroy
+  has_many :training_schedules
 
   scope :asc, -> { order(:name) }
 end
