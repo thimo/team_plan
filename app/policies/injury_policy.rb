@@ -11,7 +11,7 @@ class InjuryPolicy < ApplicationPolicy
   def create?
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_staff_for?(@record.team)
+    @user.is_team_staff_for?(@record.member)
   end
 
   def update?
