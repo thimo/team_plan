@@ -3,7 +3,7 @@
 - content_for :action_buttons
   .btn-toolbar
     .btn-group
-      - if policy(Injury).create? && policy(@member).show_injuries?
+      - if policy(Injury.new(member: @member)).create? && policy(@member).show_injuries?
         = link_to new_member_injury_path(@member), title: "Blessure toevoegen", class: "btn btn-secondary"
           i.fa.fa-medkit
       - if policy(Todo).create? && policy(@member).show_todos?
