@@ -95,9 +95,12 @@ nl:
         head_coach: Hoofdcoach
         coach: Coach
         trainer: Trainer
+        assistant_trainer: Assistent trainer
         team_parent: Teamouder
         manager: Teammanager
         physio: Fysiotherapeut
+        assistant_referee: Assistent scheidsrechter
+
       status:
         draft: Concept
         active: Actief

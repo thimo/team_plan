@@ -30,7 +30,8 @@ class Member < ApplicationRecord
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
-  scope :team_staff, -> { joins(:team_members).where(team_members: {role: TeamMember::STAFF_ROLES}) }
+  scope :team_staff, -> { joins(:team_members).where.not(team_members: {role: TeamMember.roles[:player]}) }
+
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
   scope :by_season, -> (season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
   # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that it's renamed everywhere

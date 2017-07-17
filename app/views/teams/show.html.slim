@@ -155,7 +155,7 @@
     - if policy(@team).show_todos? && @todos.present?
       = render "todos/list", todos: @todos, new_path: new_team_todo_path(@team)
       
-    - if policy(@team).show_evaluations? && @team_evaluations.present?
+    - if policy(@team).show_evaluations? #&& @team_evaluations.present?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
       
     - if policy(@team).show_notes?
