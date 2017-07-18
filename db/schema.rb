@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716191309) do
+ActiveRecord::Schema.define(version: 20170718190250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,6 +228,14 @@ ActiveRecord::Schema.define(version: 20170716191309) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
+  create_table "soccer_fields", force: :cascade do |t|
+    t.string "name"
+    t.boolean "training", default: false
+    t.boolean "match", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "team_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_id"
     t.datetime "created_at", null: false
@@ -256,6 +264,13 @@ ActiveRecord::Schema.define(version: 20170716191309) do
     t.index ["team_id"], name: "index_team_members_on_team_id"
   end
 
+  create_table "team_members_training_schedules", id: false, force: :cascade do |t|
+    t.bigint "team_member_id", null: false
+    t.bigint "training_schedule_id", null: false
+    t.index ["team_member_id", "training_schedule_id"], name: "member_schedule"
+    t.index ["training_schedule_id", "team_member_id"], name: "schedule_member"
+  end
+
   create_table "teams", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "age_group_id"
@@ -282,6 +297,20 @@ ActiveRecord::Schema.define(version: 20170716191309) do
     t.date "ends_on"
     t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable_type_and_todoable_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
+  create_table "training_schedules", force: :cascade do |t|
+    t.integer "day"
+    t.time "present_time"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "field_part"
+    t.bigint "soccer_field_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["soccer_field_id"], name: "index_training_schedules_on_soccer_field_id"
+    t.index ["team_id"], name: "index_training_schedules_on_team_id"
   end
 
   create_table "user_settings", force: :cascade do |t|
@@ -360,5 +389,7 @@ ActiveRecord::Schema.define(version: 20170716191309) do
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
   add_foreign_key "todos", "users"
+  add_foreign_key "training_schedules", "soccer_fields"
+  add_foreign_key "training_schedules", "teams"
   add_foreign_key "user_settings", "users"
 end

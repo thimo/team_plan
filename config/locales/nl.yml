@@ -1,4 +1,7 @@
 nl:
+  time:
+    formats:
+      short: "%H:%M"
   activerecord:
     attributes:
       user:
@@ -73,10 +76,22 @@ nl:
         body: Beschrijving
         for_role: Toon aan
       injury:
-         title: Beschrijving
-         body: Omschrijving / behandeling
-         started_on: Begindatum
-         ended_on: Einddatum
+        title: Beschrijving
+        body: Omschrijving / behandeling
+        started_on: Begindatum
+        ended_on: Einddatum
+      soccer_field:
+        name: Veldnaam
+        match: Wedstrijdveld
+        training: Trainingsveld
+      training_schedule:
+        day: Dag van de week
+        present_time: Aanwezig
+        start_time: Aanvang
+        end_time: Einde
+        soccer_field_id: Veld
+        field_part: Deel van het veld
+        team_member_ids: Trainer
 
   form:
     an_error:
@@ -96,11 +111,11 @@ nl:
         coach: Coach
         trainer: Trainer
         assistant_trainer: Assistent trainer
+        keeper_trainer: Keeperstrainer
         team_parent: Teamouder
         manager: Teammanager
         physio: Fysiotherapeut
         assistant_referee: Assistent scheidsrechter
-
       status:
         draft: Concept
         active: Actief
@@ -137,6 +152,23 @@ nl:
         draft: Concept
         active: Actief
         archived: Archief
+    training_schedule:
+      day:
+        monday: Maandag
+        tuesday: Dinsdag
+        wednesday: Woensdag
+        thursday: Donderdag
+        friday: Vrijdag
+        saturday: Zaterdag
+        sunday: Zondag
+      field_part:
+        whole: Gehele veld
+        a: Deel A
+        b: Deel B
+        c: Deel C
+        d: Deel D
+        ab: Deel A - B
+        cd: Deel C - D
 
   views:
     pagination:
@@ -243,3 +275,6 @@ nl:
   email: E-mail
   member_since: Lid sinds
   previous_team: Vorig team
+
+  "false": "Nee"
+  "true": "Ja"

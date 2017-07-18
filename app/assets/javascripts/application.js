@@ -14,7 +14,7 @@
 //= require tether/dist/js/tether.min.js
 //= require bootstrap/dist/js/bootstrap.min.js
 //= require select2/dist/js/select2.min.js
-//= require jquery-autosize/jquery.autosize.min.js
+//= require autosize/dist/autosize.min.js
 //= require notie/dist/notie.min.js
 //= require jquery-ujs/src/rails.js
 //= require selectize/dist/js/standalone/selectize.min.js

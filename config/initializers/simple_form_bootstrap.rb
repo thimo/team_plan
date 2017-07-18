@@ -138,6 +138,20 @@ SimpleForm.setup do |config|
       ba.use :hint,  wrap_with: { tag: 'p', class: 'form-text text-muted' }
     end
   end
+
+  config.wrappers :time, tag: 'div', class: 'row form-group', error_class: 'has-error' do |b|
+    b.use :html5
+    b.use :placeholder
+
+    b.use :label, class: 'col-md-3 control-label'
+
+    b.wrapper tag: :div, class: 'col-md-9 form-inline' do |ba|
+      ba.use :input, class: 'form-control'
+      ba.use :error, wrap_with: { tag: 'span', class: 'form-text text-muted' }
+      ba.use :hint,  wrap_with: { tag: 'p', class: 'form-text text-muted' }
+    end
+  end
+
   # Wrappers for forms and inputs using the Bootstrap toolkit.
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,
