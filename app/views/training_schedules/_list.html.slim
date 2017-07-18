@@ -20,25 +20,29 @@ section.box-typical
             th Dag
             th Veld
             th Duur
+            th Trainer
             th
         tbody
-          - training_schedules.each do |training_schedule|
+          - training_schedules.each do |ts|
             tr.clickable
               td
-                = training_schedule.day_i18n
+                = ts.day_i18n
               td 
-                = training_schedule.soccer_field.name
+                = ts.soccer_field.name
                 .color-blue-grey.small
-                  = training_schedule.field_part_i18n
+                  = ts.field_part_i18n
               td 
-                = I18n.l training_schedule.start_time, format: :short
+                = I18n.l ts.start_time, format: :short
                 |  - 
-                = I18n.l training_schedule.end_time, format: :short
+                = I18n.l ts.end_time, format: :short
                 .color-blue-grey.small
-                  | Aanwezig #{I18n.l training_schedule.present_time, format: :short}
+                  | Aanwezig #{I18n.l ts.present_time, format: :short}
+              td 
+                - ts.team_members.each do |trainer|
+                  div #{trainer.name}
               td.w-1.nowrap.text-right
-                - if policy(training_schedule).update?
-                  = link_to [:edit, training_schedule]
+                - if policy(ts).update?
+                  = link_to [:edit, ts]
                     i.fa.fa-pencil.p-1.pl-2
 
       - else 

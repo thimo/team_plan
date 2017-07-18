@@ -91,6 +91,7 @@ nl:
         end_time: Einde
         soccer_field_id: Veld
         field_part: Deel van het veld
+        team_member_ids: Trainer
 
   form:
     an_error:
@@ -110,6 +111,7 @@ nl:
         coach: Coach
         trainer: Trainer
         assistant_trainer: Assistent trainer
+        keeper_trainer: Keeperstrainer
         team_parent: Teamouder
         manager: Teammanager
         physio: Fysiotherapeut

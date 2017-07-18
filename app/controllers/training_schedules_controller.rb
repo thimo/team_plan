@@ -34,7 +34,7 @@ class TrainingSchedulesController < ApplicationController
   end
 
   private
-  
+
     def set_team
       @team = if @training_schedule.present? && @training_schedule.team.present?
                 @training_schedule.team
@@ -60,7 +60,7 @@ class TrainingSchedulesController < ApplicationController
     end
 
     def training_schedule_params
-      params.require(:training_schedule).permit(:day, :present_time, :start_time, :end_time, :soccer_field_id, :field_part)
+      params.require(:training_schedule).permit(:day, :present_time, :start_time, :end_time, :soccer_field_id, :field_part, team_member_ids: [])
     end
 
     def add_breadcrumbs
@@ -70,7 +70,7 @@ class TrainingSchedulesController < ApplicationController
       if @training_schedule.new_record?
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb @training_schedule.day, @training_schedule
+        add_breadcrumb @training_schedule.day_i18n, @training_schedule
       end
     end
 
