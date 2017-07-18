@@ -5,6 +5,9 @@
 - content_for :action_buttons
   .btn-toolbar
     .btn-group
+      - if policy(TeamEvaluation.new(team: @team)).create?
+        = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn btn-secondary"
+          i.fa.fa-list-ol
       - if policy(@team).update?
         = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn btn-secondary" do
           i.fa.fa-pencil
@@ -155,7 +158,7 @@
     - if policy(@team).show_training_schedules?
       = render "training_schedules/list", team: @team, training_schedules: @training_schedules
       
-    - if policy(@team).show_evaluations? #&& @team_evaluations.present?
+    - if policy(@team).show_evaluations? && @team_evaluations.present?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
       
       - if policy(@team).show_todos? && @todos.present?
