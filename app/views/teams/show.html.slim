@@ -152,11 +152,14 @@
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
-    - if policy(@team).show_todos? && @todos.present?
-      = render "todos/list", todos: @todos, new_path: new_team_todo_path(@team)
+    - if policy(@team).show_training_schedules?
+      = render "training_schedules/list", team: @team, training_schedules: @training_schedules
       
     - if policy(@team).show_evaluations? #&& @team_evaluations.present?
       = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
       
+      - if policy(@team).show_todos? && @todos.present?
+        = render "todos/list", todos: @todos, new_path: new_team_todo_path(@team)
+        
     - if policy(@team).show_notes?
       = render "notes/list", team: @team, notes: @notes

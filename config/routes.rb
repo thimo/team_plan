@@ -35,6 +35,7 @@ Rails.application.routes.draw do
           resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]
           resources :download_team_members, only: [:index]
           resources :todos, only: [:new, :create]
+          resources :training_schedules
         end
       end
     end
@@ -86,9 +87,7 @@ Rails.application.routes.draw do
       resources :version_updates
       resources :settings,
         :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
-      resources :soccer_fields, shallow: true do
-        resources :soccer_field_parts
-      end
+      resources :soccer_fields
     end
   end
 

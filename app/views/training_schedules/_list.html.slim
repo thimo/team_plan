@@ -1,0 +1,48 @@
+- title ||= 'Trainingen'
+- disable_header ||= false
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          = title
+      - if defined?(team).present? && policy(TrainingSchedule.new(team: team)).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_team_training_schedule_path(team), title: "Training toevoegen", class: "action-btn"
+            i.fa.fa-line-chart
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if training_schedules.size > 0
+        - unless disable_header
+          thead
+            th Dag
+            th Veld
+            th Duur
+            th
+        tbody
+          - training_schedules.each do |training_schedule|
+            tr.clickable
+              td
+                = training_schedule.day_i18n
+              td 
+                = training_schedule.soccer_field.name
+                .color-blue-grey.small
+                  = training_schedule.field_part_i18n
+              td 
+                = I18n.l training_schedule.start_time, format: :short
+                |  - 
+                = I18n.l training_schedule.end_time, format: :short
+                .color-blue-grey.small
+                  | Aanwezig #{I18n.l training_schedule.present_time, format: :short}
+              td.w-1.nowrap.text-right
+                - if policy(training_schedule).update?
+                  = link_to [:edit, training_schedule]
+                    i.fa.fa-pencil.p-1.pl-2
+
+      - else 
+        tbody
+          tr
+            td
+              i Geen trainingen gevonden

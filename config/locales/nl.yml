@@ -1,4 +1,7 @@
 nl:
+  time:
+    formats:
+      short: "%H:%M"
   activerecord:
     attributes:
       user:
@@ -81,6 +84,13 @@ nl:
         name: Veldnaam
         match: Wedstrijdveld
         training: Trainingsveld
+      training_schedule:
+        day: Dag van de week
+        present_time: Aanwezig
+        start_time: Aanvang
+        end_time: Einde
+        soccer_field_id: Veld
+        field_part: Deel van het veld
 
   form:
     an_error:
@@ -104,7 +114,6 @@ nl:
         manager: Teammanager
         physio: Fysiotherapeut
         assistant_referee: Assistent scheidsrechter
-
       status:
         draft: Concept
         active: Actief
@@ -141,6 +150,23 @@ nl:
         draft: Concept
         active: Actief
         archived: Archief
+    training_schedule:
+      day:
+        monday: Maandag
+        tuesday: Dinsdag
+        wednesday: Woensdag
+        thursday: Donderdag
+        friday: Vrijdag
+        saturday: Zaterdag
+        sunday: Zondag
+      field_part:
+        whole: Gehele veld
+        a: Deel A
+        b: Deel B
+        c: Deel C
+        d: Deel D
+        ab: Deel A - B
+        cd: Deel C - D
 
   views:
     pagination:

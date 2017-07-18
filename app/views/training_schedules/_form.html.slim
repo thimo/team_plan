@@ -1,0 +1,25 @@
+= simple_form_for [@team, @training_schedule], {wrapper: :horizontal_form} do |f|
+  = f.error_notification
+
+  = f.input :day, prompt: "-- Selecteer een dag"
+  = f.input :present_time, minute_step: 5, default: Time.parse('18:45'), wrapper: :time
+  = f.input :start_time, minute_step: 5, default: Time.parse('19:00'), wrapper: :time
+  = f.input :end_time, minute_step: 5, default: Time.parse('20:00'), wrapper: :time
+  = f.input :soccer_field_id, as: :select, collection: SoccerField.asc.training, prompt: "-- Selecteer een veld"
+  = f.input :field_part, prompt: "-- Selecteer het deel van het veld"
+  
+  
+  / .row.form-group class="#{'has-error' if has_error(f.object, :body)}"
+  /   label.col-md-3.col-form-label.text.required[for="training_schedule_body"]
+  /     = f.label :body
+  /   .col-md-9
+  /     = f.trix_editor :body
+  /     = errors_for(f.object, :body)
+
+  / = f.input :member_id, as: :select, collection: @training_schedule.team.members, prompt: "-- Selecteer een teamgenoot", hint: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
+  / = render 'shared/enum_radio_buttons', f: f, field: :visibility
+  
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @training_schedule.team, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@training_schedule).destroy?
+    = link_to "Verwijderen", training_schedule_path(@training_schedule), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
