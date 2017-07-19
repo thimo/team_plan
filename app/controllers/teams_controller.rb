@@ -4,8 +4,10 @@ class TeamsController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions))
-    @staff = TeamMember.staff_by_member(policy_scope(@team.team_members))
+    @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions).not_ended)
+    @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
+    @old_members = policy_scope(@team.team_members).ended.group_by(&:member)
+
     @team_evaluations = policy_scope(@team.team_evaluations).desc
     @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
     @previous_season = @team.age_group.season.previous

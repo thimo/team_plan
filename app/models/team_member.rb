@@ -28,6 +28,8 @@ class TeamMember < ApplicationRecord
   scope :active_for_team, -> (team) { where(status: team.status, ended_on: nil).or(where(status: TeamMember.statuses[:active])) }
   scope :active_or_archived, -> { where(status: [TeamMember.statuses[:archived], TeamMember.statuses[:active]], ended_on: nil) }
   scope :draft_or_active, -> { where(status: [TeamMember.statuses[:draft], TeamMember.statuses[:active]], ended_on: nil) }
+  scope :not_ended, -> { where(ended_on: nil) }
+  scope :ended, -> { where.not(ended_on: nil) }
 
   def age_group
     team.age_group
