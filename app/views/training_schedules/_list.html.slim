@@ -40,6 +40,8 @@ section.box-typical
               td 
                 - ts.team_members.each do |trainer|
                   div #{trainer.name}
+                div 
+                  = "CIOS" if ts.cios?
               td.w-1.nowrap.text-right
                 - if policy(ts).update?
                   = link_to [:edit, ts]

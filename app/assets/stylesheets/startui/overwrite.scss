@@ -3,7 +3,7 @@
     margin-bottom: 1rem;
     padding-left: 2rem;
   }
-  
+
   ul {
     list-style: inherit;
     margin-bottom: 1rem;
@@ -151,4 +151,9 @@ th {
     color: #6c7a86;
     padding: 8px;
   }
+}
+
+.checkbox, .radio, .checkbox-slide, .checkbox-toggle, .checkbox-bird, .checkbox-detailed {
+  margin-bottom: .5rem;
+  margin-top: .5rem;
 }

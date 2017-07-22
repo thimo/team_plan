@@ -9,8 +9,9 @@
   = f.input :end_time, minute_step: 5, default: Time.parse('20:00'), wrapper: :time
   = f.input :soccer_field_id, as: :select, collection: SoccerField.asc.training, prompt: "-- Selecteer een veld"
   = f.input :field_part, prompt: "-- Selecteer het deel van het veld"
-  = render 'shared/input/habtm_checkboxes', f: f, field: :team_member_ids, collection: trainers
-  
+  = render 'shared/input/habtm_checkboxes', f: f, field: :team_member_ids, collection: trainers, row_class: 'mb-0'
+  = render 'shared/input/boolean_checkbox', f: f, field: :cios
+
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @training_schedule.team, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@training_schedule).destroy?

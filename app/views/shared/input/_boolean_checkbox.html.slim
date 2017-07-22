@@ -1,0 +1,7 @@
+.row.form-group[class="#{row_class ||= ''}"]
+  .col-form-legend.col-sm-3
+    = f.label field if (show_label ||= false)
+  .col-md-9
+    .checkbox
+      = f.check_box field, class: 'form-check-input', id: field
+      = f.label f.object.class.human_attribute_name(field), field, class: 'form-check-label', for: field

@@ -1,4 +1,4 @@
-.form-group.row class="#{'has-error' if has_error(f.object, field)}"
+.form-group.row class="#{'has-error' if has_error(f.object, field)} #{(row_class ||= '')}"
   .col-form-legend.col-sm-3
     = f.label field
   .col-md-9
