@@ -3,7 +3,7 @@
   = f.input :name
   
   - if policy(@season).set_status?
-    = render 'shared/enum_radio_buttons', f: f, field: :status
+    = render 'shared/input/enum_radio_buttons', f: f, field: :status
     
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @season.new_record? ? Season : @season, class: 'btn btn-secondary-outline btn-inline'

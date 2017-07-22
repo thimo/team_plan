@@ -6,7 +6,7 @@
   = f.input :remark
   
   - if policy(@team).set_status?
-    = render 'shared/enum_radio_buttons', f: f, field: :status
+    = render 'shared/input/enum_radio_buttons', f: f, field: :status
   
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team.new_record? ? @age_group : @team, class: 'btn btn-secondary-outline btn-inline'

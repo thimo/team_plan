@@ -36,6 +36,9 @@
       .chat-message-header {
         .tbl-cell-name {
           font-weight: normal;
+          &.strong {
+            font-weight: bold;
+          }
         }
       }
       .chat-message-txt {

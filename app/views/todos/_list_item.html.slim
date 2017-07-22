@@ -1,15 +1,21 @@
-.todo.comment.chat-message
+.todo.comment.chat-message[class="#{'opacity-5' if todo.defered?}"]
   .chat-message-photo
     = link_to [:toggle, todo], method: :post, remote: true
       i.fa[class="#{todo.finished? ? 'fa-check-square-o' : 'fa-square-o'}"]
   .chat-message-header
     .tbl-row
-      .tbl-cell.tbl-cell-name
+      .tbl-cell.tbl-cell-name[class="#{'strong' if todo.due?}"]
         = todo.body
       .tbl-cell.tbl-cell-date
         = link_to edit_todo_path(todo), title: "Aanpassen", class: "pl-2"
           i.fa.fa-pencil.color-blue-grey-lighter
 
   .chat-message-content
-    .chat-message-txt
-      = link_to todo.todoable.name, todo.todoable if todo.todoable.present?
+    .chat-message-txt.color-blue-grey
+      = link_to todo.todoable.name, todo.todoable, class: 'pr-2' if todo.todoable.present?
+      - if todo.starts_on.present?
+        span.small.pr-2
+          | #{todo.defered? ? 'Vanaf' : 'Sinds'}: #{todo.starts_on}
+      - if todo.ends_on.present? && !todo.defered?
+        span.small.pr-2
+          | Einddatum: #{todo.ends_on}
