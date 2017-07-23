@@ -39,6 +39,10 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def show_injureds?
+    show_todos?
+  end
+
   def show_status?
     return false if @record.status == @record.season.status
 

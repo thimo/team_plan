@@ -34,11 +34,13 @@ class Member < ApplicationRecord
 
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
   scope :by_season, -> (season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
+  scope :by_age_group, -> (age_group) { includes(team_members: :team).where(teams: {age_group_id: age_group}) }
   # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that it's renamed everywhere
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
   scope :recent_members, -> (days_ago) { where("registered_at >= ?", days_ago.days.ago.to_date).order(registered_at: :desc) }
+  scope :injured, -> { where(injured: true) }
 
   pg_search_scope :search_by_name,
     against: [:first_name, :middle_name, :last_name, :email, :email2],

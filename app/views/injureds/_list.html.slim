@@ -1,0 +1,39 @@
+- title ||= 'Geblesseerden'
+- disable_header ||= false
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          = title
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if injureds.size > 0
+        - unless disable_header
+          thead
+            th Speler
+            th Sinds
+            th Beschrijving
+            
+        tbody
+          - injureds.each do |member|
+            - injury = member.injuries.active.first
+            tr.clickable
+              td 
+                = link_to member.name, member
+                .color-blue-grey-lighter.small
+                  => l member.born_on, format: :long unless member.born_on.nil?
+                  = "(#{member.gender})"
+              td
+                = l injury.started_on.to_date, format: :long
+              td
+                = injury.title
+
+      - else 
+        tbody
+          tr
+            td
+              i Geen geblesseerden gevonden
+              
