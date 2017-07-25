@@ -5,6 +5,7 @@ class TodosController < ApplicationController
   before_action :add_breadcrumbs
 
   def new
+    @todo.body = params[:title] if params[:title].present?
   end
 
   def create
