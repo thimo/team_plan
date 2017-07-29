@@ -15,6 +15,8 @@ nl:
         name: Seizoen
         active: Actief
         status: Status
+        started_on: Begindatum
+        ended_on: Einddatum
       age_group:
         name: Leeftijdsgroep
         year_of_birth_from: Jaartal geboorte vanaf

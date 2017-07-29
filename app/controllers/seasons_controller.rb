@@ -44,8 +44,11 @@ class SeasonsController < ApplicationController
   private
 
     def create_season
+      start_year = Date.today.year + (Date.today.month >= 7 ? 1 : 0)
+      started_on = Date.new(start_year, 7, 1)
+      ended_on = Date.new(start_year + 1, 6, 30)
       @season = if action_name == 'new'
-                  Season.new
+                  Season.new(started_on: started_on, ended_on: ended_on)
                 else
                   Season.new(permitted_attributes(Season.new))
                 end

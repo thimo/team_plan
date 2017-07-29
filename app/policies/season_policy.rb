@@ -41,7 +41,7 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    attributes = [:name]
+    attributes = [:name, :started_on, :ended_on]
     attributes << :status if set_status?
     return attributes
   end
