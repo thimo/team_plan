@@ -7,9 +7,10 @@ section.box-typical
         h3
           | #{@users.count} Gebruikers
           
-      .tbl-cell.text-right
-        = text_field_tag "query"
-        = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Filter op rol", ""]))
+      .tbl-cell
+        = form_with url: admin_users_path, method: :get, local: true, class: 'form-inline float-right'
+          = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
+          = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["-- Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
       - if policy(User).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_admin_user_path, title: "Gebruiker toevoegen"
