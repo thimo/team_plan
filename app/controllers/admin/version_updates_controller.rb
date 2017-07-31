@@ -54,7 +54,7 @@ class Admin::VersionUpdatesController < AdminController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Versies', admin_version_updates_path
+      add_breadcrumb 'Versie updates', admin_version_updates_path
       unless @version_update.nil?
         if @version_update.new_record?
           add_breadcrumb 'Nieuw'

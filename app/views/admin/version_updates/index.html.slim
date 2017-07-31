@@ -1,11 +1,11 @@
-- provide(:title, "Versies")
+- provide(:title, "Versie updates")
 
 section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
         h3
-          | Versies
+          | Versie updates
       - if policy(VersionUpdate).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_admin_version_update_path, title: "Toevoegen", class: "action-btn"
