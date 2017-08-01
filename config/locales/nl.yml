@@ -1,7 +1,11 @@
 nl:
+  date:
+    formats:
+      weekday: "%a"    
   time:
     formats:
       short: "%H:%M"
+      month: "%b"
   activerecord:
     attributes:
       user:

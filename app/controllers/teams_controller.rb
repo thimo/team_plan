@@ -13,6 +13,7 @@ class TeamsController < ApplicationController
     @previous_season = @team.age_group.season.previous
     @todos = policy_scope(@team.todos).open
     @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
+    @schedules = @team.trainings.in_period(1.week.ago.to_date, 2.week.from_now.to_date).to_a.sort_by(&:started_at)
   end
 
   def new; end

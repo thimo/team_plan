@@ -1,0 +1,20 @@
+- title ||= 'Kalender'
+- disable_header ||= false
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        .strong
+          = title
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if schedules.size > 0
+        - unless disable_header
+          thead
+            / th Dag
+            / th
+        tbody
+          - schedules.each do |schedule|
+            = render "#{schedule.class.to_s.underscore.pluralize}/schedule_item", object: schedule

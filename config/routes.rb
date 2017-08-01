@@ -36,6 +36,7 @@ Rails.application.routes.draw do
           resources :download_team_members, only: [:index]
           resources :todos, only: [:new, :create]
           resources :training_schedules
+          resources :trainings
         end
       end
     end

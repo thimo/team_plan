@@ -136,6 +136,9 @@
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
+    - if policy(@team).show_schedules?
+      = render "schedules/list", schedules: @schedules
+      
     - if policy(@team).show_training_schedules?
       = render "training_schedules/list", team: @team, training_schedules: @training_schedules
       
