@@ -21,6 +21,9 @@ class TrainingSchedule < ApplicationRecord
     # Remove all future, non-modified trainings
     trainings.from_now.not_modified.destroy_all
 
+    # Create new trainings
+    return unless active?
+    
     training_day = next_training_day
     while training_day < team.age_group.season.ended_on
       started_at = training_day.change(hour: start_time.hour, min: start_time.min)
