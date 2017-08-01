@@ -3,6 +3,7 @@ class TrainingSchedule < ApplicationRecord
 
   belongs_to :team
   belongs_to :soccer_field
+  has_many :trainings, dependent: :destroy
   has_and_belongs_to_many :team_members
   has_paper_trail
 

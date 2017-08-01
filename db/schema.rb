@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801121951) do
+ActiveRecord::Schema.define(version: 20170801144627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -315,6 +315,19 @@ ActiveRecord::Schema.define(version: 20170801121951) do
     t.index ["team_id"], name: "index_training_schedules_on_team_id"
   end
 
+  create_table "trainings", force: :cascade do |t|
+    t.bigint "training_schedule_id"
+    t.boolean "active", default: true
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean "user_modified", default: false
+    t.text "body"
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_schedule_id"], name: "index_trainings_on_training_schedule_id"
+  end
+
   create_table "user_settings", force: :cascade do |t|
     t.bigint "user_id"
     t.string "email_separator", default: ";"
@@ -393,5 +406,6 @@ ActiveRecord::Schema.define(version: 20170801121951) do
   add_foreign_key "todos", "users"
   add_foreign_key "training_schedules", "soccer_fields"
   add_foreign_key "training_schedules", "teams"
+  add_foreign_key "trainings", "training_schedules"
   add_foreign_key "user_settings", "users"
 end
