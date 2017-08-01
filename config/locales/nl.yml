@@ -94,6 +94,7 @@ nl:
         soccer_field_id: Veld
         field_part: Deel van het veld
         team_member_ids: Trainer
+        cios: CIOS
       todo:
         body: Todo
         starts_on: Actief vanaf
