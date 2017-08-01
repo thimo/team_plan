@@ -97,8 +97,8 @@ nl:
         cios: CIOS
       todo:
         body: Todo
-        starts_on: Actief vanaf
-        ends_on: Einddatum
+        started_on: Actief vanaf
+        ended_on: Einddatum
 
   form:
     an_error:

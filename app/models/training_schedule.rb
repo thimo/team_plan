@@ -23,14 +23,14 @@ class TrainingSchedule < ApplicationRecord
 
     training_day = next_training_day
     while training_day < team.age_group.season.ended_on
-      starts_at = training_day.change(hour: start_time.hour, min: start_time.min)
-      ends_at = training_day.change(hour: end_time.hour, min: end_time.min)
+      started_at = training_day.change(hour: start_time.hour, min: start_time.min)
+      ended_at = training_day.change(hour: end_time.hour, min: end_time.min)
 
       Training.create(
         training_schedule: self,
-        starts_at: starts_at,
-        ends_at: ends_at,
-      ) unless has_training_this_week?(starts_at)
+        started_at: started_at,
+        ended_at: ended_at,
+      ) unless has_training_this_week?(started_at)
 
       training_day = training_day.next_day(7)
     end
@@ -42,8 +42,8 @@ class TrainingSchedule < ApplicationRecord
 
   private
 
-    def has_training_this_week?(starts_at)
-      trainings.this_week(starts_at).present?
+    def has_training_this_week?(started_at)
+      trainings.this_week(started_at).present?
     end
 
     def next_training_day

@@ -66,7 +66,7 @@ class TodosController < ApplicationController
     end
 
     def todo_params
-      params.require(:todo).permit(:body, :waiting, :finished, :starts_on, :ends_on)
+      params.require(:todo).permit(:body, :waiting, :finished, :started_on, :ended_on)
     end
 
     def add_breadcrumbs
