@@ -1,7 +1,10 @@
 class TrainingSchedule < ApplicationRecord
+  include Activatable
+
   belongs_to :team
   belongs_to :soccer_field
   has_and_belongs_to_many :team_members
+  has_paper_trail
 
   validates_presence_of :day, :start_time, :end_time, :soccer_field_id, :field_part
 

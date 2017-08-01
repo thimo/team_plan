@@ -12,7 +12,7 @@ class TeamsController < ApplicationController
     @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
     @previous_season = @team.age_group.season.previous
     @todos = policy_scope(@team.todos).open
-    @training_schedules = policy_scope(@team.training_schedules)
+    @training_schedules = policy_scope(@team.training_schedules).active
   end
 
   def new; end

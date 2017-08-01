@@ -30,7 +30,7 @@ class TrainingSchedulesController < ApplicationController
 
   def destroy
     redirect_to @training_schedule.team, notice: "Training is verwijderd."
-    @training_schedule.destroy
+    @training_schedule.deactivate
   end
 
   private
