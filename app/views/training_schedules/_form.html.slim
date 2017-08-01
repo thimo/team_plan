@@ -4,9 +4,9 @@
   = f.error_notification
 
   = f.input :day, prompt: "-- Selecteer een dag"
-  = f.input :present_time, minute_step: 5, default: Time.parse('18:45'), wrapper: :time
   = f.input :start_time, minute_step: 5, default: Time.parse('19:00'), wrapper: :time
   = f.input :end_time, minute_step: 5, default: Time.parse('20:00'), wrapper: :time
+  = f.input :present_minutes, include_blank: false
   = f.input :soccer_field_id, as: :select, collection: SoccerField.asc.training, prompt: "-- Selecteer een veld"
   = f.input :field_part, prompt: "-- Selecteer het deel van het veld"
   = render 'shared/input/habtm_checkboxes', f: f, field: :team_member_ids, collection: trainers, row_class: 'mb-0'

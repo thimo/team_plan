@@ -19,7 +19,6 @@ section.box-typical
           thead
             th Dag
             th Veld
-            th Duur
             th Trainer
             th
         tbody
@@ -27,21 +26,22 @@ section.box-typical
             tr.clickable
               td
                 = ts.day_i18n
+                .color-blue-grey
+                  = I18n.l ts.start_time, format: :short
+                  |  - 
+                  = I18n.l ts.end_time, format: :short
+                - if TrainingSchedule.present_minutes[ts.present_minutes] > 0
+                  .color-blue-grey.small
+                    | #{ts.present_minutes_i18n} aanwezig
               td 
                 = ts.soccer_field.name
                 .color-blue-grey.small
                   = ts.field_part_i18n
               td 
-                = I18n.l ts.start_time, format: :short
-                |  - 
-                = I18n.l ts.end_time, format: :short
-                .color-blue-grey.small
-                  | Aanwezig #{I18n.l ts.present_time, format: :short}
-              td 
                 - ts.team_members.each do |trainer|
                   div #{trainer.name}
                 div 
-                  = "CIOS" if ts.cios?
+                  = ts.class.human_attribute_name(:cios) if ts.cios?
               td.w-1.nowrap.text-right
                 - if policy(ts).update?
                   = link_to [:edit, ts]

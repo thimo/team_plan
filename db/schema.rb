@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801113603) do
+ActiveRecord::Schema.define(version: 20170801121951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -301,7 +301,6 @@ ActiveRecord::Schema.define(version: 20170801113603) do
 
   create_table "training_schedules", force: :cascade do |t|
     t.integer "day"
-    t.time "present_time"
     t.time "start_time"
     t.time "end_time"
     t.integer "field_part"
@@ -311,6 +310,7 @@ ActiveRecord::Schema.define(version: 20170801113603) do
     t.datetime "updated_at", null: false
     t.boolean "cios", default: false
     t.boolean "active", default: true
+    t.integer "present_minutes", default: 0
     t.index ["soccer_field_id"], name: "index_training_schedules_on_soccer_field_id"
     t.index ["team_id"], name: "index_training_schedules_on_team_id"
   end

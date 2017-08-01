@@ -60,7 +60,7 @@ class TrainingSchedulesController < ApplicationController
     end
 
     def training_schedule_params
-      params.require(:training_schedule).permit(:day, :present_time, :start_time, :end_time, :soccer_field_id, :field_part, :cios, team_member_ids: [])
+      params.require(:training_schedule).permit(:day, :present_minutes, :start_time, :end_time, :soccer_field_id, :field_part, :cios, team_member_ids: [])
     end
 
     def add_breadcrumbs
