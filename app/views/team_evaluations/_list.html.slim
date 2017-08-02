@@ -13,7 +13,7 @@ section.box-typical
         h4
           = title
       - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
-        .tbl-cell.tbl-cell-action-bordered
+        .tbl-cell.tbl-cell-actions
           = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
             i.fa.fa-list-ol
           

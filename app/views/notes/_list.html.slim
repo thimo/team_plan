@@ -6,7 +6,7 @@ section.box-typical
         small
           | Zoals gespreksverslagen en teambesprekingen
       - if policy(Note.new(team: team)).create?
-        .tbl-cell.tbl-cell-action-bordered
+        .tbl-cell.tbl-cell-actions
           = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "action-btn"
             i.fa.fa-file-text-o
           
