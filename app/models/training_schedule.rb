@@ -23,9 +23,9 @@ class TrainingSchedule < ApplicationRecord
 
     # Create new trainings
     return unless active?
-    
+
     training_day = next_training_day
-    while training_day < team.age_group.season.ended_on
+    while training_day <= team.age_group.season.ended_on
       started_at = training_day.change(hour: start_time.hour, min: start_time.min)
       ended_at = training_day.change(hour: end_time.hour, min: end_time.min)
 
@@ -52,7 +52,7 @@ class TrainingSchedule < ApplicationRecord
 
     def next_training_day
       training_day = DateTime.now.beginning_of_week.next_day(day_number)
-      training_day = training_day.next_day(7) if training_day <= Date.today
+      training_day = training_day.next_day(7) if training_day.to_date < Date.today
       training_day
     end
 
