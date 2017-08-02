@@ -3,12 +3,7 @@
 
   = f.input :title
   
-  .row.form-group class="#{'has-error' if has_error(f.object, :body)}"
-    label.col-md-3.col-form-label.text.required[for="note_body"]
-      = f.label :body
-    .col-md-9
-      = f.trix_editor :body
-      = errors_for(f.object, :body)
+  = render 'shared/input/trix', f: f, field: :body
 
   = f.input :member_id, as: :select, collection: @note.team.members, prompt: "-- Selecteer een teamgenoot", hint: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
   = render 'shared/input/enum_radio_buttons', f: f, field: :visibility

@@ -5,12 +5,7 @@
   = render 'shared/input/datepicker', f: f, field: :started_on
   = render 'shared/input/datepicker', f: f, field: :ended_on, hint: "Invullen als de blessure voorbij is"
 
-  .row.form-group class="#{'has-error' if has_error(f.object, :body)}"
-    label.col-md-3.col-form-label.text.required[for="injury_body"]
-      = f.label :body
-    .col-md-9
-      = f.trix_editor :body
-      = errors_for(f.object, :body)
+  = render 'shared/input/trix', f: f, field: :body
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @injury.new_record? ? @injury.member : @injury, class: 'btn btn-secondary-outline btn-inline'
