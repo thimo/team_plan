@@ -4,8 +4,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
-          = "Todo's"
+        h4 Todo's
       - if policy(Todo).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_path, title: "Todo toevoegen", class: "action-btn"

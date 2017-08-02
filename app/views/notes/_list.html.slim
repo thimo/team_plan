@@ -2,8 +2,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
-          | Notities
+        h4 Notities
         small
           | Zoals gespreksverslagen en teambesprekingen
       - if policy(Note.new(team: team)).create?

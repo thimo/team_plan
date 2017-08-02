@@ -14,9 +14,9 @@
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        span.strong
+        h4
           = @injury.title
-        |  - #{l @injury.started_on.to_date, format: :long}
+        | #{l @injury.started_on.to_date, format: :long}
         - if @injury.ended_on.present?
           |  - #{l @injury.ended_on.to_date, format: :long}
         - else 

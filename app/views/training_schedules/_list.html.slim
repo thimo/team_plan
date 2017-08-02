@@ -5,7 +5,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
+        h4
           = title
       - if defined?(team).present? && policy(TrainingSchedule.new(team: team)).create?
         .tbl-cell.tbl-cell-action-bordered

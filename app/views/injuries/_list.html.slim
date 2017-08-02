@@ -2,8 +2,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
-          | Blessures
+        h4 Blessures
       - if policy(Injury.new(member: member)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "action-btn"
