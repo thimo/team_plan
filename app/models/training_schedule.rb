@@ -31,6 +31,7 @@ class TrainingSchedule < ApplicationRecord
 
       Training.create(
         training_schedule: self,
+        team: self.team,
         started_at: started_at,
         ended_at: ended_at,
       ) unless has_training_this_week?(started_at)

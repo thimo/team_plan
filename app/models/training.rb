@@ -1,9 +1,10 @@
 class Training < ApplicationRecord
   include Activatable
 
+  belongs_to :team
   belongs_to :training_schedule
 
-  validates_presence_of :started_at, :ended_at, :training_schedule_id
+  validates_presence_of :started_at, :ended_at, :team_id
 
   scope :not_modified, -> { where(user_modified: false) }
   scope :from_now,     -> { where('started_at > ?', DateTime.now) }
@@ -11,6 +12,6 @@ class Training < ApplicationRecord
   scope :in_period, -> (start_date, end_date) { where('started_at > ?', start_date).where('started_at < ?', end_date)}
 
   def title
-    "Training - #{training_schedule.soccer_field.name}" 
+    "Training - #{training_schedule.soccer_field.name}"
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801182425) do
+ActiveRecord::Schema.define(version: 20170802132401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -325,6 +325,8 @@ ActiveRecord::Schema.define(version: 20170801182425) do
     t.text "remark"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_trainings_on_team_id"
     t.index ["training_schedule_id"], name: "index_trainings_on_training_schedule_id"
   end
 
@@ -406,6 +408,7 @@ ActiveRecord::Schema.define(version: 20170801182425) do
   add_foreign_key "todos", "users"
   add_foreign_key "training_schedules", "soccer_fields"
   add_foreign_key "training_schedules", "teams"
+  add_foreign_key "trainings", "teams"
   add_foreign_key "trainings", "training_schedules"
   add_foreign_key "user_settings", "users"
 end
