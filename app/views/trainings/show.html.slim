@@ -1,0 +1,27 @@
+- provide(:title, @training.title)
+
+.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4
+          = @training.title
+        .color-blue-grey
+          | #{l @training.started_at.to_date, format: :long} - #{starts_ends(@training)} uur
+        - if @training.training_schedule.present?
+          .color-blue-grey-lighter.small
+            | #{@training.training_schedule.present_minutes_i18n} aanwezig
+          
+
+      .tbl-cell.tbl-cell-actions
+        = link_to edit_training_path(@training), class: "action-btn", title: "Aanpassen"
+          i.fa.fa-pencil
+          
+  .box-typical-body
+    .comment-row-item.no-photo
+      h5 Programma
+      = @training.body.html_safe if @training.body.present?
+      
+      - if @training.remark.present?
+        h5 Opmerkingen
+        = markdown(@training.remark).html_safe

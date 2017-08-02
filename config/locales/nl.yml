@@ -1,7 +1,7 @@
 nl:
   date:
     formats:
-      weekday: "%a"    
+      weekday: "%a"
   time:
     formats:
       short: "%H:%M"
@@ -99,6 +99,9 @@ nl:
         field_part: Deel van het veld
         team_member_ids: Trainer
         cios: CIOS
+      training:
+        body: Programma
+        remark: Opmerkingen
       todo:
         body: Todo
         started_on: Actief vanaf
