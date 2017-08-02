@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', () => {
     $(fieldTypes).first().focus().select();
   } else {
     // Set focus on first input field
-    const fieldTypes = 'form input[type=text], form input[type=email], form input[type=number], form textarea';
+    const fieldTypes = 'form input[type=text], form input[type=email], form input[type=number], form textarea, form trix-editor';
     $(fieldTypes).not('header input').first().focus().select();
   }
 
