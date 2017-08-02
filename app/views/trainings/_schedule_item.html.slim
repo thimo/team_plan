@@ -1,15 +1,21 @@
-tr.clickable
-  td.text-center
-    .strong
-      = I18n.l(object.started_at.to_date, format: :weekday).upcase
-    = I18n.l(object.started_at.to_date, format: :short)
+- training = object
+- date = training.started_at.to_date
+
+tr.clickable[class="#{'table-info' if date == Date.today} #{'table-active' if date < Date.today}"]
+  td.schedule-date
+    .weekday.color-blue-grey
+      = I18n.l(date, format: :weekday).upcase
+    .date
+      = I18n.l(date, format: :short)
   td
-    = link_to object
-      | Training - #{object.training_schedule.soccer_field.name}
+    = link_to training
+      | Training - #{training.training_schedule.soccer_field.name}
     .color-blue-grey
-      = I18n.l(object.started_at.to_time, format: :short)
+      = I18n.l(training.started_at.to_time, format: :short)
       |  - 
-      = I18n.l(object.ended_at.to_time, format: :short)
-    - if TrainingSchedule.present_minutes[object.training_schedule.present_minutes] > 0
-      .color-blue-grey.small
-        | #{object.training_schedule.present_minutes_i18n} aanwezig
+      = I18n.l(training.ended_at.to_time, format: :short)
+    - if TrainingSchedule.present_minutes[training.training_schedule.present_minutes] > 0
+      .color-blue-grey-lighter.small
+        | #{training.training_schedule.present_minutes_i18n} aanwezig
+  td 
+    

@@ -1,7 +1,7 @@
 - title ||= 'Kalender'
-- disable_header ||= false
+- disable_header ||= true
 
-section.box-typical
+section.box-typical.schedule-list
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
@@ -9,12 +9,12 @@ section.box-typical
           = title
           
   .box-typical-body
-    table.table.table-sm.tr-links
+    table.table.table-xs.tr-links
       - if schedules.size > 0
         - unless disable_header
           thead
-            / th Dag
-            / th
+            th Dag
+            th
         tbody
           - schedules.each do |schedule|
-            = render "#{schedule.class.to_s.underscore.pluralize}/schedule_item", object: schedule
+            = render "#{schedule.class.name.underscore.pluralize}/schedule_item", object: schedule
