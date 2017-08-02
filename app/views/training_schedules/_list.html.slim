@@ -1,4 +1,4 @@
-- title ||= 'Trainingen'
+- title ||= 'Reguliere trainingen'
 - disable_header ||= false
 
 section.box-typical
@@ -9,7 +9,7 @@ section.box-typical
           = title
       - if defined?(team).present? && policy(TrainingSchedule.new(team: team)).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_team_training_schedule_path(team), title: "Training toevoegen", class: "action-btn"
+          = link_to new_team_training_schedule_path(team), title: "Reguliere training toevoegen", class: "action-btn"
             i.fa.fa-line-chart
           
   .box-typical-body
