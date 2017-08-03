@@ -22,14 +22,14 @@ class TrainingsController < ApplicationController
 
   def update
     if @training.update_attributes(training_params.merge(user_modified: true))
-      redirect_to @training, notice: "Notitie is aangepast."
+      redirect_to @training, notice: "Training is aangepast."
     else
       render 'edit'
     end
   end
 
   def destroy
-    redirect_to @training.team, notice: "Notitie is verwijderd."
+    redirect_to @training.team, notice: "Training is verwijderd."
     @training.destroy
   end
 
@@ -59,11 +59,11 @@ class TrainingsController < ApplicationController
     end
 
     def training_params
-      params.require(:training).permit(:body, :remark, :team_id)
+      params.require(:training).permit(:body, :remark, :team_id, :started_at, :ended_at, :start_time, :end_time)
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@training.training_schedule.team.name}", @training.training_schedule.team
+      add_breadcrumb "#{@training.team.name}", @training.team
       if @training.new_record?
         add_breadcrumb 'Nieuw'
       else

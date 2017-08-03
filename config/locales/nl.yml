@@ -100,6 +100,9 @@ nl:
         team_member_ids: Trainer
         cios: CIOS
       training:
+        started_at: Datum
+        start_time: Aanvang
+        end_time: Einde
         body: Programma
         remark: Opmerkingen
       todo:

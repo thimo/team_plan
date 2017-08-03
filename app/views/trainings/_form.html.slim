@@ -1,16 +1,18 @@
-= simple_form_for [@training_schedule, @training], {wrapper: :horizontal_form} do |f|
+= simple_form_for [@team, @training], {wrapper: :horizontal_form} do |f|
   = f.error_notification
-
-  / = f.input :title
+  - f.object.errors.each do |error|
+    div
+      = error
   
+  - if @training.training_schedule.nil?
+    = render 'shared/input/datepicker', f: f, field: :started_at
+    = f.input :start_time, as: :time, minute_step: 5, default: Time.parse('19:00'), wrapper: :time
+    = f.input :end_time, as: :time, minute_step: 5, default: Time.parse('20:00'), wrapper: :time
+
   = render 'shared/input/trix', f: f, field: :body
-  / = render 'shared/input/trix', f: f, field: :remark
   = f.input :remark
 
-  / = f.input :member_id, as: :select, collection: @training.team.members, prompt: "-- Selecteer een teamgenoot", hint: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
-  / = render 'shared/input/enum_radio_buttons', f: f, field: :visibility
-  
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @training.new_record? ? @training.training_schedule.team : @training, class: 'btn btn-secondary-outline btn-inline'
+  = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@training).destroy?
     = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
