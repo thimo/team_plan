@@ -11,9 +11,9 @@ class TeamsController < ApplicationController
     @team_evaluations = policy_scope(@team.team_evaluations).desc
     @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
     @previous_season = @team.age_group.season.previous
-    @todos = policy_scope(@team.todos).open
+    @todos = policy_scope(@team.todos).open.includes(:todoable)
     @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
-    @schedules = @team.trainings.in_period(1.week.ago.to_date, 2.week.from_now.to_date).to_a.sort_by(&:started_at)
+    @schedules = @team.trainings.in_period(1.week.ago.to_date, 2.week.from_now.to_date).includes(:training_schedule, training_schedule: :soccer_field).to_a.sort_by(&:started_at)
   end
 
   def new; end
