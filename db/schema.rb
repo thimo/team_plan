@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170802132401) do
+ActiveRecord::Schema.define(version: 20170804110413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,20 @@ ActiveRecord::Schema.define(version: 20170802132401) do
     t.index ["team_member_id"], name: "index_player_evaluations_on_team_member_id"
   end
 
+  create_table "presences", force: :cascade do |t|
+    t.string "presentable_type"
+    t.bigint "presentable_id"
+    t.bigint "member_id"
+    t.boolean "present", default: true
+    t.integer "on_time", default: 0
+    t.integer "signed_off", default: 0
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_presences_on_member_id"
+    t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
+  end
+
   create_table "seasons", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -399,6 +413,7 @@ ActiveRecord::Schema.define(version: 20170802132401) do
   add_foreign_key "notes", "users"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
+  add_foreign_key "presences", "members"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"

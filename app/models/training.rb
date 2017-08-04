@@ -3,6 +3,7 @@ class Training < ApplicationRecord
 
   belongs_to :team
   belongs_to :training_schedule
+  has_many :presences, as: :presentable, dependent: :destroy
 
   attr_accessor :start_time, :end_time
 
