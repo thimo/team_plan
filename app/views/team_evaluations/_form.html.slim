@@ -69,7 +69,7 @@
                 
             tr
               td.b-t-0[colspan="12" style="padding-left: 2px;"]
-                = pe.text_area :remark, class: "form-control", placeholder: PlayerEvaluation.human_attribute_name(:remark)
+                = pe.text_area :remark, class: "form-control", placeholder: PlayerEvaluation.human_attribute_name(:remark), rows: 1
 
     footer.box-typical-footer
       - if policy(@team_evaluation).update?
