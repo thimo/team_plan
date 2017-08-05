@@ -21,8 +21,7 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
-var matchParts;
-matchParts = function(term, text) {
+var matchParts = function(term, text) {
   if (text.toUpperCase().indexOf(term.toUpperCase()) === 0) {
     return true;
   }
