@@ -1,3 +1,12 @@
 // Place all the styles related to the Presences controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.presence-form {
+  .btn-group {
+    width: 100%;
+    margin-bottom: .5rem;
+  }
+  label.btn {
+    flex: 1;
+  }
+}

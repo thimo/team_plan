@@ -173,7 +173,7 @@ nl:
         much_too_late: Veel te laat
       signed_off:
         signed_off_on_time: Op tijd afgemeld
-        signed_off_too_late: Te laat afgemeld
+        signed_off_too_late: Te laat
         not_signed_off: Niet afgemeld
     team:
       status:
