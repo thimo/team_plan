@@ -6,7 +6,8 @@
     header.box-typical-header
       .tbl-row
         .tbl-cell.tbl-cell-title
-          h4 Teamevaluatie #{@team_evaluation.team.name}
+          h4 
+            | Teamevaluatie #{@team_evaluation.team.name}
             - if @team_evaluation.team.division.present?
               small.pl-1 #{@team_evaluation.team.division}
             div.color-blue-grey-lighter.small

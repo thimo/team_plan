@@ -9,7 +9,8 @@
       header.box-typical-header
         .tbl-row
           .tbl-cell.tbl-cell-title
-            h4 Beschikbare leden
+            h4 
+              | Beschikbare leden
               - if @available_members.size > 0
                 .label.label-one-number.ml-3
                   = "#{@available_members.size}"
