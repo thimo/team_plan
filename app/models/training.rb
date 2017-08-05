@@ -20,7 +20,7 @@ class Training < ApplicationRecord
 
   # Accessors for time aspects of start and end dates
   def start_time
-    started_at.to_time
+    started_at.to_time if started_at.present?
   end
 
   def start_time=(time)
@@ -28,7 +28,7 @@ class Training < ApplicationRecord
   end
 
   def end_time
-    ended_at.to_time
+    ended_at.to_time if ended_at.present?
   end
 
   def end_time=(time)
