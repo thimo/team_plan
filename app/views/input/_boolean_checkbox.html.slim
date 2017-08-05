@@ -1,3 +1,3 @@
-.checkbox-toggle
+div[class="#{checkbox_class ||= 'checkbox'}"]
   = f.check_box field, class: 'form-check-input', id: "#{f.object.id}_#{field}"
   = f.label field, label ||= f.object.class.human_attribute_name(field), class: 'form-check-label', for: "#{f.object.id}_#{field}"

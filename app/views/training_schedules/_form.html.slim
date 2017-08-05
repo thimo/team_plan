@@ -10,7 +10,7 @@
   = f.input :soccer_field_id, as: :select, collection: SoccerField.asc.training, prompt: "-- Selecteer een veld"
   = f.input :field_part, prompt: "-- Selecteer het deel van het veld"
   = render 'input/habtm_checkboxes', f: f, field: :team_member_ids, collection: trainers, row_class: 'mb-0'
-  = render partial: 'input/boolean_checkbox', locals: {f: f, field: :cios, hide_label: true}, layout: 'input/col_3_9_wrapper' 
+  = render partial: 'input/boolean_checkbox', locals: {f: f, field: :cios, hide_label: true}, layout: 'input/col_3_9_wrapper'
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @training_schedule.team, class: 'btn btn-secondary-outline btn-inline'
