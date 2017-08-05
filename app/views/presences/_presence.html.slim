@@ -1,4 +1,3 @@
-div[id="presence_#{presence.id}"]
+div[id="presence-#{presence.id}"]
   = form_with model: presence, data: { behavior: "autosave" } do |f|
     = render 'shared/input/boolean_checkbox_bare', f: f, field: :present, label: presence.member.name
-    div 

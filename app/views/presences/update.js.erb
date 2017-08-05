@@ -1,0 +1,5 @@
+$("#presence-<%= @presence.id %>").replaceWith("<%= j render('presence', presence: @presence) %>")
+
+$("#presence-<%= @presence.id %>").find('form[data-behavior="autosave"]').each((index, form) => {
+  autosaveForm(form)
+})

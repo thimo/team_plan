@@ -21,3 +21,10 @@
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js
 //= require turbolinks
 //= require trix
+
+// This should be in presences.js, but can't get it to work
+var autosaveForm = function(form) {
+  $(form).find('input[type=checkbox]').on('change', (e) => {
+    $(form).submit()
+  })
+}
