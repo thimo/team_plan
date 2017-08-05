@@ -3,8 +3,8 @@
 = simple_form_for [@todoable, @todo], {wrapper: :horizontal_form} do |f|
   = f.error_notification
   = f.input :body, placeholder: "Todo", autofocus: true
-  = render 'shared/input/datepicker', f: f, field: :started_on, hint: "Optioneel: De datum waarop de todo actief wordt."
-  = render 'shared/input/datepicker', f: f, field: :ended_on, hint: "Optioneel: De deadline voor deze todo"
+  = render 'input/datepicker', f: f, field: :started_on, hint: "Optioneel: De datum waarop de todo actief wordt."
+  = render 'input/datepicker', f: f, field: :ended_on, hint: "Optioneel: De deadline voor deze todo"
   
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", cancel_url, class: 'btn btn-secondary-outline btn-inline'

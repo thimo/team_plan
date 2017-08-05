@@ -3,10 +3,10 @@
 
   = f.input :title, autofocus: true
   
-  = render 'shared/input/trix', f: f, field: :body
+  = render 'input/trix', f: f, field: :body
 
   = f.input :member_id, as: :select, collection: @note.team.members, prompt: "-- Selecteer een teamgenoot", hint: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
-  = render 'shared/input/enum_radio_buttons', f: f, field: :visibility
+  = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :visibility}, layout: 'input/col_3_9_wrapper'
   
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-secondary-outline btn-inline'

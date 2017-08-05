@@ -2,10 +2,10 @@
   = f.error_notification
 
   = f.input :title, autofocus: true
-  = render 'shared/input/datepicker', f: f, field: :started_on
-  = render 'shared/input/datepicker', f: f, field: :ended_on, hint: "Invullen als de blessure voorbij is"
+  = render 'input/datepicker', f: f, field: :started_on
+  = render 'input/datepicker', f: f, field: :ended_on, hint: "Invullen als de blessure voorbij is"
 
-  = render 'shared/input/trix', f: f, field: :body
+  = render 'input/trix', f: f, field: :body
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @injury.new_record? ? @injury.member : @injury, class: 'btn btn-secondary-outline btn-inline'

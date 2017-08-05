@@ -1,0 +1,5 @@
+.row.form-group[class="#{row_class ||= ''} #{'has-error' if has_error(f.object, field)}"]
+  .col-form-legend.col-sm-3
+    = f.label field if (show_label ||= false)
+  .col-md-9
+    = render 'input/boolean_checkbox_bare', f: f, field: field, label: (label ||= nil)

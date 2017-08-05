@@ -1,5 +1,0 @@
-.row.form-group[class="#{row_class ||= ''}"]
-  .col-form-legend.col-sm-3
-    = f.label field if (show_label ||= false)
-  .col-md-9
-    = render 'shared/input/boolean_checkbox_bare', f: f, field: field, label: (label ||= nil)

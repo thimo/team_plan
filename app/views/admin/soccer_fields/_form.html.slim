@@ -2,8 +2,8 @@
   = f.error_notification
 
   = f.input :name
-  = render 'shared/input/boolean_checkbox', f: f, field: :match, row_class: 'mb-0'
-  = render 'shared/input/boolean_checkbox', f: f, field: :training
+  = render 'input/boolean_checkbox', f: f, field: :match, row_class: 'mb-0'
+  = render 'input/boolean_checkbox', f: f, field: :training
   
   div
     = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
