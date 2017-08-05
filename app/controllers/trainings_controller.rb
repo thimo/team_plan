@@ -4,7 +4,9 @@ class TrainingsController < ApplicationController
   before_action :set_training, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumbs
 
-  def show; end
+  def show
+    @presences = @training.find_or_create_presences.asc
+  end
 
   def new
   end

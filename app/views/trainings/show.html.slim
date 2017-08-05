@@ -25,3 +25,8 @@
       - if @training.remark.present?
         h5 Opmerkingen
         = markdown(@training.remark).html_safe
+        
+      - if @presences.any?
+        h5 Aanwezig
+        - @presences.each do |presence|
+          = render presence

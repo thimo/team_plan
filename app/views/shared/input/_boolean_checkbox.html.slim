@@ -2,6 +2,4 @@
   .col-form-legend.col-sm-3
     = f.label field if (show_label ||= false)
   .col-md-9
-    .checkbox
-      = f.check_box field, class: 'form-check-input', id: field
-      = f.label field, f.object.class.human_attribute_name(field), class: 'form-check-label', for: field
+    = render 'shared/input/boolean_checkbox_bare', f: f, field: field, label: label
