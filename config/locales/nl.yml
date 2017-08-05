@@ -86,6 +86,8 @@ nl:
         body: Omschrijving / behandeling
         started_on: Begindatum
         ended_on: Einddatum
+      presence:
+        remark: Opmerking
       soccer_field:
         name: Veldnaam
         match: Wedstrijdveld
@@ -164,6 +166,15 @@ nl:
         draft: Concept
         active: Actief
         archived: Archief
+    presence:
+      on_time:
+        on_time: Op tijd aanwezig
+        a_bit_too_late: Iets te laat
+        much_too_late: Veel te laat
+      signed_off:
+        signed_off_on_time: Op tijd afgemeld
+        signed_off_too_late: Te laat afgemeld
+        not_signed_off: Niet afgemeld
     team:
       status:
         draft: Concept

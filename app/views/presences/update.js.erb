@@ -2,4 +2,5 @@ $("#presence-<%= @presence.id %>").replaceWith("<%= j render('presence', presenc
 
 $("#presence-<%= @presence.id %>").find('form[data-behavior="autosave"]').each((index, form) => {
   autosaveForm(form)
+  autosize($('textarea'))
 })

@@ -4,8 +4,9 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
-window.autosaveForm = function(form) {
-  $(form).find('input[type=checkbox]').on('change', (e) => {
+var autosaveForm = function(form) {
+  $(form).find('input[type=checkbox], input[type=radio], textarea').on('change', (e) => {
     $(form).submit()
   })
 }
+window.autosaveForm = autosaveForm

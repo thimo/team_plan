@@ -154,9 +154,23 @@ th {
   }
 }
 
-.checkbox, .radio, .checkbox-slide, .checkbox-toggle, .checkbox-bird, .checkbox-detailed {
-  margin-bottom: .5rem;
-  margin-top: .5rem;
+.checkbox,
+.checkbox-bird,
+.checkbox-detailed,
+.checkbox-slide,
+.checkbox-toggle,
+.radio {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.form-inline {
+  .form-check-label {
+    padding-left: 24px;
+    padding-right: 20px;
+  }
+}
+
 trix-toolbar {
   .button_group {
     border-color: #d6e2e8;

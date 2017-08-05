@@ -1,3 +1,12 @@
 div[id="presence-#{presence.id}"]
-  = form_with model: presence, data: { behavior: "autosave" } do |f|
-    = render 'shared/input/boolean_checkbox_bare', f: f, field: :present, label: presence.member.name
+  = simple_form_for presence, html: { class: 'row mb-2' }, data: { behavior: "autosave" }, remote: true do |f|
+    .col-4
+      = render 'shared/input/boolean_checkbox_bare', f: f, field: :present, label: presence.member.name
+    .col-8
+      - if presence.present?
+        .form-inline
+          = render 'shared/input/enum_radio_buttons_bare', f: f, field: :on_time
+      - unless presence.present?
+        .form-inline
+          = render 'shared/input/enum_radio_buttons_bare', f: f, field: :signed_off
+      = f.text_area :remark, class: "form-control", placeholder: f.object.class.human_attribute_name(:remark), rows: 1
