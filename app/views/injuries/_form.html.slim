@@ -1,7 +1,7 @@
 = simple_form_for [@member, @injury], {wrapper: :horizontal_form} do |f|
   = f.error_notification
 
-  = f.input :title
+  = f.input :title, autofocus: true
   = render 'shared/input/datepicker', f: f, field: :started_on
   = render 'shared/input/datepicker', f: f, field: :ended_on, hint: "Invullen als de blessure voorbij is"
 

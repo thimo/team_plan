@@ -1,6 +1,6 @@
 = simple_form_for @season, {wrapper: :horizontal_form} do |f|
   = f.error_notification
-  = f.input :name
+  = f.input :name, autofocus: true
   = render 'shared/input/datepicker', f: f, field: :started_on, hint: 'Normaal gesproken per 1 juli'
   = render 'shared/input/datepicker', f: f, field: :ended_on, hint: 'Normaal gesproken 30 juni'
   

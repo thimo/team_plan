@@ -9,7 +9,7 @@
     = f.input :start_time, as: :time, minute_step: 5, default: Time.parse('19:00'), wrapper: :time
     = f.input :end_time, as: :time, minute_step: 5, default: Time.parse('20:00'), wrapper: :time
 
-  = render 'shared/input/trix', f: f, field: :body
+  = render 'shared/input/trix', f: f, field: :body, autofocus: true
   = f.input :remark
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'

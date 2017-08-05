@@ -1,7 +1,7 @@
 = simple_form_for [@team, @note], {wrapper: :horizontal_form} do |f|
   = f.error_notification
 
-  = f.input :title
+  = f.input :title, autofocus: true
   
   = render 'shared/input/trix', f: f, field: :body
 
