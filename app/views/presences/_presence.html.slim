@@ -1,14 +1,13 @@
 - if policy(presence).update?
   div.presence-form[id="presence-#{presence.id}"]
     = simple_form_for presence, html: { class: 'row mb-2' }, data: { behavior: "autosave" }, remote: true do |f|
-      .col-12
+      .col-md-4
         = render 'input/boolean_checkbox', f: f, field: :present, label: presence.member.name, checkbox_class: 'checkbox-toggle'
-      .col-md-7.col-lg-6.col-xl-5
+      .col-md-8
         - if presence.present?
           = render 'input/enum_buttons', f: f, field: :on_time
           = f.hidden_field :signed_off, value: :signed_off_on_time
         - unless presence.present?
           = render 'input/enum_buttons', f: f, field: :signed_off
           = f.hidden_field :on_time, value: :on_time
-      .col-md-5.col-lg-6.col-xl-7
         = f.text_area :remark, class: "form-control", placeholder: f.object.class.human_attribute_name(:remark), rows: 1
