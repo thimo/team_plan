@@ -10,6 +10,7 @@ class SeasonsController < ApplicationController
   def show
     @age_groups_male = policy_scope(@season.age_groups).male.asc
     @age_groups_female = policy_scope(@season.age_groups).female.asc
+    @seasons = policy_scope(Season).all.desc
   end
 
   def new; end
