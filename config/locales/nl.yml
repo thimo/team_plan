@@ -168,11 +168,11 @@ nl:
         archived: Archief
     presence:
       on_time:
-        on_time: Op tijd aanwezig
+        on_time: Op tijd
         a_bit_too_late: Iets te laat
         much_too_late: Veel te laat
       signed_off:
-        signed_off_on_time: Op tijd afgemeld
+        signed_off_on_time: Tijdig afgemeld
         signed_off_too_late: Te laat
         not_signed_off: Niet afgemeld
     team:
