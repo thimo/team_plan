@@ -1,4 +1,6 @@
 class TrainingsController < ApplicationController
+  include TrainingsHelper
+  
   before_action :set_team, only: [:new, :create]
   before_action :create_training, only: [:new, :create]
   before_action :set_training, only: [:show, :edit, :update, :destroy]
@@ -69,7 +71,7 @@ class TrainingsController < ApplicationController
       if @training.new_record?
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb "Training", @training
+        add_breadcrumb training_title(@training), @training
       end
     end
 end

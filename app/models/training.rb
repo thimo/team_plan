@@ -14,10 +14,6 @@ class Training < ApplicationRecord
   scope :this_week,    -> (date) { where('started_at > ?', date.beginning_of_week).where('started_at < ?', date.end_of_week) }
   scope :in_period, -> (start_date, end_date) { where('started_at > ?', start_date).where('started_at < ?', end_date)}
 
-  def title
-    "Training - #{training_schedule.present? ? training_schedule.soccer_field.name : 'veld onbekend'}"
-  end
-
   # Accessors for time aspects of start and end dates
   def start_time
     started_at.to_time if started_at.present?

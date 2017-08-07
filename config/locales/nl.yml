@@ -311,6 +311,7 @@ nl:
   email: E-mail
   member_since: Lid sinds
   previous_team: Vorig team
+  training: Training
 
   "false": "Nee"
   "true": "Ja"

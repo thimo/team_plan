@@ -9,7 +9,7 @@ tr.clickable[class="#{'table-info' if date == Date.today} #{'table-active' if da
       = I18n.l(date, format: :short)
   td
     = link_to training
-      = training.title
+      = training_title(training)
     .color-blue-grey
       = starts_ends(training)
       - if training.training_schedule.present? && TrainingSchedule.present_minutes[training.training_schedule.present_minutes] > 0
