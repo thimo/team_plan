@@ -22,17 +22,34 @@ section.tabs-section
               span.label.label-pill.label-success[id="presence-count"]
                 = @presences.present.size
   .tab-content
-    #tab-program.tab-pane.fade.in.active.show[role="tabpanel" aria-expanded="true"]
-      .mb-2
-        | #{l @training.started_at.to_date, format: :long} - #{starts_ends(@training)} uur
-        - if @training.training_schedule.present?
-          .color-blue-grey-lighter.small
-            | #{@training.training_schedule.present_minutes_i18n} aanwezig
+    #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
+      .card.float-right.training-info-box-xxx
+        .card-block
+          .strong #{l @training.started_at.to_date, format: :weekday} #{l @training.started_at.to_date, format: :long}
+          div #{starts_ends(@training)} uur
+          - if (ts = @training.training_schedule).present?
+            .color-blue-grey.small
+              | #{ts.present_minutes_i18n} aanwezig
+            hr.my-2
+            div
+              = ts.soccer_field.name
+              span.color-blue-grey.small.ml-2
+                = ts.field_part_i18n
+            - if ts.team_members.any? || ts.cios?
+              hr.my-2
+              - ts.team_members.each do |trainer|
+                div #{trainer.name}
+              div 
+                = ts.class.human_attribute_name(:cios) if ts.cios?
 
-      = @training.body.html_safe if @training.body.present?
+      - if @training.body.present?
+        = @training.body.html_safe
+      - else 
+        i Er is nog geen programma ingevuld
       
       - if @training.remark.present?
-        h5 Opmerkingen
+        hr
+        strong Opmerkingen
         = markdown(@training.remark).html_safe
         
     - if @presences.any?
