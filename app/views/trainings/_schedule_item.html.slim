@@ -1,4 +1,5 @@
 - training = object
+- ts = training.training_schedule
 - date = training.started_at
 
 tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' if date < Time.zone.today}"]
@@ -12,8 +13,12 @@ tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' 
       = training_title(training)
     .color-blue-grey
       = starts_ends(training)
-      - if training.training_schedule.present? && TrainingSchedule.present_minutes[training.training_schedule.present_minutes] > 0
+      - if ts.present? && TrainingSchedule.present_minutes[ts.present_minutes] > 0
         span.color-blue-grey-lighter.small.pl-2
-          | #{training.training_schedule.present_minutes_i18n} aanwezig
-  td 
+          | #{ts.present_minutes_i18n} aanwezig
+  td.w-1.nowrap.text-right
+    - if ts.present?
+      - if policy(ts).update?
+        = link_to [:edit, ts]
+          i.fa.fa-repeat.p-1.pl-2.color-blue-grey-lighter[title="Reguliere training"]
     
