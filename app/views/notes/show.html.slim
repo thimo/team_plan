@@ -11,8 +11,8 @@
               = " - #{@note.member.name}"
               
         .color-blue-grey-lighter.small
-          = "#{l @note.created_at.to_date, format: :long}"
-          = " (aangepast op #{l @note.updated_at.to_date, format: :long})" if @note.created_at.to_date != @note.updated_at.to_date
+          = "#{l @note.created_at, format: :date_long}"
+          = " (aangepast op #{l @note.updated_at, format: :long})" if @note.created_at != @note.updated_at
           = ", #{@note.user.name}"
           
       .tbl-cell.tbl-cell-actions

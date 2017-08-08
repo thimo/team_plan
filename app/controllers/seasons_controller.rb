@@ -45,9 +45,9 @@ class SeasonsController < ApplicationController
   private
 
     def create_season
-      start_year = Date.today.year + (Date.today.month >= 7 ? 1 : 0)
-      started_on = Date.new(start_year, 7, 1)
-      ended_on = Date.new(start_year + 1, 6, 30)
+      start_year = Time.zone.today.year + (Time.zone.today.month >= 7 ? 1 : 0)
+      started_on = Time.zone.local(start_year, 7, 1)
+      ended_on = Time.zone.local(start_year + 1, 6, 30)
       @season = if action_name == 'new'
                   Season.new(started_on: started_on, ended_on: ended_on)
                 else
@@ -65,7 +65,7 @@ class SeasonsController < ApplicationController
       # Find first draft season
       @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
       # Create a new draft season in the database
-      @season = Season.create(name: "#{Time.current.year} / #{Time.current.year + 1}") if @season.nil?
+      @season = Season.create(name: "#{Time.zone.today.year} / #{Time.zone.today.year + 1}") if @season.nil?
 
       authorize @season
     end

@@ -37,10 +37,10 @@ end
 
 # jo11_8s = Team.where({name: "ESA JO11-8"})
 # jo11_8s.each do |jo11_8|
-#   TeamMember.create!({team: jo11_8, member: player1, joined_on: Date.new(2016,8,1), role: TeamMember.roles[:player]})
-#   TeamMember.create!({team: jo11_8, member: player2, joined_on: Date.new(2016,8,1), role: TeamMember.roles[:player]})
-#   TeamMember.create!({team: jo11_8, member: player3, joined_on: Date.new(2016,8,1), role: TeamMember.roles[:player]})
-#   TeamMember.create!({team: jo11_8, member: coach1, joined_on: Date.new(2016,8,1), role: TeamMember.roles[:coach]})
+#   TeamMember.create!({team: jo11_8, member: player1, joined_on: Time.zone.local(2016,8,1), role: TeamMember.roles[:player]})
+#   TeamMember.create!({team: jo11_8, member: player2, joined_on: Time.zone.local(2016,8,1), role: TeamMember.roles[:player]})
+#   TeamMember.create!({team: jo11_8, member: player3, joined_on: Time.zone.local(2016,8,1), role: TeamMember.roles[:player]})
+#   TeamMember.create!({team: jo11_8, member: coach1, joined_on: Time.zone.local(2016,8,1), role: TeamMember.roles[:coach]})
 # end
 
 User.create!(email: 'admin@defrog.nl',

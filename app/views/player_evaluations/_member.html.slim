@@ -16,7 +16,7 @@ section.box-typical.evaluation
               td.nowrap[rowspan="2"]
                 = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
                 .color-blue-grey-lighter.small
-                  = l evaluation.team_evaluation.finished_at.to_date, format: :long
+                  = l evaluation.team_evaluation.finished_at, format: :date_long
               = render "player_evaluations/td_columns", evaluation: evaluation
             - if evaluation.remark.present?
               tr

@@ -69,7 +69,7 @@ class TeamMember < ApplicationRecord
     if active?
       # TODO send notification to member administration
       self.status = TeamMember.statuses[:archived]
-      self.ended_on = Date.today
+      self.ended_on = Time.zone.today
       save
 
       # Place team member in archive

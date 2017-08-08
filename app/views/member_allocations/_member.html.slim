@@ -33,7 +33,7 @@
           span.pl-1
             = "#{previous_team.division}"
           - if (evaluation = member.evaluation_for_season(@previous_season)).present?
-            span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{evaluation.advise_next_season}"]
+            span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at, format: :date_long}, advies: #{evaluation.advise_next_season}"]
               i.fa[class="#{evaluation.advise_to_icon_class}"]
             - if evaluation.remark.present?
               i.fa.fa-info-circle.blue.ml-1[title="#{evaluation.remark}"]
@@ -46,5 +46,5 @@
     
     - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
       - last_comments.each do |last_comment|
-        .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at.to_date, format: :short})"]
+        .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at, format: :date_short})"]
           = last_comment.body

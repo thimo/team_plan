@@ -1,6 +1,6 @@
 class TrainingsController < ApplicationController
   include TrainingsHelper
-  
+
   before_action :set_team, only: [:new, :create]
   before_action :create_training, only: [:new, :create]
   before_action :set_training, only: [:show, :edit, :update, :destroy]
@@ -50,7 +50,7 @@ class TrainingsController < ApplicationController
       @training = if action_name == 'new'
                     @team.trainings.new
                   else
-                    Training.new(training_params)
+                    Training.new(training_params.merge(user_modified: true))
                   end
       @training.team = @team
 

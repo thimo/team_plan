@@ -49,7 +49,7 @@ class DownloadTeamMembersController < ApplicationController
     filename = "#{Setting['club.name']}_#{@season.name}"
     filename += "_#{@age_group.name}" if @age_group.present?
     filename += "_#{@team.name}" if @team.present?
-    filename += "_#{Time.now}.xlsx"
+    filename += "_#{Time.zone.now}.xlsx"
 
     respond_to do |format|
        format.xlsx {render xlsx: 'download', filename: filename.gsub(' ', '')}

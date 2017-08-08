@@ -1,12 +1,12 @@
 - training = object
-- date = training.started_at.to_date
+- date = training.started_at
 
-tr.clickable[class="#{'table-info' if date == Date.today} #{'table-active' if date < Date.today}"]
+tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' if date < Time.zone.today}"]
   td.schedule-date
     .weekday.color-blue-grey
       = I18n.l(date, format: :weekday).upcase
     .date
-      = I18n.l(date, format: :short)
+      = I18n.l(date, format: :date_short)
   td
     = link_to training
       = training_title(training)

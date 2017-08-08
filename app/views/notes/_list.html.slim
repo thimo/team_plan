@@ -21,7 +21,7 @@ section.box-typical
                   = note.title
                 = " - #{note.member.name}" if note.member.present?
                 .color-blue-grey-lighter.small
-                  = l note.updated_at.to_date, format: :long
+                  = l note.updated_at, format: :long
                   = ", #{note.user.name}"
                 
 

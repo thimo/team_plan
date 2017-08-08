@@ -21,7 +21,7 @@ section.box-typical.hidden-xs-down
               .tbl-cell.tbl-cell-name
                 = version_update.name
               .tbl-cell.tbl-cell-date
-                = l version_update.released_at.to_date, format: :long
+                = l version_update.released_at, format: :date_long
           .comment-row-item-content
             = markdown(version_update.body).html_safe
     - else 

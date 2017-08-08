@@ -27,7 +27,7 @@ section.box-typical
                   => l member.born_on, format: :long unless member.born_on.nil?
                   = "(#{member.gender})"
               td
-                = l injury.started_on.to_date, format: :long
+                = l injury.started_on, format: :long
               td
                 = injury.title
 

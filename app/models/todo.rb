@@ -6,15 +6,15 @@ class Todo < ApplicationRecord
   scope :desc,     -> { order(created_at: :desc) }
   scope :open,     -> { where(finished: false) }
   scope :finished, -> { where(finished: true) }
-  scope :active,   -> { where(started_on: nil).or(where("started_on <= ?", Date.today)) }
-  scope :defered,  -> { where("started_on > ?", Date.today) }
+  scope :active,   -> { where(started_on: nil).or(where("started_on <= ?", Time.zone.today)) }
+  scope :defered,  -> { where("started_on > ?", Time.zone.today) }
 
   def due?
-    ended_on.present? && ended_on < Time.now
+    ended_on.present? && ended_on < Time.zone.now
   end
 
   def defered?
-    started_on.present? && started_on > Time.now
+    started_on.present? && started_on > Time.zone.now
   end
 
 end

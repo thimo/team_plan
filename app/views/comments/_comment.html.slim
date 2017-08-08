@@ -6,7 +6,7 @@
       .tbl-cell.tbl-cell-name
         = comment.user.name
       .tbl-cell.tbl-cell-date
-        span[title="#{l comment.created_at.to_date, format: :long}"]
+        span[title="#{l comment.created_at, format: :long}"]
           = time_ago_in_words(comment.created_at)
           |  geleden 
         - if policy(comment).update?

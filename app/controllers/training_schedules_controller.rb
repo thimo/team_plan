@@ -6,8 +6,7 @@ class TrainingSchedulesController < ApplicationController
 
   # def show; end
 
-  def new
-  end
+  def new; end
 
   def create
     if @training_schedule.save
@@ -17,8 +16,7 @@ class TrainingSchedulesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @training_schedule.update_attributes(training_schedule_params)
@@ -45,7 +43,7 @@ class TrainingSchedulesController < ApplicationController
 
     def create_training_schedule
       @training_schedule = if action_name == 'new'
-                @team.training_schedules.new
+                @team.training_schedules.new(start_time: Time.zone.local(2000, 1, 1, 19, 0), end_time: Time.zone.local(2000, 1, 1, 20, 0))
               else
                 TrainingSchedule.new(training_schedule_params)
               end

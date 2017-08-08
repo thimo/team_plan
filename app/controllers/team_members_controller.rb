@@ -67,7 +67,7 @@ class TeamMembersController < ApplicationController
     # TODO send notification to member administration
     @team_member.status = TeamMember.statuses[:active]
     @team_member.ended_on = nil
-    @team_member.started_on = Date.today if @team_member.draft?
+    @team_member.started_on = Time.zone.today if @team_member.draft?
 
     if @team_member.save
       @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)

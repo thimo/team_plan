@@ -17,9 +17,9 @@ section.box-typical
               td 
                 = link_to injury
                   = injury.title
-                |  - #{l injury.started_on.to_date, format: :long}
+                |  - #{l injury.started_on, format: :long}
                 - if injury.ended_on.present?
-                  |  - #{l injury.ended_on.to_date, format: :long}
+                  |  - #{l injury.ended_on, format: :long}
                 - else 
                   |  - ...
                 

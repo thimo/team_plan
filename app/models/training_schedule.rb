@@ -36,7 +36,7 @@ class TrainingSchedule < ApplicationRecord
         ended_at: ended_at,
       ) unless has_training_this_week?(started_at)
 
-      training_day = training_day.next_day(7)
+      training_day += 7.days
     end
   end
 
@@ -51,8 +51,8 @@ class TrainingSchedule < ApplicationRecord
     end
 
     def next_training_day
-      training_day = DateTime.now.beginning_of_week.next_day(day_number)
-      training_day = training_day.next_day(7) if training_day.to_date < Date.today
+      training_day = Time.zone.now.beginning_of_week + day_number.days
+      training_day += 7.days if training_day.end_of_day <= Time.zone.today.end_of_day
       training_day
     end
 
