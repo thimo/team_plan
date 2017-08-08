@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 var autosaveForm = function(form) {
-  $(form).find('input[type=checkbox], input[type=radio], textarea').on('change', (e) => {
+  $(form).find('input[type=checkbox], input[type=radio], textarea, select').on('change', (e) => {
     $(form).submit()
   })
 }
