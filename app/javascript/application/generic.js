@@ -1,6 +1,9 @@
 $(document).on('turbolinks:load', () => {
   // Auto-size all textarea's
   autosize($('textarea'));
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    autosize.update($('textarea'))
+  })
 
   // Initialize date pickers
   $('[data-provide="datepicker"]').datepicker();

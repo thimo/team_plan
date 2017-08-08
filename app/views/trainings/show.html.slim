@@ -11,18 +11,18 @@ section.tabs-section
   .tabs-section-nav.tabs-width-relative
     ul.nav[role="tablist"]
       li.nav-item
-        a.nav-link.active[href="#tabs-2-tab-1" role="tab" data-toggle="tab" aria-expanded="true"]
+        a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
           span.nav-link-in
             | Programma 
       - if @presences.any?
         li.nav-item
-          a.nav-link[href="#tabs-2-tab-2" role="tab" data-toggle="tab" aria-expanded="false"]
+          a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
             span.nav-link-in
               | Aanwezig 
-              span.label.label-pill.label-success
+              span.label.label-pill.label-success[id="presence-count"]
                 = @presences.present.size
   .tab-content
-    #tabs-2-tab-1.tab-pane.fade.in.active.show[role="tabpanel" aria-expanded="true"]
+    #tab-program.tab-pane.fade.in.active.show[role="tabpanel" aria-expanded="true"]
       .mb-2
         | #{l @training.started_at.to_date, format: :long} - #{starts_ends(@training)} uur
         - if @training.training_schedule.present?
@@ -36,6 +36,6 @@ section.tabs-section
         = markdown(@training.remark).html_safe
         
     - if @presences.any?
-      #tabs-2-tab-2.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+      #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
         - @presences.each do |presence|
           = render presence

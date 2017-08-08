@@ -23,6 +23,7 @@ class PresencesController < ApplicationController
   def update
     if @presence.update_attributes(presence_params)
       @presence.set_presentable_user_modified
+      @present_count = @presence.presentable.presences.present.size
       # redirect_to @presence, notice: "Notitie is aangepast."
     else
       # render 'edit'

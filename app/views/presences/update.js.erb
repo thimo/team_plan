@@ -4,3 +4,5 @@ $("#presence-<%= @presence.id %>").find('form[data-behavior="autosave"]').each((
   autosaveForm(form)
   autosize($('textarea'))
 })
+
+$('#presence-count').html("<%= @present_count %>")
