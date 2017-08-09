@@ -64,55 +64,12 @@ class User < ApplicationRecord
   end
 
   def is_team_member_for?(record)
-    team_id = 0
-
-    case [record.class]
-    when [Member]
-      # Find overlap in teams between current user and given member
-      team_members = record.team_members
-      team_members = team_members.active_or_archived if member?
-      team_id = team_members.pluck(:team_id).uniq
-    when [Team]
-      team_id = record.id
-    when [TeamEvaluation]
-      team_id = record.team_id
-    when [PlayerEvaluation]
-      team_id = record.team_evaluation.team_id
-    when [Note]
-      team_id = record.team_id
-    when [TrainingSchedule]
-      team_id = record.team_id
-    when [Training]
-      team_id = record.training_schedule.team_id
-    end
-
+    team_id = team_id_for record
     return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).size > 0
   end
 
   def is_team_staff_for?(record)
-    team_id = 0
-
-    case [record.class]
-    when [Team]
-      team_id = record.id
-    when [TeamMember]
-      team_id = record.team_id
-    when [Member]
-      team_members = record.team_members
-      team_members = team_members.active_or_archived if member?
-      team_id = team_members.pluck(:team_id).uniq
-    when [TeamEvaluation]
-      team_id = record.team_id
-    when [PlayerEvaluation]
-      team_id = record.team_evaluation.team_id
-    when [Note]
-      team_id = record.team_id
-    when [TrainingSchedule]
-      team_id = record.team_id
-    when [Training]
-      team_id = record.training_schedule.team_id
-    end
-
+    team_id = team_id_for record
     return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).where.not(team_members: {role: TeamMember.roles[:player]}).size > 0
   end
 
@@ -177,4 +134,27 @@ class User < ApplicationRecord
   def export_columns
     @export_columns ||= (columns = settings.export_columns).present? ? columns : Member::DEFAULT_COLUMNS
   end
+
+  private
+
+    def team_id_for(record)
+      team_id = 0
+
+      case [record.class]
+      when [Team]
+        team_id = record.id
+      when [Member]
+        # Find overlap in teams between current user and given member
+        team_members = record.team_members
+        team_members = team_members.active_or_archived if member?
+        team_id = team_members.pluck(:team_id).uniq
+      when [PlayerEvaluation]
+        team_id = record.team_evaluation.team_id
+      when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training], [Match]
+        team_id = record.team_id
+      end
+
+      team_id
+    end
+    
 end
