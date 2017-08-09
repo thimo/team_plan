@@ -4,7 +4,7 @@ nl:
       weekday: "%a"
   time:
     formats:
-      short: "%H:%M"
+      time_short: "%k:%M"
       month: "%b"
       weekday: "%a"
       date_time_short: "%-d %b %k:%M"
@@ -115,6 +115,13 @@ nl:
         body: Todo
         started_on: Actief vanaf
         ended_on: Einddatum
+      match:
+        opponent: Tegenstander
+        home_match: Thuiswedstrijd
+        started_at: Datum
+        start_time: Aanvang
+        body: Programma/strategie
+        remark: Opmerkingen
 
   form:
     an_error:

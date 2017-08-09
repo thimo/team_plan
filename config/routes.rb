@@ -39,6 +39,9 @@ Rails.application.routes.draw do
           resources :trainings, shallow: true do
             resources :presences
           end
+          resources :matches, shallow: true do
+            resources :presences
+          end
         end
       end
     end

@@ -1,0 +1,16 @@
+- match = object
+- date = match.started_at
+
+tr.clickable[class="table-success #{'table-info' if date == Time.zone.today} #{'table-active' if date < Time.zone.today}"]
+  td.schedule-date
+    .weekday.color-blue-grey
+      = I18n.l(date, format: :weekday).upcase
+    .date
+      = I18n.l(date, format: :date_short)
+  td
+    .strong
+      = link_to match
+        = match_title(match)
+    .color-blue-grey
+      | #{I18n.l match.started_at, format: :time_short} uur
+  td.w-1.nowrap.text-right
