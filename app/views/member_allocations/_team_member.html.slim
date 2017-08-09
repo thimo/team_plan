@@ -8,9 +8,6 @@ tr
       - if policy(team_member).show_status?
         div
           = team_member.status_to_label.html_safe
-          / - if policy(team_member).activate?
-          /   = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
-          /     i.fa.fa-check.p-1.pl-2
 
   = render "member_allocations/member", member: member
     

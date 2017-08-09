@@ -20,8 +20,6 @@ section.box-typical
         - @members.each do |member|
           tr
             td
-              = link_to member.name, [member]
-              .color-blue-grey.small
-                = l member.born_on, format: :long unless member.born_on.nil?
+              = render 'members/member', member: member
             td 
               = member.email

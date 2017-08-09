@@ -43,11 +43,7 @@
 
             tr
               td.member-name[class="#{'line-through' if evaluation.team_member.inactive_for?(@team_evaluation)}", rowspan="2"]
-                - member = evaluation.team_member.member
-                = link_to member.name, member
-                .color-blue-grey-lighter.small
-                  => l member.born_on, format: :long unless member.born_on.nil?
-                  = "(#{member.gender})"
+                = render evaluation.team_member.member
               
               = render "player_evaluations/td_columns", evaluation: evaluation
               

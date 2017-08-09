@@ -17,9 +17,7 @@
           - @import_result[:created].each do |member|
             tr
               td
-                = link_to member.name, [member]
-                .color-blue-grey.small
-                  = l member.born_on, format: :long unless member.born_on.nil?
+                = render member
               td 
                 = member.email
                 
@@ -39,9 +37,7 @@
           - @import_result[:activated].each do |member|
             tr
               td
-                = link_to member.name, [member]
-                .color-blue-grey.small
-                  = l member.born_on, format: :long unless member.born_on.nil?
+                = render member
               td 
                 = member.email
                 
@@ -62,8 +58,6 @@
           - @cleanup_result[:deregistered].each do |member|
             tr
               td
-                = link_to member.name, [member]
-                .color-blue-grey.small
-                  = l member.born_on, format: :long unless member.born_on.nil?
+                = render member
               td 
                 = member.email
