@@ -48,7 +48,7 @@ class TrainingsController < ApplicationController
 
     def create_training
       @training = if action_name == 'new'
-                    @team.trainings.new
+                    @team.trainings.new(started_at: Time.zone.now.change(hour: 19), ended_at: Time.zone.now.change(hour: 20))
                   else
                     Training.new(training_params.merge(user_modified: true))
                   end

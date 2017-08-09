@@ -4,10 +4,9 @@
     div
       = error
   
-  / - if @training.training_schedule.nil?
   = render 'input/datepicker', f: f, field: :started_at
-  = f.input :start_time, as: :time, minute_step: 5, default: Time.zone.parse('19:00'), wrapper: :time
-  = f.input :end_time, as: :time, minute_step: 5, default: Time.zone.parse('20:00'), wrapper: :time
+  = f.input :start_time, as: :time, minute_step: 5, wrapper: :time
+  = f.input :end_time, as: :time, minute_step: 5, wrapper: :time
 
   = render 'input/trix', f: f, field: :body, autofocus: true
   = f.input :remark
