@@ -2,6 +2,9 @@ class Match < ApplicationRecord
   include Activatable
   include Presentable
 
+  PLAYER_COUNT = [6, 7, 8, 9, 11]
+  MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45]
+
   belongs_to :team
 
   attr_accessor :start_time

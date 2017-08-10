@@ -3,8 +3,8 @@
   = f.input :name, autofocus: true
   = f.input :year_of_birth_from, html5: true
   = f.input :year_of_birth_to, html5: true
-  = f.input :players_per_team, as: :select, collection: [6,7,8,9,11], prompt: "-- Selecteer het standaard aantal veldspelers"
-  = f.input :minutes_per_half, as: :select, collection: [20,25,30,35,40,45], prompt: "-- Selecteer het aantal speelminuten per wedstrijdhelft"
+  = f.input :players_per_team, as: :select, collection: Match::PLAYER_COUNT, prompt: "-- Selecteer het standaard aantal veldspelers"
+  = f.input :minutes_per_half, as: :select, collection: Match::MINUTES_PER_HALF, prompt: "-- Selecteer het aantal speelminuten per wedstrijdhelft"
   
   .form-group.row class="#{'has-error' if has_error(@age_group, :gender)}"
     .col-form-legend.col-sm-3
