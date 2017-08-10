@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809152944) do
+ActiveRecord::Schema.define(version: 20170810114525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170809152944) do
     t.integer "status", default: 0
     t.date "started_on"
     t.date "ended_on"
+    t.integer "players_per_team"
+    t.integer "minutes_per_half"
     t.index ["season_id"], name: "index_age_groups_on_season_id"
   end
 
@@ -311,6 +313,8 @@ ActiveRecord::Schema.define(version: 20170809152944) do
     t.date "ended_on"
     t.string "division"
     t.text "remark"
+    t.integer "players_per_team"
+    t.integer "minutes_per_half"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
   end
 

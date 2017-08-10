@@ -1,0 +1,25 @@
+.col-sm-6
+  table.table.table-sm.tr-links
+    thead
+      tr
+        td.strong #{title ||= 'Leeftijdsgroepen'}
+        td
+        td
+    tbody
+      - age_groups.each do |age_group|
+        tr
+          td
+            = link_to age_group.name, age_group
+            .color-blue-grey.small
+              - if age_group.players_per_team.present?
+                = "#{age_group.players_per_team} tegen #{age_group.players_per_team}"
+              - if age_group.minutes_per_half.present?
+                = ", 2x#{age_group.minutes_per_half} min"
+          td.text-center
+            => year_of_birth_range(age_group)
+          td.text-right
+            - if policy(age_group).show_status?
+              => age_group.status_to_label.html_safe
+            - if (size = policy_scope(age_group.teams).size) > 0
+              .label.label-one-number>
+                = "#{size}"
