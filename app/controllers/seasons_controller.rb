@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   before_action :create_season, only: [:new, :create]
-  before_action :set_season, only: [:show, :edit, :update, :destroy]
+  before_action :set_season, only: [:show, :edit, :update, :destroy, :inherit_age_groups]
   before_action :add_breadcrumbs
 
   def index
@@ -39,7 +39,14 @@ class SeasonsController < ApplicationController
 
   def destroy
     @season.destroy
-    redirect_to seasons_path, notice: 'Seizoen is verwijderd.'
+    redirect_to root_path, notice: 'Seizoen is verwijderd.'
+  end
+
+  def inherit_age_groups
+    @season.inherit_age_groups
+
+    flash[:success] = "Leeftijdsgroepen zijn overgenomen van #{Season.active.first.name}"
+    redirect_to @season
   end
 
   private
