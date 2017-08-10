@@ -13,7 +13,7 @@ section.tabs-section
       li.nav-item
         a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
           span.nav-link-in
-            | Programma 
+            | Wedstrijd 
       - if @presences.any?
         li.nav-item
           a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
@@ -21,12 +21,16 @@ section.tabs-section
               | Aanwezig 
               span.label.label-pill.label-success[id="presence-count"]
                 = @presences.present.size
+
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
       .card.float-right
         .card-block
           .strong #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
-          / div #{I18n.l @match.started_at, format: :} uur
+      - if @players.present?
+        - @players.each do |player|
+          div
+            = render player.member
 
       - if @match.body.present?
         = @match.body.html_safe

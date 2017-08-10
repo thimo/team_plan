@@ -8,6 +8,7 @@ class MatchesController < ApplicationController
 
   def show
     @presences = policy_scope(@match.find_or_create_presences.asc)
+    @players = @presences.present
   end
 
   def new
