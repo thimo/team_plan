@@ -104,8 +104,17 @@
     .site-header-content-in {
       margin-left: 290px;
     }
+
+    .site-header-collapsed {
+      margin-right: -70px;
+
+      .site-header-collapsed-in {
+        margin-right: 70px;
+      }
+    }
   }
 }
+
 @media (max-width: 544px) {
   .site-header {
     .site-header-content {
