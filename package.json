@@ -32,6 +32,7 @@
     "js-yaml": "^3.9.0",
     "node-sass": "^4.5.3",
     "notie": "^3.9.5",
+    "popper.js": "^1.11.1",
     "postcss-loader": "^2.0.6",
     "postcss-smart-import": "^0.7.5",
     "precss": "^2.0.0",
@@ -42,7 +43,6 @@
     "select2": "^4.0.3",
     "selectize": "^0.12.4",
     "style-loader": "^0.18.2",
-    "tether": "^1.4.0",
     "webpack-manifest-plugin": "^1.1.2",
     "webpacker-react": "^0.2.1"
   },

@@ -3573,6 +3573,10 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+popper.js@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.11.1.tgz#f5aca9a73bca1ce1fdbd9be8b1ba68677cbdd8e0"
+
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
@@ -4978,10 +4982,6 @@ tar@^2.0.0, tar@^2.2.1:
 tcomb@^2.5.1:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/tcomb/-/tcomb-2.7.0.tgz#10d62958041669a5d53567b9a4ee8cde22b1c2b0"
-
-tether@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.0.tgz#0f9fa171f75bf58485d8149e94799d7ae74d1c1a"
 
 thunky@^0.1.0:
   version "0.1.0"

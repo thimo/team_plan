@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery.min.js
-//= require tether/dist/js/tether.min.js
+//= require popper.js/dist/umd/popper.min.js
 //= require bootstrap/dist/js/bootstrap.min.js
 //= require select2/dist/js/select2.min.js
 //= require autosize/dist/autosize.min.js
