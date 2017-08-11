@@ -30,12 +30,11 @@ h3 Contactgegevens
     div.mt-2
       - if member.user.present?
         .color-blue-grey
-          | Heeft toegang tot TeamPlan
-        = link_to "Nieuw wachtwoord versturen", resend_password_member_path(member), method: :post, class: "btn btn-sm", data: { confirm: 'Let op: het oude wachtwoord van de gebruiker is hierna niet meer te gebruiken. Doorgaan?' }
+          i Heeft toegang tot TeamPlan
       - else 
         .color-blue-grey
-          | Heeft geen toegang tot TeamPlan
-        = link_to "Login aanmaken en versturen", create_login_member_path(member), method: :post, class: "btn btn-sm"
+          i Heeft geen toegang tot TeamPlan
+        / = link_to "Login aanmaken en versturen", create_login_member_path(member), method: :post, class: "btn btn-sm"
           
   div.pt-4
   - unless member.person_type.blank?

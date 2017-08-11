@@ -2,7 +2,17 @@
 
 - content_for :action_buttons
   .btn-toolbar
-    .btn-group
+    .btn-group.ml-1
+      - if @member.user.present?
+        = link_to resend_password_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
+          i.fa.fa-lock.pr-2
+          | Nieuw wachtwoord
+      - else 
+        = link_to create_login_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt loging gegevens via e-mail. Doorgaan?" }
+          i.fa.fa-user.pr-2
+          | Login
+
+    .btn-group.ml-1
       - if policy(Injury.new(member: @member)).create? && policy(@member).show_injuries?
         = link_to new_member_injury_path(@member), title: "Blessure toevoegen", class: "btn btn-secondary"
           i.fa.fa-medkit
@@ -14,7 +24,7 @@
 .row
   .col-xl-6
     .box-typical.box-typical-padding
-      = render "shared/member", member: @member
+      = render "show_member", member: @member
   
   .col-xl-6
     - if policy(@member).show_comments?
