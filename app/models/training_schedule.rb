@@ -22,7 +22,9 @@ class TrainingSchedule < ApplicationRecord
     trainings.from_now.not_modified.destroy_all
 
     # Create new trainings
-    return unless active?
+
+    # Don't create trainings if training schedule was archived or if season has no end date
+    return if !active? || team.age_group.season.ended_on.nil?
 
     training_day = next_training_day
     while training_day <= team.age_group.season.ended_on

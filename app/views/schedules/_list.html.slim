@@ -25,3 +25,8 @@ section.box-typical.schedule-list
         tbody
           - schedules.each do |schedule|
             = render "#{schedule.class.name.underscore.pluralize}/schedule_item", object: schedule
+      - else 
+        tbody
+          tr
+            td
+              i Geen kalenderitems gevonden in deze periode
