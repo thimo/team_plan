@@ -37,7 +37,7 @@ class Admin::VersionUpdatesController < AdminController
 
     def create_version_update
       @version_update = if action_name == 'new'
-                          VersionUpdate.new(released_at: Date.today)
+                          VersionUpdate.new(released_at: Time.zone.today)
                         else
                           VersionUpdate.new(version_update_params)
                         end
@@ -54,7 +54,7 @@ class Admin::VersionUpdatesController < AdminController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Versies', admin_version_updates_path
+      add_breadcrumb 'Versie updates', admin_version_updates_path
       unless @version_update.nil?
         if @version_update.new_record?
           add_breadcrumb 'Nieuw'

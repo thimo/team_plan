@@ -47,6 +47,10 @@ class TeamPolicy < ApplicationPolicy
     true
   end
 
+  def show_schedules?
+    true
+  end
+
   def show_training_schedules?
     true
   end

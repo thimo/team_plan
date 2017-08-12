@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index
-  before_action :default_breadcrumb #, unless: :devise_controller?
+  before_action :default_breadcrumb
   before_action :set_paper_trail_whodunnit
 
   # Globally rescue Authorization Errors in controller.
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     def default_breadcrumb
       unless devise_controller? || self.class == DashboardsController
         add_breadcrumb "Home", :root_path
-        add_breadcrumb "Seizoenen", Season unless self.class.parent == Admin || self.class == StaticPagesController
+        # add_breadcrumb "Seizoenen", Season unless self.class.parent == Admin || self.class == StaticPagesController
       end
     end
 

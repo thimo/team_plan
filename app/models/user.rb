@@ -64,19 +64,29 @@ class User < ApplicationRecord
   end
 
   def is_team_member_for?(record)
+    team_id = 0
+
     case [record.class]
     when [Member]
       # Find overlap in teams between current user and given member
       team_members = record.team_members
       team_members = team_members.active_or_archived if member?
-      team_ids = team_members.pluck(:team_id).uniq
-      return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
+      team_id = team_members.pluck(:team_id).uniq
     when [Team]
-      team_ids = record.id
-      return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
-    else
-      false
+      team_id = record.id
+    when [TeamEvaluation]
+      team_id = record.team_id
+    when [PlayerEvaluation]
+      team_id = record.team_evaluation.team_id
+    when [Note]
+      team_id = record.team_id
+    when [TrainingSchedule]
+      team_id = record.team_id
+    when [Training]
+      team_id = record.training_schedule.team_id
     end
+
+    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).size > 0
   end
 
   def is_team_staff_for?(record)
@@ -95,6 +105,12 @@ class User < ApplicationRecord
       team_id = record.team_id
     when [PlayerEvaluation]
       team_id = record.team_evaluation.team_id
+    when [Note]
+      team_id = record.team_id
+    when [TrainingSchedule]
+      team_id = record.team_id
+    when [Training]
+      team_id = record.training_schedule.team_id
     end
 
     return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).where.not(team_members: {role: TeamMember.roles[:player]}).size > 0

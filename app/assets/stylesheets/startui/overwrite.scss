@@ -56,6 +56,7 @@
   }
 }
 // .sign-avatar.sign-logo
+
 .sign-box {
   max-width: 420px;
 
@@ -153,7 +154,60 @@ th {
   }
 }
 
-.checkbox, .radio, .checkbox-slide, .checkbox-toggle, .checkbox-bird, .checkbox-detailed {
-  margin-bottom: .5rem;
-  margin-top: .5rem;
+.checkbox,
+.checkbox-bird,
+.checkbox-detailed,
+.checkbox-slide,
+.checkbox-toggle,
+.radio {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.form-inline {
+  .form-check-label {
+    padding-left: 24px;
+    padding-right: 20px;
+  }
+}
+
+trix-toolbar {
+  .button_group {
+    border-color: #d6e2e8;
+
+    button:not(:first-child),
+    input[type=button]:not(:first-child) {
+      border-color: #d6e2e8;
+    }
+
+    button,
+    input[type=button] {
+      border-bottom: none;
+    }
+  }
+}
+
+.tabs-section-nav {
+  &.tabs-width-relative {
+    border-top: none;
+
+    ul.nav {
+      display: block;
+    }
+
+    li.nav-item {
+      display: inline-block;
+      border-top: solid 1px #d8e2e7;
+    }
+
+    .nav-link-in {
+      padding: 10px 24px;
+    }
+  }
+}
+
+.table a,
+.bootstrap-table .table a,
+.fixed-table-body .table a {
+  top: inherit;
 }

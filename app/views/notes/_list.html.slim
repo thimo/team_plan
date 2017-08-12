@@ -2,12 +2,11 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
-          | Notities
+        h4 Notities
         small
           | Zoals gespreksverslagen en teambesprekingen
       - if policy(Note.new(team: team)).create?
-        .tbl-cell.tbl-cell-action-bordered
+        .tbl-cell.tbl-cell-actions
           = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "action-btn"
             i.fa.fa-file-text-o
           
@@ -22,7 +21,7 @@ section.box-typical
                   = note.title
                 = " - #{note.member.name}" if note.member.present?
                 .color-blue-grey-lighter.small
-                  = l note.updated_at.to_date, format: :long
+                  = l note.updated_at, format: :long
                   = ", #{note.user.name}"
                 
 

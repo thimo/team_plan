@@ -26,8 +26,7 @@
       header.box-typical-header
         .tbl-row
           .tbl-cell.tbl-cell-title
-            .strong
-              | Teamgenoten
+            h4 Teamgenoten
           - if policy(@team).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
               a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
@@ -133,6 +132,9 @@
               
             
   .col-xl-6
+    - if policy(@team).show_schedules?
+      = render "schedules/list", schedules: @schedules
+      
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       

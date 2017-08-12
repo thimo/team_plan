@@ -23,9 +23,9 @@ class Member < ApplicationRecord
   has_paper_trail
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
-  scope :from_year, -> (year) { where("born_on >= ?", Date.new(year).beginning_of_year) }
-  scope :to_year, -> (year) { where("born_on <= ?", Date.new(year).end_of_year) }
-  scope :sportlink_active, -> { where(deregistered_at: nil).or(where("deregistered_at > ?", Date.today)) }
+  scope :from_year, -> (year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year) }
+  scope :to_year, -> (year) { where("born_on <= ?", Time.zone.local(year).end_of_year) }
+  scope :sportlink_active, -> { where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today)) }
   scope :sportlink_player, -> { where("sport_category <> ''").or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)) }
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
@@ -39,7 +39,7 @@ class Member < ApplicationRecord
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
-  scope :recent_members, -> (days_ago) { where("registered_at >= ?", days_ago.days.ago.to_date).order(registered_at: :desc) }
+  scope :recent_members, -> (days_ago) { where("registered_at >= ?", days_ago.days.ago.beginning_of_day).order(registered_at: :desc) }
   scope :injured, -> { where(injured: true) }
 
   pg_search_scope :search_by_name,
@@ -145,7 +145,7 @@ class Member < ApplicationRecord
       end
       result[:activated] << member if old_deregistered_at.present? && member.deregistered_at.nil?
 
-      member.imported_at = DateTime.now
+      member.imported_at = Time.zone.now
       member.save!
     end
 

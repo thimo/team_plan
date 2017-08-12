@@ -12,6 +12,7 @@ class Team < ApplicationRecord
   has_many :team_evaluations, dependent: :destroy
   has_many :todos, as: :todoable, dependent: :destroy
   has_many :training_schedules, dependent: :destroy
+  has_many :trainings, dependent: :destroy
   has_paper_trail
 
   validates_presence_of :name, :age_group

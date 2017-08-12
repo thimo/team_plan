@@ -10,10 +10,10 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
+        h4
           = title
       - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
-        .tbl-cell.tbl-cell-action-bordered
+        .tbl-cell.tbl-cell-actions
           = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
             i.fa.fa-list-ol
           
@@ -43,11 +43,11 @@ section.box-typical
                 - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
                 = link_to url
                   - if team_evaluation.finished_at.present?
-                    = l team_evaluation.finished_at.to_date, format: :long
+                    = l team_evaluation.finished_at, format: :date_long
                   - elsif team_evaluation.invited_at.present?
-                    = l team_evaluation.invited_at.to_date, format: :long
+                    = l team_evaluation.invited_at, format: :date_long
                   - else 
-                    = l team_evaluation.created_at.to_date, format: :long
+                    = l team_evaluation.created_at, format: :date_long
               - unless hide_status
                 td 
                   = team_evaluation.status
@@ -56,7 +56,7 @@ section.box-typical
                   = team_evaluation.finished_by.name
               - if show_last_modified
                 td.hidden-xs-down
-                  = l team_evaluation.last_modified.to_date, format: :long
+                  = l team_evaluation.last_modified, format: :date_long
               - if show_progress
                 td 
                   .progress

@@ -1,0 +1,5 @@
+.row.form-group[class="#{row_class ||= ''} #{'has-error' if has_error(f.object, field)}"]
+  .col-form-legend.col-sm-3
+    = f.label field unless hide_label ||= false
+  .col-sm-9
+    = yield

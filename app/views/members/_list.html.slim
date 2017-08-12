@@ -5,7 +5,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
+        h4
           = title
           
   .box-typical-body
@@ -24,9 +24,9 @@ section.box-typical
               td 
                 = link_to member.name, member
               td
-                = l member.born_on.to_date, format: :long
+                = l member.born_on, format: :long
               td
-                = l member.registered_at.to_date, format: :long
+                = l member.registered_at, format: :long
               td
                 - if member.reactivated?
                   i.fa.fa-recycle.pl-2.color-green[title="Opnieuw geactiveerd" data-placement="left"] 

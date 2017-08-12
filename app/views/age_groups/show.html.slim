@@ -25,8 +25,7 @@
       header.box-typical-header
         .tbl-row
           .tbl-cell.tbl-cell-title
-            .strong
-              | Teams
+            h4 Teams
           - if policy(@age_group).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_action_path(@age_group, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true

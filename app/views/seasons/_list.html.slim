@@ -1,0 +1,36 @@
+.row
+  .col-xl-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h4 Seizoenen
+          - if policy(Season).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
+                i.fa.fa-file-o
+      .box-typical-body
+        table.table.table-sm.tr-links
+          thead
+            tr
+              th 
+              th
+                | Van
+              th 
+                | Tot
+              th
+          tbody
+            - @seasons.each do |season|
+              tr
+                td
+                  = link_to season.name, season, class: "#{"font-weight-bold" if season.active?} #{"font-italic" if season.draft?}"
+                td
+                  = I18n.l season.started_on, format: :long if season.started_on.present?
+                td 
+                  = I18n.l season.ended_on, format: :long if season.ended_on.present?
+                td.text-right
+                  - if policy(season).show_status?
+                    => season.status_to_label.html_safe
+                  - if (size = policy_scope(season.age_groups).size) > 0
+                    .label.label-one-number>
+                      = "#{size}"

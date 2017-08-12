@@ -10,6 +10,7 @@ class SeasonsController < ApplicationController
   def show
     @age_groups_male = policy_scope(@season.age_groups).male.asc
     @age_groups_female = policy_scope(@season.age_groups).female.asc
+    @seasons = policy_scope(Season).all.desc
   end
 
   def new; end
@@ -44,8 +45,11 @@ class SeasonsController < ApplicationController
   private
 
     def create_season
+      start_year = Time.zone.today.year + (Time.zone.today.month >= 7 ? 1 : 0)
+      started_on = Time.zone.local(start_year, 7, 1)
+      ended_on = Time.zone.local(start_year + 1, 6, 30)
       @season = if action_name == 'new'
-                  Season.new
+                  Season.new(started_on: started_on, ended_on: ended_on)
                 else
                   Season.new(permitted_attributes(Season.new))
                 end
@@ -61,7 +65,7 @@ class SeasonsController < ApplicationController
       # Find first draft season
       @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
       # Create a new draft season in the database
-      @season = Season.create(name: "#{Time.current.year} / #{Time.current.year + 1}") if @season.nil?
+      @season = Season.create(name: "#{Time.zone.today.year} / #{Time.zone.today.year + 1}") if @season.nil?
 
       authorize @season
     end

@@ -1,12 +1,12 @@
 = simple_form_for [@age_group, @team], {wrapper: :horizontal_form} do |f|
   = f.error_notification
 
-  = f.input :name
+  = f.input :name, autofocus: true
   = f.input :division, as: :select, collection: Team::DIVISION_OPTIONS
   = f.input :remark
   
   - if policy(@team).set_status?
-    = render 'shared/input/enum_radio_buttons', f: f, field: :status
+    = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :status}, layout: 'input/col_3_9_wrapper'
   
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team.new_record? ? @age_group : @team, class: 'btn btn-secondary-outline btn-inline'

@@ -12,8 +12,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
-          | Leeftijdsgroepen
+        h4 Leeftijdsgroepen
       - if policy(@season).bulk_email?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_season_team_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
@@ -75,3 +74,5 @@ section.box-typical
                   - if (size = policy_scope(age_group.teams).size) > 0
                     .label.label-one-number>
                       = "#{size}"
+
+= render 'seasons/list'

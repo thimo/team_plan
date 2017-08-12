@@ -10,7 +10,7 @@
     = f.input :member_id, collection: Member.sportlink_active.asc, value_method: :id, label_method: :name_and_born_on, id: :team_member_member_id
   
   - if policy(@team_member).set_role?
-    = render 'shared/input/enum_radio_buttons', f: f, field: :role
+    = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :role}, layout: 'input/col_3_9_wrapper'
 
   - if @team_member.persisted?
     - if @team_member.player?

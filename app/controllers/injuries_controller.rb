@@ -44,7 +44,7 @@ class InjuriesController < ApplicationController
 
     def create_injury
       @injury = if action_name == 'new'
-                  @member.injuries.new(started_on: Date.today)
+                  @member.injuries.new(started_on: Time.zone.today)
                 else
                   Injury.new(injury_params.merge(user: current_user))
                 end

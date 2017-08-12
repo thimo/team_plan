@@ -15,14 +15,6 @@
     left: 6px;
   }
 }
-@-o-keyframes writing {
-  0% {
-    left: 0px;
-  }
-  100% {
-    left: 6px;
-  }
-}
 @keyframes writing {
   0% {
     left: 0px;
@@ -89,7 +81,6 @@
   line-height: 20px;
   cursor: default;
   -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   max-width: 100%;
   min-height: 52px;
@@ -125,8 +116,7 @@
   vertical-align: top;
   overflow: hidden;
   white-space: nowrap;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   max-width: 100%;
 }
 .chat-list-item .chat-list-item-date {
@@ -144,8 +134,7 @@
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .chat-list-item .chat-list-item-txt.writing {
   color: #919fa9;
@@ -162,13 +151,10 @@
   left: 0;
   top: 0;
   -webkit-animation-name: writing;
-       -o-animation-name: writing;
           animation-name: writing;
   -webkit-animation-duration: 1.2s;
-       -o-animation-duration: 1.2s;
           animation-duration: 1.2s;
   -webkit-animation-iteration-count: infinite;
-       -o-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
 }
 .chat-list-item .chat-list-item-count,

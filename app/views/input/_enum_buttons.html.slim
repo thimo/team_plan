@@ -1,0 +1,9 @@
+.btn-group[data-toggle="buttons"]
+  - f.object.class.send(field.to_s.pluralize).each do |enum_label, enum_index| 
+    / For unique ID's, even if multiple forms with same field exist
+    - id = "#{f.object.class.name.downcase}_#{f.object.id}_#{field.to_s}_#{enum_label}"
+    = f.label "#{field.to_s}_#{enum_label}", class: "btn #{f.object.send("#{enum_label}?") ? 'btn-default active' : 'btn-default-outline'}", for: id
+      = f.radio_button field, enum_label, id: id
+      = f.object.class.send("#{field.to_s.pluralize}_i18n")[enum_label]
+      
+= errors_for(f.object, field)

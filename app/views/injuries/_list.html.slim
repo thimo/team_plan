@@ -2,8 +2,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        .strong
-          | Blessures
+        h4 Blessures
       - if policy(Injury.new(member: member)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "action-btn"
@@ -18,9 +17,9 @@ section.box-typical
               td 
                 = link_to injury
                   = injury.title
-                |  - #{l injury.started_on.to_date, format: :long}
+                |  - #{l injury.started_on, format: :long}
                 - if injury.ended_on.present?
-                  |  - #{l injury.ended_on.to_date, format: :long}
+                  |  - #{l injury.ended_on, format: :long}
                 - else 
                   |  - ...
                 

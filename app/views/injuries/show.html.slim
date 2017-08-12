@@ -14,17 +14,17 @@
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        span.strong
+        h4
           = @injury.title
-        |  - #{l @injury.started_on.to_date, format: :long}
+        | #{l @injury.started_on, format: :long}
         - if @injury.ended_on.present?
-          |  - #{l @injury.ended_on.to_date, format: :long}
+          |  - #{l @injury.ended_on, format: :long}
         - else 
           |  - ...
               
         .color-blue-grey-lighter.small
           = "#{@injury.user.name}"
-          = ". Bijgewerkt op #{l @injury.updated_at.to_date, format: :long}" if @injury.created_at.to_date != @injury.updated_at.to_date
+          = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
           
   .box-typical-body
     .comment-row-item.no-photo

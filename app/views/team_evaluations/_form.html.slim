@@ -9,12 +9,12 @@
     header.box-typical-header
       .tbl-row
         .tbl-cell.tbl-cell-title
-          .strong
+          h4 
             | Teamevaluatie #{@team_evaluation.team.name}
             - if @team_evaluation.team.division.present?
               small.pl-1 #{@team_evaluation.team.division}
             div.color-blue-grey-lighter.small
-              = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record?
+              = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
               |  - 
               = @team_evaluation.status
         .tbl-cell.text-right
@@ -69,7 +69,7 @@
                 
             tr
               td.b-t-0[colspan="12" style="padding-left: 2px;"]
-                = pe.text_area :remark, class: "form-control", placeholder: PlayerEvaluation.human_attribute_name(:remark)
+                = pe.text_area :remark, class: "form-control", placeholder: PlayerEvaluation.human_attribute_name(:remark), rows: 1
 
     footer.box-typical-footer
       - if policy(@team_evaluation).update?

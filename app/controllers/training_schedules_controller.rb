@@ -6,31 +6,29 @@ class TrainingSchedulesController < ApplicationController
 
   # def show; end
 
-  def new
-  end
+  def new; end
 
   def create
     if @training_schedule.save
-      redirect_to @training_schedule.team, notice: "Training is toegevoegd."
+      redirect_to @training_schedule.team, notice: "Reguliere training is toegevoegd."
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @training_schedule.update_attributes(training_schedule_params)
-      redirect_to @training_schedule.team, notice: "Training is aangepast."
+      redirect_to @training_schedule.team, notice: "Reguliere training is aangepast."
     else
       render 'edit'
     end
   end
 
   def destroy
-    redirect_to @training_schedule.team, notice: "Training is verwijderd."
-    @training_schedule.destroy
+    redirect_to @training_schedule.team, notice: "Reguliere training is verwijderd."
+    @training_schedule.deactivate
   end
 
   private
@@ -45,7 +43,7 @@ class TrainingSchedulesController < ApplicationController
 
     def create_training_schedule
       @training_schedule = if action_name == 'new'
-                @team.training_schedules.new
+                @team.training_schedules.new(start_time: Time.zone.local(2000, 1, 1, 19, 0), end_time: Time.zone.local(2000, 1, 1, 20, 0))
               else
                 TrainingSchedule.new(training_schedule_params)
               end
@@ -60,7 +58,7 @@ class TrainingSchedulesController < ApplicationController
     end
 
     def training_schedule_params
-      params.require(:training_schedule).permit(:day, :present_time, :start_time, :end_time, :soccer_field_id, :field_part, :cios, team_member_ids: [])
+      params.require(:training_schedule).permit(:day, :present_minutes, :start_time, :end_time, :soccer_field_id, :field_part, :cios, team_member_ids: [])
     end
 
     def add_breadcrumbs

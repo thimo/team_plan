@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722184614) do
+ActiveRecord::Schema.define(version: 20170804110413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,20 @@ ActiveRecord::Schema.define(version: 20170722184614) do
     t.index ["team_member_id"], name: "index_player_evaluations_on_team_member_id"
   end
 
+  create_table "presences", force: :cascade do |t|
+    t.string "presentable_type"
+    t.bigint "presentable_id"
+    t.bigint "member_id"
+    t.boolean "present", default: true
+    t.integer "on_time", default: 0
+    t.integer "signed_off", default: 0
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_presences_on_member_id"
+    t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
+  end
+
   create_table "seasons", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -293,15 +307,14 @@ ActiveRecord::Schema.define(version: 20170722184614) do
     t.bigint "todoable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "starts_on"
-    t.date "ends_on"
+    t.date "started_on"
+    t.date "ended_on"
     t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable_type_and_todoable_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
   create_table "training_schedules", force: :cascade do |t|
     t.integer "day"
-    t.time "present_time"
     t.time "start_time"
     t.time "end_time"
     t.integer "field_part"
@@ -310,8 +323,25 @@ ActiveRecord::Schema.define(version: 20170722184614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "cios", default: false
+    t.boolean "active", default: true
+    t.integer "present_minutes", default: 0
     t.index ["soccer_field_id"], name: "index_training_schedules_on_soccer_field_id"
     t.index ["team_id"], name: "index_training_schedules_on_team_id"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.bigint "training_schedule_id"
+    t.boolean "active", default: true
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.boolean "user_modified", default: false
+    t.text "body"
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_trainings_on_team_id"
+    t.index ["training_schedule_id"], name: "index_trainings_on_training_schedule_id"
   end
 
   create_table "user_settings", force: :cascade do |t|
@@ -383,6 +413,7 @@ ActiveRecord::Schema.define(version: 20170722184614) do
   add_foreign_key "notes", "users"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
+  add_foreign_key "presences", "members"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"
@@ -392,5 +423,7 @@ ActiveRecord::Schema.define(version: 20170722184614) do
   add_foreign_key "todos", "users"
   add_foreign_key "training_schedules", "soccer_fields"
   add_foreign_key "training_schedules", "teams"
+  add_foreign_key "trainings", "teams"
+  add_foreign_key "trainings", "training_schedules"
   add_foreign_key "user_settings", "users"
 end

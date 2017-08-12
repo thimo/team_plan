@@ -4,7 +4,7 @@ class Season < ApplicationRecord
   has_many :age_groups, dependent: :destroy
   has_paper_trail
 
-  validates_presence_of :name, :status
+  validates_presence_of :name, :status, :started_on, :ended_on
 
   scope :asc, -> { order(name: :asc) }
   scope :desc, -> { order(name: :desc) }

@@ -13,9 +13,9 @@
   .chat-message-content
     .chat-message-txt.color-blue-grey
       = link_to todo.todoable.name, todo.todoable, class: 'pr-2' if todo.todoable.present?
-      - if todo.starts_on.present?
+      - if todo.started_on.present?
         span.small.pr-2
-          | #{todo.defered? ? 'Vanaf' : 'Sinds'}: #{todo.starts_on}
-      - if todo.ends_on.present? && !todo.defered?
+          | #{todo.defered? ? 'Vanaf' : 'Sinds'}: #{todo.started_on}
+      - if todo.ended_on.present? && !todo.defered?
         span.small.pr-2
-          | Einddatum: #{todo.ends_on}
+          | Einddatum: #{todo.ended_on}
