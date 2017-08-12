@@ -135,6 +135,10 @@ class User < ApplicationRecord
     @export_columns ||= (columns = settings.export_columns).present? ? columns : Member::DEFAULT_COLUMNS
   end
 
+  def remember_me
+    true
+  end
+  
   private
 
     def team_id_for(record)
@@ -156,5 +160,5 @@ class User < ApplicationRecord
 
       team_id
     end
-    
+
 end
