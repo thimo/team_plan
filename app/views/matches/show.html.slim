@@ -25,7 +25,7 @@ section.tabs-section
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
       .card.float-right
-        .card-block
+        .card-body
           .strong #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
       - if @players.present?
         - @players.each do |player|

@@ -24,7 +24,7 @@ section.tabs-section
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
       .card.float-right
-        .card-block
+        .card-body
           .strong #{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}
           div #{starts_ends(@training)} uur
           - if (ts = @training.training_schedule).present?
