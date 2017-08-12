@@ -27,9 +27,9 @@ section.box-typical
               td
                 = ts.day_i18n
                 .color-blue-grey
-                  = I18n.l ts.start_time.localtime, format: :short
+                  = I18n.l ts.start_time.localtime, format: :time_short
                   |  - 
-                  = I18n.l ts.end_time.localtime, format: :short
+                  = I18n.l ts.end_time.localtime, format: :time_short
                 - if TrainingSchedule.present_minutes[ts.present_minutes] > 0
                   .color-blue-grey.small
                     | #{ts.present_minutes_i18n} aanwezig
