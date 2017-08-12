@@ -9,7 +9,16 @@ class AgeGroupsController < ApplicationController
     @open_team_evaluations = TeamEvaluation.open_at_team.by_age_group(@age_group).asc
     @finished_team_evaluations = TeamEvaluation.finished.desc_finished.by_age_group(@age_group)
     @teams = human_sort(policy_scope(@age_group.teams), :name)
-    @todos = Todo.where(todoable_type: Team.name, todoable_id: teams.map(&:id)).or(Todo.where(todoable_type: AgeGroup.name, todoable_id: @age_group.id)).open.asc
+
+    todos = policy_scope(@age_group.todos).open.asc
+    @todos_active = todos.active.to_a
+    @todos_defered = todos.defered.to_a
+    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id)).open.asc
+    @todos_active += todos.active
+    @todos_defered += todos.defered
+    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_age_group(@age_group).map(&:id)).open.asc
+    @todos_active += todos.active
+    @todos_defered += todos.defered
 
     @injureds = policy_scope(Member).by_age_group(@age_group).injured.asc
   end

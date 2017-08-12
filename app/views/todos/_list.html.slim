@@ -11,11 +11,11 @@ section.box-typical
             i.fa.fa-check-square-o
           
   .box-typical-body
-    - if (active_todos = todos.active).present?
-      - active_todos.each do |todo|
+    - if todos_active.present?
+      - todos_active.each do |todo|
         div[id="todo-#{todo.id}"]
           = render 'todos/list_item', todo: todo
-    - if (defered_todos = todos.defered).present?
-      - defered_todos.each do |todo|
+    - if todos_defered.present?
+      - todos_defered.each do |todo|
         div[id="todo-#{todo.id}"]
           = render 'todos/list_item', todo: todo

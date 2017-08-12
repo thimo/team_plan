@@ -87,7 +87,8 @@
                         span.lbl
                           = age_group.name
 
-      = render "todos/list", todos: @todos
+      - if @todos.present?
+        = render "todos/list", todos_active: @todos.active, todos_defered: @todos.defered
 
     .col-sm-6
       - if @open_team_evaluations.present?

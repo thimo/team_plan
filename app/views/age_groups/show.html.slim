@@ -72,5 +72,5 @@
     - if (policy(@age_group).show_injureds? && @injureds.any?)
       = render "injureds/list", injureds: @injureds
       
-    - if policy(@age_group).show_todos? && @todos.present?
-      = render "todos/list", todos: @todos, new_path: new_age_group_todo_path(@age_group)
+    - if policy(@age_group).show_todos? && (@todos_active.present? || @todos_defered.present?)
+      = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_age_group_todo_path(@age_group)
