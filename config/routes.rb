@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :dashboard, only: [:index], controller: :dashboards
     resources :seasons, shallow: true do
+      member do
+        post :inherit_age_groups
+      end
       resources :age_group_bulk_updates, only: [:new, :create]
       resources :download_team_members, only: [:index]
       resources :team_actions, only: [:new, :create]
@@ -37,6 +40,9 @@ Rails.application.routes.draw do
           resources :todos, only: [:new, :create]
           resources :training_schedules
           resources :trainings, shallow: true do
+            resources :presences
+          end
+          resources :matches, shallow: true do
             resources :presences
           end
         end

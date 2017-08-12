@@ -3,6 +3,8 @@
 
   = f.input :name, autofocus: true
   = f.input :division, as: :select, collection: Team::DIVISION_OPTIONS
+  = f.input :players_per_team, as: :select, collection: Match::PLAYER_COUNT, prompt: "-- Selecteer het standaard aantal veldspelers", hint: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.players_per_team})"
+  = f.input :minutes_per_half, as: :select, collection: Match::MINUTES_PER_HALF, prompt: "-- Selecteer het aantal speelminuten per wedstrijdhelft", hint: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.minutes_per_half})"
   = f.input :remark
   
   - if policy(@team).set_status?

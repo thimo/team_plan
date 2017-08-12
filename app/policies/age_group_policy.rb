@@ -64,7 +64,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender]
+    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half]
     attributes << :status if set_status?
     return attributes
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804110413) do
+ActiveRecord::Schema.define(version: 20170810114525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170804110413) do
     t.integer "status", default: 0
     t.date "started_on"
     t.date "ended_on"
+    t.integer "players_per_team"
+    t.integer "minutes_per_half"
     t.index ["season_id"], name: "index_age_groups_on_season_id"
   end
 
@@ -109,6 +111,22 @@ ActiveRecord::Schema.define(version: 20170804110413) do
     t.datetime "updated_at", null: false
     t.index ["logable_type", "logable_id"], name: "index_logs_on_logable_type_and_logable_id"
     t.index ["user_id"], name: "index_logs_on_user_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.boolean "active", default: true
+    t.datetime "started_at"
+    t.boolean "user_modified", default: false
+    t.text "body"
+    t.text "remark"
+    t.bigint "team_id"
+    t.string "opponent"
+    t.boolean "home_match", default: true
+    t.integer "goals_self", default: 0
+    t.integer "goals_opponent", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_matches_on_team_id"
   end
 
   create_table "members", id: :serial, force: :cascade do |t|
@@ -295,6 +313,8 @@ ActiveRecord::Schema.define(version: 20170804110413) do
     t.date "ended_on"
     t.string "division"
     t.text "remark"
+    t.integer "players_per_team"
+    t.integer "minutes_per_half"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
   end
 
@@ -407,6 +427,7 @@ ActiveRecord::Schema.define(version: 20170804110413) do
   add_foreign_key "injuries", "members"
   add_foreign_key "injuries", "users"
   add_foreign_key "logs", "users"
+  add_foreign_key "matches", "teams"
   add_foreign_key "members", "users"
   add_foreign_key "notes", "members"
   add_foreign_key "notes", "teams"

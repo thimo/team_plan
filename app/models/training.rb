@@ -1,9 +1,9 @@
 class Training < ApplicationRecord
   include Activatable
+  include Presentable
 
   belongs_to :team
   belongs_to :training_schedule, optional: true
-  has_many :presences, as: :presentable, dependent: :destroy
 
   attr_accessor :start_time, :end_time
 
@@ -31,13 +31,4 @@ class Training < ApplicationRecord
     self.ended_at = started_at.change(hour: time[4], min: time[5]) unless started_at.nil?
   end
 
-  def find_or_create_presences
-    if presences.empty?
-      team.team_members.player.asc.each do |team_member|
-        presences.create(member: team_member.member)
-      end
-    end
-
-    presences
-  end
 end

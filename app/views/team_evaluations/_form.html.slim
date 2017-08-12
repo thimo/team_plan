@@ -47,10 +47,7 @@
             tr
               td.member-name[class="#{'line-through' if pe.object.team_member.inactive_for?(@team_evaluation)}" rowspan="2"]
                 - member = pe.object.team_member.member
-                = link_to member.name, member, target: "_blank"
-                .color-blue-grey-lighter.small
-                  => l member.born_on, format: :long unless member.born_on.nil?
-                  = "(#{member.gender})"
+                = render member, target: "_blank"
               
               td.field-positions[rowspan="2"]
                 div[class="#{'form-control-error' if pe.error("field_positions").present?}"]

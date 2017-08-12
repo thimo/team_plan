@@ -15,14 +15,12 @@ class SeasonPolicy < ApplicationPolicy
   def update?
     return false if @record.archived?
 
-    # Only by admin
     @user.admin?
   end
 
   def destroy?
     return false if @record.archived? || @record.active?
 
-    # Only by admin
     @user.admin?
   end
 
@@ -38,6 +36,10 @@ class SeasonPolicy < ApplicationPolicy
 
   def bulk_email?
     download_team_members?
+  end
+
+  def inherit_age_groups?
+    update?
   end
 
   def permitted_attributes

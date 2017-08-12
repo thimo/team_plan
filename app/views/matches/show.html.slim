@@ -1,0 +1,48 @@
+- provide(:title, match_title(@match))
+
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group
+      - if policy(@match).update?
+        = link_to edit_match_path(@match), class: "btn btn-secondary", title: "Aanpassen"
+          i.fa.fa-pencil
+
+section.tabs-section
+  .tabs-section-nav.tabs-width-relative
+    ul.nav[role="tablist"]
+      li.nav-item
+        a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
+          span.nav-link-in
+            | Wedstrijd 
+      - if @presences.any?
+        li.nav-item
+          a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+            span.nav-link-in
+              | Aanwezig 
+              span.label.label-pill.label-success[id="presence-count"]
+                = @presences.present.size
+
+  .tab-content
+    #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
+      .card.float-right
+        .card-block
+          .strong #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
+      - if @players.present?
+        - @players.each do |player|
+          div
+            = render player.member
+
+      - if @match.body.present?
+        = @match.body.html_safe
+      - else 
+        i Er is nog geen programma ingevuld
+      
+      - if @match.remark.present?
+        hr
+        strong Opmerkingen
+        = markdown(@match.remark).html_safe
+        
+    - if @presences.any?
+      #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+        - @presences.each do |presence|
+          = render presence

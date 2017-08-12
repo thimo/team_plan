@@ -4,7 +4,7 @@ nl:
       weekday: "%a"
   time:
     formats:
-      short: "%H:%M"
+      time_short: "%k:%M"
       month: "%b"
       weekday: "%a"
       date_time_short: "%-d %b %k:%M"
@@ -31,11 +31,15 @@ nl:
         year_of_birth_to: Jaartal geboorte t/m
         gender: Geslacht
         status: Status
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
       team:
         name: Team
         division: Klasse
         status: Status
         remark: Opmerking/aantekening
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
@@ -115,6 +119,16 @@ nl:
         body: Todo
         started_on: Actief vanaf
         ended_on: Einddatum
+      match:
+        opponent: Tegenstander
+        home_match: Thuiswedstrijd
+        started_at: Datum
+        start_time: Aanvang
+        body: Programma/strategie
+        remark: Opmerkingen
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
+        half_count: Aantal helften
 
   form:
     an_error:

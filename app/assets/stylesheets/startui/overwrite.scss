@@ -87,10 +87,10 @@
 
 .site-header {
   h1 {
-    color: #adb7be;
+    color: #343434;
     float: left;
     font-size: 1.8rem;
-    font-weight: 100;
+    font-weight: 400;
     line-height: 2.5rem;
   }
 
@@ -104,8 +104,17 @@
     .site-header-content-in {
       margin-left: 290px;
     }
+
+    .site-header-collapsed {
+      margin-right: -70px;
+
+      .site-header-collapsed-in {
+        margin-right: 70px;
+      }
+    }
   }
 }
+
 @media (max-width: 544px) {
   .site-header {
     .site-header-content {
@@ -210,4 +219,8 @@ trix-toolbar {
 .bootstrap-table .table a,
 .fixed-table-body .table a {
   top: inherit;
+}
+
+.b, .strong {
+  font-weight: 600;
 }
