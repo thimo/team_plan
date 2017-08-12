@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :load_commentable, only: [:create]
+  before_action :add_breadcrumbs
 
   def create
     @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
@@ -41,5 +42,14 @@ class CommentsController < ApplicationController
 
     def comment_params
       params.require(:comment).permit(:body, :comment_type, :private)
+    end
+
+    def add_breadcrumbs
+      add_breadcrumb @comment.commentable.name, @comment.commentable
+      if @comment.new_record?
+        add_breadcrumb 'Nieuw'
+      else
+        add_breadcrumb "Opmerking"
+      end
     end
 end
