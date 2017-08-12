@@ -196,25 +196,6 @@ trix-toolbar {
   }
 }
 
-.tabs-section-nav {
-  &.tabs-width-relative {
-    border-top: none;
-
-    ul.nav {
-      display: block;
-    }
-
-    li.nav-item {
-      display: inline-block;
-      border-top: solid 1px #d8e2e7;
-    }
-
-    .nav-link-in {
-      padding: 10px 24px;
-    }
-  }
-}
-
 .table a,
 .bootstrap-table .table a,
 .fixed-table-body .table a {

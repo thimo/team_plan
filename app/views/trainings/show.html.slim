@@ -8,19 +8,20 @@
           i.fa.fa-pencil
 
 section.tabs-section
-  .tabs-section-nav.tabs-width-relative
-    ul.nav[role="tablist"]
-      li.nav-item
-        a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
-          span.nav-link-in
-            | Programma 
-      - if @presences.any?
+  .tabs-section-nav
+    .tbl
+      ul.nav[role="tablist"]
         li.nav-item
-          a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+          a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
             span.nav-link-in
-              | Aanwezig 
-              span.label.label-pill.label-success[id="presence-count"]
-                = @presences.present.size
+              | Programma 
+        - if @presences.any?
+          li.nav-item
+            a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+              span.nav-link-in
+                | Aanwezig 
+                span.label.label-pill.label-success[id="presence-count"]
+                  = @presences.present.size
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
       .card.float-right
