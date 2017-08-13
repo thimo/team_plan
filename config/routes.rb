@@ -94,13 +94,14 @@ Rails.application.routes.draw do
       resources :members_import, only: [:new, :create]
       resources :email_logs, only: [:index, :show]
       resources :version_updates
-      resources :settings, 
+      resources :settings,
         :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
       namespace :club_data do
         resources :dashboards
         resources :teams, shallow: true do
           resources :competities
         end
+        resources :teams_import, only: [:new, :create]
       end
       resources :soccer_fields
     end

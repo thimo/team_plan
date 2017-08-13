@@ -34,6 +34,35 @@ ActiveRecord::Schema.define(version: 20170810114525) do
     t.index ["season_id"], name: "index_age_groups_on_season_id"
   end
 
+  create_table "club_data_competities", force: :cascade do |t|
+    t.integer "poulecode", null: false
+    t.string "competitienaam"
+    t.string "klasse"
+    t.string "poule"
+    t.string "klassepoule"
+    t.string "competitiesoort"
+    t.bigint "club_data_team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_data_team_id"], name: "index_club_data_competities_on_club_data_team_id"
+    t.index ["poulecode"], name: "index_club_data_competities_on_poulecode", unique: true
+  end
+
+  create_table "club_data_teams", force: :cascade do |t|
+    t.integer "teamcode", null: false
+    t.string "teamnaam"
+    t.string "spelsoort"
+    t.string "geslacht"
+    t.string "teamsoort"
+    t.string "leeftijdscategorie"
+    t.string "kalespelsoort"
+    t.string "speeldag"
+    t.string "speeldagteam"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
+  end
+
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "body"
     t.integer "user_id"
@@ -315,7 +344,9 @@ ActiveRecord::Schema.define(version: 20170810114525) do
     t.text "remark"
     t.integer "players_per_team"
     t.integer "minutes_per_half"
+    t.bigint "club_data_teams_id"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
+    t.index ["club_data_teams_id"], name: "index_teams_on_club_data_teams_id"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -419,6 +450,7 @@ ActiveRecord::Schema.define(version: 20170810114525) do
   end
 
   add_foreign_key "age_groups", "seasons"
+  add_foreign_key "club_data_competities", "club_data_teams"
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
   add_foreign_key "favorites", "users"
@@ -441,6 +473,7 @@ ActiveRecord::Schema.define(version: 20170810114525) do
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
+  add_foreign_key "teams", "club_data_teams", column: "club_data_teams_id"
   add_foreign_key "todos", "users"
   add_foreign_key "training_schedules", "soccer_fields"
   add_foreign_key "training_schedules", "teams"
