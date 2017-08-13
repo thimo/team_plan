@@ -1,6 +1,6 @@
 module MatchesHelper
   def match_title(match)
-    teams = [match.team.name, match.opponent]
+    teams = ["#{Setting['club.name_short']} #{match.team.name}", match.opponent]
     if match.home_match?
       teams * ' - '
     else
