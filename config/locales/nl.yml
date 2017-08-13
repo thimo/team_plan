@@ -2,13 +2,14 @@ nl:
   date:
     formats:
       weekday: "%a"
+      date_long: "%-d %b %Y"
   time:
     formats:
       time_short: "%k:%M"
       month: "%b"
       weekday: "%a"
       date_time_short: "%-d %b %k:%M"
-      date_long: "%-d %B %Y"
+      date_long: "%-d %b %Y"
       date_short: "%-d %b"
   activerecord:
     attributes:
