@@ -1,4 +1,4 @@
-- provide(:title, "Team #{@team.name}")
+- provide(:title, "#{Setting['club.name_short']} #{@team.name}")
 - provide(:subtitle, "#{@team.division}")
 - provide(:hint, "#{@team.remark}") if @team.remark.present?
 

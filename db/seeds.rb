@@ -20,13 +20,13 @@ end
 age_groups = AgeGroup.where({name: "JO11"})
 age_groups.each do |age_group|
   [*1..13].each do |index|
-    Team.create!({name: "ESA JO11-#{index}", age_group: age_group})
+    Team.create!({name: "JO11-#{index}", age_group: age_group})
   end
 end
 age_groups = AgeGroup.where({name: "MO11"})
 age_groups.each do |age_group|
   [*1..2].each do |index|
-    Team.create!({name: "ESA MO11-#{index}", age_group: age_group})
+    Team.create!({name: "MO11-#{index}", age_group: age_group})
   end
 end
 
@@ -35,7 +35,7 @@ end
 # player3 = Member.create!({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_number: Faker::Code.ean, association_number: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
 # coach1 = Member.create!({first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, member_number: Faker::Code.ean, association_number: Faker::Code.asin, address: Faker::Address.street_address, city: Faker::Address.city})
 
-# jo11_8s = Team.where({name: "ESA JO11-8"})
+# jo11_8s = Team.where({name: "JO11-8"})
 # jo11_8s.each do |jo11_8|
 #   TeamMember.create!({team: jo11_8, member: player1, joined_on: Time.zone.local(2016,8,1), role: TeamMember.roles[:player]})
 #   TeamMember.create!({team: jo11_8, member: player2, joined_on: Time.zone.local(2016,8,1), role: TeamMember.roles[:player]})

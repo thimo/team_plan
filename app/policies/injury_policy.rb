@@ -1,6 +1,6 @@
 class InjuryPolicy < ApplicationPolicy
   def show?
-    # Visible for ESA staff, author, member's team staff, member
+    # Visible for club staff, author, member's team staff, member
     create? || @record.user = @user || @user.has_member?(@record.member)
   end
 

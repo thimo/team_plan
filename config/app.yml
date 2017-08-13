@@ -2,6 +2,7 @@
 defaults: &defaults
   application.name: TeamPlan
   club.name: Defrog
+  club.name_short: Defrog
   club.hostname: teamplan.defrog.nl
   club.address:
   club.zip:
