@@ -9,7 +9,7 @@
   = render 'input/datepicker', f: f, field: :started_at
   = f.input :start_time, as: :time, minute_step: 5, wrapper: :time
 
-  = render 'input/trix', f: f, field: :body, autofocus: true
+  / = render 'input/trix', f: f, field: :body, autofocus: true
   = f.input :remark
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'

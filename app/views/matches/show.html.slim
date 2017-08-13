@@ -29,14 +29,17 @@ section.tabs-section
         .card-body
           .strong #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
       - if @players.present?
-        - @players.each do |player|
-          div
-            = render player.member
+        table.table
+          - @players.each do |player|
+            tr
+              td
+                = render player.member
 
-      - if @match.body.present?
-        = @match.body.html_safe
-      - else 
-        i Er is nog geen programma ingevuld
+      / - if @match.body.present?
+      /   = @match.body.html_safe
+      / - else
+      /   p
+      /     i Er is nog geen programma ingevuld
       
       - if @match.remark.present?
         hr
