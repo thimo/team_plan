@@ -31,7 +31,7 @@
       = render "comments/tabs", parent: @member
 
     - if policy(@member).show_todos? && @todos.present?
-      = render "todos/list", todos: @todos, new_path: new_member_todo_path(@member)
+      = render "todos/list", todos_active: @todos.active, todos_defered: @todos.defered, new_path: new_member_todo_path(@member)
 
     - if policy(@member).show_injuries? && @injuries.present?
       = render "injuries/list", injuries: @injuries, member: @member
