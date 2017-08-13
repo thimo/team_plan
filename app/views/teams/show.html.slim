@@ -68,11 +68,11 @@
                       = year if index == 0
                     td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
                       = render team_member.member                 
-                    td
+                    td.small
                       - team_member.field_positions.each do |field_position|
                         div
                           = field_position.name
-                      .color-blue-grey-lighter.small
+                      .color-blue-grey-lighter
                         = team_member.prefered_foot
                                               
                     - if policy(@team).show_previous_team?
