@@ -17,6 +17,9 @@ tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' 
         span.color-blue-grey-lighter.small.pl-2
           | #{ts.present_minutes_i18n} aanwezig
   td.w-1.nowrap.text-right
+    - if (present = training.presences.present).size > 0
+      .label.ml-1[title="Aanwezig"]
+        = present.size    
     - if ts.present?
       - if policy(ts).update?
         = link_to [:edit, ts]

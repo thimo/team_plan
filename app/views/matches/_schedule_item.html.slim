@@ -14,3 +14,6 @@ tr.clickable[class="table-success #{'table-info' if date == Time.zone.today} #{'
     .color-blue-grey
       | #{I18n.l match.started_at, format: :time_short} uur
   td.w-1.nowrap.text-right
+    - if (present = match.presences.present).size > 0
+      .label.ml-1[title="Aanwezig"]
+        = present.size    

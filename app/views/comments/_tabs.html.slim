@@ -10,7 +10,7 @@ section.tabs-section
                 span.nav-link-in
                   = Comment.comment_types_i18n[comment_type.first]
                   - if (count = parent.comments.public_send(comment_type.first).size) > 0
-                    .label.label-one-number.ml-1
+                    .label.ml-1
                       = count
   .tab-content
     - parent.comment_types.each do |comment_type|

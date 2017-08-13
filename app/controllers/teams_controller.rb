@@ -20,8 +20,8 @@ class TeamsController < ApplicationController
     @todos_active += todos.active
     @todos_defered += todos.defered
 
-    @schedules = @team.trainings.in_period(1.week.ago.beginning_of_day, 2.week.from_now.end_of_day).includes(:training_schedule, training_schedule: :soccer_field).to_a
-    @schedules += @team.matches.in_period(1.week.ago.beginning_of_day, 2.week.from_now.end_of_day).to_a
+    @schedules = @team.trainings.in_period(1.week.ago.beginning_of_day, 2.week.from_now.end_of_day).includes(:training_schedule, :presences, training_schedule: :soccer_field).to_a
+    @schedules += @team.matches.in_period(1.week.ago.beginning_of_day, 2.week.from_now.end_of_day).includes(:presences).to_a
     @schedules = @schedules.flatten.sort_by(&:started_at)
   end
 
