@@ -85,7 +85,7 @@
                               = "#{previous_team.division}"
 
                     td.w-1.nowrap.text-right                        
-                      = render "shared/favorite", parent: team_member.member, styleClass: "p-1 pl-2"
+                      / = render "shared/favorite", parent: team_member.member, styleClass: "p-1 pl-2"
                       
                       - if policy(team_member).edit?
                         = link_to edit_team_member_path(team_member), title: "Aanpassen"
