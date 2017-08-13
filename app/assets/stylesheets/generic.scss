@@ -11,3 +11,37 @@
 .line-through {
   text-decoration: line-through;
 }
+
+.box-typical-footer {
+  .pagination {
+    margin: 0;
+
+    a, span.current {
+      padding: 4px;
+    }
+  }
+}
+
+.header-buttons {
+  float: right;
+}
+
+.datepicker{
+  z-index: 100 !important;
+}
+
+.fa {
+  &.red {
+    color: #da211d;
+  }
+}
+
+.opacity-5 {
+  opacity: .5;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+    transition: all .2s ease-in-out;
+  }
+}

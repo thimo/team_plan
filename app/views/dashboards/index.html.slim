@@ -1,5 +1,12 @@
 - provide(:title, "Dashboard")
 
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group.ml-1
+      - if policy(Todo).create?
+        = link_to new_todo_path, title: "Todo toevoegen", class: "btn btn-secondary"
+          i.fa.fa-check-square-o
+
 .dashboard
   .row
     .col-sm-6
@@ -11,8 +18,7 @@
                 header.box-typical-header
                   .tbl-row
                     .tbl-cell.tbl-cell-title
-                      .strong
-                        | Mijn teams
+                      h4 Mijn teams
                           
                 .box-typical-body.mb-3
                   ul.side-menu-list
@@ -28,8 +34,7 @@
                 header.box-typical-header
                   .tbl-row
                     .tbl-cell.tbl-cell-title
-                      .strong
-                        | Favorieten
+                      h4 Favorieten
                           
                 .box-typical-body.mb-3
                   ul.side-menu-list
@@ -50,8 +55,7 @@
         header.box-typical-header
           .tbl-row
             .tbl-cell.tbl-cell-title
-              .strong
-                | Seizoen #{@season.name}
+              h4 Seizoen #{@season.name}
 
         .row.mb-3
           .col-6
@@ -60,8 +64,7 @@
                 header.box-typical-header
                   .tbl-row
                     .tbl-cell.tbl-cell-title
-                      .strong
-                        | Mannen
+                      h4 Mannen
                 ul.side-menu-list
                   - @age_groups_male.each do |age_group|
                     li
@@ -75,8 +78,7 @@
                 header.box-typical-header
                   .tbl-row
                     .tbl-cell.tbl-cell-title
-                      .strong
-                        | Vrouwen
+                      h4 Vrouwen
                 ul.side-menu-list
                   - @age_groups_female.each do |age_group|
                     li
@@ -85,9 +87,15 @@
                         span.lbl
                           = age_group.name
 
+      - if @todos.present?
+        = render "todos/list", todos_active: @todos.active, todos_defered: @todos.defered
+
     .col-sm-6
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
+
+      - if @new_members.present?
+        = render "members/list", members: @new_members, title: "Nieuwe leden"
 
       - if @version_updates.present?
         = render "version_updates/list", version_updates: @version_updates, disable_header: true

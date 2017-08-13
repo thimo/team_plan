@@ -1,0 +1,54 @@
+- title ||= 'Reguliere trainingen'
+- disable_header ||= false
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4
+          = title
+      - if defined?(team).present? && policy(TrainingSchedule.new(team: team)).create?
+        .tbl-cell.tbl-cell-actions
+          = link_to new_team_training_schedule_path(team), title: "Reguliere training toevoegen", class: "action-btn"
+            i.fa.fa-line-chart
+          
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if training_schedules.size > 0
+        - unless disable_header
+          thead
+            th Dag
+            th Veld
+            th Trainer
+            th
+        tbody
+          - training_schedules.each do |ts|
+            tr.clickable
+              td
+                = ts.day_i18n
+                .color-blue-grey
+                  = I18n.l ts.start_time, format: :time_short
+                  |  - 
+                  = I18n.l ts.end_time, format: :time_short
+                - if TrainingSchedule.present_minutes[ts.present_minutes] > 0
+                  .color-blue-grey.small
+                    | #{ts.present_minutes_i18n} aanwezig
+              td 
+                = ts.soccer_field.name
+                .color-blue-grey.small
+                  = ts.field_part_i18n
+              td 
+                - ts.team_members.each do |trainer|
+                  div #{trainer.name}
+                div 
+                  = ts.class.human_attribute_name(:cios) if ts.cios?
+              td.w-1.nowrap.text-right
+                - if policy(ts).update?
+                  = link_to [:edit, ts]
+                    i.fa.fa-pencil.p-1.pl-2
+
+      - else 
+        tbody
+          tr
+            td
+              i Geen trainingen gevonden

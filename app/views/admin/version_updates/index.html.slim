@@ -1,11 +1,11 @@
-- provide(:title, "Versies")
+- provide(:title, "Versie updates")
 
 section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
         h3
-          | Versies
+          | Versie updates
       - if policy(VersionUpdate).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_admin_version_update_path, title: "Toevoegen", class: "action-btn"
@@ -21,6 +21,6 @@ section.box-typical
               small.pl-3
                 | #{version_update.for_role_i18n}
             .tbl-cell.tbl-cell-date
-              = l version_update.released_at.to_date, format: :long
+              = l version_update.released_at, format: :long
         .comment-row-item-content
           = markdown(version_update.body).html_safe

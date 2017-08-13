@@ -33,6 +33,16 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def show_todos?
+    return false if @record.archived?
+
+    @user.admin? || @user.club_staff?
+  end
+
+  def show_injureds?
+    show_todos?
+  end
+
   def show_status?
     return false if @record.status == @record.season.status
 
@@ -54,7 +64,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender]
+    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half]
     attributes << :status if set_status?
     return attributes
   end
@@ -64,7 +74,7 @@ class AgeGroupPolicy < ApplicationPolicy
       if @user.admin? || @user.club_staff?
         scope
       else
-        scope.where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]])
+        scope.active_or_archived
       end
     end
   end

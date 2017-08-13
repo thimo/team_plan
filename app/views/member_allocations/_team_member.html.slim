@@ -1,4 +1,3 @@
-/ - cache [member]
 - first_column ||= ''
 tr
   td.small.strong.color-blue-grey-lighter
@@ -6,6 +5,10 @@ tr
     - team_members.each do |team_member|
       div
         = team_member.role_i18n unless team_member.player?
+      - if policy(team_member).show_status?
+        div
+          = team_member.status_to_label.html_safe
+
   = render "member_allocations/member", member: member
     
   td.w-1.nowrap

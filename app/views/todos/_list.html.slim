@@ -1,0 +1,21 @@
+- new_path ||= new_todo_path
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4 Todo's
+      - if policy(Todo).create?
+        .tbl-cell.tbl-cell-actions
+          = link_to new_path, title: "Todo toevoegen", class: "action-btn"
+            i.fa.fa-check-square-o
+          
+  .box-typical-body
+    - if todos_active.present?
+      - todos_active.each do |todo|
+        div[id="todo-#{todo.id}"]
+          = render 'todos/list_item', todo: todo
+    - if todos_defered.present?
+      - todos_defered.each do |todo|
+        div[id="todo-#{todo.id}"]
+          = render 'todos/list_item', todo: todo

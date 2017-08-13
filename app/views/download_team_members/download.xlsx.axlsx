@@ -1,62 +1,76 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: "Teamleden") do |sheet|
-  columns = [
-    Season.human_attribute_name(:name),
-    AgeGroup.human_attribute_name(:name),
-    Team.human_attribute_name(:name),
-    Member.human_attribute_name(:association_number),
-    Member.human_attribute_name(:name),
-    Member.human_attribute_name(:last_name),
-    Member.human_attribute_name(:first_name),
-    Member.human_attribute_name(:middle_name),
-    Member.human_attribute_name(:born_on),
-    TeamMember.human_attribute_name(:role),
-    Member.human_attribute_name(:address),
-    Member.human_attribute_name(:zipcode),
-    Member.human_attribute_name(:city),
-    Member.human_attribute_name(:phone),
-    Member.human_attribute_name(:email),
-  ]
+wb.add_worksheet(name: "Teamgenoten") do |sheet|
+  columns = []
+  columns << Season.human_attribute_name(:name) if @export_columns.include? 'season'
+  columns << AgeGroup.human_attribute_name(:name) if @export_columns.include? 'age_group'
+  columns << Team.human_attribute_name(:name) if @export_columns.include? 'team'
+  columns << Member.human_attribute_name(:association_number) if @export_columns.include? 'association_number'
+  columns << Member.human_attribute_name(:name) if @export_columns.include? 'name'
+  columns << Member.human_attribute_name(:reversed_name) if @export_columns.include? 'reversed_name'
+  columns << Member.human_attribute_name(:last_name) if @export_columns.include? 'last_name'
+  columns << Member.human_attribute_name(:first_name) if @export_columns.include? 'first_name'
+  columns << Member.human_attribute_name(:middle_name) if @export_columns.include? 'middle_name'
+  columns << Member.human_attribute_name(:born_on) if @export_columns.include? 'born_on'
+  columns << TeamMember.human_attribute_name(:role) if @export_columns.include? 'role'
+  columns << Member.human_attribute_name(:address) if @export_columns.include? 'address'
+  columns << Member.human_attribute_name(:zipcode) if @export_columns.include? 'zipcode'
+  columns << Member.human_attribute_name(:city) if @export_columns.include? 'city'
+  columns << Member.human_attribute_name(:phone) if @export_columns.include? 'phone'
+  columns << Member.human_attribute_name(:email) if @export_columns.include? 'email'
+  columns << Member.human_attribute_name(:member_since) if @export_columns.include? 'member_since'
+  columns << I18n.t(:previous_team) if @export_columns.include? 'previous_team'
+
   sheet.add_row columns
+
   @teams.each do |team|
     team[:players].each do |team_member|
-      columns = [
-        team[:season],
-        team[:age_group],
-        team[:team],
-        team_member.member.association_number,
-        team_member.member.name,
-        team_member.member.last_name,
-        team_member.member.first_name,
-        team_member.member.middle_name,
-        team_member.member.born_on,
-        team_member.role_i18n,
-        team_member.member.address,
-        team_member.member.zipcode,
-        team_member.member.city,
-        team_member.member.phone,
-        team_member.member.email,
-      ]
+      columns = []
+      columns << team[:season] if @export_columns.include? 'season'
+      columns << team[:age_group] if @export_columns.include? 'age_group'
+      columns << team[:team] if @export_columns.include? 'team'
+      columns << team_member.member.association_number if @export_columns.include? 'association_number'
+      columns << team_member.member.name if @export_columns.include? 'name'
+      columns << team_member.member.reversed_name if @export_columns.include? 'reversed_name'
+      columns << team_member.member.last_name if @export_columns.include? 'last_name'
+      columns << team_member.member.first_name if @export_columns.include? 'first_name'
+      columns << team_member.member.middle_name if @export_columns.include? 'middle_name'
+      columns << team_member.member.born_on if @export_columns.include? 'born_on'
+      columns << team_member.role_i18n if @export_columns.include? 'role'
+      columns << team_member.member.address if @export_columns.include? 'address'
+      columns << team_member.member.zipcode if @export_columns.include? 'zipcode'
+      columns << team_member.member.city if @export_columns.include? 'city'
+      columns << team_member.member.phone if @export_columns.include? 'phone'
+      columns << team_member.member.email if @export_columns.include? 'email'
+      columns << team_member.member.member_since if @export_columns.include? 'member_since'
+      if @export_columns.include?('previous_team') && @previous_season.present?
+        columns << team_member.member.teams_for_season(@previous_season).as_player.distinct.map(&:name).join(',')
+      end
+
       sheet.add_row columns
     end
     team[:staff].group_by(&:member).each do |member, team_members|
-      columns = [
-        team[:season],
-        team[:age_group],
-        team[:team],
-        member.association_number,
-        member.name,
-        member.last_name,
-        member.first_name,
-        member.middle_name,
-        member.born_on,
-        team_members.map(&:role_i18n).join(', '),
-        member.address,
-        member.zipcode,
-        member.city,
-        member.phone,
-        member.email,
-      ]
+      columns = []
+      columns << team[:season] if @export_columns.include? 'season'
+      columns << team[:age_group] if @export_columns.include? 'age_group'
+      columns << team[:team] if @export_columns.include? 'team'
+      columns << member.association_number if @export_columns.include? 'association_number'
+      columns << member.name if @export_columns.include? 'name'
+      columns << member.reversed_name if @export_columns.include? 'reversed_name'
+      columns << member.last_name if @export_columns.include? 'last_name'
+      columns << member.first_name if @export_columns.include? 'first_name'
+      columns << member.middle_name if @export_columns.include? 'middle_name'
+      columns << member.born_on if @export_columns.include? 'born_on'
+      columns << team_members.map(&:role_i18n).join(', ') if @export_columns.include? 'role'
+      columns << member.address if @export_columns.include? 'address'
+      columns << member.zipcode if @export_columns.include? 'zipcode'
+      columns << member.city if @export_columns.include? 'city'
+      columns << member.phone if @export_columns.include? 'phone'
+      columns << member.email if @export_columns.include? 'email'
+      columns << member.member_since if @export_columns.include? 'member_since'
+      if @export_columns.include? 'previous_team' && @previous_season.present?
+        columns << ''
+      end
+
       sheet.add_row columns
     end
   end

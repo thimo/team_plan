@@ -1,19 +1,27 @@
 class Admin::UsersController < AdminController
   before_action :create_user, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :resend_password, :destroy, :impersonate]
-  before_action :breadcumbs
+  before_action :add_breadcrumbs
 
   def index
     @users = policy_scope(User).asc.filter(params.slice(:role, :query))
   end
 
-  def new; end
+  def new
+    prefill_from_member
+  end
 
   def create
     generated_password = @user.set_new_password
+    @user.skip_confirmation!
     if @user.save
       @user.send_new_account(generated_password)
-      redirect_to admin_users_path, notice: 'Gebruiker is toegevoegd.'
+      flash[:success] = 'Gebruiker is toegevoegd.'
+      if params[:member].present?
+        redirect_to policy_scope(Member).find(params[:member])
+      else
+        redirect_to admin_users_path
+      end
     else
       render :new
     end
@@ -22,6 +30,7 @@ class Admin::UsersController < AdminController
   def edit; end
 
   def update
+    @user.skip_reconfirmation!
     if @user.update_attributes(user_params)
       redirect_to admin_users_path, notice: 'Gebruiker is aangepast.'
     else
@@ -70,7 +79,7 @@ class Admin::UsersController < AdminController
       params.require(:user).permit(:first_name, :middle_name, :last_name, :email, :role)
     end
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb 'Gebruikers', admin_users_path
       unless @user.nil?
         if @user.new_record?
@@ -78,6 +87,13 @@ class Admin::UsersController < AdminController
         else
           add_breadcrumb @user.email, [:edit, :admin, @user]
         end
+      end
+    end
+
+    def prefill_from_member
+      if params[:member].present?
+        member = policy_scope(Member).find(params[:member])
+        @user.prefill(member)
       end
     end
 end

@@ -1,39 +1,19 @@
 - cache [member]
   td
-    = link_to member.name, member, target: "_blank"
-
-    .color-blue-grey-lighter.small
-      => l member.born_on, format: :long unless member.born_on.nil?
-      = "(#{member.gender})"
-    - unless member.local_teams.blank?
-      .color-blue-grey.small
-        = "#{member.local_teams}"
-    - if member.status_af_te_melden?
-      .color-blue-grey.small
-        = member.status.capitalize
-        - if member.deregistered_at.present?
-          |  per 
-          = I18n.l member.deregistered_at, format: :long
-    - else  
-      - unless member.status_definitief? 
-        .color-blue-grey.small
-          = member.status.capitalize
-      - unless member.deregistered_at.blank?
-        .color-blue-grey.small
-          | Afmelddatum: 
-            = I18n.l member.deregistered_at, format: :long
+    = render member, target: '_blank'
         
   td.color-blue-grey.small
-    - if (active_team = member.active_team).present?
-      div
-        = link_to active_team.name, active_team, target: '_blank', class: 'strong', title: 'Huidig team'
-        span.pl-1
-          = "#{active_team.division}"
-        - if (last_evaluation = member.last_evaluation).present?
-          span.ml-1[title="Evaluatie #{I18n.l last_evaluation.team_evaluation.finished_at.to_date, format: :long}, advies: #{last_evaluation.advise_next_season}"]
-            i.fa[class="#{last_evaluation.advise_to_icon_class}"]
-          - if last_evaluation.remark.present?
-            i.fa.fa-info-circle.blue.ml-1[title="#{last_evaluation.remark}"]
+    - if (previous_teams = member.teams_for_season(@previous_season).as_player.distinct).present?
+      - previous_teams.each do |previous_team|
+        div
+          = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
+          span.pl-1
+            = "#{previous_team.division}"
+          - if (evaluation = member.evaluation_for_season(@previous_season)).present?
+            span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at, format: :date_long}, advies: #{evaluation.advise_next_season}"]
+              i.fa[class="#{evaluation.advise_to_icon_class}"]
+            - if evaluation.remark.present?
+              i.fa.fa-info-circle.blue.ml-1[title="#{evaluation.remark}"]
           
     - if (active_team_member = member.active_team_member).present?
       - if (field_positions = active_team_member.field_positions).present?
@@ -43,5 +23,5 @@
     
     - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
       - last_comments.each do |last_comment|
-        .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at.to_date, format: :short})"]
+        .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at, format: :date_short})"]
           = last_comment.body

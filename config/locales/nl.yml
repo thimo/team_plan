@@ -1,4 +1,16 @@
 nl:
+  date:
+    formats:
+      weekday: "%a"
+      date_long: "%-d %b %Y"
+  time:
+    formats:
+      time_short: "%k:%M"
+      month: "%b"
+      weekday: "%a"
+      date_time_short: "%-d %b %k:%M"
+      date_long: "%-d %b %Y"
+      date_short: "%-d %b"
   activerecord:
     attributes:
       user:
@@ -12,22 +24,29 @@ nl:
         name: Seizoen
         active: Actief
         status: Status
+        started_on: Begindatum
+        ended_on: Einddatum
       age_group:
         name: Leeftijdsgroep
         year_of_birth_from: Jaartal geboorte vanaf
         year_of_birth_to: Jaartal geboorte t/m
         gender: Geslacht
         status: Status
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
       team:
         name: Team
         division: Klasse
         status: Status
         remark: Opmerking/aantekening
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
         last_name: Achternaam
-        name: Naam
+        name: Volledige naam
+        reversed_name: Achternaam, voornaam
         email: E-mail
         born_on: Geboortedatum
         phone: Telefoonnummer
@@ -36,15 +55,17 @@ nl:
         city: Woonplaats
         country: Land
         association_number: KNVB nummer
+        member_since: Lid sinds
       team_member:
         role: Rol
         name: Naam
+        member_id: Teamgenoot
         field_positions: Veldpositie
         field_position_ids: Veldpositie
         prefered_foot: Links-/rechtsbenig
         status: Status
       player_evaluation:
-        advise_next_season: Advies volgend seizoen
+        advise_next_season: Advies niveau
         remark: Opmerking
         behaviour: Gedrag
         technique: Techniek
@@ -69,6 +90,46 @@ nl:
         name: Titel
         body: Beschrijving
         for_role: Toon aan
+      injury:
+        title: Beschrijving
+        body: Omschrijving / behandeling
+        started_on: Begindatum
+        ended_on: Einddatum
+      presence:
+        remark: Opmerking
+      soccer_field:
+        name: Veldnaam
+        match: Wedstrijdveld
+        training: Trainingsveld
+      training_schedule:
+        day: Dag van de week
+        present_minutes: Aanwezig
+        start_time: Aanvang
+        end_time: Einde
+        soccer_field_id: Veld
+        field_part: Deel van het veld
+        team_member_ids: Trainer
+        cios: CIOS
+      training:
+        started_at: Datum
+        start_time: Aanvang
+        end_time: Einde
+        body: Programma
+        remark: Opmerkingen
+      todo:
+        body: Todo
+        started_on: Actief vanaf
+        ended_on: Einddatum
+      match:
+        opponent: Tegenstander
+        home_match: Thuiswedstrijd
+        started_at: Datum
+        start_time: Aanvang
+        body: Programma/strategie
+        remark: Opmerkingen
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
+        half_count: Aantal helften
 
   form:
     an_error:
@@ -84,10 +145,15 @@ nl:
     team_member:
       role:
         player: Speler
+        head_coach: Hoofdcoach
         coach: Coach
         trainer: Trainer
+        assistant_trainer: Assistent trainer
+        keeper_trainer: Keeperstrainer
         team_parent: Teamouder
         manager: Teammanager
+        physio: Fysiotherapeut
+        assistant_referee: Assistent scheidsrechter
       status:
         draft: Concept
         active: Actief
@@ -119,11 +185,45 @@ nl:
         draft: Concept
         active: Actief
         archived: Archief
+    presence:
+      on_time:
+        on_time: Op tijd
+        a_bit_too_late: Iets te laat
+        much_too_late: Veel te laat
+      signed_off:
+        signed_off_on_time: Op tijd afgemeld
+        signed_off_too_late: Te laat afgemeld
+        not_signed_off: Niet afgemeld
     team:
       status:
         draft: Concept
         active: Actief
         archived: Archief
+    training_schedule:
+      day:
+        monday: Maandag
+        tuesday: Dinsdag
+        wednesday: Woensdag
+        thursday: Donderdag
+        friday: Vrijdag
+        saturday: Zaterdag
+        sunday: Zondag
+      field_part:
+        whole: Gehele veld
+        a: Deel A
+        b: Deel B
+        c: Deel C
+        d: Deel D
+        ab: Deel A - B
+        cd: Deel C - D
+      present_minutes:
+        min_0: Bij aanvangstijd
+        min_5: 5 min vooraf
+        min_10: 10 min vooraf
+        min_15: 15 min vooraf
+        min_30: 30 min vooraf
+        min_45: 45 min vooraf
+        min_60: 60 min vooraf
 
   views:
     pagination:
@@ -211,3 +311,26 @@ nl:
   invites_sent:
     one: er is 1 uitnodiging verstuurd
     other: er zijn %{count} uitnodigingen verstuurd
+
+  season: Seizoen
+  age_group: Leeftijdsgroep
+  team: Team
+  association_number: KNVB nummer
+  name: Naam
+  reversed_name: Achternaam, voornaam
+  last_name: Achternaam
+  first_name: Voornaam
+  middle_name: Tussenvoegsels
+  born_on: Geboortedatum
+  role: Rol
+  address: Adres
+  zipcode: Postcode
+  city: Woonplaats
+  phone: Telefoonnummer
+  email: E-mail
+  member_since: Lid sinds
+  previous_team: Vorig team
+  training: Training
+
+  "false": "Nee"
+  "true": "Ja"

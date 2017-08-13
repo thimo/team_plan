@@ -1,7 +1,24 @@
 - provide(:title, "Team #{@team.name}")
 - provide(:subtitle, "#{@team.division}")
+- provide(:hint, "#{@team.remark}") if @team.remark.present?
 
-= render "shared/favorite", parent: @team, styleClass: 'fa-2x top-right'
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group
+      - if policy(TeamEvaluation.new(team: @team)).create?
+        = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn btn-secondary"
+          i.fa.fa-list-ol
+      - if policy(@team).update?
+        = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn btn-secondary" do
+          i.fa.fa-pencil
+      - if policy(@team).destroy?
+        = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "btn btn-secondary"
+          i.fa.fa-trash-o  
+    .btn-group.ml-1
+      - if policy(Todo).create? && policy(@team).show_todos?
+        = link_to new_team_todo_path(@team), title: "Todo toevoegen", class: "btn btn-secondary"
+          i.fa.fa-check-square-o
+      = render "shared/favorite", parent: @team, styleClass: "btn btn-secondary"
 
 .row
   .col-xl-6
@@ -9,15 +26,14 @@
       header.box-typical-header
         .tbl-row
           .tbl-cell.tbl-cell-title
-            .strong
-              | Teamleden
+            h4 Teamgenoten
           - if policy(@team).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
-              a.action-btn[href="mailto:#{@team.members.team_staff.distinct.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan de teamleiding"]
+              a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
                 i.fa.fa-envelope-o
           - if policy(@team).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
-              a.action-btn[href="mailto:#{@team.members.map(&:email).uniq.join(',')}", title="Stuur een e-mail aan alle teamleden"]
+              a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan alle teamgenoten"]
                 i.fa.fa-envelope
           - if policy(@team).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
@@ -25,26 +41,22 @@
                 i.fa.fa-file-excel-o
           - if policy(TeamMember.new(team: @team)).create?
             .tbl-cell.tbl-cell-action-bordered
-              = link_to new_team_team_member_bulk_update_path(@team), title: "Teamleden toevoegen", class: "action-btn" do
+              = link_to new_team_team_member_path(@team), title: "Teamgenoot toevoegen", class: "action-btn" do
+                i.fa.fa-user
+          - if policy(TeamMember.new(team: @team)).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_team_team_member_bulk_update_path(@team), title: "Teamgenoten toevoegen", class: "action-btn" do
                 i.fa.fa-users
-          - if policy(@team).update?
-            .tbl-cell.tbl-cell-action-bordered
-              = link_to edit_team_path(@team), title: "Team aanpassen", class: "action-btn" do
-                i.fa.fa-pencil
-          - if policy(@team).destroy?
-            .tbl-cell.tbl-cell-action-bordered
-              = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "action-btn"
-                i.fa.fa-trash-o
           
       .box-typical-body.table-responsive
         table.table.table-sm.tr-links
           thead
             th[colspan="2"]
               | Spelers
-              .label.label-one-number.ml-3 = policy_scope(@team.team_members).player.size
-            - if @team.draft?
-              th Huidig team 
+              .label.label-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
             th
+            - if policy(@team).show_previous_team?
+              th
             th
             
           tbody
@@ -54,33 +66,26 @@
                   tr
                     td.strong.small.color-blue-grey-lighter
                       = year if index == 0
-                    td 
-                      - if policy(team_member.member).show_private_data?
-                        = link_to team_member.member.name, team_member.member
-                      - else
-                        = team_member.member.name
-                        
-                      - if policy(team_member.member).show_private_data?
-                        .color-blue-grey-lighter.small
-                          => l team_member.member.born_on, format: :long unless team_member.member.born_on.nil?
-                          = "(#{team_member.member.gender})"
-                    - if @team.draft?
-                      td 
-                        - if (active_team = team_member.member.active_team).present?
-                          div
-                            = link_to active_team.name, active_team, target: '_blank'
-                          .small
-                            = "#{active_team.division}"
-                        
-                    td
+                    td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
+                      = render team_member.member                 
+                    td.small
                       - team_member.field_positions.each do |field_position|
                         div
                           = field_position.name
-                      .color-blue-grey-lighter.small
+                      .color-blue-grey-lighter
                         = team_member.prefered_foot
                                               
-                    td.w-1.nowrap.text-right
-                      = render "shared/favorite", parent: team_member.member
+                    - if policy(@team).show_previous_team?
+                      td.small
+                        - if (previous_teams = team_member.member.teams_for_season(@previous_season).as_player.distinct).present?
+                          - previous_teams.each do |previous_team|
+                            div
+                              = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
+                            div.color-blue-grey-lighter
+                              = "#{previous_team.division}"
+
+                    td.w-1.nowrap.text-right                        
+                      / = render "shared/favorite", parent: team_member.member, styleClass: "p-1 pl-2"
                       
                       - if policy(team_member).edit?
                         = link_to edit_team_member_path(team_member), title: "Aanpassen"
@@ -103,44 +108,34 @@
                 tr
                   th[colspan="4"] Begeleiding
               - @staff.each do |member, team_members|
-                tr
-                  td 
-                    - if policy(member).show_private_data?
-                      = link_to member.name, member
-                    - else
-                      = member.name
-                    - if policy(member).show_private_data?
-                      .color-blue-grey-lighter.small
-                        => l member.born_on, format: :long unless member.born_on.nil?
-                        = "(#{member.gender})"
-                  td
-                    - team_members.each do |team_member|
-                      div 
-                        = team_member.role_i18n
-                  td.w-1.nowrap
-                    - team_members.each do |team_member|
-                      .text-right
-                        - if policy(team_member).edit?
-                          => link_to edit_team_member_path(team_member), title: "Aanpassen"
-                            i.fa.fa-pencil.p-1.pl-2
-                            
-                        - if policy(team_member).destroy?
-                          => link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-                            i.fa.fa-times.p-1
-
-                        - if policy(team_member).show_status?
-                          div
-                            = team_member.status_to_label.html_safe
-                            - if policy(team_member).activate?
-                              = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
-                                i.fa.fa-check.p-1.pl-2
-
+                = render 'member', member: member, team_members: team_members
+                                
+    - if @old_members.present?
+      section.box-typical
+        .box-typical-body.table-responsive
+          table.table.table-sm.tr-links
+            thead
+              tr
+                th[colspan="4"] Oud teamgenoten
+            - @old_members.each do |member, team_members|
+              = render 'member', member: member, team_members: team_members
+              
+            
   .col-xl-6
+    - if policy(@team).show_schedules?
+      = render "schedules/list", schedules: @schedules
+      
     - if policy(@team).show_comments?
       = render "comments/tabs", parent: @team
       
-    - if policy(@team).show_evaluations?
-      = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations
+    - if policy(@team).show_training_schedules?
+      = render "training_schedules/list", team: @team, training_schedules: @training_schedules
       
+    - if policy(@team).show_evaluations? && @team_evaluations.present?
+      = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
+      
+    - if policy(@team).show_todos? && (@todos_active.present? || @todos_defered.present?)
+      = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
+        
     - if policy(@team).show_notes?
       = render "notes/list", team: @team, notes: @notes

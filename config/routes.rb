@@ -15,20 +15,36 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :dashboard, only: [:index], controller: :dashboards
     resources :seasons, shallow: true do
+      member do
+        post :inherit_age_groups
+      end
       resources :age_group_bulk_updates, only: [:new, :create]
       resources :download_team_members, only: [:index]
+      resources :team_actions, only: [:new, :create]
       resources :age_groups, shallow: true do
         resources :team_bulk_updates, only: [:new, :create]
         resources :member_allocations, only: [:index, :create, :update, :destroy]
         resources :favorites, only: [:create, :destroy]
         resources :download_team_members, only: [:index]
+        resources :team_actions, only: [:new, :create]
+        resources :select_teams
+        resources :todos, only: [:new, :create]
         resources :teams, except: [:index], shallow: true do
+          resources :team_members, only: [:new, :create]
           resources :comments, only: [:new, :create, :edit, :update, :destroy]
           resources :notes, only: [:show, :new, :create, :edit, :update, :destroy]
           resources :favorites, only: [:create, :destroy]
           resources :team_member_bulk_updates, only: [:new, :create]
           resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]
           resources :download_team_members, only: [:index]
+          resources :todos, only: [:new, :create]
+          resources :training_schedules
+          resources :trainings, shallow: true do
+            resources :presences
+          end
+          resources :matches, shallow: true do
+            resources :presences
+          end
         end
       end
     end
@@ -45,12 +61,24 @@ Rails.application.routes.draw do
     end
     resources :member_allocation_filters, only: [:create, :destroy]
 
-    resources :members, only: [:show] do
+    resources :members, only: [:show], shallow: true do
+      member do
+        post :create_login
+        post :resend_password
+      end
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
+      resources :todos, only: [:new, :create]
+      resources :injuries, only: [:show, :new, :create, :edit, :update, :destroy]
     end
     resources :users, only: [] do
       post :stop_impersonating, on: :collection
+    end
+    resources :search
+    resources :todos do
+      member do
+        post :toggle
+      end
     end
 
     get 'admin' => 'admin#show'
@@ -63,20 +91,18 @@ Rails.application.routes.draw do
         end
       end
       resources :members, only: [:index]
-      resources :members_import, only: [:new] do
-        collection do
-          post :create #, to: 'members_import#create'
-        end
-      end
+      resources :members_import, only: [:new, :create]
       resources :email_logs, only: [:index, :show]
       resources :version_updates
-      resources :settings, :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
+      resources :settings, 
+        :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
       namespace :club_data do
         resources :dashboards
         resources :teams, shallow: true do
           resources :competities
         end
       end
+      resources :soccer_fields
     end
   end
 

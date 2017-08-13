@@ -9,7 +9,7 @@
       header.box-typical-header
         .tbl-row
           .tbl-cell.tbl-cell-title
-            .strong
+            h4 
               | Beschikbare leden
               - if @available_members.size > 0
                 .label.label-one-number.ml-3
@@ -24,13 +24,14 @@
           .tbl-cell.pt-0
             = simple_form_for :member_allocation_filters, {url: member_allocation_filters_path} do |f|
               div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
-                = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), { include_blank: true }, { class: "form-control custom-select field_position", placeholder: "Filter op veldpositie", onchange: "$('#filter-button').click()" }
+                = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), { include_blank: true }, { class: "form-control field_position", placeholder: "Filter op veldpositie", onchange: "$('#filter-button').click()" }
                 = f.button :button, title: 'Filter toepassen', class: "btn-primary ml-1", id: 'filter-button' do
                   i.fa.fa-search
                 = link_to member_allocation_filter_path(0),  method: :delete, title: "Filters verwijderen", class: "btn btn-secondary ml-1"
                   i.fa.fa-trash-o
-              div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
-                = f.select :team, options_for_select(@teams_for_filter, @filter_team), { include_blank: true }, { class: "form-control custom-select", placeholder: "Filter op team", onchange: "$('#filter-button').click()" }
+              - if @teams_for_filter.present?
+                div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
+                  = f.select :team, options_for_select(@teams_for_filter, @filter_team), { include_blank: true }, { class: "form-control", placeholder: "Filter op team", onchange: "$('#filter-button').click()" }
 
       .box-typical-body
         table.table.table-sm.table-responsive

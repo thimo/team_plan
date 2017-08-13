@@ -1,6 +1,9 @@
 $(document).on('turbolinks:load', () => {
   // Auto-size all textarea's
-  $('textarea').autosize();
+  autosize($('textarea'));
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    autosize.update($('textarea'))
+  })
 
   // Initialize date pickers
   $('[data-provide="datepicker"]').datepicker();
@@ -8,10 +11,6 @@ $(document).on('turbolinks:load', () => {
   if ($('.has-error').length > 0) {
     // Set focus on first field with an error
     const fieldTypes = '.has-error input[type=text], .has-error input[type=email], .has-error input[type=number], .has-error textarea';
-    $(fieldTypes).first().focus().select();
-  } else {
-    // Set focus on first input field
-    const fieldTypes = 'form input[type=text], form input[type=email], form input[type=number]';
     $(fieldTypes).first().focus().select();
   }
 

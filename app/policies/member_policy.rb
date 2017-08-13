@@ -21,17 +21,41 @@ class MemberPolicy < AdminPolicy
     @user.is_team_member_for?(@record)
   end
 
-  def show_comments?
-    @user.admin? ||
-    @user.club_staff? ||
-    @user.is_team_staff_for?(@record) ||
-    @user.has_member?(@record)
+  def show_todos?
+    show_private_data?
   end
 
   def show_evaluations?
     @user.admin? ||
     @user.club_staff? ||
     @user.is_team_staff_for?(@record)
+  end
+
+  def show_comments?
+    show_evaluations? ||
+    @user.has_member?(@record)
+  end
+
+  def show_injuries?
+    show_evaluations?
+  end
+
+  def show_new_members?
+    @user.admin? ||
+    @user.club_staff?
+  end
+
+  def show_login?
+    create_login?
+  end
+
+  def resend_password?
+    create_login?
+  end
+
+  def create_login?
+    @user.admin? ||
+    @user.club_staff?
   end
 
   class Scope < Scope

@@ -1,10 +1,11 @@
 = simple_form_for [:admin, @user], {wrapper: :horizontal_form} do |f|
   = f.error_notification
+  = hidden_field_tag :member, params[:member]
   
   = f.input :first_name
   = f.input :middle_name
-  = f.input :last_name
-  = f.input :email
+  = f.input :last_name  
+  = f.input :email, hint: (@user.unconfirmed_email.present? ? "Wijziging naar #{@user.unconfirmed_email} nog niet bevestigd" : '')
   = f.input :role
   
   div

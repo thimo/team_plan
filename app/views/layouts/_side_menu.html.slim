@@ -38,14 +38,14 @@ nav.side-menu
       header.side-menu-title
         | Favorieten
       ul.side-menu-list
-        - current_user.favorite_teams.each do |team|
+        - human_sort(current_user.favorite_teams, :name).each do |team|
           li.gold class="#{'active' if current_page?(team_path(team))}"
             = link_to team
               i.fa.fa-star
               span.lbl
                 = team.name
                 
-        - current_user.favorite_age_groups.each do |age_group|
+        - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
           li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
             = link_to age_group
               i.fa.fa-star
@@ -57,27 +57,32 @@ nav.side-menu
       header.side-menu-title
         | Admin
       ul.side-menu-list
-        li.blue class="#{'active' if controller_path == 'admin/users'}"
-          = link_to admin_users_path do
-            i.fa.fa-user
-            span.lbl
-              | Gebruikers
-        li.green class="#{'active' if controller_path == 'admin/members'}"
+        li.green class="#{'active' if controller_name == 'members'}"
           = link_to admin_members_path do
             i.fa.fa-users
             span.lbl
               | Leden
-        li.grey class="#{'active' if controller_path == 'admin/email_logs'}"
+        li.blue class="#{'active' if controller_name == 'users'}"
+          = link_to admin_users_path do
+            i.fa.fa-user
+            span.lbl
+              | Gebruikers
+        li.aquamarine class="#{'active' if controller_name == 'soccer_fields' || controller_name == 'soccer_field_parts'}"
+          = link_to admin_soccer_fields_path do
+            i.fa.fa-leaf
+            span.lbl
+              | Velden
+        li.grey class="#{'active' if controller_name == 'email_logs'}"
           = link_to admin_email_logs_path do
             i.fa.fa-envelope
             span.lbl
               | E-mail log
-        li.magenta class="#{'active' if controller_path == 'admin/version_updates'}"
+        li.magenta class="#{'active' if controller_name == 'version_updates'}"
           = link_to admin_version_updates_path do
             i.fa.fa-code-fork.pl-1
             span.lbl
-              | Versies
-        li.red class="#{'active' if controller_path == 'admin/settings'}"
+              | Versie updates
+        li.red class="#{'active' if controller_name == 'settings'}"
           = link_to admin_settings_path do
             i.fa.fa-sliders
             span.lbl

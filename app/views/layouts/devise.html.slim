@@ -15,11 +15,13 @@ html
   body.devise
     .page-center
       .page-center-in
-        .container-fluid.text-center
+        .container-fluid
           - if flash.present?
-            - flash.each do |message_type, message|
-              .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
-                | #{message}
+            .text-center
+              - flash.each do |message_type, message|
+                - if message.present?
+                  .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
+                    | #{message}
 
           .sign-box
             .sign-avatar.sign-logo.mt-2.mb-5
@@ -29,3 +31,11 @@ html
               
             = yield
                 
+        section.supplier.hidden-sm-down
+          ul.side-menu-list
+            li.red
+              a[href="https://www.defrog.nl/" target="_blank"]
+                i.fa.fa-heart
+                span.lbl
+                  | Handcrafted in Arnhem by 
+                  img[alt="Defrog" src="/assets/logo/defrog_wide-e63709e59828cdb04547c97c362ddf8db6f4ef2ce9841c4983bb9204da59a88f.svg"]

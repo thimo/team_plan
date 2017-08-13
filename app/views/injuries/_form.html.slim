@@ -1,0 +1,13 @@
+= simple_form_for [@member, @injury], {wrapper: :horizontal_form} do |f|
+  = f.error_notification
+
+  = f.input :title, autofocus: true
+  = render 'input/datepicker', f: f, field: :started_on
+  = render 'input/datepicker', f: f, field: :ended_on, hint: "Invullen als de blessure voorbij is"
+
+  = render 'input/trix', f: f, field: :body
+
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @injury.new_record? ? @injury.member : @injury, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@injury).destroy?
+    = link_to "Verwijderen", injury_path(@injury), method: :delete, data: { confirm: 'Blessure wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

@@ -47,8 +47,30 @@ class TeamPolicy < ApplicationPolicy
     true
   end
 
+  def show_schedules?
+    true
+  end
+
+  def show_training_schedules?
+    true
+  end
+
+  def show_todos?
+    return false if @record.archived?
+
+    @user.admin? ||
+    @user.club_staff? ||
+    @user.is_team_member_for?(@record)
+  end
+
   def show_status?
     return false if @record.status == @record.age_group.status
+
+    @user.admin? || @user.club_staff?
+  end
+
+  def show_previous_team?
+    return false if @record.archived?
 
     @user.admin? || @user.club_staff?
   end
@@ -70,7 +92,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    attributes = [:name, :division, :remark]
+    attributes = [:name, :division, :remark, :players_per_team, :minutes_per_half]
     attributes << :status if set_status?
     return attributes
   end
@@ -80,7 +102,7 @@ class TeamPolicy < ApplicationPolicy
       if @user.admin? || @user.club_staff?
         scope
       else
-        scope.where(status: [Team.statuses[:archived], Team.statuses[:active]])
+        scope.active_or_archived
       end
     end
   end

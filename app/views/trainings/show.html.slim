@@ -1,0 +1,59 @@
+- provide(:title, training_title(@training))
+
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group
+      - if policy(@training).update?
+        = link_to edit_training_path(@training), class: "btn btn-secondary", title: "Aanpassen"
+          i.fa.fa-pencil
+
+section.tabs-section
+  .tabs-section-nav
+    .tbl
+      ul.nav[role="tablist"]
+        li.nav-item
+          a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
+            span.nav-link-in
+              | Programma 
+        - if @presences.any?
+          li.nav-item
+            a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+              span.nav-link-in
+                | Aanwezig 
+                span.label.label-pill.label-success[id="presence-count"]
+                  = @presences.present.size
+  .tab-content
+    #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
+      .card.float-right
+        .card-body
+          .strong #{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}
+          div #{starts_ends(@training)} uur
+          - if (ts = @training.training_schedule).present?
+            .color-blue-grey.small
+              | #{ts.present_minutes_i18n} aanwezig
+            hr.my-2
+            div
+              = ts.soccer_field.name
+              span.color-blue-grey.small.ml-2
+                = ts.field_part_i18n
+            - if ts.team_members.any? || ts.cios?
+              hr.my-2
+              - ts.team_members.each do |trainer|
+                div #{trainer.name}
+              div 
+                = ts.class.human_attribute_name(:cios) if ts.cios?
+
+      - if @training.body.present?
+        = @training.body.html_safe
+      - else 
+        i Er is nog geen programma ingevuld
+      
+      - if @training.remark.present?
+        hr
+        strong Opmerkingen
+        = markdown(@training.remark).html_safe
+        
+    - if @presences.any?
+      #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+        - @presences.each do |presence|
+          = render presence

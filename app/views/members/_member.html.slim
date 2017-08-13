@@ -1,0 +1,28 @@
+- if policy(member).show_private_data?
+  = link_to member.name, member, target: target ||= ''
+- else
+  = member.name
+- if member.injured?
+  i.fa.fa-medkit.p-1.pl-2.red[title="Geblesseerd"]
+  
+- if policy(member).show_private_data?
+  .color-blue-grey-lighter.small
+    => l member.born_on, format: :date_long unless member.born_on.nil?
+    = "(#{member.gender})"
+  - unless member.local_teams.blank?
+    .color-blue-grey.small
+      = "#{member.local_teams}"
+  - if member.status_af_te_melden?
+    .color-blue-grey.small
+      = member.status.capitalize
+      - if member.deregistered_at.present?
+        |  per 
+        = I18n.l member.deregistered_at, format: :long
+  - else  
+    - unless member.status_definitief? 
+      .color-blue-grey.small
+        = member.status.capitalize
+    - unless member.deregistered_at.blank?
+      .color-blue-grey.small
+        | Afmelddatum: 
+        = I18n.l member.deregistered_at, format: :long

@@ -24,14 +24,18 @@ html
     .page-content
       .container-fluid
         header.section-header
+          .header-buttons
+            = yield(:action_buttons)
           h3 
             = yield(:title)
             small.pl-2.color-blue-grey
               = yield(:subtitle)
-            - if (label_object = @season || @age_group || @team || @team_member).present? && label_object.draft?
+            - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.draft?
               span.ml-3.label[class="#{label_object.color_class_for_status}"]
                 = label_object.status_i18n
-                
+          .color-blue-grey.small
+            = yield(:hint)
+
           ol.breadcrumb.breadcrumb-simple
             = render_breadcrumbs :tag => :li, :separator => ""
           
@@ -45,5 +49,7 @@ html
     = render 'layouts/flash'
 
     / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
-    / = react_component('Copyright', year: Date.today.year)
+    / = react_component('Copyright', year: Time.zone.today.year)
+    
+    #generic-modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
     

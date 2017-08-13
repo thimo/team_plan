@@ -15,14 +15,12 @@ class SeasonPolicy < ApplicationPolicy
   def update?
     return false if @record.archived?
 
-    # Only by admin
     @user.admin?
   end
 
   def destroy?
     return false if @record.archived? || @record.active?
 
-    # Only by admin
     @user.admin?
   end
 
@@ -36,8 +34,16 @@ class SeasonPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def bulk_email?
+    download_team_members?
+  end
+
+  def inherit_age_groups?
+    update?
+  end
+
   def permitted_attributes
-    attributes = [:name]
+    attributes = [:name, :started_on, :ended_on]
     attributes << :status if set_status?
     return attributes
   end
@@ -47,7 +53,7 @@ class SeasonPolicy < ApplicationPolicy
       if @user.admin? || @user.club_staff?
         scope
       else
-        scope.where(status: [Season.statuses[:archived], Season.statuses[:active]])
+        scope.active_or_archived
       end
     end
   end

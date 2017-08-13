@@ -1,6 +1,6 @@
 class TeamMemberBulkUpdatesController < ApplicationController
   before_action :set_team, only: [:new, :create]
-  before_action :breadcumbs
+  before_action :add_breadcrumbs
 
   def new
     @members = Member.asc.all
@@ -23,11 +23,11 @@ class TeamMemberBulkUpdatesController < ApplicationController
     end
 
     if count == 0
-      flash[:alert] = "Er zijn geen teamleden toegevoegd aan #{@team.name}"
+      flash[:alert] = "Er zijn geen teamgenoten toegevoegd aan #{@team.name}"
     elsif count == 1
-      flash[:success] = "Er is één teamlid toegevoegd aan #{@team.name}"
+      flash[:success] = "Er is één teamgenoot toegevoegd aan #{@team.name}"
     else
-      flash[:success] = "Er zijn #{count} teamleden toegevoegd aan #{@team.name}"
+      flash[:success] = "Er zijn #{count} teamgenoten toegevoegd aan #{@team.name}"
     end
 
     case params[:from]
@@ -46,7 +46,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
     end
 
 
-    def breadcumbs
+    def add_breadcrumbs
       add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
       add_breadcrumb @team.age_group.name, @team.age_group
       add_breadcrumb @team.name, @team

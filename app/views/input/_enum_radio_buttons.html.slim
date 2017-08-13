@@ -1,0 +1,8 @@
+- f.object.class.send(field.to_s.pluralize).each do |enum_label, enum_index| 
+  .radio
+    / For unique ID's, even if multiple forms with same field exist
+    - id = "#{f.object.class.name.downcase}_#{f.object.id}_#{field.to_s}_#{enum_label}"
+    = f.radio_button field, enum_label, id: id
+    = f.label "#{field.to_s}_#{enum_label}", class: "form-check-label", for: id
+      = f.object.class.send("#{field.to_s.pluralize}_i18n")[enum_label]
+= errors_for(f.object, field)

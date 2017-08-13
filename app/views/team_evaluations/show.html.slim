@@ -6,13 +6,13 @@
     header.box-typical-header
       .tbl-row
         .tbl-cell.tbl-cell-title
-          .strong
+          h4 
             | Teamevaluatie #{@team_evaluation.team.name}
             - if @team_evaluation.team.division.present?
               small.pl-1 #{@team_evaluation.team.division}
             div.color-blue-grey-lighter.small
-              = l @team_evaluation.created_at.to_date, format: :long unless @team_evaluation.new_record? || @team_evaluation.finished_at.present?
-              = l @team_evaluation.finished_at.to_date, format: :long if @team_evaluation.finished_at.present?
+              = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record? || @team_evaluation.finished_at.present?
+              = l @team_evaluation.finished_at, format: :date_long if @team_evaluation.finished_at.present?
               |  - 
               = @team_evaluation.status
         .tbl-cell.tbl-cell-action-bordered
@@ -28,7 +28,7 @@
               i.fa.fa-trash-o
         
     .box-typical-body.table-responsive
-      table.table.table-striped.table-xxs
+      table.table.table-xxs
         thead
           tr
             th
@@ -42,13 +42,14 @@
             = render "inbetween_header" if index > 0 && index % 4 == 0
 
             tr
-              td.member-name[class="#{'line-through' if evaluation.team_member.archived?}"]
-                - member = evaluation.team_member.member
-                = link_to member.name, member
-                .color-blue-grey-lighter.small
-                  => l member.born_on, format: :long unless member.born_on.nil?
-                  = "(#{member.gender})"
+              td.member-name[class="#{'line-through' if evaluation.team_member.inactive_for?(@team_evaluation)}", rowspan="2"]
+                = render evaluation.team_member.member
               
               = render "player_evaluations/td_columns", evaluation: evaluation
+              
+            tr
+              td.color-blue-grey.b-t-0[colspan="11", style="padding-left: 2px;"]
+                = evaluation.remark
+
 
     footer.box-typical-footer

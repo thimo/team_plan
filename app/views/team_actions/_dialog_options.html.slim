@@ -1,0 +1,68 @@
+div[class="#{column_class}"]
+  - if params[:type] == 'email'
+    .form-check
+      strong 
+        | Selectie e-mailadressen
+    .form-check
+      label.form-check-label
+        input.form-check-input[type="radio" name="email_selection" value="all" checked="true"]
+        |  Alle teamgenoten
+    .form-check
+      label.form-check-label
+        input.form-check-input[type="radio" name="email_selection" value="staff"]
+        |  Teamleiding
+    .form-check
+      label.form-check-label
+        input.form-check-input[type="radio" name="email_selection" value="player"]
+        |  Spelers
+        
+    .form-check
+      strong 
+        | Voor gebruik met
+    .form-check
+      label.form-check-label
+        => f.radio_button :email_separator, ";", class: "form-check-input", checked: current_user.settings.email_separator == ';'
+        | Outlook
+    .form-check
+      label.form-check-label
+        => f.radio_button :email_separator, ",", class: "form-check-input", checked: current_user.settings.email_separator == ','
+        | Apple Mail, Gmail
+
+    .form-check
+      strong 
+        | Invullen in veld
+    .form-check
+      label.form-check-label
+        => f.radio_button :to_field, "to", class: "form-check-input", checked: true
+        | Aan
+    .form-check
+      label.form-check-label
+        => f.radio_button :to_field, "cc", class: "form-check-input"
+        | CC
+    .form-check
+      label.form-check-label
+        => f.radio_button :to_field, "bcc", class: "form-check-input"
+        | BCC
+
+        
+  - if params[:type] == 'download_team_members'
+    .form-check
+      strong 
+        | Status van teams
+    .form-check
+      label.form-check-label
+        input.form-check-input[type="radio" name="status" value="" checked]
+        |  Alle statussen
+    - AgeGroup.statuses.each do |status, index|
+      .form-check
+        label.form-check-label
+          input.form-check-input[type="radio" name="status" value="#{status}"]
+          |  #{AgeGroup.statuses_i18n[status]}
+    .form-check
+      strong 
+        | Kolommen
+    - Member::EXPORT_COLUMNS.each do |column, index|
+      .form-check
+        label.form-check-label
+          => f.check_box 'columns[]', { checked: current_user.export_columns.include?(column.to_s), class: 'form-check-input' }, column.to_s, nil
+          | #{t column}

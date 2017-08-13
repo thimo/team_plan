@@ -11,14 +11,20 @@ class Team < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :team_evaluations, dependent: :destroy
+  has_many :todos, as: :todoable, dependent: :destroy
+  has_many :training_schedules, dependent: :destroy
+  has_many :trainings, dependent: :destroy
+  has_many :matches, dependent: :destroy
   has_paper_trail
 
   validates_presence_of :name, :age_group
 
   scope :asc, -> { order(:name) }
   scope :for_members, -> (members) { joins(:team_members).where(team_members: { member_id: members }) }
+  scope :as_player, -> { joins(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :for_season, -> (season) { joins(:age_group).where(age_groups: { season_id: season }) }
   scope :for_active_season, -> { joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}) }
+  scope :active_or_archived, -> { where(status: [Team.statuses[:archived], Team.statuses[:active]]) }
 
   def is_favorite?(user)
     favorites.where(user: user).size > 0

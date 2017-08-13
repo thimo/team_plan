@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611194722) do
+ActiveRecord::Schema.define(version: 20170810114525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "age_groups", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -26,36 +29,9 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.integer "status", default: 0
     t.date "started_on"
     t.date "ended_on"
+    t.integer "players_per_team"
+    t.integer "minutes_per_half"
     t.index ["season_id"], name: "index_age_groups_on_season_id"
-  end
-
-  create_table "club_data_competities", force: :cascade do |t|
-    t.integer "poulecode", null: false
-    t.string "competitienaam"
-    t.string "klasse"
-    t.string "poule"
-    t.string "klassepoule"
-    t.string "competitiesoort"
-    t.bigint "club_data_team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["club_data_team_id"], name: "index_club_data_competities_on_club_data_team_id"
-    t.index ["poulecode"], name: "index_club_data_competities_on_poulecode", unique: true
-  end
-
-  create_table "club_data_teams", force: :cascade do |t|
-    t.integer "teamcode", null: false
-    t.string "teamnaam"
-    t.string "spelsoort"
-    t.string "geslacht"
-    t.string "teamsoort"
-    t.string "leeftijdscategorie"
-    t.string "kalespelsoort"
-    t.string "speeldag"
-    t.string "speeldagteam"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -107,10 +83,23 @@ ActiveRecord::Schema.define(version: 20170611194722) do
   end
 
   create_table "field_positions_team_members", id: false, force: :cascade do |t|
-    t.integer "field_position_id", null: false
-    t.integer "team_member_id", null: false
+    t.bigint "field_position_id", null: false
+    t.bigint "team_member_id", null: false
     t.index ["field_position_id", "team_member_id"], name: "position_member_index"
     t.index ["team_member_id", "field_position_id"], name: "member_position_index"
+  end
+
+  create_table "injuries", force: :cascade do |t|
+    t.date "started_on"
+    t.date "ended_on"
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_injuries_on_member_id"
+    t.index ["user_id"], name: "index_injuries_on_user_id"
   end
 
   create_table "logs", force: :cascade do |t|
@@ -122,6 +111,22 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.datetime "updated_at", null: false
     t.index ["logable_type", "logable_id"], name: "index_logs_on_logable_type_and_logable_id"
     t.index ["user_id"], name: "index_logs_on_user_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.boolean "active", default: true
+    t.datetime "started_at"
+    t.boolean "user_modified", default: false
+    t.text "body"
+    t.text "remark"
+    t.bigint "team_id"
+    t.string "opponent"
+    t.boolean "home_match", default: true
+    t.integer "goals_self", default: 0
+    t.integer "goals_opponent", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_matches_on_team_id"
   end
 
   create_table "members", id: :serial, force: :cascade do |t|
@@ -182,6 +187,7 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.string "club_sports"
     t.string "association_sports"
     t.string "person_type"
+    t.boolean "injured", default: false
     t.index ["association_number"], name: "index_members_on_association_number"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
@@ -221,6 +227,20 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.index ["team_member_id"], name: "index_player_evaluations_on_team_member_id"
   end
 
+  create_table "presences", force: :cascade do |t|
+    t.string "presentable_type"
+    t.bigint "presentable_id"
+    t.bigint "member_id"
+    t.boolean "present", default: true
+    t.integer "on_time", default: 0
+    t.integer "signed_off", default: 0
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_presences_on_member_id"
+    t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
+  end
+
   create_table "seasons", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -238,6 +258,14 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+  end
+
+  create_table "soccer_fields", force: :cascade do |t|
+    t.string "name"
+    t.boolean "training", default: false
+    t.boolean "match", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_evaluations", id: :serial, force: :cascade do |t|
@@ -268,6 +296,13 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.index ["team_id"], name: "index_team_members_on_team_id"
   end
 
+  create_table "team_members_training_schedules", id: false, force: :cascade do |t|
+    t.bigint "team_member_id", null: false
+    t.bigint "training_schedule_id", null: false
+    t.index ["team_member_id", "training_schedule_id"], name: "member_schedule"
+    t.index ["training_schedule_id", "team_member_id"], name: "schedule_member"
+  end
+
   create_table "teams", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "age_group_id"
@@ -278,9 +313,64 @@ ActiveRecord::Schema.define(version: 20170611194722) do
     t.date "ended_on"
     t.string "division"
     t.text "remark"
-    t.bigint "club_data_teams_id"
+    t.integer "players_per_team"
+    t.integer "minutes_per_half"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
-    t.index ["club_data_teams_id"], name: "index_teams_on_club_data_teams_id"
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "body"
+    t.boolean "waiting", default: false
+    t.boolean "finished", default: false
+    t.string "todoable_type"
+    t.bigint "todoable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "started_on"
+    t.date "ended_on"
+    t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable_type_and_todoable_id"
+    t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
+  create_table "training_schedules", force: :cascade do |t|
+    t.integer "day"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "field_part"
+    t.bigint "soccer_field_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "cios", default: false
+    t.boolean "active", default: true
+    t.integer "present_minutes", default: 0
+    t.index ["soccer_field_id"], name: "index_training_schedules_on_soccer_field_id"
+    t.index ["team_id"], name: "index_training_schedules_on_team_id"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.bigint "training_schedule_id"
+    t.boolean "active", default: true
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.boolean "user_modified", default: false
+    t.text "body"
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_trainings_on_team_id"
+    t.index ["training_schedule_id"], name: "index_trainings_on_training_schedule_id"
+  end
+
+  create_table "user_settings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "email_separator", default: ";"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "export_columns", default: [], array: true
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -329,24 +419,32 @@ ActiveRecord::Schema.define(version: 20170611194722) do
   end
 
   add_foreign_key "age_groups", "seasons"
-  add_foreign_key "club_data_competities", "club_data_teams"
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "field_positions", "field_positions", column: "axis_parent_id"
   add_foreign_key "field_positions", "field_positions", column: "line_parent_id"
+  add_foreign_key "injuries", "members"
+  add_foreign_key "injuries", "users"
   add_foreign_key "logs", "users"
+  add_foreign_key "matches", "teams"
   add_foreign_key "members", "users"
   add_foreign_key "notes", "members"
   add_foreign_key "notes", "teams"
   add_foreign_key "notes", "users"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
+  add_foreign_key "presences", "members"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
-  add_foreign_key "teams", "club_data_teams", column: "club_data_teams_id"
+  add_foreign_key "todos", "users"
+  add_foreign_key "training_schedules", "soccer_fields"
+  add_foreign_key "training_schedules", "teams"
+  add_foreign_key "trainings", "teams"
+  add_foreign_key "trainings", "training_schedules"
+  add_foreign_key "user_settings", "users"
 end

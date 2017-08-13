@@ -14,8 +14,10 @@ module Statussable
     return if new_status == old_status
 
     update_columns(status: self.class.statuses[new_status]) if self.status != new_status
-    update_columns(ended_on: Date.today) if user_invoked_archivation?(old_status)
-    update_columns(ended_on: nil) if unarchived_with_end_date?
+    unless self.class == Season
+      update_columns(ended_on: Time.zone.today) if user_invoked_archivation?(old_status)
+      update_columns(ended_on: nil) if unarchived_with_end_date?
+    end
 
     if respond_to? :status_children
       status_children.each do |child|

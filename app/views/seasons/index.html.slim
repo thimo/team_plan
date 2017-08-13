@@ -1,28 +1,3 @@
 - provide(:title, "Seizoenen")
 
-.row
-  .col-xl-6
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            .strong
-              | Seizoenen
-          - if policy(Season).create?
-            .tbl-cell.tbl-cell-action-bordered
-              = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
-                i.fa.fa-file-o
-      .box-typical-body
-        table.table.table-sm.tr-links
-          thead
-          tbody
-            - @seasons.each do |season|
-              tr
-                td
-                  = link_to season.name, season, class: "#{"font-weight-bold" if season.active?} #{"font-italic" if season.draft?}"
-                td.text-right
-                  - if (size = policy_scope(season.age_groups).size) > 0
-                    .label.label-one-number>
-                      = "#{size}"
-                  - if policy(season).show_status?
-                    => season.status_to_label.html_safe
+= render 'seasons/list'

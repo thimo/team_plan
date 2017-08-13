@@ -33,8 +33,9 @@ class TeamMemberPolicy < ApplicationPolicy
   def activate?
     # Only activate for active teams
     return false unless @record.team.active?
+    return false if @record.active?
 
-    @record.draft? && (@user.admin? || @user.club_staff?)
+    @user.admin? || @user.club_staff?
   end
 
   def show_status?
@@ -61,7 +62,7 @@ class TeamMemberPolicy < ApplicationPolicy
       if @user.admin? || @user.club_staff?
         scope
       else
-        scope.where(status: [TeamMember.statuses[:archived], TeamMember.statuses[:active]], ended_on: nil)
+        scope.active_or_archived
       end
     end
   end

@@ -1,12 +1,14 @@
 = simple_form_for [@age_group, @team], {wrapper: :horizontal_form} do |f|
   = f.error_notification
 
-  = f.input :name
+  = f.input :name, autofocus: true
   = f.input :division, as: :select, collection: Team::DIVISION_OPTIONS
-  = f.input :remark, hint: 'Wordt alleen getoond bij teams in concept status, bijvoorbeeld bij het maken van nieuwe indelingen'
+  = f.input :players_per_team, as: :select, collection: Match::PLAYER_COUNT, prompt: "-- Selecteer het standaard aantal veldspelers", hint: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.players_per_team})"
+  = f.input :minutes_per_half, as: :select, collection: Match::MINUTES_PER_HALF, prompt: "-- Selecteer het aantal speelminuten per wedstrijdhelft", hint: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.minutes_per_half})"
+  = f.input :remark
   
   - if policy(@team).set_status?
-    = render 'shared/enum_radio_buttons', f: f, field: :status
+    = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :status}, layout: 'input/col_3_9_wrapper'
   
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team.new_record? ? @age_group : @team, class: 'btn btn-secondary-outline btn-inline'

@@ -33,12 +33,12 @@ gem 'net-ssh',                    '~> 4.1.0'
 gem 'figaro',                     '~> 1.1.1'
 gem 'devise',                     '~> 4.3.0'
 # gem 'erubis'
-gem 'devise-bootstrap-views', git: "https://github.com/hisea/devise-bootstrap-views.git", :branch => 'bootstrap4'
+gem 'devise-bootstrap-views', git: 'https://github.com/hisea/devise-bootstrap-views.git', :branch => 'bootstrap4'
 gem 'rails-settings-cached'
 
 gem 'pundit',                     '~> 1.1.0'
 # gem 'rolify',                     '~> 5.0.0'
-gem 'awesome_print', require: "awesome_print"
+gem 'awesome_print', require: 'awesome_print'
 gem 'redcarpet',                  '~> 3.4.0' # Markdown parser
 gem 'paper_trail'
 gem 'rubyzip',                    '~> 1.1.0'
@@ -46,13 +46,14 @@ gem 'axlsx',                      '~> 2.1.0.pre'
 gem 'axlsx_rails'
 gem 'pretender'
 gem 'trix'
+gem 'pg_search'
+gem 'simple-password-gen'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'guard', require: false
-  gem 'rspec-rails', '~> 3.5'
+  gem 'guard'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'capybara-webkit'
@@ -67,22 +68,21 @@ group :development do
   gem 'letter_opener'
   gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'rack-mini-profiler'
-  gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
-  gem 'guard-rspec', require: false
-  gem "rack-livereload"
-  gem "rb-fsevent"
-  gem 'spring-commands-rspec'
+  gem 'guard-livereload', require: false # Adds live-reloading, run with `guard -P livereload`
+  gem 'guard-minitest', require: false
+  gem 'rack-livereload'
+  gem 'rb-fsevent'
   gem 'terminal-notifier-guard'
-  gem 'meta_request' # RailsPanel is a Chrome extension for Rails development that will end your tailing of development.log
+  # gem 'meta_request' # RailsPanel is a Chrome extension for Rails development that will end your tailing of development.log
 end
 
 group :test do
   gem 'minitest-reporters'
-  gem 'mini_backtrace'
-  gem 'shoulda-matchers', require: false
+  # gem 'mini_backtrace'
   gem 'launchy' # For 'save_and_open_page' debugging during testing
   gem 'minitest'
   gem 'minitest-rails'
+  gem 'selenium-webdriver'
 end
 
 group :production, :staging do

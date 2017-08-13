@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
   has_many :logs, dependent: :destroy
+  has_many :todos, dependent: :destroy
+  has_many :injuries
+  has_one :user_setting
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise
@@ -53,7 +56,7 @@ class User < ApplicationRecord
 
   def teams_as_staff_in_season(season)
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids, role: TeamMember::STAFF_ROLES}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
+    Team.joins(:team_members).where(team_members: {member_id: member_ids}).where.not(team_members: {role: TeamMember.roles[:player]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
   end
 
   def has_member?(member)
@@ -61,36 +64,13 @@ class User < ApplicationRecord
   end
 
   def is_team_member_for?(record)
-    case [record.class]
-    when [Member]
-      # Find overlap in teams between current user and given member
-      team_ids = record.team_members.pluck(:team_id).uniq
-      return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
-    when [Team]
-      team_ids = record.id
-      return self.members.joins(:team_members).where(team_members: {team_id: team_ids}).size > 0
-    else
-      false
-    end
+    team_id = team_id_for record
+    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).size > 0
   end
 
   def is_team_staff_for?(record)
-    team_id = 0
-
-    case [record.class]
-    when [Team]
-      team_id = record.id
-    when [TeamMember]
-      team_id = record.team_id
-    when [Member]
-      team_id = record.team_members.pluck(:team_id).uniq
-    when [TeamEvaluation]
-      team_id = record.team_id
-    when [PlayerEvaluation]
-      team_id = record.team_evaluation.team_id
-    end
-
-    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, role: TeamMember::STAFF_ROLES}).size > 0
+    team_id = team_id_for record
+    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).where.not(team_members: {role: TeamMember.roles[:player]}).size > 0
   end
 
   def favorite_teams
@@ -107,7 +87,11 @@ class User < ApplicationRecord
   end
 
   def set_new_password
-    self.password = Devise.friendly_token.first(8)
+    self.password = User.password
+  end
+
+  def self.password
+    Password.pronounceable(8) + rand(100).to_s
   end
 
   def send_new_account(password)
@@ -118,9 +102,16 @@ class User < ApplicationRecord
     UserMailer.password_reset(self, password).deliver_now
   end
 
+  def prefill(member)
+    self.first_name = member.first_name
+    self.middle_name = member.middle_name
+    self.last_name = member.last_name
+    self.email = member.email
+  end
+
   def self.find_or_create_and_invite(member)
     user = User.where(email: member.email).first_or_initialize(
-      password: (generated_password = Devise.friendly_token.first(8)),
+      password: (generated_password = User.password),
       first_name: member.first_name,
       middle_name: member.middle_name,
       last_name: member.last_name,
@@ -134,4 +125,40 @@ class User < ApplicationRecord
 
     user
   end
+
+  def settings
+    # Auto-create user_setting
+    user_setting || self.create_user_setting
+  end
+
+  def export_columns
+    @export_columns ||= (columns = settings.export_columns).present? ? columns : Member::DEFAULT_COLUMNS
+  end
+
+  def remember_me
+    true
+  end
+  
+  private
+
+    def team_id_for(record)
+      team_id = 0
+
+      case [record.class]
+      when [Team]
+        team_id = record.id
+      when [Member]
+        # Find overlap in teams between current user and given member
+        team_members = record.team_members
+        team_members = team_members.active_or_archived if member?
+        team_id = team_members.pluck(:team_id).uniq
+      when [PlayerEvaluation]
+        team_id = record.team_evaluation.team_id
+      when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training], [Match]
+        team_id = record.team_id
+      end
+
+      team_id
+    end
+
 end
