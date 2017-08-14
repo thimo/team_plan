@@ -1,3 +1,4 @@
+- team ||= @team
 - title ||= 'Kalender'
 - disable_header ||= true
 
@@ -8,11 +9,11 @@ section.box-typical.schedule-list
         h4
           = title
       .tbl-cell.tbl-cell-actions
-        - if policy(Match.new(team: @team)).create?
-          = link_to new_team_match_path(@team), title: "Wedstrijd toevoegen", class: "action-btn"
+        - if policy(Match.new(team: team)).create?
+          = link_to new_team_match_path(team), title: "Wedstrijd toevoegen", class: "action-btn"
             i.fa.fa-futbol-o
-        - if policy(Training.new(team: @team)).create?
-          = link_to new_team_training_path(@team), title: "Training toevoegen", class: "action-btn"
+        - if policy(Training.new(team: team)).create?
+          = link_to new_team_training_path(team), title: "Training toevoegen", class: "action-btn"
             i.fa.fa-line-chart
           
   .box-typical-body
@@ -29,4 +30,4 @@ section.box-typical.schedule-list
         tbody
           tr
             td
-              i Geen kalenderitems gevonden in deze periode
+              i Geen kalenderitems gevonden
