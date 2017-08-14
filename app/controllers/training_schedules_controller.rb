@@ -1,7 +1,7 @@
 class TrainingSchedulesController < ApplicationController
   before_action :set_team, only: [:new, :create]
   before_action :create_training_schedule, only: [:new, :create]
-  before_action :set_training_schedule, only: [:show, :edit, :update, :destroy]
+  before_action :set_training_schedule, only: [:show, :edit, :update, :destroy, :activate]
   before_action :add_breadcrumbs
 
   # def show; end
@@ -29,6 +29,11 @@ class TrainingSchedulesController < ApplicationController
   def destroy
     redirect_to @training_schedule.team, notice: "Reguliere training is verwijderd."
     @training_schedule.deactivate
+  end
+
+  def activate
+    redirect_to @training_schedule.team, notice: "Reguliere training is geactiveerd."
+    @training_schedule.activate
   end
 
   private

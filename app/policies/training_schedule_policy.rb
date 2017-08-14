@@ -19,6 +19,12 @@ class TrainingSchedulePolicy < ApplicationPolicy
     create?
   end
 
+  def activate?
+    return false if @record.new_record?
+
+    create?
+  end
+
   class Scope < Scope
     def resolve
       scope

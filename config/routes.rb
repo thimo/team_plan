@@ -38,7 +38,11 @@ Rails.application.routes.draw do
           resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]
           resources :download_team_members, only: [:index]
           resources :todos, only: [:new, :create]
-          resources :training_schedules
+          resources :training_schedules do
+            member do
+              post :activate
+            end
+          end
           resources :trainings, shallow: true do
             resources :presences
           end

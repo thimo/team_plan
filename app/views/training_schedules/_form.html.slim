@@ -1,5 +1,9 @@
 - trainers = @training_schedule.team.team_members.trainers.active.asc
 
+- if @training_schedule.inactive?
+  .alert.alert-warning
+    | Deze training is niet meer actief
+
 = simple_form_for [@team, @training_schedule], {wrapper: :horizontal_form} do |f|
   = f.error_notification
 
@@ -14,5 +18,7 @@
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @training_schedule.team, class: 'btn btn-secondary-outline btn-inline'
-  - if policy(@training_schedule).destroy?
-    = link_to "Verwijderen", training_schedule_path(@training_schedule), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+  - if policy(@training_schedule).destroy? && @training_schedule.active?
+      = link_to "Verwijderen", training_schedule_path(@training_schedule), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+  - if policy(@training_schedule).activate? && @training_schedule.inactive?
+      = link_to "Activeren", activate_training_schedule_path(@training_schedule), method: :post, data: { confirm: 'Training wordt weer actief gemaakt. Doorgaan?' }, class: 'btn btn-success btn-inline'

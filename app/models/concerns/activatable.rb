@@ -13,6 +13,10 @@ module Activatable
     update(active: false) if active?
   end
 
+  def inactive?
+    !active?
+  end
+
   private
 
   module ClassMethods
