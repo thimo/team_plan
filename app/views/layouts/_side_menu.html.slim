@@ -33,7 +33,7 @@ nav.side-menu
               span.lbl
                 = team.name
                 
-  - if current_user.favorite_teams.size > 0 || current_user.favorite_age_groups.size > 0
+  - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
     section
       header.side-menu-title
         | Favorieten
