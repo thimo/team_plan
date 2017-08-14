@@ -16,7 +16,7 @@ class TeamMemberPolicy < ApplicationPolicy
   def update?
     return false if @record.archived?
 
-    create? || @user.is_team_staff_for?(@record)
+    create? || (@user.is_team_staff_for?(@record) && @record.player?)
   end
 
   def set_role?
