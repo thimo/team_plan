@@ -1,7 +1,7 @@
 - match = object
 - date = match.started_at
 
-tr.clickable[class="table-success #{'table-info' if date == Time.zone.today} #{'table-active' if date < Time.zone.today}"]
+tr.clickable[class="#{match_schedule_color(match)}"]
   td.schedule-date
     .weekday.color-blue-grey
       = I18n.l(date, format: :weekday).upcase
