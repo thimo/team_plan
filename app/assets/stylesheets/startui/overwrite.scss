@@ -113,6 +113,18 @@
       }
     }
   }
+
+  .dropdown {
+    .dropdown-item {
+      .fa {
+        width: 22px;
+        text-align: center;
+      }
+    }
+    &.dropdown-right {
+      float: right;
+    }
+  }
 }
 
 @media (max-width: 544px) {
@@ -196,12 +208,13 @@ trix-toolbar {
   }
 }
 
-.table a,
 .bootstrap-table .table a,
-.fixed-table-body .table a {
+.fixed-table-body .table a,
+.table a {
   top: inherit;
 }
 
-.b, .strong {
+.b,
+.strong {
   font-weight: 600;
 }

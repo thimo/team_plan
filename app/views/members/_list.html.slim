@@ -24,7 +24,7 @@ section.box-typical
                 = render member
               td
                 = l member.registered_at, format: :long
-              td
+              td.text-right
                 - if member.reactivated?
                   i.fa.fa-recycle.pl-2.color-green[title="Opnieuw geactiveerd"] 
 

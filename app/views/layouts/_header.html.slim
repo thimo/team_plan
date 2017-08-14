@@ -21,9 +21,6 @@ header.site-header
                 = link_to edit_registration_path(current_user), class: "dropdown-item"
                   span.font-icon.glyphicon.glyphicon-user
                   | Account aanpassen
-                / a.dropdown-item[href="#"]
-                /   span.font-icon.glyphicon.glyphicon-cog
-                /   | Settings
                 = link_to support_path, class: "dropdown-item"
                   span.font-icon.glyphicon.glyphicon-question-sign
                   | Help
@@ -42,6 +39,44 @@ header.site-header
         .mobile-menu-right-overlay
         .site-header-collapsed
           .site-header-collapsed-in
+            - if policy(:admin).show?
+              .dropdown.dropdown-typical.dropdown-right
+                a#dd-header-admin.dropdown-toggle[data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+                  span.font-icon.font-icon-cogwheel
+                  span.lbl
+                    | Admin
+                    
+                .dropdown-menu[aria-labelledby="dd-header-admin"]
+                  = link_to admin_members_path, class: 'dropdown-item' do
+                    i.fa.fa-users.font-icon
+                    | Leden
+                  = link_to admin_users_path, class: 'dropdown-item' do
+                    i.fa.fa-user.font-icon
+                    | Gebruikers
+                  = link_to admin_soccer_fields_path, class: 'dropdown-item' do
+                    i.fa.fa-leaf.font-icon
+                    | Velden
+                  = link_to admin_email_logs_path, class: 'dropdown-item' do
+                    i.fa.fa-envelope.font-icon
+                    | E-mail log
+                  = link_to admin_version_updates_path, class: 'dropdown-item' do
+                    i.fa.fa-code-fork.font-icon
+                    | Versie updates
+                  = link_to admin_settings_path, class: 'dropdown-item' do
+                    i.fa.fa-sliders.font-icon
+                    | Instellingen
+
+                  - if policy(:club_data_dashboard).index?
+                    .dropdown-divider
+                    .dropdown-header
+                      | Club Data
+                    = link_to admin_club_data_dashboards_path, class: 'dropdown-item' do
+                      i.fa.fa-dashboard.font-icon
+                      | Dashboard
+                    = link_to admin_club_data_teams_path, class: 'dropdown-item' do
+                      i.fa.fa-dashboard.font-icon
+                      | Teams
+
             .site-header-search-container
               = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
                 = f.text_field :query, placeholder: 'Zoeken', value: @query

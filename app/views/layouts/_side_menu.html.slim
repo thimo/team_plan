@@ -52,58 +52,6 @@ nav.side-menu
               span.lbl
                 = age_group.name
             
-  - if policy(:admin).show?
-    section
-      header.side-menu-title
-        | Admin
-      ul.side-menu-list
-        li.green class="#{'active' if controller_name == 'members'}"
-          = link_to admin_members_path do
-            i.fa.fa-users
-            span.lbl
-              | Leden
-        li.blue class="#{'active' if controller_name == 'users'}"
-          = link_to admin_users_path do
-            i.fa.fa-user
-            span.lbl
-              | Gebruikers
-        li.aquamarine class="#{'active' if controller_name == 'soccer_fields' || controller_name == 'soccer_field_parts'}"
-          = link_to admin_soccer_fields_path do
-            i.fa.fa-leaf
-            span.lbl
-              | Velden
-        li.grey class="#{'active' if controller_name == 'email_logs'}"
-          = link_to admin_email_logs_path do
-            i.fa.fa-envelope
-            span.lbl
-              | E-mail log
-        li.magenta class="#{'active' if controller_name == 'version_updates'}"
-          = link_to admin_version_updates_path do
-            i.fa.fa-code-fork.pl-1
-            span.lbl
-              | Versie updates
-        li.red class="#{'active' if controller_name == 'settings'}"
-          = link_to admin_settings_path do
-            i.fa.fa-sliders
-            span.lbl
-              | Instellingen
-
-  - if policy(:club_data_dashboard).index?
-    section
-      header.side-menu-title
-        | Club Data
-      ul.side-menu-list
-        li.blue class="#{'active' if controller_path == 'admin/club_data/dashboards'}"
-          = link_to admin_club_data_dashboards_path do
-            i.fa.fa-dashboard
-            span.lbl
-              | Dashboard
-        li.blue class="#{'active' if controller_path == 'admin/club_data/teams'}"
-          = link_to admin_club_data_teams_path do
-            i.fa.fa-dashboard
-            span.lbl
-              | Teams
-              
   section
     ul.side-menu-list
       li.brown
