@@ -4,7 +4,7 @@
       i.fa[class="#{todo.finished? ? 'fa-check-square-o' : 'fa-square-o'}"]
   .chat-message-header
     .tbl-row
-      .tbl-cell.tbl-cell-name[class="#{'strong' if todo.due?}"]
+      .tbl-cell.tbl-cell-name[class="#{'strong' if todo.due?} #{'line-through' if todo.finished?}"]
         = todo.body
       .tbl-cell.tbl-cell-date
         = link_to edit_todo_path(todo), title: "Aanpassen", class: "pl-2"
