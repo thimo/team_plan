@@ -91,6 +91,13 @@
         = render "todos/list", todos_active: @todos.active, todos_defered: @todos.defered
 
     .col-sm-6
+      - @active_teams.each do |team|
+        - if (schedules = team.schedules(from: 0.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)).any?
+          = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
+      - @favorite_teams.each do |team|
+        - if (schedules = team.schedules(from: 0.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)).any?
+          = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
+        
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
 
