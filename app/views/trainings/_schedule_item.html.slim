@@ -24,7 +24,7 @@ tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' 
     - if (present = training.presences.present).size > 0
       .label.ml-1[title="Aanwezig"]
         = present.size    
-    - if ts.present?
-      - if policy(ts).update?
-        = link_to [:edit, ts]
-          i.fa.fa-repeat.p-1.pl-2.color-blue-grey-lighter[title="Reguliere training"]
+    / - if ts.present?
+    /   - if policy(ts).update?
+    /     = link_to [:edit, ts]
+    /       i.fa.fa-repeat.p-1.pl-2.color-blue-grey-lighter[title="Reguliere training"]
