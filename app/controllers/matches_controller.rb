@@ -40,11 +40,7 @@ class MatchesController < ApplicationController
 
   private
     def set_team
-      @team = if @match.present? && @match.team.present?
-                @match.team
-              else
-                Team.find(params[:team_id])
-              end
+      @team = @match&.team || Team.find(params[:team_id])
     end
 
     def create_match

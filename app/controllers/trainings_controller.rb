@@ -39,11 +39,7 @@ class TrainingsController < ApplicationController
 
   private
     def set_team
-      @team = if @training.present? && @training.team.present?
-                @training.team
-              else
-                Team.find(params[:team_id])
-              end
+      @team = @training&.team || Team.find(params[:team_id])
     end
 
     def create_training

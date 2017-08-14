@@ -35,11 +35,7 @@ class NotesController < ApplicationController
 
   private
     def set_team
-      @team = if @note.present? && @note.team.present?
-                @note.team
-              else
-                Team.find(params[:team_id])
-              end
+      @team = @note&.team || Team.find(params[:team_id])
     end
 
     def create_note

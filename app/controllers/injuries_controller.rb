@@ -35,11 +35,7 @@ class InjuriesController < ApplicationController
   private
 
     def set_member
-      @member = if @injury.present? && @injury.member.present?
-                @injury.member
-              else
-                Member.find(params[:member_id])
-              end
+      @member = @injury&.member || Member.find(params[:member_id])
     end
 
     def create_injury
