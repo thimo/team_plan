@@ -11,11 +11,15 @@ tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' 
   td
     = link_to training
       = training_title(training)
+    - if ts&.soccer_field
+      span.color-blue-grey.pl-2
+         = ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")
     .color-blue-grey
       = starts_ends(training)
       - if ts.present? && TrainingSchedule.present_minutes[ts.present_minutes] > 0
         span.color-blue-grey-lighter.small.pl-2
           | #{ts.present_minutes_i18n} aanwezig
+
   td.w-1.nowrap.text-right
     - if (present = training.presences.present).size > 0
       .label.ml-1[title="Aanwezig"]

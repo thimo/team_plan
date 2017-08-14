@@ -34,9 +34,7 @@ section.box-typical
                   .color-blue-grey.small
                     | #{ts.present_minutes_i18n} aanwezig
               td 
-                = ts.soccer_field.name
-                .color-blue-grey.small
-                  = ts.field_part_i18n
+                = ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")
               td 
                 - ts.team_members.each do |trainer|
                   div #{trainer.name}

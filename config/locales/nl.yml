@@ -210,12 +210,12 @@ nl:
         sunday: Zondag
       field_part:
         whole: Gehele veld
-        a: Deel A
-        b: Deel B
-        c: Deel C
-        d: Deel D
-        ab: Deel A - B
-        cd: Deel C - D
+        part_a: A
+        part_b: B
+        part_c: C
+        part_d: D
+        part_ab: A-B
+        part_cd: C-D
       present_minutes:
         min_0: Bij aanvangstijd
         min_5: 5 min vooraf
