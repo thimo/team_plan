@@ -1,13 +1,15 @@
 class DashboardsController < ApplicationController
+  include SortHelper
+  
   def index
     @season = policy_scope(Season).active.last
 
     @age_groups_male = policy_scope(@season.age_groups).male.asc
     @age_groups_female = policy_scope(@season.age_groups).female.asc
 
-    @active_teams = policy_scope(current_user.active_teams)
-    @favorite_teams = policy_scope(current_user.favorite_teams)
-    @favorite_age_groups = policy_scope(current_user.favorite_age_groups)
+    @active_teams = human_sort(policy_scope(current_user.active_teams), :name)
+    @favorite_teams = human_sort(policy_scope(current_user.favorite_teams), :name)
+    @favorite_age_groups = human_sort(policy_scope(current_user.favorite_age_groups), :name)
 
     team_ids = current_user.teams_as_staff_in_season(@season).collect(&:id).uniq
     @open_team_evaluations = policy_scope(TeamEvaluation).desc.where(team_id: team_ids)
