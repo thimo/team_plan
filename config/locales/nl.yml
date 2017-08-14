@@ -122,7 +122,7 @@ nl:
         ended_on: Einddatum
       match:
         opponent: Tegenstander
-        home_match: Thuiswedstrijd
+        location: Wedstrijdlocatie
         started_at: Datum
         start_time: Aanvang
         body: Programma/strategie
@@ -170,6 +170,10 @@ nl:
         behaviour: Gedrag
         classification: Indeling
         membership: Lidmaatschap
+    match:
+      location:
+        location_home: Thuis
+        location_opponent: Uit
     note:
       visibility:
         self: Zelf

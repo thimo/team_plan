@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170810114525) do
+ActiveRecord::Schema.define(version: 20170814163552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,11 +150,11 @@ ActiveRecord::Schema.define(version: 20170810114525) do
     t.text "remark"
     t.bigint "team_id"
     t.string "opponent"
-    t.boolean "home_match", default: true
     t.integer "goals_self", default: 0
     t.integer "goals_opponent", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "location", default: 0
     t.index ["team_id"], name: "index_matches_on_team_id"
   end
 

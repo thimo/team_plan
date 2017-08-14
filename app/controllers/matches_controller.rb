@@ -60,7 +60,7 @@ class MatchesController < ApplicationController
     end
 
     def match_params
-      params.require(:match).permit(:opponent, :home_match, :body, :remark, :team_id, :started_at, :start_time)
+      params.require(:match).permit(:opponent, :location, :body, :remark, :team_id, :started_at, :start_time)
     end
 
     def add_breadcrumbs

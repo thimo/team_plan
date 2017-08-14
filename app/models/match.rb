@@ -9,6 +9,8 @@ class Match < ApplicationRecord
 
   attr_accessor :start_time
 
+  enum location: {location_home: 0, location_opponent: 1}
+
   validates_presence_of :started_at, :team_id
 
   # scope :from_now,     -> { where('started_at > ?', Time.zone.now) }

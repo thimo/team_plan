@@ -4,8 +4,8 @@
     div
       = error
   
-  = f.input :opponent
-  = render partial: 'input/boolean_checkbox', locals: {f: f, field: :home_match, hide_label: true}, layout: 'input/col_3_9_wrapper'
+  = f.input :opponent, autofocus: true
+  = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :location}, layout: 'input/col_3_9_wrapper'
   = render 'input/datepicker', f: f, field: :started_at
   = f.input :start_time, as: :time, minute_step: 5, wrapper: :time
 
