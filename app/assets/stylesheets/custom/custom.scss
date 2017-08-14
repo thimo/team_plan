@@ -188,3 +188,11 @@ a:hover, a:hover:hover {
 .breadcrumb li.active {
   color: #636c72;
 }
+
+@media (min-width: 544px) {
+  @for $i from 1 through 20 {
+    .width-#{$i * 5} {
+      width: 5% * $i;
+    }
+  }
+}

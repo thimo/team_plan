@@ -3,12 +3,12 @@
 = simple_form_for [@team, @training_schedule], {wrapper: :horizontal_form} do |f|
   = f.error_notification
 
-  = f.input :day, prompt: "-- Selecteer een dag"
+  = f.input :day, prompt: "-- Selecteer een dag", input_html: { class: 'width-25' }
   = f.input :start_time, minute_step: 5, wrapper: :time
   = f.input :end_time, minute_step: 5, wrapper: :time
-  = f.input :present_minutes, include_blank: false
-  = f.input :soccer_field_id, as: :select, collection: SoccerField.asc.training, prompt: "-- Selecteer een veld"
-  = f.input :field_part, prompt: "-- Selecteer het deel van het veld"
+  = f.input :present_minutes, include_blank: false, input_html: { class: 'width-25' }
+  = f.input :soccer_field_id, as: :select, collection: SoccerField.asc.training, prompt: "-- Selecteer een veld", input_html: { class: 'width-25' }
+  = f.input :field_part, prompt: "-- Selecteer het deel van het veld", input_html: { class: 'width-25' }
   = render 'input/habtm_checkboxes', f: f, field: :team_member_ids, collection: trainers, row_class: 'mb-0'
   = render partial: 'input/boolean_checkbox', locals: {f: f, field: :cios, hide_label: true}, layout: 'input/col_3_9_wrapper'
 
