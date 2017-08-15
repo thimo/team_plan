@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814163552) do
+ActiveRecord::Schema.define(version: 20170815203006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -344,9 +344,9 @@ ActiveRecord::Schema.define(version: 20170814163552) do
     t.text "remark"
     t.integer "players_per_team"
     t.integer "minutes_per_half"
-    t.bigint "club_data_teams_id"
+    t.bigint "club_data_team_id"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
-    t.index ["club_data_teams_id"], name: "index_teams_on_club_data_teams_id"
+    t.index ["club_data_team_id"], name: "index_teams_on_club_data_team_id"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -473,7 +473,7 @@ ActiveRecord::Schema.define(version: 20170814163552) do
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "age_groups"
-  add_foreign_key "teams", "club_data_teams", column: "club_data_teams_id"
+  add_foreign_key "teams", "club_data_teams"
   add_foreign_key "todos", "users"
   add_foreign_key "training_schedules", "soccer_fields"
   add_foreign_key "training_schedules", "teams"

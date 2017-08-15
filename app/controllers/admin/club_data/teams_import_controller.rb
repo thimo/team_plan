@@ -6,14 +6,16 @@ class Admin::ClubData::TeamsImportController < ApplicationController
     # Import URL
     json = JSON.load(open("#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
-      team = ClubDataTeam.find_or_initialize_by(teamcode: data['teamcode'])
+      club_data_team = ClubDataTeam.find_or_initialize_by(teamcode: data['teamcode'])
       %w[teamnaam spelsoort geslacht teamsoort leeftijdscategorie kalespelsoort speeldag speeldagteam].each do |field|
-        team.write_attribute(field, data[field])
+        club_data_team.write_attribute(field, data[field])
       end
-      team.save
+      club_data_team.save
+
+      club_data_team.link_to_team
 
       competitie = ClubDataCompetitie.find_or_initialize_by(poulecode: data['poulecode'])
-      competitie.club_data_team = team
+      competitie.club_data_team = club_data_team
       %w[competitienaam klasse poule klassepoule competitiesoort].each do |field|
         competitie.write_attribute(field, data[field])
       end
