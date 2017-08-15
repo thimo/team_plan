@@ -14,18 +14,23 @@ section.box-typical
     table.table.table-sm.tr-links
       thead
         tr
-          th = ClubDataTeam.human_attribute_name(:teamcode)
           th = ClubDataTeam.human_attribute_name(:teamnaam)
           th = ClubDataTeam.human_attribute_name(:geslacht)
           th = ClubDataTeam.human_attribute_name(:leeftijdscategorie)
+          th = ClubDataTeam.human_attribute_name(:teamcode)
+          th Team
       tbody
         - @teams.each do |team|
           tr
-            td
-              = team.teamcode
             td
               = team.teamnaam
             td
               = team.geslacht
             td
               = team.leeftijdscategorie
+            td
+              = team.teamcode
+            td 
+              - if team.team.present?
+                = link_to team.team.name, team.team
+            

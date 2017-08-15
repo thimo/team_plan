@@ -48,4 +48,8 @@ class Team < ApplicationRecord
     schedules.flatten.sort_by(&:started_at)
   end
 
+  def no_club_data_link?
+    club_data_team.nil?
+  end
+
 end
