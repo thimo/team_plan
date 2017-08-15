@@ -1,8 +1,8 @@
-$("#presence-<%= @presence.id %>").replaceWith("<%= j render('presence', presence: @presence) %>")
+$("#presence-<%= @presence.id %>").replaceWith("<%= j render('presence', presence: @presence, compact: true?(params[:compact])) %>")
 
 $("#presence-<%= @presence.id %>").find('form[data-behavior="autosave"]').each((index, form) => {
   autosaveForm(form)
   autosize($('textarea'))
 })
 
-$('#presence-count').html("<%= @present_count %>")
+$('#<%= @presence.presentable.model_name.singular %>-<%= @presence.presentable.id %>-presence-count').html("<%= @present_count %>")

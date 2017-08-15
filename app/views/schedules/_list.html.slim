@@ -25,7 +25,7 @@ section.box-typical.schedule-list
             th
         tbody
           - schedules.each do |schedule|
-            = render "#{schedule.class.name.underscore.pluralize}/schedule_item", object: schedule
+            = render "#{schedule.model_name.plural}/schedule_item", object: schedule
       - else 
         tbody
           tr

@@ -15,5 +15,9 @@ tr.clickable[class="#{match_schedule_color(match)}"]
       | #{I18n.l match.started_at, format: :time_short} uur
   td.w-1.nowrap.text-right
     - if (present = match.presences.present).size > 0
-      .label.ml-1[title="Aanwezig"]
-        = present.size    
+      - if policy(match).update?
+        a.dropdown-toggle.label.ml-1[href="#" title="Aanwezig"]
+          = present.size
+      - else
+        .label.ml-1[title="Aanwezig"]
+          = present.size

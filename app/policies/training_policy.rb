@@ -1,6 +1,6 @@
 class TrainingPolicy < ApplicationPolicy
   def show?
-    create? || @user.is_team_member_for(@record)
+    create? || @user.is_team_member_for?(@record)
   end
 
   def new?

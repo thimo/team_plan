@@ -20,7 +20,7 @@ section.tabs-section
             a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
               span.nav-link-in
                 | Aanwezig 
-                span.label.label-pill.label-success[id="presence-count"]
+                span.label.label-pill.label-success[id="#{@training.model_name.singular}-#{@training.id}-presence-count"]
                   = @presences.present.size
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]

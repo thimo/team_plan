@@ -22,8 +22,12 @@ tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' 
 
   td.w-1.nowrap.text-right
     - if (present = training.presences.present).size > 0
-      .label.ml-1[title="Aanwezig"]
-        = present.size    
+      - if policy(training).update?
+        a.dropdown-toggle.label.ml-1[href="#" title="Aanwezig"]
+          = present.size    
+      - else 
+        .label.ml-1[title="Aanwezig"]
+          = present.size    
     / - if ts.present?
     /   - if policy(ts).update?
     /     = link_to [:edit, ts]

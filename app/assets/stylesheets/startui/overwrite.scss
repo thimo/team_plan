@@ -124,6 +124,9 @@
     &.dropdown-right {
       float: right;
     }
+    &.dropdown-typical a.dropdown-toggle:after {
+      top: inherit;
+    }
   }
 }
 
