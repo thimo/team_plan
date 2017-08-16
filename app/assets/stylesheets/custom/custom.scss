@@ -15,6 +15,18 @@
   }
 }
 
+@media (max-width: 767px) {
+  .site-header {
+    .site-logo {
+      img {
+        height: auto;
+        width: 48px;
+        top: 2px;
+      }
+    }
+  }
+}
+
 .nowrap {
   white-space: nowrap;
 }
