@@ -130,6 +130,13 @@
     }
   }
 }
+@media (max-width: 1056px) {
+  .site-header .site-header-collapsed .dropdown.dropdown-right {
+    float: none;
+    margin: 0;
+    zoom: 1;
+  }
+}
 
 @media (max-width: 544px) {
   .site-header {
