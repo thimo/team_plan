@@ -4,6 +4,6 @@ module TrainingsHelper
   end
 
   def training_title(training)
-    "#{I18n.t training.model_name.name} - #{I18n.l training.started_at, format: :weekday} #{I18n.l training.started_at, format: :date_time_short}"
+    "#{I18n.t training.model_name.singular} - #{I18n.l training.started_at, format: :weekday} #{I18n.l training.started_at, format: :date_time_short}"
   end
 end
