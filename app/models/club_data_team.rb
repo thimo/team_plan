@@ -7,6 +7,7 @@ class ClubDataTeam < ApplicationRecord
   def link_to_team
     if team.nil?
       team = Team.for_active_season.find_by(name: teamnaam)
+      team ||= Team.for_active_season.where("teams.name like (?)", "#{teamnaam}%").first
       if team&.no_club_data_link?
         team.club_data_team = self
         team.save
