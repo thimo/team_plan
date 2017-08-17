@@ -22,7 +22,7 @@ section.box-typical
         tr
           th = User.human_attribute_name(:name) 
           th = User.human_attribute_name(:role)
-          th.hidden-xs-down = User.human_attribute_name(:current_sign_in_at)
+          th.d-none.d-sm-table-cell = User.human_attribute_name(:current_sign_in_at)
           th
           
       tbody
@@ -36,7 +36,7 @@ section.box-typical
                   |  (wijziging naar #{user.unconfirmed_email} nog niet bevestigd)
             td 
               = user.role_i18n
-            td.hidden-xs-down
+            td.d-none.d-sm-table-cell
               = I18n.l user.current_sign_in_at, format: :long if user.current_sign_in_at.present?
             td.text-right
               - if current_user != user

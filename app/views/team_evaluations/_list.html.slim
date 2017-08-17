@@ -28,9 +28,9 @@ section.box-typical
             - unless hide_status
               th Status
             - if show_finished_by
-              th.hidden-xs-down Afgerond door
+              th.d-none.d-sm-table-cell Afgerond door
             - if show_last_modified
-              th.hidden-xs-down Opgeslagen
+              th.d-none.d-sm-table-cell Opgeslagen
             - if show_progress
               th Voortgang
         tbody
@@ -52,10 +52,10 @@ section.box-typical
                 td 
                   = team_evaluation.status
               - if show_finished_by
-                td.hidden-xs-down
+                td.d-none.d-sm-table-cell
                   = team_evaluation.finished_by.name
               - if show_last_modified
-                td.hidden-xs-down
+                td.d-none.d-sm-table-cell
                   = l team_evaluation.last_modified, format: :date_long
               - if show_progress
                 td 

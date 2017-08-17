@@ -57,14 +57,18 @@
             th
             - if policy(@team).show_previous_team?
               th
-            th
+            th.d-none.d-sm-table-cell
             
           tbody
             - if @players.size > 0
               - @players.each do |year, team_members|
                 - team_members.each_with_index do |team_member, index|
+                  - if index == 0
+                    tr.d-table-row.d-sm-none
+                      td.strong.small.color-blue-grey-lighter[colspan="100"]
+                        = year
                   tr
-                    td.strong.small.color-blue-grey-lighter
+                    td.strong.small.color-blue-grey-lighter.d-none.d-sm-table-cell
                       = year if index == 0
                     td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
                       = render team_member.member                 
@@ -79,9 +83,9 @@
                       td.small
                         - if (previous_teams = team_member.member.teams_for_season(@previous_season).as_player.distinct).present?
                           - previous_teams.each do |previous_team|
-                            div
+                            div.nowrap
                               = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
-                            div.color-blue-grey-lighter
+                            div.color-blue-grey-lighter.nowrap
                               = "#{previous_team.division}"
 
                     td.w-1.nowrap.text-right                        
