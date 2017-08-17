@@ -1,0 +1,23 @@
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4 Competities
+
+  .box-typical-body
+    table.table.table-sm.tr-links
+      - if competitions.size > 0
+        tbody
+          - competitions.each do |competition|
+            tr.clickable
+              td
+                = "#{competition.competitiesoort} - #{competition.klassepoule}"
+                .color-blue-grey-lighter.small
+                  = "#{competition.competitienaam}"
+
+
+      - else
+        tbody
+          tr
+            td
+              i Geen competities gevonden
