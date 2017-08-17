@@ -11,8 +11,10 @@ section.box-typical
           - competitions.each do |competition|
             tr.clickable
               td
-                = "#{competition.competitiesoort} - #{competition.klassepoule}"
-                .color-blue-grey-lighter.small
+                = "#{competition.competitiesoort} - #{competition.klasse}"
+                span.color-blue-grey-lighter.pl-2
+                  = "#{competition.poule}"
+                .color-blue-grey.small
                   = "#{competition.competitienaam}"
 
 
