@@ -103,7 +103,7 @@ Rails.application.routes.draw do
       namespace :club_data do
         resources :dashboards
         resources :teams, shallow: true do
-          resources :competities
+          resources :competitions
         end
         resources :teams_import, only: [:new, :create]
       end

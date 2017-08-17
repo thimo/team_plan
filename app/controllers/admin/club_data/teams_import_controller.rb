@@ -14,12 +14,12 @@ class Admin::ClubData::TeamsImportController < ApplicationController
 
       club_data_team.link_to_team
 
-      competitie = ClubDataCompetitie.find_or_initialize_by(poulecode: data['poulecode'])
-      competitie.club_data_team = club_data_team
+      competition = ClubDataCompetition.find_or_initialize_by(poulecode: data['poulecode'])
+      competition.club_data_team = club_data_team
       %w[competitienaam klasse poule klassepoule competitiesoort].each do |field|
-        competitie.write_attribute(field, data[field])
+        competition.write_attribute(field, data[field])
       end
-      competitie.save
+      competition.save
 
     end
 

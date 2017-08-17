@@ -15,6 +15,7 @@ class Team < ApplicationRecord
   has_many :training_schedules, dependent: :destroy
   has_many :trainings, dependent: :destroy
   has_many :matches, dependent: :destroy
+  has_many :club_data_competitions, through: :club_data_team
   has_paper_trail
 
   validates_presence_of :name, :age_group

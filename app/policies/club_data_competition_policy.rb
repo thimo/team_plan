@@ -1,4 +1,4 @@
-class ClubDataCompetitiePolicy < AdminPolicy
+class ClubDataCompetitionPolicy < AdminPolicy
   class Scope < Scope
     def resolve
       scope

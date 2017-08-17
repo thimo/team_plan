@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815203006) do
+ActiveRecord::Schema.define(version: 20170817204540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170815203006) do
     t.index ["season_id"], name: "index_age_groups_on_season_id"
   end
 
-  create_table "club_data_competities", force: :cascade do |t|
+  create_table "club_data_competitions", force: :cascade do |t|
     t.integer "poulecode", null: false
     t.string "competitienaam"
     t.string "klasse"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20170815203006) do
     t.bigint "club_data_team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["club_data_team_id"], name: "index_club_data_competities_on_club_data_team_id"
-    t.index ["poulecode"], name: "index_club_data_competities_on_poulecode", unique: true
+    t.index ["club_data_team_id"], name: "index_club_data_competitions_on_club_data_team_id"
+    t.index ["poulecode"], name: "index_club_data_competitions_on_poulecode", unique: true
   end
 
   create_table "club_data_teams", force: :cascade do |t|
@@ -450,7 +450,7 @@ ActiveRecord::Schema.define(version: 20170815203006) do
   end
 
   add_foreign_key "age_groups", "seasons"
-  add_foreign_key "club_data_competities", "club_data_teams"
+  add_foreign_key "club_data_competitions", "club_data_teams"
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
   add_foreign_key "favorites", "users"
