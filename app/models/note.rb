@@ -1,7 +1,7 @@
 class Note < ApplicationRecord
   belongs_to :user, required: true
   belongs_to :team, required: true
-  belongs_to :member
+  belongs_to :member, optional: true
   has_paper_trail
 
   enum visibility: { self: 0, staff: 1, member: 2 }
