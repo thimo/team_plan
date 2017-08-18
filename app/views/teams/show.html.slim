@@ -145,4 +145,5 @@
       = render "notes/list", team: @team, notes: @notes
 
     - if @competitions
-      = render "competitions", competitions: @competitions, compact: true
+      - @competitions.each do |competition|
+        = render "competition", competition: competition, compact: true

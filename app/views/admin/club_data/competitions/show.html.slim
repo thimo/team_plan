@@ -1,0 +1,34 @@
+- provide(:title, "Competitie #{@competition.club_data_team.team.name} #{@competition.competitiesoort} - #{@competition.klasse}")
+- provide(:subtitle, "#{@competition.competitienaam}")
+
+.row
+  .col-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Wedstrijden
+
+      .box-typical-body.table-responsive
+        table.table.table-sm.tr-links
+          thead
+            tr
+              th
+              th Thuis
+              th
+              th Uit
+          tbody
+            - @competition.club_data_matches.asc.each do |match|
+             tr[class="#{'strong' if match.team.present?}"]
+              td.nowrap
+                = I18n.l match.wedstrijddatum, format: :date_short
+              td
+                = match.thuisteam
+              td
+                | -
+              td
+                = match.uitteam
+
+  .col-6
+    = render "teams/competition", competition: @competition, compact: true

@@ -105,7 +105,7 @@ Rails.application.routes.draw do
         resources :teams
         resources :teams_import, only: [:new, :create]
         resources :competitions
-        resources :rankings_import, only: [:new, :create]
+        resources :competitions_import, only: [:new, :create]
       end
       resources :soccer_fields
     end
