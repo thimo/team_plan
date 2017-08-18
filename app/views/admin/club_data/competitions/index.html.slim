@@ -1,0 +1,53 @@
+- provide(:title, "Competities")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@competitions.count} Competities
+      - if policy(ClubDataCompetition).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_club_data_rankings_import_path, title: "Importeer standen", class: "action-btn"
+            i.fa.fa-refresh
+  .box-typical-body.table-responsive
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th Team
+          th = ClubDataCompetition.human_attribute_name(:competitiesoort)
+          th = ClubDataCompetition.human_attribute_name(:klasse)
+          th = ClubDataCompetition.human_attribute_name(:competitienaam)
+          th = ClubDataCompetition.human_attribute_name(:ranking)
+      tbody
+        - @competitions.each do |competition|
+          tr
+            td
+              - if competition&.club_data_team&.team.present?
+                = link_to competition.club_data_team.team.name, competition.club_data_team.team
+            td
+              = competition.competitiesoort
+            td
+              = competition.klasse
+            td
+              = competition.competitienaam
+            td
+              table
+                thead
+                  th
+                  th Team
+                  th Gespeeld
+                  th Punten
+                tbody
+                  - competition.ranking.each do |line|
+                    tr[class="#{'strong' if line['eigenteam'] == 'true'}"]
+                      td
+                        = line['positie']
+                      td
+                        = line['teamnaam']
+                      td
+                        = line['gespeeldewedstrijden']
+                      td
+                        = line['punten']
+                      / td
+                      /   = line

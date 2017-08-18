@@ -102,10 +102,10 @@ Rails.application.routes.draw do
         :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
       namespace :club_data do
         resources :dashboards
-        resources :teams, shallow: true do
-          resources :competitions
-        end
+        resources :teams
         resources :teams_import, only: [:new, :create]
+        resources :competitions
+        resources :rankings_import, only: [:new, :create]
       end
       resources :soccer_fields
     end

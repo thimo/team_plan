@@ -9,7 +9,7 @@ header.site-header
     a.site-logo[href="/" alt="#{Setting['club.name']} #{Setting['application.name']}"]
       img[src="#{asset_path 'logo/esa_logo.svg'}" alt=""]
       h1 TeamPlan
-    
+
     .site-header-content
       .site-header-content-in
         .site-header-shown
@@ -35,7 +35,7 @@ header.site-header
             button.burger-right[type="button"]
               i.font-icon-menu-addl
 
-                    
+
         .mobile-menu-right-overlay
         .site-header-collapsed
           .site-header-collapsed-in
@@ -45,7 +45,7 @@ header.site-header
                   span.font-icon.font-icon-cogwheel
                   span.lbl
                     | Admin
-                    
+
                 .dropdown-menu[aria-labelledby="dd-header-admin"]
                   = link_to admin_members_path, class: 'dropdown-item' do
                     i.fa.fa-users.font-icon
@@ -74,8 +74,11 @@ header.site-header
                     /   i.fa.fa-dashboard.font-icon
                     /   | Dashboard
                     = link_to admin_club_data_teams_path, class: 'dropdown-item' do
-                      i.fa.fa-dashboard.font-icon
+                      i.fa.fa-table.font-icon
                       | Teams
+                    = link_to admin_club_data_competitions_path, class: 'dropdown-item' do
+                      i.fa.fa-table.font-icon
+                      | Competities
 
             .site-header-search-container
               = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
@@ -83,5 +86,5 @@ header.site-header
                 = f.button
                   span.font-icon-search
                 .overlay
-        
+
 .mobile-menu-left-overlay

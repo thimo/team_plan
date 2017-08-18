@@ -1,25 +1,64 @@
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 Competities
+- compact ||= false
 
-  .box-typical-body
-    table.table.table-sm.tr-links
-      - if competitions.size > 0
-        tbody
-          - competitions.each do |competition|
-            tr.clickable
-              td
-                = "#{competition.competitiesoort} - #{competition.klasse}"
-                span.color-blue-grey-lighter.pl-2
-                  = "#{competition.poule}"
-                .color-blue-grey.small
-                  = "#{competition.competitienaam}"
+- if competitions.size > 0
+  - competitions.each do |competition|
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h4
+              = "#{competition.competitiesoort} - #{competition.klasse}"
+              span.color-blue-grey-lighter.pl-2
+                = "#{competition.poule}"
+              .color-blue-grey.small
+                = "#{competition.competitienaam}"
 
-
-      - else
-        tbody
-          tr
-            td
-              i Geen competities gevonden
+      .box-typical-body
+        table.table.table-sm.tr-links
+          thead
+            tr
+              th
+              th Team
+              th.text-center[title="Gespeeld"]
+                | G
+              - unless compact
+                th.text-center[title="Gewonnen"]
+                  | W
+                th.text-center[title="Gelijk"]
+                  | GL
+                th.text-center[title="Verloren"]
+                  | V
+              th.text-center[title="Punten"]
+                | P
+              - unless compact
+                th.text-center[title="Doelpunten voor"]
+                  | DPV
+                th.text-center[title="Doelpunten tegen"]
+                  | DPT
+              th.text-center[title="Doelsaldo"]
+                | DS
+            tbody
+              - competition.ranking.each do |line|
+                tr[class="#{'strong' if line['eigenteam'] == 'true'}"]
+                  td.text-right
+                    = line['positie']
+                  td
+                    = line['teamnaam']
+                  td.text-center
+                    = line['gespeeldewedstrijden']
+                  - unless compact
+                    td.text-center
+                      = line['gewonnen']
+                    td.text-center
+                      = line['gelijk']
+                    td.text-center
+                      = line['verloren']
+                  td.text-center
+                    = line['punten']
+                  - unless compact
+                    td.text-center
+                      = line['doelpuntenvoor']
+                    td.text-center
+                      = line['doelpuntentegen']
+                  td.text-center
+                    = line['doelsaldo']
