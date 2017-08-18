@@ -1,4 +1,6 @@
 class ClubDataTeam < ApplicationRecord
+  include Activatable
+
   has_one :team
   has_many :club_data_competitions
 

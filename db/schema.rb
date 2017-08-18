@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817204540) do
+ActiveRecord::Schema.define(version: 20170818171455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20170817204540) do
     t.bigint "club_data_team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
+    t.json "ranking"
     t.index ["club_data_team_id"], name: "index_club_data_competitions_on_club_data_team_id"
     t.index ["poulecode"], name: "index_club_data_competitions_on_poulecode", unique: true
   end
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170817204540) do
     t.string "speeldagteam"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
     t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
   end
 
