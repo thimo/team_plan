@@ -49,6 +49,9 @@ Rails.application.routes.draw do
           resources :matches, shallow: true do
             resources :presences
           end
+          resources :club_data_matches, shallow: true do
+            resources :presences
+          end
         end
       end
     end

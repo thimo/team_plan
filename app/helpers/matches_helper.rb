@@ -1,12 +1,17 @@
 module MatchesHelper
   def match_title(match)
-    teams = ["#{Setting['club.name_short']} #{match.team.name}", match.opponent]
-    if match.location_opponent?
-      teams.reverse * ' - '
+    case [match.class]
+    when [ClubDataMatch]
+      match.wedstrijd
     else
-      teams * ' - '
+      teams = ["#{Setting['club.name_short']} #{match.team.name}", match.opponent]
+      if match.location_opponent?
+        teams.reverse * ' - '
+      else
+        teams * ' - '
+      end
     end
-  end
+   end
 
   def match_schedule_color(match)
     if match.started_at.to_date == Time.zone.today.to_date

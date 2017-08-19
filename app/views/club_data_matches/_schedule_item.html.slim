@@ -1,0 +1,23 @@
+- match = object
+- date = match.started_at
+
+tr.clickable[class="#{match_schedule_color(match)}"]
+  td.schedule-date
+    .weekday.color-blue-grey
+      = I18n.l(date, format: :weekday).upcase
+    .date
+      = I18n.l(date, format: :date_short)
+  td
+    .strong
+      = link_to match
+        = match_title(match)
+    .color-blue-grey
+      | #{I18n.l match.started_at, format: :time_short} uur
+  td.w-1.nowrap.text-right
+    - if (present = match.presences.present).size > 0
+      - if policy(match).update?
+        a.dropdown-toggle.label.ml-1[href="#" title="Aanwezig"]
+          = present.size
+      - else
+        .label.ml-1[title="Aanwezig"]
+          = present.size
