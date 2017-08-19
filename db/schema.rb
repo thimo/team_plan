@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818194440) do
+ActiveRecord::Schema.define(version: 20170819114247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20170818194440) do
     t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "remark"
+    t.boolean "user_modified", default: false
     t.index ["club_data_competition_id"], name: "index_club_data_matches_on_club_data_competition_id"
     t.index ["team_id"], name: "index_club_data_matches_on_team_id"
   end
