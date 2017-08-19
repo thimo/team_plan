@@ -11,16 +11,16 @@
       table.table.table-sm.tr-links
         thead
           tr
-            th = Member.human_attribute_name(:name) 
+            th = Member.human_attribute_name(:name)
             th = Member.human_attribute_name(:email)
         tbody
           - @import_result[:created].each do |member|
             tr
               td
-                = render member
-              td 
+                = render 'members/member', member: member
+              td
                 = member.email
-                
+
   section.box-typical
     header.box-typical-header
       .tbl-row
@@ -31,16 +31,16 @@
       table.table.table-sm.tr-links
         thead
           tr
-            th = Member.human_attribute_name(:name) 
+            th = Member.human_attribute_name(:name)
             th = Member.human_attribute_name(:email)
         tbody
           - @import_result[:activated].each do |member|
             tr
               td
-                = render member
-              td 
+                = render 'members/member', member: member
+              td
                 = member.email
-                
+
 - if @cleanup_result.present?
   section.box-typical
     header.box-typical-header
@@ -52,12 +52,12 @@
       table.table.table-sm.tr-links
         thead
           tr
-            th = Member.human_attribute_name(:name) 
+            th = Member.human_attribute_name(:name)
             th = Member.human_attribute_name(:email)
         tbody
           - @cleanup_result[:deregistered].each do |member|
             tr
               td
-                = render member
-              td 
+                = render 'members/member', member: member
+              td
                 = member.email
