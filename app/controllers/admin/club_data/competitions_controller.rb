@@ -6,5 +6,6 @@ class Admin::ClubData::CompetitionsController < ApplicationController
   def show
     @competition = ClubDataCompetition.find(params[:id])
     authorize @competition
+    @matches = @competition.club_data_matches.asc
   end
 end
