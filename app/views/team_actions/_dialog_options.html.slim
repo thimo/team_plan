@@ -1,7 +1,7 @@
 div[class="#{column_class}"]
   - if params[:type] == 'email'
     .form-check
-      strong 
+      strong
         | Selectie e-mailadressen
     .form-check
       label.form-check-label
@@ -15,9 +15,9 @@ div[class="#{column_class}"]
       label.form-check-label
         input.form-check-input[type="radio" name="email_selection" value="player"]
         |  Spelers
-        
+
     .form-check
-      strong 
+      strong
         | Voor gebruik met
     .form-check
       label.form-check-label
@@ -29,7 +29,7 @@ div[class="#{column_class}"]
         | Apple Mail, Gmail
 
     .form-check
-      strong 
+      strong
         | Invullen in veld
     .form-check
       label.form-check-label
@@ -44,10 +44,10 @@ div[class="#{column_class}"]
         => f.radio_button :to_field, "bcc", class: "form-check-input"
         | BCC
 
-        
+
   - if params[:type] == 'download_team_members'
     .form-check
-      strong 
+      strong
         | Status van teams
     .form-check
       label.form-check-label
@@ -59,9 +59,9 @@ div[class="#{column_class}"]
           input.form-check-input[type="radio" name="status" value="#{status}"]
           |  #{AgeGroup.statuses_i18n[status]}
     .form-check
-      strong 
+      strong
         | Kolommen
-    - Member::EXPORT_COLUMNS.each do |column, index|
+    - Member.export_columns(current_user).each do |column, index|
       .form-check
         label.form-check-label
           => f.check_box 'columns[]', { checked: current_user.export_columns.include?(column.to_s), class: 'form-check-input' }, column.to_s, nil

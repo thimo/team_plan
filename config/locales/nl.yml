@@ -334,6 +334,10 @@ nl:
   email: E-mail
   member_since: Lid sinds
   previous_team: Vorig team
+  field_positions: Veldpositie
+  prefered_foot: Links-/rechtsbenig
+  advise_next_season: Advies niveau
+
   training: Training
 
   "false": "Nee"

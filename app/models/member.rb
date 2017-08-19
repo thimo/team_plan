@@ -7,6 +7,7 @@ class Member < ApplicationRecord
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = 'overschrijving spelactiviteit'
 
   EXPORT_COLUMNS = %w(season age_group team association_number name reversed_name last_name first_name middle_name born_on role address zipcode city phone email member_since previous_team)
+  EXPORT_COLUMNS_ADVANCED = %w(field_positions prefered_foot advise_next_season)
   DEFAULT_COLUMNS = %w(team association_number name born_on role address zipcode city phone email)
 
   has_many :team_members, dependent: :destroy
@@ -85,6 +86,10 @@ class Member < ApplicationRecord
     player_evaluations.for_season(season).finished_desc.first
   end
 
+  def last_evaluation
+    player_evaluations.finished_desc.first
+  end
+
   def active?
     active_team_member.present?
   end
@@ -161,5 +166,9 @@ class Member < ApplicationRecord
     end
 
     result
+  end
+
+  def self.export_columns(user)
+    Member::EXPORT_COLUMNS + ((user.admin? || user.club_staff?) ? Member::EXPORT_COLUMNS_ADVANCED : [])
   end
 end
