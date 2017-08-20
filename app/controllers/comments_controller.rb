@@ -1,11 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :load_commentable, only: [:create]
+  before_action :create_comment, only: [:create]
+  before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :add_breadcrumbs
 
   def create
-    @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
-    authorize @comment
     if @comment.save
       redirect_to [@commentable, comment: @comment.comment_type], notice: "Opmerking is toegevoegd."
     else
@@ -30,6 +29,11 @@ class CommentsController < ApplicationController
   end
 
   private
+    def create_comment
+      @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
+      authorize @comment
+    end
+
     def set_comment
       @comment = Comment.find(params[:id])
       authorize @comment
