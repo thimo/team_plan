@@ -2,7 +2,7 @@
 - ts = training.training_schedule
 - date = training.started_at
 
-tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' if date < Time.zone.today}"]
+tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date} #{'table-active' if date < Time.zone.today}"]
   td.schedule-date
     .weekday.color-blue-grey
       = I18n.l(date, format: :weekday).upcase
@@ -24,10 +24,10 @@ tr.clickable[class="#{'table-info' if date == Time.zone.today} #{'table-active' 
     - if (present = training.presences.present).size > 0
       - if policy(training).update?
         a.dropdown-toggle.label.ml-1[href="#" title="Aanwezig"]
-          = present.size    
-      - else 
+          = present.size
+      - else
         .label.ml-1[title="Aanwezig"]
-          = present.size    
+          = present.size
     / - if ts.present?
     /   - if policy(ts).update?
     /     = link_to [:edit, ts]
