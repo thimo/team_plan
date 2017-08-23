@@ -12,6 +12,8 @@ class Admin::ClubData::CompetitionsImportController < ApplicationController
         competition.save
       end
 
+      imported_wedstrijdnummers = []
+
       # Fetch upcoming matches
       json = JSON.load(open("#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
       json.each do |data|
@@ -27,8 +29,12 @@ class Admin::ClubData::CompetitionsImportController < ApplicationController
         end
         club_data_match.save
 
-        # club_data_match.link_to_team
+        imported_wedstrijdnummers << club_data_match.wedstrijdnummer
+      end
 
+      # Cleanup matches that were not included in the import
+      competition.club_data_matches.from_now.each do |match|
+        match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
       end
     end
 

@@ -8,6 +8,7 @@ class ClubDataMatch < ApplicationRecord
   scope :in_period, -> (start_date, end_date) {
     where('wedstrijddatum > ?', start_date).where('wedstrijddatum < ?', end_date)
   }
+  scope :from_now, -> { where('wedstrijddatum > ?', Time.zone.now) }
 
   def started_at
     wedstrijddatum
