@@ -15,6 +15,7 @@ section.box-typical
       thead
         tr
           th = ClubDataTeam.human_attribute_name(:teamnaam)
+          th = ClubDataTeam.human_attribute_name(:teamcode)
           th = ClubDataTeam.human_attribute_name(:geslacht)
           th = ClubDataTeam.human_attribute_name(:leeftijdscategorie)
           th = ClubDataTeam.human_attribute_name(:teamcode)
@@ -25,12 +26,13 @@ section.box-typical
             td
               = team.teamnaam
             td
+              = team.teamcode
+            td
               = team.geslacht
             td
               = team.leeftijdscategorie
             td
               = team.teamcode
-            td 
+            td
               - if team.team.present?
                 = link_to team.team.name, team.team
-            
