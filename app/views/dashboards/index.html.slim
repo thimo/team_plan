@@ -19,7 +19,7 @@
                   .tbl-row
                     .tbl-cell.tbl-cell-title
                       h4 Mijn teams
-                          
+
                 .box-typical-body.mb-3
                   ul.side-menu-list
                     - @active_teams.each do |team|
@@ -28,14 +28,14 @@
                           i.fa.fa-futbol-o
                           span.lbl
                             = team.name
-                        
+
             - if @favorite_teams.present? || @favorite_age_groups.present?
               .col-6
                 header.box-typical-header
                   .tbl-row
                     .tbl-cell.tbl-cell-title
                       h4 Favorieten
-                          
+
                 .box-typical-body.mb-3
                   ul.side-menu-list
                     - @favorite_teams.each do |team|
@@ -50,12 +50,13 @@
                           i.fa.fa-star
                           span.lbl
                             = age_group.name
-                    
+
       section.box-typical
         header.box-typical-header
           .tbl-row
             .tbl-cell.tbl-cell-title
-              h4 Seizoen #{@season.name}
+              h4 
+                = link_to "Seizoen #{@season.name}", @season
 
         .row.mb-3
           .col-6
@@ -97,7 +98,7 @@
       - @favorite_teams.each do |team|
         - if (schedules = team.schedules(from: 0.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)).any?
           = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
-        
+
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
 
