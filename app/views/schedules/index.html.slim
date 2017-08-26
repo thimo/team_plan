@@ -1,0 +1,16 @@
+- provide(:title, "Kalender #{Setting['club.name_short']} #{@team.name}")
+
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+
+  .col-12
+    = month_calendar attribute: :started_at, events: @schedules do |date, meetings|
+      .color-blue-grey
+        = I18n.l date, format: :date_short
+      - if meetings.any?
+        hr
+        - meetings.each do |meeting|
+          div
+            = link_to schedule_title(meeting), meeting

@@ -3,6 +3,7 @@ nl:
     formats:
       weekday: "%a"
       date_long: "%-d %b %Y"
+      date_short: "%-d %b"
   time:
     formats:
       time_short: "%k:%M"
@@ -342,3 +343,7 @@ nl:
 
   "false": "Nee"
   "true": "Ja"
+
+  simple_calendar:
+    previous: Vorige maand
+    next: Volgende maand

@@ -1,5 +1,5 @@
 class TrainingsController < ApplicationController
-  include TrainingsHelper
+  include SchedulesHelper
 
   before_action :set_team, only: [:new, :create]
   before_action :create_training, only: [:new, :create]
@@ -67,7 +67,7 @@ class TrainingsController < ApplicationController
       if @training.new_record?
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb training_title(@training), @training
+        add_breadcrumb schedule_title(@training), @training
       end
     end
 end

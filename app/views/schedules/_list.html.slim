@@ -7,7 +7,7 @@ section.box-typical.schedule-list
     .tbl-row
       .tbl-cell.tbl-cell-title
         h4
-          = title
+          = link_to title, [team, :schedules]
       .tbl-cell.tbl-cell-actions
         - if policy(Match.new(team: team)).create?
           = link_to new_team_match_path(team), title: "Wedstrijd toevoegen", class: "action-btn"
@@ -15,7 +15,7 @@ section.box-typical.schedule-list
         - if policy(Training.new(team: team)).create?
           = link_to new_team_training_path(team), title: "Training toevoegen", class: "action-btn"
             i.fa.fa-line-chart
-          
+
   .box-typical-body
     table.table.table-xs.tr-links
       - if schedules.size > 0
@@ -26,7 +26,7 @@ section.box-typical.schedule-list
         tbody
           - schedules.each do |schedule|
             = render "#{schedule.model_name.plural}/schedule_item", object: schedule
-      - else 
+      - else
         tbody
           tr
             td

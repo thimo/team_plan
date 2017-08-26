@@ -1,5 +1,5 @@
 class ClubDataMatchesController < ApplicationController
-  include MatchesHelper
+  include SchedulesHelper
 
   # before_action :set_team, only: [:new, :create]
   # before_action :create_match, only: [:new, :create]
@@ -68,7 +68,7 @@ class ClubDataMatchesController < ApplicationController
       if @match.new_record?
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb match_title(@match), @match
+        add_breadcrumb schedule_title(@match), @match
       end
     end
 end

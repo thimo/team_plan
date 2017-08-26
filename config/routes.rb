@@ -52,6 +52,7 @@ Rails.application.routes.draw do
           resources :club_data_matches, shallow: true do
             resources :presences
           end
+          resources :schedules
         end
       end
     end

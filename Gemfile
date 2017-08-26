@@ -48,6 +48,7 @@ gem 'pretender'
 gem 'trix'
 gem 'pg_search'
 gem 'simple-password-gen'
+gem "simple_calendar", "~> 2.0"
 
 group :development, :test do
   gem 'byebug', platform: :mri

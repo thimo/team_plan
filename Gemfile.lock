@@ -302,6 +302,8 @@ GEM
       rubyzip (~> 1.0)
     shellany (0.0.1)
     simple-password-gen (0.1.5)
+    simple_calendar (2.2.6)
+      rails (>= 3.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -416,6 +418,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   simple-password-gen
+  simple_calendar (~> 2.0)
   simple_form (~> 3.5.0)
   slim
   spring

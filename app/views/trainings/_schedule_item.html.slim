@@ -10,7 +10,7 @@ tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date} #
       = I18n.l(date, format: :date_short)
   td
     = link_to training
-      = training_title(training)
+      = schedule_title training
     - if ts&.soccer_field
       span.color-blue-grey.pl-2
          = ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")

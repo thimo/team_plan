@@ -1,0 +1,45 @@
+.simple-calendar {
+  margin-bottom: 15px;
+
+  .day {
+    vertical-align: top;
+
+    hr {
+      margin: .5em 0;
+    }
+  }
+
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+
+  .today {}
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {
+    background: #f6f8fa;
+  }
+  .next-month {
+    background: #f6f8fa;
+  }
+  .current-month {}
+
+  .has-events {}
+
+  .calendar-heading {
+    text-align: center;
+    margin: 15px 0;
+
+    .calendar-title {
+      font-size: 1.75rem;
+      padding: 0 40px;
+    }
+  }
+}
