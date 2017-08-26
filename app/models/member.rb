@@ -46,7 +46,7 @@ class Member < ApplicationRecord
   scope :injured, -> { where(injured: true) }
 
   pg_search_scope :search_by_name,
-    against: [:first_name, :middle_name, :last_name, :email, :email2],
+    against: [:first_name, :middle_name, :last_name, :email, :email2, :phone, :phone2],
     using:  {
               tsearch: {prefix: true}
             },
