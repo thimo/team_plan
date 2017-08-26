@@ -30,11 +30,13 @@ class Member < ApplicationRecord
   scope :sportlink_player, -> { where("sport_category <> ''").or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)) }
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
+  scope :gender, -> (gender) { where(gender: gender) }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
   scope :team_staff, -> { joins(:team_members).where.not(team_members: {role: TeamMember.roles[:player]}) }
 
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}
   scope :by_season, -> (season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
+  scope :not_in_team, -> { includes(team_members: {team: :age_group}).where(age_groups: {season_id: nil}) }
   scope :by_age_group, -> (age_group) { includes(team_members: :team).where(teams: {age_group_id: age_group}) }
   # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that it's renamed everywhere
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }

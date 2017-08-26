@@ -10,6 +10,11 @@ class AgeGroupsController < ApplicationController
     @finished_team_evaluations = TeamEvaluation.finished.desc_finished.by_age_group(@age_group)
     @teams = human_sort(policy_scope(@age_group.teams), :name)
 
+    if policy(@age_group).show_available_members?
+      available_members = @age_group.active_members - @age_group.assigned_active_members
+      @available_members = Kaminari.paginate_array(available_members).page(params[:member_page]).per(10)
+    end
+
     todos = policy_scope(@age_group.todos).open.asc
     @todos_active = todos.active.to_a
     @todos_defered = todos.defered.to_a

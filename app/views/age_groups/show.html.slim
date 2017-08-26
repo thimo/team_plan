@@ -42,7 +42,7 @@
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
                 i.fa.fa-files-o
-                
+
       .box-typical-body
         table.table.table-sm.tr-links
           tbody
@@ -53,7 +53,7 @@
                   - if team.draft?
                     .color-blue-grey.small
                       = team.remark
-                td 
+                td
                   = team.division
                 td.text-right
                   - if policy(team).show_status?
@@ -63,14 +63,17 @@
                       = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).staff.pluck(:member_id).uniq.size}"
 
   .col-xl-6
+    - if policy(@age_group).show_available_members? && @available_members.present?
+      = render "members/list", members: @available_members, title: "Wachtlijst"
+
     - if policy(@age_group).show_evaluations?
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties", hide_status: true, show_last_modified: true, show_progress: true
       - if @finished_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @finished_team_evaluations, title: "Afgeronde teamevaluaties", hide_status: true, show_finished_by: true
-        
+
     - if (policy(@age_group).show_injureds? && @injureds.any?)
       = render "injureds/list", injureds: @injureds
-      
+
     - if policy(@age_group).show_todos? && (@todos_active.present? || @todos_defered.present?)
       = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_age_group_todo_path(@age_group)

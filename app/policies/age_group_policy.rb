@@ -43,6 +43,10 @@ class AgeGroupPolicy < ApplicationPolicy
     show_todos?
   end
 
+  def show_available_members?
+    show_todos?
+  end
+
   def show_status?
     return false if @record.status == @record.season.status
 
