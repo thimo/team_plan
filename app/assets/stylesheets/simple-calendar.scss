@@ -3,9 +3,25 @@
 
   .day {
     vertical-align: top;
+    padding: 2px 5px;
 
     hr {
       margin: .5em 0;
+    }
+
+    .event {
+      background: #b0e4fe;
+      padding: 3px 5px;
+      border-radius: 4px;
+      margin-bottom: 3px;
+
+      a {
+        color: black;
+      }
+
+      .time {
+        font-weight: 600;
+      }
     }
   }
 
@@ -38,8 +54,16 @@
     margin: 15px 0;
 
     .calendar-title {
-      font-size: 1.75rem;
       padding: 0 40px;
+    }
+  }
+
+  thead {
+    th {
+      text-align: center;
+      text-transform: uppercase;
+      background: white;
+      font-size: .8rem;
     }
   }
 }

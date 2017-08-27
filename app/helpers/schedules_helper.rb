@@ -2,7 +2,8 @@ module SchedulesHelper
   def schedule_title(object)
     case [object.class]
     when [ClubDataMatch]
-      object.wedstrijd
+      "#{schedule_match_thuis(object)} - #{schedule_match_uit(object)}".html_safe
+
     when [Match]
       teams = ["#{Setting['club.name_short']} #{object.team.name}", object.opponent]
       if object.location_opponent?
@@ -11,7 +12,7 @@ module SchedulesHelper
         teams * ' - '
       end
     when [Training]
-      "#{I18n.t object.model_name.singular} - #{I18n.l object.started_at, format: :weekday} #{I18n.l object.started_at, format: :date_time_short}"
+      "#{I18n.t object.model_name.singular}"
     end
   end
 
