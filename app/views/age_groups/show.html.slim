@@ -62,6 +62,32 @@
                     .label.label-two-numbers>
                       = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).staff.pluck(:member_id).uniq.size}"
 
+    - if @schedules.any?
+      section.box-typical.schedule-list
+        header.box-typical-header
+          .tbl-row
+            .tbl-cell.tbl-cell-title
+              h4 Wedstrijden deze week
+
+        .box-typical-body
+          table.table.table-xs.tr-links
+            - @schedules.each do |date, matches|
+              tr
+                td.strong[colspan="100"]
+                  | #{l date, format: :weekday} #{l date, format: :date_long}
+              - human_sort(matches, :team_name).each do |match|
+                tr.clickable
+                  td
+                    .color-blue-grey
+                      | #{I18n.l match.started_at, format: :time_short} uur
+                  td
+                    = link_to match
+                      = schedule_match_thuis(match)
+                  td -
+                  td
+                    = link_to match
+                      = schedule_match_uit(match)
+
   .col-xl-6
     - if policy(@age_group).show_available_members? && @available_members.present?
       = render "members/list", members: @available_members, title: "Wachtlijst"

@@ -3,7 +3,11 @@ module SortHelper
   def human_sort(objects = [], attribute = "")
     return [] if attribute.blank? || objects.blank?
 
-    objects.sort_by { |obj| obj[attribute].to_s.split(/(\d+)/).map { |e| [e.to_i, e] } }
+    objects = objects.sort_by { |obj|
+      obj.send(attribute).to_s.split(/(\d+)/).map { |e|
+        [e.to_i, e]
+      }
+    }
   end
 
 end

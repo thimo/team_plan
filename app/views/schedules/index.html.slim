@@ -5,7 +5,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
 
-  .col-12
+  .col-12.table-responsive
     = month_calendar attribute: :started_at, events: @schedules do |date, meetings|
       .color-blue-grey
         = I18n.l date, format: :date_short

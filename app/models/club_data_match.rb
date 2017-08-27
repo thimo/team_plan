@@ -10,6 +10,8 @@ class ClubDataMatch < ApplicationRecord
   }
   scope :from_now, -> { where('wedstrijddatum > ?', Time.zone.now) }
 
+  delegate :name, to: :team, :prefix => true
+
   def started_at
     wedstrijddatum
   end

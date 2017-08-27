@@ -7,6 +7,8 @@ class AgeGroup < ApplicationRecord
   has_many :members, through: :team_members
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :todos, as: :todoable, dependent: :destroy
+  has_many :matches, through: :teams
+  has_many :club_data_matches, through: :teams
   has_paper_trail
 
   validates_presence_of :name, :season, :gender
@@ -52,6 +54,12 @@ class AgeGroup < ApplicationRecord
 
   def status_children
     teams
+  end
+
+  def schedules(from:, up_to:)
+    schedules = matches.in_period(from, up_to).to_a
+    schedules += club_data_matches.in_period(from, up_to).to_a
+    schedules.flatten.sort_by(&:started_at)
   end
 
 end

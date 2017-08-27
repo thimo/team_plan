@@ -15,17 +15,21 @@ class AgeGroupsController < ApplicationController
       @available_members = Kaminari.paginate_array(available_members).page(params[:member_page]).per(10)
     end
 
-    todos = policy_scope(@age_group.todos).open.asc
+    todos = policy_scope(@age_group.todos).open.asc.includes(:todoable)
     @todos_active = todos.active.to_a
     @todos_defered = todos.defered.to_a
-    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id)).open.asc
+    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id)).open.asc.includes(:todoable)
     @todos_active += todos.active
     @todos_defered += todos.defered
-    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_age_group(@age_group).map(&:id)).open.asc
+    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_age_group(@age_group).map(&:id)).open.asc.includes(:todoable)
     @todos_active += todos.active
     @todos_defered += todos.defered
 
     @injureds = policy_scope(Member).by_age_group(@age_group).injured.asc
+    @schedule_simple = true
+    schedules = @age_group.schedules(from: 0.days.ago.beginning_of_day, up_to: 1.week.from_now.end_of_day)
+    @schedules = schedules.group_by{ |match| match.started_at.to_date }.sort_by{|date, matches| date}
+    # @schedules = human_sort(, :team_name)
   end
 
   def new; end
