@@ -1,4 +1,6 @@
 module SchedulesHelper
+  include ActionView::Helpers::TagHelper
+
   def schedule_title(object)
     case [object.class]
     when [ClubDataMatch]
