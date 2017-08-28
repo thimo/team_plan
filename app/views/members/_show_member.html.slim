@@ -17,13 +17,13 @@ h3 Contactgegevens
     a[href="tel://#{member.phone}"]
       = member.phone
     - unless member.phone_2.blank?
-      |  / 
+      |  /
       a[href="tel://#{member.phone_2}"]
         = member.phone_2
   div
     = mail_to member.email, member.email
     - unless member.email_2.blank?
-      |  / 
+      |  /
       = mail_to member.email_2, member.email_2
 
   - if policy(Member).show_login? && member.email.present?
@@ -31,11 +31,11 @@ h3 Contactgegevens
       - if member.user.present?
         .color-blue-grey
           i Heeft toegang tot TeamPlan
-      - else 
+      - else
         .color-blue-grey
           i Heeft geen toegang tot TeamPlan
         / = link_to "Login aanmaken en versturen", create_login_member_path(member), method: :post, class: "btn btn-sm"
-          
+
   div.pt-4
   - unless member.person_type.blank?
     div
@@ -45,33 +45,33 @@ h3 Contactgegevens
       = "#{member.sport_category} "
     div
       span.color-blue-grey
-        | Lid sinds: 
+        | Lid sinds:
       = I18n.l member.member_since, format: :long
 
   - unless member.registered_at.blank? || member.registered_at == member.member_since
     div
       span.color-blue-grey
-        | Registratiedatum: 
+        | Registratiedatum:
       = I18n.l member.registered_at, format: :long
 
   - if member.status_af_te_melden?
     div
       span.color-blue-grey
-        | Status: 
+        | Status:
       = member.status.capitalize
       - if member.deregistered_at.present?
-        |  per 
+        |  per
         = I18n.l member.deregistered_at, format: :long
-  - else  
-    - unless member.status_definitief? 
+  - else
+    - unless member.status_definitief?
       div
         span.color-blue-grey
-          | Status: 
+          | Status:
         = member.status.capitalize
     - unless member.deregistered_at.blank?
       div
         span.color-blue-grey
-          | Afmelddatum: 
+          | Afmelddatum:
         = I18n.l member.deregistered_at, format: :long
 
 hr
@@ -79,20 +79,23 @@ hr
 h3
   | Teams
 - @team_members.group_by(&:season).sort_by{|season, season_members| season.name}.reverse.each do |season, season_members|
-  strong #{season.name}
-  table
-    - season_members.group_by(&:team).sort_by{|team, team_members| team.name}.each do |team, team_members|
-      - team_members.each_with_index do |team_member, index|
-        tr
-          td.pr-3
-            - if index == 0
-              = link_to team.name, team
-          td.pr-3.color-blue-grey
-            - if index == 0
-              = "#{team.division}" if team.division.present?
-          td.pr-3
-            = team_member.role_i18n
-          td
+  table.table.table-striped
+    - season_members.group_by(&:team).sort_by{|team, team_members| team.name}.each_with_index do |(team, team_members), team_index|
+      tr
+        td
+          - if team_index == 0
+            strong #{season.name}
+        td
+          = link_to team.name, team
+        td.color-blue-grey
+          = "#{team.division}" if team.division.present?
+
+        td
+          - team_members.each do |team_member|
+            div
+              = team_member.role_i18n
+        td
+        - team_members.each do |team_member|
             - if team_member.started_on.present?
               .color-blue-grey
                 | Vanaf #{ I18n.l team_member.started_on, format: :long }

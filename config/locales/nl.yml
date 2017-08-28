@@ -4,6 +4,7 @@ nl:
       weekday: "%a"
       date_long: "%-d %b %Y"
       date_short: "%-d %b"
+      date_day: "%-d"
   time:
     formats:
       time_short: "%k:%M"
@@ -12,6 +13,7 @@ nl:
       date_time_short: "%-d %b %k:%M"
       date_long: "%-d %b %Y"
       date_short: "%-d %b"
+      date_day: "%-d"
   activerecord:
     attributes:
       user:

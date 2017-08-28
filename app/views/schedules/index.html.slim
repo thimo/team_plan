@@ -7,10 +7,12 @@ section.box-typical
 
   .col-12.table-responsive
     = month_calendar attribute: :started_at, events: @schedules do |date, meetings|
-      .color-blue-grey
-        = I18n.l date, format: :date_short
+      .text-right
+        .color-blue-grey-lighter
+          = I18n.l date, format: :date_day
       - if meetings.any?
-        hr
         - meetings.each do |meeting|
-          div
+          .event
+            span.pr-1.time
+              = l meeting.started_at, format: :time_short
             = link_to schedule_title(meeting), meeting

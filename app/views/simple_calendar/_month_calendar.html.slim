@@ -1,0 +1,23 @@
+.simple-calendar
+  .calendar-heading
+    = link_to calendar.url_for_previous_view
+      i.fa.fa-chevron-left
+    span.calendar-title.strong
+      | #{t('date.month_names')[start_date.month].capitalize} #{start_date.year}
+    = link_to calendar.url_for_next_view
+      i.fa.fa-chevron-right
+  table.table
+    thead
+      tr
+        - date_range.slice(0, 7).each do |day|
+          th
+            = t('date.abbr_day_names')[day.wday]
+    tbody
+      - date_range.each_slice(7) do |week|
+        tr
+          - week.each do |day|
+            = content_tag :td, class: calendar.td_classes_for(day) do
+              - if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block)
+                - capture_haml(day, sorted_events.fetch(day, []), &block)
+              - else
+                - block.call day, sorted_events.fetch(day, [])
