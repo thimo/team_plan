@@ -19,5 +19,6 @@
 //= require jquery-ujs/src/rails.js
 //= require selectize/dist/js/standalone/selectize.min.js
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js
+//= require bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js
 //= require turbolinks
 //= require trix

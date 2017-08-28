@@ -1,1 +1,10 @@
-= f.input field, as: :string, placeholder: (placeholder ||= "dd-mm-jjjj"), hint: (hint ||= nil), input_html: {data: {provide: "datepicker", "date-format": "dd-mm-yyyy", "date-language": "nl"}, class: 'width-25'}
+= f.input field, as: :string,
+  placeholder: (placeholder ||= "dd-mm-jjjj"),
+  hint: (hint ||= nil),
+  input_html: { data: { provide: "datepicker",
+        "date-format": "dd-mm-yyyy",
+        "date-language": "nl",
+        "date-today-highlight": true,
+        "date-autoclose": true,
+      },
+    class: 'width-25' }
