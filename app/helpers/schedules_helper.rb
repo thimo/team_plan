@@ -5,7 +5,6 @@ module SchedulesHelper
     case [object.class]
     when [ClubDataMatch]
       "#{schedule_match_thuis(object, no_html: no_html)} - #{schedule_match_uit(object, no_html: no_html)}".html_safe
-
     when [Match]
       teams = ["#{Setting['club.name_short']} #{object.team.name}", object.opponent]
       if object.location_opponent?

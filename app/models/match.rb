@@ -28,4 +28,11 @@ class Match < ApplicationRecord
     self.started_at = started_at.change(hour: time[4], min: time[5]) unless started_at.nil?
   end
 
+  def thuisteam
+    location_opponent? ? opponent : "#{Setting['club.name_short']} #{team.name}"
+  end
+
+  def uitteam
+    location_opponent? ? "#{Setting['club.name_short']} #{team.name}" : opponent
+  end
 end
