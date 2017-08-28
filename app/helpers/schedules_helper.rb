@@ -19,12 +19,10 @@ module SchedulesHelper
 
   def schedule_match_thuis(object, no_html: false)
     return object.thuisteam if no_html
-    debugger
     tag.span(object.thuisteam, class: "#{'strong' if object.is_a?(ClubDataMatch) && object.thuisteamid == object&.team&.club_data_team.teamcode}")
   end
 
   def schedule_match_uit(object, no_html: false)
-    debugger
     return object.uitteam if no_html
     tag.span(object.uitteam, class: "#{'strong' if object.is_a?(ClubDataMatch) && object.uitteamid == object&.team&.club_data_team.teamcode}")
   end
