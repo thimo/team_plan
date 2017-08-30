@@ -1,0 +1,36 @@
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4
+          = link_to "Seizoen #{@season.name}", @season
+
+  .row.mb-3
+    .col-6
+      .box-typical-body
+        - if @age_groups_male.size > 0
+          header.box-typical-header
+            .tbl-row
+              .tbl-cell.tbl-cell-title
+                h4 Mannen
+          ul.side-menu-list
+            - @age_groups_male.each do |age_group|
+              li
+                = link_to age_group
+                  i.fa.fa-group
+                  span.lbl
+                    = age_group.name
+    .col-6
+      .box-typical-body
+        - if @age_groups_female.size > 0
+          header.box-typical-header
+            .tbl-row
+              .tbl-cell.tbl-cell-title
+                h4 Vrouwen
+          ul.side-menu-list
+            - @age_groups_female.each do |age_group|
+              li
+                = link_to age_group
+                  i.fa.fa-group
+                  span.lbl
+                    = age_group.name

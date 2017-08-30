@@ -1,0 +1,39 @@
+section.box-typical
+  .row.mb-3
+    - if @active_teams.present?
+      .col-6
+        header.box-typical-header
+          .tbl-row
+            .tbl-cell.tbl-cell-title
+              h4 Mijn teams
+
+        .box-typical-body.mb-3
+          ul.side-menu-list
+            - @active_teams.each do |team|
+              li.green
+                = link_to team
+                  i.fa.fa-futbol-o
+                  span.lbl
+                    = team.name
+
+    - if @favorite_teams.present? || @favorite_age_groups.present?
+      .col-6
+        header.box-typical-header
+          .tbl-row
+            .tbl-cell.tbl-cell-title
+              h4 Favorieten
+
+        .box-typical-body.mb-3
+          ul.side-menu-list
+            - @favorite_teams.each do |team|
+              li.gold
+                = link_to team
+                  i.fa.fa-star
+                  span.lbl
+                    = team.name
+            - @favorite_age_groups.each do |age_group|
+              li.gold
+                = link_to age_group
+                  i.fa.fa-star
+                  span.lbl
+                    = age_group.name

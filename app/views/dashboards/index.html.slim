@@ -10,88 +10,6 @@
 .dashboard
   .row
     .col-sm-6
-      - if @active_teams.present? || @favorite_teams.present? || @favorite_age_groups.present?
-        section.box-typical
-          .row.mb-3
-            - if @active_teams.present?
-              .col-6
-                header.box-typical-header
-                  .tbl-row
-                    .tbl-cell.tbl-cell-title
-                      h4 Mijn teams
-
-                .box-typical-body.mb-3
-                  ul.side-menu-list
-                    - @active_teams.each do |team|
-                      li.green
-                        = link_to team
-                          i.fa.fa-futbol-o
-                          span.lbl
-                            = team.name
-
-            - if @favorite_teams.present? || @favorite_age_groups.present?
-              .col-6
-                header.box-typical-header
-                  .tbl-row
-                    .tbl-cell.tbl-cell-title
-                      h4 Favorieten
-
-                .box-typical-body.mb-3
-                  ul.side-menu-list
-                    - @favorite_teams.each do |team|
-                      li.gold
-                        = link_to team
-                          i.fa.fa-star
-                          span.lbl
-                            = team.name
-                    - @favorite_age_groups.each do |age_group|
-                      li.gold
-                        = link_to age_group
-                          i.fa.fa-star
-                          span.lbl
-                            = age_group.name
-
-      section.box-typical
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 
-                = link_to "Seizoen #{@season.name}", @season
-
-        .row.mb-3
-          .col-6
-            .box-typical-body
-              - if @age_groups_male.size > 0
-                header.box-typical-header
-                  .tbl-row
-                    .tbl-cell.tbl-cell-title
-                      h4 Mannen
-                ul.side-menu-list
-                  - @age_groups_male.each do |age_group|
-                    li
-                      = link_to age_group
-                        i.fa.fa-group
-                        span.lbl
-                          = age_group.name
-          .col-6
-            .box-typical-body
-              - if @age_groups_female.size > 0
-                header.box-typical-header
-                  .tbl-row
-                    .tbl-cell.tbl-cell-title
-                      h4 Vrouwen
-                ul.side-menu-list
-                  - @age_groups_female.each do |age_group|
-                    li
-                      = link_to age_group
-                        i.fa.fa-group
-                        span.lbl
-                          = age_group.name
-
-      - if @todos.present?
-        = render "todos/list", todos_active: @todos.active, todos_defered: @todos.defered
-
-    .col-sm-6
       - @active_teams.each do |team|
         - if (schedules = team.schedules(from: 0.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)).any?
           = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
@@ -101,6 +19,15 @@
 
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
+
+      - if @todos.present?
+        = render "todos/list", todos_active: @todos.active, todos_defered: @todos.defered
+
+    .col-sm-6
+      = render 'age_groups'
+
+      - if @active_teams.present? || @favorite_teams.present? || @favorite_age_groups.present?
+        = render 'favorites'
 
       - if @new_members.present?
         = render "members/list", members: @new_members, title: "Nieuwe leden"
