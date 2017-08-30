@@ -7,7 +7,7 @@ section.box-typical.schedule-list
     .tbl-row
       .tbl-cell.tbl-cell-title
         h4
-          = link_to title, [team, :schedules]
+          = title
       .tbl-cell.tbl-cell-actions
         - if policy(Match.new(team: team)).create?
           = link_to new_team_match_path(team), title: "Wedstrijd toevoegen", class: "action-btn"
@@ -31,3 +31,8 @@ section.box-typical.schedule-list
           tr
             td
               i Geen kalenderitems gevonden
+
+  .box-typical-footer.text-right
+    = link_to [team, :schedules]
+      = "Volledige kalender"
+      i.fa.fa-chevron-right.pl-1
