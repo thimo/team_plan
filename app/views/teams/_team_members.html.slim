@@ -1,0 +1,101 @@
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4 Teamgenoten
+      - if policy(@team).bulk_email?
+        .tbl-cell.tbl-cell-action-bordered
+          a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
+            i.fa.fa-envelope-o
+      - if policy(@team).bulk_email?
+        .tbl-cell.tbl-cell-action-bordered
+          a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan alle teamgenoten"]
+            i.fa.fa-envelope
+      - if policy(@team).download_team_members?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to team_download_team_members_path(@team, format: "xlsx"), title: "Download team naar Excel", class: "action-btn"
+            i.fa.fa-file-excel-o
+      - if policy(TeamMember.new(team: @team)).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_team_team_member_path(@team), title: "Teamgenoot toevoegen", class: "action-btn" do
+            i.fa.fa-user
+      - if policy(TeamMember.new(team: @team)).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_team_team_member_bulk_update_path(@team), title: "Teamgenoten toevoegen", class: "action-btn" do
+            i.fa.fa-users
+
+  .box-typical-body.table-responsive
+    table.table.table-sm.tr-links
+      thead
+        th[colspan="2"]
+          | Spelers
+          .label.label-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
+        th
+        - if policy(@team).show_previous_team?
+          th
+        th.d-none.d-sm-table-cell
+
+      tbody
+        - if @players.size > 0
+          - @players.each do |year, team_members|
+            - team_members.each_with_index do |team_member, index|
+              - if index == 0
+                tr.d-table-row.d-sm-none
+                  td.strong.small.color-blue-grey-lighter[colspan="100"]
+                    = year
+              tr
+                td.strong.small.color-blue-grey-lighter.d-none.d-sm-table-cell
+                  = year if index == 0
+                td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
+                  = render team_member.member
+                td.small
+                  - team_member.field_positions.each do |field_position|
+                    div
+                      = field_position.name
+                  .color-blue-grey-lighter
+                    = team_member.prefered_foot
+
+                - if policy(@team).show_previous_team?
+                  td.small
+                    - if (previous_teams = team_member.member.teams_for_season(@previous_season).as_player.distinct).present?
+                      - previous_teams.each do |previous_team|
+                        div.nowrap
+                          = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
+                        div.color-blue-grey-lighter.nowrap
+                          = "#{previous_team.division}"
+
+                td.w-1.nowrap.text-right
+                  / = render "shared/favorite", parent: team_member.member, styleClass: "p-1 pl-2"
+
+                  - if policy(team_member).edit?
+                    = link_to edit_team_member_path(team_member), title: "Aanpassen"
+                      i.fa.fa-pencil.p-1.pl-2
+
+                  - if policy(team_member).destroy?
+                    = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
+                      i.fa.fa-times.p-1.pl-2
+
+                  - if policy(team_member).show_status?
+                    div
+                      = team_member.status_to_label.html_safe
+                      - if policy(team_member).activate?
+                        = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
+                          i.fa.fa-check.p-1.pl-2
+
+      - if @staff.size > 0
+        table.table.table-sm.tr-links
+          thead
+            tr
+              th[colspan="4"] Begeleiding
+          - @staff.each do |member, team_members|
+            = render 'member', member: member, team_members: team_members
+
+- if @old_members.present?
+  section.box-typical
+    .box-typical-body.table-responsive
+      table.table.table-sm.tr-links
+        thead
+          tr
+            th[colspan="4"] Oud teamgenoten
+        - @old_members.each do |member, team_members|
+          = render 'member', member: member, team_members: team_members
