@@ -2,8 +2,8 @@
 - ts = training.training_schedule
 - date = training.started_at
 
-tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date} #{'table-active' if date < Time.zone.today}"]
-  td.schedule-date
+tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date}"]
+  td.schedule-date[class="#{'opacity-5' if date < Time.zone.today}"] 
     .weekday.color-blue-grey
       = I18n.l(date, format: :weekday).upcase
     .date

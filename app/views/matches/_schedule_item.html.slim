@@ -2,7 +2,7 @@
 - date = match.started_at
 
 tr.clickable[class="#{match_schedule_color(match)}"]
-  td.schedule-date
+  td.schedule-date[class="#{"opacity-5" if date.to_date < Time.zone.today}"]
     .weekday.color-blue-grey
       = I18n.l(date, format: :weekday).upcase
     .date
