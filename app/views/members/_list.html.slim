@@ -1,5 +1,4 @@
 - title ||= 'Leden'
-- disable_header ||= false
 
 section.box-typical
   header.box-typical-header
@@ -7,32 +6,26 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         h4
           = title
-          
+
   .box-typical-body
     table.table.table-sm.tr-links
       - if members.size > 0
-        - unless disable_header
-          thead
-            th Naam
-            th 
-            th
-            
         tbody
           - members.each do |member|
             tr.clickable
-              td 
-                = render member
               td
+                = render member
+              td[title="Registratiedatum"]
                 = l member.registered_at, format: :long
               td.text-right
                 - if member.reactivated?
-                  i.fa.fa-recycle.pl-2.color-green[title="Opnieuw geactiveerd"] 
+                  i.fa.fa-recycle.pl-2.color-green[title="Opnieuw geactiveerd"]
 
-      - else 
+      - else
         tbody
           tr
             td
               i Geen leden gevonden
-              
+
   .box-typical-footer
     = paginate members, param_name: 'member_page'
