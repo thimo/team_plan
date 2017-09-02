@@ -27,9 +27,10 @@ class AgeGroupsController < ApplicationController
 
     @injureds = policy_scope(Member).by_age_group(@age_group).injured.asc
     @schedule_simple = true
-    schedules = @age_group.schedules(from: 0.days.ago.beginning_of_day, up_to: 1.week.from_now.end_of_day)
-    @schedules = schedules.group_by{ |match| match.started_at.to_date }.sort_by{|date, matches| date}
-    # @schedules = human_sort(, :team_name)
+    matches = @age_group.not_played_matches(from: 0.days.ago.beginning_of_day, up_to: 1.week.from_now.end_of_day)
+    @not_played_matches = matches.group_by{ |match| match.started_at.to_date }.sort_by{|date, matches| date}
+    matches = @age_group.played_matches(from: 1.week.ago.end_of_day, up_to: 0.days.from_now.end_of_day)
+    @played_matches = matches.group_by{ |match| match.started_at.to_date }.sort_by{|date, matches| date}
   end
 
   def new; end

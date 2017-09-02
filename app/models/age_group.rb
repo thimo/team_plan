@@ -56,10 +56,16 @@ class AgeGroup < ApplicationRecord
     teams
   end
 
-  def schedules(from:, up_to:)
-    schedules = matches.in_period(from, up_to).to_a
-    schedules += club_data_matches.in_period(from, up_to).to_a
-    schedules.flatten.sort_by(&:started_at)
+  def not_played_matches(from:, up_to:)
+    not_played_matches = matches.not_played.in_period(from, up_to).to_a
+    not_played_matches += club_data_matches.not_played.in_period(from, up_to).to_a
+    not_played_matches.flatten.sort_by(&:started_at)
+  end
+
+  def played_matches(from:, up_to:)
+    played_matches = matches.played.in_period(from, up_to).to_a
+    played_matches += club_data_matches.played.in_period(from, up_to).to_a
+    played_matches.flatten.sort_by(&:started_at)
   end
 
 end
