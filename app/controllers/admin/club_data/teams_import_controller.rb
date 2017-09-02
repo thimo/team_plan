@@ -1,4 +1,4 @@
-class Admin::ClubData::TeamsImportController < ApplicationController
+class Admin::ClubData::TeamsImportController < AdminController
   def new
     authorize ClubDataTeam
 

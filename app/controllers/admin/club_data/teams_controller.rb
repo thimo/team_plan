@@ -1,4 +1,4 @@
-class Admin::ClubData::TeamsController < ApplicationController
+class Admin::ClubData::TeamsController < AdminController
   include SortHelper
 
   def index

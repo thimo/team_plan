@@ -1,2 +1,2 @@
-class Admin::ClubData::ResultsImportController < ApplicationController
+class Admin::ClubData::ResultsImportController < AdminController
 end
