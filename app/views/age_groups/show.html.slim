@@ -70,7 +70,7 @@
               h4 Programma
 
         .box-typical-body
-          table.table.table-xs.tr-links
+          table.table.table-xs.tr-links.align-top
             - @not_played_matches.each do |date, matches|
               tr
                 td.strong[colspan="100"]
@@ -78,11 +78,10 @@
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
                   td
-                    .color-blue-grey
-                      | #{I18n.l match.started_at, format: :time_short} uur
-                  td
                     = link_to match
                       = schedule_match_thuis(match)
+                    .small.color-blue-grey
+                      | #{I18n.l match.started_at, format: :time_short} uur
                   td -
                   td
                     = link_to match
@@ -95,7 +94,7 @@
               h4 Uitslagen
 
         .box-typical-body
-          table.table.table-xs.tr-links
+          table.table.table-xs.tr-links.align-top
             - @played_matches.each do |date, matches|
               tr
                 td.strong[colspan="100"]
@@ -103,16 +102,15 @@
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
                   td
-                    .color-blue-grey
-                      | #{I18n.l match.started_at, format: :time_short} uur
-                  td
                     = link_to match
                       = schedule_match_thuis(match)
+                    .small.color-blue-grey
+                      | #{I18n.l match.started_at, format: :time_short} uur
                   td -
                   td
                     = link_to match
                       = schedule_match_uit(match)
-                  td.text-center
+                  td.text-center.nowrap
                     = match.uitslag
 
   .col-xl-6

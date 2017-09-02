@@ -45,3 +45,7 @@
     transition: all .2s ease-in-out;
   }
 }
+
+table.align-top th, table.align-top td {
+  vertical-align: top;
+}
