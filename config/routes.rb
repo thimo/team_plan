@@ -107,9 +107,11 @@ Rails.application.routes.draw do
       namespace :club_data do
         resources :dashboards
         resources :teams
-        resources :teams_import, only: [:new, :create]
+        resources :teams_import, only: [:new]
         resources :competitions
-        resources :competitions_import, only: [:new, :create]
+        resources :competitions_import, only: [:new]
+        resources :matches
+        resources :results_import, only: [:new]
       end
       resources :soccer_fields
     end

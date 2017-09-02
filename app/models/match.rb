@@ -16,6 +16,8 @@ class Match < ApplicationRecord
   # scope :from_now,     -> { where('started_at > ?', Time.zone.now) }
   # scope :this_week,    -> (date) { where('started_at > ?', date.beginning_of_week).where('started_at < ?', date.end_of_week) }
   scope :in_period, -> (start_date, end_date) { where('started_at > ?', start_date).where('started_at < ?', end_date)}
+  scope :played, -> { where.not(goals_self: nil, goals_opponent: nil) }
+  scope :not_played, -> { where(goals_self: nil, goals_opponent: nil) }
 
   delegate :name, to: :team, :prefix => true
 
@@ -34,5 +36,9 @@ class Match < ApplicationRecord
 
   def uitteam
     location_opponent? ? "#{Setting['club.name_short']} #{team.name}" : opponent
+  end
+
+  def uitslag
+    nil
   end
 end

@@ -79,6 +79,9 @@ header.site-header
                     = link_to admin_club_data_competitions_path, class: 'dropdown-item' do
                       i.fa.fa-table.font-icon
                       | Competities
+                    = link_to admin_club_data_matches_path, class: 'dropdown-item' do
+                      i.fa.fa-table.font-icon
+                      | Wedstrijden
 
             .site-header-search-container
               = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
