@@ -12,9 +12,11 @@ tr.clickable[class="#{match_schedule_color(match)}"]
       = schedule_title(match)
     .color-blue-grey
       | #{I18n.l match.started_at, format: :time_short} uur
+  td.nowrap
+    = match.uitslag
   td.w-1.nowrap.text-right
     - if (present = match.presences.present).size > 0
-      - if policy(match).update?
+      - if false && policy(match).update?
         a.dropdown-toggle.label.ml-1[href="#" title="Aanwezig"]
           = present.size
       - else

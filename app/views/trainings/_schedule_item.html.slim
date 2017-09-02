@@ -20,9 +20,11 @@ tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date}"]
         span.color-blue-grey-lighter.small.pl-2
           | #{ts.present_minutes_i18n} aanwezig
 
+  td
+
   td.w-1.nowrap.text-right
     - if (present = training.presences.present).size > 0
-      - if policy(training).update?
+      - if false && policy(training).update?
         a.dropdown-toggle.label.ml-1[href="#" title="Aanwezig"]
           = present.size
       - else

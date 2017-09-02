@@ -23,6 +23,7 @@ section.box-typical.schedule-list
           thead
             th Dag
             th
+            th
         tbody
           - schedules.each do |schedule|
             = render "#{schedule.model_name.plural}/schedule_item", object: schedule
