@@ -21,7 +21,6 @@ gem 'mini_magick',                '~> 4.7.0'
 
 gem 'rails-i18n'
 gem 'kaminari',                   '~> 1.0.1'  # Paging
-# gem 'kaminari-bootstrap' #,         '~> 3.0.1'   # Bootstrap templates for paging
 gem 'bootstrap4-kaminari-views'
 
 gem 'simple_form',                '~> 3.5.0'
