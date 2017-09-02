@@ -2,7 +2,6 @@ class Admin::ClubData::TeamsImportController < AdminController
   def new
     authorize ClubDataTeam
 
-    # TODO Move to create with POST action
     # Import URL
     json = JSON.load(open("#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
@@ -24,8 +23,5 @@ class Admin::ClubData::TeamsImportController < AdminController
     end
 
     redirect_to admin_club_data_teams_path
-  end
-
-  def create
   end
 end

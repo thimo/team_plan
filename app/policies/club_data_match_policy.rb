@@ -1,4 +1,4 @@
-class ClubDataMatchPolicy < ApplicationPolicy
+class ClubDataMatchPolicy < AdminPolicy
   def show?
     true
   end

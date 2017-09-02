@@ -1,0 +1,58 @@
+- provide(:title, "Wedstrijden")
+
+
+.row
+  .col-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Programma
+      .box-typical-body.table-responsive
+        table.table.table-sm.tr-links
+          tbody
+            - @not_played_matches.each do |date, matches|
+              tr
+                td.strong[colspan="100"]
+                  = "#{l date, format: :weekday} "
+                  = "#{l date, format: :date_long} "
+              - matches.each do |match|
+                tr
+                  td
+                    = "#{l match.wedstrijddatum, format: :time_short}"
+                  td
+                    = match.thuisteam
+                  td -
+                  td
+                    = match.uitteam
+  .col-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Uitslagen
+          - if policy(ClubDataMatch).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_admin_club_data_results_import_path, title: "Importeer uitslagen", class: "action-btn"
+                i.fa.fa-refresh
+      .box-typical-body.table-responsive
+        table.table.table-sm.tr-links
+          tbody
+            - @played_matches.each do |date, matches|
+              tr
+                td.strong[colspan="100"]
+                  = "#{l date, format: :weekday} "
+                  = "#{l date, format: :date_long} "
+              - matches.each do |match|
+                tr
+                  td
+                    = "#{l match.wedstrijddatum, format: :time_short}"
+                  td
+                    = match.thuisteam
+                  td -
+                  td
+                    = match.uitteam
+                  td.text-center
+                    = match.uitslag

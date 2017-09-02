@@ -2,7 +2,6 @@ class Admin::ClubData::CompetitionsImportController < AdminController
   def new
     authorize ClubDataCompetition
 
-    # TODO Move to create with POST action
     # Import URL
     ClubDataCompetition.active.each do |competition|
       # Fetch ranking
@@ -33,15 +32,12 @@ class Admin::ClubData::CompetitionsImportController < AdminController
       end
 
       # Cleanup matches that were not included in the import
-      competition.club_data_matches.from_now.each do |match|
+      competition.club_data_matches.not_played.from_now.each do |match|
         match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
       end
     end
 
     redirect_to admin_club_data_competitions_path
-  end
-
-  def create
   end
 end
 
