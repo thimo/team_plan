@@ -1,6 +1,6 @@
 class DashboardsController < ApplicationController
   include SortHelper
-  
+
   def index
     @season = policy_scope(Season).active.last
 

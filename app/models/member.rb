@@ -42,7 +42,7 @@ class Member < ApplicationRecord
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, -> (field_positions) { includes(team_members: :field_positions).where(field_positions: {id: field_positions}) }
-  scope :recent_members, -> (days_ago) { where("registered_at >= ?", days_ago.days.ago.beginning_of_day).order(registered_at: :desc) }
+  scope :recent_members, -> (days_ago) { where("registered_at >= ?", days_ago.days.ago.beginning_of_day).order(registered_at: :desc, created_at: :desc) }
   scope :injured, -> { where(injured: true) }
 
   pg_search_scope :search_by_name,

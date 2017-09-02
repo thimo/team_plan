@@ -8,24 +8,12 @@ section.box-typical
           = title
 
   .box-typical-body
-    table.table.table-sm.tr-links
-      - if members.size > 0
-        tbody
-          - members.each do |member|
-            tr.clickable
-              td
-                = render member
-              td[title="Registratiedatum"]
-                = l member.registered_at, format: :long
-              td.text-right
-                - if member.reactivated?
-                  i.fa.fa-recycle.pl-2.color-green[title="Opnieuw geactiveerd"]
+    - if members.any?
+      = render 'members/list_body', members: members
 
-      - else
+    - else
+      table.table
         tbody
           tr
             td
               i Geen leden gevonden
-
-  .box-typical-footer
-    = paginate members, param_name: 'member_page'

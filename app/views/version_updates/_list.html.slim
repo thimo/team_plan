@@ -1,5 +1,4 @@
 - title ||= 'Nieuw in TeamPlan'
-- disable_header ||= false
 
 section.box-typical.d-none.d-sm-block
   header.box-typical-header
@@ -11,22 +10,10 @@ section.box-typical.d-none.d-sm-block
         .tbl-cell.tbl-cell-actions
           = link_to new_admin_version_update_path, title: "Versie toevoegen", class: "action-btn"
             i.fa.fa-file-o
-          
+
   .box-typical-body
     - if version_updates.present?
-      - version_updates.each do |version_update|
-        .comment-row-item.no-photo
-          .tbl.comment-row-item-header
-            .tbl-row
-              .tbl-cell.tbl-cell-name
-                = version_update.name
-              .tbl-cell.tbl-cell-date
-                = l version_update.released_at, format: :date_long
-          .comment-row-item-content
-            = markdown(version_update.body).html_safe
-    - else 
+      = render 'version_updates/list_body', version_updates: version_updates
+    - else
       p
         i Geen versies gevonden
-
-  .box-typical-footer
-    = paginate version_updates, param_name: 'version_page'
