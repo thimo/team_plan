@@ -1,6 +1,6 @@
 class Todo < ApplicationRecord
   belongs_to :user
-  belongs_to :todoable, polymorphic: true
+  belongs_to :todoable, polymorphic: true, optional: true
 
   scope :asc,      -> { order(created_at: :asc) }
   scope :desc,     -> { order(created_at: :desc) }

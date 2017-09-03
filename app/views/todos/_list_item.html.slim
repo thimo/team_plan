@@ -7,7 +7,7 @@
       .tbl-cell.tbl-cell-name[class="#{'strong' if todo.due?} #{'line-through' if todo.finished?}"]
         = todo.body
       .tbl-cell.tbl-cell-date
-        = link_to edit_todo_path(todo), title: "Aanpassen", class: "pl-2"
+        = link_to edit_todo_path(todo, return: request.path), title: "Aanpassen", class: "pl-2"
           i.fa.fa-pencil.color-blue-grey-lighter
 
   .chat-message-content
