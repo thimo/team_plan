@@ -1,5 +1,5 @@
 module ClubDataImporter
-  def teams_and_competitions
+  def self.teams_and_competitions
     json = JSON.load(open("#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
       club_data_team = ClubDataTeam.find_or_initialize_by(teamcode: data['teamcode'])
@@ -19,7 +19,7 @@ module ClubDataImporter
     end
   end
 
-  def results
+  def self.results
     json = JSON.load(open("#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
       club_data_match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])
@@ -30,7 +30,7 @@ module ClubDataImporter
     end
   end
 
-  def poule_standing_and_matches
+  def self.poule_standing_and_matches
     ClubDataCompetition.active.each do |competition|
       # Fetch ranking
       json = JSON.load(open("#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
@@ -66,7 +66,7 @@ module ClubDataImporter
     end
   end
 
-  def team_photos
+  def self.team_photos
     ClubDataTeam.active.each do |club_data_team|
       team = club_data_team.team
       json = JSON.load(open("#{Setting['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}&client_id=#{Setting['clubdata.client_id']}"))
