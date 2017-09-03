@@ -15,6 +15,7 @@ defaults: &defaults
   clubdata.urls.poulestand: https://data.sportlink.com/poulestand?gebruiklokaleteamgegevens=NEE
   clubdata.urls.poule-programma: https://data.sportlink.com/poule-programma?eigenwedstrijden=NEE&gebruiklokaleteamgegevens=NEE
   clubdata.urls.uitslagen: https://data.sportlink.com/uitslagen?gebruiklokaleteamgegevens=NEE&eigenwedstrijden=JA&thuis=JA&uit=JA
+  clubdata.urls.team-indeling: https://data.sportlink.com/team-indeling?lokaleteamcode=-1&teampersoonrol=ALLES&toonlidfoto=JA
   clubdata.client_id:
 
 development:

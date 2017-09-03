@@ -1,27 +1,7 @@
 class Admin::ClubData::TeamsImportController < AdminController
   def new
     authorize ClubDataTeam
-
-    # Import URL
-    json = JSON.load(open("#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"))
-    json.each do |data|
-      club_data_team = ClubDataTeam.find_or_initialize_by(teamcode: data['teamcode'])
-      %w[teamnaam spelsoort geslacht teamsoort leeftijdscategorie kalespelsoort speeldag speeldagteam].each do |field|
-        club_data_team.write_attribute(field, data[field])
-      end
-      club_data_team.save
-
-      club_data_team.link_to_team
-
-      competition = ClubDataCompetition.find_or_initialize_by(poulecode: data['poulecode'])
-      competition.club_data_team = club_data_team
-      %w[competitienaam klasse poule klassepoule competitiesoort].each do |field|
-        competition.write_attribute(field, data[field])
-      end
-      competition.save
-
-    end
-
+    ClubDataImporter.teams_and_competitions
     redirect_to admin_club_data_teams_path
   end
 end
