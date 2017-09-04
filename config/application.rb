@@ -31,6 +31,8 @@ module TeamPlan
 
     config.assets.paths << Rails.root.join("vendor", "assets", "images")
 
+    config.exceptions_app = self.routes
+
     console do
       ActiveRecord::Base.connection
     end
