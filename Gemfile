@@ -30,12 +30,10 @@ gem 'enum_help',                  '~> 0.0.17'
 gem 'net-ssh',                    '~> 4.1.0'
 gem 'figaro',                     '~> 1.1.1'
 gem 'devise',                     '~> 4.3.0'
-# gem 'erubis'
 gem 'devise-bootstrap-views', git: 'https://github.com/hisea/devise-bootstrap-views.git', :branch => 'bootstrap4'
 gem 'rails-settings-cached'
 
 gem 'pundit',                     '~> 1.1.0'
-# gem 'rolify',                     '~> 5.0.0'
 gem 'awesome_print', require: 'awesome_print'
 gem 'redcarpet',                  '~> 3.4.0' # Markdown parser
 gem 'paper_trail'
@@ -46,7 +44,7 @@ gem 'pretender'
 gem 'trix'
 gem 'pg_search'
 gem 'simple-password-gen'
-gem "simple_calendar", "~> 2.0"
+gem 'simple_calendar',            '~> 2.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
