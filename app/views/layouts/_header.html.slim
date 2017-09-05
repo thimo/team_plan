@@ -8,10 +8,10 @@ header.site-header
         | toggle menu
     a.site-logo[href="/" alt="#{Setting['club.name']} #{Setting['application.name']}"]
       img[src="#{asset_path 'logo/esa_logo.svg'}" alt=""]
-      h1 TeamPlan
+      h1.d-none.d-sm-inline TeamPlan
 
     .site-header-content
-      .site-header-content-in
+      .site-header-content-in-DISABLED
         .site-header-shown
           - if user_signed_in?
             .dropdown.user-menu[title="Ingelogd als #{current_user.name}"]
@@ -32,62 +32,66 @@ header.site-header
                   = link_to stop_impersonating_users_path, method: :post, class: "dropdown-item"
                     span.font-icon.glyphicon.glyphicon-log-in
                     | Terug naar admin
-            button.burger-right[type="button"]
-              i.font-icon-menu-addl
+            / button.burger-right[type="button"]
+            /   i.font-icon-menu-addl
+
+        .site-header-shown
+          - if policy(:admin).show?
+            .dropdown.dropdown-typical.dropdown-right
+              a#dd-header-admin.dropdown-toggle[data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+                span.font-icon.font-icon-cogwheel
+                / span.lbl
+                /   | Admin
+
+              .dropdown-menu[aria-labelledby="dd-header-admin"]
+                = link_to admin_members_path, class: 'dropdown-item' do
+                  i.fa.fa-users.font-icon
+                  | Leden
+                = link_to admin_users_path, class: 'dropdown-item' do
+                  i.fa.fa-user.font-icon
+                  | Gebruikers
+                = link_to admin_soccer_fields_path, class: 'dropdown-item' do
+                  i.fa.fa-leaf.font-icon
+                  | Velden
+                = link_to admin_email_logs_path, class: 'dropdown-item' do
+                  i.fa.fa-envelope.font-icon
+                  | E-mail log
+                = link_to admin_version_updates_path, class: 'dropdown-item' do
+                  i.fa.fa-code-fork.font-icon
+                  | Versie updates
+                = link_to admin_settings_path, class: 'dropdown-item' do
+                  i.fa.fa-sliders.font-icon
+                  | Instellingen
+
+                - if policy(:club_data_dashboard).index?
+                  .dropdown-divider
+                  .dropdown-header
+                    | Club Data
+                  / = link_to admin_club_data_dashboards_path, class: 'dropdown-item' do
+                  /   i.fa.fa-dashboard.font-icon
+                  /   | Dashboard
+                  = link_to admin_club_data_teams_path, class: 'dropdown-item' do
+                    i.fa.fa-table.font-icon
+                    | Teams
+                  = link_to admin_club_data_competitions_path, class: 'dropdown-item' do
+                    i.fa.fa-table.font-icon
+                    | Competities
+                  = link_to admin_club_data_matches_path, class: 'dropdown-item' do
+                    i.fa.fa-table.font-icon
+                    | Wedstrijden
+
+        .site-header-shown
+          .site-header-search-container
+            = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
+              = f.text_field :query, placeholder: 'Zoeken', value: @query
+              = f.button
+                span.font-icon-search
+              .overlay
 
 
-        .mobile-menu-right-overlay
-        .site-header-collapsed
-          .site-header-collapsed-in
-            - if policy(:admin).show?
-              .dropdown.dropdown-typical.dropdown-right
-                a#dd-header-admin.dropdown-toggle[data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-                  span.font-icon.font-icon-cogwheel
-                  span.lbl
-                    | Admin
+        / .mobile-menu-right-overlay
+        / .site-header-collapsed
+        /   .site-header-collapsed-in
 
-                .dropdown-menu[aria-labelledby="dd-header-admin"]
-                  = link_to admin_members_path, class: 'dropdown-item' do
-                    i.fa.fa-users.font-icon
-                    | Leden
-                  = link_to admin_users_path, class: 'dropdown-item' do
-                    i.fa.fa-user.font-icon
-                    | Gebruikers
-                  = link_to admin_soccer_fields_path, class: 'dropdown-item' do
-                    i.fa.fa-leaf.font-icon
-                    | Velden
-                  = link_to admin_email_logs_path, class: 'dropdown-item' do
-                    i.fa.fa-envelope.font-icon
-                    | E-mail log
-                  = link_to admin_version_updates_path, class: 'dropdown-item' do
-                    i.fa.fa-code-fork.font-icon
-                    | Versie updates
-                  = link_to admin_settings_path, class: 'dropdown-item' do
-                    i.fa.fa-sliders.font-icon
-                    | Instellingen
-
-                  - if policy(:club_data_dashboard).index?
-                    .dropdown-divider
-                    .dropdown-header
-                      | Club Data
-                    / = link_to admin_club_data_dashboards_path, class: 'dropdown-item' do
-                    /   i.fa.fa-dashboard.font-icon
-                    /   | Dashboard
-                    = link_to admin_club_data_teams_path, class: 'dropdown-item' do
-                      i.fa.fa-table.font-icon
-                      | Teams
-                    = link_to admin_club_data_competitions_path, class: 'dropdown-item' do
-                      i.fa.fa-table.font-icon
-                      | Competities
-                    = link_to admin_club_data_matches_path, class: 'dropdown-item' do
-                      i.fa.fa-table.font-icon
-                      | Wedstrijden
-
-            .site-header-search-container
-              = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
-                = f.text_field :query, placeholder: 'Zoeken', value: @query
-                = f.button
-                  span.font-icon-search
-                .overlay
 
 .mobile-menu-left-overlay
