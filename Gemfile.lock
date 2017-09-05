@@ -87,14 +87,7 @@ GEM
       image_optimizer (~> 1.6)
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
-    coderay (1.1.1)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
+    coderay (1.1.2)
     concurrent-ruby (1.0.5)
     countries (2.1.2)
       i18n_data (~> 0.8.0)
@@ -202,7 +195,7 @@ GEM
       ruby-progressbar
     money (6.9.0)
       i18n (>= 0.6.4, < 0.9)
-    multi_json (1.12.1)
+    multi_json (1.12.2)
     nenv (0.3.0)
     net-ssh (4.1.0)
     nio4r (2.1.0)
@@ -378,7 +371,6 @@ DEPENDENCIES
   capybara-webkit
   carrierwave (~> 1.1.0)
   carrierwave-imageoptimizer
-  coffee-rails (~> 4.2)
   country_select
   devise (~> 4.3.0)
   devise-bootstrap-views!
