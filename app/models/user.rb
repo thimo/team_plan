@@ -138,7 +138,7 @@ class User < ApplicationRecord
   def remember_me
     true
   end
-  
+
   private
 
     def team_id_for(record)
@@ -156,6 +156,8 @@ class User < ApplicationRecord
         team_id = record.team_evaluation.team_id
       when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training], [Match]
         team_id = record.team_id
+      when [Comment]
+        team_id = record.commentable_id if record.commentable_type == "Team"
       end
 
       team_id
