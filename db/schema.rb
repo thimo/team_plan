@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170902134025) do
+ActiveRecord::Schema.define(version: 20170905205039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
   enable_extension "unaccent"
+  enable_extension "uuid-ossp"
 
   create_table "age_groups", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -372,8 +373,10 @@ ActiveRecord::Schema.define(version: 20170902134025) do
     t.integer "players_per_team"
     t.integer "minutes_per_half"
     t.bigint "club_data_team_id"
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
     t.index ["club_data_team_id"], name: "index_teams_on_club_data_team_id"
+    t.index ["uuid"], name: "index_teams_on_uuid"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -452,9 +455,11 @@ ActiveRecord::Schema.define(version: 20170902134025) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uuid"], name: "index_users_on_uuid"
   end
 
   create_table "version_updates", force: :cascade do |t|

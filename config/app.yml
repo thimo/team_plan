@@ -4,6 +4,7 @@ defaults: &defaults
   club.name: Defrog
   club.name_short: Defrog
   club.hostname: teamplan.defrog.nl
+  club.sportscenter:
   club.address:
   club.zip:
   club.city: Arnhem

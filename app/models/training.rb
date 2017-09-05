@@ -31,4 +31,16 @@ class Training < ApplicationRecord
     self.ended_at = started_at.change(hour: time[4], min: time[5]) unless started_at.nil?
   end
 
+  def title
+    "Training #{Setting['club.name_short']} #{team.name}"
+  end
+
+  def description
+    "#{training_schedule.soccer_field.name} #{training_schedule.field_part_i18n}" if training_schedule&.soccer_field
+  end
+
+  def location
+    "#{Setting['club.sportscenter']}\\n#{Setting['club.address']}\\n#{Setting['club.zip']}  #{Setting['club.city']}"
+  end
+
 end

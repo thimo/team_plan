@@ -19,4 +19,20 @@ class ClubDataMatch < ApplicationRecord
   def started_at
     wedstrijddatum
   end
+
+  def ended_at
+    wedstrijddatum + 2.hours
+  end
+
+  def title
+    wedstrijd
+  end
+
+  def description
+    nil
+  end
+
+  def location
+    "#{accommodatie}\\n#{plaats}"
+  end
 end
