@@ -383,7 +383,7 @@ DEPENDENCIES
   guard
   guard-livereload
   guard-minitest
-  icalendar (~> 2.4)
+  icalendar (~> 2.4.1)
   jbuilder (~> 2.5)
   kaminari (~> 1.0.1)
   launchy
