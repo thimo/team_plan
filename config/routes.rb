@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   get 'support', to: 'static_pages#support'
   get 'about', to: 'static_pages#about'
 
-  root to: "dashboards#index"
-
   # Devise setup, with limit on creating new accounts
   devise_for :users, :skip => [:registrations]
   as :user do
@@ -13,6 +11,8 @@ Rails.application.routes.draw do
   end
 
   authenticate :user do
+    root to: "dashboards#index"
+    
     resources :dashboard, only: [:index], controller: :dashboards
     resources :seasons, shallow: true do
       member do
