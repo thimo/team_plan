@@ -1,0 +1,2 @@
+class IcalsController < ApplicationController
+end
