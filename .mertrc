@@ -5,16 +5,6 @@ layout:
       -
         layout:
           -
-            - ls
-      -
-        layout:
-          -
-            - ./bin/webpack-dev-server
-          -
-            - ls
-      -
-        layout:
-          -
             - rails s
           -
             - guard
