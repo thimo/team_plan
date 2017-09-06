@@ -4,7 +4,7 @@ module SchedulesHelper
   def schedule_title(object, no_html: false)
     case [object.class]
     when [ClubDataMatch]
-      "#{schedule_match_thuis(object, no_html: no_html)} - #{schedule_match_uit(object, no_html: no_html)}".html_safe
+      "#{object.thuisteam} - #{object.uitteam}".html_safe
     when [Match]
       teams = ["#{Setting['club.name_short']} #{object.team.name}", object.opponent]
       if object.location_opponent?
@@ -17,13 +17,12 @@ module SchedulesHelper
     end
   end
 
-  def schedule_match_thuis(object, no_html: false)
-    return object.thuisteam if no_html
-    tag.span(object.thuisteam, class: "#{'strong' if object.is_a?(ClubDataMatch) && object.thuisteamid == object&.team&.club_data_team.teamcode}")
+  def is_thuisteam? object
+    object.is_a?(ClubDataMatch) && object.thuisteamid == object&.team&.club_data_team.teamcode
   end
 
-  def schedule_match_uit(object, no_html: false)
-    return object.uitteam if no_html
-    tag.span(object.uitteam, class: "#{'strong' if object.is_a?(ClubDataMatch) && object.uitteamid == object&.team&.club_data_team.teamcode}")
+  def is_uitteam? object
+    object.is_a?(ClubDataMatch) && object.uitteamid == object&.team&.club_data_team.teamcode
   end
+  
 end

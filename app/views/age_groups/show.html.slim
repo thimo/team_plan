@@ -77,15 +77,22 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  td
-                    = link_to match
-                      = schedule_match_thuis(match)
+                  td[class="#{'strong' if is_thuisteam? match}"]
+                    - if is_thuisteam? match
+                      = link_to match.team
+                        = match.thuisteam
+                    - else
+                      = match.thuisteam
                     .small.color-blue-grey
                       | #{I18n.l match.started_at, format: :time_short} uur
                   td -
-                  td
-                    = link_to match
-                      = schedule_match_uit(match)
+                  td[class="#{'strong' if is_uitteam? match}"]
+                    - if is_uitteam? match
+                      = link_to match.team
+                        = match.uitteam
+                    - else
+                      = match.uitteam
+
     - if @played_matches.any?
       section.box-typical.schedule-list
         header.box-typical-header
@@ -101,15 +108,21 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  td
-                    = link_to match
-                      = schedule_match_thuis(match)
+                  td[class="#{'strong' if is_thuisteam? match}"]
+                    - if is_thuisteam? match
+                      = link_to match.team
+                        = match.thuisteam
+                    - else
+                      = match.thuisteam
                     .small.color-blue-grey
                       | #{I18n.l match.started_at, format: :time_short} uur
                   td -
-                  td
-                    = link_to match
-                      = schedule_match_uit(match)
+                  td[class="#{'strong' if is_uitteam? match}"]
+                    - if is_uitteam? match
+                      = link_to match.team
+                        = match.uitteam
+                    - else
+                      = match.uitteam
                   td.text-center.nowrap
                     = match.uitslag
 
