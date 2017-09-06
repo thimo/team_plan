@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
     @todos_active += todos.active
     @todos_defered += todos.defered
 
-    @schedules = @team.schedules(from: 1.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)
+    @schedules = @team.schedules(from: 0.days.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)
     @competitions = @team.club_data_competitions
   end
 
