@@ -77,21 +77,7 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  td[class="#{'strong' if is_thuisteam? match}"]
-                    - if is_thuisteam? match
-                      = link_to match.team
-                        = match.thuisteam
-                    - else
-                      = match.thuisteam
-                    .small.color-blue-grey
-                      | #{I18n.l match.started_at, format: :time_short} uur
-                  td -
-                  td[class="#{'strong' if is_uitteam? match}"]
-                    - if is_uitteam? match
-                      = link_to match.team
-                        = match.uitteam
-                    - else
-                      = match.uitteam
+                  = render 'match_list_teams', match: match
 
     - if @played_matches.any?
       section.box-typical.schedule-list
@@ -108,21 +94,7 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  td[class="#{'strong' if is_thuisteam? match}"]
-                    - if is_thuisteam? match
-                      = link_to match.team
-                        = match.thuisteam
-                    - else
-                      = match.thuisteam
-                    .small.color-blue-grey
-                      | #{I18n.l match.started_at, format: :time_short} uur
-                  td -
-                  td[class="#{'strong' if is_uitteam? match}"]
-                    - if is_uitteam? match
-                      = link_to match.team
-                        = match.uitteam
-                    - else
-                      = match.uitteam
+                  = render 'match_list_teams', match: match
                   td.text-center.nowrap
                     = match.uitslag
 

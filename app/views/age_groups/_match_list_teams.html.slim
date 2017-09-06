@@ -1,0 +1,15 @@
+td[class="#{'strong' if is_thuisteam? match}"]
+  - if is_thuisteam? match
+    = link_to match.team
+      = match.thuisteam
+  - else
+    = match.thuisteam
+  .small.color-blue-grey
+    | #{I18n.l match.started_at, format: :time_short} uur
+td -
+td[class="#{'strong' if is_uitteam? match}"]
+  - if is_uitteam? match
+    = link_to match.team
+      = match.uitteam
+  - else
+    = match.uitteam
