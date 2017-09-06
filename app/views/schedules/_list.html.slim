@@ -10,8 +10,6 @@ section.box-typical.schedule-list
           = link_to [team, :schedules], title: "Bekijk de volledig kalender"
             = title
       .tbl-cell.tbl-cell-actions
-        = link_to ical_path(team.uuid, format: :ics, check: current_user.uuid), title: "Kalender abonnement voor #{Setting['club.name_short']} #{team.name}", class: "action-btn"
-          i.fa.fa-calendar-plus-o
         - if controller.controller_name == "teams"
           - if policy(Match.new(team: team)).create?
             = link_to new_team_match_path(team), title: "Wedstrijd toevoegen", class: "action-btn"
