@@ -158,6 +158,8 @@ class User < ApplicationRecord
         team_id = record.team_id
       when [Comment]
         team_id = record.commentable_id if record.commentable_type == "Team"
+      when [Presence]
+        team_id = record.presentable.team.id
       end
 
       team_id
