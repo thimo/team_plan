@@ -77,15 +77,8 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  td
-                    = link_to match
-                      = schedule_match_thuis(match)
-                    .small.color-blue-grey
-                      | #{I18n.l match.started_at, format: :time_short} uur
-                  td -
-                  td
-                    = link_to match
-                      = schedule_match_uit(match)
+                  = render 'shared/match_list_teams', match: match
+
     - if @played_matches.any?
       section.box-typical.schedule-list
         header.box-typical-header
@@ -101,15 +94,7 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  td
-                    = link_to match
-                      = schedule_match_thuis(match)
-                    .small.color-blue-grey
-                      | #{I18n.l match.started_at, format: :time_short} uur
-                  td -
-                  td
-                    = link_to match
-                      = schedule_match_uit(match)
+                  = render 'shared/match_list_teams', match: match
                   td.text-center.nowrap
                     = match.uitslag
 
