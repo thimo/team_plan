@@ -77,7 +77,7 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  = render 'match_list_teams', match: match
+                  = render 'shared/match_list_teams', match: match
 
     - if @played_matches.any?
       section.box-typical.schedule-list
@@ -94,7 +94,7 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
-                  = render 'match_list_teams', match: match
+                  = render 'shared/match_list_teams', match: match
                   td.text-center.nowrap
                     = match.uitslag
 
