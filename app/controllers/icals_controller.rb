@@ -2,9 +2,9 @@ class IcalsController < ApplicationController
   def show
     skip_authorization
 
-    team = Team.find_by(uuid: params[:id])
-    raise "Team not found" if team.nil?
-    user = User.find_by(uuid: params[:check])
+    team = Team.active.find_by(uuid: params[:id])
+    return render plain: "" if team.nil?
+    user = User.active.find_by(uuid: params[:check])
     raise "Check invalid" if user.nil?
 
     schedules = team.club_data_matches.from_now + team.trainings.in_period(0.days.ago, 2.months.from_now)
