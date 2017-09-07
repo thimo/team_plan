@@ -140,6 +140,14 @@ class User < ApplicationRecord
     true
   end
 
+  def active_for_authentication?
+    super and self.active?
+  end
+
+  def inactive_message
+    "Je account is uitgeschakeld."
+  end
+
   private
 
     def team_id_for(record)
