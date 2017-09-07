@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Filterable
+  include Statussable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
