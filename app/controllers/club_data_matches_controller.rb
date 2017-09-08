@@ -64,7 +64,9 @@ class ClubDataMatchesController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@match.team.name}", @match.team
+      @match.teams.each do |team|
+        add_breadcrumb team.name, team
+      end
       if @match.new_record?
         add_breadcrumb 'Nieuw'
       else
