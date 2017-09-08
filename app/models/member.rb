@@ -27,7 +27,11 @@ class Member < ApplicationRecord
   scope :from_year, -> (year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year) }
   scope :to_year, -> (year) { where("born_on <= ?", Time.zone.local(year).end_of_year) }
   scope :sportlink_active, -> { where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today)) }
-  scope :sportlink_player, -> { where("sport_category <> ''").or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)) }
+  scope :sportlink_player, -> {
+    where("sport_category <> ''").
+    or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)).
+    where('local_teams != ? OR local_teams IS NULL', "Wachtlijst onbekend")
+  }
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :gender, -> (gender) { where(gender: gender) }
