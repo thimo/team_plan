@@ -46,16 +46,16 @@ module ClubDataImporter
       json = JSON.load(open("#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
       json.each do |data|
         club_data_match = ClubDataMatch.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
-        %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid].each do |field|
+        %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
           club_data_match.write_attribute(field, data[field])
         end
         club_data_match.club_data_competition = competition
-        if data['eigenteam'] == 'true'
-          club_data_team = ClubDataTeam.find_by(teamcode: data['thuisteamid'])
-          club_data_team ||= ClubDataTeam.find_by(teamcode: data['uitteamid'])
-          club_data_match.team = club_data_team&.team
-        end
         club_data_match.save
+
+        if club_data_match.eigenteam?
+          add_team_to_match(club_data_match, club_data_match.thuisteamid)
+          add_team_to_match(club_data_match, club_data_match.uitteamid)
+        end
 
         imported_wedstrijdnummers << club_data_match.wedstrijdnummer
       end
@@ -78,4 +78,13 @@ module ClubDataImporter
       end
     end
   end
+
+  private
+
+    def self.add_team_to_match(match, teamcode)
+      club_data_team = ClubDataTeam.find_by(teamcode: teamcode)
+      if club_data_team&.team && !match.team_ids.include?(club_data_team.team.id)
+        match.teams << club_data_team.team
+      end
+    end
 end

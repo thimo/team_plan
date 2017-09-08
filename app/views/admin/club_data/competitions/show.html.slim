@@ -1,4 +1,4 @@
-- provide(:title, "Competitie #{@competition.club_data_team.team.name} #{@competition.competitiesoort} - #{@competition.klasse}")
+- provide(:title, "Competitie #{@competition.club_data_teams.map{ |team| team.team.name }.join(', ')} #{@competition.competitiesoort} - #{@competition.klasse}")
 - provide(:subtitle, "#{@competition.competitienaam}")
 
 .row
@@ -21,7 +21,7 @@
           tbody
             - if @matches.any?
               - @matches.each do |match|
-               tr[class="#{'strong' if match.team.present?}"]
+               tr[class="#{'strong' if match.eigenteam?}"]
                 td.nowrap
                   = I18n.l match.wedstrijddatum, format: :date_short
                 td

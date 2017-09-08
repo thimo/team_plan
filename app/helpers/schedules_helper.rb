@@ -18,11 +18,11 @@ module SchedulesHelper
   end
 
   def is_thuisteam? object
-    object.is_a?(ClubDataMatch) && object.thuisteamid == object&.team&.club_data_team.teamcode
+    object.is_a?(ClubDataMatch) && object&.teams&.map{ |team| team.club_data_team.teamcode }.include?(object.thuisteamid)
   end
 
   def is_uitteam? object
-    object.is_a?(ClubDataMatch) && object.uitteamid == object&.team&.club_data_team.teamcode
+    object.is_a?(ClubDataMatch) && object&.teams&.map{ |team| team.club_data_team.teamcode }.include?(object.uitteamid)
   end
-  
+
 end

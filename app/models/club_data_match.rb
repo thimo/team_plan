@@ -2,7 +2,9 @@ class ClubDataMatch < ApplicationRecord
   include Presentable
 
   belongs_to :club_data_competition
+  # Remove after migration
   belongs_to :team, optional: true
+  has_and_belongs_to_many :teams
 
   scope :asc, -> { order(:wedstrijddatum) }
   scope :desc, -> { order(wedstrijddatum: :desc) }
@@ -13,8 +15,6 @@ class ClubDataMatch < ApplicationRecord
   scope :played, -> { where.not(uitslag: nil) }
   scope :not_played, -> { where(uitslag: nil) }
   scope :own, -> { where.not(team: nil) }
-
-  delegate :name, to: :team, :prefix => true
 
   def started_at
     wedstrijddatum
@@ -34,5 +34,9 @@ class ClubDataMatch < ApplicationRecord
 
   def location
     "#{accommodatie}\\n#{plaats}"
+  end
+
+  def team_name
+    teams.first.name
   end
 end

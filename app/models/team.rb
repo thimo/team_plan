@@ -16,7 +16,7 @@ class Team < ApplicationRecord
   has_many :trainings, dependent: :destroy
   has_many :matches, dependent: :destroy
   has_many :club_data_competitions, through: :club_data_team
-  has_many :club_data_matches
+  has_and_belongs_to_many :club_data_matches
   has_paper_trail
 
   validates_presence_of :name, :age_group
@@ -25,8 +25,9 @@ class Team < ApplicationRecord
   scope :for_members, -> (members) { joins(:team_members).where(team_members: { member_id: members }) }
   scope :as_player, -> { joins(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :for_season, -> (season) { joins(:age_group).where(age_groups: { season_id: season }) }
-  scope :for_active_season, -> { joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}) }
+  scope :for_active_season, -> { joins(age_group: :season).where(seasons: { status: Season.statuses[:active] }) }
   scope :active_or_archived, -> { where(status: [Team.statuses[:archived], Team.statuses[:active]]) }
+  scope :by_teamcode, -> (teamcode) { includes(:club_data_team).where(club_data_teams: { teamcode: teamcode }) }
 
   def is_favorite?(user)
     favorites.where(user: user).size > 0

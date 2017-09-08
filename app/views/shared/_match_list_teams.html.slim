@@ -1,6 +1,6 @@
 td[class="#{'strong' if is_thuisteam? match}"]
   - if is_thuisteam? match
-    = link_to match.team
+    = link_to Team.by_teamcode(match.thuisteamid).first
       = match.thuisteam
   - else
     = match.thuisteam
@@ -9,7 +9,7 @@ td[class="#{'strong' if is_thuisteam? match}"]
 td -
 td[class="#{'strong' if is_uitteam? match}"]
   - if is_uitteam? match
-    = link_to match.team
+    = link_to Team.by_teamcode(match.uitteamid).first
       = match.uitteam
   - else
     = match.uitteam
