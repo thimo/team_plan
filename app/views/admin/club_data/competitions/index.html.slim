@@ -31,5 +31,7 @@ section.box-typical
             td
               = competition.poulecode
             td
-              - if competition&.club_data_team&.team.present?
-                = link_to competition.club_data_team.team.name, competition.club_data_team.team
+              - if (teams = competition&.club_data_teams&.map(&:team)).any?
+                - teams.each do |team|
+                  div
+                    = link_to team.name, team

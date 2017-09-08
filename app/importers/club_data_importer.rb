@@ -11,11 +11,12 @@ module ClubDataImporter
       club_data_team.link_to_team
 
       competition = ClubDataCompetition.find_or_initialize_by(poulecode: data['poulecode'])
-      competition.club_data_team = club_data_team
       %w[competitienaam klasse poule klassepoule competitiesoort].each do |field|
         competition.write_attribute(field, data[field])
       end
       competition.save
+
+      competition.club_data_teams << club_data_team unless competition.club_data_team_ids.include?(club_data_team.id)
     end
   end
 

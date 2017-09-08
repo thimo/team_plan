@@ -2,7 +2,7 @@ class ClubDataTeam < ApplicationRecord
   include Activatable
 
   has_one :team
-  has_many :club_data_competitions
+  has_and_belongs_to_many :club_data_competitions
 
   scope :asc, -> { order(:id) }
 
