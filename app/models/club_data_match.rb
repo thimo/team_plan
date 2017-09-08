@@ -2,8 +2,6 @@ class ClubDataMatch < ApplicationRecord
   include Presentable
 
   belongs_to :club_data_competition
-  # Remove after migration
-  belongs_to :team, optional: true
   has_and_belongs_to_many :teams
 
   scope :asc, -> { order(:wedstrijddatum) }

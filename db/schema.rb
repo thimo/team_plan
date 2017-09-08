@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908193301) do
+ActiveRecord::Schema.define(version: 20170908210945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -305,8 +305,10 @@ ActiveRecord::Schema.define(version: 20170908193301) do
     t.text "remark"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "team_id"
     t.index ["member_id"], name: "index_presences_on_member_id"
     t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
+    t.index ["team_id"], name: "index_presences_on_team_id"
   end
 
   create_table "seasons", id: :serial, force: :cascade do |t|
@@ -511,6 +513,7 @@ ActiveRecord::Schema.define(version: 20170908193301) do
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
   add_foreign_key "presences", "members"
+  add_foreign_key "presences", "teams"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"
