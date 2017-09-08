@@ -14,7 +14,7 @@ class ClubDataMatch < ApplicationRecord
   scope :from_now, -> { where('wedstrijddatum > ?', Time.zone.now) }
   scope :played, -> { where.not(uitslag: nil) }
   scope :not_played, -> { where(uitslag: nil) }
-  scope :own, -> { where.not(team: nil) }
+  scope :own, -> { where(eigenteam: true) }
 
   def started_at
     wedstrijddatum
