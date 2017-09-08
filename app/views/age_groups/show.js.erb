@@ -1,0 +1,3 @@
+<% if params[:member_page] && @available_members %>
+$('#members_list').replaceWith("<%= j render("members/list_body", members: @available_members) %>")
+<% end %>

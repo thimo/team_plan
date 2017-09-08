@@ -47,4 +47,11 @@ module ApplicationHelper
   def true?(obj)
     obj.to_s == "true"
   end
+
+  def replace_param_in_request_path(params)
+    uri = URI.parse(request.path)
+    query = Rack::Utils.parse_query(uri.query).merge(params)
+    uri.query = Rack::Utils.build_query(query)
+    uri.to_s
+  end
 end

@@ -13,6 +13,6 @@ table.table.table-sm.tr-links
 - unless members.last_page?
   #members_list
     .box-typical-footer
-      = link_to dashboard_index_path(member_page: members.next_page), remote: true
+      = link_to replace_param_in_request_path(member_page: members.next_page), remote: true
         | Meer
         i.fa.fa-angle-down.pl-1
