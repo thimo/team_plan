@@ -79,12 +79,15 @@ module ClubDataImporter
 
   def self.team_photos
     ClubDataTeam.active.each do |club_data_team|
-      team = club_data_team.team
       json = JSON.load(open("#{Setting['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}&client_id=#{Setting['clubdata.client_id']}"))
       json.each do |data|
-        # Zoek team member op a.h.v. naam (achternaam, voornaam tussenvoegsels)
-        # Misschien query op achternaam (links van ','), daarna filter op voornaam + tussenvoegsels
-        # Decodeer base64 naar image en koppel aan member
+        if data['foto'].present?
+          member = Member.find_by(full_name: data['naam'])
+          if member
+            member.photo_data = data['foto']
+            member.save
+          end
+        end
       end
     end
   end

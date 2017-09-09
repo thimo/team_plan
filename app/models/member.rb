@@ -2,6 +2,8 @@ class Member < ApplicationRecord
   include Filterable
   include PgSearch
 
+  mount_uploader :photo, PhotoUploader
+
   STATUS_DEFINITIEF = 'definitief'
   STATUS_AF_TE_MELDEN = 'af te melden'
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = 'overschrijving spelactiviteit'
@@ -122,6 +124,11 @@ class Member < ApplicationRecord
 
   def update_injured
     update_columns(injured: injuries.active.any?)
+  end
+
+  def photo_data=(data)
+    io = CarrierStringIO.new(Base64.decode64(data))
+    self.photo = io
   end
 
   def self.import(file)
