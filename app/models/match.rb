@@ -41,4 +41,8 @@ class Match < ApplicationRecord
   def uitslag
     nil
   end
+
+  def teams
+    [team]
+  end
 end

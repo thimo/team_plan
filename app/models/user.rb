@@ -169,7 +169,7 @@ class User < ApplicationRecord
         team_id = record.commentable_id if record.commentable_type == "Team"
         team_id = record.commentable.active_team.id if record.commentable_type == "Member"
       when [Presence]
-        team_id = record.presentable.team.id
+        team_id = record.presentable.teams.pluck(:id)
       end
 
       team_id
