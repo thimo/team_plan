@@ -1,5 +1,7 @@
 h3 Contactgegevens
 
+= image_tag @member.photo_url, style: 'width: 200px; float: right;' if @member.photo
+
 .strong
   => member.name
   - if policy(member).show_private_data?

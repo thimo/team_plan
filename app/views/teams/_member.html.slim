@@ -1,4 +1,9 @@
 tr
+  td.w-1
+    - if member.photo.present?
+      = image_tag member.photo_url, style: 'width: 50px;'
+    - else
+      = image_tag 'startui/avatar-2-64.png', style: 'width: 50px;'
   td
     - if policy(member).show_private_data?
       = link_to member.name, member

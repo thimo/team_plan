@@ -40,12 +40,15 @@ section.box-typical
           - @players.each do |year, team_members|
             - team_members.each_with_index do |team_member, index|
               - if index == 0
-                tr.d-table-row.d-sm-none
+                tr
                   td.strong.small.color-blue-grey-lighter[colspan="100"]
                     = year
               tr
-                td.strong.small.color-blue-grey-lighter.d-none.d-sm-table-cell
-                  = year if index == 0
+                td.w-1
+                  - if team_member.member.photo.present?
+                    = image_tag team_member.member.photo_url, style: 'width: 50px;'
+                  - else
+                    = image_tag 'startui/avatar-2-64.png', style: 'width: 50px;'
                 td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
                   = render team_member.member
                 td.small
