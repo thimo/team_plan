@@ -49,7 +49,7 @@ nl:
         middle_name: Tussenvoegsels
         last_name: Achternaam
         name: Volledige naam
-        reversed_name: Achternaam, voornaam
+        full_name: Achternaam, voornaam
         email: E-mail
         born_on: Geboortedatum
         phone: Telefoonnummer
@@ -324,7 +324,7 @@ nl:
   team: Team
   association_number: KNVB nummer
   name: Naam
-  reversed_name: Achternaam, voornaam
+  full_name: Achternaam, voornaam
   last_name: Achternaam
   first_name: Voornaam
   middle_name: Tussenvoegsels

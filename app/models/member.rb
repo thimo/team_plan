@@ -6,7 +6,7 @@ class Member < ApplicationRecord
   STATUS_AF_TE_MELDEN = 'af te melden'
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = 'overschrijving spelactiviteit'
 
-  EXPORT_COLUMNS = %w(season age_group team association_number name reversed_name last_name first_name middle_name born_on role address zipcode city phone email member_since previous_team)
+  EXPORT_COLUMNS = %w(season age_group team association_number name full_name last_name first_name middle_name born_on role address zipcode city phone email member_since previous_team)
   EXPORT_COLUMNS_ADVANCED = %w(field_positions prefered_foot advise_next_season)
   DEFAULT_COLUMNS = %w(team association_number name born_on role address zipcode city phone email)
 
@@ -58,10 +58,6 @@ class Member < ApplicationRecord
 
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
-  end
-
-  def reversed_name
-    "#{last_name}, #{first_name} #{middle_name}".squish
   end
 
   def name_and_born_on
