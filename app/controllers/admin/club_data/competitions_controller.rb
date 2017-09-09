@@ -1,6 +1,6 @@
 class Admin::ClubData::CompetitionsController < AdminController
   def index
-    @competitions = policy_scope(ClubDataCompetition).active.asc
+    @competitions = policy_scope(ClubDataCompetition).active.includes(:clubdatacompetitions_club_data_teams, :club_data_teams).asc
   end
 
   def show
