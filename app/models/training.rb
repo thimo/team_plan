@@ -43,4 +43,7 @@ class Training < ApplicationRecord
     "#{Setting['club.sportscenter']}\\n#{Setting['club.address']}\\n#{Setting['club.zip']}  #{Setting['club.city']}"
   end
 
+  def teams
+    [team]
+  end
 end
