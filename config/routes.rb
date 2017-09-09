@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     root to: "dashboards#index"
-    
+
     resources :dashboard, only: [:index], controller: :dashboards
     resources :seasons, shallow: true do
       member do
@@ -88,6 +88,7 @@ Rails.application.routes.draw do
         post :toggle
       end
     end
+    resources :competitions, only: [:show]
 
     get 'admin' => 'admin#show'
     namespace :admin do

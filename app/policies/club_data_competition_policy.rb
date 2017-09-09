@@ -1,4 +1,8 @@
 class ClubDataCompetitionPolicy < AdminPolicy
+  def show?
+    true
+  end
+  
   class Scope < Scope
     def resolve
       scope
