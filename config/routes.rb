@@ -109,6 +109,7 @@ Rails.application.routes.draw do
         resources :dashboards
         resources :teams
         resources :teams_import, only: [:new]
+        resources :team_photos_import, only: [:new]
         resources :competitions
         resources :competitions_import, only: [:new]
         resources :matches
