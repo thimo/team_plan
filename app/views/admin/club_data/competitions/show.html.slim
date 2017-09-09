@@ -18,6 +18,7 @@
               th Thuis
               th
               th Uit
+              th
           tbody
             - if @matches.any?
               - @matches.each do |match|
@@ -30,6 +31,8 @@
                   | -
                 td
                   = match.uitteam
+                td.nowrap
+                  = match.uitslag
             - else
               tr
                 td[colspan="100"]

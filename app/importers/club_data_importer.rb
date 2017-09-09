@@ -21,6 +21,7 @@ module ClubDataImporter
   end
 
   def self.results
+    # Regular import of all club matches
     json = JSON.load(open("#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
       club_data_match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])
@@ -58,6 +59,15 @@ module ClubDataImporter
         end
 
         imported_wedstrijdnummers << club_data_match.wedstrijdnummer
+      end
+
+      json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
+      json.each do |data|
+        club_data_match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])
+        if club_data_match
+          club_data_match.write_attribute('uitslag', data['uitslag'])
+          club_data_match.save
+        end
       end
 
       # Cleanup matches that were not included in the import
