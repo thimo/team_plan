@@ -1,0 +1,20 @@
+- title ||= "Wedstrijden"
+
+section.box-typical.schedule-list
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4
+          = title
+
+  .box-typical-body
+    table.table.table-xs.tr-links.align-top
+      - matches.each do |date, matches|
+        tr
+          td.strong[colspan="100"]
+            | #{l date, format: :weekday} #{l date, format: :date_long}
+        - matches.each do |match|
+          tr.clickable
+            = render 'shared/match_list_teams', match: match
+            td.text-center.nowrap
+              = match.uitslag
