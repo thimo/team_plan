@@ -46,7 +46,7 @@ gem 'pg_search'
 gem 'simple-password-gen'
 gem 'simple_calendar',            '~> 2.0'
 gem 'icalendar',                  '~> 2.4.1'
-gem 'bootsnap'
+gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'byebug', platform: :mri
