@@ -1,0 +1,8 @@
+.member_photo {
+  max-width: 50px;
+  max-height: 50px;
+
+  &.placeholder {
+    padding: 8px;
+  }
+}

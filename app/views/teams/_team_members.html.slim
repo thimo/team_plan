@@ -45,10 +45,7 @@ section.box-typical
                     = year
               tr
                 td.w-1
-                  - if team_member.member.photo.present?
-                    = image_tag team_member.member.photo_url, style: 'width: 50px;'
-                  - else
-                    = image_tag 'startui/avatar-2-64.png', style: 'width: 50px;'
+                  = render 'members/photo', member: team_member.member
                 td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
                   = render team_member.member
                 td.small

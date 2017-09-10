@@ -25,8 +25,7 @@ h3 Contactgegevens
   div
     = mail_to member.email, member.email
     - unless member.email_2.blank?
-      |  /
-      = mail_to member.email_2, member.email_2
+      == " / #{mail_to member.email_2, member.email_2}"
 
   - if policy(Member).show_login? && member.email.present?
     div.mt-2

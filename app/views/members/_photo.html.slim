@@ -1,0 +1,4 @@
+- if member.photo.present?
+  = image_tag member.photo_url, class: 'member_photo'
+- else
+  = image_tag 'startui/avatar-2-64.png', class: 'member_photo placeholder'
