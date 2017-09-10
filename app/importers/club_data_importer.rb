@@ -20,7 +20,7 @@ module ClubDataImporter
     end
   end
 
-  def self.results
+  def self.club_results
     # Regular import of all club matches
     json = JSON.load(open("#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
@@ -32,7 +32,7 @@ module ClubDataImporter
     end
   end
 
-  def self.poule_standing_and_matches
+  def self.poule_standings
     ClubDataCompetition.active.each do |competition|
       # Fetch ranking
       json = JSON.load(open("#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
@@ -40,7 +40,11 @@ module ClubDataImporter
         competition.ranking = json
         competition.save
       end
+    end
+  end
 
+  def self.poule_matches
+    ClubDataCompetition.active.each do |competition|
       imported_wedstrijdnummers = []
 
       # Fetch upcoming matches
@@ -61,6 +65,15 @@ module ClubDataImporter
         imported_wedstrijdnummers << club_data_match.wedstrijdnummer
       end
 
+      # Cleanup matches that were not included in the import
+      competition.club_data_matches.not_played.from_now.each do |match|
+        match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
+      end
+    end
+  end
+
+  def self.poule_results
+    ClubDataCompetition.active.each do |competition|
       json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
       json.each do |data|
         club_data_match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])
@@ -68,11 +81,6 @@ module ClubDataImporter
           club_data_match.write_attribute('uitslag', data['uitslag'])
           club_data_match.save
         end
-      end
-
-      # Cleanup matches that were not included in the import
-      competition.club_data_matches.not_played.from_now.each do |match|
-        match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
       end
     end
   end
