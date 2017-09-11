@@ -1,9 +1,9 @@
 class DashboardsController < ApplicationController
   include SortHelper
 
-  def index
-    @season = policy_scope(Season).active.last
+  before_action :set_season
 
+  def index
     @age_groups_male = policy_scope(@season.age_groups).male.asc
     @age_groups_female = policy_scope(@season.age_groups).female.asc
 
@@ -20,4 +20,20 @@ class DashboardsController < ApplicationController
 
     skip_policy_scope
   end
+
+  def program
+    authorize ClubDataMatch, :show?
+    @not_played_matches = policy_scope(ClubDataMatch).own.not_played.asc.in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
+  end
+
+  def results
+    authorize ClubDataMatch, :show?
+    @played_matches = policy_scope(ClubDataMatch).own.played.desc.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
+  end
+
+  private
+
+    def set_season
+      @season = policy_scope(Season).active.last
+    end
 end

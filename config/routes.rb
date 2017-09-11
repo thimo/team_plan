@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   authenticate :user do
     root to: "dashboards#index"
 
-    resources :dashboard, only: [:index], controller: :dashboards
+    resources :dashboard, only: [:index], controller: :dashboards do
+      collection do
+        get :program
+        get :results
+      end
+    end
     resources :seasons, shallow: true do
       member do
         post :inherit_age_groups

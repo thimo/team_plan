@@ -6,6 +6,21 @@ nav.side-menu
           i.fa.fa-dashboard
           span.lbl
             | Dashboard
+
+    li.dirty-blue class="#{'active' if current_page?(program_dashboard_index_path)}"
+      = link_to program_dashboard_index_path
+        span
+          i.fa.fa-futbol-o
+          span.lbl
+            | Programma
+
+    li.dirty-blue class="#{'active' if current_page?(results_dashboard_index_path)}"
+      = link_to results_dashboard_index_path
+        span
+          i.fa.fa-futbol-o
+          span.lbl
+            | Uitslagen
+
     - if (season = policy_scope(Season).draft.last).present?
       li.gold class="#{'active' if current_page?(season_path(season))}"
         = link_to season
@@ -13,6 +28,7 @@ nav.side-menu
             i.fa.fa-calendar
             span.lbl
               | Seizoen #{season.name}
+
     - if (season = policy_scope(Season).active.last).present?
       li.aquamarine class="#{'active' if current_page?(season_path(season))}"
         = link_to season
@@ -32,7 +48,7 @@ nav.side-menu
               i.fa.fa-futbol-o
               span.lbl
                 = team.name
-                
+
   - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
     section
       header.side-menu-title
@@ -44,14 +60,14 @@ nav.side-menu
               i.fa.fa-star
               span.lbl
                 = team.name
-                
+
         - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
           li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
             = link_to age_group
               i.fa.fa-star
               span.lbl
                 = age_group.name
-            
+
   section
     ul.side-menu-list
       li.brown
@@ -67,5 +83,5 @@ nav.side-menu
         a[href="https://www.defrog.nl/" target="_blank"]
           i.fa.fa-heart
           span.lbl
-            | Handcrafted in Arnhem by 
+            | Handcrafted in Arnhem by
             = image_tag 'logo/defrog_wide.svg', alt: "Defrog"
