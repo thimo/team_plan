@@ -12,9 +12,11 @@
         .box-typical-body
           table.table.table-xs.tr-links.align-top
             - @not_played_matches.each do |date, matches|
-              tr
-                td.strong[colspan="100"]
-                  | #{l date, format: :weekday} #{l date, format: :date_long}
+              thead
+                tr
+                  th[colspan="100"]
+                    | #{l date, format: :weekday} #{l date, format: :date_long}
               - matches.each do |match|
-                tr.clickable
-                  = render 'shared/match_list_teams', match: match
+                tbody
+                  tr.clickable
+                    = render 'shared/match_list_teams', match: match
