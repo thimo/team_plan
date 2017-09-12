@@ -32,7 +32,7 @@ class Member < ApplicationRecord
   scope :sportlink_player, -> {
     where("sport_category <> ''").
     or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)).
-    where('local_teams != ? OR local_teams IS NULL', "Wachtlijst onbekend")
+    where('(local_teams != ? AND local_teams != ?) OR local_teams IS NULL', 'Wachtlijst onbekend', 'Wachtlijst afgemeld')
   }
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
