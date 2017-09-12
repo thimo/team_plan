@@ -1,24 +1,6 @@
-- provide(:title, "Uitslagen")
+- provide(:title, "Uitslagen van de afgelopen week")
 
 .row
   .col-xl-6
     - if @played_matches.any?
-      section.box-typical.schedule-list
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Uitslagen
-
-        .box-typical-body
-          table.table.table-xs.tr-links.align-top
-            - @played_matches.each do |date, matches|
-              thead
-                tr
-                  th[colspan="100"]
-                    | #{l date, format: :weekday} #{l date, format: :date_long}
-              - matches.each do |match|
-                tbody
-                  tr.clickable
-                    = render 'shared/match_list_teams', match: match
-                    td.text-center.nowrap
-                      = match.uitslag
+      = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen"

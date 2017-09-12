@@ -1,22 +1,6 @@
-- provide(:title, "Programma")
+- provide(:title, "Programma voor de komende week")
 
 .row
   .col-xl-6
     - if @not_played_matches.any?
-      section.box-typical.schedule-list
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Programma
-
-        .box-typical-body
-          table.table.table-xs.tr-links.align-top
-            - @not_played_matches.each do |date, matches|
-              thead
-                tr
-                  th[colspan="100"]
-                    | #{l date, format: :weekday} #{l date, format: :date_long}
-              - matches.each do |match|
-                tbody
-                  tr.clickable
-                    = render 'shared/match_list_teams', match: match
+      = render "club_data_matches/list", matches: @not_played_matches, title: "Programma"

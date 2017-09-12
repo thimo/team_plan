@@ -18,6 +18,12 @@
         - if (schedules = team.schedules(from: 0.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)).any?
           = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
 
+      - if @not_played_matches.present?
+        = render "club_data_matches/list", matches: @not_played_matches, title: link_to("Volgende wedstrijden", program_dashboard_index_path, title: "Bekijk het programma voor de komende week")
+
+      - if @played_matches.present?
+        = render "club_data_matches/list", matches: @played_matches, title: link_to("Laatste uitslagen", results_dashboard_index_path, title: "Bekijk alle uitslagen van de afgelopen week")
+
       - if @open_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
 
