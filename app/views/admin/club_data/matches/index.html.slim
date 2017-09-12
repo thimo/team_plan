@@ -17,21 +17,17 @@
         table.table.table-sm.tr-links.align-top
           tbody
             - @played_matches.each do |date, matches|
-              tr
-                td.strong[colspan="100"]
-                  = "#{l date, format: :weekday} "
-                  = "#{l date, format: :date_long} "
-              - matches.each do |match|
+              thead
                 tr
-                  td
-                    = match.thuisteam
-                    .small.color-blue-grey
-                      = "#{l match.wedstrijddatum, format: :time_short}"
-                  td -
-                  td
-                    = match.uitteam
-                  td.text-center.nowrap
-                    = match.uitslag
+                  th[colspan="100"]
+                    = "#{l date, format: :weekday} "
+                    = "#{l date, format: :date_long} "
+              - matches.each do |match|
+                tbody
+                  tr
+                    = render 'shared/match_list_teams', match: match
+                    td.text-center.nowrap
+                      = match.uitslag
 
   .col-md-6
     section.box-typical
@@ -42,18 +38,13 @@
               | Programma
       .box-typical-body.table-responsive
         table.table.table-sm.tr-links.align-top
-          tbody
-            - @not_played_matches.each do |date, matches|
+          - @not_played_matches.each do |date, matches|
+            thead
               tr
-                td.strong[colspan="100"]
+                th[colspan="100"]
                   = "#{l date, format: :weekday} "
                   = "#{l date, format: :date_long} "
+            tbody
               - matches.each do |match|
                 tr
-                  td
-                    = match.thuisteam
-                    .small.color-blue-grey
-                      = "#{l match.wedstrijddatum, format: :time_short}"
-                  td -
-                  td
-                    = match.uitteam
+                  = render 'shared/match_list_teams', match: match
