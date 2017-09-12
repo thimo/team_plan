@@ -13,7 +13,7 @@
       - @active_teams.each do |team|
         - if (schedules = team.schedules(from: 0.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)).any?
           = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
-          
+
       - @favorite_teams.each do |team|
         - if (schedules = team.schedules(from: 0.week.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)).any?
           = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
@@ -31,7 +31,7 @@
         = render 'favorites'
 
       - if @new_members.present?
-        = render "members/list", members: @new_members, title: "Nieuwe leden"
+        = render "members/list", members: @new_members, title: "Nieuwe leden", subtitle: "Laatste import #{l Member.imported_at, format: :long}"
 
       - if @version_updates.present?
         = render "version_updates/list", version_updates: @version_updates

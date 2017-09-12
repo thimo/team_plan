@@ -14,6 +14,7 @@ nl:
       date_long: "%-d %b %Y"
       date_short: "%-d %b"
       date_day: "%-d"
+      long: "%-d %b %Y %k:%M"
   activerecord:
     attributes:
       user:

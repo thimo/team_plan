@@ -180,4 +180,8 @@ class Member < ApplicationRecord
   def self.export_columns(user)
     Member::EXPORT_COLUMNS + ((user.admin? || user.club_staff?) ? Member::EXPORT_COLUMNS_ADVANCED : [])
   end
+
+  def self.imported_at
+    order(imported_at: :desc).limit(1).first.imported_at
+  end
 end
