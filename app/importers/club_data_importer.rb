@@ -24,11 +24,7 @@ module ClubDataImporter
     # Regular import of all club matches
     json = JSON.load(open("#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
-      club_data_match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])
-
-      if club_data_match.present?
-        club_data_match.update(uitslag: data["uitslag"])
-      end
+      ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
     end
   end
 
@@ -76,11 +72,7 @@ module ClubDataImporter
     ClubDataCompetition.active.each do |competition|
       json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
       json.each do |data|
-        club_data_match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])
-        if club_data_match
-          club_data_match.write_attribute('uitslag', data['uitslag'])
-          club_data_match.save
-        end
+        ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
       end
     end
   end

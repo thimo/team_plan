@@ -37,4 +37,13 @@ class ClubDataMatch < ApplicationRecord
   def team_name
     teams.first.name
   end
+
+  def update_uitslag(data_uitslag)
+    # TODO remove uitslag_at check after a next sync
+    if uitslag != data_uitslag || uitslag_at.nil?
+      self.uitslag = data_uitslag
+      self.uitslag_at = Time.zone.now
+      save
+    end
+  end
 end
