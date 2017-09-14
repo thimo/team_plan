@@ -20,6 +20,7 @@ section.box-typical
             th Dag
             th Veld
             th Trainer
+            th
         tbody
           - training_schedules.each do |ts|
             tr.clickable
@@ -40,6 +41,10 @@ section.box-typical
                   div #{trainer.name}
                 div
                   = ts.class.human_attribute_name(:cios) if ts.cios?
+              td.w-1.nowrap.text-right
+                - if (present = ts.presences.present).any?
+                  .label.ml-1[title="Standaard aanwezig"]
+                    = present.size
 
       - else
         tbody

@@ -30,7 +30,3 @@ tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date}"]
       - else
         .label.ml-1[title="Aanwezig"]
           = present.size
-    / - if ts.present?
-    /   - if policy(ts).update?
-    /     = link_to [:edit, ts]
-    /       i.fa.fa-repeat.p-1.pl-2.color-blue-grey-lighter[title="Reguliere training"]
