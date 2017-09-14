@@ -1,5 +1,6 @@
 class TrainingSchedule < ApplicationRecord
   include Activatable
+  include Presentable
 
   after_save :update_trainings
 
@@ -44,6 +45,10 @@ class TrainingSchedule < ApplicationRecord
 
   def day_number
     TrainingSchedule.days[day]
+  end
+
+  def teams
+    [team]
   end
 
   private

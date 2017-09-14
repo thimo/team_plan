@@ -11,7 +11,9 @@ class Presence < ApplicationRecord
   enum signed_off: { signed_off_on_time: 0, signed_off_too_late: 1, not_signed_off: 2 }
 
   def set_presentable_user_modified
-    presentable.update_attributes(user_modified: true) unless presentable.user_modified?
+    if presentable.respond_to?(:user_modified) && presentable.user_modified?
+      presentable.update_attributes(user_modified: true) unless presentable.user_modified?
+    end
   end
 
 end

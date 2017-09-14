@@ -8,9 +8,13 @@ class TrainingSchedulesController < ApplicationController
 
   def new; end
 
+  def show
+    @presences = policy_scope(@training_schedule.find_or_create_presences.asc)
+  end
+
   def create
     if @training_schedule.save
-      redirect_to @training_schedule.team, notice: "Reguliere training is toegevoegd."
+      redirect_to @training_schedule, notice: "Reguliere training is toegevoegd."
     else
       render :new
     end
@@ -20,7 +24,7 @@ class TrainingSchedulesController < ApplicationController
 
   def update
     if @training_schedule.update_attributes(training_schedule_params)
-      redirect_to @training_schedule.team, notice: "Reguliere training is aangepast."
+      redirect_to @training_schedule, notice: "Reguliere training is aangepast."
     else
       render 'edit'
     end

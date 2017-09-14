@@ -1,0 +1,68 @@
+- provide(:title, "Reguliere training")
+
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group
+      - if policy(@training_schedule).update?
+        = link_to edit_training_schedule_path(@training_schedule), class: "btn btn-secondary", title: "Aanpassen"
+          i.fa.fa-pencil
+
+section.tabs-section
+  .tabs-section-nav
+    .tbl
+      ul.nav[role="tablist"]
+        li.nav-item
+          a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
+            span.nav-link-in
+              | Training
+        - if @presences.any? && policy(@presences.first).update?
+          li.nav-item
+            a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+              span.nav-link-in
+                | Aanwezig
+                span.ml-1.label.label-pill.label-success[id="#{@training_schedule.model_name.singular}-#{@training_schedule.id}-presence-count"]
+                  = @presences.present.size
+  .tab-content
+    #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
+      .row
+        .col-3
+          | Trainingsdag
+        .col-9
+          = @training_schedule.day_i18n
+      .row
+        .col-3
+          | Tijd
+        .col-9
+          = "Van #{l @training_schedule.start_time, format: :time_short} tot #{l @training_schedule.end_time, format: :time_short} uur"
+        .col-3
+          | Aanwezig
+        .col-9
+          = @training_schedule.present_minutes_i18n
+        .col-3
+          | Veld
+        .col-9
+          = "#{@training_schedule.soccer_field.name} #{@training_schedule.field_part_i18n}"
+        .col-3
+          | Trainer
+        .col-9
+          - @training_schedule.team_members.each do |team_member|
+            div
+              = team_member.member.name
+          - if @training_schedule.cios
+            div
+              | CIOS
+        .col-3
+        .col-9
+
+
+    - if @presences.any? && policy(@presences.first).update?
+      #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
+        p
+          | Geef hier de standaard aanwezigheid op voor de training van deze dag.
+            Misschien weet je al dat de keeper niet mee doet omdat er
+            keeperstraining is of is er een speler langere tijd geblesseerd.
+            Dan kun je hier de aanwezigheid uitzetten en
+            een opmerking invoeren. Dit wordt dan automatisch
+            overgenomen bij de volgende training.
+        - @presences.each do |presence|
+          = render presence
