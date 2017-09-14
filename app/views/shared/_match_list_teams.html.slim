@@ -1,13 +1,15 @@
-td[class="#{'strong' if is_thuisteam? match}"]
+td
+  .small.color-blue-grey
+    | #{I18n.l match.started_at, format: :time_short}
+td.text-right.width-50
   - if is_thuisteam? match
     = link_to Team.by_teamcode(match.thuisteamid).first
       = match.thuisteam
   - else
     = match.thuisteam
-  .small.color-blue-grey
-    | #{I18n.l match.started_at, format: :time_short} uur
-td -
-td[class="#{'strong' if is_uitteam? match}"]
+td.text-center.nowrap.strong
+  = match.uitslag || "-"
+td.width-50
   - if is_uitteam? match
     = link_to Team.by_teamcode(match.uitteamid).first
       = match.uitteam

@@ -95,8 +95,6 @@
               - human_sort(matches, :team_name).each do |match|
                 tr.clickable
                   = render 'shared/match_list_teams', match: match
-                  td.text-center.nowrap
-                    = match.uitslag
 
   .col-xl-6
     - if policy(@age_group).show_available_members? && @available_members.present?

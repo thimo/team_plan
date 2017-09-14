@@ -14,9 +14,7 @@ section.box-typical.schedule-list
           tr
             th[colspan="100"]
               | #{l date, format: :weekday} #{l date, format: :date_long}
-        - matches.each do |match|
-          tbody
+        tbody
+          - matches.each do |match|
             tr.clickable
               = render 'shared/match_list_teams', match: match
-              td.text-center.nowrap
-                = match.uitslag
