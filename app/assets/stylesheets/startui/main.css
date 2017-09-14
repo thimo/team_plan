@@ -5994,7 +5994,7 @@ textarea.form-control {
 .uploading-container .uploading-container-right-in {
   margin-left: 220px;
 }
-@media (max-width: 544px) {
+@media (max-width: 576px) {
   .uploading-container .uploading-container-left,
   .uploading-container .uploading-container-right {
     float: none;
@@ -8849,7 +8849,7 @@ body.modal-open {
     width: 500px;
   }
 }
-@media (max-width: 544px) {
+@media (max-width: 576px) {
   .modal-dialog:not(.modal-sm):not(.modal-lg) {
     width: auto;
   }
@@ -9094,7 +9094,7 @@ body.modal-open {
 .upload-gd-header .tbl-cell-btns button:hover {
   color: #00a8ff;
 }
-@media (max-width: 544px) {
+@media (max-width: 576px) {
   .upload-gd-header {
     display: block;
     margin-bottom: 15px;
