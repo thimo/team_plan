@@ -26,7 +26,7 @@
       = render "schedules/list", schedules: @schedules
 
     - if @played_matches.any?
-      = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen"
+      = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen", compact: true
 
     = render 'team_members'
 
