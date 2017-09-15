@@ -15,6 +15,7 @@ class IcalsController < ApplicationController
       format.ics do
         cal = Icalendar::Calendar.new
         cal.append_custom_property("X-WR-CALNAME","#{Setting['club.name_short']} #{team.name}")
+        cal.append_custom_property("TZID", "Europe/Amsterdam")
         schedules.each do |schedule|
           event = Icalendar::Event.new
           event.dtstart = schedule.started_at
