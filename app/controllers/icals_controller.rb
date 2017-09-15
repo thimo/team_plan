@@ -1,4 +1,6 @@
 class IcalsController < ApplicationController
+  require 'icalendar/tzinfo'
+
   def show
     skip_authorization
 
@@ -14,9 +16,14 @@ class IcalsController < ApplicationController
       # format.ics { render text: Ical.new(@myevents).to_ical }
       format.ics do
         cal = Icalendar::Calendar.new
+        tzid = "Europe/Amsterdam"
+        tz = TZInfo::Timezone.get(tzid)
+
         cal.append_custom_property("X-WR-CALNAME","#{Setting['club.name_short']} #{team.name}")
-        cal.append_custom_property("TZID", "Europe/Amsterdam")
         schedules.each do |schedule|
+          timezone = tz.ical_timezone(schedule.started_at)
+          cal.add_timezone timezone
+
           event = Icalendar::Event.new
           event.dtstart = schedule.started_at
           event.dtend = schedule.ended_at
