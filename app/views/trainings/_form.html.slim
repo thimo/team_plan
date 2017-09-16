@@ -3,10 +3,19 @@
   - f.object.errors.each do |error|
     div
       = error
-  
-  = render 'input/datepicker', f: f, field: :started_at
-  = f.input :start_time, as: :time, minute_step: 5, wrapper: :time
-  = f.input :end_time, as: :time, minute_step: 5, wrapper: :time
+
+  - if @training.training_schedule.present?
+    .row.form-group
+      .col-md-3
+        | Datum
+      .col-md-9
+        = "#{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}"
+        .color-blue-grey.small
+          = "#{l @training.started_at, format: :time_short} tot #{l @training.ended_at, format: :time_short}"
+  - else
+    = render 'input/datepicker', f: f, field: :started_at
+    = f.input :start_time, as: :time, minute_step: 5, wrapper: :time
+    = f.input :end_time, as: :time, minute_step: 5, wrapper: :time
 
   = render 'input/trix', f: f, field: :body, autofocus: true
   = f.input :remark
@@ -15,3 +24,19 @@
   = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@training).destroy?
     = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+
+
+h5.mt-5 Vorige trainingen
+
+- @latest_trainings.each do |training|
+  hr
+  .row
+    .col-md-3
+      | Training
+    .col-md-9
+      = "#{l training.started_at, format: :weekday} #{l training.started_at, format: :date_long}"
+  .row
+    .col-md-3
+      | Programma
+    .col-md-9
+      = training.body&.html_safe

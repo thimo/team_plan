@@ -22,6 +22,7 @@ class TrainingsController < ApplicationController
   end
 
   def edit
+    @latest_trainings = policy_scope(@training.team.trainings).in_period(2.weeks.ago, 0.days.ago).asc.active
   end
 
   def update
