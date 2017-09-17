@@ -1,24 +1,10 @@
 class PresencesController < ApplicationController
-  # before_action :set_team, only: [:new, :create]
-  # before_action :create_note, only: [:new, :create]
+  before_action :set_parent, only: [:index]
   before_action :set_presence, only: [:show, :edit, :update, :destroy]
-  # before_action :add_breadcrumbs
 
-  # def show; end
-
-  # def new
-  # end
-
-  # def create
-  #   if @presence.save
-  #     redirect_to @presence, notice: "Notitie is toegevoegd."
-  #   else
-  #     render :new
-  #   end
-  # end
-
-  # def edit
-  # end
+  def index
+    @presences = policy_scope(@parent.find_or_create_presences).asc
+  end
 
   def update
     if @presence.update_attributes(presence_params)
@@ -30,30 +16,17 @@ class PresencesController < ApplicationController
     end
   end
 
-  # def destroy
-  #   redirect_to @presence.team, notice: "Notitie is verwijderd."
-  #   @presence.destroy
-  # end
-
   private
-    # def set_team
-    #   @team = if @presence.present? && @presence.team.present?
-    #             @presence.team
-    #           else
-    #             Team.find(params[:team_id])
-    #           end
-    # end
 
-    # def create_note
-    #   @presence = if action_name == 'new'
-    #             @team.notes.new
-    #           else
-    #             Presence.new(presence_params.merge(user: current_user))
-    #           end
-    #   @presence.team = @team
-    #
-    #   authorize @presence
-    # end
+    def set_parent
+      @parent = if params[:training_id]
+         Training.find(params[:training_id])
+       elsif params[:club_data_match_id]
+         ClubDataMatch.find(params[:club_data_match_id])
+       elsif params[:match_id]
+         Match.find(params[:match_id])
+       end
+    end
 
     def set_presence
       @presence = Presence.find(params[:id])
@@ -64,14 +37,4 @@ class PresencesController < ApplicationController
       params.require(:presence).permit(:present, :on_time, :signed_off, :remark)
     end
 
-    # def add_breadcrumbs
-    #   add_breadcrumb "#{@presence.team.age_group.season.name}", @presence.team.age_group.season
-    #   add_breadcrumb @presence.team.age_group.name, @presence.team.age_group
-    #   add_breadcrumb @presence.team.name, @presence.team
-    #   if @presence.new_record?
-    #     add_breadcrumb 'Nieuw'
-    #   else
-    #     add_breadcrumb @presence.title, @presence
-    #   end
-    # end
 end

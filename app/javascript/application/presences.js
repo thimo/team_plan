@@ -10,3 +10,17 @@ var autosaveForm = function(form) {
   })
 }
 window.autosaveForm = autosaveForm
+
+$(function () {
+  $('.presence-popover').popover({
+    html: true,
+    placement: 'bottom'
+  }).on('show.bs.popover', function () {
+    $.ajax({
+      dataType: 'script',
+      type: "GET",
+      url: $(this).data('popover-content-url')
+    }).done(function(data) {
+    })
+  });
+})

@@ -60,7 +60,7 @@ class Team < ApplicationRecord
   def played_matches(from:, up_to:)
     played_matches = matches.played.in_period(from, up_to).to_a
     played_matches += club_data_matches.played.in_period(from, up_to).to_a
-    played_matches.flatten #.sort_by(&:started_at)
+    played_matches.flatten
   end
 
 end

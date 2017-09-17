@@ -15,10 +15,4 @@ tr.clickable[class="#{match_schedule_color(match)}"]
   td.nowrap
     = match.uitslag
   td.w-1.nowrap.text-right
-    - if (present = match.presences.present).size > 0
-      - if false && policy(match).update?
-        a.dropdown-toggle.label.ml-1[href="#" title="Aanwezig"]
-          = present.size
-      - else
-        .label.ml-1[title="Aanwezig"]
-          = present.size
+    = render 'presences/presence_label', parent: match
