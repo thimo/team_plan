@@ -1,6 +1,5 @@
 - title ||= "Wedstrijden"
 - hide_time ||= false
-- compact ||= false
 
 section.box-typical.schedule-list
   header.box-typical-header
@@ -11,13 +10,7 @@ section.box-typical.schedule-list
 
   .box-typical-body
     table.table.table-xs.tr-links.align-top
-      - if compact
-        tbody
-          - matches.each do |date, matches|
-              - matches.each do |match|
-                tr.clickable
-                  = render 'shared/match_list_teams', match: match, compact: compact, hide_time: hide_time
-      - else
+      - if matches.first.is_a? Array
         - matches.each do |date, matches|
           thead
             tr
@@ -26,4 +19,9 @@ section.box-typical.schedule-list
           tbody
             - matches.each do |match|
               tr.clickable
-                = render 'shared/match_list_teams', match: match, compact: compact, hide_time: hide_time
+                = render 'shared/match_list_teams', match: match, hide_time: hide_time
+      - else
+        tbody
+          - matches.each do |match|
+              tr.clickable
+                = render 'shared/match_list_teams', match: match, compact: true, hide_time: hide_time
