@@ -26,17 +26,18 @@
     = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
 
 
-h5.mt-5 Vorige trainingen
+- if @latest_trainings.present?
+  h5.mt-5 Vorige trainingen
 
-- @latest_trainings.each do |training|
-  hr
-  .row
-    .col-md-3
-      | Training
-    .col-md-9
-      = "#{l training.started_at, format: :weekday} #{l training.started_at, format: :date_long}"
-  .row
-    .col-md-3
-      | Programma
-    .col-md-9
-      = training.body&.html_safe
+  - @latest_trainings.each do |training|
+    hr
+    .row
+      .col-md-3
+        | Training
+      .col-md-9
+        = "#{l training.started_at, format: :weekday} #{l training.started_at, format: :date_long}"
+    .row
+      .col-md-3
+        | Programma
+      .col-md-9
+        = training.body&.html_safe
