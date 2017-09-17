@@ -2,6 +2,20 @@ $(document).on('turbolinks:load', function() {
   $('form[data-behavior="autosave"]').each((index, form) => {
     autosaveForm(form)
   });
+
+  $('.presence-popover').popover({
+    title: $('<a onclick="closePopovers()" class="d-block"><i class="fa fa-times float-right pl-2" />Aanwezig</a>'),
+    html: true,
+    placement: 'bottom'
+  }).on('show.bs.popover', function () {
+    closePopovers()
+    $.ajax({
+      dataType: 'script',
+      type: "GET",
+      url: $(this).data('popover-content-url')
+    }).done(function(data) {
+    })
+  });
 });
 
 var autosaveForm = function(form) {
@@ -11,16 +25,7 @@ var autosaveForm = function(form) {
 }
 window.autosaveForm = autosaveForm
 
-$(function () {
-  $('.presence-popover').popover({
-    html: true,
-    placement: 'bottom'
-  }).on('show.bs.popover', function () {
-    $.ajax({
-      dataType: 'script',
-      type: "GET",
-      url: $(this).data('popover-content-url')
-    }).done(function(data) {
-    })
-  });
-})
+var closePopovers = function() {
+  $('.presence-popover').popover('hide')
+}
+window.closePopovers = closePopovers

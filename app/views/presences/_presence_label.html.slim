@@ -1,7 +1,6 @@
 - if (present = parent.presences.present).size > 0
   - if policy(parent).update?
     a.presence-popover.dropdown-toggle.label.p-2.ml-1[
-      title="Aanwezig"
       tabindex="0"
       id="#{parent.model_name.singular}-#{parent.id}-presence-count"
       data-popover-content-url="#{polymorphic_path [parent, :presences]}"
