@@ -4,16 +4,16 @@
   div.presence-form[id="presence-#{presence.id}"]
     = simple_form_for presence, html: { class: 'row' }, data: { behavior: "autosave" }, remote: true do |f|
       = hidden_field_tag :compact, compact
-      .col-md-4.col-lg-4
-        = render 'input/boolean_checkbox', f: f, field: :present, label: presence.member.name, checkbox_class: "checkbox-toggle #{'mt-0 mb-1' if compact}", label_class: "#{'color-blue-grey line-through' unless presence.present?}"
-      - unless compact
-        .col-md-2.col-lg-2
-          - if presence.present?
-            = f.input :on_time, include_blank: false, input_html: {class: " #{color_for_on_time(presence.send(:on_time))}"}, wrapper_html: {class: "mb-2"}, label: false
-            = f.hidden_field :signed_off, value: :signed_off_on_time
-          - unless presence.present?
-            = f.input :signed_off, include_blank: false, input_html: {class: " #{color_for_on_time(presence.send(:signed_off))}"}, wrapper_html: {class: "mb-2"}, label: false
-            = f.hidden_field :on_time, value: :on_time
-          
-        .col-md-6
-          = f.text_area :remark, class: "form-control", placeholder: f.object.class.human_attribute_name(:remark), rows: 1
+      - if compact
+      div[class="#{compact ? 'col-12' : 'col-md-4'}"]
+        = render 'input/boolean_checkbox', f: f, field: :present, label: presence.member.name, checkbox_class: "checkbox-toggle #{'mt-1 mb-1' if compact}", label_class: "#{'color-blue-grey line-through' unless presence.present?}"
+      div.extra_fields[class="#{compact ? 'col-12' : 'col-md-2'}"]
+        - if presence.present?
+          = f.input :on_time, include_blank: false, input_html: {class: " #{color_for_on_time(presence.send(:on_time))}"}, wrapper_html: {class: "mb-2"}, label: false
+          = f.hidden_field :signed_off, value: :signed_off_on_time
+        - unless presence.present?
+          = f.input :signed_off, include_blank: false, input_html: {class: " #{color_for_on_time(presence.send(:signed_off))}"}, wrapper_html: {class: "mb-2"}, label: false
+          = f.hidden_field :on_time, value: :on_time
+
+      div.extra_fields[class="#{compact ? 'col-12' : 'col-md-6'}"]
+        = f.text_area :remark, class: "form-control", placeholder: f.object.class.human_attribute_name(:remark), rows: 1

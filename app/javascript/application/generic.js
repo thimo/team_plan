@@ -30,21 +30,6 @@ $(document).on('turbolinks:load', () => {
 
   $('.no-touch [title]').tooltip();
 
-  // $("[rel=details]").popover({
-  //   trigger: 'hover',
-  //   placement: 'bottom',
-  //   html: 'true'
-  // }).on('show.bs.popover', function () {
-  //   //I saw an answer here  with 'show.bs.modal' it is wrong, this is the correct,
-  //   //also you can use   'shown.bs.popover to take actions AFTER the popover shown in screen.
-  //   $.ajax({
-  //     url: 'data.php',
-  //     success: function (html) {
-  //       popover.attr('data-content', html);
-  //     }
-  //   });
-  // });
-
   $('select.field_positions').each((index, target) => {
     $(target).select2({placeholder: "Veldpositie"});
   })

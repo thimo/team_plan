@@ -1,0 +1,8 @@
+$("#presences-<%= @parent.model_name.singular %>-<%= @parent.id %>").html("<%= j render('index', presences: @presences, compact: true) %>")
+
+$('form[data-behavior="autosave"]').each((index, form) => {
+  autosaveForm(form)
+  autosize($('textarea'))
+  // Initially hide extra fields
+  $('.popover .extra_fields').hide()
+})

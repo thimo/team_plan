@@ -55,7 +55,6 @@
     min-width: 48px;
   }
 }
-// .sign-avatar.sign-logo
 
 .sign-box {
   max-width: 420px;
@@ -240,4 +239,8 @@ trix-toolbar {
     padding-right: 10px;
     padding-left: 0;
   }
+}
+
+.popover {
+  font-family: inherit;
 }
