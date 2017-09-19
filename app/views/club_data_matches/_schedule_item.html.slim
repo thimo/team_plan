@@ -17,3 +17,5 @@ tr.clickable[class="#{match_schedule_color(match)}"]
           = "Uitslag: #{match.uitslag}"
   td.w-1.nowrap.text-right
     = render 'presences/presence_label', parent: match
+
+= render 'presences/presences_row', parent: match

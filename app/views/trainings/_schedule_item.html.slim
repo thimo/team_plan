@@ -21,3 +21,5 @@ tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date}"]
           | #{ts.present_minutes_i18n} aanwezig
   td.w-1.nowrap.text-right
     = render 'presences/presence_label', parent: training
+
+= render 'presences/presences_row', parent: training

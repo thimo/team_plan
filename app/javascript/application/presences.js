@@ -3,20 +3,22 @@ $(document).on('turbolinks:load', function() {
     autosaveForm(form)
   });
 
-  $('.presence-popover').popover({
-    title: $('<a onclick="closePopovers()" class="d-block"><i class="fa fa-times float-right pl-2" />Aanwezig</a>'),
-    html: true,
-    placement: 'bottom'
-  }).on('show.bs.popover', function () {
-    closePopovers()
-    $.ajax({
-      dataType: 'script',
-      type: "GET",
-      url: $(this).data('popover-content-url')
-    }).done(function(data) {
-      $('.presence-popover').popover('update')
-    })
-  });
+  $('.presences-toggle').on('click', function() {
+    var target_id = $(this).data('target-id')
+    var target = $('#' + target_id)
+    if (target.is(':visible')) {
+      target.closest('tr').hide()
+    } else {
+      target.closest('tr').show()
+
+      $.ajax({
+        dataType: 'script',
+        type: "GET",
+        url: $(this).data('content-url')
+      }).done(function(data) {
+      })
+    }
+  })
 });
 
 var autosaveForm = function(form) {
@@ -25,8 +27,3 @@ var autosaveForm = function(form) {
   })
 }
 window.autosaveForm = autosaveForm
-
-var closePopovers = function() {
-  $('.presence-popover').popover('hide')
-}
-window.closePopovers = closePopovers
