@@ -28,6 +28,18 @@ section.tabs-section
       .card.float-right
         .card-body
           .strong #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
+          div.mt-2
+            div.strong
+              = @match.accommodatie
+            div
+              = @match.adres
+            div
+              = "#{@match.postcode}  #{@match.plaats}"
+            div
+              = @match.telefoonnummer
+            div
+              = link_to "Route", @match.route, target: "_blank"
+
       - if @players.present?
         table.table
           - @players.each do |player|
