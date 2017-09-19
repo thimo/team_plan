@@ -44,21 +44,26 @@ h3 Contactgegevens
         = "#{member.person_type}: "
       = "#{member.local_teams} "
       = "#{member.sport_category} "
+    - if member.association_number.present?
+      div
+        span.color-blue-grey
+          = "KNVB-nummer: "
+        = member.association_number
     div
       span.color-blue-grey
-        | Lid sinds:
+        = "Lid sinds: "
       = I18n.l member.member_since, format: :long
 
   - unless member.registered_at.blank? || member.registered_at == member.member_since
     div
       span.color-blue-grey
-        | Registratiedatum:
+        = "Registratiedatum: "
       = I18n.l member.registered_at, format: :long
 
   - if member.status_af_te_melden?
     div
       span.color-blue-grey
-        | Status:
+        = "Status: "
       = member.status.capitalize
       - if member.deregistered_at.present?
         |  per
@@ -67,12 +72,12 @@ h3 Contactgegevens
     - unless member.status_definitief?
       div
         span.color-blue-grey
-          | Status:
+          = "Status: "
         = member.status.capitalize
     - unless member.deregistered_at.blank?
       div
         span.color-blue-grey
-          | Afmelddatum:
+          = "Afmelddatum: "
         = I18n.l member.deregistered_at, format: :long
 
 hr
