@@ -19,8 +19,5 @@ tr.clickable[class="#{'table-info' if date.to_date == Time.zone.today.to_date}"]
       - if ts.present? && TrainingSchedule.present_minutes[ts.present_minutes] > 0
         span.color-blue-grey-lighter.small.pl-2
           | #{ts.present_minutes_i18n} aanwezig
-
-  td
-
   td.w-1.nowrap.text-right
     = render 'presences/presence_label', parent: training

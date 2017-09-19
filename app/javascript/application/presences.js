@@ -14,6 +14,7 @@ $(document).on('turbolinks:load', function() {
       type: "GET",
       url: $(this).data('popover-content-url')
     }).done(function(data) {
+      $('.presence-popover').popover('update')
     })
   });
 });
