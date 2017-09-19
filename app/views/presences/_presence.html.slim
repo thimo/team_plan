@@ -4,12 +4,12 @@
   div.presence-form[id="presence-#{presence.id}"]
     = simple_form_for presence, html: { class: 'row' }, data: { behavior: "autosave" }, remote: true do |f|
       = hidden_field_tag :compact, compact
-      - if compact
       div[class="#{compact ? 'col-12' : 'col-md-4'}"]
+        - label = "#{presence.member.name} #{'<i class="fa fa-medkit p-1 pl-2 red"></i>' if presence.member.injured?}".html_safe
         = render 'input/boolean_checkbox', f: f,
           field: :present,
-          label: presence.member.name,
-          checkbox_class: "checkbox-toggle #{'mt-2 mb-1' if compact}", 
+          label: label.html_safe,
+          checkbox_class: "checkbox-toggle #{'mt-2 mb-1' if compact}",
           label_class: "#{'color-blue-grey line-through' unless presence.present?}"
       div.extra_fields[class="#{compact ? 'col-12' : 'col-md-2'}"]
         - if presence.present?
