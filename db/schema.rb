@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912065846) do
+ActiveRecord::Schema.define(version: 20170919195012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,10 @@ ActiveRecord::Schema.define(version: 20170912065846) do
     t.string "uitslag"
     t.boolean "eigenteam", default: false
     t.datetime "uitslag_at"
+    t.string "adres"
+    t.string "postcode"
+    t.string "telefoonnummer"
+    t.string "route"
     t.index ["club_data_competition_id"], name: "index_club_data_matches_on_club_data_competition_id"
   end
 

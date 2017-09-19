@@ -56,7 +56,10 @@ module ClubDataImporter
         if club_data_match.eigenteam?
           add_team_to_match(club_data_match, club_data_match.thuisteamid)
           add_team_to_match(club_data_match, club_data_match.uitteamid)
+
+          add_address(club_data_match) if club_data_match.adres.blank?
         end
+
 
         imported_wedstrijdnummers << club_data_match.wedstrijdnummer
       end
@@ -90,6 +93,25 @@ module ClubDataImporter
         end
       end
     end
+  end
+
+  def self.add_address(match)
+    if match.adres.blank?
+      json = JSON.load(open("#{Setting['clubdata.urls.wedstrijd-accommodatie']}?wedstrijdcode=#{match.wedstrijdcode}&client_id=#{Setting['clubdata.client_id']}"))
+      if json['wedstrijd'].present?
+        wedstrijd = json['wedstrijd']
+
+        match.write_attribute('adres', wedstrijd['adres'])
+        if (zip = wedstrijd['plaats'].split.first).match(/\d{4}[a-zA-Z]{2}/)
+          match.write_attribute('postcode', zip)
+        end
+        match.write_attribute('telefoonnummer', wedstrijd['telefoonnummer'])
+        match.write_attribute('route', wedstrijd['route'])
+        match.save
+      end
+    end
+  rescue OpenURI::HTTPError
+    # Not all match codes return a valid response, ignore errors
   end
 
   private
