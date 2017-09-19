@@ -32,7 +32,7 @@ class ClubDataMatch < ApplicationRecord
   end
 
   def location
-    "#{accommodatie}\\n#{plaats}"
+    "#{accommodatie}\\n#{adres}\\n#{postcode} #{plaats}\\n#{telefoonnummer}"
   end
 
   def team_name
