@@ -84,8 +84,8 @@ hr
 
 h3
   | Teams
-- @team_members.group_by(&:season).sort_by{|season, season_members| season.name}.reverse.each do |season, season_members|
-  table.table.table-striped
+table.table.table-striped
+  - @team_members.group_by(&:season).sort_by{|season, season_members| season.name}.reverse.each do |season, season_members|
     - season_members.group_by(&:team).sort_by{|team, team_members| team.name}.each_with_index do |(team, team_members), team_index|
       tr
         td
