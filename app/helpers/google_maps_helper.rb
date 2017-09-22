@@ -1,0 +1,3 @@
+module GoogleMapsHelper
+
+end

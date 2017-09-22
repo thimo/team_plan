@@ -1,0 +1,34 @@
+ruby:
+  base_url = Setting['google.maps.base_url']
+
+  place_params = {
+    key: Setting['google.maps.api-key'],
+    q: match.google_maps_address,
+    zoom: 12,
+  }
+  direction_params_club = {
+    key: Setting['google.maps.api-key'],
+    origin: "#{Setting['club.sportscenter']},#{Setting['club.address']},#{Setting['club.zip']} #{Setting['club.city']}",
+    destination: match.google_maps_address,
+  }
+  member = current_user.members.sportlink_active.first
+  direction_params_home = {
+    key: Setting['google.maps.api-key'],
+    origin: "#{member.address},#{member.zipcode} #{member.city}",
+    destination: match.google_maps_address,
+  } if member.present?
+  place_url = "#{base_url}place?#{place_params.to_param}"
+  directions_url_club = "#{base_url}directions?#{direction_params_club.to_param}"
+  directions_url_home = "#{base_url}directions?#{direction_params_home.to_param}" if member.present?
+
+iframe#google-maps[frameborder="0" style="width: 100%; height: 600px; border:0"
+  src="#{place_url}" allowfullscreen]
+
+ul.nav.nav-pills.mt-2
+  li
+    = link_to 'Sportcomplex', '#', class: "nav-link active", onclick: "$('#google-maps').attr('src', '#{place_url}'); return false;"
+  - if member.present?
+    li
+      = link_to "Route vanuit huis", '#', class: "nav-link", onclick: "$('#google-maps').attr('src', '#{directions_url_home}'); return false;"
+  li
+    = link_to "Route vanuit #{Setting['club.name']}", '#', class: "nav-link", onclick: "$('#google-maps').attr('src', '#{directions_url_club}'); return false;"

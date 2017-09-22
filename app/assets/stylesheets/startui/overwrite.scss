@@ -244,3 +244,11 @@ trix-toolbar {
 .popover {
   font-family: inherit;
 }
+
+.nav.nav-pills .nav-link {
+  border-radius: 5px;
+}
+
+.nav-pills .nav-link.active, .show > .nav-pills .nav-link {
+  background-color: inherit;
+}
