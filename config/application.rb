@@ -33,6 +33,9 @@ module TeamPlan
 
     config.exceptions_app = self.routes
 
+    # Enable to prevent loading all helpers all the time
+    # config.action_controller.include_all_helpers = false
+
     console do
       ActiveRecord::Base.connection
     end
