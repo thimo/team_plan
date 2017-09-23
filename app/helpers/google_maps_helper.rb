@@ -1,5 +1,5 @@
 module GoogleMapsHelper
-  def google_maps_url(object:, type:, current_user: nil)
+  def google_maps_url(object:, type:, user: nil)
     base_url = "#{Setting['google.maps.base_url']}#{type}"
 
     params = {
@@ -13,8 +13,8 @@ module GoogleMapsHelper
       )
     when 'directions'
       params.merge!(destination: object.google_maps_address)
-      if current_user
-        member = current_user.members.sportlink_active.first
+      if user.present?
+        member = user.members.sportlink_active.first
         params.merge!(origin: "#{member.address},#{member.zipcode} #{member.city}") if member.present?
       else
         params.merge!(origin: "#{Setting['club.sportscenter']},#{Setting['club.address']},#{Setting['club.zip']} #{Setting['club.city']}")
