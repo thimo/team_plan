@@ -1,7 +1,7 @@
 - cache [member]
   td
     = render member, target: '_blank'
-        
+
   td.color-blue-grey.small
     - if (previous_teams = member.teams_for_season(@previous_season).as_player.distinct).present?
       - previous_teams.each do |previous_team|
@@ -14,13 +14,13 @@
               i.fa[class="#{evaluation.advise_to_icon_class}"]
             - if evaluation.remark.present?
               i.fa.fa-info-circle.blue.ml-1[title="#{evaluation.remark}"]
-          
+
     - if (active_team_member = member.active_team_member).present?
       - if (field_positions = active_team_member.field_positions).present?
         .mb-1
           - field_positions.each do |field_position|
             div = "#{field_position.name}"
-    
+
     - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
       - last_comments.each do |last_comment|
         .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at, format: :date_short})"]

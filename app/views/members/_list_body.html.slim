@@ -4,8 +4,15 @@ table.table.table-sm.tr-links
       tr.clickable
         td
           = render member
-        td.text-right[title="Registratiedatum"]
-          = l member.registered_at, format: :long
+        td.small[style="max-width: 160px;"]
+          div[title="Registratiedatum"]
+            span.color-blue-grey-lighter.pr-1
+              | Registratie
+            = l member.registered_at, format: :long
+          - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
+            - last_comments.each do |last_comment|
+              .comment.color-blue-grey.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at, format: :date_short})"]
+                = last_comment.body
         td.text-right.w-44
           - if member.reactivated?
             i.fa.fa-recycle.pl-2.color-green[title="Opnieuw geactiveerd"]
