@@ -2,25 +2,43 @@
 - active_members_as_options = options_from_collection_for_select(@members.sportlink_active, :id, :name_and_born_on)
 
 .box-typical.box-typical-padding
-  p Gebruik dit formulier om meerdere teamgenoten in één keer toe te voegen. Niet genoemde rollen (hoofdcoach, teamouder, teammanager, etc.) kun je vanuit #{link_to "het individuele formulier", new_team_team_member_path(@team)} toevoegen.
-  
+  p Gebruik dit formulier om meerdere teamgenoten in één keer toe te voegen.
+   Niet genoemde rollen (hoofdcoach, teamouder, teammanager, etc.) kun je vanuit
+   #{link_to "het individuele formulier", new_team_team_member_path(@team)} toevoegen.
+
+  - if @team.active?
+    .alert.alert-warning
+      strong
+        = "Let op: "
+      | Nieuwe teamgenoten worden direct geactiveerd. Toevoegen als 'concept'
+        kan via #{link_to "het individuele formulier", new_team_team_member_path(@team)}.
+
   hr
 
   = form_with url: team_team_member_bulk_updates_path(@team, from: params[:from]), method: :post do
     .form-group.row
       label.col-sm-2.col-form-label Spelers
       .col-sm-10
-        = select_tag :players, options_from_collection_for_select(@members.sportlink_active.sportlink_player, :id, :name_and_born_on), multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_players'
-      
+        = select_tag :players, options_from_collection_for_select(@members.sportlink_active.sportlink_player, :id, :name_and_born_on),
+          multiple: true,
+          class: 'form-control select2-hidden-accessible',
+          id: 'team_member_players'
+
     .form-group.row
       label.col-sm-2.col-form-label Coaches
       .col-sm-10
-        = select_tag :coaches, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_coaches'
-      
+        = select_tag :coaches, active_members_as_options,
+          multiple: true,
+          class: 'form-control select2-hidden-accessible',
+            id: 'team_member_coaches'
+
     .form-group.row
       label.col-sm-2.col-form-label Trainers
       .col-sm-10
-        = select_tag :trainers, active_members_as_options, multiple: true, class: 'form-control select2-hidden-accessible', id: 'team_member_trainers'
-            
+        = select_tag :trainers, active_members_as_options,
+          multiple: true,
+          class: 'form-control select2-hidden-accessible',
+          id: 'team_member_trainers'
+
     = submit_tag "Toevoegen", class: "btn btn-primary btn-inline"
     = link_to "Annuleren", @team, class: 'btn btn-secondary-outline btn-inline'
