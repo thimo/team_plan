@@ -51,7 +51,7 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def set_initial_status?
-    return false if @record.persisted? || @record.team.draft? || @record.team.archived?
+    return false if @record.persisted? || @record.team.nil? || @record.team.draft? || @record.team.archived?
 
     @user.admin? || @user.club_staff?
   end
