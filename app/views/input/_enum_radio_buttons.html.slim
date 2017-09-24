@@ -1,4 +1,4 @@
-- f.object.class.send(field.to_s.pluralize).each do |enum_label, enum_index| 
+- f.object.class.send(field.to_s.pluralize).each do |enum_label, enum_index|
   .radio
     / For unique ID's, even if multiple forms with same field exist
     - id = "#{f.object.model_name.singular}_#{f.object.id}_#{field.to_s}_#{enum_label}"

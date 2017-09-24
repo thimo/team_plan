@@ -68,6 +68,7 @@ nl:
         field_position_ids: Veldpositie
         prefered_foot: Links-/rechtsbenig
         status: Status
+        initial_status: Activeren
       player_evaluation:
         advise_next_season: Advies niveau
         remark: Opmerking
@@ -147,6 +148,9 @@ nl:
         team_staff: Team begeleiding
         member: Lid
     team_member:
+      initial_status:
+        initial_draft: Nee, als 'concept' toevoegen
+        initial_active: Ja, direct activeren
       role:
         player: Speler
         head_coach: Hoofdcoach

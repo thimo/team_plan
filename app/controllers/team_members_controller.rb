@@ -51,9 +51,15 @@ class TeamMembersController < ApplicationController
       end
     else
       @team = Team.find(params[:team_id])
-      @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
+      @team_member = TeamMember.new(permitted_attributes(TeamMember.new(team: @team)))
       @team_member.team ||= @team
       authorize @team_member
+
+      # @team_member.initial_draft? does not seem to work here
+      if @team_member.initial_status != 'initial_draft'
+        # By default use team's status, otherwise use default 'status' value (draft)
+        @team_member.status = @team.status
+      end
 
       if @team_member.save
         return redirect_to @team

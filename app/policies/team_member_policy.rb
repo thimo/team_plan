@@ -50,10 +50,17 @@ class TeamMemberPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def set_initial_status?
+    return false if @record.persisted? || @record.team.draft? || @record.team.archived?
+
+    @user.admin? || @user.club_staff?
+  end
+
   def permitted_attributes
     attributes = [:team_id, :member_id, :prefered_foot, field_position_ids: []]
     attributes << :role if set_role?
     attributes << :status if set_status?
+    attributes << :initial_status if set_initial_status?
     return attributes
   end
 

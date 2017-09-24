@@ -1,14 +1,14 @@
 = simple_form_for [@team, @team_member], {wrapper: :horizontal_form} do |f|
   = f.error_notification
-  
+
   - if @team_member.persisted?
     .form-group.row
       = f.label :name, class: "col-md-3 col-form-label"
       .col-md-9.form-control-static
-        = @team_member.member.name 
-  - else 
+        = @team_member.member.name
+  - else
     = f.input :member_id, collection: Member.sportlink_active.asc, value_method: :id, label_method: :name_and_born_on, id: :team_member_member_id
-  
+
   - if policy(@team_member).set_role?
     = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :role}, layout: 'input/col_3_9_wrapper'
 
@@ -18,7 +18,7 @@
         = f.label :field_position_ids, class: "col-md-3 col-form-label"
         .col-md-9
           = f.select :field_position_ids, options_for_select(FieldPosition.options_for_select, f.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
-    
+
       .form-group.row[class="#{'form-control-error' if f.error("prefered_foot").present?}"]
         = f.label :prefered_foot, class: "col-md-3 col-form-label"
         .col-md-9
@@ -26,6 +26,9 @@
 
   - if policy(@team_member).set_status?
     = f.input :status
+
+  - if policy(@team_member).set_initial_status?
+    = render partial: 'input/enum_radio_buttons', locals: { f: f, field: :initial_status }, layout: 'input/col_3_9_wrapper'
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team_member.new_record? ? @team : @team_member.team, class: 'btn btn-secondary-outline btn-inline'

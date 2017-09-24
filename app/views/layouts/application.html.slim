@@ -12,25 +12,25 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
-    
+
   body.with-side-menu[class="#{yield(:body_class)}"]
     - unless Rails.env.production? || Rails.env.development?
       div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
-        |  -= #{Rails.env} =- 
-        
+        |  -= #{Rails.env} =-
+
     = render 'layouts/header'
     = render 'layouts/side_menu'
-    
+
     .page-content
       .container-fluid
         header.section-header
           .header-buttons
             = yield(:action_buttons)
-          h3 
+          h3
             = yield(:title)
             small.pl-2.color-blue-grey
               = yield(:subtitle)
-            - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.draft?
+            - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
               span.ml-3.label[class="#{label_object.color_class_for_status}"]
                 = label_object.status_i18n
           .color-blue-grey.small
@@ -38,18 +38,17 @@ html
 
           ol.breadcrumb.breadcrumb-simple
             = render_breadcrumbs :tag => :li, :separator => ""
-          
+
 
         = content_for?(:content) ? yield(:content) : yield
-      
+
         = render 'layouts/footer'
-    
+
     = javascript_include_tag 'application', 'data-turbolinks-eval': 'false'
     = javascript_pack_tag 'application', 'data-turbolinks-eval': 'false'
     = render 'layouts/flash'
 
     / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
     / = react_component('Copyright', year: Time.zone.today.year)
-    
+
     #generic-modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
-    
