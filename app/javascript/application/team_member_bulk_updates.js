@@ -21,6 +21,10 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
+$(document).on('turbolinks:before-cache', () => {
+  $('#team_member_players, #team_member_coaches, #team_member_trainers, #team_member_team_parents').select2('destroy');
+})
+
 var matchParts = function(term, text) {
   if (text.toUpperCase().indexOf(term.toUpperCase()) === 0) {
     return true;
