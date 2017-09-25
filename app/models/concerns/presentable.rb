@@ -29,7 +29,7 @@ module Presentable
       end
     end
 
-    if self.is_a? TrainingSchedule || started_at > Time.zone.now
+    if self.is_a?(TrainingSchedule) || started_at > Time.zone.now
       # Update presences: add new team members
       # TODO remove inactive team members
       teams.each do |team|
