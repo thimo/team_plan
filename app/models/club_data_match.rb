@@ -31,16 +31,16 @@ class ClubDataMatch < ApplicationRecord
     nil
   end
 
-  def address
+  def full_address
     [accommodatie, adres, "#{postcode} #{plaats}"]
   end
 
   def location
-    address.join("\\n")
+    full_address.join("\\n")
   end
 
   def google_maps_address
-    address.join(',')
+    full_address.join(',')
   end
 
   def team_name

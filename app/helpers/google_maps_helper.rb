@@ -1,5 +1,5 @@
 module GoogleMapsHelper
-  def google_maps_url(object:, type:, user: nil)
+  def google_maps_url(object:, type:, user: nil, zoom: 12)
     base_url = "#{Setting['google.maps.base_url']}#{type}"
 
     params = {
@@ -9,7 +9,7 @@ module GoogleMapsHelper
     when 'place'
       params.merge!(
         q: object.google_maps_address,
-        zoom: 12,
+        zoom: zoom,
       )
     when 'directions'
       params.merge!(destination: object.google_maps_address)
