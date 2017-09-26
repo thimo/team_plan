@@ -1,4 +1,4 @@
-h3 Contactgegevens
+h4 Contactgegevens
 
 = image_tag @member.photo_url, style: 'width: 200px; float: right;' if @member.photo.present?
 
@@ -10,13 +10,24 @@ h3 Contactgegevens
       = "(#{member.gender})"
 
 - if policy(member).show_private_data?
-  = link_to google_maps_url(object: member, type: 'place', zoom: 14), target: '_blank'
+  = link_to '#', data: { toggle: "modal", target: "#exampleModal" }
     div.pt-2
       => member.address
     div
       => member.zipcode
       => member.city
       i.fa.fa-map-o.pl-2
+
+  .modal.modal-xl#exampleModal
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-body
+          iframe[frameborder="0" style="width: 100%; height: 600px; border:0"
+            src="#{google_maps_url(object: member, type: 'place', zoom: 14)}" allowfullscreen]
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-dismiss="modal"]
+            | Sluiten
+
   div.pt-2
     a[href="tel://#{member.phone}"]
       = member.phone
@@ -91,8 +102,7 @@ h3 Contactgegevens
 
 hr
 
-h3
-  | Teams
+h4 Teams
 table.table.table-striped
   - @team_members.group_by(&:season).sort_by{|season, season_members| season.name}.reverse.each do |season, season_members|
     - season_members.group_by(&:team).sort_by{|team, team_members| team.name}.each_with_index do |(team, team_members), team_index|
