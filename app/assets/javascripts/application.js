@@ -20,5 +20,6 @@
 //= require selectize/dist/js/standalone/selectize.min.js
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js
 //= require bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js
+//= require chart.js/dist/Chart.min.js
 //= require turbolinks
 //= require trix

@@ -49,3 +49,6 @@
     - if @competitions
       - @competitions.each do |competition|
         = render "competitions/standing", competition: competition, compact: true
+
+/ = column_chart @team.presences.where(presentable_type: "Training").group_by(&:member).count
+canvas#myChart
