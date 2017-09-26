@@ -10,22 +10,31 @@ h3 Contactgegevens
       = "(#{member.gender})"
 
 - if policy(member).show_private_data?
+  = link_to google_maps_url(object: member, type: 'place', zoom: 14), target: '_blank'
+    div.pt-2
+      => member.address
+    div
+      => member.zipcode
+      => member.city
+      i.fa.fa-map-o.pl-2
   div.pt-2
-    => member.address
-  div
-    => member.zipcode
-    => member.city
-  div
     a[href="tel://#{member.phone}"]
       = member.phone
-    - unless member.phone_2.blank?
-      |  /
+      i.fa.fa-phone.pl-2
+  - unless member.phone_2.blank?
+    div
       a[href="tel://#{member.phone_2}"]
         = member.phone_2
+        i.fa.fa-phone.pl-2
   div
-    = mail_to member.email, member.email
-    - unless member.email_2.blank?
-      == " / #{mail_to member.email_2, member.email_2}"
+    = mail_to member.email
+      = member.email
+      i.fa.fa-envelope-o.pl-2
+  - unless member.email_2.blank?
+    div
+      = mail_to member.email_2
+        = member.email_2
+        i.fa.fa-envelope-o.pl-2
 
   - if policy(Member).show_login? && member.email.present?
     div.mt-2
@@ -101,7 +110,7 @@ table.table.table-striped
             div
               = team_member.role_i18n
         td
-        - team_members.each do |team_member|
+          - team_members.each do |team_member|
             - if team_member.started_on.present?
               .color-blue-grey
                 | Vanaf #{ I18n.l team_member.started_on, format: :long }

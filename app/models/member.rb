@@ -131,6 +131,14 @@ class Member < ApplicationRecord
     self.photo = io
   end
 
+  def full_address
+    [address, "#{zipcode} #{city}"]
+  end
+
+  def google_maps_address
+    full_address.join(',')
+  end
+
   def self.import(file)
     result = { counters: { imported: 0, changed: 0 }, created: [], activated: [] }
 
