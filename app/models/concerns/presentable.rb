@@ -16,7 +16,7 @@ module Presentable
               presence.update(present: false, remark: "Blessure (#{team_member.member.injuries.active.last.title})")
           else
             if respond_to? :training_schedule
-              unless (inherit_from = training_schedule.presences&.find_by(member: team_member.member)).blank?
+              unless (inherit_from = training_schedule&.presences&.find_by(member: team_member.member)).blank?
                 # Inherit fields from training schedule
                 %w[present on_time signed_off remark].each do |field|
                   presence.write_attribute(field, inherit_from.send(field))
