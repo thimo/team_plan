@@ -1,7 +1,6 @@
 class TeamMembersController < ApplicationController
   include SortHelper
 
-  # before_action :create_team_member, only: [:new, :create]
   before_action :set_team_member, only: [:show, :edit, :update, :destroy, :activate]
   before_action :add_breadcrumbs, only: [:edit]
 
@@ -10,9 +9,13 @@ class TeamMembersController < ApplicationController
   end
 
   def new
-    @team = Team.find(params[:team_id])
-
-    @team_member = @team.team_members.new
+    if params[:team_id]
+      @team = Team.find(params[:team_id])
+      @team_member = @team.team_members.new
+    elsif params[:member_id]
+      @member = Member.find(params[:member_id])
+      @team_member = @member.team_members.new
+    end
     # @team_member.team = @team
 
     authorize @team_member

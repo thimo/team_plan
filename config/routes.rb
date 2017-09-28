@@ -80,6 +80,7 @@ Rails.application.routes.draw do
         post :create_login
         post :resend_password
       end
+      resources :team_members, only: [:new, :create]
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
       resources :todos, only: [:new, :create]

@@ -8,7 +8,8 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def create?
-    return false if @record&.team.archived?
+    return false if @record&.team&.archived?
+    return false unless @record&.member&.sportlink_active?
 
     @user.admin? || @user.club_staff?
   end

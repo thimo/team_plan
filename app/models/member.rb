@@ -110,6 +110,10 @@ class Member < ApplicationRecord
     status == STATUS_AF_TE_MELDEN
   end
 
+  def sportlink_active?
+    deregistered_at == nil || deregistered_at > Time.zone.today
+  end
+
   def comment_types
     Comment.comment_types
   end
