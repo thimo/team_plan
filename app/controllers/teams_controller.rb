@@ -39,12 +39,19 @@ class TeamsController < ApplicationController
           {
             label: "Wedstrijd, iets te laat",
             stack: "Wedstrijd",
+            backgroundColor: 'rgba(255, 218, 78, .5)',
+            borderColor: 'rgba(255, 218, 78, 1)',
+            data: [],
+          },
+          {
+            label: "Wedstrijd, veel te laat",
+            stack: "Wedstrijd",
             backgroundColor: 'rgba(242, 152, 36, .5)',
             borderColor: 'rgba(242, 152, 36, 1)',
             data: [],
           },
           {
-            label: "Wedstrijd, veel te laat",
+            label: "Wedstrijd, niet afgemeld",
             stack: "Wedstrijd",
             backgroundColor: 'rgba(250, 66, 74, .5)',
             borderColor: 'rgba(250, 66, 74, 1)',
@@ -60,12 +67,19 @@ class TeamsController < ApplicationController
           {
             label: "Training, iets te laat",
             stack: "Training",
+            backgroundColor: 'rgba(255, 218, 78, .5)',
+            borderColor: 'rgba(255, 218, 78, 1)',
+            data: [],
+          },
+          {
+            label: "Training, veel te laat",
+            stack: "Training",
             backgroundColor: 'rgba(242, 152, 36, .7)',
             borderColor: 'rgba(242, 152, 36, 1)',
             data: [],
           },
           {
-            label: "Training, veel te laat",
+            label: "Training, niet afgemeld",
             stack: "Training",
             backgroundColor: 'rgba(250, 66, 74, .7)',
             borderColor: 'rgba(250, 66, 74, 1)',
@@ -75,14 +89,16 @@ class TeamsController < ApplicationController
       }
       @team.team_members.active.player.asc.each do |team_member|
         @team_presences_data[:labels] << team_member.name
-        present = team_member.member.presences.where(presentable_type: ClubDataMatch.model_name.name).present
-        @team_presences_data[:datasets][0][:data] << present.on_time.size
-        @team_presences_data[:datasets][1][:data] << present.a_bit_too_late.size
-        @team_presences_data[:datasets][2][:data] << present.much_too_late.size
-        present = team_member.member.presences.where(presentable_type: Training.model_name.name).present
-        @team_presences_data[:datasets][3][:data] << present.on_time.size
-        @team_presences_data[:datasets][4][:data] << present.a_bit_too_late.size
-        @team_presences_data[:datasets][5][:data] << present.much_too_late.size
+        presences = team_member.member.presences.where(presentable_type: ClubDataMatch.model_name.name)
+        @team_presences_data[:datasets][0][:data] << presences.present.on_time.size
+        @team_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
+        @team_presences_data[:datasets][2][:data] << presences.present.much_too_late.size
+        @team_presences_data[:datasets][3][:data] << presences.not_present.not_signed_off.size
+        presences = team_member.member.presences.where(presentable_type: Training.model_name.name)
+        @team_presences_data[:datasets][4][:data] << presences.present.on_time.size
+        @team_presences_data[:datasets][5][:data] << presences.present.a_bit_too_late.size
+        @team_presences_data[:datasets][6][:data] << presences.present.much_too_late.size
+        @team_presences_data[:datasets][7][:data] << presences.not_present.not_signed_off.size
       end
     end
   end
