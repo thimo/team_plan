@@ -1,5 +1,9 @@
-$(function() {
-  var ctx = document.getElementById('myChart').getContext('2d');
+$(document).on('turbolinks:load', function() {
+  var myChart = $('#myChart')[0]
+  if (!myChart) {
+    return;
+  }
+  var ctx = myChart.getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',

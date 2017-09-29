@@ -51,7 +51,6 @@
         = render "competitions/standing", competition: competition, compact: true
 
 - if policy(@team).show_presences?
-  / = column_chart @team.presences.where(presentable_type: "Training").group_by(&:member).count
   section.box-typical
     header.box-typical-header
       .tbl-row
