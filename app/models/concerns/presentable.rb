@@ -46,7 +46,7 @@ module Presentable
 
   private
 
-  module ClassMethods
-  end
+    module ClassMethods
+    end
 
 end

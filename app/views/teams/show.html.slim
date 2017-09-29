@@ -49,3 +49,17 @@
     - if @competitions
       - @competitions.each do |competition|
         = render "competitions/standing", competition: competition, compact: true
+
+- if policy(@team).show_presences?
+  / = column_chart @team.presences.where(presentable_type: "Training").group_by(&:member).count
+  section.box-typical
+    header.box-typical-header
+      .tbl-row
+        .tbl-cell.tbl-cell-title
+          h4
+            | Aanwezigheid
+    .box-typical-body.box-typical-padding
+      canvas#myChart
+
+  script
+    | var myChartData = #{@team_presences_data.to_json.html_safe}

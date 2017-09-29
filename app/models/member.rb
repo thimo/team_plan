@@ -23,6 +23,7 @@ class Member < ApplicationRecord
   has_many :logs, as: :logable
   has_many :todos, as: :todoable
   has_many :injuries, dependent: :destroy
+  has_many :presences, dependent: :destroy
   has_paper_trail
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
