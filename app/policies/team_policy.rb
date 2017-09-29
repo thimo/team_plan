@@ -35,6 +35,13 @@ class TeamPolicy < ApplicationPolicy
     @user.is_team_staff_for?(@record)
   end
 
+  def show_presences?
+    @user.admin?
+    # ||
+    # @user.club_staff? ||
+    # @user.is_team_staff_for?(@record)
+  end
+
   def show_notes?
     @user.admin? ||
     @user.club_staff? ||

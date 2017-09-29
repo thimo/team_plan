@@ -5,17 +5,27 @@ $(function() {
     type: 'bar',
 
     // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "Trainingen",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
+    data: myChartData,
 
     // Configuration options go here
-    options: {}
+    options: {
+      scales: {
+        xAxes: [{
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1,
+            min: 0,
+            autoSkip: false,
+          },
+        }],
+        yAxes: [{
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1,
+            min: 0,
+          },
+        }]
+      },
+    }
   });
 })
