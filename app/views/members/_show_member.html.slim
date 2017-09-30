@@ -28,19 +28,22 @@ h4 Contactgegevens
           button.btn.btn-secondary[type="button" data-dismiss="modal"]
             | Sluiten
 
-  div.pt-2
-    a[href="tel://#{member.phone}"]
-      = member.phone
-      i.fa.fa-phone.pl-2
+  - unless member.phone.blank?
+    div.pt-2
+      a[href="tel://#{member.phone}"]
+        = member.phone
+        i.fa.fa-phone.pl-2
   - unless member.phone_2.blank?
     div
       a[href="tel://#{member.phone_2}"]
         = member.phone_2
         i.fa.fa-phone.pl-2
-  div
-    = mail_to member.email
-      = member.email
-      i.fa.fa-envelope-o.pl-2
+
+  - unless member.email.blank?
+    div
+      = mail_to member.email
+        = member.email
+        i.fa.fa-envelope-o.pl-2
   - unless member.email_2.blank?
     div
       = mail_to member.email_2
