@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       collection do
         get :program
         get :results
+        get :cancellations
       end
     end
     resources :seasons, shallow: true do

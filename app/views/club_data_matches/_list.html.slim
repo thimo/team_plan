@@ -19,13 +19,11 @@ section.box-typical.schedule-list
                   | #{l date, format: :weekday} #{l date, format: :date_long}
             tbody
               - matches.each do |match|
-                tr.clickable
-                  = render 'shared/match_list_teams', match: match, hide_time: hide_time
+                = render 'shared/match_list_teams', match: match, hide_time: hide_time
         - else
           tbody
             - matches.each do |match|
-                tr.clickable
-                  = render 'shared/match_list_teams', match: match, compact: true, hide_time: hide_time
+                = render 'shared/match_list_teams', match: match, compact: true, hide_time: hide_time
       - else
         tbody
           tr

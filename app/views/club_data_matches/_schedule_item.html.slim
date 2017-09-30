@@ -1,7 +1,7 @@
 - match = object
 - date = match.started_at
 
-tr.clickable[class="#{match_schedule_color(match)}"]
+tr.clickable[class="#{match_schedule_color(match)} #{'line-through' if match.afgelast?}"]
   td.schedule-date
     .weekday.color-blue-grey
       = I18n.l(date, format: :weekday).upcase

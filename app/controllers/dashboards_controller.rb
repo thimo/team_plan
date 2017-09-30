@@ -34,6 +34,11 @@ class DashboardsController < ApplicationController
     @played_matches = policy_scope(ClubDataMatch).own.played.desc.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
   end
 
+  def cancellations
+    authorize ClubDataMatch, :show?
+    @cancelled_matches = policy_scope(ClubDataMatch).own.afgelast
+  end
+
   private
 
     def set_season

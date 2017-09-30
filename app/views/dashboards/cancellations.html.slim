@@ -1,0 +1,5 @@
+- provide(:title, "Afgelaste wedstrijden")
+
+.row
+  .col-xl-6
+    = render "club_data_matches/list", matches: @cancelled_matches, title: "Afgelastingen"

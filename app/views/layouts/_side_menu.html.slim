@@ -21,6 +21,13 @@ nav.side-menu
           span.lbl
             | Uitslagen
 
+    li.orange-red class="#{'active' if current_page?(cancellations_dashboard_index_path)}"
+      = link_to cancellations_dashboard_index_path
+        span
+          i.fa.fa-ban
+          span.lbl
+            | Afgelastingen
+
     - if (season = policy_scope(Season).draft.last).present?
       li.gold class="#{'active' if current_page?(season_path(season))}"
         = link_to season

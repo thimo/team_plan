@@ -9,7 +9,7 @@ class IcalsController < ApplicationController
     user = User.active.find_by(uuid: params[:check])
     raise "Check invalid" if user.nil?
 
-    schedules = team.club_data_matches.in_period(1.months.ago, 3.months.from_now) + team.trainings.in_period(1.months.ago, 3.months.from_now)
+    schedules = team.club_data_matches.niet_afgelast.in_period(1.months.ago, 3.months.from_now) + team.trainings.in_period(1.months.ago, 3.months.from_now)
 
     respond_to do |format|
       format.html

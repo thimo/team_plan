@@ -24,8 +24,7 @@
                     = "#{l date, format: :date_long} "
               - matches.each do |match|
                 tbody
-                  tr
-                    = render 'shared/match_list_teams', match: match
+                  = render 'shared/match_list_teams', match: match
 
   .col-md-6
     section.box-typical
@@ -44,5 +43,4 @@
                   = "#{l date, format: :date_long} "
             tbody
               - matches.each do |match|
-                tr
-                  = render 'shared/match_list_teams', match: match
+                = render 'shared/match_list_teams', match: match

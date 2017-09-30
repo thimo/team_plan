@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919195012) do
+ActiveRecord::Schema.define(version: 20170930185703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 20170919195012) do
     t.string "postcode"
     t.string "telefoonnummer"
     t.string "route"
+    t.boolean "afgelast", default: false
+    t.string "afgelast_status"
     t.index ["club_data_competition_id"], name: "index_club_data_matches_on_club_data_competition_id"
   end
 

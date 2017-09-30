@@ -114,6 +114,31 @@ module ClubDataImporter
     # Not all match codes return a valid response, ignore errors
   end
 
+  def self.afgelastingen
+    # Regular import of all club matches
+    json = JSON.load(open("#{Setting['clubdata.urls.afgelastingen']}&client_id=#{Setting['clubdata.client_id']}"))
+    cancelled_matches = []
+    json.each do |data|
+      if (match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])).present?
+        match.update(
+          afgelast: true,
+          afgelast_status: data['status']
+        )
+
+        cancelled_matches << data['wedstrijdcode']
+      end
+    end
+
+    ClubDataMatch.afgelast.each do |match|
+      unless cancelled_matches.include? match.wedstrijdcode
+        match.update(
+          afgelast: false,
+          afgelast_status: ''
+        )
+      end
+    end
+  end
+
   private
 
     def self.add_team_to_match(match, teamcode)

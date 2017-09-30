@@ -14,6 +14,8 @@ class ClubDataMatch < ApplicationRecord
   scope :not_played, -> { where(uitslag: nil) }
   scope :own, -> { where(eigenteam: true) }
   scope :uitslag_at, -> { order(uitslag_at: :desc) }
+  scope :afgelast, -> { where(afgelast: true) }
+  scope :niet_afgelast, -> { where(afgelast: false) }
 
   def started_at
     wedstrijddatum

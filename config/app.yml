@@ -19,6 +19,7 @@ defaults: &defaults
   clubdata.urls.uitslagen: https://data.sportlink.com/uitslagen?aantalregels=300&gebruiklokaleteamgegevens=NEE&sorteervolgorde=datum-omgekeerd&thuis=JA&uit=JA
   clubdata.urls.team-indeling: https://data.sportlink.com/team-indeling?lokaleteamcode=-1&teampersoonrol=ALLES&toonlidfoto=JA
   clubdata.urls.wedstrijd-accommodatie: https://data.sportlink.com/wedstrijd-accommodatie
+  clubdata.urls.afgelastingen: https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1
   clubdata.client_id:
   google.maps.base_url: https://www.google.com/maps/embed/v1/
   google.maps.api-key: AIzaSyAOFIRg1PtqSjCzQfGoyPJTi-XH7TvPfkc
