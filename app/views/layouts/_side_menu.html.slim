@@ -7,14 +7,14 @@ nav.side-menu
           span.lbl
             | Dashboard
 
-    li.dirty-blue class="#{'active' if current_page?(program_dashboard_index_path)}"
+    li.green class="#{'active' if current_page?(program_dashboard_index_path)}"
       = link_to program_dashboard_index_path
         span
           i.fa.fa-futbol-o
           span.lbl
             | Programma
 
-    li.dirty-blue class="#{'active' if current_page?(results_dashboard_index_path)}"
+    li.grey class="#{'active' if current_page?(results_dashboard_index_path)}"
       = link_to results_dashboard_index_path
         span
           i.fa.fa-trophy
