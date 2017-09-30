@@ -2,5 +2,4 @@
 
 .row
   .col-xl-6
-    - if @not_played_matches.any?
-      = render "club_data_matches/list", matches: @not_played_matches, title: "Programma"
+    = render "club_data_matches/list", matches: @not_played_matches, title: "Programma"
