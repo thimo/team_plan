@@ -27,7 +27,7 @@ nav.side-menu
           span
             i.fa.fa-calendar
             span.lbl
-              | Seizoen #{season.name}
+              | #{season.name}
 
     - if (season = policy_scope(Season).active.last).present?
       li.aquamarine class="#{'active' if current_page?(season_path(season))}"
@@ -35,7 +35,7 @@ nav.side-menu
           span
             i.fa.fa-calendar
             span.lbl
-              | Seizoen #{season.name}
+              | #{season.name}
 
   - if current_user.active_teams.size > 0
     section
