@@ -1,7 +1,8 @@
 - compact ||= false
 - hide_time ||= false
+- disable_line_through ||= false
 
-tr.clickable[class="#{'line-through' if match.afgelast?}"]
+tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
   td
     .small.color-blue-grey.nowrap
       - if compact
