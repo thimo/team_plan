@@ -10,15 +10,15 @@ h4 Contactgegevens
       = "(#{member.gender})"
 
 - if policy(member).show_private_data?
-  = link_to '#', data: { toggle: "modal", target: "#exampleModal" }
-    div.pt-2
+  div.pt-2
+    = link_to '#', data: { toggle: "modal", target: "#googleMapsModal" }
       => member.address
-    div
+      br
       => member.zipcode
       => member.city
       i.fa.fa-map-o.pl-2
 
-  .modal.modal-xl#exampleModal
+  .modal.modal-xl#googleMapsModal
     .modal-dialog.modal-lg
       .modal-content
         .modal-body
