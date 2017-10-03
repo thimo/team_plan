@@ -30,6 +30,34 @@ class TeamsController < ApplicationController
         labels: [],
         datasets: [
           {
+            label: "Training, op tijd",
+            stack: "Training",
+            backgroundColor: 'rgba(70, 195, 95, .7)',
+            borderColor: 'rgba(70, 195, 95, 1)',
+            data: [],
+          },
+          {
+            label: "Training, iets te laat",
+            stack: "Training",
+            backgroundColor: 'rgba(255, 218, 78, .7)',
+            borderColor: 'rgba(255, 218, 78, 1)',
+            data: [],
+          },
+          {
+            label: "Training, veel te laat",
+            stack: "Training",
+            backgroundColor: 'rgba(242, 152, 36, .7)',
+            borderColor: 'rgba(242, 152, 36, 1)',
+            data: [],
+          },
+          {
+            label: "Training, niet afgemeld",
+            stack: "Training",
+            backgroundColor: 'rgba(250, 66, 74, .7)',
+            borderColor: 'rgba(250, 66, 74, 1)',
+            data: [],
+          },
+          {
             label: "Wedstrijd, op tijd",
             stack: "Wedstrijd",
             backgroundColor: 'rgba(70, 195, 95, .5)',
@@ -57,44 +85,16 @@ class TeamsController < ApplicationController
             borderColor: 'rgba(250, 66, 74, 1)',
             data: [],
           },
-          {
-            label: "Training, op tijd",
-            stack: "Training",
-            backgroundColor: 'rgba(70, 195, 95, .7)',
-            borderColor: 'rgba(70, 195, 95, 1)',
-            data: [],
-          },
-          {
-            label: "Training, iets te laat",
-            stack: "Training",
-            backgroundColor: 'rgba(255, 218, 78, .5)',
-            borderColor: 'rgba(255, 218, 78, 1)',
-            data: [],
-          },
-          {
-            label: "Training, veel te laat",
-            stack: "Training",
-            backgroundColor: 'rgba(242, 152, 36, .7)',
-            borderColor: 'rgba(242, 152, 36, 1)',
-            data: [],
-          },
-          {
-            label: "Training, niet afgemeld",
-            stack: "Training",
-            backgroundColor: 'rgba(250, 66, 74, .7)',
-            borderColor: 'rgba(250, 66, 74, 1)',
-            data: [],
-          },
         ]
       }
       @team.team_members.active.player.asc.each do |team_member|
         @team_presences_data[:labels] << team_member.name
-        presences = team_member.member.presences.where(presentable_type: ClubDataMatch.model_name.name)
+        presences = team_member.member.presences.where(presentable_type: Training.model_name.name)
         @team_presences_data[:datasets][0][:data] << presences.present.on_time.size
         @team_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
         @team_presences_data[:datasets][2][:data] << presences.present.much_too_late.size
         @team_presences_data[:datasets][3][:data] << presences.not_present.not_signed_off.size
-        presences = team_member.member.presences.where(presentable_type: Training.model_name.name)
+        presences = team_member.member.presences.where(presentable_type: ClubDataMatch.model_name.name)
         @team_presences_data[:datasets][4][:data] << presences.present.on_time.size
         @team_presences_data[:datasets][5][:data] << presences.present.a_bit_too_late.size
         @team_presences_data[:datasets][6][:data] << presences.present.much_too_late.size

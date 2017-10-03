@@ -11,6 +11,7 @@ class Training < ApplicationRecord
 
   scope :not_modified, -> { where(user_modified: false) }
   scope :from_now,     -> { where('started_at > ?', Time.zone.now) }
+  scope :in_past,     -> { where('started_at < ?', Time.zone.now) }
   scope :this_week,    -> (date) { where('started_at > ?', date.beginning_of_week).where('started_at < ?', date.end_of_week) }
   scope :in_period,    -> (start_date, end_date) { where('started_at > ?', start_date).where('started_at < ?', end_date)}
   scope :asc,          -> { order(started_at: :asc) }
