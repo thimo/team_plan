@@ -38,6 +38,11 @@ h4 Contactgegevens
       a[href="tel://#{member.phone_2}"]
         = member.phone_2
         i.fa.fa-phone.pl-2
+  - unless member.phone_home.blank?
+    div
+      a[href="tel://#{member.phone_home}"]
+        = member.phone_home
+        i.fa.fa-phone.pl-2
 
   - unless member.email.blank?
     div

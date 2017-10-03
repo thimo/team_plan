@@ -42,7 +42,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
       columns << team_member.member.address if @export_columns.include? 'address'
       columns << team_member.member.zipcode if @export_columns.include? 'zipcode'
       columns << team_member.member.city if @export_columns.include? 'city'
-      columns << team_member.member.phone if @export_columns.include? 'phone'
+      columns << [team_member.member.phone, team_member.member.phone_2, team_member.member.phone_home].compact.join(', ') if @export_columns.include? 'phone'
       columns << team_member.member.email if @export_columns.include? 'email'
       columns << team_member.member.member_since if @export_columns.include? 'member_since'
       if @export_columns.include?('previous_team') && @previous_season.present?
