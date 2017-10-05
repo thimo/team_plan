@@ -129,9 +129,12 @@ table.table.table-striped
               = team_member.role_i18n
         td
           - team_members.each do |team_member|
-            - if team_member.started_on.present?
-              .color-blue-grey
-                | Vanaf #{ I18n.l team_member.started_on, format: :long }
-            - if team_member.ended_on.present?
-              .color-blue-grey
-                | Tot #{ I18n.l team_member.ended_on, format: :long }
+            div
+              - if team_member.started_on.present?
+                .color-blue-grey
+                  | Vanaf #{ I18n.l team_member.started_on, format: :long }
+              - elsif team_member.ended_on.present?
+                .color-blue-grey
+                  | Tot #{ I18n.l team_member.ended_on, format: :long }
+              - else
+                | &nbsp;
