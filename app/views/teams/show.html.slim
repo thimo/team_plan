@@ -53,7 +53,7 @@
       - @competitions.each do |competition|
         = render "competitions/standing", competition: competition, compact: true
 
-- if policy(@team).show_presences?
+- if policy(@team).show_presence_chart?
   section.box-typical
     header.box-typical-header
       .tbl-row

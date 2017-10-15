@@ -26,7 +26,7 @@ class TeamsController < ApplicationController
     @competitions = @team.club_data_competitions
 
     # FIXME convert to helper/model
-    if policy(@team).show_presences?
+    if policy(@team).show_presence_chart?
       @team_presences_data = {
         labels: [],
         datasets: [

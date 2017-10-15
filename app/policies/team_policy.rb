@@ -35,7 +35,7 @@ class TeamPolicy < ApplicationPolicy
     @user.is_team_staff_for?(@record)
   end
 
-  def show_presences?
+  def show_presence_chart?
     @user.admin?
     # ||
     # @user.club_staff? ||
