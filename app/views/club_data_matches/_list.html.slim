@@ -1,6 +1,7 @@
 - title ||= "Wedstrijden"
 - hide_time ||= false
 - disable_line_through ||= false
+- team ||= nil
 
 section.box-typical.schedule-list
   header.box-typical-header
@@ -20,11 +21,11 @@ section.box-typical.schedule-list
                   | #{l date, format: :weekday} #{l date, format: :date_long}
             tbody
               - matches.each do |match|
-                = render 'shared/match_list_teams', match: match, hide_time: hide_time, disable_line_through: disable_line_through
+                = render 'shared/match_list_teams', match: match, hide_time: hide_time, disable_line_through: disable_line_through, team: team
         - else
           tbody
             - matches.each do |match|
-                = render 'shared/match_list_teams', match: match, compact: true, hide_time: hide_time, disable_line_through: disable_line_through
+                = render 'shared/match_list_teams', match: match, compact: true, hide_time: hide_time, disable_line_through: disable_line_through, team: team
       - else
         tbody
           tr
