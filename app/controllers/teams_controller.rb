@@ -21,10 +21,11 @@ class TeamsController < ApplicationController
     @todos_defered += todos.defered
 
     @schedules = @team.schedules(from: 0.days.ago.beginning_of_day, up_to: 2.week.from_now.end_of_day)
-    matches = @team.played_matches(from: 3.week.ago.end_of_day, up_to: 0.days.from_now.end_of_day)
-    @played_matches = matches.sort_by{|match| match.started_at}.reverse
+    @not_played_matches = @team.club_data_matches.not_played.in_period(0.days.ago.beginning_of_day, 3.weeks.from_now.end_of_day).asc
+    @played_matches = @team.club_data_matches.played.in_period(3.week.ago.beginning_of_day, 0.days.from_now.end_of_day).desc
     @competitions = @team.club_data_competitions
 
+    # FIXME convert to helper/model
     if policy(@team).show_presences?
       @team_presences_data = {
         labels: [],
