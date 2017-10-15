@@ -15,7 +15,7 @@ section.tabs-section
           a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
             span.nav-link-in
               | Training
-        - if @presences.any? && policy(@presences.first).update?
+        - if @presences.present? && policy(@presences.first).update?
           li.nav-item
             a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
               span.nav-link-in
@@ -55,7 +55,7 @@ section.tabs-section
         .col-9
 
 
-    - if @presences.any? && policy(@presences.first).update?
+    - if @presences.present? && policy(@presences.first).update?
       #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
         p
           | Geef hier de standaard aanwezigheid op voor de training van deze dag.
