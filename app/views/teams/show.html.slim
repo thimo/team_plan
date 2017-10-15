@@ -25,8 +25,11 @@
     - if policy(@team).show_schedules?
       = render "schedules/list", schedules: @schedules
 
+    - if @not_played_matches.any?
+      = render "club_data_matches/list", matches: @not_played_matches, title: "Programma", team: @team
+
     - if @played_matches.any?
-      = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen"
+      = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen", team: @team
 
     = render 'team_members'
 
