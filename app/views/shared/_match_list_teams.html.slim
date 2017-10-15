@@ -1,5 +1,4 @@
 - compact ||= false
-- hide_time ||= false
 - disable_line_through ||= false
 - team ||= nil
 
@@ -7,9 +6,10 @@ tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through
   td
     .small.color-blue-grey.nowrap
       - if compact
-        | #{I18n.l match.started_at, format: :date_short}
+        = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
+        = ", #{I18n.l match.started_at, format: :time_short}" unless match.uitslag
       - else
-        - unless hide_time
+        - unless match.uitslag
           | #{I18n.l match.started_at, format: :time_short}
   td.text-right.width-50
     - if is_thuisteam? match
@@ -27,8 +27,8 @@ tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through
     - if is_uitteam? match
       - if team
         = link_to match
-          = match.thuisteam
-      - else 
+          = match.uitteam
+      - else
         = link_to Team.by_teamcode(match.uitteamid).first
           = match.uitteam
     - else
