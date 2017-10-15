@@ -7,7 +7,9 @@ class TrainingsController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    @presences = policy_scope(@training.find_or_create_presences.asc)
+    if policy(@training).show_presences?
+      @presences = @training.find_or_create_presences.asc
+    end
   end
 
   def new

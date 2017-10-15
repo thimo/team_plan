@@ -7,8 +7,10 @@ class ClubDataMatchesController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    @presences = policy_scope(@match.find_or_create_presences.asc)
-    @players = @presences.present
+    if policy(@match).show_presences?
+      @presences = @match.find_or_create_presences.asc
+      @players = @presences.present
+    end
   end
 
   def new

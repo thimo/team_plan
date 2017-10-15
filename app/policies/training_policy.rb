@@ -23,6 +23,10 @@ class TrainingPolicy < ApplicationPolicy
     update?
   end
 
+  def show_presences?
+    update?
+  end
+
   class Scope < Scope
     def resolve
       scope
