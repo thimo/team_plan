@@ -37,7 +37,11 @@ Rails.application.routes.draw do
         resources :todos, only: [:new, :create]
         resources :teams, except: [:index], shallow: true do
           resources :team_members, only: [:new, :create]
-          resources :comments, only: [:new, :create, :edit, :update, :destroy]
+          resources :comments, only: [:index, :new, :create, :edit, :update, :destroy] do
+            collection do
+              post :toggle_include_member
+            end
+          end
           resources :notes, only: [:show, :new, :create, :edit, :update, :destroy]
           resources :favorites, only: [:create, :destroy]
           resources :team_member_bulk_updates, only: [:new, :create]
@@ -96,6 +100,11 @@ Rails.application.routes.draw do
       end
     end
     resources :competitions, only: [:show]
+    resources :comments, only: []  do
+      collection do
+        post :set_active_tab
+      end
+    end
 
     get 'admin' => 'admin#show'
     namespace :admin do

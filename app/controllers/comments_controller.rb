@@ -1,12 +1,23 @@
 class CommentsController < ApplicationController
-  before_action :load_commentable, only: [:create]
+  before_action :load_commentable, only: [:toggle_include_member, :create]
   before_action :create_comment, only: [:create]
   before_action :set_comment, only: [:edit, :update, :destroy]
-  before_action :add_breadcrumbs
+  before_action :add_breadcrumbs, only: [:edit]
+
+  def toggle_include_member
+    authorize @commentable, :show_comments?
+    current_user.toggle_include_member_comments
+    render 'tabs'
+  end
+
+  def set_active_tab
+    authorize current_user, :update?
+    current_user.set_active_comments_tab(params[:tab])
+  end
 
   def create
     if @comment.save
-      redirect_to [@commentable, comment: @comment.comment_type], notice: "Opmerking is toegevoegd."
+      redirect_to @commentable, notice: "Opmerking is toegevoegd."
     else
       render :new
     end
@@ -17,18 +28,19 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update_attributes(comment_params)
-      redirect_to [@comment.commentable, comment: @comment.comment_type], notice: "Opmerking is aangepast."
+      redirect_to @comment.commentable, notice: "Opmerking is aangepast."
     else
       render 'edit'
     end
   end
 
   def destroy
-    redirect_to [@comment.commentable, comment: @comment.comment_type], notice: "Opmerking is verwijderd."
+    redirect_to @comment.commentable, notice: "Opmerking is verwijderd."
     @comment.destroy
   end
 
   private
+
     def create_comment
       @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
       authorize @comment
