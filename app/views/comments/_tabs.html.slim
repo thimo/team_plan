@@ -26,19 +26,23 @@ section.tabs-section
     - comment_types_for(parent).each do |comment_type, comment_type_id|
       - is_active = comment_type == active_tab
       .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type}" class="#{is_active ? 'active in' : 'fade'}"]
-        = simple_form_for [parent, Comment.new], html: { class: 'clearfix pb-2' } do |f|
+        = simple_form_for [parent, Comment.new], html: { class: 'pb-4' } do |f|
           = f.input :body, label: false, placeholder: "Opmerking", wrapper_html: { class: 'mb-1' }, input_html: { rows: 1 }
           = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm float-right'
           = f.hidden_field :comment_type, value: comment_type
+
+        div.small.mb-2[style="height: 20px;"]
+          - if parent.is_a? Team
+            = link_to [:toggle_include_member, parent, :comments, comment: comment_type],
+              remote: true,
+              method: :post do
+              .checkbox
+                input[type="checkbox" checked=current_user.settings.include_member_comments]
+                label[style="color: black;"]
+                  | Toon van teamleden
 
 
         - if (comments = comments_for(parent, comment_type)).present?
           = render comments, parent: parent
         - else
           i Voeg een opmerking toe
-
-        - if parent.is_a? Team
-          = link_to "#{current_user.settings.include_member_comments ? 'zonder spelers' : 'met spelers'}", [:toggle_include_member, parent, :comments, comment: comment_type],
-            class: 'btn btn-sm btn-primary-outline float-right',
-            remote: true,
-            method: :post

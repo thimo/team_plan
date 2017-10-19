@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
   def create
     if @comment.save
-      redirect_to [@commentable, comment: @comment.comment_type], notice: "Opmerking is toegevoegd."
+      redirect_to @commentable, notice: "Opmerking is toegevoegd."
     else
       render :new
     end
@@ -28,14 +28,14 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update_attributes(comment_params)
-      redirect_to [@comment.commentable, comment: @comment.comment_type], notice: "Opmerking is aangepast."
+      redirect_to @comment.commentable, notice: "Opmerking is aangepast."
     else
       render 'edit'
     end
   end
 
   def destroy
-    redirect_to [@comment.commentable, comment: @comment.comment_type], notice: "Opmerking is verwijderd."
+    redirect_to @comment.commentable, notice: "Opmerking is verwijderd."
     @comment.destroy
   end
 
