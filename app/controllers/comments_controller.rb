@@ -2,12 +2,17 @@ class CommentsController < ApplicationController
   before_action :load_commentable, only: [:toggle_include_member, :create]
   before_action :create_comment, only: [:create]
   before_action :set_comment, only: [:edit, :update, :destroy]
-  before_action :add_breadcrumbs, except: [:toggle_include_member]
+  before_action :add_breadcrumbs, only: [:edit]
 
   def toggle_include_member
     authorize @commentable, :show_comments?
     current_user.toggle_include_member_comments
     render 'tabs'
+  end
+
+  def set_active_tab
+    authorize current_user, :update?
+    current_user.set_active_comments_tab(params[:tab])
   end
 
   def create

@@ -1,38 +1,42 @@
-/ TODO let controller play a role in (pre) selecting comments
+/ TODO by default only show for current season, add links to show for previous season
+- active_tab = Comment.active_tab(current_user, parent, params[:comment])
+
 section.tabs-section
   .tabs-section-nav
     .tbl
       ul.nav[role="tablist"]
-        - parent.comment_types.each do |comment_type, comment_type_id|
-          - if policy(Comment).public_send("show_#{comment_type}?")
-            li.nav-item
-              - is_active = params[:comment].present? ? comment_type == params[:comment] : comment_type == 'generic'
-              a.nav-link[href="#comments-tab-#{comment_type}" role="tab" data-toggle="tab" aria-expanded="#{is_active}" class="#{'active' if is_active}"]
-                span.nav-link-in
-                  = Comment.comment_types_i18n[comment_type]
-                  - if (count = parent.comments.public_send(comment_type).size) > 0
-                    .label.ml-1
-                      = count
+        - comment_types_for(parent).each do |comment_type, comment_type_id|
+          - is_active = comment_type == active_tab
+          li.nav-item
+            a.nav-link[
+              href="#comments-tab-#{comment_type}"
+              role="tab"
+              data-toggle="tab"
+              data-tab="#{comment_type}"
+              aria-expanded="#{is_active}"
+              class="#{'active' if is_active}"
+              data-set-active-tab-url="#{url_for [:set_active_tab, parent, :comments]}"
+            ]
+              span.nav-link-in
+                = Comment.comment_types_i18n[comment_type]
+                - if (count = comments_for(parent, comment_type).size) > 0
+                  .label.ml-1
+                    = count
   .tab-content
-    - parent.comment_types.each do |comment_type, comment_type_id|
-      - if policy(Comment).public_send("show_#{comment_type}?")
-        - is_active = params[:comment].present? ? comment_type == params[:comment] : comment_type == 'generic'
-        .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type}" class="#{is_active ? 'active in' : 'fade'}"]
-          = simple_form_for [parent, Comment.new], html: { class: 'clearfix pb-2' } do |f|
-            = f.input :body, label: false, placeholder: "Opmerking", wrapper_html: { class: 'mb-1' }, input_html: { rows: 1 }
-            = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm float-right'
-            = f.hidden_field :comment_type, value: comment_type
+    - comment_types_for(parent).each do |comment_type, comment_type_id|
+      - is_active = comment_type == active_tab
+      .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type}" class="#{is_active ? 'active in' : 'fade'}"]
+        = simple_form_for [parent, Comment.new], html: { class: 'clearfix pb-2' } do |f|
+          = f.input :body, label: false, placeholder: "Opmerking", wrapper_html: { class: 'mb-1' }, input_html: { rows: 1 }
+          = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm float-right'
+          = f.hidden_field :comment_type, value: comment_type
 
-          / TODO cleanup this link_to
-          / TODO only show for team comments
+        - if parent.is_a? Team
           = link_to "- #{current_user.settings.include_member_comments}", [:toggle_include_member, parent, :comments, comment: comment_type],
             remote: true,
-            method: :post,
-            id: "#{comment_type}-toggle-link",
-            data: { after_toggle_url: "#{url_for [parent, :comments]}" },
-            class: 'include-member-comments-link'
+            method: :post
 
-          - if (comments = policy_scope(parent.comments).public_send(comment_type).includes(:user)).present?
-            = render comments
-          - else
-            i Voeg een opmerking toe
+        - if (comments = comments_for(parent, comment_type)).present?
+          = render comments
+        - else
+          i Voeg een opmerking toe

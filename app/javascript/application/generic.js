@@ -33,6 +33,8 @@ $(document).on('turbolinks:load', () => {
   $('select.field_positions').each((index, target) => {
     $(target).select2({placeholder: "Veldpositie"});
   })
+
+  initCommentTabs();
 });
 
 $(document).on('turbolinks:before-cache', () => {
@@ -40,3 +42,15 @@ $(document).on('turbolinks:before-cache', () => {
     $(target).select2('destroy');
   })
 })
+
+function initCommentTabs() {
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    $.ajax({
+      dataType: 'script',
+      type: "POST",
+      url: $(this).data('set-active-tab-url'),
+      data: { tab: $(this).data('tab') }
+    })
+  })
+}
+window.initCommentTabs = initCommentTabs
