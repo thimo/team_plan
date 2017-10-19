@@ -15,7 +15,7 @@ section.tabs-section
               data-tab="#{comment_type}"
               aria-expanded="#{is_active}"
               class="#{'active' if is_active}"
-              data-set-active-tab-url="#{url_for [:set_active_tab, parent, :comments]}"
+              data-set-active-tab-url="#{url_for [:set_active_tab, :comments]}"
             ]
               span.nav-link-in
                 = Comment.comment_types_i18n[comment_type]
@@ -31,12 +31,14 @@ section.tabs-section
           = f.button :submit, "Toevoegen", class: 'btn btn-primary btn-sm float-right'
           = f.hidden_field :comment_type, value: comment_type
 
-        - if parent.is_a? Team
-          = link_to "- #{current_user.settings.include_member_comments}", [:toggle_include_member, parent, :comments, comment: comment_type],
-            remote: true,
-            method: :post
 
         - if (comments = comments_for(parent, comment_type)).present?
-          = render comments
+          = render comments, parent: parent
         - else
           i Voeg een opmerking toe
+
+        - if parent.is_a? Team
+          = link_to "#{current_user.settings.include_member_comments ? 'zonder spelers' : 'met spelers'}", [:toggle_include_member, parent, :comments, comment: comment_type],
+            class: 'btn btn-sm btn-primary-outline float-right',
+            remote: true,
+            method: :post

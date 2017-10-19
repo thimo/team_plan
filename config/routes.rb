@@ -40,7 +40,6 @@ Rails.application.routes.draw do
           resources :comments, only: [:index, :new, :create, :edit, :update, :destroy] do
             collection do
               post :toggle_include_member
-              post :set_active_tab
             end
           end
           resources :notes, only: [:show, :new, :create, :edit, :update, :destroy]
@@ -101,6 +100,11 @@ Rails.application.routes.draw do
       end
     end
     resources :competitions, only: [:show]
+    resources :comments, only: []  do
+      collection do
+        post :set_active_tab
+      end
+    end
 
     get 'admin' => 'admin#show'
     namespace :admin do
