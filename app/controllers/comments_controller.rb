@@ -1,8 +1,14 @@
 class CommentsController < ApplicationController
-  before_action :load_commentable, only: [:create]
+  before_action :load_commentable, only: [:toggle_include_member, :create]
   before_action :create_comment, only: [:create]
   before_action :set_comment, only: [:edit, :update, :destroy]
-  before_action :add_breadcrumbs
+  before_action :add_breadcrumbs, except: [:toggle_include_member]
+
+  def toggle_include_member
+    authorize @commentable, :show_comments?
+    current_user.toggle_include_member_comments
+    render 'tabs'
+  end
 
   def create
     if @comment.save
@@ -29,6 +35,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
     def create_comment
       @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
       authorize @comment

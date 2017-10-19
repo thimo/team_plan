@@ -148,6 +148,11 @@ class User < ApplicationRecord
     "Je account is uitgeschakeld."
   end
 
+  def toggle_include_member_comments
+    include_member_comments = settings.include_member_comments
+    settings.update_attribute(:include_member_comments, !include_member_comments)
+  end
+
   private
 
     def team_id_for(record)
