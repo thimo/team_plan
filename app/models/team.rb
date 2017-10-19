@@ -7,6 +7,9 @@ class Team < ApplicationRecord
   belongs_to :club_data_team, optional: true
   has_many :team_members, dependent: :destroy
   has_many :members, through: :team_members
+  has_many :active_members, -> { where(team_members: { status: TeamMember.statuses[:active] }) },
+    through: :team_members,
+    source: :member
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy

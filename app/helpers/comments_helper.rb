@@ -10,7 +10,7 @@ module CommentsHelper
     if @comments_for[comment_type].nil?
       comments = Comment.where(commentable: parent)
       if include_member_comments?(parent)
-        comments = comments.or(Comment.where(commentable: parent.members))
+        comments = comments.or(Comment.where(commentable: parent.active_members))
       end
 
       @comments_for[comment_type] = comments.public_send(comment_type).desc.includes(:user, :commentable).to_a
