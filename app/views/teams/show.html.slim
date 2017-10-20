@@ -22,11 +22,11 @@
 
 .row
   .col-xl-6
-    - if policy(@team).show_schedules?
-      = render "schedules/list", schedules: @schedules
+    - if @trainings.any?
+      = render "trainings/list", trainings: @trainings
 
     - if @not_played_matches.any?
-      = render "club_data_matches/list", matches: @not_played_matches, title: "Programma", team: @team
+      = render "club_data_matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
 
     - if @played_matches.any?
       = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen", team: @team

@@ -1,0 +1,44 @@
+- title ||= "Trainingen"
+- team ||= nil
+- include_presences ||= true
+
+section.box-typical.schedule-list
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4
+          == title
+
+  .box-typical-body
+    table.table.table-sm.tr-links.align-top
+      - if trainings.any?
+        tbody
+          - trainings.each do |training|
+            - ts = training.training_schedule
+            tr.clickable
+              td.py-1.align-middle
+                .small.color-blue-grey.nowrap
+                  = "#{I18n.l training.started_at, format: :weekday} #{I18n.l training.started_at, format: :date_short}"
+                  div
+                    = starts_ends(training)
+              td
+                = link_to training
+                  - if ts&.soccer_field
+                     = ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")
+                  - else
+                    | Training
+                - if ts.present? && TrainingSchedule.present_minutes[ts.present_minutes] > 0
+                  .color-blue-grey-lighter.small
+                    | #{ts.present_minutes_i18n} aanwezig
+              - if include_presences
+                td.w-1.nowrap.text-right.py-1.align-middle
+                  = render 'presences/presence_label', parent: training, team: team
+
+            - if include_presences
+              = render 'presences/presences_row', parent: training, team: team
+
+      - else
+        tbody
+          tr
+            td
+              i Geen trainingen gevonden

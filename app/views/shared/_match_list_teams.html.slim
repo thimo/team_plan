@@ -1,26 +1,34 @@
 - compact ||= false
 - disable_line_through ||= false
+- include_presences ||= false
 
 tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
-  td
+  td.py-1.align-middle
     .small.color-blue-grey.nowrap
       - if compact
         = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
-        = ", #{I18n.l match.started_at, format: :time_short}" unless match.uitslag
+        div
+          = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
       - else
         - unless match.uitslag
           | #{I18n.l match.started_at, format: :time_short}
   td.text-right.width-50
-    - if (team = Team.by_teamcode(match.thuisteamid).first).present?
-      = link_to [match, team: team]
+    - if (thuisteam = Team.by_teamcode(match.thuisteamid).first).present?
+      = link_to [match, team: thuisteam]
         = match.thuisteam
     - else
       = match.thuisteam
   td.text-center.nowrap.strong
     = match.uitslag || "-"
   td.width-50
-    - if (team = Team.by_teamcode(match.uitteamid).first).present?
-      = link_to [match, team: team]
+    - if (uitteam = Team.by_teamcode(match.uitteamid).first).present?
+      = link_to [match, team: uitteam]
         = match.uitteam
     - else
       = match.uitteam
+  - if include_presences
+    td.w-1.nowrap.text-right.py-1.align-middle
+      = render 'presences/presence_label', parent: match, team: team
+
+- if include_presences
+  = render 'presences/presences_row', parent: match, team: team
