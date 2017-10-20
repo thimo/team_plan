@@ -39,10 +39,6 @@ class TrainingSchedule < ApplicationRecord
     TrainingSchedule.days[day]
   end
 
-  def teams
-    [team]
-  end
-
   private
 
     def has_training_this_week?(started_at)

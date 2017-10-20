@@ -60,9 +60,18 @@
       .tbl-row
         .tbl-cell.tbl-cell-title
           h4
-            | Aanwezigheid
+            | Aanwezigheid trainingen
     .box-typical-body.box-typical-padding
-      canvas#myChart
+      canvas#trainingChart
+
+    header.box-typical-header
+      .tbl-row
+        .tbl-cell.tbl-cell-title
+          h4
+            | Aanwezigheid wedstrijden
+    .box-typical-body.box-typical-padding
+      canvas#matchChart
 
   script
-    | var myChartData = #{@team_presences_data.to_json.html_safe}
+    | var trainingChartData = #{@training_presences_data.to_json.html_safe}
+      var matchChartData = #{@match_presences_data.to_json.html_safe}

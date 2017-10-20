@@ -16,6 +16,6 @@ tr.clickable[class="#{match_schedule_color(match)} #{'line-through' if match.afg
         span.pl-2
           = "Uitslag: #{match.uitslag}"
   td.w-1.nowrap.text-right
-    = render 'presences/presence_label', parent: match
+    = render 'presences/presence_label', parent: match, team: @team
 
-= render 'presences/presences_row', parent: match
+= render 'presences/presences_row', parent: match, team: @team

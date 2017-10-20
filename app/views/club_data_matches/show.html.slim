@@ -1,12 +1,5 @@
 - provide(:title, schedule_title(@match, no_html: true))
 
-- content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@match).update?
-        = link_to edit_match_path(@match), class: "btn btn-secondary", title: "Aanpassen"
-          i.fa.fa-pencil
-
 section.tabs-section
   .tabs-section-nav
     .tbl

@@ -42,7 +42,4 @@ class Match < ApplicationRecord
     nil
   end
 
-  def teams
-    [team]
-  end
 end

@@ -1,37 +1,14 @@
 class ClubDataMatchesController < ApplicationController
   include SchedulesHelper
 
-  # before_action :set_team, only: [:new, :create]
-  # before_action :create_match, only: [:new, :create]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
-  before_action :add_breadcrumbs
+  before_action :set_team, only: [:show]
+  before_action :add_breadcrumbs, only: [:show]
 
   def show
-    if policy(@match).show_presences?
-      @presences = @match.find_or_create_presences.asc
+    if policy(@match).show_presences? && @team.present?
+      @presences = @match.find_or_create_presences(@team).asc
       @players = @presences.present
-    end
-  end
-
-  def new
-  end
-
-  def create
-    if @match.save
-      redirect_to @match, notice: "Wedstrijd is toegevoegd."
-    else
-      render :new
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @match.update_attributes(match_params.merge(user_modified: true))
-      redirect_to @match, notice: "Wedstrijd is aangepast."
-    else
-      render 'edit'
     end
   end
 
@@ -41,20 +18,11 @@ class ClubDataMatchesController < ApplicationController
   end
 
   private
-    # def set_team
-    #   @team = @match&.team || Team.find(params[:team_id])
-    # end
 
-    # def create_match
-    #   @match = if action_name == 'new'
-    #               @team.matches.new
-    #             else
-    #               Match.new(match_params.merge(user_modified: true))
-    #             end
-    #   @match.team = @team
-    #
-    #   authorize @match
-    # end
+    def set_team
+      @team = Team.find(params[:team]) if params[:team]
+      @team ||= @match.teams.first if @match.teams.size == 1
+    end
 
     def set_match
       @match = ClubDataMatch.find(params[:id])
@@ -66,7 +34,7 @@ class ClubDataMatchesController < ApplicationController
     end
 
     def add_breadcrumbs
-      @match.teams.each do |team|
+      [@team || @match.teams].flatten.each do |team|
         add_breadcrumb team.name, team
       end
       if @match.new_record?

@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
 
     # FIXME convert to helper/model
     if policy(@team).show_presence_chart?
-      @team_presences_data = {
+      @training_presences_data = {
         labels: [],
         datasets: [
           {
@@ -58,6 +58,20 @@ class TeamsController < ApplicationController
             borderColor: 'rgba(250, 66, 74, 1)',
             data: [],
           },
+        ]
+      }
+      @team.team_members.active.player.asc.each do |team_member|
+        @training_presences_data[:labels] << team_member.name
+        presences = team_member.member.presences.where(presentable_type: Training.model_name.name)
+        @training_presences_data[:datasets][0][:data] << presences.present.on_time.size
+        @training_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
+        @training_presences_data[:datasets][2][:data] << presences.present.much_too_late.size
+        @training_presences_data[:datasets][3][:data] << presences.not_present.not_signed_off.size
+      end
+
+      @match_presences_data = {
+        labels: [],
+        datasets: [
           {
             label: "Wedstrijd, op tijd",
             stack: "Wedstrijd",
@@ -89,17 +103,12 @@ class TeamsController < ApplicationController
         ]
       }
       @team.team_members.active.player.asc.each do |team_member|
-        @team_presences_data[:labels] << team_member.name
-        presences = team_member.member.presences.where(presentable_type: Training.model_name.name)
-        @team_presences_data[:datasets][0][:data] << presences.present.on_time.size
-        @team_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
-        @team_presences_data[:datasets][2][:data] << presences.present.much_too_late.size
-        @team_presences_data[:datasets][3][:data] << presences.not_present.not_signed_off.size
+        @match_presences_data[:labels] << team_member.name
         presences = team_member.member.presences.where(presentable_type: ClubDataMatch.model_name.name)
-        @team_presences_data[:datasets][4][:data] << presences.present.on_time.size
-        @team_presences_data[:datasets][5][:data] << presences.present.a_bit_too_late.size
-        @team_presences_data[:datasets][6][:data] << presences.present.much_too_late.size
-        @team_presences_data[:datasets][7][:data] << presences.not_present.not_signed_off.size
+        @match_presences_data[:datasets][0][:data] << presences.present.on_time.size
+        @match_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
+        @match_presences_data[:datasets][2][:data] << presences.present.much_too_late.size
+        @match_presences_data[:datasets][3][:data] << presences.not_present.not_signed_off.size
       end
     end
   end

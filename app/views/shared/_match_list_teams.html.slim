@@ -1,6 +1,5 @@
 - compact ||= false
 - disable_line_through ||= false
-- team ||= nil
 
 tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
   td
@@ -12,24 +11,16 @@ tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through
         - unless match.uitslag
           | #{I18n.l match.started_at, format: :time_short}
   td.text-right.width-50
-    - if is_thuisteam? match
-      - if team
-        = link_to match
-          = match.thuisteam
-      - else
-        = link_to Team.by_teamcode(match.thuisteamid).first
-          = match.thuisteam
+    - if (team = Team.by_teamcode(match.thuisteamid).first).present?
+      = link_to [match, team: team]
+        = match.thuisteam
     - else
       = match.thuisteam
   td.text-center.nowrap.strong
     = match.uitslag || "-"
   td.width-50
-    - if is_uitteam? match
-      - if team
-        = link_to match
-          = match.uitteam
-      - else
-        = link_to Team.by_teamcode(match.uitteamid).first
-          = match.uitteam
+    - if (team = Team.by_teamcode(match.uitteamid).first).present?
+      = link_to [match, team: team]
+        = match.uitteam
     - else
       = match.uitteam

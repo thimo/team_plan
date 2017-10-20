@@ -3,16 +3,14 @@ class PresencesController < ApplicationController
   before_action :set_presence, only: [:show, :edit, :update, :destroy]
 
   def index
-    @presences = policy_scope(@parent.find_or_create_presences).asc
+    @team = Team.find(params[:team]) if params[:team]
+    @presences = policy_scope(@parent.find_or_create_presences(@team)).asc
   end
 
   def update
     if @presence.update_attributes(presence_params)
       @presence.set_presentable_user_modified
       @present_count = @presence.presentable.presences.present.size
-      # redirect_to @presence, notice: "Notitie is aangepast."
-    else
-      # render 'edit'
     end
   end
 

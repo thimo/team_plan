@@ -1,5 +1,10 @@
 $(document).on('turbolinks:load', function() {
-  var myChart = $('#myChart')[0]
+  showChart('trainingChart', trainingChartData)
+  showChart('matchChart', matchChartData)
+})
+
+function showChart(id, data) {
+  var myChart = $('#' + id)[0]
   if (!myChart) {
     return;
   }
@@ -9,7 +14,7 @@ $(document).on('turbolinks:load', function() {
     type: 'bar',
 
     // The data for our dataset
-    data: myChartData,
+    data: data,
 
     // Configuration options go here
     options: {
@@ -32,4 +37,5 @@ $(document).on('turbolinks:load', function() {
       },
     }
   });
-})
+
+}
