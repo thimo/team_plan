@@ -1,4 +1,8 @@
 class UserPolicy < AdminPolicy
+  def update_settings?
+    @record == @user
+  end
+
   def resend_password?
     @record.persisted? && @user.admin?
   end

@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
   end
 
   def set_active_tab
-    authorize current_user, :update?
+    authorize current_user, :update_settings?
     current_user.set_active_comments_tab(params[:tab])
   end
 
