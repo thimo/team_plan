@@ -62,7 +62,7 @@
           h4
             | Aanwezigheid trainingen
     .box-typical-body.box-typical-padding
-      canvas#trainingChart
+      canvas#trainingChart.presenceChart
 
     header.box-typical-header
       .tbl-row
@@ -70,7 +70,7 @@
           h4
             | Aanwezigheid wedstrijden
     .box-typical-body.box-typical-padding
-      canvas#matchChart
+      canvas#matchChart.presenceChart
 
   script
     | var trainingChartData = #{@training_presences_data.to_json.html_safe}
