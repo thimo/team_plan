@@ -14,16 +14,24 @@ tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through
           | #{I18n.l match.started_at, format: :time_short}
   td.text-right.width-50
     - if (thuisteam = Team.by_teamcode(match.thuisteamid).first).present?
-      = link_to [match, team: thuisteam]
-        = match.thuisteam
+      - if team
+        = link_to [match, team: thuisteam]
+          = match.thuisteam
+      - else
+        = link_to thuisteam
+          = match.thuisteam
     - else
       = match.thuisteam
   td.text-center.nowrap.strong
     = match.uitslag || "-"
   td.width-50
     - if (uitteam = Team.by_teamcode(match.uitteamid).first).present?
-      = link_to [match, team: uitteam]
-        = match.uitteam
+      - if team
+        = link_to [match, team: uitteam]
+          = match.uitteam
+      - else
+        = link_to uitteam
+          = match.uitteam
     - else
       = match.uitteam
   - if include_presences
