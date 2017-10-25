@@ -232,8 +232,6 @@ GEM
     rack (2.0.3)
     rack-livereload (0.3.16)
       rack
-    rack-mini-profiler (0.10.5)
-      rack (>= 1.2.0)
     rack-proxy (0.6.2)
       rack
     rack-test (0.7.0)
@@ -402,7 +400,6 @@ DEPENDENCIES
   puma (~> 3.0)
   pundit (~> 1.1.0)
   rack-livereload
-  rack-mini-profiler
   rails (~> 5.1.0)
   rails-i18n
   rails-settings-cached
