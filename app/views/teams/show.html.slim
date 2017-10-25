@@ -23,7 +23,7 @@
 .row
   .col-xl-6
     - if @trainings.any?
-      = render "trainings/list", trainings: @trainings
+      = render "trainings/list", trainings: @trainings, team: @team
 
     - if @not_played_matches.any?
       = render "club_data_matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true

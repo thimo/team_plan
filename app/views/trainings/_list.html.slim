@@ -7,6 +7,10 @@ section.box-typical.schedule-list
     .tbl-row
       .tbl-cell.tbl-cell-title
         h4
+          - if team.present?
+            .float-right
+              = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}"
+                i.fa.fa-calendar
           == title
 
   .box-typical-body
