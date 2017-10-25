@@ -1,6 +1,10 @@
 $(document).on('turbolinks:load', function() {
-  showChart('trainingChart', trainingChartData)
-  showChart('matchChart', matchChartData)
+  if (typeof trainingChartData != 'undefined') {
+    showChart('trainingChart', trainingChartData)
+  }
+  if (typeof matchChartData != 'undefined') {
+    showChart('matchChart', matchChartData)
+  }
 })
 
 function showChart(id, data) {
@@ -8,6 +12,7 @@ function showChart(id, data) {
   if (!myChart) {
     return;
   }
+
   var ctx = myChart.getContext('2d');
   var chart = new Chart(ctx, {
     type: 'bar',
