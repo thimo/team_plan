@@ -116,9 +116,6 @@ class TeamsController < ApplicationController
         @match_presences_data[:datasets][2][:data] << presences.present.much_too_late.size
         @match_presences_data[:datasets][3][:data] << presences.not_present.not_signed_off.size
       end
-
-      # Get trainings with presences
-      # Team.find(61).trainings.in_past.left_outer_joins(:presences).where( 'presences.id IS NOT NULL' ).asc.distinct.map(&:started_at)
     end
   end
 

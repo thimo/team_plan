@@ -16,3 +16,15 @@
   padding: 10px 16px;
   max-width: 300px;
 }
+
+table.presences {
+  th {
+    &.rotate {
+      height: 70px;
+
+      div {
+        width: 15px;
+      }
+    }
+  }
+}

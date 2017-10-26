@@ -33,6 +33,13 @@
 .fa {
   &.red {
     color: #da211d;
+    color: #fa424a;
+  }
+  &.green {
+    color: #46c35f;
+  }
+  &.grey {
+    color: #ccc;
   }
 }
 
@@ -48,4 +55,46 @@
 
 table.align-top th, table.align-top td {
   vertical-align: top;
+}
+
+.table-xxs {
+  td {
+    height: 25px;
+    padding: 2px;
+
+    &:first-child {
+      padding-left: 15px;
+    }
+    &:last-child {
+      padding-right: 15px;
+    }
+  }
+
+  th {
+    padding-left: 2px;
+    padding-right: 2px;
+
+    &:first-child {
+      padding-left: 15px;
+    }
+    &:last-child {
+      padding-right: 15px;
+    }
+  }
+}
+
+th {
+  &.rotate {
+    white-space: nowrap;
+
+    > div {
+      transform: translate(0, 0) rotate(-45deg);
+      width: 30px;
+
+      > span {
+        border-bottom: 1px solid #ccc;
+        padding: 5px 10px;
+      }
+    }
+  }
 }
