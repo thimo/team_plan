@@ -64,37 +64,7 @@
     .box-typical-body.box-typical-padding
       canvas#trainingChart.presenceChart
 
-    / TODO move most of this code to partial/helper/controller
-    - trainings = @team.trainings.in_past.active.left_outer_joins(:presences).where( 'presences.id IS NOT NULL' ).distinct.asc
-    - if trainings.any?
-      .box-typical-body.box-typical-padding.table-responsive
-        - ids = trainings.map(&:id)
-        table.table.table-xxs.presences
-          thead
-            tr
-              th.w-1
-              - trainings.each do |training|
-                th.rotate.w-1.small
-                  div
-                    = l(training.started_at, format: :date_long)
-              th
-          tbody
-            - @team.team_members.player.asc.each do |team_member|
-              - member = team_member.member
-              - presences = member.presences.for_training(ids).inject({}) { |r, presence| r.merge!({presence.presentable_id => presence})}
-              tr
-                td.nowrap
-                  = link_to member.name, member
-                - trainings.each do |training|
-                  td
-                    - if presences.has_key? training.id
-                      - if presences[training.id].present
-                        i.fa.fa-check.green
-                      - else
-                        i.fa.fa-times.red
-                    - else
-                      i.fa.fa-minus.grey
-                td
+    = render 'presence_table', team: @team, presentable_class: Training
 
     header.box-typical-header
       .tbl-row
@@ -104,37 +74,7 @@
     .box-typical-body.box-typical-padding
       canvas#matchChart.presenceChart
 
-    / TODO move most of this code to partial/helper/controller
-    - club_data_matches = @team.club_data_matches.in_past.left_outer_joins(:presences).where( 'presences.id IS NOT NULL' ).distinct.asc
-    - if club_data_matches.any?
-      .box-typical-body.box-typical-padding.table-responsive
-        - ids = club_data_matches.map(&:id)
-        table.table.table-xxs.presences
-          thead
-            tr
-              th.w-1
-              - club_data_matches.each do |training|
-                th.rotate.w-1.small
-                  div
-                    = l(training.started_at, format: :date_long)
-              th
-          tbody
-            - @team.team_members.player.asc.each do |team_member|
-              - member = team_member.member
-              - presences = member.presences.for_club_data_match(ids).inject({}) { |r, presence| r.merge!({presence.presentable_id => presence})}
-              tr
-                td.nowrap
-                  = link_to member.name, member
-                - club_data_matches.each do |training|
-                  td
-                    - if presences.has_key? training.id
-                      - if presences[training.id].present
-                        i.fa.fa-check.green
-                      - else
-                        i.fa.fa-times.red
-                    - else
-                      i.fa.fa-minus.grey
-                td
+    = render 'presence_table', team: @team, presentable_class: ClubDataMatch
 
   script
     | var trainingChartData = #{@training_presences_data.to_json.html_safe}

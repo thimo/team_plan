@@ -1,0 +1,32 @@
+/ TODO move code to helper/controller
+- presentable_class = Training
+- presentables = team.send(presentable_class.model_name.plural).in_past.active.left_outer_joins(:presences).where( 'presences.id IS NOT NULL' ).distinct.desc
+- if presentables.any?
+  .box-typical-body.box-typical-padding.table-responsive
+    - ids = presentables.map(&:id)
+    table.table.table-xxs.presences
+      thead
+        tr
+          th.w-1
+          - presentables.each do |presentable|
+            th.rotate.w-1.small
+              div
+                = "#{l(presentable.started_at, format: :weekday)} #{l(presentable.started_at, format: :date_short)}"
+          th
+      tbody
+        - team.team_members.player.asc.each do |team_member|
+          - member = team_member.member
+          - presences = member.presences.send("for_#{presentable_class.model_name.singular}", ids).inject({}) { |r, presence| r.merge!({presence.presentable_id => presence})}
+          tr
+            td.nowrap
+              = link_to member.name, member
+            - presentables.each do |presentable|
+              td
+                - if presences.has_key? presentable.id
+                  - if presences[presentable.id].present
+                    i.fa.fa-check.green
+                  - else
+                    i.fa.fa-times.red
+                - else
+                  i.fa.fa-minus.grey
+            td
