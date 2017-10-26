@@ -1,5 +1,4 @@
 / TODO move code to helper/controller
-- presentable_class = Training
 - presentables = team.send(presentable_class.model_name.plural).in_past.active.left_outer_joins(:presences).where( 'presences.id IS NOT NULL' ).distinct.desc
 - if presentables.any?
   .box-typical-body.box-typical-padding.table-responsive
