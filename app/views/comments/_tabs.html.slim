@@ -33,13 +33,14 @@ section.tabs-section
 
         div.small.mb-2[style="height: 20px;"]
           - if parent.is_a? Team
-            = link_to [:toggle_include_member, parent, :comments, comment: comment_type],
-              remote: true,
-              method: :post do
-              .checkbox.color-blue-grey
-                input[type="checkbox" checked=current_user.settings.include_member_comments]
-                label
-                  | Inclusief teamleden
+            .checkbox
+              = link_to [:toggle_include_member, parent, :comments, comment: comment_type],
+                remote: true,
+                method: :post do
+                span.color-blue-grey
+                  input[type="checkbox" checked=current_user.settings.include_member_comments]
+                  label
+                    | Inclusief teamleden
 
 
         - if (comments = comments_for(parent, comment_type)).present?
