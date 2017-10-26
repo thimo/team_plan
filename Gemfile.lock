@@ -220,11 +220,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.5.0)
-      byebug (~> 9.1)
-      pry (~> 0.10)
-    pry-rails (0.3.6)
-      pry (>= 0.10.4)
     public_suffix (3.0.0)
     puma (3.10.0)
     pundit (1.1.0)
@@ -395,8 +390,6 @@ DEPENDENCIES
   pg (~> 0.18)
   pg_search
   pretender
-  pry-byebug
-  pry-rails
   puma (~> 3.0)
   pundit (~> 1.1.0)
   rack-livereload

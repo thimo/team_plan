@@ -50,8 +50,8 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'pry-rails'
-  gem 'pry-byebug'
+  # gem 'pry-rails'
+  # gem 'pry-byebug'
   gem 'guard'
   gem 'factory_girl_rails'
   gem 'capybara'
