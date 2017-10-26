@@ -65,7 +65,7 @@
       canvas#trainingChart.presenceChart
 
     / TODO move most of this code to helper/controller
-    - trainings = @team.trainings.in_past.left_outer_joins(:presences).where( 'presences.id IS NOT NULL' ).distinct.asc
+    - trainings = @team.trainings.in_past.active.left_outer_joins(:presences).where( 'presences.id IS NOT NULL' ).distinct.asc
     - if trainings.any?
       .box-typical-body.box-typical-padding.table-responsive
         - ids = trainings.map(&:id)
@@ -84,7 +84,7 @@
               - presences = member.presences.for_training(ids).inject({}) { |r, presence| r.merge!({presence.presentable_id => presence})}
               tr
                 td.nowrap
-                  = member.name
+                  = link_to member.name, member
                 - trainings.each do |training|
                   td
                     - if presences.has_key? training.id
