@@ -10,7 +10,7 @@ section.box-typical.schedule-list
         h4
           - if team.present?
             .float-right
-              = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}"
+              = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
                 i.fa.fa-calendar
           == title
 
