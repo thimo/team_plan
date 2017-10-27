@@ -7,4 +7,4 @@ $('form[data-behavior="autosave"]').each((index, form) => {
   $('.presences-dropdown .extra_fields').hide()
 })
 
-$('#<%= @parent.model_name.singular %>-<%= @parent.id %>-presence-count').html("<%= @presences.count %>")
+$('#<%= @parent.model_name.singular %>-<%= @parent.id %>-presence-count').html("<%= @presences.present.count %>")
