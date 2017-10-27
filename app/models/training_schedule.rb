@@ -19,19 +19,41 @@ class TrainingSchedule < ApplicationRecord
   scope :asc, -> { order(:day) }
 
   def update_trainings
-    trainings.from_now.each do |training|
-      if saved_change_to_day?
-        difference = TrainingSchedule.days[day] - TrainingSchedule.days[day_before_last_save]
-        training.started_at += difference.days
-        training.ended_at += difference.days
+    # Don't create trainings if training schedule was archived or if season has no end date
+    return if !active? || team.age_group.season.ended_on.nil?
+
+    if trainings.any?
+      # Update existing trainings
+      trainings.from_now.each do |training|
+        if saved_change_to_day?
+          difference = TrainingSchedule.days[day] - TrainingSchedule.days[day_before_last_save]
+          training.started_at += difference.days
+          training.ended_at += difference.days
+        end
+        if saved_change_to_start_time?
+          training.started_at = training.started_at.change(hour: start_time.hour, min: start_time.min)
+        end
+        if saved_change_to_end_time?
+          training.ended_at = training.ended_at.change(hour: end_time.hour, min: end_time.min)
+        end
+        training.save
       end
-      if saved_change_to_start_time?
-        training.started_at = training.started_at.change(hour: start_time.hour, min: start_time.min)
+    else
+      # Create new trainings
+      training_day = next_training_day
+      while training_day <= team.age_group.season.ended_on
+        started_at = training_day.change(hour: start_time.hour, min: start_time.min)
+        ended_at = training_day.change(hour: end_time.hour, min: end_time.min)
+
+        Training.create(
+          training_schedule: self,
+          team: self.team,
+          started_at: started_at,
+          ended_at: ended_at,
+        ) unless has_training_this_week?(started_at)
+
+        training_day += 7.days
       end
-      if saved_change_to_end_time?
-        training.ended_at = training.ended_at.change(hour: end_time.hour, min: end_time.min)
-      end
-      training.save
     end
   end
 
