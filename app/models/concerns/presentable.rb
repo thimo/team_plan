@@ -7,7 +7,9 @@ module Presentable
 
   def find_or_create_presences(team = nil)
     team ||= self.team
-    
+
+    return if team.archived?
+
     if presences.team(team).empty?
       # Add presences for all local teams (can be two local teams per match)
       team.team_members.player.active.asc.each do |team_member|
@@ -31,12 +33,15 @@ module Presentable
 
     if self.is_a?(TrainingSchedule) || started_at > Time.zone.now
       # Update presences: add new team members
-      # TODO remove inactive team members
       team.team_members.player.active.asc.each do |team_member|
         if presences.where(member: team_member.member).empty?
           presences.create({ member: team_member.member, team: team })
         end
       end
+
+      # Remove inactive team members
+      member_ids = team.team_members.archived.pluck(:member_id)
+      presences.where(member: member_ids).delete_all
     end
 
     presences.team(team)
