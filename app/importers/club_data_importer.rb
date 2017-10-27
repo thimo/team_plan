@@ -14,9 +14,10 @@ module ClubDataImporter
       %w[competitienaam klasse poule klassepoule competitiesoort].each do |field|
         competition.write_attribute(field, data[field])
       end
-      competition.save
-
-      competition.club_data_teams << club_data_team unless competition.club_data_team_ids.include?(club_data_team.id)
+      if competition.valid?
+        competition.save
+        competition.club_data_teams << club_data_team unless competition.club_data_team_ids.include?(club_data_team.id)
+      end
     end
   end
 
