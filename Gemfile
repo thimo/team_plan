@@ -52,6 +52,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # gem 'pry-rails'
   # gem 'pry-byebug'
+  gem 'scout_apm'
   gem 'guard'
   gem 'factory_girl_rails'
   gem 'capybara'
