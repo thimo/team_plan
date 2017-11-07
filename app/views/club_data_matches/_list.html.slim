@@ -8,11 +8,14 @@ section.box-typical.schedule-list
     .tbl-row
       .tbl-cell.tbl-cell-title
         h4
-          - if team.present?
-            .float-right
-              = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
-                i.fa.fa-calendar
           == title
+      .tbl-cell.tbl-cell-actions
+        - if team.present?
+          / - if policy(Match.new(team: team)).create?
+          /   = link_to new_team_match_path(team), title: "Wedstrijd toevoegen", class: "action-btn"
+          /     i.fa.fa-futbol-o
+          = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
+            i.fa.fa-calendar
 
   .box-typical-body
     table.table.table-sm.tr-links.align-top

@@ -7,7 +7,7 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         h4
           = title
-      - if defined?(team).present? && policy(TrainingSchedule.new(team: team)).create?
+      - if defined?(team) && policy(TrainingSchedule.new(team: team)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_team_training_schedule_path(team), title: "Reguliere training toevoegen", class: "action-btn"
             i.fa.fa-line-chart
