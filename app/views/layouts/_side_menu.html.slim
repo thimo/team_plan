@@ -28,16 +28,16 @@ nav.side-menu
           span.lbl
             | Afgelastingen
 
-    - if (season = policy_scope(Season).draft.last).present?
-      li.gold class="#{'active' if current_page?(season_path(season))}"
+    - if (season = policy_scope(Season).active.last).present?
+      li.aquamarine class="#{'active' if current_page?(season_path(season))}"
         = link_to season
           span
             i.fa.fa-calendar
             span.lbl
-              | #{season.name}
+              | Leeftijdsgroepen
 
-    - if (season = policy_scope(Season).active.last).present?
-      li.aquamarine class="#{'active' if current_page?(season_path(season))}"
+    - if (season = policy_scope(Season).draft.last).present?
+      li.gold class="#{'active' if current_page?(season_path(season))}"
         = link_to season
           span
             i.fa.fa-calendar
