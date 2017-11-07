@@ -11,8 +11,15 @@ class DashboardsController < ApplicationController
     @favorite_teams = human_sort(policy_scope(current_user.favorite_teams), :name)
     @favorite_age_groups = human_sort(policy_scope(current_user.favorite_age_groups), :name)
 
-    @not_played_matches = policy_scope(ClubDataMatch).own.not_played.asc.from_now.limit(4).group_by{ |match| match.wedstrijddatum.to_date }
-    @played_matches = policy_scope(ClubDataMatch).own.played.order(uitslag_at: :desc).limit(4).group_by{ |match| match.wedstrijddatum.to_date }
+    # Retrieve for own teams + favorite teams + favorite age groups
+    team_ids = (
+      current_user.active_teams.pluck(:id) +
+      current_user.favorite_teams.pluck(:id) +
+      current_user.favorite_age_groups.map{ |age_group| age_group.teams.pluck(:id)}
+    ).flatten.uniq
+    matches = policy_scope(ClubDataMatch).for_team(team_ids)
+    @not_played_matches = matches.not_played.in_period(1.hour.ago, 1.week.from_now.beginning_of_day).asc.limit(20).group_by{ |match| match.wedstrijddatum.to_date }
+    @played_matches = matches.played.in_period(1.week.ago.end_of_day, 0.hour.ago).desc.limit(20).group_by{ |match| match.wedstrijddatum.to_date }
 
     team_ids = current_user.teams_as_staff_in_season(@season).collect(&:id).uniq
     @open_team_evaluations = policy_scope(TeamEvaluation).desc.where(team_id: team_ids)

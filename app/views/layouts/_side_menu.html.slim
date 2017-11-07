@@ -49,7 +49,7 @@ nav.side-menu
       header.side-menu-title
         | Mijn teams
       ul.side-menu-list
-        - current_user.active_teams.each do |team|
+        - current_user.active_teams.asc.each do |team|
           li.green class="#{'active' if current_page?(team_path(team))}"
             = link_to team
               i.fa.fa-futbol-o

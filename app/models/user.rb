@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   def active_teams
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct.asc
+    Team.joins(:team_members).where(team_members: {member_id: member_ids}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct
   end
 
   def teams_as_staff_in_season(season)

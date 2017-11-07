@@ -16,6 +16,7 @@ class ClubDataMatch < ApplicationRecord
   scope :afgelast,      -> { where(afgelast: true) }
   scope :niet_afgelast, -> { where(afgelast: false) }
   scope :active,        -> {}
+  scope :for_team,      -> (team_ids) { includes(:teams).where(teams: { id: team_ids }) }
 
   def started_at
     wedstrijddatum
