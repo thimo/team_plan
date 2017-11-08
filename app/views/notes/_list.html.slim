@@ -8,24 +8,24 @@ section.box-typical
       - if policy(Note.new(team: team)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "action-btn"
-            i.fa.fa-file-text-o
-          
+            i.fa.fa-plus-square-o.fa-lg
+
   .box-typical-body
     table.table.table-sm.tr-links
       - if notes.size > 0
         tbody
           - notes.each do |note|
             tr.clickable
-              td 
+              td
                 = link_to note_path(note)
                   = note.title
                 = " - #{note.member.name}" if note.member.present?
                 .color-blue-grey-lighter.small
                   = l note.updated_at, format: :long
                   = ", #{note.user.name}"
-                
 
-      - else 
+
+      - else
         tbody
           tr
             td

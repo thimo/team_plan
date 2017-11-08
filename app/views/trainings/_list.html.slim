@@ -11,8 +11,8 @@ section.box-typical.schedule-list
       .tbl-cell.tbl-cell-actions
         - if team.present?
           - if policy(Training.new(team: team)).create?
-            = link_to new_team_training_path(team), title: "Training toevoegen", class: "action-btn"
-              i.fa.fa-line-chart
+            = link_to new_team_training_path(team), title: "Eénmalige training toevoegen", class: "action-btn"
+              i.fa.fa-plus-square-o.fa-lg
           = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
             i.fa.fa-calendar
   .box-typical-body

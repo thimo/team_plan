@@ -8,8 +8,8 @@ section.box-typical
       - if policy(Todo).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_path, title: "Todo toevoegen", class: "action-btn"
-            i.fa.fa-check-square-o
-          
+            i.fa.fa-plus-square-o.fa-lg
+
   .box-typical-body
     - if todos_active.present?
       - todos_active.each do |todo|
