@@ -35,12 +35,6 @@ section.tabs-section
               td
                 = render player.member
 
-      / - if @match.body.present?
-      /   = @match.body.html_safe
-      / - else
-      /   p
-      /     i Er is nog geen programma ingevuld
-
       - if @match.remark.present?
         hr
         strong Opmerkingen

@@ -2,7 +2,7 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        h4 Teamgenoten
+        h4 Team
       - if policy(@team).bulk_email?
         .tbl-cell.tbl-cell-action-bordered
           a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
