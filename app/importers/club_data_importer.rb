@@ -103,7 +103,7 @@ module ClubDataImporter
         wedstrijd = json['wedstrijd']
 
         match.write_attribute('adres', wedstrijd['adres'])
-        if (zip = wedstrijd['plaats'].split.first).match(/\d{4}[a-zA-Z]{2}/)
+        if (zip = wedstrijd['plaats'].split.first)&.match(/\d{4}[a-zA-Z]{2}/)
           match.write_attribute('postcode', zip)
         end
         match.write_attribute('telefoonnummer', wedstrijd['telefoonnummer'])
