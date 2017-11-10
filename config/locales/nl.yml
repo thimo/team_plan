@@ -145,7 +145,7 @@ nl:
       role:
         admin: Administrator
         club_staff: Club staf
-        team_staff: Team begeleiding
+        team_staff: Teamleiding
         member: Lid
     team_member:
       initial_status:
