@@ -5,10 +5,10 @@
 
 tr.clickable[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
   td.py-1.align-middle
-    .small.color-blue-grey.nowrap
+    .small.nowrap
       - if compact
         = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
-        div
+        div.color-blue-grey
           = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
       - else
         - unless match.uitslag

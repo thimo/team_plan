@@ -23,9 +23,9 @@ section.box-typical.schedule-list
             - ts = training.training_schedule
             tr.clickable
               td.py-1.align-middle
-                .small.color-blue-grey.nowrap
+                .small.nowrap
                   = "#{I18n.l training.started_at, format: :weekday} #{I18n.l training.started_at, format: :date_short}"
-                  div
+                  div.color-blue-grey
                     = starts_ends(training)
               td
                 = link_to training
