@@ -41,16 +41,17 @@ section.tabs-section
 
 .row
   .col-xl-6
-    - if @trainings.any?
+    - if @trainings&.any?
       = render "trainings/list", trainings: @trainings, team: @team
 
-    - if @not_played_matches.any?
+    - if @not_played_matches&.any?
       = render "club_data_matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
 
-    - if @played_matches.any?
+    - if @played_matches&.any?
       = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen", team: @team
 
-    = render 'team_members'
+    - if @players&.any?
+      = render 'team_members'
 
   .col-xl-6
     - if policy(@team).show_comments?
@@ -66,7 +67,7 @@ section.tabs-section
     - if policy(@team).show_todos? && (@todos_active.present? || @todos_defered.present?)
       = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
 
-    - if policy(@team).show_notes?
+    - if policy(@team).show_notes? && @notes&.any?
       = render "notes/list", team: @team, notes: @notes
 
     - if @competitions
@@ -95,6 +96,7 @@ section.tabs-section
 
     = render 'presence_table', team: @team, presentable_class: ClubDataMatch
 
-  script
-    | var trainingChartData = #{@training_presences_data.to_json.html_safe}
-      var matchChartData = #{@match_presences_data.to_json.html_safe}
+  - if @training_presences_data&.any? && @match_presences_data&.any?
+    script
+      | var trainingChartData = #{@training_presences_data.to_json.html_safe}
+        var matchChartData = #{@match_presences_data.to_json.html_safe}
