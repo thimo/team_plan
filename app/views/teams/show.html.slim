@@ -20,6 +20,25 @@
           i.fa.fa-check-square-o
       = render "shared/favorite", parent: @team, styleClass: "btn btn-secondary"
 
+section.tabs-section
+  .tabs-section-nav.tabs-section-nav-inline
+    ul.nav[role="tablist" style="background-color: inherit; border-top: 0; border-left: 0; border-right: 0;"]
+      li.nav-item
+        a.nav-link.active[href="#tabs-4-tab-1"]
+          | Programma
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-2"]
+          | Stand
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-3"]
+          | Team
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-4"]
+          | Opmerkingen
+      li.nav-item
+        a.nav-link[href="#tabs-4-tab-5"]
+          | Aanwezigheid
+
 .row
   .col-xl-6
     - if @trainings.any?
