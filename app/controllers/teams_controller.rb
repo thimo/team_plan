@@ -4,9 +4,10 @@ class TeamsController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    tab = :schedule
+    @selected_tab = :schedule
+    @previous_season = @team.age_group.season.previous
 
-    case tab
+    case @selected_tab
       when :standing
         @competitions = @team.club_data_competitions
       when :team
@@ -34,9 +35,6 @@ class TeamsController < ApplicationController
       @not_played_matches = @team.club_data_matches.not_played.in_period(0.days.ago.beginning_of_day, 3.weeks.from_now.beginning_of_day).asc
       @played_matches = @team.club_data_matches.played.in_period(3.week.ago.end_of_day, 0.days.from_now.end_of_day).desc
     end
-
-    @previous_season = @team.age_group.season.previous
-
   end
 
   def new; end
