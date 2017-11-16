@@ -1,22 +1,25 @@
 class TeamsController < ApplicationController
+  include TeamsHelper
+  
   before_action :create_team, only: [:new, :create]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumbs
 
   def show
-    @selected_tab = :schedule
+    @selected_tab = params[:tab] || 'schedule'
+
     @previous_season = @team.age_group.season.previous
 
     case @selected_tab
-      when :standing
+      when 'standing'
         @competitions = @team.club_data_competitions
-      when :team
+      when 'team'
         @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions).not_ended)
         @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
         @old_members = policy_scope(@team.team_members).ended.group_by(&:member)
 
         @team_evaluations = policy_scope(@team.team_evaluations).desc
-      when :remarks
+      when 'remarks'
         @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
 
         todos = policy_scope(@team.todos).open.includes(:todoable)
@@ -26,14 +29,14 @@ class TeamsController < ApplicationController
         @todos_active += todos.active
         @todos_defered += todos.defered
 
-      when :presence
+      when 'presence'
         team_presence_graphs
       else
       # when :schedule
-      @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
-      @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 2.weeks.from_now.beginning_of_day).asc
-      @not_played_matches = @team.club_data_matches.not_played.in_period(0.days.ago.beginning_of_day, 3.weeks.from_now.beginning_of_day).asc
-      @played_matches = @team.club_data_matches.played.in_period(3.week.ago.end_of_day, 0.days.from_now.end_of_day).desc
+        @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
+        @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 2.weeks.from_now.beginning_of_day).asc
+        @not_played_matches = @team.club_data_matches.not_played.in_period(0.days.ago.beginning_of_day, 3.weeks.from_now.beginning_of_day).asc
+        @played_matches = @team.club_data_matches.played.in_period(3.week.ago.end_of_day, 0.days.from_now.end_of_day).desc
     end
   end
 

@@ -24,80 +24,95 @@ section.tabs-section
   .tabs-section-nav.tabs-section-nav-inline
     ul.nav[role="tablist" style="background-color: #f6f8fa; /*border-top: 0; border-left: 0; border-right: 0;*/"]
       li.nav-item
-        a.nav-link.active[href="#tabs-4-tab-1"]
+        a.nav-link.active[href="?tab=schedule"]
           | Programma
       li.nav-item
-        a.nav-link[href="#tabs-4-tab-2"]
+        a.nav-link[href="?tab=standing"]
           | Stand
       li.nav-item
-        a.nav-link[href="#tabs-4-tab-3"]
+        a.nav-link[href="?tab=team"]
           | Team
       li.nav-item
-        a.nav-link[href="#tabs-4-tab-4"]
+        a.nav-link[href="?tab=remarks"]
           | Opmerkingen
       li.nav-item
-        a.nav-link[href="#tabs-4-tab-5"]
+        a.nav-link[href="?tab=presence"]
           | Aanwezigheid
 
-.row
-  .col-xl-6
-    - if @trainings&.any?
-      = render "trainings/list", trainings: @trainings, team: @team
+- if @selected_tab == 'schedule'
+  .row
+    .col-xl-6
+      - if @not_played_matches&.any?
+        = render "club_data_matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
 
-    - if @not_played_matches&.any?
-      = render "club_data_matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
+      - if @played_matches&.any?
+        = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen", team: @team
 
-    - if @played_matches&.any?
-      = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen", team: @team
+    .col-xl-6
+      - if @trainings&.any?
+        = render "trainings/list", trainings: @trainings, team: @team
 
-    - if @players&.any?
-      = render 'team_members'
+      - if policy(@team).show_training_schedules?
+        = render "training_schedules/list", team: @team, training_schedules: @training_schedules
 
-  .col-xl-6
-    - if @selected_tab == :remarks && policy(@team).show_comments?
-      #comments-tabs
-        = render "comments/tabs", parent: @team
+- if @selected_tab == 'standing'
+  .row
+    .col-xl-6
+      - if @competitions
+        - @competitions.each do |competition|
+          = render "competitions/standing", competition: competition, compact: true
+    .col-xl-6
 
-    - if policy(@team).show_training_schedules?
-      = render "training_schedules/list", team: @team, training_schedules: @training_schedules
+- if @selected_tab == 'team'
+  .row
+    .col-xl-6
+      - if @players&.any?
+        = render 'team_members'
 
-    - if policy(@team).show_evaluations? && @team_evaluations.present?
-      = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
+    .col-xl-6
+      - if policy(@team).show_evaluations? && @team_evaluations.present?
+        = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
 
-    - if policy(@team).show_todos? && (@todos_active.present? || @todos_defered.present?)
-      = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
+      - if policy(@team).show_todos? && (@todos_active.present? || @todos_defered.present?)
+        = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
 
-    - if policy(@team).show_notes? && @notes&.any?
-      = render "notes/list", team: @team, notes: @notes
+- if @selected_tab == 'remarks'
+  .row
+    .col-xl-6
+      - if policy(@team).show_notes? && @notes&.any?
+        = render "notes/list", team: @team, notes: @notes
 
-    - if @competitions
-      - @competitions.each do |competition|
-        = render "competitions/standing", competition: competition, compact: true
-
-- if @selected_tab == :presence && policy(@team).show_presence_chart?
-  section.box-typical
-    header.box-typical-header
-      .tbl-row
-        .tbl-cell.tbl-cell-title
-          h4
-            | Aanwezigheid trainingen
-    .box-typical-body.box-typical-padding
-      canvas#trainingChart.presenceChart
-
-    = render 'presence_table', team: @team, presentable_class: Training
-
-    header.box-typical-header
-      .tbl-row
-        .tbl-cell.tbl-cell-title
-          h4
-            | Aanwezigheid wedstrijden
-    .box-typical-body.box-typical-padding
-      canvas#matchChart.presenceChart
+    .col-xl-6
+      - if policy(@team).show_comments?
+        #comments-tabs
+          = render "comments/tabs", parent: @team
 
 
-  = render 'presence_table', team: @team, presentable_class: ClubDataMatch
+- if @selected_tab == 'presence'
+  - if policy(@team).show_presence_chart?
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h4
+              | Aanwezigheid trainingen
+      .box-typical-body.box-typical-padding
+        canvas#trainingChart.presenceChart
 
-  - if @training_presences_data&.any? && @match_presences_data&.any?
-    script
-      | var trainingChartData = #{@training_presences_data.to_json.html_safe}
-        var matchChartData = #{@match_presences_data.to_json.html_safe}
+      = render 'presence_table', team: @team, presentable_class: Training
+
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h4
+              | Aanwezigheid wedstrijden
+      .box-typical-body.box-typical-padding
+        canvas#matchChart.presenceChart
+
+
+    = render 'presence_table', team: @team, presentable_class: ClubDataMatch
+
+    - if @training_presences_data&.any? && @match_presences_data&.any?
+      script
+        | var trainingChartData = #{@training_presences_data.to_json.html_safe}
+          var matchChartData = #{@match_presences_data.to_json.html_safe}
