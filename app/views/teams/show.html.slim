@@ -22,7 +22,7 @@
 
 section.tabs-section
   .tabs-section-nav.tabs-section-nav-inline
-    ul.nav[role="tablist" style="background-color: inherit; border-top: 0; border-left: 0; border-right: 0;"]
+    ul.nav[role="tablist" style="background-color: #f6f8fa; /*border-top: 0; border-left: 0; border-right: 0;*/"]
       li.nav-item
         a.nav-link.active[href="#tabs-4-tab-1"]
           | Programma
@@ -54,7 +54,7 @@ section.tabs-section
       = render 'team_members'
 
   .col-xl-6
-    - if policy(@team).show_comments?
+    - if @selected_tab == :remarks && policy(@team).show_comments?
       #comments-tabs
         = render "comments/tabs", parent: @team
 
@@ -74,7 +74,7 @@ section.tabs-section
       - @competitions.each do |competition|
         = render "competitions/standing", competition: competition, compact: true
 
-- if policy(@team).show_presence_chart?
+- if @selected_tab == :presence && policy(@team).show_presence_chart?
   section.box-typical
     header.box-typical-header
       .tbl-row
@@ -94,7 +94,8 @@ section.tabs-section
     .box-typical-body.box-typical-padding
       canvas#matchChart.presenceChart
 
-    = render 'presence_table', team: @team, presentable_class: ClubDataMatch
+
+  = render 'presence_table', team: @team, presentable_class: ClubDataMatch
 
   - if @training_presences_data&.any? && @match_presences_data&.any?
     script
