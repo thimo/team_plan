@@ -22,8 +22,8 @@ class TeamActionsController < ApplicationController
       email_addresses = []
       @teams.each do |team|
         active_members = team.team_members.active_for_team(team)
-        email_addresses << active_members.player.map(&:email) if include_players?
-        email_addresses << active_members.staff.map(&:email)  if include_staff?
+        email_addresses += active_members.player.map(&:email) if include_players?
+        email_addresses += active_members.staff.map(&:email)  if include_staff?
       end
 
       # Collect email addresses
