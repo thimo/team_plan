@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    @active_tab = params[:tab] || 'schedule'
+    set_active_tab
 
     @previous_season = @team.age_group.season.previous
 
@@ -97,5 +97,14 @@ class TeamsController < ApplicationController
       else
         add_breadcrumb @team.name, @team
       end
+    end
+
+    def set_active_tab
+      @active_tab = if params[:tab].present?
+        params[:tab]
+      else
+        current_user.settings.active_team_tab || 'schedule'
+      end
+      current_user.settings.update_attributes(active_team_tab: @active_tab)
     end
 end
