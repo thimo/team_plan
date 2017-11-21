@@ -1,16 +1,16 @@
 class TeamsController < ApplicationController
   include TeamsHelper
-  
+
   before_action :create_team, only: [:new, :create]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumbs
 
   def show
-    @selected_tab = params[:tab] || 'schedule'
+    @active_tab = params[:tab] || 'schedule'
 
     @previous_season = @team.age_group.season.previous
 
-    case @selected_tab
+    case @active_tab
       when 'standing'
         @competitions = @team.club_data_competitions
       when 'team'

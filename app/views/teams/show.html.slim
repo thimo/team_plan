@@ -24,22 +24,22 @@ section.tabs-section
   .tabs-section-nav.tabs-section-nav-inline
     ul.nav[role="tablist" style="background-color: #f6f8fa; /*border-top: 0; border-left: 0; border-right: 0;*/"]
       li.nav-item
-        a.nav-link.active[href="?tab=schedule"]
+        a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
           | Programma
       li.nav-item
-        a.nav-link[href="?tab=standing"]
+        a.nav-link[href="?tab=standing" class="#{'active' if @active_tab == 'standing'}"]
           | Stand
       li.nav-item
-        a.nav-link[href="?tab=team"]
+        a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
           | Team
       li.nav-item
-        a.nav-link[href="?tab=remarks"]
+        a.nav-link[href="?tab=remarks" class="#{'active' if @active_tab == 'remarks'}"]
           | Opmerkingen
       li.nav-item
-        a.nav-link[href="?tab=presence"]
+        a.nav-link[href="?tab=presence" class="#{'active' if @active_tab == 'presence'}"]
           | Aanwezigheid
 
-- if @selected_tab == 'schedule'
+- if @active_tab == 'schedule'
   .row
     .col-xl-6
       - if @not_played_matches&.any?
@@ -55,7 +55,7 @@ section.tabs-section
       - if policy(@team).show_training_schedules?
         = render "training_schedules/list", team: @team, training_schedules: @training_schedules
 
-- if @selected_tab == 'standing'
+- if @active_tab == 'standing'
   .row
     .col-xl-6
       - if @competitions
@@ -63,7 +63,7 @@ section.tabs-section
           = render "competitions/standing", competition: competition, compact: true
     .col-xl-6
 
-- if @selected_tab == 'team'
+- if @active_tab == 'team'
   .row
     .col-xl-6
       - if @players&.any?
@@ -76,7 +76,7 @@ section.tabs-section
       - if policy(@team).show_todos? && (@todos_active.present? || @todos_defered.present?)
         = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
 
-- if @selected_tab == 'remarks'
+- if @active_tab == 'remarks'
   .row
     .col-xl-6
       - if policy(@team).show_notes? && @notes&.any?
@@ -88,7 +88,7 @@ section.tabs-section
           = render "comments/tabs", parent: @team
 
 
-- if @selected_tab == 'presence'
+- if @active_tab == 'presence'
   - if policy(@team).show_presence_chart?
     section.box-typical
       header.box-typical-header
