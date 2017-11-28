@@ -5,6 +5,7 @@
 - show_last_modified ||= false
 - show_progress ||= false
 - hide_team ||= false
+- show_bulk_create ||= false
 
 section.box-typical
   header.box-typical-header
@@ -16,7 +17,11 @@ section.box-typical
         .tbl-cell.tbl-cell-actions
           = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
             i.fa.fa-list-ol
-          
+      - if show_bulk_create && @age_group.present? && policy(TeamEvaluation.new(team: @teams.first)).create?
+        .tbl-cell.tbl-cell-actions
+          = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "action-btn"
+            i.fa.fa-files-o
+
   .box-typical-body
     table.table.table-sm.tr-links
       - if team_evaluations.size > 0
@@ -37,7 +42,7 @@ section.box-typical
           - team_evaluations.each do |team_evaluation|
             tr.clickable
               - unless hide_team
-                td 
+                td
                   = team_evaluation.team.name
               td
                 - url = team_evaluation.finished_at.present? ? team_evaluation_path(team_evaluation) : edit_team_evaluation_path(team_evaluation)
@@ -46,10 +51,10 @@ section.box-typical
                     = l team_evaluation.finished_at, format: :date_long
                   - elsif team_evaluation.invited_at.present?
                     = l team_evaluation.invited_at, format: :date_long
-                  - else 
+                  - else
                     = l team_evaluation.created_at, format: :date_long
               - unless hide_status
-                td 
+                td
                   = team_evaluation.status
               - if show_finished_by
                 td.d-none.d-sm-table-cell
@@ -58,11 +63,11 @@ section.box-typical
                 td.d-none.d-sm-table-cell
                   = l team_evaluation.last_modified, format: :date_long
               - if show_progress
-                td 
+                td
                   .progress
                     .progress-bar[role="progressbar" style="width: #{team_evaluation.progress}%" aria-valuenow="#{team_evaluation.progress}" aria-valuemin="0" aria-valuemax="100" title="#{team_evaluation.progress}%"]
 
-      - else 
+      - else
         tbody
           tr
             td

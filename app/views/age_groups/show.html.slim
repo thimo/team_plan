@@ -100,8 +100,8 @@
       = render "members/list", members: @available_members, title: "Wachtlijst"
 
     - if policy(@age_group).show_evaluations?
-      - if @open_team_evaluations.present?
-        = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties", hide_status: true, show_last_modified: true, show_progress: true
+      / - if @open_team_evaluations.present?
+      = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties", hide_status: true, show_last_modified: true, show_progress: true, show_bulk_create: true
       - if @finished_team_evaluations.present?
         = render "team_evaluations/list", team_evaluations: @finished_team_evaluations, title: "Afgeronde teamevaluaties", hide_status: true, show_finished_by: true
 

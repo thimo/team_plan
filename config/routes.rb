@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :team_actions, only: [:new, :create]
       resources :age_groups, shallow: true do
         resources :team_bulk_updates, only: [:new, :create]
+        resources :team_evaluation_bulk_updates, only: [:new, :create]
         resources :member_allocations, only: [:index, :create, :update, :destroy]
         resources :favorites, only: [:create, :destroy]
         resources :download_team_members, only: [:index]
