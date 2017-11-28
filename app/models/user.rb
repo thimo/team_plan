@@ -66,12 +66,12 @@ class User < ApplicationRecord
 
   def is_team_member_for?(record)
     team_id = team_id_for record
-    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).size > 0
+    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, ended_on: nil}).size > 0
   end
 
   def is_team_staff_for?(record)
     team_id = team_id_for record
-    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id}).where.not(team_members: {role: TeamMember.roles[:player]}).size > 0
+    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).size > 0
   end
 
   def favorite_teams
