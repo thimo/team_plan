@@ -3,11 +3,11 @@
 - content_for :action_buttons
   .btn-toolbar
     .btn-group.ml-1
-      - if @member.user.present?
+      - if policy(@member).resend_password? && @member.user.present?
         = link_to resend_password_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
           i.fa.fa-lock.pr-2
           | Nieuw wachtwoord
-      - else 
+      - if policy(@member).create_login? && @member.user.nil?
         = link_to create_login_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt loging gegevens via e-mail. Doorgaan?" }
           i.fa.fa-user.pr-2
           | Login
@@ -25,7 +25,7 @@
   .col-xl-6
     .box-typical.box-typical-padding
       = render "show_member", member: @member
-  
+
   .col-xl-6
     - if policy(@member).show_comments?
       = render "comments/tabs", parent: @member
