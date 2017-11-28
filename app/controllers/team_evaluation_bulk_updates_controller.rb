@@ -5,7 +5,7 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
   before_action :add_breadcrumbs
 
   def new
-    @teams = human_sort(policy_scope(@age_group.teams), :name)
+    @teams = human_sort(policy_scope(@age_group.teams.active), :name)
   end
 
   def create
