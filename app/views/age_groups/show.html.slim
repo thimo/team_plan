@@ -61,7 +61,7 @@
                     => team.status_to_label.html_safe
                   - if policy_scope(team.team_members).size > 0
                     .label.label-two-numbers>
-                      = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).staff.pluck(:member_id).uniq.size}"
+                      = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).active_for_team(team).staff.pluck(:member_id).uniq.size}"
 
     - if @not_played_matches.any?
       section.box-typical.schedule-list
