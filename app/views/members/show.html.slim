@@ -8,7 +8,7 @@
           i.fa.fa-lock.pr-2
           | Nieuw wachtwoord
       - if policy(@member).create_login? && @member.user.nil?
-        = link_to create_login_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt loging gegevens via e-mail. Doorgaan?" }
+        = link_to create_login_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt login gegevens via e-mail. Doorgaan?" }
           i.fa.fa-user.pr-2
           | Login
 
