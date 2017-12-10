@@ -2,8 +2,8 @@ section.box-typical.evaluation
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        h4 Evaluaties 
-          
+        h4 Evaluaties
+
   .box-typical-body.table-responsive
     table.table.table-sm
       - if member.player_evaluations.finished_desc.size > 0
@@ -18,12 +18,11 @@ section.box-typical.evaluation
                 .color-blue-grey-lighter.small
                   = l evaluation.team_evaluation.finished_at, format: :date_long
               = render "player_evaluations/td_columns", evaluation: evaluation
-            - if evaluation.remark.present?
-              tr
-                td.color-blue-grey.b-t-0[colspan="11"]
-                  = evaluation.remark
+            tr
+              td.color-blue-grey.b-t-0[colspan="11"]
+                = evaluation.remark
 
-      - else 
+      - else
         tbody
           tr
             td

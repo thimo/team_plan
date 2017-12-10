@@ -31,52 +31,64 @@ module ClubDataImporter
 
   def self.poule_standings
     ClubDataCompetition.active.each do |competition|
-      # Fetch ranking
-      json = JSON.load(open("#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
-      if json.present?
-        competition.ranking = json
-        competition.save
+      begin
+        # Fetch ranking
+        json = JSON.load(open("#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
+        if json.present?
+          competition.ranking = json
+          competition.save
+        end
+
+      rescue OpenURI::HTTPError
+        # TODO handle error, maybe de-activate competition
       end
     end
   end
 
   def self.poule_matches
     ClubDataCompetition.active.each do |competition|
-      imported_wedstrijdnummers = []
+      begin
+        imported_wedstrijdnummers = []
 
-      # Fetch upcoming matches
-      json = JSON.load(open("#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
-      json.each do |data|
-        club_data_match = ClubDataMatch.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
-        %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
-          club_data_match.write_attribute(field, data[field])
+        # Fetch upcoming matches
+        json = JSON.load(open("#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
+        json.each do |data|
+          club_data_match = ClubDataMatch.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
+          %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
+            club_data_match.write_attribute(field, data[field])
+          end
+          club_data_match.club_data_competition = competition
+          club_data_match.save
+
+          if club_data_match.eigenteam?
+            add_team_to_match(club_data_match, club_data_match.thuisteamid)
+            add_team_to_match(club_data_match, club_data_match.uitteamid)
+
+            add_address(club_data_match) if club_data_match.adres.blank?
+          end
+
+          imported_wedstrijdnummers << club_data_match.wedstrijdnummer
         end
-        club_data_match.club_data_competition = competition
-        club_data_match.save
 
-        if club_data_match.eigenteam?
-          add_team_to_match(club_data_match, club_data_match.thuisteamid)
-          add_team_to_match(club_data_match, club_data_match.uitteamid)
-
-          add_address(club_data_match) if club_data_match.adres.blank?
+        # Cleanup matches that were not included in the import
+        competition.club_data_matches.not_played.from_now.each do |match|
+          match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
         end
-
-
-        imported_wedstrijdnummers << club_data_match.wedstrijdnummer
-      end
-
-      # Cleanup matches that were not included in the import
-      competition.club_data_matches.not_played.from_now.each do |match|
-        match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
+      rescue OpenURI::HTTPError
+        # TODO handle error, maybe de-activate competition
       end
     end
   end
 
   def self.poule_results
     ClubDataCompetition.active.each do |competition|
-      json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
-      json.each do |data|
-        ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
+      begin
+        json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
+        json.each do |data|
+          ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
+        end
+      rescue OpenURI::HTTPError
+        # TODO handle error, maybe de-activate competition
       end
     end
   end
