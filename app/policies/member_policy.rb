@@ -28,7 +28,8 @@ class MemberPolicy < AdminPolicy
   def show_evaluations?
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_staff_for?(@record)
+    @user.is_team_staff_for?(@record) ||
+    @user.has_member?(@record)
   end
 
   def show_comments?
