@@ -36,7 +36,7 @@
     - if policy(@member).show_injuries? && @injuries.present?
       = render "injuries/list", injuries: @injuries, member: @member
 
-- if policy(@member).show_evaluations?
+- if @player_evaluations.present?
   .row
     .col-12
-      = render "player_evaluations/member", member: @member
+      = render "player_evaluations/member", player_evaluations: @player_evaluations

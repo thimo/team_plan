@@ -6,6 +6,7 @@ class MembersController < ApplicationController
     @team_members = policy_scope(@member.team_members).recent_first.includes_parents
     @todos = policy_scope(@member.todos).open.asc
     @injuries = policy_scope(@member.injuries).desc.page(params[:injury_page]).per(3)
+    @player_evaluations = policy_scope(@member.player_evaluations).finished_desc if policy(@member).show_evaluations?
   end
 
   def edit
@@ -54,7 +55,7 @@ class MembersController < ApplicationController
           add_breadcrumb "#{team.age_group.name}", team.age_group
           add_breadcrumb "#{team.name}", team
         end
-        
+
         add_breadcrumb "#{@member.name}", @member
       else
         add_breadcrumb "Leden"

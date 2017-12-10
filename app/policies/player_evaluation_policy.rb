@@ -31,7 +31,11 @@ class PlayerEvaluationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      if user.admin? || user.club_staff?
+        scope.all.finished
+      else
+        scope.public_or_as_team_staff(user)
+      end
     end
   end
 end

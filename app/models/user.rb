@@ -50,9 +50,19 @@ class User < ApplicationRecord
     Member.where("lower(email) = ?", email.downcase)
   end
 
+  def teams
+    member_ids = members.map(&:id).uniq
+    Team.joins(:team_members).where(team_members: {member_id: member_ids}).distinct
+  end
+
   def active_teams
     member_ids = members.map(&:id).uniq
     Team.joins(:team_members).where(team_members: {member_id: member_ids}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct
+  end
+
+  def teams_as_staff
+    member_ids = members.map(&:id).uniq
+    Team.joins(:team_members).where(team_members: {member_id: member_ids}).where.not(team_members: {role: TeamMember.roles[:player]}).distinct.asc
   end
 
   def teams_as_staff_in_season(season)

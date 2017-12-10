@@ -6,12 +6,12 @@ section.box-typical.evaluation
 
   .box-typical-body.table-responsive
     table.table.table-sm
-      - if member.player_evaluations.finished_desc.size > 0
+      - if player_evaluations.finished_desc.size > 0
         thead
           th
           = render "player_evaluations/th_columns"
         tbody
-          - member.player_evaluations.finished_desc.each do |evaluation|
+          - player_evaluations.finished_desc.each do |evaluation|
             tr
               td.nowrap[rowspan="2"]
                 = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
