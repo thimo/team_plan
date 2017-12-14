@@ -3,28 +3,28 @@ nav.side-menu
     li.dirty-blue class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
       = link_to dashboard_index_path
         span
-          i.fa.fa-dashboard
+          i.far.fa-fw.fa-tachometer
           span.lbl
             | Dashboard
 
     li.green class="#{'active' if current_page?(program_dashboard_index_path)}"
       = link_to program_dashboard_index_path
         span
-          i.fa.fa-futbol-o
+          i.far.fa-fw.fa-futbol
           span.lbl
             | Programma
 
     li.grey class="#{'active' if current_page?(results_dashboard_index_path)}"
       = link_to results_dashboard_index_path
         span
-          i.fa.fa-trophy
+          i.far.fa-fw.fa-trophy
           span.lbl
             | Uitslagen
 
     li.orange-red class="#{'active' if current_page?(cancellations_dashboard_index_path)}"
       = link_to cancellations_dashboard_index_path
         span
-          i.fa.fa-ban
+          i.far.fa-fw.fa-ban
           span.lbl
             | Afgelastingen
 
@@ -32,7 +32,7 @@ nav.side-menu
       li.aquamarine class="#{'active' if current_page?(season_path(season))}"
         = link_to season
           span
-            i.fa.fa-calendar
+            i.far.fa-fw.fa-calendar-alt
             span.lbl
               | Leeftijdsgroepen
 
@@ -40,7 +40,7 @@ nav.side-menu
       li.gold class="#{'active' if current_page?(season_path(season))}"
         = link_to season
           span
-            i.fa.fa-calendar
+            i.far.fa-fw.fa-calendar-alt
             span.lbl
               | #{season.name}
 
@@ -52,7 +52,7 @@ nav.side-menu
         - current_user.active_teams.asc.each do |team|
           li.green class="#{'active' if current_page?(team_path(team))}"
             = link_to team
-              i.fa.fa-futbol-o
+              i.far.fa-fw.fa-futbol
               span.lbl
                 = team.name
 
@@ -64,14 +64,14 @@ nav.side-menu
         - human_sort(current_user.favorite_teams, :name).each do |team|
           li.gold class="#{'active' if current_page?(team_path(team))}"
             = link_to team
-              i.fa.fa-star
+              i.far.fa-fw.fa-star
               span.lbl
                 = team.name
 
         - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
           li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
             = link_to age_group
-              i.fa.fa-star
+              i.far.fa-fw.fa-star
               span.lbl
                 = age_group.name
 
@@ -80,7 +80,7 @@ nav.side-menu
       li.brown
         a[href="mail.html"]
         = link_to support_path do
-          i.fa.fa-question-circle
+          i.far.fa-fw.fa-question-circle
           span.lbl
             | Support
 
@@ -88,7 +88,7 @@ nav.side-menu
     ul.side-menu-list
       li.red
         a[href="https://www.defrog.nl/" target="_blank"]
-          i.fa.fa-heart
+          i.fas.fa-fw.fa-heart
           span.lbl
             | Handcrafted in Arnhem by
-            = image_tag 'logo/defrog_wide.svg', alt: "Defrog"
+            = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'

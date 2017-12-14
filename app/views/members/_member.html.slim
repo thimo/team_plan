@@ -1,7 +1,7 @@
 - if policy(member).show_private_data?
   = link_to member.name, member, target: target ||= ''
   - if member.injured?
-    i.fa.fa-medkit.p-1.pl-2.red[title="Geblesseerd"]
+    i.far.fa-medkit.m-1.ml-2.red[title="Geblesseerd"]
 - elsif (active_team = member.active_team).present?
   = link_to member.name, active_team
 - else

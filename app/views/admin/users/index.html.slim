@@ -6,7 +6,7 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         h3
           | #{@users.count} Gebruikers
-          
+
       .tbl-cell
         = form_with url: admin_users_path, method: :get, local: true, class: 'form-inline float-right'
           = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
@@ -14,17 +14,17 @@ section.box-typical
       - if policy(User).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_admin_user_path, title: "Gebruiker toevoegen"
-            i.fa.fa-file-o
-            
+            i.far.fa-file
+
   .box-typical-body
     table.table.table-sm.tr-links
       thead
         tr
-          th = User.human_attribute_name(:name) 
+          th = User.human_attribute_name(:name)
           th = User.human_attribute_name(:role)
           th.d-none.d-sm-table-cell = User.human_attribute_name(:current_sign_in_at)
           th
-          
+
       tbody
         - @users.each do |user|
           tr
@@ -34,11 +34,11 @@ section.box-typical
                 => user.email
                 - if user.unconfirmed_email.present?
                   |  (wijziging naar #{user.unconfirmed_email} nog niet bevestigd)
-            td 
+            td
               = user.role_i18n
             td.d-none.d-sm-table-cell
               = I18n.l user.current_sign_in_at, format: :long if user.current_sign_in_at.present?
             td.text-right
               - if current_user != user
                 = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
-                  i.fa.fa-sign-in.p-1.pl-2
+                  i.far.fa-sign-in.m-1.ml-2

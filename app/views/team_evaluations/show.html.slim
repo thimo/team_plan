@@ -17,15 +17,15 @@
               = @team_evaluation.status
         .tbl-cell.tbl-cell-action-bordered
           a.action-btn[href="#" onclick="window.print(); return false;"]
-            i.fa.fa-print
+            i.far.fa-print
         - if policy(@team_evaluation).re_open?
           .tbl-cell.tbl-cell-action-bordered
             = link_to re_open_team_evaluation_path(@team_evaluation),  method: :post, data: { confirm: 'Teamevaluatie wordt weer open gezet voor wijzigingen. Doorgaan?' }, title: "Teamevaluatie open zetten voor wijzigingen", class: "action-btn"
-              i.fa.fa-undo
+              i.far.fa-undo
         - if policy(@team_evaluation).destroy?
           .tbl-cell.tbl-cell-action-bordered
             = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "action-btn"
-              i.fa.fa-trash-o
+              i.far.fa-trash
         
     .box-typical-body.table-responsive
       table.table.table-xxs

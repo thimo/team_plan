@@ -23,3 +23,6 @@
 //= require chart.js/dist/Chart.min.js
 //= require turbolinks
 //= require trix
+//= require fa-regular.js
+//= require fa-solid.js
+//= require fontawesome.min.js

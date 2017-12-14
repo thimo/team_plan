@@ -16,11 +16,11 @@ section.box-typical
       - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
-            i.fa.fa-list-ol
+            i.far.fa-list-ol
       - if show_bulk_create && @age_group.present? && policy(TeamEvaluation.new(team: @teams.first)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "action-btn"
-            i.fa.fa-files-o
+            i.far.fa-files
 
   .box-typical-body
     table.table.table-sm.tr-links

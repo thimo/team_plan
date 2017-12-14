@@ -9,7 +9,7 @@ section.box-typical.d-none.d-sm-block
       - if policy(VersionUpdate).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_admin_version_update_path, title: "Versie toevoegen", class: "action-btn"
-            i.fa.fa-file-o
+            i.far.fa-file
 
   .box-typical-body
     - if version_updates.present?

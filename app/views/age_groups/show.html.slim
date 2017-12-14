@@ -7,17 +7,17 @@
       - if @age_group.teams.size > 0
         - if policy(TeamMember.new(team: @age_group.teams.first)).create?
           = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn btn-secondary"
-            i.fa.fa-table
+            i.far.fa-table
       - if policy(@age_group).update?
         = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "btn btn-secondary"
-          i.fa.fa-pencil
+          i.far.fa-pencil
       - if policy(@age_group).destroy?
         = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "btn btn-secondary"
-          i.fa.fa-trash-o
+          i.far.fa-trash
     .btn-group.ml-1
       - if policy(Todo).create? && policy(@age_group).show_todos?
         = link_to new_age_group_todo_path(@age_group), title: "Todo toevoegen", class: "btn btn-secondary"
-          i.fa.fa-check-square-o
+          i.far.fa-check-square
       = render "shared/favorite", parent: @age_group, styleClass: "btn btn-secondary"
 
 .row
@@ -30,19 +30,19 @@
           - if policy(@age_group).bulk_email?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_action_path(@age_group, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
-                i.fa.fa-envelope-o
+                i.far.fa-envelope
           - if policy(@age_group).download_team_members?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_action_path(@age_group, type: :download_team_members), title: "Download teams naar Excel", class: "action-btn", remote: true
-                i.fa.fa-file-excel-o
+                i.far.fa-file-excel
           - if policy(Team.new(age_group: @age_group)).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
-                i.fa.fa-file-o
+                i.far.fa-file
           - if policy(Team.new(age_group: @age_group)).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
-                i.fa.fa-files-o
+                i.far.fa-files
 
       .box-typical-body
         table.table.table-sm.tr-links

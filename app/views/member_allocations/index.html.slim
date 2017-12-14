@@ -26,9 +26,9 @@
               div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
                 = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position), { include_blank: true }, { class: "form-control field_position", placeholder: "Filter op veldpositie", onchange: "$('#filter-button').click()" }
                 = f.button :button, title: 'Filter toepassen', class: "btn-primary ml-1", id: 'filter-button' do
-                  i.fa.fa-search
+                  i.far.fa-search
                 = link_to member_allocation_filter_path(0),  method: :delete, title: "Filters verwijderen", class: "btn btn-secondary ml-1"
-                  i.fa.fa-trash-o
+                  i.far.fa-trash
               - if @teams_for_filter.present?
                 div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
                   = f.select :team, options_for_select(@teams_for_filter, @filter_team), { include_blank: true }, { class: "form-control", placeholder: "Filter op team", onchange: "$('#filter-button').click()" }
