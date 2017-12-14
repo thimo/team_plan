@@ -12,7 +12,7 @@ section.box-typical
             - @active_teams.each do |team|
               li.green
                 = link_to team
-                  i.fa.fa-futbol-o
+                  i.far.fa-futbol
                   span.lbl
                     = team.name
 
@@ -28,12 +28,12 @@ section.box-typical
             - @favorite_teams.each do |team|
               li.gold
                 = link_to team
-                  i.fa.fa-star
+                  i.far.fa-star
                   span.lbl
                     = team.name
             - @favorite_age_groups.each do |age_group|
               li.gold
                 = link_to age_group
-                  i.fa.fa-star
+                  i.far.fa-star
                   span.lbl
                     = age_group.name

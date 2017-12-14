@@ -24,13 +24,30 @@
 
 .header-buttons {
   float: right;
+
+  .btn-group {
+    a {
+      min-height: 38px;
+      min-width: 44px;
+    }
+  }
+}
+
+.dropdown-toggle {
+  a {
+    i {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 }
 
 .datepicker{
   z-index: 100 !important;
 }
 
-.fa {
+.fa, .svg-inline--fa {
   &.red {
     color: #da211d;
     color: #fa424a;

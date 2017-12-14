@@ -1,14 +1,14 @@
 .todo.comment.chat-message[class="#{'opacity-5' if todo.defered?}"]
   .chat-message-photo
     = link_to [:toggle, todo], method: :post, remote: true
-      i.fa[class="#{todo.finished? ? 'fa-check-square-o' : 'fa-square-o'}"]
+      i.far[class="#{todo.finished? ? 'fa-check-square' : 'fa-square'}"]
   .chat-message-header
     .tbl-row
       .tbl-cell.tbl-cell-name[class="#{'strong' if todo.due?} #{'line-through' if todo.finished?}"]
         = todo.body
       .tbl-cell.tbl-cell-date
         = link_to edit_todo_path(todo, return: request.path), title: "Aanpassen", class: "pl-2"
-          i.fa.fa-pencil.color-blue-grey-lighter
+          i.far.fa-pencil.color-blue-grey-lighter
 
   .chat-message-content
     .chat-message-txt.color-blue-grey

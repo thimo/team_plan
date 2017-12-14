@@ -28,14 +28,14 @@ html
               = image_tag "logo/esa_logo.svg"
             header.sign-title
               = yield(:title)
-              
+
             = yield
-                
+
         section.supplier
           ul.side-menu-list
             li.red
               a[href="https://www.defrog.nl/" target="_blank"]
-                i.fa.fa-heart
+                i.fas.fa-fw.fa-heart
                 span.lbl
-                  | Handcrafted in Arnhem by 
-                  img[alt="Defrog" src="/assets/logo/defrog_wide-e63709e59828cdb04547c97c362ddf8db6f4ef2ce9841c4983bb9204da59a88f.svg"]
+                  | Handcrafted in Arnhem by
+                  = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'

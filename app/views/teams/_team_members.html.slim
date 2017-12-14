@@ -6,23 +6,23 @@ section.box-typical
       - if policy(@team).bulk_email?
         .tbl-cell.tbl-cell-action-bordered
           a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
-            i.fa.fa-envelope-o
+            i.far.fa-envelope
       - if policy(@team).bulk_email?
         .tbl-cell.tbl-cell-action-bordered
           a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan alle teamgenoten"]
-            i.fa.fa-envelope
+            i.fas.fa-envelope
       - if policy(@team).download_team_members?
         .tbl-cell.tbl-cell-action-bordered
           = link_to team_download_team_members_path(@team, format: "xlsx"), title: "Download team naar Excel", class: "action-btn"
-            i.fa.fa-file-excel-o
+            i.far.fa-file-excel
       - if policy(TeamMember.new(team: @team)).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_team_team_member_path(@team), title: "Teamgenoot toevoegen", class: "action-btn" do
-            i.fa.fa-user
+            i.far.fa-user
       - if policy(TeamMember.new(team: @team)).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_team_team_member_bulk_update_path(@team), title: "Teamgenoten toevoegen", class: "action-btn" do
-            i.fa.fa-users
+            i.far.fa-users
 
   .box-typical-body.table-responsive
     table.table.table-sm.tr-links
@@ -65,22 +65,20 @@ section.box-typical
                           = "#{previous_team.division}"
 
                 td.w-1.nowrap.text-right
-                  / = render "shared/favorite", parent: team_member.member, styleClass: "p-1 pl-2"
-
                   - if policy(team_member).edit?
                     = link_to edit_team_member_path(team_member), title: "Aanpassen"
-                      i.fa.fa-pencil.p-1.pl-2
+                      i.far.fa-pencil.m-1.ml-2
 
                   - if policy(team_member).destroy?
                     = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-                      i.fa.fa-times.p-1.pl-2
+                      i.far.fa-times.m-1.ml-2
 
                   - if policy(team_member).show_status?
                     div
                       = team_member.status_to_label.html_safe
                       - if policy(team_member).activate?
                         = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
-                          i.fa.fa-check.p-1.pl-2
+                          i.far.fa-check.m-1.ml-2
 
       - if @staff.size > 0
         table.table.table-sm.tr-links
