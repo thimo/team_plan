@@ -13,7 +13,7 @@
           i.far.fa-pencil
       - if policy(@team).destroy?
         = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "btn btn-secondary"
-          i.far.fa-trash
+          i.far.fa-trash-alt
     .btn-group.ml-1
       - if policy(Todo).create? && policy(@team).show_todos?
         = link_to new_team_todo_path(@team), title: "Todo toevoegen", class: "btn btn-secondary"

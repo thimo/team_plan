@@ -13,7 +13,7 @@
           i.far.fa-pencil
       - if policy(@age_group).destroy?
         = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "btn btn-secondary"
-          i.far.fa-trash
+          i.far.fa-trash-alt
     .btn-group.ml-1
       - if policy(Todo).create? && policy(@age_group).show_todos?
         = link_to new_age_group_todo_path(@age_group), title: "Todo toevoegen", class: "btn btn-secondary"
@@ -42,7 +42,7 @@
           - if policy(Team.new(age_group: @age_group)).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
-                i.far.fa-files
+                i.far.fa-copy
 
       .box-typical-body
         table.table.table-sm.tr-links

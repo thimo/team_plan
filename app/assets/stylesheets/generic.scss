@@ -24,6 +24,23 @@
 
 .header-buttons {
   float: right;
+
+  .btn-group {
+    a {
+      min-height: 38px;
+      min-width: 44px;
+    }
+  }
+}
+
+.dropdown-toggle {
+  a {
+    i {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 }
 
 .datepicker{

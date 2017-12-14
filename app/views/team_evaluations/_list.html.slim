@@ -20,7 +20,7 @@ section.box-typical
       - if show_bulk_create && @age_group.present? && policy(TeamEvaluation.new(team: @teams.first)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "action-btn"
-            i.far.fa-files
+            i.far.fa-copy
 
   .box-typical-body
     table.table.table-sm.tr-links
