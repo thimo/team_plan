@@ -25,12 +25,12 @@
               td
                 - if presences.has_key? presentable.id
                   - if presences[presentable.id].present
-                    i.fa.fa-check.green
+                    i.far.fa-check.green
                     - presence_count += 1
                   - else
-                    i.fa.fa-times.red
+                    i.far.fa-times.red
                 - else
-                  i.fa.fa-minus.grey
+                  i.far.fa-minus.grey
             td.w-1.text-right.color-blue-grey
               = presence_count
             td

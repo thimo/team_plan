@@ -1,0 +1,23 @@
+- provide(:title, "Teamevaluaties aanmaken en versturen")
+
+.box-typical.box-typical-padding#team_evaluation_bulk_updates
+  p Gebruik dit formulier om meerdere teamevaluaties in één keer aan te maken en te versturen.
+
+  hr
+
+  = form_with url: age_group_team_evaluation_bulk_updates_path(@age_group), method: :post do |f|
+    div
+      .form-check
+        label.form-check-label
+          input.form-check-input.team-select-toggle[type="checkbox" checked]
+          strong
+            |  Teams
+
+      - @teams.each do |team|
+        .form-check
+          label.form-check-label
+            = f.check_box 'team_ids[]', { checked: true, class: 'form-check-input team-select' }, team.id, nil
+            = " #{team.name}"
+
+    div
+      = f.submit "Aanmaken en versturen", class: "btn btn-primary"

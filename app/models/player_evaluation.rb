@@ -17,8 +17,10 @@ class PlayerEvaluation < ApplicationRecord
   default_scope -> { joins(team_member: :member).order('members.last_name ASC, members.first_name ASC') }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: {finished_at: nil}) }
   scope :finished_desc, -> { finished.joins(:team_evaluation).order('team_evaluations.finished_at DESC') }
-  scope :includes_member, -> {includes(:team_member).includes(team_member: :member).includes(team_member: :field_positions)}
-  scope :for_season, -> (season) {includes(team_member: {team: :age_group}).where(age_groups: { season_id: season.id })}
+  scope :includes_member, -> { includes(:team_member).includes(team_member: :member).includes(team_member: :field_positions) }
+  scope :for_season, -> (season) { includes(team_member: {team: :age_group}).where(age_groups: { season_id: season.id }) }
+  scope :not_private, -> { joins(:team_evaluation).where(team_evaluations: {private: false}) }
+  scope :public_or_as_team_staff, -> (user) { joins(:team_evaluation).where("team_evaluations.private = false OR team_evaluations.team_id IN (?)", user.teams_as_staff.map(&:id)) }
 
   def draft?
     team_evaluation.draft?

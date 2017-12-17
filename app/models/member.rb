@@ -38,7 +38,7 @@ class Member < ApplicationRecord
   scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :gender, -> (gender) { where(gender: gender) }
-  scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team}) }
+  scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team, ended_on: nil}) }
   scope :team_staff, -> { joins(:team_members).where.not(team_members: {role: TeamMember.roles[:player]}) }
 
   scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")}

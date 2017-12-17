@@ -13,10 +13,10 @@
 
 .todo {
   .chat-message-photo {
-    .fa {
+    .fa, .svg-inline--fa {
       color: #919fa9;
       font-size: 1.0625rem;
-      padding: 2px 15px;
+      margin: 2px 15px;
 
       &:hover {
         // background-color: #ecf2f5;
