@@ -5,11 +5,11 @@
     .btn-group.ml-1
       - if policy(@member).resend_password? && @member.user.present?
         = link_to resend_password_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
-          i.far.fa-lock.pr-2
+          i.far.fa-lock.mr-2
           | Nieuw wachtwoord
       - if policy(@member).create_login? && @member.user.nil?
         = link_to create_login_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt login gegevens via e-mail. Doorgaan?" }
-          i.far.fa-user.pr-2
+          i.far.fa-user.mr-2
           | Login
 
     .btn-group.ml-1

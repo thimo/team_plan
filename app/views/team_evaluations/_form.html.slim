@@ -9,23 +9,23 @@
     header.box-typical-header
       .tbl-row
         .tbl-cell.tbl-cell-title
-          h4 
+          h4
             | Teamevaluatie #{@team_evaluation.team.name}
             - if @team_evaluation.team.division.present?
               small.pl-1 #{@team_evaluation.team.division}
             div.color-blue-grey-lighter.small
               = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
-              |  - 
+              |  -
               = @team_evaluation.status
         .tbl-cell.text-right
           = link_to "/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf", target: "_blank" do
-            i.far.fa-book.pr-1
+            i.far.fa-book.mr-1
             | Handleiding
         - if policy(@team_evaluation).destroy?
           .tbl-cell.tbl-cell-action-bordered
             = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "action-btn"
               i.far.fa-trash-alt
-        
+
     .box-typical-body
       table.table.table-xxs
         thead
@@ -34,36 +34,36 @@
               div
                 span
                   | Speler
-                  
+
             = render "player_evaluations/th_columns", show_prefered_foot: true
-            
+
         tbody
           = f.simple_fields_for :player_evaluations do |pe|
             = pe.hidden_field :id
             = pe.hidden_field :team_member_id
-            
+
             = render "inbetween_header", show_prefered_foot: true if pe.index > 0 && pe.index % 4 == 0
 
             tr
               td.member-name[class="#{'line-through' if pe.object.team_member.inactive_for?(@team_evaluation)}" rowspan="2"]
                 - member = pe.object.team_member.member
                 = render member, target: "_blank"
-              
+
               td.field-positions[rowspan="2"]
                 div[class="#{'form-control-error' if pe.error("field_positions").present?}"]
                   = pe.simple_fields_for :team_member, pe.object.team_member do |tm|
                     = tm.select :field_position_ids, options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
-                    
+
               td.prefered-foot
                 = pe.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:prefered_foot).present?}", title: TeamMember.human_attribute_name(:prefered_foot)}
-              
+
               - PlayerEvaluation::RATING_FIELDS.each do |field_name|
                 td.evaluation-rating
                   = pe.select field_name.to_s, PlayerEvaluation::RATING_OPTIONS, {include_blank: true}, {class: "form-control custom-select evaluation-rating #{'form-control-error' if pe.error(field_name.to_s).present?}", title: PlayerEvaluation.human_attribute_name(field_name)}
-                
+
               td.advise-next-season
                 = pe.select :advise_next_season, PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS, {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if pe.error(:advise_next_season).present?}", title: PlayerEvaluation.human_attribute_name(:advise_next_season)}
-                
+
             tr
               td.b-t-0[colspan="12" style="padding-left: 2px;"]
                 = pe.text_area :remark, class: "form-control", placeholder: PlayerEvaluation.human_attribute_name(:remark), rows: 1
