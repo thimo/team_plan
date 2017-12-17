@@ -11,16 +11,16 @@ class TeamsController < ApplicationController
     @previous_season = @team.age_group.season.previous
 
     case @active_tab
-      when 'standing'
-        @competitions = @team.club_data_competitions
+      when 'competitions'
+        @competitions_regular = @team.club_data_competitions.regular
+        @competitions_other = @team.club_data_competitions.other
+
       when 'team'
         @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions).not_ended)
         @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
         @old_members = policy_scope(@team.team_members).ended.group_by(&:member)
 
         @team_evaluations = policy_scope(@team.team_evaluations).desc
-      when 'remarks'
-        @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
 
         todos = policy_scope(@team.todos).open.includes(:todoable)
         @todos_active = todos.active.to_a
@@ -29,14 +29,17 @@ class TeamsController < ApplicationController
         @todos_active += todos.active
         @todos_defered += todos.defered
 
-      when 'presence'
+      when 'dossier'
+        @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
+
+      when 'statistics'
         team_presence_graphs
-      else
-      # when :schedule
-        @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
-        @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 2.weeks.from_now.beginning_of_day).asc
+      else # 'schedule'
         @not_played_matches = @team.club_data_matches.not_played.in_period(0.days.ago.beginning_of_day, 3.weeks.from_now.beginning_of_day).asc
         @played_matches = @team.club_data_matches.played.in_period(3.week.ago.end_of_day, 0.days.from_now.end_of_day).desc
+
+        @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
+        @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 2.weeks.from_now.beginning_of_day).asc
     end
   end
 
@@ -105,6 +108,7 @@ class TeamsController < ApplicationController
       else
         current_user.settings.active_team_tab || 'schedule'
       end
+      @active_tab = 'schedule' unless policy(@team).try("show_#{@active_tab}?")
       current_user.settings.update_attributes(active_team_tab: @active_tab)
     end
 end

@@ -23,29 +23,44 @@ class TeamPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  # Tabs
+
+  def show_schedule?
+    true
+  end
+
+  def show_competitions?
+    true
+  end
+
+  def show_team?
+    true
+  end
+
+  def show_dossier?
+    club_or_team_staff?
+  end
+
+  def show_statistics?
+    club_or_team_staff?
+  end
+
+  # Sections
+
   def show_comments?
-    @user.admin? ||
-    @user.club_staff? ||
-    @user.is_team_staff_for?(@record)
-  end
-
-  def show_evaluations?
-    @user.admin? ||
-    @user.club_staff? ||
-    @user.is_team_staff_for?(@record)
-  end
-
-  def show_presence_chart?
-    @user.admin?
-    # ||
-    # @user.club_staff? ||
-    # @user.is_team_staff_for?(@record)
+    show_dossier?
   end
 
   def show_notes?
-    @user.admin? ||
-    @user.club_staff? ||
-    @user.is_team_member_for?(@record)
+    show_dossier?
+  end
+
+  def show_evaluations?
+    club_or_team_staff?
+  end
+
+  def show_presence_chart?
+    show_statistics?
   end
 
   def show_favorite?
@@ -89,9 +104,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def download_team_members?
-    @user.admin? ||
-    @user.club_staff? ||
-    @user.is_team_staff_for?(@record)
+    club_or_team_staff?
   end
 
   def bulk_email?
@@ -113,4 +126,12 @@ class TeamPolicy < ApplicationPolicy
       end
     end
   end
+
+  private
+
+    def club_or_team_staff?
+      @user.admin? ||
+      @user.club_staff? ||
+      @user.is_team_staff_for?(@record)
+    end
 end

@@ -11,7 +11,7 @@
               | Stand
             - else
               = link_to competition_path(competition)
-                = "#{competition.competitiesoort} - #{competition.klasse}"
+                = "#{competition.competitiesoort.humanize} - #{competition.klasse}"
               span.color-blue-grey-lighter.pl-2
                 = "#{competition.poule}"
               .color-blue-grey.small
