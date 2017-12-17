@@ -115,3 +115,11 @@ th {
     }
   }
 }
+
+.tabs-section-nav {
+  &.tabs-section-nav-inline {
+    .nav-link.active {
+      border-bottom: solid 3px #00a8ff;
+    }
+  }
+}

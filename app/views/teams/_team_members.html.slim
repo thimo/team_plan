@@ -87,13 +87,3 @@ section.box-typical
               th[colspan="4"] Teamleiding
           - @staff.each do |member, team_members|
             = render 'member', member: member, team_members: team_members
-
-- if @old_members.present?
-  section.box-typical
-    .box-typical-body.table-responsive
-      table.table.table-sm.tr-links
-        thead
-          tr
-            th[colspan="4"] Oud teamgenoten
-        - @old_members.each do |member, team_members|
-          = render 'member', member: member, team_members: team_members

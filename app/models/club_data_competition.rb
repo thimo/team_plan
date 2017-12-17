@@ -6,6 +6,8 @@ class ClubDataCompetition < ApplicationRecord
   has_and_belongs_to_many :club_data_teams
   has_many :club_data_matches
 
-  scope :asc, -> { order(:id) }
+  scope :asc,     -> { order(:id) }
+  scope :regular, -> { where(competitiesoort: 'regulier') }
+  scope :other,   -> { where.not(competitiesoort: 'regulier') }
 
 end
