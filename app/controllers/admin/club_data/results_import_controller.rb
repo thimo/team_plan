@@ -1,4 +1,4 @@
-class Admin::ClubData::ResultsImportController < AdminController
+class Admin::ClubData::ResultsImportController < Admin::BaseController
   def new
     authorize ClubDataMatch
     ClubDataImporter.club_results

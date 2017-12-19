@@ -107,7 +107,7 @@ Rails.application.routes.draw do
       end
     end
 
-    get 'admin' => 'admin#show'
+    get 'admin' => 'admin/base#show'
     namespace :admin do
       resources :users, except: [:show], shallow: true do
         resources :email_logs, only: [:index, :show]
