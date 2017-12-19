@@ -1,0 +1,10 @@
+/ # use bootstrap styling, as setup in the helper
+= arranged_tree_as_list(@org_positions, {sort_by: [:name, :id], list_style: :bootstrap_list_group}) do |org_position|
+  / stuff that goes inside the <li></li> tags
+  = link_to org_position_path(org_position)
+    | #{org_position.name}
+  - org_position.org_position_members.each do |member|
+    div
+      | #{member.member.name}
+      - if member.name.present?
+        |  (#{member.name})
