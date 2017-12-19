@@ -47,6 +47,7 @@ gem 'simple-password-gen'
 gem 'simple_calendar',            '~> 2.0'
 gem 'icalendar',                  '~> 2.4.1'
 gem 'bootsnap', require: false
+gem 'ancestry'
 
 group :development, :test do
   gem 'byebug', platform: :mri
