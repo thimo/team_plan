@@ -107,6 +107,11 @@ Rails.application.routes.draw do
       end
     end
 
+    get 'org' => 'org/base#show'
+    namespace :org do
+      resources :positions
+    end
+
     get 'admin' => 'admin/base#show'
     namespace :admin do
       resources :users, except: [:show], shallow: true do
