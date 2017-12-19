@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171219165330) do
+ActiveRecord::Schema.define(version: 20171219170012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,7 +298,7 @@ ActiveRecord::Schema.define(version: 20171219165330) do
   create_table "org_positions", force: :cascade do |t|
     t.string "name"
     t.text "remark"
-    t.integer "position_type"
+    t.integer "position_type", default: 0
     t.date "started_on"
     t.date "ended_on"
     t.string "ancestry"
