@@ -17,6 +17,8 @@ class Member < ApplicationRecord
   has_many :teams, through: :team_members
   has_many :teams_as_player, through: :team_members_as_player, class_name: 'Team', source: :team
 
+  has_many :org_position_members
+
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
