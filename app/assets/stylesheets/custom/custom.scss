@@ -56,6 +56,13 @@ a:hover, a:hover:hover {
   width: 44px;
 }
 
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0;
+}
+
 // Highlight navigation
 .side-menu-list .active .lbl {
   color: black;
@@ -74,9 +81,6 @@ a:hover, a:hover:hover {
 }
 
 .supplier {
-  bottom: 0;
-  position: absolute;
-
   .side-menu-list {
     margin-bottom: 10px;
 
