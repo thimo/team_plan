@@ -220,3 +220,19 @@ a:hover, a:hover:hover {
     width: 5% * $i;
   }
 }
+
+.top-nav {
+  margin: 2px 0 8px;
+  display: flex;
+  justify-content: center;
+  color: #adb7be;
+
+  a {
+    color: #adb7be;
+    padding: 6px;
+
+    &.active {
+      color: #444;
+    }
+  }
+}

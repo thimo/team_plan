@@ -1,79 +1,23 @@
 nav.side-menu
-  ul.side-menu-list
-    li.dirty-blue class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
-      = link_to dashboard_index_path
-        span
-          i.far.fa-fw.fa-tachometer
-          span.lbl
-            | Dashboard
+  - if policy(:org).show? || policy(:files).show? || policy(:admin).show?
+    section.top-nav
+      = link_to dashboard_index_path, title: "Voetbal", class: "#{'active' if [Object].include? controller.class.parent}"
+        i.far.fa-futbol.fa-lg
+      - if policy(:org).show?
+        = link_to org_path, title: "Organisatie", class: "#{'active' if [Org].include? controller.class.parent}"
+          i.far.fa-sitemap.fa-lg
+      - if policy(:intranet).show?
+        = link_to intranet_path, title: "Intranet", class: "#{'active' if controller.class.parent == Intranet}"
+          i.far.fa-folder-open.fa-lg
+      - if policy(:admin).show?
+        = link_to admin_path, title: "Beheer", class: "#{'active' if [Admin, Admin::ClubData].include? controller.class.parent}"
+          i.far.fa-cog.fa-lg
 
-    li.green class="#{'active' if current_page?(program_dashboard_index_path)}"
-      = link_to program_dashboard_index_path
-        span
-          i.far.fa-fw.fa-futbol
-          span.lbl
-            | Programma
+  = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
+  = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
+  = render 'layouts/side_menu_admin'    if [Admin, Admin::ClubData].include? controller.class.parent
 
-    li.grey class="#{'active' if current_page?(results_dashboard_index_path)}"
-      = link_to results_dashboard_index_path
-        span
-          i.far.fa-fw.fa-trophy
-          span.lbl
-            | Uitslagen
-
-    li.orange-red class="#{'active' if current_page?(cancellations_dashboard_index_path)}"
-      = link_to cancellations_dashboard_index_path
-        span
-          i.far.fa-fw.fa-ban
-          span.lbl
-            | Afgelastingen
-
-    - if (season = policy_scope(Season).active.last).present?
-      li.aquamarine class="#{'active' if current_page?(season_path(season))}"
-        = link_to season
-          span
-            i.far.fa-fw.fa-calendar-alt
-            span.lbl
-              | Leeftijdsgroepen
-
-    - if (season = policy_scope(Season).draft.last).present?
-      li.gold class="#{'active' if current_page?(season_path(season))}"
-        = link_to season
-          span
-            i.far.fa-fw.fa-calendar-alt
-            span.lbl
-              | #{season.name}
-
-  - if current_user.active_teams.size > 0
-    section
-      header.side-menu-title
-        | Mijn teams
-      ul.side-menu-list
-        - current_user.active_teams.asc.each do |team|
-          li.green class="#{'active' if current_page?(team_path(team))}"
-            = link_to team
-              i.far.fa-fw.fa-futbol
-              span.lbl
-                = team.name
-
-  - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
-    section
-      header.side-menu-title
-        | Favorieten
-      ul.side-menu-list
-        - human_sort(current_user.favorite_teams, :name).each do |team|
-          li.gold class="#{'active' if current_page?(team_path(team))}"
-            = link_to team
-              i.far.fa-fw.fa-star
-              span.lbl
-                = team.name
-
-        - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
-          li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
-            = link_to age_group
-              i.far.fa-fw.fa-star
-              span.lbl
-                = age_group.name
+  section[style="flex-grow: 1;"]
 
   section
     ul.side-menu-list
@@ -82,8 +26,6 @@ nav.side-menu
           i.far.fa-fw.fa-question-circle
           span.lbl
             | Support
-
-  section[style="flex-grow: 1;"]
 
   section.supplier
     ul.side-menu-list

@@ -112,6 +112,11 @@ Rails.application.routes.draw do
       resources :positions
     end
 
+    get 'intranet' => 'intranet/base#show'
+    namespace :intranet do
+      resources :files
+    end
+
     get 'admin' => 'admin/base#show'
     namespace :admin do
       resources :users, except: [:show], shallow: true do

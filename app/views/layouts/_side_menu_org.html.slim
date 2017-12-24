@@ -1,0 +1,7 @@
+ul.side-menu-list
+  li class="#{'active' if current_page?(org_positions_path)}"
+    = link_to org_positions_path do
+      span
+        i.far.fa-fw.fa-sitemap
+        span.lbl
+          | Organisatie

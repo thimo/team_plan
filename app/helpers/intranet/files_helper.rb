@@ -1,0 +1,2 @@
+module Intranet::FilesHelper
+end
