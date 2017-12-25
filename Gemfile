@@ -53,7 +53,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # gem 'pry-rails'
   # gem 'pry-byebug'
-  gem 'scout_apm'
+  # gem 'scout_apm' # Disabled to improve loading without internet connction
   gem 'guard'
   gem 'factory_girl_rails'
   gem 'capybara'
