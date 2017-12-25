@@ -61,6 +61,7 @@ a:hover, a:hover:hover {
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 0;
+  padding-top: 80px;
 }
 
 // Highlight navigation
@@ -222,17 +223,19 @@ a:hover, a:hover:hover {
 }
 
 .top-nav {
-  margin: 2px 0 8px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
-  color: #adb7be;
+  background-color: #eceff4;
+  padding: 6px;
+  border-bottom: solid 1px #c5d6de;
 
   a {
-    color: #adb7be;
+    color: #6b7a85;
     padding: 6px;
 
     &.active {
-      color: #444;
+      color: #0082c6;
     }
   }
 }
