@@ -1,10 +1,16 @@
-/ # use bootstrap styling, as setup in the helper
-= arranged_tree_as_list(@org_positions, {sort_by: [:name, :id], list_style: :bootstrap_list_group}) do |org_position|
-  / stuff that goes inside the <li></li> tags
-  = link_to org_position_path(org_position)
-    | #{org_position.name}
-  - org_position.org_position_members.each do |member|
-    div
-      | #{member.member.name}
-      - if member.name.present?
-        |  (#{member.name})
+- provide(:title, "Organisatie")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | Organisatiestructuur
+      - if policy(OrgPosition).create?
+        .tbl-cell.tbl-cell-actions
+          = link_to new_org_position_path, title: "Toevoegen", class: "action-btn"
+            i.far.fa-plus-square
+
+
+  .box-typical-body.orgchart
+    = render 'org_chart_level', objects: @org_positions

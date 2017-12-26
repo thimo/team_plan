@@ -1,0 +1,28 @@
+- provide(:title, "#{@org_position.position_type_i18n} \"#{@org_position.name}\"")
+
+- content_for :action_buttons
+  .btn-toolbar
+    .btn-group
+      - if policy(@org_position).update?
+        = link_to edit_org_position_path(@org_position), title: "Positie aanpassen", class: "btn btn-secondary"
+          i.far.fa-pencil
+      - if policy(@org_position).destroy?
+        = link_to org_position_path(@org_position),  method: :delete, data: { confirm: 'Positie wordt verwijderd. Doorgaan?' }, title: "Positie verwijderen", class: "btn btn-secondary"
+          i.far.fa-trash-alt
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4 #{@org_position.position_type_i18n}
+        = @org_position.name
+
+        h4
+          = @org_position.working_group? || @org_position.committee? ? "Leden" : "Persoon"
+        - @org_position.org_position_members.each do |member|
+          div
+            = member.member.name
+            = ", #{member.name}" if member.name.present?
+
+  .row.box-typical-body
+    / = render 'age_groups/list', age_groups: @age_groups_male, title: "Mannen"

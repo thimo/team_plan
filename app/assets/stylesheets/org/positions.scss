@@ -1,3 +1,21 @@
 // Place all the styles related to the org/positions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.orgchart {
+  padding: 15px;
+  padding-top: 0;
+
+  &> .list-group {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .list-group {
+    margin-bottom: 0;
+  }
+  .list-group-item {
+    // padding-right: 0;
+    .list-group-item {
+      border: none;
+    }
+  }
+}

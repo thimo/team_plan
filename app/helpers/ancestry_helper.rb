@@ -35,7 +35,6 @@ module AncestryHelper
     # and here... we... go...
     hash.each do |object, children|
       li_classes = options[:li_class]
-
       li_classes += if object.depth == 0
                       options[:li_class_top]
                     else
