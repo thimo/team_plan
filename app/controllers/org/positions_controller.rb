@@ -1,4 +1,4 @@
-class Org::PositionsController < ApplicationController
+class Org::PositionsController < Org::BaseController
   before_action :create_org_position, only: [:new, :create]
   before_action :set_org_position, only: [:show, :edit, :update, :destroy]
   before_action :set_parent_list, only: [:new, :create, :edit, :update]
@@ -49,7 +49,7 @@ class Org::PositionsController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "Organisatie", org_path
+      # add_breadcrumb "Organisatie", org_path
       unless @org_position.nil?
         if @org_position.new_record?
           add_breadcrumb 'Nieuw'

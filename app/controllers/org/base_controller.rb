@@ -1,6 +1,6 @@
 class Org::BaseController < ApplicationController
   add_breadcrumb "Home", "/"
-  before_action :admin_user
+  before_action :admin_user # TODO remove this, should be more open
   before_action :default_breadcrumb
 
   def index
