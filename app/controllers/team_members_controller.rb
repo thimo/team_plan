@@ -1,22 +1,15 @@
 class TeamMembersController < ApplicationController
   include SortHelper
 
-  # before_action :create_team_member, only: [:new, :create]
+  before_action :create_team_member, only: [:new, :create]
   before_action :set_team_member, only: [:show, :edit, :update, :destroy, :activate]
-  before_action :add_breadcrumbs, only: [:edit]
+  before_action :add_breadcrumbs, only: [:new, :edit]
 
   def show
     redirect_to @team_member.member
   end
 
-  def new
-    @team = Team.find(params[:team_id])
-
-    @team_member = @team.team_members.new
-    # @team_member.team = @team
-
-    authorize @team_member
-  end
+  def new; end
 
   def create
     if params[:age_group_id].present?
@@ -30,7 +23,12 @@ class TeamMembersController < ApplicationController
         @team_member.deactivate
       end
 
-      @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
+      if (@team_member = TeamMember.find_by(permitted_attributes(TeamMember.new).to_h)).present?
+        # Member already was in the team, but has previously been removed. Reset its status
+        @team_member.attributes = permitted_attributes(TeamMember.new).merge(role: :player, ended_on: nil, status: @team_member.team.status)
+      else
+        @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
+      end
       authorize @team_member
 
       if @team_member.save
@@ -50,11 +48,6 @@ class TeamMembersController < ApplicationController
         }
       end
     else
-      @team = Team.find(params[:team_id])
-      @team_member = TeamMember.new(permitted_attributes(TeamMember.new(team: @team)))
-      @team_member.team ||= @team
-      authorize @team_member
-
       # @team_member.initial_draft? does not seem to work here
       if @team_member.initial_status != 'initial_draft'
         # By default use team's status, otherwise use default 'status' value (draft)
@@ -108,18 +101,20 @@ class TeamMembersController < ApplicationController
 
   private
 
-    # def create_team_member
-    #   @team = Team.find(params[:team_id])
-    #
-    #   @team_member = if action_name == 'new'
-    #             @team.team_members.new
-    #           else
-    #             TeamMember.new(permitted_attributes(TeamMember.new))
-    #           end
-    #   @team_member.team = @team
-    #
-    #   authorize @team_member
-    # end
+    def create_team_member
+      return if params[:team_id].blank?
+
+      @team = Team.find(params[:team_id])
+
+      @team_member = if action_name == 'new'
+                       @team.team_members.new
+                     else
+                       TeamMember.new(permitted_attributes(TeamMember.new(team: @team)))
+                     end
+      @team_member.team ||= @team
+
+      authorize @team_member
+    end
 
     def set_team_member
       @team_member = TeamMember.find(params[:id])
