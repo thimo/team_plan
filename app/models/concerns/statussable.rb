@@ -34,6 +34,10 @@ module Statussable
     return color_class = 'label-light-grey' if archived?
   end
 
+  def to_archive
+    update(status: self.class.statuses[:archived]) unless self.archived?
+  end
+
   private
 
     def user_invoked_archivation?(old_status)
