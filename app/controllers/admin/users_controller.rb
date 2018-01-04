@@ -4,7 +4,7 @@ class Admin::UsersController < AdminController
   before_action :add_breadcrumbs
 
   def index
-    @users = policy_scope(User).asc.filter(params.slice(:role, :query))
+    @users = policy_scope(User).active.asc.filter(params.slice(:role, :query))
   end
 
   def new
@@ -50,8 +50,8 @@ class Admin::UsersController < AdminController
   end
 
   def destroy
+    @user.to_archive
     redirect_to admin_users_path, notice: 'Gebruiker is verwijderd.'
-    @user.destroy
   end
 
   def impersonate
