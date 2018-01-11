@@ -173,7 +173,7 @@ nl:
         member: Lid
     comment:
       comment_type:
-        generic: Algemeen
+        generic: Opmerkingen
         technique: Voetbal
         behaviour: Gedrag
         classification: Indeling

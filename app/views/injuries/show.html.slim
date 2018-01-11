@@ -10,22 +10,28 @@
         = link_to edit_injury_path(@injury), class: "btn btn-secondary", title: "Aanpassen"
           i.far.fa-pencil
 
-.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = @injury.title
-        | #{l @injury.started_on, format: :long}
-        - if @injury.ended_on.present?
-          |  - #{l @injury.ended_on, format: :long}
-        - else 
-          |  - ...
-              
-        .color-blue-grey-lighter.small
-          = "#{@injury.user.name}"
-          = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
-          
-  .box-typical-body
-    .comment-row-item.no-photo
-      = @injury.body.html_safe
+.row
+  .col-xl-6
+    .box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h4
+              = @injury.title
+            | #{l @injury.started_on, format: :long}
+            - if @injury.ended_on.present?
+              |  - #{l @injury.ended_on, format: :long}
+            - else
+              |  - ...
+
+            .color-blue-grey-lighter.small
+              = "#{@injury.user.name}"
+              = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
+
+      .box-typical-body
+        .comment-row-item.no-photo
+          = @injury.body.html_safe
+
+  .col-xl-6
+    - if policy(@injury).show_comments?
+      = render "comments/tabs", parent: @injury
