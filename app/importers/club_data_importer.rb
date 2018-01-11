@@ -29,6 +29,12 @@ module ClubDataImporter
     end
   end
 
+  def self.poules
+    poule_standings
+    poule_matches
+    poule_results
+  end
+
   def self.poule_standings
     ClubDataCompetition.active.each do |competition|
       begin
