@@ -8,6 +8,9 @@ class Org::PositionsController < Org::BaseController
     @org_positions = policy_scope(OrgPosition).active.arrange(order: :name)
   end
 
+  def show
+  end
+
   def new
   end
 

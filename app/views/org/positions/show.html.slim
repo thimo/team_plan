@@ -14,11 +14,14 @@ section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
-        h4 #{@org_position.position_type_i18n}
-        = @org_position.name
+        h4 #{@org_position.position_type_i18n} "#{@org_position.name}"
+
+        - if @org_position.remark.present?
+          p #{@org_position.remark}
 
         h4
           = @org_position.working_group? || @org_position.committee? ? "Leden" : "Persoon"
+          i.far.fa-plus-square.ml-2
         - @org_position.org_position_members.each do |member|
           div
             = member.member.name
