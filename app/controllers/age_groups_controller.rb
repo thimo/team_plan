@@ -15,13 +15,13 @@ class AgeGroupsController < ApplicationController
       @available_members = Kaminari.paginate_array(available_members).page(params[:member_page]).per(10)
     end
 
-    todos = policy_scope(@age_group.todos).open.asc.includes(:todoable)
+    todos = policy_scope(@age_group.todos).unfinished.asc.includes(:todoable)
     @todos_active = todos.active.to_a
     @todos_defered = todos.defered.to_a
-    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id)).open.asc.includes(:todoable)
+    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id)).unfinished.asc.includes(:todoable)
     @todos_active += todos.active
     @todos_defered += todos.defered
-    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_age_group(@age_group).map(&:id)).open.asc.includes(:todoable)
+    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_age_group(@age_group).map(&:id)).unfinished.asc.includes(:todoable)
     @todos_active += todos.active
     @todos_defered += todos.defered
 

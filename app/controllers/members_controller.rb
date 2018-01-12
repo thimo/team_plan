@@ -4,7 +4,7 @@ class MembersController < ApplicationController
 
   def show
     @team_members = policy_scope(@member.team_members).recent_first.includes_parents
-    @todos = policy_scope(@member.todos).open.asc
+    @todos = policy_scope(@member.todos).unfinished.asc
     @injuries = policy_scope(@member.injuries).desc.page(params[:injury_page]).per(3)
     @player_evaluations = policy_scope(@member.player_evaluations).finished_desc if policy(@member).show_evaluations?
   end

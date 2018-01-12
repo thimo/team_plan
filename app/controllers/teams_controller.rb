@@ -22,10 +22,10 @@ class TeamsController < ApplicationController
 
         @team_evaluations = policy_scope(@team.team_evaluations).desc
 
-        todos = policy_scope(@team.todos).open.includes(:todoable)
+        todos = policy_scope(@team.todos).unfinished.includes(:todoable)
         @todos_active = todos.active.to_a
         @todos_defered = todos.defered.to_a
-        todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_team(@team).map(&:id)).open.asc
+        todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_team(@team).map(&:id)).unfinished.asc
         @todos_active += todos.active
         @todos_defered += todos.defered
 
