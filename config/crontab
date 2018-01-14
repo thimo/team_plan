@@ -1,12 +1,12 @@
 # Teams and competitions - every friday at 20:00
-0   20   * * 5   root    dokku run svs.defrog.nl rails r ClubDataImporter.teams_and_competitions
+0   20   * * 5   root    dokku run svs.defrog.nl rails r ClubDataImporter.teams_and_competitions | mail -s "ClubDataImporter.teams_and_competitions" ${MAILTO}
 # Own results, every 15 minutes on saturday - otherwise every hour
-5    *   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.club_results
-*/15 *   * * 6   root    dokku run svs.defrog.nl rails r ClubDataImporter.club_results
+5    *   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.club_results | mail -s "ClubDataImporter.club_results" ${MAILTO}
+*/15 *   * * 6   root    dokku run svs.defrog.nl rails r ClubDataImporter.club_results | mail -s "ClubDataImporter.club_results" ${MAILTO}
 # Cancelations, every hour
-15    *   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.afgelastingen
+15    *   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.afgelastingen | mail -s "ClubDataImporter.afgelastingen" ${MAILTO}
 # Competitions, matches, standing, results - every hour on saturday, otherwise at 23:05,
-5   23   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.poules
-10  */1  * * 6   root    dokku run svs.defrog.nl rails r ClubDataImporter.poules
+5   23   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.poules | mail -s "ClubDataImporter.poules" ${MAILTO}
+10  */1  * * 6   root    dokku run svs.defrog.nl rails r ClubDataImporter.poules | mail -s "ClubDataImporter.poules" ${MAILTO}
 # Team member photos - every sunday at 22:15
-15  22   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.team_photos
+15  22   * * *   root    dokku run svs.defrog.nl rails r ClubDataImporter.team_photos | mail -s "ClubDataImporter.team_photos" ${MAILTO}
