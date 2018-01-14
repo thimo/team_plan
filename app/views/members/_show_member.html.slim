@@ -77,6 +77,11 @@ h4 Contactgegevens
         span.color-blue-grey
           = "KNVB-nummer: "
         = member.association_number
+    - if policy(Member).show_conduct? && member.conduct_number.present?
+      div
+        span.color-blue-grey
+          = "VOG-nummer: "
+        = member.conduct_number
     div
       span.color-blue-grey
         = "Lid sinds: "
