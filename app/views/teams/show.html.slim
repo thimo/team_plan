@@ -80,8 +80,7 @@ section.tabs-section
 - if @active_tab == 'team'
   .row
     .col-xl-6
-      - if @players&.any?
-        = render 'team_members'
+      = render 'team_members'
 
     .col-xl-6
       - if policy(@team).show_evaluations? && @team_evaluations.present?
