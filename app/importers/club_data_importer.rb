@@ -6,6 +6,7 @@ module ClubDataImporter
       %w[teamnaam spelsoort geslacht teamsoort leeftijdscategorie kalespelsoort speeldag speeldagteam].each do |field|
         club_data_team.write_attribute(field, data[field])
       end
+      ClubDataLog.create level: :info, source: :teams_and_competitions_import, body: "Team '#{club_data_team.teamnaam}' aangemaakt" if club_data_team.new_record?
       club_data_team.save
 
       club_data_team.link_to_team
@@ -15,10 +16,13 @@ module ClubDataImporter
         competition.write_attribute(field, data[field])
       end
       if competition.valid?
+        ClubDataLog.create level: :info, source: :teams_and_competitions_import, body: "Competitie '#{competition.competitiesoort} - #{competition.klasse}' aangemaakt voor '#{club_data_team.teamnaam}'" if competition.new_record?
         competition.save
         competition.club_data_teams << club_data_team unless competition.club_data_team_ids.include?(club_data_team.id)
       end
     end
+
+    ClubDataLog.create level: :info, source: :teams_and_competitions_import, body: "Finished"
   end
 
   def self.club_results
@@ -27,6 +31,8 @@ module ClubDataImporter
     json.each do |data|
       ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
     end
+
+    ClubDataLog.create level: :info, source: :club_results_import, body: "Finished"
   end
 
   def self.poules
@@ -49,6 +55,8 @@ module ClubDataImporter
         # TODO handle error, maybe de-activate competition
       end
     end
+
+    ClubDataLog.create level: :info, source: :poule_standings_import, body: "Finished"
   end
 
   def self.poule_matches
@@ -84,6 +92,8 @@ module ClubDataImporter
         # TODO handle error, maybe de-activate competition
       end
     end
+
+    ClubDataLog.create level: :info, source: :poule_matches_import, body: "Finished"
   end
 
   def self.poule_results
@@ -97,6 +107,8 @@ module ClubDataImporter
         # TODO handle error, maybe de-activate competition
       end
     end
+
+    ClubDataLog.create level: :info, source: :poule_results_import, body: "Finished"
   end
 
   def self.team_photos
@@ -112,6 +124,8 @@ module ClubDataImporter
         end
       end
     end
+
+    ClubDataLog.create level: :info, source: :team_photos_import, body: "Finished"
   end
 
   def self.add_address(match)
@@ -156,6 +170,8 @@ module ClubDataImporter
         )
       end
     end
+
+    ClubDataLog.create level: :info, source: :afgelastingen_import, body: "Finished"
   end
 
   private
