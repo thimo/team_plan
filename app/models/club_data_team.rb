@@ -10,7 +10,7 @@ class ClubDataTeam < ApplicationRecord
     if team.nil?
       stripped_teamname = teamnaam.gsub(Setting['club.name'], '').strip
 
-      team = Team.for_active_season.active.find_by(name: [teamnaam, stripped_teamnaam])
+      team = Team.for_active_season.active.find_by(name: [teamnaam, stripped_teamname])
       team ||= Team.for_active_season.active.where("teams.name like (?) OR teams.name like (?)", "#{teamnaam}%", "#{stripped_teamname}%").first
 
       if team&.no_club_data_link?
