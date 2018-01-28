@@ -8,10 +8,11 @@ class ClubDataTeam < ApplicationRecord
 
   def link_to_team
     if team.nil?
-      team = Team.for_active_season.find_by(name: teamnaam)
-      team ||= Team.for_active_season.where("teams.name like (?)", "#{teamnaam}%").first
       stripped_teamname = teamnaam.gsub(Setting['club.name'], '').strip
-      team ||= Team.for_active_season.where("teams.name like (?)", "#{stripped_teamname}%").first
+
+      team = Team.for_active_season.active.find_by(name: [teamnaam, stripped_teamnaam])
+      team ||= Team.for_active_season.active.where("teams.name like (?) OR teams.name like (?)", "#{teamnaam}%", "#{stripped_teamname}%").first
+
       if team&.no_club_data_link?
         team.club_data_team = self
         team.save
