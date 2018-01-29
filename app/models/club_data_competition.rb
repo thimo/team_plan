@@ -10,6 +10,5 @@ class ClubDataCompetition < ApplicationRecord
   scope :desc,    -> { order(created_at: :desc) }
   scope :regular, -> { where(competitiesoort: 'regulier') }
   scope :other,   -> { where.not(competitiesoort: 'regulier') }
-  scope :active,  -> { where(active: true) }
 
 end
