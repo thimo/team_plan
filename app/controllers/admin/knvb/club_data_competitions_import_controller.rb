@@ -1,4 +1,4 @@
-class Admin::ClubData::CompetitionsImportController < AdminController
+class Admin::Knvb::ClubDataCompetitionsImportController < AdminController
   def new
     authorize ClubDataCompetition
     ClubDataImporter.poules

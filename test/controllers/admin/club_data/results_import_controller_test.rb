@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::ClubData::ResultsImportControllerTest < ActionDispatch::IntegrationTest
+class Admin::Knvb::ClubDataResultsImportControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
