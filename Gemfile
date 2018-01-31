@@ -54,7 +54,7 @@ group :development, :test do
   # gem 'pry-byebug'
   gem 'scout_apm'
   gem 'guard'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'capybara'
   gem 'capybara-webkit'
 end

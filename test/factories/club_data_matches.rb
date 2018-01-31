@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :club_data_match do
     wedstrijddatum "2017-08-18 21:44:40"
     wedstrijdcode 1

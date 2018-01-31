@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :match do
     started_at "2017-08-09 17:29:45"
     remark "MyText"
