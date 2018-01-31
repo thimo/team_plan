@@ -51,8 +51,7 @@ section.tabs-section
     .col-xl-6
       h4 Trainingen
 
-      - if @trainings&.any?
-        = render "trainings/list", trainings: @trainings, team: @team
+      = render "trainings/list", trainings: @trainings, team: @team
 
       - if policy(@team).show_training_schedules?
         = render "training_schedules/list", team: @team, training_schedules: @training_schedules
