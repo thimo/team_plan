@@ -8,7 +8,7 @@ section.box-typical
           | #{@competitions.count} Competities
       - if policy(ClubDataCompetition).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_club_data_competitions_import_path, title: "Importeer competities", class: "action-btn"
+          = link_to new_admin_knvb_club_data_competitions_import_path, title: "Importeer competities", class: "action-btn"
             i.far.fa-sync
   .box-typical-body.table-responsive
     table.table.table-sm.tr-links
@@ -27,7 +27,7 @@ section.box-typical
             td
               = competition.klasse
             td
-              = link_to competition.competitienaam, admin_club_data_competition_path(competition)
+              = link_to competition.competitienaam, admin_knvb_club_data_competition_path(competition)
             td
               = competition.poulecode
             td

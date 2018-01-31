@@ -1,2 +1,2 @@
-module Admin::Knvb::ClubDataDashboardsHelper
+module Admin::Knvb::DashboardsHelper
 end
