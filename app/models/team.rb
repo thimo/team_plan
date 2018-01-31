@@ -50,7 +50,6 @@ class Team < ApplicationRecord
 
   def schedules(from:, up_to:)
     schedules = trainings.in_period(from, up_to).includes(:training_schedule, training_schedule: :soccer_field).to_a
-    schedules += matches.in_period(from, up_to).to_a
     schedules += club_data_matches.in_period(from, up_to).to_a
     schedules.flatten.sort_by(&:started_at)
   end
