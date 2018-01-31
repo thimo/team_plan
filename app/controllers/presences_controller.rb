@@ -21,8 +21,6 @@ class PresencesController < ApplicationController
          Training.find(params[:training_id])
        elsif params[:club_data_match_id]
          ClubDataMatch.find(params[:club_data_match_id])
-       elsif params[:match_id]
-         Match.find(params[:match_id])
        end
     end
 

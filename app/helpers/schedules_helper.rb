@@ -5,13 +5,6 @@ module SchedulesHelper
     case [object.class]
     when [ClubDataMatch]
       "#{object.thuisteam} - #{object.uitteam}".html_safe
-    when [Match]
-      teams = ["#{Setting['club.name_short']} #{object.team.name}", object.opponent]
-      if object.location_opponent?
-        teams.reverse * ' - '
-      else
-        teams * ' - '
-      end
     when [Training]
       "#{I18n.t object.model_name.singular}"
     end

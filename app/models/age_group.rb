@@ -7,7 +7,6 @@ class AgeGroup < ApplicationRecord
   has_many :members, through: :team_members
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :todos, as: :todoable, dependent: :destroy
-  has_many :matches, through: :teams
   has_many :club_data_matches, through: :teams
   has_paper_trail
 
@@ -18,6 +17,9 @@ class AgeGroup < ApplicationRecord
   scope :asc, -> {order(year_of_birth_to: :asc)}
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
 
+  PLAYER_COUNT = [6, 7, 8, 9, 11]
+  MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45]
+  
   def is_not_member(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
   end

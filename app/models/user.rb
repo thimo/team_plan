@@ -186,7 +186,7 @@ class User < ApplicationRecord
         team_id = team_members.pluck(:team_id).uniq
       when [PlayerEvaluation]
         team_id = record.team_evaluation.team_id
-      when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training], [Match]
+      when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
         team_id = record.team_id
       when [Comment]
         team_id = record.commentable_id if record.commentable_type == "Team"

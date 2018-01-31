@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116171941) do
+ActiveRecord::Schema.define(version: 20180131194902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,22 +196,6 @@ ActiveRecord::Schema.define(version: 20180116171941) do
     t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
-  create_table "matches", force: :cascade do |t|
-    t.boolean "active", default: true
-    t.datetime "started_at"
-    t.boolean "user_modified", default: false
-    t.text "body"
-    t.text "remark"
-    t.bigint "team_id"
-    t.string "opponent"
-    t.integer "goals_self", default: 0
-    t.integer "goals_opponent", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "location", default: 0
-    t.index ["team_id"], name: "index_matches_on_team_id"
-  end
-
   create_table "members", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
@@ -289,30 +273,6 @@ ActiveRecord::Schema.define(version: 20180116171941) do
     t.index ["member_id"], name: "index_notes_on_member_id"
     t.index ["team_id"], name: "index_notes_on_team_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
-  end
-
-  create_table "org_position_members", force: :cascade do |t|
-    t.bigint "org_position_id"
-    t.bigint "member_id"
-    t.string "name"
-    t.date "started_on"
-    t.date "ended_on"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_org_position_members_on_member_id"
-    t.index ["org_position_id"], name: "index_org_position_members_on_org_position_id"
-  end
-
-  create_table "org_positions", force: :cascade do |t|
-    t.string "name"
-    t.text "remark"
-    t.integer "position_type", default: 0
-    t.date "started_on"
-    t.date "ended_on"
-    t.string "ancestry"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ancestry"], name: "index_org_positions_on_ancestry"
   end
 
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
@@ -550,13 +510,10 @@ ActiveRecord::Schema.define(version: 20180116171941) do
   add_foreign_key "injuries", "members"
   add_foreign_key "injuries", "users"
   add_foreign_key "logs", "users"
-  add_foreign_key "matches", "teams"
   add_foreign_key "members", "users"
   add_foreign_key "notes", "members"
   add_foreign_key "notes", "teams"
   add_foreign_key "notes", "users"
-  add_foreign_key "org_position_members", "members"
-  add_foreign_key "org_position_members", "org_positions"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
   add_foreign_key "presences", "members"
