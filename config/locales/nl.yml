@@ -135,6 +135,8 @@ nl:
         players_per_team: Wedstrijdspelers per team
         minutes_per_half: Minuten per helft
         half_count: Aantal helften
+      club_data_competition:
+        competitienaam: Naam
 
   form:
     an_error:

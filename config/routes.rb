@@ -121,17 +121,18 @@ Rails.application.routes.draw do
       resources :version_updates
       resources :settings,
         :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
-      namespace :club_data do
+      namespace :knvb do
         resources :dashboards
-        resources :teams
-        resources :teams_import, only: [:new]
-        resources :team_photos_import, only: [:new]
-        resources :competitions
-        resources :competitions_import, only: [:new]
-        resources :matches
-        resources :results_import, only: [:new]
+        resources :club_data_teams
+        resources :club_data_teams_import, only: [:new]
+        resources :club_data_team_photos_import, only: [:new]
+        resources :club_data_competitions
+        resources :club_data_competitions_import, only: [:new]
+        resources :club_data_matches
+        resources :club_data_results_import, only: [:new]
       end
       resources :soccer_fields
+      resources :club_data_competitions
     end
   end
 
