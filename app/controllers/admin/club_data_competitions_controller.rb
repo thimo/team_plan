@@ -38,8 +38,7 @@ class Admin::ClubDataCompetitionsController < AdminController
       @competition = if action_name == 'new'
                        ClubDataCompetition.new
                      else
-                       debugger
-                       ClubDataCompetition.new(competition_params.merge(poulecode: ClubDataCompetition.new_custom_poulecode, user_modified: true))
+                       ClubDataCompetition.new(competition_params.merge(poulecode: ClubDataCompetition.new_custom_poulecode))
                      end
       authorize @competition
     end
@@ -50,7 +49,7 @@ class Admin::ClubDataCompetitionsController < AdminController
     end
 
     def competition_params
-      params.require(:club_data_competition).permit(:competitienaam)
+      params.require(:club_data_competition).permit(:competitienaam, :competitiesoort)
     end
 
     def add_breadcrumbs

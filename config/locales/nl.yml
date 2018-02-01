@@ -136,7 +136,8 @@ nl:
         minutes_per_half: Minuten per helft
         half_count: Aantal helften
       club_data_competition:
-        competitienaam: Naam
+        competitienaam: Competitie
+        competitiesoort: Soort
 
   form:
     an_error:
