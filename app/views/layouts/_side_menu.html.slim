@@ -15,7 +15,7 @@ nav.side-menu
 
   = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
   = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
-  = render 'layouts/side_menu_admin'    if [Admin, Admin::ClubData].include? controller.class.parent
+  = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
 
   section[style="flex-grow: 1;"]
 
