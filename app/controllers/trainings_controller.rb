@@ -12,8 +12,7 @@ class TrainingsController < ApplicationController
     end
   end
 
-  def new
-  end
+  def new; end
 
   def create
     if @training.save
@@ -41,6 +40,7 @@ class TrainingsController < ApplicationController
   end
 
   private
+
     def set_team
       @team = @training&.team || Team.find(params[:team_id])
     end
