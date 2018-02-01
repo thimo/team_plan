@@ -1,4 +1,4 @@
-class Admin::VersionUpdatesController < AdminController
+class Admin::VersionUpdatesController < Admin::BaseController
   before_action :create_version_update, only: [:new, :create]
   before_action :set_version_update, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumbs

@@ -1,4 +1,4 @@
-class Admin::Knvb::ClubDataResultsImportController < AdminController
+class Admin::Knvb::ClubDataResultsImportController < Admin::BaseController
   def new
     authorize ClubDataMatch
     ClubDataImporter.club_results

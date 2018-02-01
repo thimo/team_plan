@@ -1,4 +1,4 @@
-class Admin::Knvb::ClubDataTeamPhotosImportController < ApplicationController
+class Admin::Knvb::ClubDataTeamPhotosImportController < Admin::BaseController
   def new
     authorize ClubDataTeam
     ClubDataImporter.team_photos

@@ -1,4 +1,4 @@
-class Admin::MembersImportController < AdminController
+class Admin::MembersImportController < Admin::BaseController
   before_action :add_breadcrumbs
 
   def new

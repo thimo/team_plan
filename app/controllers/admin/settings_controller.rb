@@ -1,4 +1,4 @@
-class Admin::SettingsController < AdminController
+class Admin::SettingsController < Admin::BaseController
   before_action :get_setting, only: [:edit, :update]
 
   def index

@@ -1,4 +1,4 @@
-class Admin::Knvb::ClubDataCompetitionsController < AdminController
+class Admin::Knvb::ClubDataCompetitionsController < Admin::BaseController
   def index
     @competitions = policy_scope(ClubDataCompetition).active.includes(:clubdatacompetitions_club_data_teams, :club_data_teams).asc
   end

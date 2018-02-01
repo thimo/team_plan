@@ -1,4 +1,4 @@
-class Admin::SoccerFieldsController < ApplicationController
+class Admin::SoccerFieldsController < Admin::BaseController
   before_action :create_soccer_field, only: [:new, :create]
   before_action :set_soccer_field, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumbs
