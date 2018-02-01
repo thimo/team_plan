@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class Admin::BaseController < ApplicationController
   add_breadcrumb "Home", "/"
   before_action :admin_user
   before_action :default_breadcrumb

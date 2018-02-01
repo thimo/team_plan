@@ -3,13 +3,13 @@
 .row.member_allocations[data-scroll-position="member_allocations_index"]
   .col-lg-6#teams
     = render "teams"
-  
+
   .col-lg-6
     section.box-typical
       header.box-typical-header
         .tbl-row
           .tbl-cell.tbl-cell-title
-            h4 
+            h4
               | Beschikbare leden
               - if @available_members.size > 0
                 .label.label-one-number.ml-3
@@ -18,7 +18,7 @@
           .tbl-cell.color-blue-grey-lighter.text-right
             = year_of_birth_range(@age_group)
             = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
-            
+
       .box-typical-header
         .tbl-row
           .tbl-cell.pt-0
@@ -33,8 +33,8 @@
                 div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
                   = f.select :team, options_for_select(@teams_for_filter, @filter_team), { include_blank: true }, { class: "form-control", placeholder: "Filter op team", onchange: "$('#filter-button').click()" }
 
-      .box-typical-body
-        table.table.table-sm.table-responsive
+      .box-typical-body.table-responsive
+        table.table.table-sm
           thead
           tbody
             - @filtered_available_members.each do |team, members|

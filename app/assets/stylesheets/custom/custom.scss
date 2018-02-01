@@ -56,6 +56,14 @@ a:hover, a:hover:hover {
   width: 44px;
 }
 
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0;
+  padding-top: 80px;
+}
+
 // Highlight navigation
 .side-menu-list .active .lbl {
   color: black;
@@ -74,9 +82,6 @@ a:hover, a:hover:hover {
 }
 
 .supplier {
-  bottom: 0;
-  position: absolute;
-
   .side-menu-list {
     margin-bottom: 10px;
 
@@ -214,5 +219,23 @@ a:hover, a:hover:hover {
 @for $i from 1 through 20 {
   .width-#{$i * 5} {
     width: 5% * $i;
+  }
+}
+
+.top-nav {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: #eceff4;
+  padding: 6px;
+  border-bottom: solid 1px #c5d6de;
+
+  a {
+    color: #6b7a85;
+    padding: 6px;
+
+    &.active {
+      color: #0082c6;
+    }
   }
 }

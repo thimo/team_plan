@@ -106,7 +106,17 @@ Rails.application.routes.draw do
       end
     end
 
-    get 'admin' => 'admin#show'
+    get 'org' => 'org/base#show'
+    namespace :org do
+      resources :positions
+    end
+
+    get 'intranet' => 'intranet/base#show'
+    namespace :intranet do
+      resources :files
+    end
+
+    get 'admin' => 'admin/base#show'
     namespace :admin do
       resources :users, except: [:show], shallow: true do
         resources :email_logs, only: [:index, :show]

@@ -47,12 +47,13 @@ gem 'simple-password-gen'
 gem 'simple_calendar',            '~> 2.0'
 gem 'icalendar',                  '~> 2.4.1'
 gem 'bootsnap', require: false
+gem 'ancestry'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   # gem 'pry-rails'
   # gem 'pry-byebug'
-  gem 'scout_apm'
+  # gem 'scout_apm' # Disabled to improve loading without internet connction
   gem 'guard'
   gem 'factory_bot_rails'
   gem 'capybara'

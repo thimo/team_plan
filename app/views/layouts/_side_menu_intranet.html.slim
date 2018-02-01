@@ -1,0 +1,7 @@
+ul.side-menu-list
+  li class="#{'active' if current_page?(files_intranet_path)}"
+    = link_to files_intranet_path do
+      span
+        i.far.fa-fw.fa-files
+        span.lbl
+          | Bestanden

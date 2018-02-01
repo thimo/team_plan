@@ -1,4 +1,4 @@
-class Admin::MembersController < AdminController
+class Admin::MembersController < Admin::BaseController
   before_action :add_breadcrumbs
 
   def index

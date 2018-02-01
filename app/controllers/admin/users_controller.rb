@@ -1,4 +1,4 @@
-class Admin::UsersController < AdminController
+class Admin::UsersController < Admin::BaseController
   before_action :create_user, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :resend_password, :destroy, :impersonate]
   before_action :add_breadcrumbs

@@ -1,4 +1,4 @@
-class Admin::EmailLogsController < AdminController
+class Admin::EmailLogsController < Admin::BaseController
   add_breadcrumb "E-mail log", :admin_email_logs_path
 
   def index

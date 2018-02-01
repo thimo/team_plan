@@ -34,50 +34,6 @@ header.site-header
                     | Terug naar admin
 
         .site-header-shown
-          - if policy(:admin).show?
-            .dropdown.dropdown-typical.dropdown-right
-              a#dd-header-admin.dropdown-toggle[data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-                i.far.fa-cog.font-icon
-
-              .dropdown-menu[aria-labelledby="dd-header-admin"]
-                = link_to admin_members_path, class: 'dropdown-item' do
-                  i.far.fa-fw.fa-users.font-icon
-                  | Leden
-                = link_to admin_users_path, class: 'dropdown-item' do
-                  i.far.fa-fw.fa-user.font-icon
-                  | Gebruikers
-                = link_to admin_soccer_fields_path, class: 'dropdown-item' do
-                  i.far.fa-fw.fa-leaf.font-icon
-                  | Velden
-                = link_to admin_email_logs_path, class: 'dropdown-item' do
-                  i.far.fa-fw.fa-envelope.font-icon
-                  | E-mail log
-                = link_to admin_version_updates_path, class: 'dropdown-item' do
-                  i.far.fa-fw.fa-code-branch.font-icon
-                  | Versie updates
-                = link_to admin_settings_path, class: 'dropdown-item' do
-                  i.far.fa-fw.fa-sliders-h.font-icon
-                  | Instellingen
-                = link_to admin_club_data_competitions_path, class: 'dropdown-item' do
-                  i.far.fa-fw.fa-trophy.font-icon
-                  | Wedstrijdsoorten
-
-                - if policy(:club_data_dashboard).index?
-                  .dropdown-divider
-                  .dropdown-header
-                    | Club Data
-                  / = link_to admin_knvb_club_data_dashboards_path, class: 'dropdown-item' do
-                  /   i.far.fa-tachometer.font-icon
-                  /   | Dashboard
-                  = link_to admin_knvb_club_data_teams_path, class: 'dropdown-item' do
-                    i.far.fa-fw.fa-database.font-icon
-                    | Teams
-                  = link_to admin_knvb_club_data_competitions_path, class: 'dropdown-item' do
-                    i.far.fa-fw.fa-database.font-icon
-                    | Competities
-                  = link_to admin_knvb_club_data_matches_path, class: 'dropdown-item' do
-                    i.far.fa-fw.fa-database.font-icon
-                    | Wedstrijden
 
         .site-header-shown
           .site-header-search-container
@@ -87,10 +43,8 @@ header.site-header
                 i.far.fa-search
               .overlay
 
-
         / .mobile-menu-right-overlay
         / .site-header-collapsed
         /   .site-header-collapsed-in
-
 
 .mobile-menu-left-overlay

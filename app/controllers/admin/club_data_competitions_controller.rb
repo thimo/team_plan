@@ -1,4 +1,4 @@
-class Admin::ClubDataCompetitionsController < AdminController
+class Admin::ClubDataCompetitionsController < Admin::BaseController
   before_action :create_competition, only: [:new, :create]
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumbs

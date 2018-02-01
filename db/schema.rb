@@ -277,6 +277,30 @@ ActiveRecord::Schema.define(version: 20180131215914) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
+  create_table "org_position_members", force: :cascade do |t|
+    t.bigint "org_position_id"
+    t.bigint "member_id"
+    t.string "name"
+    t.date "started_on"
+    t.date "ended_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_org_position_members_on_member_id"
+    t.index ["org_position_id"], name: "index_org_position_members_on_org_position_id"
+  end
+
+  create_table "org_positions", force: :cascade do |t|
+    t.string "name"
+    t.text "remark"
+    t.integer "position_type", default: 0
+    t.date "started_on"
+    t.date "ended_on"
+    t.string "ancestry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_org_positions_on_ancestry"
+  end
+
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_evaluation_id"
     t.string "advise_next_season"
@@ -516,6 +540,8 @@ ActiveRecord::Schema.define(version: 20180131215914) do
   add_foreign_key "notes", "members"
   add_foreign_key "notes", "teams"
   add_foreign_key "notes", "users"
+  add_foreign_key "org_position_members", "members"
+  add_foreign_key "org_position_members", "org_positions"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
   add_foreign_key "presences", "members"
