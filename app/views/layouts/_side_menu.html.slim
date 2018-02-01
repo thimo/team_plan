@@ -1,5 +1,5 @@
 nav.side-menu
-  - if policy(:org).show? || policy(:files).show? || policy(:admin).show?
+  - if policy(:org).show? || policy(:intranet).show? || policy(:admin).show?
     section.top-nav
       = link_to dashboard_index_path, title: "Voetbal", class: "#{'active' if [Object].include? controller.class.parent}"
         i.far.fa-futbol.fa-lg
