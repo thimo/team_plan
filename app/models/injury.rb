@@ -1,6 +1,7 @@
 class Injury < ApplicationRecord
   belongs_to :user
   belongs_to :member
+  has_many :comments, as: :commentable, dependent: :destroy
   has_paper_trail
 
   after_save :update_member
@@ -10,6 +11,10 @@ class Injury < ApplicationRecord
 
   scope :desc, -> { order(created_at: :desc) }
   scope :active, -> { where(ended_on: nil) }
+
+  def comment_types
+    { 'generic' => 0 }
+  end
 
   private
 

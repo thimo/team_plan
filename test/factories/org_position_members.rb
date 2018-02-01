@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :org_position_member do
     org_position nil
     member nil

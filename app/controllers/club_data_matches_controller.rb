@@ -29,9 +29,9 @@ class ClubDataMatchesController < ApplicationController
       authorize @match
     end
 
-    def match_params
-      params.require(:match).permit(:opponent, :location, :body, :remark, :team_id, :started_at, :start_time)
-    end
+    # def match_params
+    #   params.require(:match).permit(:opponent, :location, :body, :remark, :team_id, :started_at, :start_time)
+    # end
 
     def add_breadcrumbs
       [@team || @match.teams].flatten.each do |team|

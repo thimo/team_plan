@@ -4,6 +4,8 @@ tr
   td
     - if policy(member).show_private_data?
       = link_to member.name, member
+      - if policy(member).show_conduct? && member.conduct_number.present?
+        i.far.fa-shield-check.green.ml-1[title="VOG-nummer geregistreerd"]
     - else
       = member.name
     - if policy(member).show_private_data?

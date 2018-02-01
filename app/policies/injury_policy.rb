@@ -9,9 +9,7 @@ class InjuryPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.admin? ||
-    @user.club_staff? ||
-    @user.is_team_staff_for?(@record.member)
+    club_or_team_staff?
   end
 
   def update?
@@ -24,9 +22,23 @@ class InjuryPolicy < ApplicationPolicy
     update?
   end
 
+  # Sections
+
+  def show_comments?
+    club_or_team_staff?
+  end
+
   class Scope < Scope
     def resolve
       scope
     end
   end
+
+  private
+
+    def club_or_team_staff?
+      @user.admin? ||
+      @user.club_staff? ||
+      @user.is_team_staff_for?(@record.member)
+    end
 end

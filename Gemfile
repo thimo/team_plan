@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.0'
+ruby '2.4.1'
 
 gem 'rails', '~> 5.1.0'
 gem 'pg', '~> 0.18'
@@ -55,7 +55,7 @@ group :development, :test do
   # gem 'pry-byebug'
   # gem 'scout_apm' # Disabled to improve loading without internet connction
   gem 'guard'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'capybara'
   gem 'capybara-webkit'
 end

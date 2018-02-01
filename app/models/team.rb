@@ -17,7 +17,6 @@ class Team < ApplicationRecord
   has_many :todos, as: :todoable, dependent: :destroy
   has_many :training_schedules, dependent: :destroy
   has_many :trainings, dependent: :destroy
-  has_many :matches, dependent: :destroy
   has_many :club_data_competitions, through: :club_data_team
   has_many :presences
   has_and_belongs_to_many :club_data_matches

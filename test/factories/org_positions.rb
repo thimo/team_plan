@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :org_position do
     name "MyString"
     remark "MyText"

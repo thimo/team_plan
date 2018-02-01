@@ -10,19 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery/dist/jquery.min.js
-//= require popper.js/dist/umd/popper.min.js
-//= require bootstrap/dist/js/bootstrap.min.js
-//= require select2/dist/js/select2.min.js
-//= require autosize/dist/autosize.min.js
-//= require notie/dist/notie.min.js
-//= require jquery-ujs/src/rails.js
-//= require selectize/dist/js/standalone/selectize.min.js
-//= require bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js
+//= require jquery/dist/jquery
+//= require popper.js/dist/umd/popper
+//= require bootstrap/dist/js/bootstrap
+//= require select2/dist/js/select2
+//= require autosize/dist/autosize
+//= require notie/dist/notie
+//= require jquery-ujs/src/rails
+//= require selectize/dist/js/standalone/selectize
+//= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //= require bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js
-//= require chart.js/dist/Chart.min.js
+//= require chart.js/dist/Chart
 //= require turbolinks
 //= require trix
-//= require fa-regular.js
-//= require fa-solid.js
-//= require fontawesome.min.js
+//= require fa-regular
+//= require fa-solid
+//= require fontawesome

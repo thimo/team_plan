@@ -21,6 +21,11 @@ class MemberPolicy < AdminPolicy
     @user.is_team_member_for?(@record)
   end
 
+  def show_conduct?
+    @user.admin? ||
+    @user.club_staff?
+  end
+
   def show_todos?
     show_private_data?
   end

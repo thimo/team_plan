@@ -52,22 +52,22 @@ class User < ApplicationRecord
 
   def teams
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids}).distinct
+    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).distinct
   end
 
   def active_teams
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct
+    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct
   end
 
   def teams_as_staff
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids}).where.not(team_members: {role: TeamMember.roles[:player]}).distinct.asc
+    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).distinct.asc
   end
 
   def teams_as_staff_in_season(season)
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids}).where.not(team_members: {role: TeamMember.roles[:player]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
+    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
   end
 
   def has_member?(member)
@@ -186,7 +186,7 @@ class User < ApplicationRecord
         team_id = team_members.pluck(:team_id).uniq
       when [PlayerEvaluation]
         team_id = record.team_evaluation.team_id
-      when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training], [Match]
+      when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
         team_id = record.team_id
       when [Comment]
         team_id = record.commentable_id if record.commentable_type == "Team"

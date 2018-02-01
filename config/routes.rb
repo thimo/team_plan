@@ -58,9 +58,6 @@ Rails.application.routes.draw do
           resources :trainings, shallow: true do
             resources :presences
           end
-          resources :matches, shallow: true do
-            resources :presences
-          end
           resources :club_data_matches, only: [:show], shallow: true do
             resources :presences
           end
@@ -89,7 +86,9 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
       resources :favorites, only: [:create, :destroy]
       resources :todos, only: [:new, :create]
-      resources :injuries, only: [:show, :new, :create, :edit, :update, :destroy]
+      resources :injuries, only: [:show, :new, :create, :edit, :update, :destroy] do
+        resources :comments, only: [:new, :create, :edit, :update, :destroy]
+      end
     end
     resources :users, only: [] do
       post :stop_impersonating, on: :collection
@@ -132,17 +131,18 @@ Rails.application.routes.draw do
       resources :version_updates
       resources :settings,
         :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
-      namespace :club_data do
+      namespace :knvb do
         resources :dashboards
-        resources :teams
-        resources :teams_import, only: [:new]
-        resources :team_photos_import, only: [:new]
-        resources :competitions
-        resources :competitions_import, only: [:new]
-        resources :matches
-        resources :results_import, only: [:new]
+        resources :club_data_teams
+        resources :club_data_teams_import, only: [:new]
+        resources :club_data_team_photos_import, only: [:new]
+        resources :club_data_competitions
+        resources :club_data_competitions_import, only: [:new]
+        resources :club_data_matches
+        resources :club_data_results_import, only: [:new]
       end
       resources :soccer_fields
+      resources :club_data_competitions
     end
   end
 

@@ -141,6 +141,9 @@ nl:
         position_type: Soort positie
         started_on: Begindatum
         ended_on: Einddatum
+      club_data_competition:
+        competitienaam: Competitie
+        competitiesoort: Soort
 
   form:
     an_error:
@@ -179,7 +182,7 @@ nl:
         member: Lid
     comment:
       comment_type:
-        generic: Algemeen
+        generic: Opmerkingen
         technique: Voetbal
         behaviour: Gedrag
         classification: Indeling

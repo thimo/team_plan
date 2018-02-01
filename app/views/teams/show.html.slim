@@ -51,8 +51,7 @@ section.tabs-section
     .col-xl-6
       h4 Trainingen
 
-      - if @trainings&.any?
-        = render "trainings/list", trainings: @trainings, team: @team
+      = render "trainings/list", trainings: @trainings, team: @team
 
       - if policy(@team).show_training_schedules?
         = render "training_schedules/list", team: @team, training_schedules: @training_schedules
@@ -80,13 +79,9 @@ section.tabs-section
 - if @active_tab == 'team'
   .row
     .col-xl-6
-      - if @players&.any?
-        = render 'team_members'
+      = render 'team_members'
 
     .col-xl-6
-      - if policy(@team).show_evaluations? && @team_evaluations.present?
-        = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
-
       - if policy(@team).show_todos?
         = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
 
@@ -106,6 +101,9 @@ section.tabs-section
   - if policy(@team).show_comments?
     #comments-tabs
       = render "comments/tabs", parent: @team
+
+  - if policy(@team).show_evaluations? && @team_evaluations.present?
+    = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
 
   - if policy(@team).show_notes?
     = render "notes/list", team: @team, notes: @notes

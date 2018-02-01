@@ -1,0 +1,42 @@
+- provide(:title, "Competitie #{@competition.club_data_teams.map{ |team| team.team&.name }.join(', ')} #{@competition.competitiesoort} - #{@competition.klasse}")
+- provide(:subtitle, "#{@competition.competitienaam}")
+
+.row
+  .col-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Wedstrijden
+
+      .box-typical-body.table-responsive
+        table.table.table-sm.tr-links
+          thead
+            tr
+              th
+              th Thuis
+              th
+              th Uit
+              th
+          tbody
+            - if @matches.any?
+              - @matches.each do |match|
+               tr[class="#{'strong' if match.eigenteam?}"]
+                td.nowrap
+                  = I18n.l match.wedstrijddatum, format: :date_short
+                td
+                  = match.thuisteam
+                td
+                  | -
+                td
+                  = match.uitteam
+                td.nowrap
+                  = match.uitslag
+            - else
+              tr
+                td[colspan="100"]
+                  i Geen wedstrijden gevonden
+
+  .col-6
+    = render "competitions/standing", competition: @competition, compact: true
