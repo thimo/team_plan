@@ -1,0 +1,46 @@
+- provide(:title, "Wedstrijden")
+
+
+.row
+  .col-md-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Uitslagen
+          - if policy(ClubDataMatch).create?
+            .tbl-cell.tbl-cell-action-bordered
+              = link_to new_admin_knvb_club_data_results_import_path, title: "Importeer uitslagen", class: "action-btn"
+                i.far.fa-sync
+      .box-typical-body.table-responsive
+        table.table.table-sm.tr-links.align-top
+          tbody
+            - @played_matches.each do |date, matches|
+              thead
+                tr
+                  th[colspan="100"]
+                    = "#{l date, format: :weekday} "
+                    = "#{l date, format: :date_long} "
+              - matches.each do |match|
+                tbody
+                  = render 'shared/match_list_teams', match: match
+
+  .col-md-6
+    section.box-typical
+      header.box-typical-header
+        .tbl-row
+          .tbl-cell.tbl-cell-title
+            h3
+              | Programma
+      .box-typical-body.table-responsive
+        table.table.table-sm.tr-links.align-top
+          - @not_played_matches.each do |date, matches|
+            thead
+              tr
+                th[colspan="100"]
+                  = "#{l date, format: :weekday} "
+                  = "#{l date, format: :date_long} "
+            tbody
+              - matches.each do |match|
+                = render 'shared/match_list_teams', match: match

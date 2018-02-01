@@ -1,0 +1,42 @@
+- provide(:title, "Teams")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@teams.count} Teams
+      - if policy(ClubDataTeam).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_knvb_club_data_teams_import_path, title: "Importeer teams", class: "action-btn"
+            i.far.fa-sync
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_knvb_club_data_team_photos_import_path, title: "Importeer pasfoto's", class: "action-btn"
+            i.far.fa-file-image
+
+  .box-typical-body.table-responsive
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th = ClubDataTeam.human_attribute_name(:teamnaam)
+          th = ClubDataTeam.human_attribute_name(:teamcode)
+          th = ClubDataTeam.human_attribute_name(:teamcode)
+          th = ClubDataTeam.human_attribute_name(:geslacht)
+          th = ClubDataTeam.human_attribute_name(:leeftijdscategorie)
+          th Team
+      tbody
+        - @teams.each do |team|
+          tr
+            td
+              = team.teamnaam
+            td
+              = team.teamcode
+            td
+              = team.geslacht
+            td
+              = team.leeftijdscategorie
+            td
+              = team.teamcode
+            td
+              - if team.team.present?
+                = link_to team.team.name, team.team
