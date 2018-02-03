@@ -1,17 +1,22 @@
 nav.side-menu
   - if policy(:org).show? || policy(:intranet).show? || policy(:admin).show?
     section.top-nav
-      = link_to dashboard_index_path, title: "Voetbal", class: "#{'active' if [Object].include? controller.class.parent}"
-        i.far.fa-futbol.fa-lg
-      - if policy(:org).show?
-        = link_to org_path, title: "Organisatie", class: "#{'active' if [Org].include? controller.class.parent}"
-          i.far.fa-sitemap.fa-lg
-      - if policy(:intranet).show?
-        = link_to intranet_path, title: "Intranet", class: "#{'active' if controller.class.parent == Intranet}"
-          i.far.fa-folder-open.fa-lg
-      - if policy(:admin).show?
-        = link_to admin_path, title: "Beheer", class: "#{'active' if [Admin, Admin::ClubData].include? controller.class.parent}"
-          i.far.fa-cog.fa-lg
+      ul.nav.nav-tabs
+        li.nav-item
+          = link_to dashboard_index_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
+            i.far.fa-futbol.fa-lg
+        - if policy(:org).show?
+          li.nav-item
+            = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
+              i.far.fa-sitemap.fa-lg
+        - if policy(:intranet).show?
+          li.nav-item
+            = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
+              i.far.fa-folder-open.fa-lg
+        - if policy(:admin).show?
+          li.nav-item
+            = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
+              i.far.fa-cog.fa-lg
 
   = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
   = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent

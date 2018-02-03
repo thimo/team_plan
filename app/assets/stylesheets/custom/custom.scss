@@ -224,18 +224,16 @@ a:hover, a:hover:hover {
 
 .top-nav {
   margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  background-color: #eceff4;
-  padding: 6px;
-  border-bottom: solid 1px #c5d6de;
+  background-color: #f6f8fa;
+  padding-top: 4px;
 
-  a {
-    color: #6b7a85;
-    padding: 6px;
-
-    &.active {
-      color: #0082c6;
+  ul.nav.nav-tabs {
+    padding-left: 4px;
+    .nav-link {
+      color: #8b9295;
+      &.active {
+        color: #495057;
+      }
     }
   }
 }
