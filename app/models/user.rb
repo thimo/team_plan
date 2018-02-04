@@ -167,6 +167,12 @@ class User < ApplicationRecord
     settings.update_attributes(active_comments_tab: tab) if tab.present?
   end
 
+  def self.deactivate_for_inactive_members
+    User.active.each do |user|
+      user.deactivate if user.members.none?
+    end
+  end
+
   private
 
     def team_id_for(record, as_team_staf = false)

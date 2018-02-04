@@ -1,6 +1,7 @@
 class Member < ApplicationRecord
   include Filterable
   include PgSearch
+  include Activatable
 
   mount_uploader :photo, PhotoUploader
 

@@ -25,6 +25,9 @@ class Admin::MembersImportController < Admin::BaseController
       # After an import with at least one member, cleanup members that were last imported 7 days ago
       if @import_result[:counters][:imported] > 0
         @cleanup_result = Member.cleanup(7.days.ago)
+
+        # Deactivate users with no matching members
+        User.deactivate_for_inactive_members
       end
 
     end
