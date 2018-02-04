@@ -47,7 +47,7 @@ class User < ApplicationRecord
   end
 
   def members
-    Member.where("lower(email) = ?", email.downcase)
+    Member.where("lower(email) = ?", email.downcase).sportlink_active
   end
 
   def teams
