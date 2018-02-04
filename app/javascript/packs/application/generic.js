@@ -48,7 +48,7 @@ $(document).on('turbolinks:before-cache', () => {
 })
 
 function initCommentTabs() {
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  $('#comments-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.ajax({
       dataType: 'script',
       type: "POST",
