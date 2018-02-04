@@ -1,8 +1,9 @@
 class ClubDataTeam < ApplicationRecord
   include Activatable
 
+  validates_presence_of :teamcode, :teamnaam
   validates_uniqueness_of :teamcode
-  
+
   has_one :team
   has_and_belongs_to_many :club_data_competitions
 
