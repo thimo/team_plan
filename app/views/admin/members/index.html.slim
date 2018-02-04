@@ -6,6 +6,14 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         h3
           | #{@members.count} Leden
+      .tbl-cell.float-right
+        - if params[:inactive]
+          = link_to admin_members_path, class: 'btn btn-link'
+            | Actieve leden
+        - else
+          = link_to admin_members_path(inactive: true), class: 'btn btn-link'
+            | Inactieve leden
+
       - if policy(Member).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_admin_members_import_path, title: "Importeer leden", class: "action-btn"
@@ -14,12 +22,12 @@ section.box-typical
     table.table.table-sm.tr-links
       thead
         tr
-          th = Member.human_attribute_name(:name) 
+          th = Member.human_attribute_name(:name)
           th = Member.human_attribute_name(:email)
       tbody
         - @members.each do |member|
           tr
             td
               = render 'members/member', member: member
-            td 
+            td
               = member.email
