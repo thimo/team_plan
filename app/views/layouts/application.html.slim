@@ -13,11 +13,8 @@ html
     = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
 
-    / / script[defer src="/assets/fa-brands.js"]
-    / / script[defer src="/assets/fa-light.js"]
-    / script[defer src="/assets/fa-regular.js"]
-    / script[defer src="/assets/fa-solid.js"]
-    / script[src="/assets/fontawesome.min.js"]
+    = javascript_include_tag 'application'
+    = javascript_pack_tag 'application'
 
   body.with-side-menu[class="#{yield(:body_class)}"]
     - unless Rails.env.production? || Rails.env.development?
@@ -45,13 +42,10 @@ html
           ol.breadcrumb.breadcrumb-simple
             = render_breadcrumbs :tag => :li, :separator => ""
 
-
         = content_for?(:content) ? yield(:content) : yield
 
         = render 'layouts/footer'
 
-    = javascript_include_tag 'application', 'data-turbolinks-eval': 'false'
-    = javascript_pack_tag 'application', 'data-turbolinks-eval': 'false'
     = render 'layouts/flash'
 
     / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'

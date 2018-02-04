@@ -1,4 +1,10 @@
 - if flash.present?
   - flash.each do |message_type, message|
     script
-      | $(function() {notie.alert(#{notie_type(message_type)}, '#{message}', 2)})
+      | $(function() {
+          notie.alert({
+            type: #{notie_type(message_type)},
+            text: '#{message}',
+            time: 2
+          })
+        })
