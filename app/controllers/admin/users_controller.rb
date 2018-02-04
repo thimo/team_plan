@@ -4,7 +4,8 @@ class Admin::UsersController < Admin::BaseController
   before_action :add_breadcrumbs
 
   def index
-    @users = policy_scope(User).active.asc.filter(params.slice(:role, :query))
+    @users = policy_scope(User).asc.filter(params.slice(:role, :query))
+    @users = params[:inactive] ? @users.archived : @users.active
   end
 
   def new
