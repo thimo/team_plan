@@ -5,12 +5,12 @@ class Admin::BaseController < ApplicationController
 
   def index
     authorize :admin
-    redirect_to admin_users_path
+    redirect_to admin_members_path
   end
 
   def show
     authorize :admin
-    redirect_to admin_users_path
+    redirect_to admin_members_path
   end
 
   private
