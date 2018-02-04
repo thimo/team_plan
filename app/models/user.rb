@@ -47,7 +47,7 @@ class User < ApplicationRecord
   end
 
   def members
-    Member.where("lower(email) = ?", email.downcase)
+    Member.where("lower(email) = ?", email.downcase).sportlink_active
   end
 
   def teams
@@ -165,6 +165,12 @@ class User < ApplicationRecord
 
   def set_active_comments_tab(tab)
     settings.update_attributes(active_comments_tab: tab) if tab.present?
+  end
+
+  def self.deactivate_for_inactive_members
+    User.active.each do |user|
+      user.deactivate if user.members.none?
+    end
   end
 
   private

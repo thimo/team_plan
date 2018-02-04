@@ -5343,6 +5343,16 @@ hr.margin-4 {
   background-color: #fb6067;
   border-color: #fb6067;
 }
+.btn.btn-link {
+  background-color: transparent;
+  border-color: transparent;
+  color: #0082c6;
+}
+.btn.btn-link:hover,
+.btn.btn-link:focus {
+  color: #0082c6;
+  border-color: #0082c6;
+}
 .btn.btn-default-outline,
 .btn.btn-primary-outline,
 .btn.btn-secondary-outline,

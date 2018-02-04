@@ -2,7 +2,8 @@ class Admin::MembersController < Admin::BaseController
   before_action :add_breadcrumbs
 
   def index
-    @members = policy_scope(Member).sportlink_active.asc.filter(params.slice(:query))
+    @members = policy_scope(Member).asc.filter(params.slice(:query))
+    @members = params[:inactive] ? @members.sportlink_inactive : @members.sportlink_active
   end
 
   private

@@ -38,6 +38,14 @@ module Statussable
     update(status: self.class.statuses[:archived]) unless self.archived?
   end
 
+  def deactivate
+    to_archive
+  end
+
+  def activate
+    update(status: :active) unless self.active?
+  end
+
   private
 
     def user_invoked_archivation?(old_status)

@@ -1,6 +1,7 @@
 class Member < ApplicationRecord
   include Filterable
   include PgSearch
+  include Activatable
 
   mount_uploader :photo, PhotoUploader
 
@@ -32,6 +33,7 @@ class Member < ApplicationRecord
   scope :from_year, -> (year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year) }
   scope :to_year, -> (year) { where("born_on <= ?", Time.zone.local(year).end_of_year) }
   scope :sportlink_active, -> { where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today)) }
+  scope :sportlink_inactive, -> { where.not(deregistered_at: nil).where("deregistered_at <= ?", Time.zone.today) }
   scope :sportlink_player, -> {
     where("sport_category <> ''").
     or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)).
