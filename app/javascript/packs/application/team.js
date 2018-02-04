@@ -40,5 +40,4 @@ function showChart(id, data) {
       },
     }
   });
-
 }
