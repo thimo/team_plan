@@ -13,6 +13,9 @@ html
     = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
 
+    = javascript_include_tag 'application'
+    = javascript_pack_tag 'application'
+
   body.with-side-menu[class="#{yield(:body_class)}"]
     - unless Rails.env.production? || Rails.env.development?
       div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
@@ -43,8 +46,6 @@ html
 
         = render 'layouts/footer'
 
-    = javascript_include_tag 'application', 'data-turbolinks-eval': 'false'
-    = javascript_pack_tag 'application', 'data-turbolinks-eval': 'false'
     = render 'layouts/flash'
 
     / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
