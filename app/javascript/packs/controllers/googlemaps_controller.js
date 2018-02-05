@@ -1,14 +1,15 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "iframe" ]
+  static targets = [ "iframe", "link" ]
 
   activateIframe(event) {
     event.preventDefault()
 
     let url = event.target.dataset.googleMapsUrl
     this.iframeTarget.src = url
-    $('.google-maps-iframe-link').removeClass('active')
-    event.target.classList.add('active')
+    this.linkTargets.forEach((el, i) => {
+      el.classList.toggle("active", el == event.target)
+    })
   }
 }

@@ -6,13 +6,13 @@ div[data-controller='googlemaps']
     li
       = link_to 'Sportcomplex', nil,
         class: "google-maps-iframe-link nav-link active",
-        data: { action: 'googlemaps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'place') }
+        data: { target: 'googlemaps.link', action: 'googlemaps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'place') }
     - if current_user.members.sportlink_active.first.present?
       li
         = link_to "Route vanuit huis", nil,
         class: "google-maps-iframe-link nav-link",
-        data: { action: 'googlemaps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'directions', user: current_user) }
+        data: { target: 'googlemaps.link', action: 'googlemaps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'directions', user: current_user) }
     li
       = link_to "Route vanuit #{Setting['club.name']}", nil,
         class: "google-maps-iframe-link nav-link",
-        data: { action: 'googlemaps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'directions') }
+        data: { target: 'googlemaps.link', action: 'googlemaps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'directions') }
