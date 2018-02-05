@@ -31,9 +31,9 @@ ul.side-menu-list
     li.aquamarine class="#{'active' if current_page?(season_path(season))}"
       = link_to season
         span
-          i.far.fa-fw.fa-calendar-alt
+          i.far.fa-fw.fa-users
           span.lbl
-            | Leeftijdsgroepen
+            | Teams
 
   - if (season = policy_scope(Season).draft.last).present?
     li.gold class="#{'active' if current_page?(season_path(season))}"
