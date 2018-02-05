@@ -22,7 +22,7 @@
         = select_tag :players, options_from_collection_for_select(@members.sportlink_active.sportlink_player, :id, :name_and_born_on),
           multiple: true,
           class: 'form-control select2-hidden-accessible',
-          id: 'team_member_players'
+          data: { controller: 'team-member-multiple-select2' }
 
     .form-group.row
       label.col-sm-2.col-form-label Coaches
@@ -30,7 +30,7 @@
         = select_tag :coaches, active_members_as_options,
           multiple: true,
           class: 'form-control select2-hidden-accessible',
-            id: 'team_member_coaches'
+          data: { controller: 'team-member-multiple-select2' }
 
     .form-group.row
       label.col-sm-2.col-form-label Trainers
@@ -38,7 +38,7 @@
         = select_tag :trainers, active_members_as_options,
           multiple: true,
           class: 'form-control select2-hidden-accessible',
-          id: 'team_member_trainers'
+          data: { controller: 'team-member-multiple-select2' }
 
     = submit_tag "Toevoegen", class: "btn btn-primary btn-inline"
     = link_to "Annuleren", @team, class: 'btn btn-secondary-outline btn-inline'
