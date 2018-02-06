@@ -58,7 +58,7 @@ Rails.application.routes.draw do
           resources :trainings, shallow: true do
             resources :presences
           end
-          resources :club_data_matches, shallow: true do
+          resources :matches, shallow: true do
             resources :presences
           end
           resources :schedules
@@ -100,7 +100,7 @@ Rails.application.routes.draw do
       end
     end
     resources :competitions, only: [:show]
-    resources :club_data_matches
+    resources :matches
     resources :comments, only: []  do
       collection do
         post :set_active_tab
@@ -139,7 +139,7 @@ Rails.application.routes.draw do
         resources :club_data_team_photos_import, only: [:new]
         resources :club_data_competitions
         resources :club_data_competitions_import, only: [:new]
-        resources :club_data_matches
+        resources :matches
         resources :club_data_results_import, only: [:new]
       end
       resources :soccer_fields
