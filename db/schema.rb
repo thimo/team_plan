@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206212645) do
+ActiveRecord::Schema.define(version: 20180206214340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 20180206212645) do
     t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
   end
 
+  create_table "club_data_teams_competitions", id: false, force: :cascade do |t|
+    t.bigint "competition_id", null: false
+    t.bigint "club_data_team_id", null: false
+    t.index ["club_data_team_id", "competition_id"], name: "team_competition", unique: true
+    t.index ["competition_id", "club_data_team_id"], name: "competition_team", unique: true
+  end
+
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "body"
     t.integer "user_id"
@@ -86,13 +93,6 @@ ActiveRecord::Schema.define(version: 20180206212645) do
     t.text "remark"
     t.boolean "user_modified", default: false
     t.index ["poulecode"], name: "index_competitions_on_poulecode", unique: true
-  end
-
-  create_table "competitions_teams", id: false, force: :cascade do |t|
-    t.bigint "competition_id", null: false
-    t.bigint "club_data_team_id", null: false
-    t.index ["club_data_team_id", "competition_id"], name: "team_competition", unique: true
-    t.index ["competition_id", "club_data_team_id"], name: "competition_team", unique: true
   end
 
   create_table "email_logs", force: :cascade do |t|
