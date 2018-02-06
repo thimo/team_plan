@@ -3,6 +3,6 @@ class Admin::Knvb::ClubDataResultsImportController < Admin::BaseController
     authorize Match
     ClubDataImporter.club_results
     ClubDataImporter.afgelastingen
-    redirect_to admin_knvb_club_data_matches_path
+    redirect_to admin_knvb_matches_path
   end
 end

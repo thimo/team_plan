@@ -75,10 +75,10 @@ module ClubDataImporter
           match.save
 
           if match.eigenteam?
-            add_team_to_match(match, club_data_match.thuisteamid)
-            add_team_to_match(match, club_data_match.uitteamid)
+            add_team_to_match(match, match.thuisteamid)
+            add_team_to_match(match, match.uitteamid)
 
-            add_address(match) if club_data_match.adres.blank?
+            add_address(match) if match.adres.blank?
           end
 
           imported_wedstrijdnummers << match.wedstrijdnummer

@@ -6,6 +6,6 @@ class Admin::Knvb::ClubDataCompetitionsController < Admin::BaseController
   def show
     @competition = ClubDataCompetition.find(params[:id])
     authorize @competition
-    @matches = @competition.club_data_matches.asc
+    @matches = @competition.matches.asc
   end
 end
