@@ -75,6 +75,7 @@ group :development do
   gem 'rack-livereload'
   gem 'rb-fsevent'
   gem 'terminal-notifier-guard'
+  gem 'rails-erd', require: false
 end
 
 group :test do
