@@ -12,8 +12,8 @@ class TeamsController < ApplicationController
 
     case @active_tab
       when 'competitions'
-        @competitions_regular = @team.club_data_competitions.desc.active.regular
-        @competitions_other = @team.club_data_competitions.desc.active.other
+        @competitions_regular = @team.competitions.desc.active.regular
+        @competitions_other = @team.competitions.desc.active.other
 
       when 'team'
         @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions).not_ended)

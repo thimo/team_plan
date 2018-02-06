@@ -1,7 +1,7 @@
-class Admin::Knvb::ClubDataCompetitionsImportController < Admin::BaseController
+class Admin::Knvb::CompetitionsImportController < Admin::BaseController
   def new
-    authorize ClubDataCompetition
+    authorize Competition
     ClubDataImporter.poules
-    redirect_to admin_knvb_club_data_competitions_path
+    redirect_to admin_knvb_competitions_path
   end
 end

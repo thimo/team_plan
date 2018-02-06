@@ -11,7 +11,7 @@ module ClubDataImporter
 
       club_data_team.link_to_team
 
-      competition = ClubDataCompetition.find_or_initialize_by(poulecode: data['poulecode'])
+      competition = Competition.find_or_initialize_by(poulecode: data['poulecode'])
       %w[competitienaam klasse poule klassepoule competitiesoort].each do |field|
         competition.write_attribute(field, data[field])
       end
@@ -42,7 +42,7 @@ module ClubDataImporter
   end
 
   def self.poule_standings
-    ClubDataCompetition.active.each do |competition|
+    Competition.active.each do |competition|
       begin
         # Fetch ranking
         json = JSON.load(open("#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
@@ -60,7 +60,7 @@ module ClubDataImporter
   end
 
   def self.poule_matches
-    ClubDataCompetition.active.each do |competition|
+    Competition.active.each do |competition|
       begin
         imported_wedstrijdnummers = []
 
@@ -71,7 +71,7 @@ module ClubDataImporter
           %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
             match.write_attribute(field, data[field])
           end
-          match.club_data_competition = competition
+          match.competition = competition
           match.save
 
           if match.eigenteam?
@@ -97,7 +97,7 @@ module ClubDataImporter
   end
 
   def self.poule_results
-    ClubDataCompetition.active.each do |competition|
+    Competition.active.each do |competition|
       begin
         json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
         json.each do |data|

@@ -1,4 +1,4 @@
-class ClubDataCompetition < ApplicationRecord
+class Competition < ApplicationRecord
   include Activatable
 
   validates_presence_of :poulecode, :competitienaam

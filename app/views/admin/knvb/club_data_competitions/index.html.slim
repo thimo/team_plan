@@ -6,18 +6,18 @@ section.box-typical
       .tbl-cell.tbl-cell-title
         h3
           | #{@competitions.count} Competities
-      - if policy(ClubDataCompetition).create?
+      - if policy(Competition).create?
         .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_knvb_club_data_competitions_import_path, title: "Importeer competities", class: "action-btn"
+          = link_to new_admin_knvb_competitions_import_path, title: "Importeer competities", class: "action-btn"
             i.far.fa-sync
   .box-typical-body.table-responsive
     table.table.table-sm.tr-links
       thead
         tr
-          th = ClubDataCompetition.human_attribute_name(:competitiesoort)
-          th = ClubDataCompetition.human_attribute_name(:klasse)
-          th = ClubDataCompetition.human_attribute_name(:competitienaam)
-          th = ClubDataCompetition.human_attribute_name(:poulecode)
+          th = Competition.human_attribute_name(:competitiesoort)
+          th = Competition.human_attribute_name(:klasse)
+          th = Competition.human_attribute_name(:competitienaam)
+          th = Competition.human_attribute_name(:poulecode)
           th Team
       tbody
         - @competitions.each do |competition|
@@ -27,7 +27,7 @@ section.box-typical
             td
               = competition.klasse
             td
-              = link_to competition.competitienaam, admin_knvb_club_data_competition_path(competition)
+              = link_to competition.competitienaam, admin_knvb_competition_path(competition)
             td
               = competition.poulecode
             td

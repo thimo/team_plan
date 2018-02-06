@@ -141,7 +141,7 @@ nl:
         position_type: Soort positie
         started_on: Begindatum
         ended_on: Einddatum
-      club_data_competition:
+      competition:
         competitienaam: Competitie
         competitiesoort: Soort
 

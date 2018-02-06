@@ -10,7 +10,7 @@ class CompetitionsController < ApplicationController
   private
 
     def set_competition
-      @competition = ClubDataCompetition.find(params[:id])
+      @competition = Competition.find(params[:id])
       authorize @competition
     end
 

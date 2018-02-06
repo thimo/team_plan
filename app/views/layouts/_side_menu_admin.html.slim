@@ -35,8 +35,8 @@ ul.side-menu-list
         i.far.fa-fw.fa-sliders-h
         span.lbl
           | Instellingen
-  li class="#{'active' if controller.class == Admin::ClubDataCompetitionsController}"
-    = link_to admin_club_data_competitions_path do
+  li class="#{'active' if controller.class == Admin::CompetitionsController}"
+    = link_to admin_competitions_path do
       span
         i.far.fa-fw.fa-trophy
         span.lbl
@@ -56,8 +56,8 @@ ul.side-menu-list
           i.far.fa-fw.fa-database
           span.lbl
             | Teams
-    li class="#{'active' if controller.class == Admin::Knvb::ClubDataCompetitionsController}"
-      = link_to admin_knvb_club_data_competitions_path do
+    li class="#{'active' if controller.class == Admin::Knvb::CompetitionsController}"
+      = link_to admin_knvb_competitions_path do
         span
           i.far.fa-fw.fa-database
           span.lbl
