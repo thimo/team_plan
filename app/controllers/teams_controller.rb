@@ -35,8 +35,8 @@ class TeamsController < ApplicationController
       when 'statistics'
         team_presence_graphs
       else # 'schedule'
-        @not_played_matches = @team.club_data_matches.not_played.in_period(0.days.ago.beginning_of_day, 3.weeks.from_now.beginning_of_day).asc
-        @played_matches = @team.club_data_matches.played.in_period(3.week.ago.end_of_day, 0.days.from_now.end_of_day).desc
+        @not_played_matches = @team.matches.not_played.in_period(0.days.ago.beginning_of_day, 3.weeks.from_now.beginning_of_day).asc
+        @played_matches = @team.matches.played.in_period(3.week.ago.end_of_day, 0.days.from_now.end_of_day).desc
 
         @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
         @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 2.weeks.from_now.beginning_of_day).asc

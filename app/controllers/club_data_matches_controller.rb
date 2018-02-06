@@ -25,7 +25,7 @@ class MatchesController < ApplicationController
   end
 
   def edit
-    @latest_matches = policy_scope(@match.team.club_data_matches).in_period(2.weeks.ago, 0.days.ago).desc.active
+    @latest_matches = policy_scope(@match.team.matches).in_period(2.weeks.ago, 0.days.ago).desc.active
   end
 
   def update
@@ -57,7 +57,7 @@ class MatchesController < ApplicationController
     def create_match
       @match = if action_name == 'new'
                  # TODO add defaults
-                 # @team.club_data_matches.new()
+                 # @team.matches.new()
                  Match.new
                else
                  Match.new(match_params.merge(user_modified: true))

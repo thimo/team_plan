@@ -5,7 +5,7 @@ class ClubDataCompetition < ApplicationRecord
   validates_uniqueness_of :poulecode
 
   has_and_belongs_to_many :club_data_teams
-  has_many :club_data_matches
+  has_many :matches
 
   scope :asc,     -> { order(:created_at) }
   scope :desc,    -> { order(created_at: :desc) }

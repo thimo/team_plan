@@ -67,25 +67,25 @@ module ClubDataImporter
         # Fetch upcoming matches
         json = JSON.load(open("#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
         json.each do |data|
-          club_data_match = Match.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
+          match = Match.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
           %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
-            club_data_match.write_attribute(field, data[field])
+            match.write_attribute(field, data[field])
           end
-          club_data_match.club_data_competition = competition
-          club_data_match.save
+          match.club_data_competition = competition
+          match.save
 
-          if club_data_match.eigenteam?
-            add_team_to_match(club_data_match, club_data_match.thuisteamid)
-            add_team_to_match(club_data_match, club_data_match.uitteamid)
+          if match.eigenteam?
+            add_team_to_match(match, club_data_match.thuisteamid)
+            add_team_to_match(match, club_data_match.uitteamid)
 
-            add_address(club_data_match) if club_data_match.adres.blank?
+            add_address(match) if club_data_match.adres.blank?
           end
 
-          imported_wedstrijdnummers << club_data_match.wedstrijdnummer
+          imported_wedstrijdnummers << match.wedstrijdnummer
         end
 
         # Cleanup matches that were not included in the import
-        competition.club_data_matches.not_played.from_now.each do |match|
+        competition.matches.not_played.from_now.each do |match|
           match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
         end
       rescue OpenURI::HTTPError

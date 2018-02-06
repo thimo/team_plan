@@ -19,8 +19,8 @@ class PresencesController < ApplicationController
     def set_parent
       @parent = if params[:training_id]
          Training.find(params[:training_id])
-       elsif params[:club_data_match_id]
-         Match.find(params[:club_data_match_id])
+       elsif params[:match_id]
+         Match.find(params[:match_id])
        end
     end
 

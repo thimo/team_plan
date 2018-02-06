@@ -99,7 +99,7 @@ class TeamPolicy < ApplicationPolicy
     @user.admin?
   end
 
-  def create_club_data_match?
+  def create_match?
     return false if @record.archived?
 
     club_or_team_staff?
