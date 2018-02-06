@@ -100,6 +100,7 @@ Rails.application.routes.draw do
       end
     end
     resources :competitions, only: [:show]
+    resources :club_data_matches
     resources :comments, only: []  do
       collection do
         post :set_active_tab

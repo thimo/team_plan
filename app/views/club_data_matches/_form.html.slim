@@ -1,0 +1,15 @@
+= simple_form_for @match, {wrapper: :horizontal_form} do |f|
+  = f.error_notification
+  - f.object.errors.each do |error|
+    div
+      = error
+
+  = render 'input/datepicker', f: f, field: :started_at
+  = f.input :start_time, as: :time, minute_step: 5, wrapper: :time
+
+  = f.input :remark
+
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@match).destroy?
+    = link_to "Verwijderen", training_path(@match), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

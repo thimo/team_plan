@@ -1,8 +1,8 @@
 class ClubDataMatchesController < ApplicationController
   include SchedulesHelper
 
-  before_action :set_team, only: [:new, :create]
-  before_action :create_team, only: [:new, :create]
+  # before_action :set_team, only: [:new, :create]
+  before_action :create_match, only: [:new, :create]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
   before_action :set_team_for_show, only: [:show]
   before_action :add_breadcrumbs, only: [:show, :new, :edit]
@@ -43,11 +43,11 @@ class ClubDataMatchesController < ApplicationController
 
   private
 
-    def set_team
-      # TODO This line is inherited from TrainingsController, but first part should not work
-      # @team = @match&.team || Team.find(params[:team_id])
-      @team = Team.find(params[:team_id])
-    end
+    # def set_team
+    #   # TODO This line is inherited from TrainingsController, but first part should not work
+    #   # @team = @match&.team || Team.find(params[:team_id])
+    #   @team = Team.find(params[:team_id])
+    # end
 
     def set_team_for_show
       @team = Team.find(params[:team]) if params[:team]
@@ -57,11 +57,12 @@ class ClubDataMatchesController < ApplicationController
     def create_match
       @match = if action_name == 'new'
                  # TODO add defaults
-                 @team.club_data_matches.new()
+                 # @team.club_data_matches.new()
+                 ClubDataMatch.new
                else
-                 Training.new(match_params.merge(user_modified: true))
+                 ClubDataMatch.new(match_params.merge(user_modified: true))
                end
-      @match.team = @team
+      # @match.team = @team
 
       authorize @match
     end
