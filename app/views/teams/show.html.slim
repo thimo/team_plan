@@ -129,7 +129,7 @@ section.tabs-section
         canvas#matchChart.presenceChart
 
 
-    = render 'presence_table', team: @team, presentable_class: ClubDataMatch
+    = render 'presence_table', team: @team, presentable_class: Match
 
     - if @training_presences_data&.any? && @match_presences_data&.any?
       script

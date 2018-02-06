@@ -1,2 +1,2 @@
-module Admin::Knvb::ClubDataMatchesHelper
+module Admin::Knvb::MatchesHelper
 end
