@@ -1,2 +1,2 @@
-module ClubDataMatchesHelper
+module MatchesHelper
 end

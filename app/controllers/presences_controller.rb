@@ -20,7 +20,7 @@ class PresencesController < ApplicationController
       @parent = if params[:training_id]
          Training.find(params[:training_id])
        elsif params[:club_data_match_id]
-         ClubDataMatch.find(params[:club_data_match_id])
+         Match.find(params[:club_data_match_id])
        end
     end
 

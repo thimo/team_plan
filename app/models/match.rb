@@ -1,4 +1,4 @@
-class ClubDataMatch < ApplicationRecord
+class Match < ApplicationRecord
   include Presentable
 
   validates_presence_of :wedstrijdcode, :wedstrijddatum, :thuisteam, :uitteam

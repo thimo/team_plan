@@ -29,7 +29,7 @@ module ClubDataImporter
     # Regular import of all club matches
     json = JSON.load(open("#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"))
     json.each do |data|
-      ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
+      Match.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
     end
 
     ClubDataLog.create level: :info, source: :club_results_import, body: "Finished"
@@ -67,7 +67,7 @@ module ClubDataImporter
         # Fetch upcoming matches
         json = JSON.load(open("#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
         json.each do |data|
-          club_data_match = ClubDataMatch.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
+          club_data_match = Match.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
           %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
             club_data_match.write_attribute(field, data[field])
           end
@@ -101,7 +101,7 @@ module ClubDataImporter
       begin
         json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
         json.each do |data|
-          ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
+          Match.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
         end
       rescue OpenURI::HTTPError
         # TODO handle error, maybe de-activate competition
@@ -152,7 +152,7 @@ module ClubDataImporter
     json = JSON.load(open("#{Setting['clubdata.urls.afgelastingen']}&client_id=#{Setting['clubdata.client_id']}"))
     cancelled_matches = []
     json.each do |data|
-      if (match = ClubDataMatch.find_by(wedstrijdcode: data['wedstrijdcode'])).present?
+      if (match = Match.find_by(wedstrijdcode: data['wedstrijdcode'])).present?
         match.update(
           afgelast: true,
           afgelast_status: data['status']
@@ -162,7 +162,7 @@ module ClubDataImporter
       end
     end
 
-    ClubDataMatch.afgelast.each do |match|
+    Match.afgelast.each do |match|
       unless cancelled_matches.include? match.wedstrijdcode
         match.update(
           afgelast: false,

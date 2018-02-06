@@ -1,4 +1,4 @@
-class ClubDataMatchesController < ApplicationController
+class MatchesController < ApplicationController
   include SchedulesHelper
 
   # before_action :set_team, only: [:new, :create]
@@ -58,9 +58,9 @@ class ClubDataMatchesController < ApplicationController
       @match = if action_name == 'new'
                  # TODO add defaults
                  # @team.club_data_matches.new()
-                 ClubDataMatch.new
+                 Match.new
                else
-                 ClubDataMatch.new(match_params.merge(user_modified: true))
+                 Match.new(match_params.merge(user_modified: true))
                end
       # @match.team = @team
 
@@ -68,7 +68,7 @@ class ClubDataMatchesController < ApplicationController
     end
 
     def set_match
-      @match = ClubDataMatch.find(params[:id])
+      @match = Match.find(params[:id])
       authorize @match
     end
 
