@@ -1,6 +1,9 @@
 class ClubDataMatch < ApplicationRecord
   include Presentable
 
+  validates_presence_of :wedstrijdcode, :wedstrijddatum, :thuisteam, :uitteam
+  validates_uniqueness_of :wedstrijdcode
+
   belongs_to :club_data_competition
   has_and_belongs_to_many :teams
 

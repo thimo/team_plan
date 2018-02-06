@@ -13,8 +13,9 @@ class MembersController < ApplicationController
   end
 
   def create_login
-    @user = User.new
+    @user = User.find_or_create_by(email: @member.email)
     @user.prefill(@member)
+    @user.status = :active
     generated_password = @user.set_new_password
     @user.skip_confirmation!
 
