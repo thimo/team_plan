@@ -19,6 +19,8 @@ TeamPlan provides the following functionality:
 - personal todo's, notes
 - user friendly, responsive design, fully compatible with phone
 
+![TeamPlan screenshot](https://user-images.githubusercontent.com/781488/35942258-4fbd2a96-0c55-11e8-8a4d-c3b2be91105b.png)
+
 Contact Thimo Jansen <thimo@defrog.nl>
 
 # Open Source warning
