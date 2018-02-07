@@ -58,9 +58,9 @@ class MatchesController < ApplicationController
       @match = if action_name == 'new'
                  # TODO add defaults
                  # @team.matches.new()
-                 Match.new
+                 Match.new(wedstrijddatum: Match.new_match_datetime)
                else
-                 Match.new(match_params.merge(user_modified: true))
+                 Match.new(match_params.merge(user_modified: true, wedstrijdcode: Match.new_custom_wedstrijdcode))
                end
       # @match.team = @team
 
@@ -73,7 +73,7 @@ class MatchesController < ApplicationController
     end
 
     def match_params
-      params.require(:match).permit(:competition_id, :wedstrijddatum, :thuisteam, :uitteam, :uitslag, :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
+      params.require(:match).permit(:competition_id, :wedstrijddatum, :wedstrijdtijd, :thuisteam, :uitteam, :uitslag, :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
       # Automatisch
       # wedstrijd (string, team - team)
       # wedstrijdcode, negatief, zoals bij competitie

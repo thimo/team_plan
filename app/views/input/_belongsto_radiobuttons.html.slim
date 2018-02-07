@@ -1,0 +1,10 @@
+.form-group.row class="#{'has-error' if has_error(f.object, field)} #{(row_class ||= '')}"
+  .col-form-legend.col-sm-3
+    = f.label field
+  .col-md-9
+    = f.hidden_field field, value: ''
+    - collection.each do |item|
+      .radio
+        = f.radio_button field, item.id, { checked: f.object.send(field) == item, class: 'form-check-input', id: "#{field.to_s}_#{item.id}" }
+        label[for="#{field.to_s}_#{item.id}"]
+          = item.name

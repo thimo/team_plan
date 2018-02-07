@@ -7,7 +7,7 @@ class Match < ApplicationRecord
   belongs_to :competition
   has_and_belongs_to_many :teams
 
-  attr_accessor :start_time, :end_time
+  attr_accessor :wedstrijdtijd #, :end_time
 
   scope :asc,           -> { order(:wedstrijddatum) }
   scope :desc,          -> { order(wedstrijddatum: :desc) }
@@ -28,6 +28,7 @@ class Match < ApplicationRecord
   end
 
   def ended_at
+    # Fixed time for ical calendar
     wedstrijddatum + 2.hours
   end
 
@@ -66,19 +67,28 @@ class Match < ApplicationRecord
   end
 
   # Accessors for time aspects of start and end dates
-  def start_time
-    started_at.to_time if started_at.present?
+  def wedstrijdtijd
+    wedstrijddatum.to_time if wedstrijddatum.present?
   end
 
-  def start_time=(time)
-    self.started_at = started_at.change(hour: time[4], min: time[5]) unless started_at.nil?
+  def wedstrijdtijd=(time)
+    self.wedstrijddatum = wedstrijddatum.change(hour: time[4], min: time[5]) unless wedstrijddatum.nil?
   end
 
-  def end_time
-    ended_at.to_time if ended_at.present?
+  # def end_time
+  #   ended_at.to_time if ended_at.present?
+  # end
+
+  # def end_time=(time)
+  #   self.ended_at = started_at.change(hour: time[4], min: time[5]) unless started_at.nil?
+  # end
+
+  def self.new_custom_wedstrijdcode
+    # Custom competitions have a wedstrijdcode < 0
+    [order(:wedstrijdcode).first.wedstrijdcode, 0].min - 1
   end
 
-  def end_time=(time)
-    self.ended_at = started_at.change(hour: time[4], min: time[5]) unless started_at.nil?
+  def self.new_match_datetime
+    Time.zone.today.at_middle_of_day
   end
 end

@@ -18,4 +18,8 @@ class Competition < ApplicationRecord
     [order(:poulecode).first.poulecode, 0].min - 1
   end
 
+  def name
+    competitienaam
+  end
+
 end
