@@ -43,7 +43,7 @@ gem 'rubyzip'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'pretender'
-gem 'trix'
+gem 'trix', git: 'https://github.com/bcoia/trix.git' # Fix for 'wrong number of arguments' - https://github.com/maclover7/trix/issues/54
 gem 'pg_search'
 gem 'simple-password-gen'
 gem 'simple_calendar',            '~> 2.0'
