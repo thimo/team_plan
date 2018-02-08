@@ -1,8 +1,5 @@
-= simple_form_for [@team, @training], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
-  - f.object.errors.each do |error|
-    div
-      = error
+= bootstrap_form_for [@team, @training], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
   - if @training.training_schedule.present?
     .row.form-group
@@ -13,14 +10,14 @@
         .color-blue-grey.small
           = "#{l @training.started_at, format: :time_short} tot #{l @training.ended_at, format: :time_short}"
   - else
-    = render 'input/datepicker', f: f, field: :started_at
-    = f.input :start_time, as: :time, minute_step: 5, wrapper: :time
-    = f.input :end_time, as: :time, minute_step: 5, wrapper: :time
+    = f.text_field :started_at, date_picker_options
+    = f.time_select :start_time, as: :time, minute_step: 5
+    = f.time_select :end_time, as: :time, minute_step: 5
 
   = render 'input/trix', f: f, field: :body, autofocus: true
-  = f.input :remark
+  = f.text_area :remark
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@training).destroy?
     = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
