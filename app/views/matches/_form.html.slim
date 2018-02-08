@@ -4,8 +4,8 @@
     div
       = error
 
-  = render 'input/datepicker', f: f, field: :wedstrijddatum
   = f.input :wedstrijdtijd, as: :time, minute_step: 5, wrapper: :time
+  = f.text_field :wedstrijddatum, date_picker_options
 
   - if @team.present?
     div thuis of uit?
