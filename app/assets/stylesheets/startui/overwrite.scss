@@ -190,9 +190,19 @@ th {
 .checkbox-detailed,
 .checkbox-slide,
 .checkbox-toggle,
-.radio {
+.radio,
+.form-check {
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
+  padding-left: 0;
+}
+
+.form-check-inline .form-check-input {
+  position: absolute;
+}
+
+label.required:after {
+  content:" *";
 }
 
 .form-inline {
