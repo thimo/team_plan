@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
   include SchedulesHelper
 
-  # before_action :set_team, only: [:new, :create]
+  before_action :set_team, only: [:new, :create]
   before_action :create_match, only: [:new, :create]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
   before_action :set_team_for_show, only: [:show]
@@ -43,11 +43,11 @@ class MatchesController < ApplicationController
 
   private
 
-    # def set_team
+    def set_team
     #   # TODO This line is inherited from TrainingsController, but first part should not work
     #   # @team = @match&.team || Team.find(params[:team_id])
-    #   @team = Team.find(params[:team_id])
-    # end
+      @team = Team.find(params[:team_id])
+    end
 
     def set_team_for_show
       @team = Team.find(params[:team]) if params[:team]
@@ -62,7 +62,6 @@ class MatchesController < ApplicationController
                else
                  Match.new(match_params.merge(user_modified: true, wedstrijdcode: Match.new_custom_wedstrijdcode))
                end
-      # @match.team = @team
 
       authorize @match
     end
