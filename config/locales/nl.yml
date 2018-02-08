@@ -136,6 +136,7 @@ nl:
         minutes_per_half: Minuten per helft
         half_count: Aantal helften
         competition_id: Soort
+        is_home_match: Thuis of uit?
       org_position:
         name: Naam
         remark: Opmerking
