@@ -3,7 +3,7 @@ module SchedulesHelper
 
   def schedule_title(object, no_html: false)
     case [object.class]
-    when [ClubDataMatch]
+    when [Match]
       "#{object.thuisteam} - #{object.uitteam}".html_safe
     when [Training]
       "#{I18n.t object.model_name.singular}"
@@ -11,11 +11,11 @@ module SchedulesHelper
   end
 
   def is_thuisteam?(object)
-    object.is_a?(ClubDataMatch) && Team.by_teamcode(object.thuisteamid).present?
+    object.is_a?(Match) && Team.by_teamcode(object.thuisteamid).present?
   end
 
   def is_uitteam?(object)
-    object.is_a?(ClubDataMatch) && Team.by_teamcode(object.uitteamid).present?
+    object.is_a?(Match) && Team.by_teamcode(object.uitteamid).present?
   end
 
 end

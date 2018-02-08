@@ -11,6 +11,9 @@ section.box-typical.schedule-list
           == title
       .tbl-cell.tbl-cell-actions
         - if team.present?
+          - if policy(team).create_match?
+            = link_to new_team_match_path(team), title: "Een wedstrijd toevoegen", class: "action-btn"
+              i.far.fa-plus-square
           = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
             i.far.fa-calendar-alt
 

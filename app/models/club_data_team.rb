@@ -5,7 +5,7 @@ class ClubDataTeam < ApplicationRecord
   validates_uniqueness_of :teamcode
 
   has_one :team
-  has_and_belongs_to_many :club_data_competitions
+  has_and_belongs_to_many :competitions
 
   scope :asc, -> { order(:id) }
 

@@ -1,0 +1,25 @@
+= simple_form_for [@team, @match], {wrapper: :horizontal_form} do |f|
+  = f.error_notification
+  - f.object.errors.each do |error|
+    div
+      = error
+
+  = render 'input/datepicker', f: f, field: :wedstrijddatum
+  = f.input :wedstrijdtijd, as: :time, minute_step: 5, wrapper: :time
+
+  - if @team.present?
+    div thuis of uit?
+    = f.input :opponent
+  - else
+    |
+    = f.input :thuisteam
+    = f.input :uitteam
+
+  = render 'input/belongsto_radiobuttons', f: f, field: :competition_id, collection: Competition.custom.asc, row_class: 'mb-0'
+
+  = f.input :remark
+
+  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@match).destroy?
+    = link_to "Verwijderen", training_path(@match), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

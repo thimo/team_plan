@@ -135,13 +135,14 @@ nl:
         players_per_team: Wedstrijdspelers per team
         minutes_per_half: Minuten per helft
         half_count: Aantal helften
+        competition_id: Soort
       org_position:
         name: Naam
         remark: Opmerking
         position_type: Soort positie
         started_on: Begindatum
         ended_on: Einddatum
-      club_data_competition:
+      competition:
         competitienaam: Competitie
         competitiesoort: Soort
 

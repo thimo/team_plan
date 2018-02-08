@@ -81,11 +81,11 @@ module TeamsHelper
         ]
       }
 
-      ids = @team.club_data_matches.in_past.pluck(:id)
+      ids = @team.matches.in_past.pluck(:id)
       @team.team_members.active.player.asc.each do |team_member|
         @match_presences_data[:labels] << team_member.name
 
-        presences = team_member.member.presences.for_club_data_match(ids)
+        presences = team_member.member.presences.for_match(ids)
         @match_presences_data[:datasets][0][:data] << presences.present.on_time.size
         @match_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
         @match_presences_data[:datasets][2][:data] << presences.present.much_too_late.size

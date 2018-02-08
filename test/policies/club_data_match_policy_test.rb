@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ClubDataMatchPolicyTest < ActiveSupport::TestCase
+class MatchPolicyTest < ActiveSupport::TestCase
 
   def test_scope
   end

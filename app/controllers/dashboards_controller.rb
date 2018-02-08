@@ -17,7 +17,7 @@ class DashboardsController < ApplicationController
       current_user.favorite_teams.pluck(:id) +
       current_user.favorite_age_groups.map{ |age_group| age_group.teams.pluck(:id)}
     ).flatten.uniq
-    matches = policy_scope(ClubDataMatch).for_team(team_ids)
+    matches = policy_scope(Match).for_team(team_ids)
 
     not_played_matches = matches.not_played.in_period(0.days.ago.beginning_of_day, 1.week.from_now.beginning_of_day)
     # On many results, hide matches from over an hour ago (handy on match day if you have many favorites)
@@ -37,18 +37,18 @@ class DashboardsController < ApplicationController
   end
 
   def program
-    authorize ClubDataMatch, :show?
-    @not_played_matches = policy_scope(ClubDataMatch).own.not_played.asc.in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
+    authorize Match, :show?
+    @not_played_matches = policy_scope(Match).own.not_played.asc.in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
   end
 
   def results
-    authorize ClubDataMatch, :show?
-    @played_matches = policy_scope(ClubDataMatch).own.played.desc.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
+    authorize Match, :show?
+    @played_matches = policy_scope(Match).own.played.desc.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
   end
 
   def cancellations
-    authorize ClubDataMatch, :show?
-    @cancelled_matches = policy_scope(ClubDataMatch).own.afgelast
+    authorize Match, :show?
+    @cancelled_matches = policy_scope(Match).own.afgelast
   end
 
   private

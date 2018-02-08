@@ -1,4 +1,4 @@
-class ClubDataCompetitionPolicy < AdminPolicy
+class CompetitionPolicy < AdminPolicy
   def show?
     true
   end

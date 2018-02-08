@@ -198,12 +198,12 @@ class User < ApplicationRecord
         team_id = record.commentable_id if record.commentable_type == "Team"
         team_id = record.commentable.active_team.id if record.commentable_type == "Member"
       when [Presence]
-        team_id = if record.presentable_type == "ClubDataMatch"
+        team_id = if record.presentable_type == "Match"
           record.presentable.teams.pluck(:id)
         else
           record.presentable.team_id
         end
-      when [ClubDataMatch]
+      when [Match]
         team_id = record.teams.pluck(:id)
       end
 
