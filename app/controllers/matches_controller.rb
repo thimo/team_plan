@@ -18,20 +18,20 @@ class MatchesController < ApplicationController
 
   def create
     if @team.present?
-      if @match.is_home_match?
-        @match.thuisteamid = @team.club_data_team.id
-        @match.thuisteam   = @team.club_data_team.teamname
+      if @match.is_home_match == 'true'
+        @match.thuisteamid = @team.club_data_team.teamcode
+        @match.thuisteam   = @team.club_data_team.teamnaam
         @match.uitteamid   = nil
         @match.uitteam     = @match.opponent # free text field
       else
         @match.thuisteamid = nil
         @match.thuisteam   = @match.opponent # free text field
-        @match.uitteamid   = @team.club_data_team.id
-        @match.uitteam     = @team.club_data_team.teamname
+        @match.uitteamid   = @team.club_data_team.teamcode
+        @match.uitteam     = @team.club_data_team.teamnaam
       end
     end
     if @match.save
-      redirect_to @match, notice: "Training is toegevoegd."
+      redirect_to @match, notice: "Wedstrijd is toegevoegd."
     else
       render :new
     end
@@ -43,7 +43,7 @@ class MatchesController < ApplicationController
 
   def update
     if @match.update_attributes(match_params.merge(user_modified: true))
-      redirect_to @match, notice: "Training is aangepast."
+      redirect_to @match, notice: "Wedstrijd is aangepast."
     else
       render 'edit'
     end
@@ -57,8 +57,6 @@ class MatchesController < ApplicationController
   private
 
     def set_team
-    #   # TODO This line is inherited from TrainingsController, but first part should not work
-    #   # @team = @match&.team || Team.find(params[:team_id])
       @team = Team.find(params[:team_id])
     end
 
@@ -74,7 +72,11 @@ class MatchesController < ApplicationController
                    competition: Competition.custom.asc.first
                  )
                else
-                 Match.new(match_params.merge(user_modified: true, wedstrijdcode: Match.new_custom_wedstrijdcode))
+                 Match.new(match_params.merge(
+                   user_modified: true,
+                   wedstrijdcode: Match.new_custom_wedstrijdcode,
+                   eigenteam: true
+                 ))
                end
 
       authorize @match
