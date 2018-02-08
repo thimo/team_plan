@@ -13,16 +13,17 @@ gem 'webpacker'
 gem 'webpacker-react'
 
 gem 'slim'
-gem 'faker',                      '~> 1.7.0'
+gem 'faker'
 gem 'carrierwave',                '~> 1.1.0'
 gem 'carrierwave-imageoptimizer' # also do: brew install optipng jpegoptim (or via 'apt-get' on Ubuntu)
 gem 'mini_magick',                '~> 4.7.0'
 
 gem 'rails-i18n'
-gem 'kaminari',                   '~> 1.0.1'  # Paging
+gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 
 gem 'simple_form',                '~> 3.5.0'
+gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/bootstrap_form.git', branch: 'master'
 gem 'country_select'
 
 gem 'breadcrumbs_on_rails',       '~> 3.0.1'
@@ -30,7 +31,7 @@ gem 'enum_help',                  '~> 0.0.17'
 gem 'net-ssh',                    '~> 4.1.0'
 gem 'figaro',                     '~> 1.1.1'
 gem 'devise',                     '~> 4.4.0'
-gem 'devise-bootstrap-views', git: 'https://github.com/hisea/devise-bootstrap-views.git', :branch => 'bootstrap4'
+# gem 'devise-bootstrap-views', git: 'https://github.com/hisea/devise-bootstrap-views.git', :branch => 'bootstrap4'
 gem 'rails-settings-cached'
 
 gem 'pundit',                     '~> 1.1.0'
