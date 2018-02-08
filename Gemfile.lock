@@ -422,6 +422,7 @@ DEPENDENCIES
   pundit (~> 1.1.0)
   rack-livereload
   rails (~> 5.2.0.pre.pre)
+  rails-erd
   rails-i18n
   rails-settings-cached
   rails_12factor
