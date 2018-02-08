@@ -29,7 +29,7 @@ gem 'breadcrumbs_on_rails',       '~> 3.0.1'
 gem 'enum_help',                  '~> 0.0.17'
 gem 'net-ssh',                    '~> 4.1.0'
 gem 'figaro',                     '~> 1.1.1'
-gem 'devise',                     '~> 4.3.0'
+gem 'devise',                     '~> 4.4.0'
 gem 'devise-bootstrap-views', git: 'https://github.com/hisea/devise-bootstrap-views.git', :branch => 'bootstrap4'
 gem 'rails-settings-cached'
 
