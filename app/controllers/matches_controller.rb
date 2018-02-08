@@ -17,6 +17,19 @@ class MatchesController < ApplicationController
   def new; end
 
   def create
+    if @team.present?
+      if @match.is_home_match?
+        @match.thuisteamid = @team.club_data_team.id
+        @match.thuisteam   = @team.club_data_team.teamname
+        @match.uitteamid   = nil
+        @match.uitteam     = @match.opponent # free text field
+      else
+        @match.thuisteamid = nil
+        @match.thuisteam   = @match.opponent # free text field
+        @match.uitteamid   = @team.club_data_team.id
+        @match.uitteam     = @team.club_data_team.teamname
+      end
+    end
     if @match.save
       redirect_to @match, notice: "Training is toegevoegd."
     else
@@ -73,7 +86,9 @@ class MatchesController < ApplicationController
     end
 
     def match_params
-      params.require(:match).permit(:competition_id, :wedstrijddatum, :wedstrijdtijd, :thuisteam, :uitteam, :uitslag, :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
+      params.require(:match).permit(:competition_id, :wedstrijddatum, :wedstrijdtijd, :thuisteam, :uitteam, :uitslag,
+        :opponent, :is_home_match,
+        :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
       # Automatisch
       # wedstrijd (string, team - team)
       # wedstrijdcode, negatief, zoals bij competitie

@@ -7,8 +7,13 @@
   = render 'input/datepicker', f: f, field: :wedstrijddatum
   = f.input :wedstrijdtijd, as: :time, minute_step: 5, wrapper: :time
 
-  = f.input :thuisteam
-  = f.input :uitteam
+  - if @team.present?
+    div thuis of uit?
+    = f.input :opponent
+  - else
+    |
+    = f.input :thuisteam
+    = f.input :uitteam
 
   = render 'input/belongsto_radiobuttons', f: f, field: :competition_id, collection: Competition.custom.asc, row_class: 'mb-0'
 

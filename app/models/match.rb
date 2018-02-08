@@ -7,7 +7,8 @@ class Match < ApplicationRecord
   belongs_to :competition
   has_and_belongs_to_many :teams
 
-  attr_accessor :wedstrijdtijd #, :end_time
+  attr_accessor :wedstrijdtijd, :opponent, :is_home_match
+   #, :end_time
 
   scope :asc,           -> { order(:wedstrijddatum) }
   scope :desc,          -> { order(wedstrijddatum: :desc) }
