@@ -5,6 +5,6 @@
     = f.hidden_field field, value: ''
     - collection.each do |item|
       .radio
-        = f.radio_button field, item.id, { checked: f.object.send(field) == item, class: 'form-check-input', id: "#{field.to_s}_#{item.id}" }
+        = f.radio_button field, item.id, { checked: f.object.send(field) == item.id, class: 'form-check-input', id: "#{field.to_s}_#{item.id}" }
         label[for="#{field.to_s}_#{item.id}"]
           = item.name

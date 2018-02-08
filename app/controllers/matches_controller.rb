@@ -56,9 +56,10 @@ class MatchesController < ApplicationController
 
     def create_match
       @match = if action_name == 'new'
-                 # TODO add defaults
-                 # @team.matches.new()
-                 Match.new(wedstrijddatum: Match.new_match_datetime)
+                 Match.new(
+                   wedstrijddatum: Match.new_match_datetime,
+                   competition: Competition.custom.asc.first
+                 )
                else
                  Match.new(match_params.merge(user_modified: true, wedstrijdcode: Match.new_custom_wedstrijdcode))
                end
