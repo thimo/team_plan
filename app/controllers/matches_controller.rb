@@ -22,10 +22,10 @@ class MatchesController < ApplicationController
         @match.thuisteamid = @team.club_data_team.teamcode
         @match.thuisteam   = @team.club_data_team.teamnaam
         @match.uitteamid   = nil
-        @match.uitteam     = @match.opponent # free text field
+        @match.uitteam     = @match.opponent
       else
         @match.thuisteamid = nil
-        @match.thuisteam   = @match.opponent # free text field
+        @match.thuisteam   = @match.opponent
         @match.uitteamid   = @team.club_data_team.teamcode
         @match.uitteam     = @team.club_data_team.teamnaam
       end

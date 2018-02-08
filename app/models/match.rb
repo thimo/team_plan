@@ -8,7 +8,6 @@ class Match < ApplicationRecord
   has_and_belongs_to_many :teams
 
   attr_accessor :wedstrijdtijd, :opponent, :is_home_match
-   #, :end_time
 
   scope :asc,           -> { order(:wedstrijddatum) }
   scope :desc,          -> { order(wedstrijddatum: :desc) }
@@ -75,14 +74,6 @@ class Match < ApplicationRecord
   def wedstrijdtijd=(time)
     self.wedstrijddatum = wedstrijddatum.change(hour: time[4], min: time[5]) unless wedstrijddatum.nil?
   end
-
-  # def end_time
-  #   ended_at.to_time if ended_at.present?
-  # end
-
-  # def end_time=(time)
-  #   self.ended_at = started_at.change(hour: time[4], min: time[5]) unless started_at.nil?
-  # end
 
   def self.new_custom_wedstrijdcode
     # Custom competitions have a wedstrijdcode < 0
