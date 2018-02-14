@@ -236,4 +236,9 @@ a:hover, a:hover:hover {
       }
     }
   }
+
+  li.nav-item {
+    min-height: 40px;
+    min-width: 50px;
+  }
 }
