@@ -30,17 +30,17 @@ h4 Contactgegevens
 
   - unless member.phone.blank?
     div.pt-2
-      a[href="tel://#{member.phone}"]
+      a[href="tel:#{member.phone}"]
         = member.phone
         i.far.fa-phone.ml-2
   - unless member.phone_2.blank?
     div
-      a[href="tel://#{member.phone_2}"]
+      a[href="tel:#{member.phone_2}"]
         = member.phone_2
         i.far.fa-phone.ml-2
   - unless member.phone_home.blank?
     div
-      a[href="tel://#{member.phone_home}"]
+      a[href="tel:#{member.phone_home}"]
         = member.phone_home
         i.far.fa-phone.ml-2
 
