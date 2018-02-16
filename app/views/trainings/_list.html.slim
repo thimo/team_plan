@@ -22,12 +22,12 @@ section.box-typical.schedule-list
           - trainings.each do |training|
             - ts = training.training_schedule
             tr.clickable
-              td.py-1.align-middle
+              td.py-1.pr-0.align-middle
                 .small.nowrap
                   = "#{I18n.l training.started_at, format: :weekday} #{I18n.l training.started_at, format: :date_short}"
                   div.color-blue-grey
                     = starts_ends(training)
-              td
+              td.align-middle
                 = link_to training
                   = schedule_title training
                   - if ts&.soccer_field
@@ -36,7 +36,7 @@ section.box-typical.schedule-list
                   .color-blue-grey-lighter.small
                     | #{ts.present_minutes_i18n} aanwezig
               - if include_presences
-                td.w-1.nowrap.text-right.py-1.align-middle
+                td.py-1.w-1.nowrap.pl-0.align-middle.strong.text-center
                   = render 'presences/presence_label', parent: training, team: team
 
             - if include_presences
