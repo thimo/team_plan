@@ -7,6 +7,11 @@
         = link_to edit_match_path(@match), class: "btn btn-secondary", title: "Aanpassen"
           i.far.fa-pencil
 
+- if @match.afgelast?
+  div.alert.alert-danger
+    h1 De wedstrijd is afgelast
+    = @match.afgelast_status
+
 section.tabs-section
   .tabs-section-nav
     .tbl
@@ -39,6 +44,9 @@ section.tabs-section
               = @match.accommodatie
             div
               = @match.plaats
+            - if @match.created_by
+              div
+                | Aangemaakt door #{@match.created_by.name}
 
       - if @players.present?
         table.table

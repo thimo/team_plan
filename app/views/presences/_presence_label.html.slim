@@ -1,7 +1,7 @@
 - team ||= parent.team
 
-- if (present_size = parent.present_size_for_label(team)) > 0
-  - if policy(parent).update?
+- if policy(parent).show_presences? && (present_size = parent.present_size_for_label(team)) > 0
+  - if policy(parent).update_presences?
     a.presences-toggle.dropdown-toggle.label.p-2.ml-1[
       tabindex="0"
       id="#{parent.model_name.singular}-#{parent.id}-presence-count"

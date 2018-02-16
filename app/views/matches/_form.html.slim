@@ -20,4 +20,4 @@
   = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@match).destroy?
-    = link_to "Verwijderen", training_path(@match), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+    = link_to "Afgelasten", match_path(@match), method: :delete, data: { confirm: 'Wedstrijd wordt afgelast. Doorgaan?' }, class: 'btn btn-danger btn-inline'

@@ -29,8 +29,14 @@ class MatchPolicy < ApplicationPolicy
     update?
   end
 
-  def show_presences?
+  def update_presences?
+    return false if @record.afgelast?
+
     create?
+  end
+
+  def show_presences?
+    update_presences?
   end
 
   class Scope < Scope

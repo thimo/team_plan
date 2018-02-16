@@ -42,9 +42,7 @@ class MatchesController < ApplicationController
     end
   end
 
-  def edit
-    @latest_matches = policy_scope(@match.team.matches).in_period(2.weeks.ago, 0.days.ago).desc.active
-  end
+  def edit; end
 
   def update
     if @match.update_attributes(match_params.merge(user_modified: true))
@@ -55,8 +53,8 @@ class MatchesController < ApplicationController
   end
 
   def destroy
-    @match.update_attributes(afgelast: true, afgelast_status: "door #{current_user.full_name}")
-    redirect_to @match.team, notice: "Wedstrijd is afgelast."
+    @match.update_attributes(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
+    redirect_to @match, notice: "Wedstrijd is afgelast."
   end
 
   private

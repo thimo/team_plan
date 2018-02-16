@@ -20,11 +20,15 @@ class TrainingPolicy < ApplicationPolicy
   def destroy?
     return false if @record.new_record?
 
-    update?
+    create?
+  end
+
+  def update_presences?
+    create?
   end
 
   def show_presences?
-    update?
+    create?
   end
 
   class Scope < Scope

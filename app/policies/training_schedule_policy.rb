@@ -25,6 +25,14 @@ class TrainingSchedulePolicy < ApplicationPolicy
     create?
   end
 
+  def update_presences?
+    create?
+  end
+
+  def show_presences?
+    create?
+  end
+
   class Scope < Scope
     def resolve
       scope
