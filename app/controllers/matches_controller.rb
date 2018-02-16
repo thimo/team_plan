@@ -55,8 +55,8 @@ class MatchesController < ApplicationController
   end
 
   def destroy
-    redirect_to @match.team, notice: "Wedstrijd is verwijderd."
-    @match.destroy
+    @match.update_attributes(afgelast: true, afgelast_status: "door #{current_user.full_name}")
+    redirect_to @match.team, notice: "Wedstrijd is afgelast."
   end
 
   private
