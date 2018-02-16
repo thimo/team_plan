@@ -20,7 +20,7 @@ $(document).on('turbolinks:load', () => {
 
   // Make rows clickable
   $('table.tr-links > tbody > tr').each((index, tr) => {
-    const links = $(tr).find('a')
+    const links = $(tr).find('a[href]')
     if (links.length > 0) {
       $(tr).on('click', function(event) {
         // Only execute if clicked on anything else in table row
