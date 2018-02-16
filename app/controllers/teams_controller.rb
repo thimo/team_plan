@@ -35,7 +35,7 @@ class TeamsController < ApplicationController
       when 'statistics'
         team_presence_graphs
       else # 'schedule'
-        @not_played_matches = @team.matches.not_played.from_now.asc
+        @not_played_matches = @team.matches.not_played.from_today.asc
         @played_matches = @team.matches.played.desc
 
         @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
