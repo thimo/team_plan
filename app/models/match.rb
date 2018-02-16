@@ -24,7 +24,7 @@ class Match < ApplicationRecord
   scope :uitslag_at,    -> { order(uitslag_at: :desc) }
   scope :afgelast,      -> { where(afgelast: true) }
   scope :niet_afgelast, -> { where(afgelast: false) }
-  scope :active,        -> {}
+  scope :active,        -> { where(afgelast: false) }
   scope :for_team,      -> (team_ids) { includes(:teams).where(teams: { id: team_ids }) }
 
   def started_at
