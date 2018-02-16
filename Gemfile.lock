@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/bootstrap-ruby/bootstrap_form.git
-  revision: 8a7188fbb2d55bbd6c64f9130e7882eea56bfee9
+  revision: 5c6a27c7731b230fa9b35e42d8e49ec1c7f3dcd9
   branch: master
   specs:
     bootstrap_form (4.0.0.dev)
@@ -88,7 +88,7 @@ GEM
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (10.0.0)
-    capybara (2.17.0)
+    capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (>= 1.3.3)
@@ -110,7 +110,7 @@ GEM
     choice (0.2.0)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
-    countries (2.1.3)
+    countries (2.1.4)
       i18n_data (~> 0.8.0)
       money (~> 6.9)
       sixarm_ruby_unaccent (~> 1.1)
@@ -169,7 +169,7 @@ GEM
       minitest (>= 3.0)
     htmlentities (4.3.4)
     http_parser.rb (0.6.0)
-    i18n (0.9.3)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     icalendar (2.4.1)
@@ -197,7 +197,7 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    loofah (2.1.1)
+    loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
@@ -248,7 +248,7 @@ GEM
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    public_suffix (3.0.1)
+    public_suffix (3.0.2)
     puma (3.11.2)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
@@ -282,9 +282,9 @@ GEM
       ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails-i18n (5.0.4)
-      i18n (~> 0.7)
-      railties (~> 5.0)
+    rails-i18n (5.1.0)
+      i18n (>= 0.7, < 2)
+      railties (>= 5.0, < 6)
     rails-settings-cached (0.6.6)
       rails (>= 4.2.0)
     rails_12factor (0.0.3)
@@ -329,7 +329,7 @@ GEM
     simple-password-gen (0.1.5)
     simple_calendar (2.2.7)
       rails (>= 3.0)
-    simple_form (3.5.0)
+    simple_form (3.5.1)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
     sixarm_ruby_unaccent (1.2.0)
@@ -360,7 +360,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.5)
+    uglifier (4.1.6)
       execjs (>= 0.3.0, < 3)
     unicode_utils (1.4.0)
     warden (1.2.7)
@@ -370,7 +370,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webpacker (3.2.1)
+    webpacker (3.2.2)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
