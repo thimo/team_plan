@@ -21,8 +21,8 @@ class DashboardsController < ApplicationController
 
     not_played_matches = matches.not_played.in_period(0.days.ago.beginning_of_day, 1.week.from_now.beginning_of_day)
     # On many results, hide matches from over an hour ago (handy on match day if you have many favorites)
-    not_played_matches = matches.not_played.in_period(1.hour.ago, 1.week.from_now.beginning_of_day) if not_played_matches.size > 10
-    @not_played_matches = not_played_matches.asc.limit(10).group_by{ |match| match.wedstrijddatum.to_date }
+    not_played_matches = matches.not_played.in_period(1.hour.ago, 1.week.from_now.beginning_of_day) if not_played_matches.size > 20
+    @not_played_matches = not_played_matches.asc.limit(20).group_by{ |match| match.wedstrijddatum.to_date }
 
     @played_matches = matches.played.in_period(1.week.ago.end_of_day, 0.hour.ago).desc.limit(10).group_by{ |match| match.wedstrijddatum.to_date }
 
