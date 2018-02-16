@@ -1,4 +1,4 @@
-class ClubDataMatchPolicy < AdminPolicy
+class MatchPolicy < AdminPolicy
   def show?
     true
   end

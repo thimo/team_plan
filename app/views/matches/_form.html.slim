@@ -1,0 +1,23 @@
+= bootstrap_form_for [@team, @match], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.text_field :wedstrijddatum, date_picker_options
+  = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
+
+  - if @team.present?
+    = f.form_group :is_home_match, label: { text: "" }
+      = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true
+      = f.radio_button :is_home_match, false, label: "Uit", inline: true
+    = f.text_field :opponent
+  - else
+    |
+    = f.text_field :thuisteam
+    = f.text_field :uitteam
+
+  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name
+  = f.text_area :remark
+
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
+  = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-secondary-outline btn-inline'
+  - if policy(@match).destroy?
+    = link_to "Verwijderen", training_path(@match), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

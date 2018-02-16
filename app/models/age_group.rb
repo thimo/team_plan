@@ -7,7 +7,7 @@ class AgeGroup < ApplicationRecord
   has_many :members, through: :team_members
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :todos, as: :todoable, dependent: :destroy
-  has_many :club_data_matches, through: :teams
+  has_many :matches, through: :teams
   has_paper_trail
 
   validates_presence_of :name, :season, :gender

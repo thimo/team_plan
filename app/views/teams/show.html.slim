@@ -45,16 +45,13 @@ section.tabs-section
   .row
     .col-xl-6
       h4 Wedstrijden
-      = render "club_data_matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
-      = render "club_data_matches/list", matches: @played_matches, title: "Uitslagen", team: @team
+      = render "matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
+      = render "matches/list", matches: @played_matches, title: "Uitslagen", team: @team
 
     .col-xl-6
       h4 Trainingen
-
       = render "trainings/list", trainings: @trainings, team: @team
-
-      - if policy(@team).show_training_schedules?
-        = render "training_schedules/list", team: @team, training_schedules: @training_schedules
+      = render "training_schedules/list", team: @team, training_schedules: @training_schedules
 
 - if @active_tab == 'competitions'
   .row
@@ -132,7 +129,7 @@ section.tabs-section
         canvas#matchChart.presenceChart
 
 
-    = render 'presence_table', team: @team, presentable_class: ClubDataMatch
+    = render 'presence_table', team: @team, presentable_class: Match
 
     - if @training_presences_data&.any? && @match_presences_data&.any?
       script

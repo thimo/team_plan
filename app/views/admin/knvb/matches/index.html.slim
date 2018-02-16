@@ -9,7 +9,7 @@
           .tbl-cell.tbl-cell-title
             h3
               | Uitslagen
-          - if policy(ClubDataMatch).create?
+          - if policy(Match).create?
             .tbl-cell.tbl-cell-action-bordered
               = link_to new_admin_knvb_club_data_results_import_path, title: "Importeer uitslagen", class: "action-btn"
                 i.far.fa-sync

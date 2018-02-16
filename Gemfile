@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.5.0'
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.0-pre'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
@@ -13,24 +13,25 @@ gem 'webpacker'
 gem 'webpacker-react'
 
 gem 'slim'
-gem 'faker',                      '~> 1.7.0'
+gem 'faker'
 gem 'carrierwave',                '~> 1.1.0'
 gem 'carrierwave-imageoptimizer' # also do: brew install optipng jpegoptim (or via 'apt-get' on Ubuntu)
 gem 'mini_magick',                '~> 4.7.0'
 
 gem 'rails-i18n'
-gem 'kaminari',                   '~> 1.0.1'  # Paging
+gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 
 gem 'simple_form',                '~> 3.5.0'
+gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/bootstrap_form.git', branch: 'master'
 gem 'country_select'
 
 gem 'breadcrumbs_on_rails',       '~> 3.0.1'
 gem 'enum_help',                  '~> 0.0.17'
 gem 'net-ssh',                    '~> 4.1.0'
 gem 'figaro',                     '~> 1.1.1'
-gem 'devise',                     '~> 4.3.0'
-gem 'devise-bootstrap-views', git: 'https://github.com/hisea/devise-bootstrap-views.git', :branch => 'bootstrap4'
+gem 'devise',                     '~> 4.4.0'
+# gem 'devise-bootstrap-views', git: 'https://github.com/hisea/devise-bootstrap-views.git', :branch => 'bootstrap4'
 gem 'rails-settings-cached'
 
 gem 'pundit',                     '~> 1.1.0'
@@ -42,7 +43,7 @@ gem 'rubyzip'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'pretender'
-gem 'trix'
+gem 'trix', git: 'https://github.com/bcoia/trix.git' # Fix for 'wrong number of arguments' - https://github.com/maclover7/trix/issues/54
 gem 'pg_search'
 gem 'simple-password-gen'
 gem 'simple_calendar',            '~> 2.0'
@@ -75,6 +76,7 @@ group :development do
   gem 'rack-livereload'
   gem 'rb-fsevent'
   gem 'terminal-notifier-guard'
+  gem 'rails-erd', require: false
 end
 
 group :test do

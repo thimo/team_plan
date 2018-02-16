@@ -1,11 +1,13 @@
-class ClubDataMatch < ApplicationRecord
+class Match < ApplicationRecord
   include Presentable
 
   validates_presence_of :wedstrijdcode, :wedstrijddatum, :thuisteam, :uitteam
   validates_uniqueness_of :wedstrijdcode
 
-  belongs_to :club_data_competition
+  belongs_to :competition
   has_and_belongs_to_many :teams
+
+  attr_accessor :wedstrijdtijd, :opponent, :is_home_match
 
   scope :asc,           -> { order(:wedstrijddatum) }
   scope :desc,          -> { order(wedstrijddatum: :desc) }
@@ -26,6 +28,7 @@ class ClubDataMatch < ApplicationRecord
   end
 
   def ended_at
+    # Fixed time for ical calendar
     wedstrijddatum + 2.hours
   end
 
@@ -61,5 +64,23 @@ class ClubDataMatch < ApplicationRecord
       self.uitslag_at = Time.zone.now
       save
     end
+  end
+
+  # Accessors for time aspects of start and end dates
+  def wedstrijdtijd
+    wedstrijddatum.to_time if wedstrijddatum.present?
+  end
+
+  def wedstrijdtijd=(time)
+    self.wedstrijddatum = wedstrijddatum.change(hour: time[4], min: time[5]) unless wedstrijddatum.nil?
+  end
+
+  def self.new_custom_wedstrijdcode
+    # Custom competitions have a wedstrijdcode < 0
+    [order(:wedstrijdcode).first.wedstrijdcode, 0].min - 1
+  end
+
+  def self.new_match_datetime
+    Time.zone.today.at_middle_of_day
   end
 end

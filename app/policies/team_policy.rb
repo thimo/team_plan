@@ -73,10 +73,6 @@ class TeamPolicy < ApplicationPolicy
     true
   end
 
-  def show_training_schedules?
-    true
-  end
-
   def show_todos?
     return false if @record.archived?
 
@@ -101,6 +97,12 @@ class TeamPolicy < ApplicationPolicy
     return false if @record.new_record? || @record.age_group.archived?
 
     @user.admin?
+  end
+
+  def create_match?
+    return false if @record.archived?
+
+    club_or_team_staff?
   end
 
   def download_team_members?

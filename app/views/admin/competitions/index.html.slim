@@ -7,21 +7,21 @@ section.box-typical
         h3
           | Wedstrijdsoorten
         .small Voer de soorten wedstrijden in die je handmatig wil toevoegen, zoals "Oefenwedstrijden" of "Toernooien"
-      - if policy(ClubDataCompetition).create?
+      - if policy(Competition).create?
         .tbl-cell.tbl-cell-actions
-          = link_to new_admin_club_data_competition_path, title: "Toevoegen", class: "action-btn"
+          = link_to new_admin_competition_path, title: "Toevoegen", class: "action-btn"
             i.far.fa-file
 
   .box-typical-body.table-responsive
     table.table.table-sm.tr-links
       thead
         tr
-          th = ClubDataCompetition.human_attribute_name(:competitienaam)
-          th = ClubDataCompetition.human_attribute_name(:competitiesoort)
+          th = Competition.human_attribute_name(:competitienaam)
+          th = Competition.human_attribute_name(:competitiesoort)
       tbody
         - @competitions.each do |competition|
           tr
             td
-              = link_to competition.competitienaam, edit_admin_club_data_competition_path(competition)
+              = link_to competition.competitienaam, edit_admin_competition_path(competition)
             td
               = competition.competitiesoort

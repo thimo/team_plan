@@ -17,9 +17,9 @@ class Team < ApplicationRecord
   has_many :todos, as: :todoable, dependent: :destroy
   has_many :training_schedules, dependent: :destroy
   has_many :trainings, dependent: :destroy
-  has_many :club_data_competitions, through: :club_data_team
+  has_many :competitions, through: :club_data_team
   has_many :presences
-  has_and_belongs_to_many :club_data_matches
+  has_and_belongs_to_many :matches
   has_paper_trail
 
   validates_presence_of :name, :age_group
@@ -50,7 +50,7 @@ class Team < ApplicationRecord
 
   def schedules(from:, up_to:)
     schedules = trainings.in_period(from, up_to).includes(:training_schedule, training_schedule: :soccer_field).to_a
-    schedules += club_data_matches.in_period(from, up_to).to_a
+    schedules += matches.in_period(from, up_to).to_a
     schedules.flatten.sort_by(&:started_at)
   end
 
