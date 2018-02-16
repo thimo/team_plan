@@ -32,6 +32,7 @@ class MatchesController < ApplicationController
     end
 
     @match.created_by = current_user
+    @match.edit_level = current_user.admin? || current_user.club_staff? ? :club_staff : :team_staff
 
     if @match.save
       @match.teams << @team

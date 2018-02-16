@@ -10,6 +10,8 @@ class Match < ApplicationRecord
 
   attr_accessor :wedstrijdtijd, :opponent, :is_home_match
 
+  enum edit_level: { knvb: 0, club_staff: 1, team_staff: 2 }
+
   scope :asc,           -> { order(:wedstrijddatum) }
   scope :desc,          -> { order(wedstrijddatum: :desc) }
   scope :in_period,     -> (start_date, end_date) { where('wedstrijddatum > ?', start_date).where('wedstrijddatum < ?', end_date) }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_16_184044) do
+ActiveRecord::Schema.define(version: 2018_02_16_200551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 2018_02_16_184044) do
     t.boolean "afgelast", default: false
     t.string "afgelast_status"
     t.bigint "created_by_id"
+    t.integer "edit_level", default: 0
     t.index ["competition_id"], name: "index_matches_on_competition_id"
     t.index ["created_by_id"], name: "index_matches_on_created_by_id"
     t.index ["wedstrijdcode"], name: "index_matches_on_wedstrijdcode", unique: true

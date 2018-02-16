@@ -1,12 +1,26 @@
-class MatchPolicy < AdminPolicy
+class MatchPolicy < ApplicationPolicy
   def show?
     true
   end
 
-  def update?
+  def new?
+    create?
+  end
+
+  def create?
     @user.admin? ||
     @user.club_staff? ||
     @user.is_team_staff_for?(@record)
+  end
+
+  def update?
+    # Don't allow edits for KNVB imported matches
+    return false if @record.knvb?
+
+    # Admin/club_staff can edit all matches, team staff only those created by themselves
+    @user.admin? ||
+    @user.club_staff? ||
+    (@record.team_staff? && @user.is_team_staff_for?(@record))
   end
 
   def destroy?
@@ -16,7 +30,7 @@ class MatchPolicy < AdminPolicy
   end
 
   def show_presences?
-    update?
+    create?
   end
 
   class Scope < Scope
