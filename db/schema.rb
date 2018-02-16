@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206214340) do
+ActiveRecord::Schema.define(version: 2018_02_16_184044) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
+  enable_extension "plpgsql"
   enable_extension "unaccent"
   enable_extension "uuid-ossp"
 
@@ -188,7 +188,9 @@ ActiveRecord::Schema.define(version: 20180206214340) do
     t.string "route"
     t.boolean "afgelast", default: false
     t.string "afgelast_status"
+    t.bigint "created_by_id"
     t.index ["competition_id"], name: "index_matches_on_competition_id"
+    t.index ["created_by_id"], name: "index_matches_on_created_by_id"
     t.index ["wedstrijdcode"], name: "index_matches_on_wedstrijdcode", unique: true
   end
 
@@ -537,6 +539,7 @@ ActiveRecord::Schema.define(version: 20180206214340) do
   add_foreign_key "injuries", "users"
   add_foreign_key "logs", "users"
   add_foreign_key "matches", "competitions"
+  add_foreign_key "matches", "users", column: "created_by_id"
   add_foreign_key "members", "users"
   add_foreign_key "notes", "members"
   add_foreign_key "notes", "teams"

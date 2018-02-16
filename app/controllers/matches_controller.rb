@@ -30,8 +30,12 @@ class MatchesController < ApplicationController
         @match.uitteam     = @team.club_data_team.teamnaam
       end
     end
+
+    @match.created_by = current_user
+
     if @match.save
-      redirect_to @match, notice: "Wedstrijd is toegevoegd."
+      @match.teams << @team
+      redirect_to [@match, team: @team], notice: "Wedstrijd is toegevoegd."
     else
       render :new
     end

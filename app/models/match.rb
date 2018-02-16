@@ -5,6 +5,7 @@ class Match < ApplicationRecord
   validates_uniqueness_of :wedstrijdcode
 
   belongs_to :competition
+  belongs_to :created_by, class_name: "User", required: false
   has_and_belongs_to_many :teams
 
   attr_accessor :wedstrijdtijd, :opponent, :is_home_match
