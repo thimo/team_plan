@@ -3,86 +3,55 @@
 - include_presences ||= false
 - team ||= nil
 
-tr[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
-  td.py-1.pr-0.align-middle
-    .small.nowrap
-      - if compact
-        = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
-        .color-blue-grey
-          = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
-      - else
-        - unless match.uitslag
-          | #{I18n.l match.started_at, format: :time_short}
-    .small.nowrap.color-blue-grey-lighter
-      = match.competition.competitiesoort
-  td.align-middle
-    div
-      - if (thuisteam = Team.by_teamcode(match.thuisteamid).first).present?
-        - if team
-          = link_to [match, team: thuisteam]
-            = match.thuisteam
+tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
+  td.py-1
+    .match-row-header
+      .match-datetime.small.align-bottom
+        - if compact
+          span.pr-1
+            = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
+          span.color-blue-grey.pr-1
+            = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
         - else
-          = link_to thuisteam
-            = match.thuisteam
-      - else
-        = match.thuisteam
-    div.match-separator
-    div
-      - if (uitteam = Team.by_teamcode(match.uitteamid).first).present?
-        - if team
-          = link_to [match, team: uitteam]
-            = match.uitteam
-        - else
-          = link_to uitteam
-            = match.uitteam
-      - else
-        = match.uitteam
+          span.pr-1
+            | #{I18n.l match.started_at, format: :time_short}
+      / - if match.uitslag
+      /   .match-result.text-center.strong
+      /     = match.uitslag
+      .match-type.small.text-right.align-bottom.color-blue-grey-lighter
+        = match.competition.competitiesoort
 
-  td.py-1.w-1.nowrap.pl-0.align-middle.strong.text-center
-    = match.uitslag || ""
-    - if include_presences
+    .match-teams
+      .match-hometeam.nowrap.text-right
+        - if (thuisteam = Team.by_teamcode(match.thuisteamid).first).present?
+          - if team
+            = link_to [match, team: thuisteam]
+              = match.thuisteam
+          - else
+            = link_to thuisteam
+              = match.thuisteam
+        - else
+          = match.thuisteam
+      .match-separator.text-center.color-blue-grey-lighter
+        = " - "
+      .match-awayteam.nowrap.text-left
+        - if (uitteam = Team.by_teamcode(match.uitteamid).first).present?
+          - if team
+            = link_to [match, team: uitteam]
+              = match.uitteam
+          - else
+            = link_to uitteam
+              = match.uitteam
+        - else
+          = match.uitteam
+    - if match.uitslag
+      .match-row-header
+        .match-result.text-center.strong
+          = match.uitslag
+
+  - if include_presences
+    td.py-1.pl-0.w-1.nowrap.align-middle.strong.text-center
       = render 'presences/presence_label', parent: match, team: team
-
-/ tr
-/   td.pb-0
-/     .small.nowrap
-/       - if compact
-/         = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
-/         span.color-blue-grey.pl-1
-/           = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
-/       - else
-/         - unless match.uitslag
-/           | #{I18n.l match.started_at, format: :time_short}
-/   td
-/   td.pb-0.text-right.color-blue-grey
-/     .small.nowrap
-/       = match.competition.competitiesoort
-/   - if include_presences
-/     td.w-1.nowrap.text-right.py-1.align-middle[rowspan="2"]
-/       = render 'presences/presence_label', parent: match, team: team
-/ tr.b-t-0[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
-/   td.text-right.width-50.pt-0
-/     - if (thuisteam = Team.by_teamcode(match.thuisteamid).first).present?
-/       - if team
-/         = link_to [match, team: thuisteam]
-/           = match.thuisteam
-/       - else
-/         = link_to thuisteam
-/           = match.thuisteam
-/     - else
-/       = match.thuisteam
-/   td.text-center.nowrap.strong.pt-0
-/     = match.uitslag || "-"
-/   td.width-50.pt-0
-/     - if (uitteam = Team.by_teamcode(match.uitteamid).first).present?
-/       - if team
-/         = link_to [match, team: uitteam]
-/           = match.uitteam
-/       - else
-/         = link_to uitteam
-/           = match.uitteam
-/     - else
-/       = match.uitteam
 
 - if include_presences
   = render 'presences/presences_row', parent: match, team: team
