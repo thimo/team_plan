@@ -43,9 +43,14 @@ tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through
           = match.uitteam
 
     - if match.uitslag
-      .match-row-header
-        .match-result.text-center.strong
-          = match.uitslag
+      .match-teams.strong
+        - uitslag = match.uitslag.split
+        .match-hometeam.nowrap.text-right
+          = uitslag.first
+        .match-separator.text-center.color-blue-grey-lighter
+          = " - "
+        .match-awayteam.nowrap.text-left
+          = uitslag.last
 
   - if include_presences
     td.py-1.pl-0.w-1.nowrap.align-middle.strong.text-center
