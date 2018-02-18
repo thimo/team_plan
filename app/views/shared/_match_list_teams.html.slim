@@ -4,21 +4,18 @@
 - team ||= nil
 
 tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through}"]
-  td.py-1
-    .match-row-header
-      .match-datetime.small.align-bottom
+  td
+    .match-row-header.small
+      .match-datetime.color-blue-grey
         - if compact
           span.pr-1
             = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
-          span.color-blue-grey.pr-1
+          span.pr-1
             = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
         - else
           span.pr-1
             | #{I18n.l match.started_at, format: :time_short}
-      / - if match.uitslag
-      /   .match-result.text-center.strong
-      /     = match.uitslag
-      .match-type.small.text-right.align-bottom.color-blue-grey-lighter
+      .match-type.text-right.color-blue-grey-lighter
         = match.competition.competitiesoort
 
     .match-teams
@@ -44,6 +41,7 @@ tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through
               = match.uitteam
         - else
           = match.uitteam
+
     - if match.uitslag
       .match-row-header
         .match-result.text-center.strong
