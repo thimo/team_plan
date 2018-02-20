@@ -22,9 +22,8 @@
                   th[colspan="100"]
                     = "#{l date, format: :weekday} "
                     = "#{l date, format: :date_long} "
-              - matches.each do |match|
-                tbody
-                  = render 'shared/match_list_teams', match: match
+              tbody
+                = render partial: 'shared/match', collection: matches, cache: true
 
   .col-md-6
     section.box-typical
@@ -42,5 +41,4 @@
                   = "#{l date, format: :weekday} "
                   = "#{l date, format: :date_long} "
             tbody
-              - matches.each do |match|
-                = render 'shared/match_list_teams', match: match
+              = render partial: 'shared/match', collection: matches, cache: true

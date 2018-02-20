@@ -27,21 +27,21 @@ section.box-typical.schedule-list
                 th[colspan="100"]
                   | #{l date, format: :weekday} #{l date, format: :date_long}
             tbody
-              - matches.each do |match|
-                = render 'shared/match_list_teams',
-                  match: match,
-                  disable_line_through: disable_line_through,
-                  include_presences: include_presences,
-                  team: team
+              = render partial: 'shared/match',
+                collection: matches,
+                disable_line_through: disable_line_through,
+                include_presences: include_presences,
+                team: team,
+                cache: true
         - else
           tbody
-            - matches.each do |match|
-                = render 'shared/match_list_teams',
-                  match: match,
-                  compact: true,
-                  disable_line_through: disable_line_through,
-                  include_presences: include_presences,
-                  team: team
+            = render partial: 'shared/match',
+              collection: matches,
+              compact: true,
+              disable_line_through: disable_line_through,
+              include_presences: include_presences,
+              team: team,
+              cache: true
       - else
         tbody
           tr
