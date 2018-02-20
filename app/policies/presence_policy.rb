@@ -1,6 +1,6 @@
 class PresencePolicy < ApplicationPolicy
   def update?
-    return false if @record.presentable.afgelast?
+    return false if @record.presentable.inactive?
 
     @user.admin? ||
     @user.club_staff? ||

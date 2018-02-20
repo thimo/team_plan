@@ -87,4 +87,12 @@ class Match < ApplicationRecord
   def self.new_match_datetime
     Time.zone.today.at_middle_of_day
   end
+
+  def active?
+    !afgelast?
+  end
+
+  def inactive?
+    !active?
+  end
 end
