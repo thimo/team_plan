@@ -29,18 +29,13 @@ section.box-typical.schedule-list
             tbody
               = render partial: 'shared/match',
                 collection: matches,
-                disable_line_through: disable_line_through,
-                include_presences: include_presences,
-                team: team,
+                locals: { disable_line_through: disable_line_through, include_presences: include_presences, team: team },
                 cache: true
         - else
           tbody
             = render partial: 'shared/match',
               collection: matches,
-              compact: true,
-              disable_line_through: disable_line_through,
-              include_presences: include_presences,
-              team: team,
+              locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team },
               cache: true
       - else
         tbody
