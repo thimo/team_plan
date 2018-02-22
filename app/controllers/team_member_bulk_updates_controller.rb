@@ -12,7 +12,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
     %w[player coach trainer].each do |type|
       ids = params[type.pluralize]
       ids.each do |id|
-        member = Member.find(id)
+        member = Member.find_by(id: id)
         unless member.nil?
           @team_member = @team.team_members.new(member: member, role: TeamMember.roles["#{type}"])
           @team_member.status = @team.status
