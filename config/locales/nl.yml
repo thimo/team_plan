@@ -63,6 +63,7 @@ nl:
       team_member:
         role: Rol
         name: Naam
+        member: Teamgenoot
         member_id: Teamgenoot
         field_positions: Veldpositie
         field_position_ids: Veldpositie

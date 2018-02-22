@@ -1,5 +1,5 @@
-= simple_form_for [@team, @team_member], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [@team, @team_member], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
   - if @team_member.persisted?
     .form-group.row
@@ -7,10 +7,10 @@
       .col-md-9.form-control-static
         = @team_member.member.name
   - else
-    = f.input :member_id, collection: Member.sportlink_active.asc, value_method: :id, label_method: :name_and_born_on, input_html: { data: { controller: 'team-member-select2' } }
+    = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on, { include_blank: true }, { data: { controller: 'team-member-select2' } }
 
   - if policy(@team_member).set_role?
-    = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :role}, layout: 'input/col_3_9_wrapper'
+    = f.collection_radio_buttons :role, TeamMember.roles_i18n, :first, :second
 
   - if @team_member.persisted?
     - if @team_member.player?
@@ -28,7 +28,7 @@
     = f.input :status
 
   - if policy(@team_member).set_initial_status?
-    = render partial: 'input/enum_radio_buttons', locals: { f: f, field: :initial_status }, layout: 'input/col_3_9_wrapper'
+    = f.collection_radio_buttons :initial_status, TeamMember.initial_statuses_i18n, :first, :second
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team_member.new_record? ? @team : @team_member.team, class: 'btn btn-secondary-outline btn-inline'
