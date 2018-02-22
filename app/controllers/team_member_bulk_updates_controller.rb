@@ -9,7 +9,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
   def create
     count = 0
 
-    %w[player coach trainer team_parent].each do |type|
+    %w[player coach trainer].each do |type|
       ids = params[type.pluralize]
       ids.each do |id|
         member = Member.find(id)
