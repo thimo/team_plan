@@ -15,30 +15,18 @@
 
   hr
 
-  = form_with url: team_team_member_bulk_updates_path(@team, from: params[:from]), method: :post do
-    .form-group.row
-      label.col-sm-2.col-form-label Spelers
-      .col-sm-10
-        = select_tag :players, options_from_collection_for_select(@members.sportlink_active.sportlink_player.asc, :id, :name_and_born_on),
-          multiple: true,
-          class: 'form-control select2-hidden-accessible',
-          data: { controller: 'team-member-multiple-select2' }
+  = bootstrap_form_with url: team_team_member_bulk_updates_path(@team, from: params[:from]), method: :post, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f|
+    = f.collection_select :players, @members.sportlink_active.sportlink_player.asc, :id, :name_and_born_on, { label: "Spelers" },
+      multiple: true,
+      data: { controller: 'team-member-multiple-select2' }
 
-    .form-group.row
-      label.col-sm-2.col-form-label Coaches
-      .col-sm-10
-        = select_tag :coaches, active_members_as_options,
-          multiple: true,
-          class: 'form-control select2-hidden-accessible',
-          data: { controller: 'team-member-multiple-select2' }
+    = f.collection_select :coaches, @members.sportlink_active.asc, :id, :name_and_born_on, { label: "Coaches" },
+      multiple: true,
+      data: { controller: 'team-member-multiple-select2' }
 
-    .form-group.row
-      label.col-sm-2.col-form-label Trainers
-      .col-sm-10
-        = select_tag :trainers, active_members_as_options,
-          multiple: true,
-          class: 'form-control select2-hidden-accessible',
-          data: { controller: 'team-member-multiple-select2' }
+    = f.collection_select :trainers, @members.sportlink_active.asc, :id, :name_and_born_on, { label: "Trainers" },
+      multiple: true,
+      data: { controller: 'team-member-multiple-select2' }
 
     = submit_tag "Toevoegen", class: "btn btn-primary btn-inline"
     = link_to "Annuleren", @team, class: 'btn btn-secondary-outline btn-inline'
