@@ -19,7 +19,7 @@
     .form-group.row
       label.col-sm-2.col-form-label Spelers
       .col-sm-10
-        = select_tag :players, options_from_collection_for_select(@members.sportlink_active.sportlink_player, :id, :name_and_born_on),
+        = select_tag :players, options_from_collection_for_select(@members.sportlink_active.sportlink_player.asc, :id, :name_and_born_on),
           multiple: true,
           class: 'form-control select2-hidden-accessible',
           data: { controller: 'team-member-multiple-select2' }
