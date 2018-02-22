@@ -1,12 +1,12 @@
 class Note < ApplicationRecord
-  belongs_to :user, required: true
-  belongs_to :team, required: true
+  belongs_to :user
+  belongs_to :team
   belongs_to :member, optional: true
   has_paper_trail
 
   enum visibility: { self: 0, staff: 1, member: 2 }
 
-  validates_presence_of :title, :body, :visibility
+  validates_presence_of :title, :body, :visibility, :user, :team
 
   scope :desc, -> { order(created_at: :desc) }
 

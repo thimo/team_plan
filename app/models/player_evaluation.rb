@@ -3,8 +3,8 @@ class PlayerEvaluation < ApplicationRecord
   RATING_OPTIONS = [["zeer goed", "9"], ["goed", "8"], ["voldoende", "6"], ["matig", "5"], ["onvoldoende", "4"]]
   ADVISE_NEXT_SEASON_OPTIONS = %w(hoger zelfde lager)
 
-  belongs_to :team_evaluation, required: true, touch: true
-  belongs_to :team_member, required: true, touch: true
+  belongs_to :team_evaluation, touch: true
+  belongs_to :team_member, touch: true
   has_paper_trail
 
   validates_presence_of :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :advise_next_season, :prefered_foot, if: -> { team_evaluation.enable_validation? && team_member.active? }
