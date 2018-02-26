@@ -16,13 +16,4 @@ $(document).on('turbolinks:load', () => {
   }).on('shown.bs.modal', (event) => {
     $('#teamMemberNew input[type=submit]').focus();
   })
-
-  $('#member_allocation_filters_field_position').selectize();
-  $('#member_allocation_filters_team').selectize();
-})
-
-$(document).on('turbolinks:before-cache', () => {
-  $('.selectized').each((index, target) => {
-    target.selectize.destroy()
-  })
 })

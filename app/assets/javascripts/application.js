@@ -17,7 +17,6 @@
 //= require autosize/dist/autosize
 //= require notie/dist/notie
 //= require jquery-ujs/src/rails
-//= require selectize/dist/js/standalone/selectize
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //= require bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min.js
 //= require chart.js/dist/Chart
