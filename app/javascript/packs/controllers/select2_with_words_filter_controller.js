@@ -3,7 +3,6 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   connect() {
     $(this.element).select2({
-      placeholder: "Selecteer leden",
       matcher: function(params, data) {
         var i, terms;
         if (!params.term) {

@@ -7,7 +7,9 @@
       .col-md-9.form-control-static
         = @team_member.member.name
   - else
-    = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on, { include_blank: true }, { data: { controller: 'team-member-select2' } }
+    = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on,
+      { include_blank: true },
+      { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer lid' } }
 
   - if policy(@team_member).set_role?
     = f.collection_radio_buttons :role, TeamMember.roles_i18n, :first, :second

@@ -7,7 +7,7 @@
    #{link_to "het individuele formulier", new_team_team_member_path(@team)} toevoegen.
 
   - if @team.active?
-    .alert.alert-warning
+    .alert.alert-info
       strong
         = "Let op: "
       | Nieuwe teamgenoten worden direct geactiveerd. Toevoegen als 'concept'
@@ -18,15 +18,15 @@
   = bootstrap_form_with url: team_team_member_bulk_updates_path(@team, from: params[:from]), method: :post, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f|
     = f.collection_select :players, @members.sportlink_active.sportlink_player.asc, :id, :name_and_born_on, { label: "Spelers" },
       multiple: true,
-      data: { controller: 'team-member-multiple-select2' }
+      data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer spelers' }
 
     = f.collection_select :coaches, @members.sportlink_active.asc, :id, :name_and_born_on, { label: "Coaches" },
       multiple: true,
-      data: { controller: 'team-member-multiple-select2' }
+      data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer coaches' }
 
     = f.collection_select :trainers, @members.sportlink_active.asc, :id, :name_and_born_on, { label: "Trainers" },
       multiple: true,
-      data: { controller: 'team-member-multiple-select2' }
+      data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer trainers' }
 
     = submit_tag "Toevoegen", class: "btn btn-primary btn-inline"
     = link_to "Annuleren", @team, class: 'btn btn-secondary-outline btn-inline'
