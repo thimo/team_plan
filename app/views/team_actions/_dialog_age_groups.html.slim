@@ -1,35 +1,37 @@
 div[class="#{column_class}"]
   .form-check
-    label.form-check-label.strong
-      input.form-check-input.age-groups-male-select-toggle[type="checkbox" checked]
+    input.form-check-input.age-groups-male-select-toggle#age_group_ids_male[type="checkbox" checked]
+    label.form-check-label.strong[for="age_group_ids_male"]
       |  Mannen
   - @age_groups_male.each do |age_group|
-    .form-check
-      label.form-check-label
-        = f.check_box 'age_group_ids[]', { checked: true, class: 'form-check-input age-groups-male-select' }, age_group.id, nil
-        = " #{age_group.name}"
-        
+    = f.check_box 'age_group_ids[]', { checked: true,
+      class: 'age-groups-male-select',
+      id: "age_group_ids_#{age_group.id}",
+      label: age_group.name },
+      age_group.id, nil
+
 div[class="#{column_class}"]
   .form-check
-    label.form-check-label.strong
-      input.form-check-input.age-groups-female-select-toggle[type="checkbox" checked]
+    input.form-check-input.age-groups-female-select-toggle#age_group_ids_female[type="checkbox" checked]
+    label.form-check-label.strong[for="age_group_ids_female"]
       |  Vrouwen
   - @age_groups_female.each do |age_group|
-    .form-check
-      label.form-check-label
-        = f.check_box 'age_group_ids[]', { checked: true, class: 'form-check-input age-groups-female-select' }, age_group.id, nil
-        = " #{age_group.name}"
+    = f.check_box 'age_group_ids[]', { checked: true,
+      class: 'age-groups-female-select',
+      id: "age_group_ids_#{age_group.id}",
+      label: age_group.name },
+      age_group.id, nil
 
 script
   | $('.age-groups-male-select-toggle').change(function() {
-  |   checkedValue = this.checked;
-  |   $('input.age-groups-male-select').each(function(index) {
-  |     this.checked = checkedValue
-  |   })
-  | });
-  | $('.age-groups-female-select-toggle').change(function() {
-  |   checkedValue = this.checked;
-  |   $('input.age-groups-female-select').each(function(index) {
-  |     this.checked = checkedValue
-  |   })
-  | })
+      checkedValue = this.checked;
+      $('input.age-groups-male-select').each(function(index) {
+        this.checked = checkedValue
+      })
+    });
+    $('.age-groups-female-select-toggle').change(function() {
+      checkedValue = this.checked;
+      $('input.age-groups-female-select').each(function(index) {
+        this.checked = checkedValue
+      })
+    })
