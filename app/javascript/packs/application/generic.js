@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', () => {
+document.addEventListener("turbolinks:load", () => {
   // Init font awesome icons
   // TODO also call after partial update
   FontAwesome.dom.i2svg();
@@ -41,7 +41,7 @@ $(document).on('turbolinks:load', () => {
   initCommentTabs();
 });
 
-$(document).on('turbolinks:before-cache', () => {
+document.addEventListener("turbolinks:before-cache", () => {
   $('select.field_positions').each((index, target) => {
     $(target).select2('destroy');
   })

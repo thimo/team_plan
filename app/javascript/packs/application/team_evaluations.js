@@ -32,7 +32,7 @@ function apply_class_for_rating(target, rating) {
   }
 }
 
-$(document).on('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", () => {
   $('.evaluation select.evaluation-rating').each((index, target) => {
     setEvaluationClass(target)
   })

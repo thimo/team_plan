@@ -7,7 +7,7 @@ const dispatchUnloadEvent = function() {
 addEventListener("beforeunload", dispatchUnloadEvent)
 addEventListener("turbolinks:before-render", dispatchUnloadEvent)
 
-$(document).on('turbolinks:load', () => {
+document.addEventListener("turbolinks:load", () => {
   // Restore scroll position
   const scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition && !!localStorage.getItem(scrollPosition)) {
@@ -15,7 +15,7 @@ $(document).on('turbolinks:load', () => {
   }
 });
 
-$(document).on('turbolinks:unload', () => {
+document.addEventListener("turbolinks:unload", () => {
   // Store scroll position for pages with data-scroll-position
   const scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition) {
