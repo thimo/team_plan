@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", () => {
   $('#team_evaluation_bulk_updates .team-select-toggle').change(function() {
     var checkedValue = this.checked;
     $('input.team-select').each(function(index) {
@@ -7,5 +7,5 @@ $(document).on('turbolinks:load', function() {
   })
 });
 
-$(document).on('turbolinks:before-cache', () => {
+document.addEventListener("turbolinks:before-cache", () => {
 })

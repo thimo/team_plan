@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", () => {
   if (typeof trainingChartData != 'undefined') {
     showChart('trainingChart', trainingChartData)
   }

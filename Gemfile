@@ -85,7 +85,8 @@ group :test do
   # gem 'mini_backtrace'
   gem 'launchy' # For 'save_and_open_page' debugging during testing
   gem 'minitest'
-  gem 'minitest-rails'
+  # Disabled to prevent "uninitialized constant Minitest::Rails::TestUnit"
+  # gem 'minitest-rails'
   gem 'selenium-webdriver'
 end
 

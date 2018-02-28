@@ -1,5 +1,4 @@
-// $(document).ready(function(){
-$(document).on('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", function() {
 /* ==========================================================================
     Header mobile menu
     ========================================================================== */

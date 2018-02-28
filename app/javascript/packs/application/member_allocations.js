@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', () => {
+document.addEventListener("turbolinks:load", () => {
   $('#teamMemberNew').on('show.bs.modal', (event) => {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var member_id = button.data('member-id')

@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", () => {
   $('form[data-behavior="autosave"]').each((index, form) => {
     autosaveForm(form)
   });
