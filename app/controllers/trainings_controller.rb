@@ -23,7 +23,7 @@ class TrainingsController < ApplicationController
   end
 
   def edit
-    @latest_trainings = policy_scope(@training.team.trainings).in_period(2.weeks.ago, 0.days.ago).desc.active
+    @trainings_with_program = policy_scope(@training.team.trainings).with_program.limit(4).desc.active
   end
 
   def update

@@ -16,6 +16,7 @@ class Training < ApplicationRecord
   scope :in_period,    -> (start_date, end_date) { where('started_at > ?', start_date).where('started_at < ?', end_date)}
   scope :asc,          -> { order(started_at: :asc) }
   scope :desc,         -> { order(started_at: :desc) }
+  scope :with_program, -> { where.not(body: nil).where.not(body: '') }
 
   # Accessors for time aspects of start and end dates
   def start_time

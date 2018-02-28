@@ -23,10 +23,10 @@
     = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
 
 
-- if @latest_trainings.present?
-  h5.mt-5 Vorige trainingen
+- if @trainings_with_program.present?
+  h5.mt-5 Vorige programma's
 
-  - @latest_trainings.each do |training|
+  - @trainings_with_program.each do |training|
     hr
     .row
       .col-md-3
