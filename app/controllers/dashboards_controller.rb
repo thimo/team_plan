@@ -48,7 +48,7 @@ class DashboardsController < ApplicationController
 
   def cancellations
     authorize Match, :show?
-    @cancelled_matches = policy_scope(Match).own.afgelast
+    @cancelled_matches = policy_scope(Match).own.afgelast.asc
   end
 
   private

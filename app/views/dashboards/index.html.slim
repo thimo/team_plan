@@ -20,20 +20,26 @@
       /     = render "schedules/list", team: team, schedules: schedules, title: "Kalender #{team.name}"
 
       - if @not_played_matches.present?
-        - cache @not_played_matches
-          = render "matches/list", matches: @not_played_matches, title: link_to("Volgende wedstrijden", program_dashboard_index_path, title: "Bekijk het programma voor de komende week")
+        = render "matches/list",
+          matches: @not_played_matches,
+          title: link_to("Volgende wedstrijden", program_dashboard_index_path, title: "Bekijk het programma voor de komende week")
 
       - if @played_matches.present?
-        - cache @played_matches
-          = render "matches/list", matches: @played_matches, title: link_to("Laatste uitslagen", results_dashboard_index_path, title: "Bekijk alle uitslagen van de afgelopen week")
+        = render "matches/list",
+          matches: @played_matches,
+          title: link_to("Laatste uitslagen", results_dashboard_index_path, title: "Bekijk alle uitslagen van de afgelopen week")
 
       - if @open_team_evaluations.present?
-        - cache @open_team_evaluations
-          = render "team_evaluations/list", team_evaluations: @open_team_evaluations, title: "Teamevaluaties", disable_header: true
+        = render "team_evaluations/list",
+          team_evaluations: @open_team_evaluations,
+          title: "Teamevaluaties",
+          disable_header: true
 
       - if @todos.present?
         - cache @todos
-          = render "todos/list", todos_active: @todos.active, todos_defered: @todos.defered
+          = render "todos/list",
+          todos_active: @todos.active,
+          todos_defered: @todos.defered
 
     .col-sm-6
       - cache [@age_groups_male, @age_groups_female]
