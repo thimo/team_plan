@@ -6,6 +6,12 @@
 }
 // Main logo
 .site-header {
+  position: relative;
+  top: auto;
+  left: auto;
+  padding: 10px 5px 0 0;
+  height: 62px;
+  
   .site-logo {
     margin-right: 10px;
 
