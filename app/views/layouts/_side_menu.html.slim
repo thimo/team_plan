@@ -1,42 +1,232 @@
-nav.side-menu
-  - if policy(:org).show? || policy(:intranet).show? || policy(:admin).show?
-    section.top-nav
-      ul.nav.nav-tabs
+.sidebar
+  nav.sidebar-nav
+  ul.nav
+    li.nav-item
+      a.nav-link[href="index.html"]
+        i.icon-speedometer
+        |  Dashboard
+        span.badge.badge-primary
+          | NEW
+    li.nav-title
+      |  Theme
+    li.nav-item
+      a.nav-link[href="colors.html"]
+        i.icon-drop
+        |  Colors
+    li.nav-item
+      a.nav-link[href="typography.html"]
+        i.icon-pencil
+        |  Typograhy
+    li.nav-title
+      |  Components
+    li.nav-item.nav-dropdown
+      a.nav-link.nav-dropdown-toggle[href="#"]
+        i.icon-puzzle
+        |  Base
+      ul.nav-dropdown-items
         li.nav-item
-          = link_to dashboard_index_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
-            i.far.fa-futbol
-        - if policy(:org).show?
+          a.nav-link[href="base-breadcrumb.html"]
+            i.icon-puzzle
+            |  Breadcrumb
+        li.nav-item
+          a.nav-link[href="base-cards.html"]
+            i.icon-puzzle
+            |  Cards
+        li.nav-item
+          a.nav-link[href="base-carousel.html"]
+            i.icon-puzzle
+            |  Carousel
+        li.nav-item
+          a.nav-link[href="base-collapse.html"]
+            i.icon-puzzle
+            |  Collapse
+        li.nav-item
+          a.nav-link[href="base-forms.html"]
+            i.icon-puzzle
+            |  Forms
+        li.nav-item
+          a.nav-link[href="base-jumbotron.html"]
+            i.icon-puzzle
+            |  Jumbotron
+        li.nav-item
+          a.nav-link[href="base-list-group.html"]
+            i.icon-puzzle
+            |  List group
+        li.nav-item
+          a.nav-link[href="base-navs.html"]
+            i.icon-puzzle
+            |  Navs
+        li.nav-item
+          a.nav-link[href="base-pagination.html"]
+            i.icon-puzzle
+            |  Pagination
+        li.nav-item
+          a.nav-link[href="base-popovers.html"]
+            i.icon-puzzle
+            |  Popovers
+        li.nav-item
+          a.nav-link[href="base-progress.html"]
+            i.icon-puzzle
+            |  Progress
+        li.nav-item
+          a.nav-link[href="base-switches.html"]
+            i.icon-puzzle
+            |  Switches
+        li.nav-item
+          a.nav-link[href="base-tables.html"]
+            i.icon-puzzle
+            |  Tables
+        li.nav-item
+          a.nav-link[href="base-tabs.html"]
+            i.icon-puzzle
+            |  Tabs
+        li.nav-item
+          a.nav-link[href="base-tooltips.html"]
+            i.icon-puzzle
+            |  Tooltips
+    li.nav-item.nav-dropdown
+      a.nav-link.nav-dropdown-toggle[href="#"]
+        i.icon-cursor
+        |  Buttons
+      ul.nav-dropdown-items
+        li.nav-item
+          a.nav-link[href="buttons-buttons.html"]
+            i.icon-cursor
+            |  Buttons
+        li.nav-item
+          a.nav-link[href="buttons-button-group.html"]
+            i.icon-cursor
+            |  Buttons Group
+        li.nav-item
+          a.nav-link[href="buttons-dropdowns.html"]
+            i.icon-cursor
+            |  Dropdowns
+        li.nav-item
+          a.nav-link[href="buttons-social-buttons.html"]
+            i.icon-cursor
+            |  Social Buttons
+    li.nav-item
+      a.nav-link[href="charts.html"]
+        i.icon-pie-chart
+        |  Charts
+    li.nav-item.nav-dropdown
+      a.nav-link.nav-dropdown-toggle[href="#"]
+        i.icon-star
+        |  Icons
+      ul.nav-dropdown-items
+        li.nav-item
+          a.nav-link[href="icons-flags.html"]
+            i.icon-star
+            |  Flags
+            span.badge.badge-success
+              | NEW
+        li.nav-item
+          a.nav-link[href="icons-font-awesome.html"]
+            i.icon-star
+            |  Font Awesome
+            span.badge.badge-secondary
+              | 4.7
+        li.nav-item
+          a.nav-link[href="icons-simple-line-icons.html"]
+            i.icon-star
+            |  Simple Line Icons
+    li.nav-item.nav-dropdown
+      a.nav-link.nav-dropdown-toggle[href="#"]
+        i.icon-bell
+        |  Notifications
+      ul.nav-dropdown-items
+        li.nav-item
+          a.nav-link[href="notifications-alerts.html"]
+            i.icon-bell
+            |  Alerts
+        li.nav-item
+          a.nav-link[href="notifications-badge.html"]
+            i.icon-bell
+            |  Badge
+        li.nav-item
+          a.nav-link[href="notifications-modals.html"]
+            i.icon-bell
+            |  Modals
+    li.nav-item
+      a.nav-link[href="widgets.html"]
+        i.icon-calculator
+        |  Widgets
+        span.badge.badge-primary
+          | NEW
+    li.divider
+    li.nav-title
+      |  Extras
+    li.nav-item.nav-dropdown
+      a.nav-link.nav-dropdown-toggle[href="#"]
+        i.icon-star
+        |  Pages
+      ul.nav-dropdown-items
+        li.nav-item
+          a.nav-link[href="pages-login.html" target="_top"]
+            i.icon-star
+            |  Login
+        li.nav-item
+          a.nav-link[href="pages-register.html" target="_top"]
+            i.icon-star
+            |  Register
+        li.nav-item
+          a.nav-link[href="pages-404.html" target="_top"]
+            i.icon-star
+            |  Error 404
+        li.nav-item
+          a.nav-link[href="pages-500.html" target="_top"]
+            i.icon-star
+            |  Error 500
+    li.nav-item.mt-auto
+      a.nav-link.nav-link-success[href="http://coreui.io/" target="_top"]
+        i.icon-cloud-download
+        |  Download CoreUI
+    li.nav-item
+      a.nav-link.nav-link-danger[href="http://coreui.io/pro/" target="_top"]
+        i.icon-layers
+        |  Try CoreUI
+        strong
+          | PRO
+
+
+    - if policy(:org).show? || policy(:intranet).show? || policy(:admin).show?
+      section.top-nav
+        ul.nav.nav-tabs
           li.nav-item
-            = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
-              i.far.fa-sitemap
-        - if policy(:intranet).show?
-          li.nav-item
-            = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
-              i.far.fa-folder-open
-        - if policy(:admin).show?
-          li.nav-item
-            = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
-              i.far.fa-cog
+            = link_to dashboard_index_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
+              i.far.fa-futbol
+          - if policy(:org).show?
+            li.nav-item
+              = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
+                i.far.fa-sitemap
+          - if policy(:intranet).show?
+            li.nav-item
+              = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
+                i.far.fa-folder-open
+          - if policy(:admin).show?
+            li.nav-item
+              = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
+                i.far.fa-cog
 
-  = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
-  = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
-  = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
+    = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
+    = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
+    = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
 
-  section[style="flex-grow: 1;"]
+    section[style="flex-grow: 1;"]
 
-  section
-    ul.side-menu-list
-      li.brown
-        = link_to support_path do
-          i.far.fa-fw.fa-question-circle
-          span.lbl
-            | Support
+    section
+      ul.side-menu-list
+        li.brown
+          = link_to support_path do
+            i.far.fa-fw.fa-question-circle
+            span.lbl
+              | Support
 
-  section.supplier
-    ul.side-menu-list
-      li.red
-        a[href="https://www.defrog.nl/" target="_blank"]
-          i.fas.fa-fw.fa-heart
-          span.lbl
-            | Handcrafted in Arnhem by
-            = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'
+    section.supplier
+      ul.side-menu-list
+        li.red
+          a[href="https://www.defrog.nl/" target="_blank"]
+            i.fas.fa-fw.fa-heart
+            span.lbl
+              | Handcrafted in Arnhem by
+              = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'

@@ -2,7 +2,8 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
- *= require bootstrap/scss/bootstrap
+ * Use require for speedier compiles after editing a partial scss files
+ *
  *= require select2/src/scss/core
  *= require notie/src/notie
  *= require selectize/dist/css/selectize.bootstrap3
@@ -12,12 +13,15 @@
  *= require rails_bootstrap_forms
  */
 
-@import 'startui/main';
-@import 'startui/chat';
-@import 'startui/login';
+@import 'bootstrap-variables';
+@import 'bootstrap/scss/bootstrap';
+@import 'core-variables';
+@import '@coreui/ajax/Static_Starter_GULP/src/scss/core/core';
+@import 'custom';
+
 @import './*';
 @import './admin/*';
 @import './org/*';
 @import './intranet/*';
 @import 'custom/*';
-@import 'startui/overwrite';
+// @import 'startui/overwrite';

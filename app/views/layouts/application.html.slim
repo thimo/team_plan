@@ -6,7 +6,7 @@ html
     meta[charset="utf-8"]
     meta name="description" content="#{full_title(yield(:title))}"
     meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     / TurboLinks caching disabled to prevent flickering (fonts-init)
     meta name="turbolinks-cache-control" content="no-cache"
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
@@ -18,39 +18,61 @@ html
     = javascript_include_tag 'application'
     = javascript_pack_tag 'application'
 
-  body.with-side-menu[class="#{yield(:body_class)}"]
+  / body.with-side-menu[class="#{yield(:body_class)}"]
+  body.app.header-fixed.aside-menu-fixed.aside-menu-hidden[class="#{yield(:body_class)}"]
     - unless Rails.env.production? || Rails.env.development?
       div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
         |  -= #{Rails.env} =-
 
     = render 'layouts/header'
-    = render 'layouts/side_menu'
 
-    .page-content
-      .container-fluid
-        header.section-header
-          .header-buttons
-            = yield(:action_buttons)
-          h3
-            = yield(:title)
-            small.pl-2.color-blue-grey
-              = yield(:subtitle)
-            - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
-              span.ml-3.label[class="#{label_object.color_class_for_status}"]
-                = label_object.status_i18n
-          .color-blue-grey.small
-            = yield(:hint)
+    .app-body
+      = render 'layouts/side_menu'
 
-          ol.breadcrumb.breadcrumb-simple
-            = render_breadcrumbs :tag => :li, :separator => ""
+      main.main
+        ol.breadcrumb
+          li.breadcrumb-item
+            | Home
+          li.breadcrumb-item
+            a[href="#"]
+              | Admin
+          li.breadcrumb-item.active
+            | Dashboard
+          li.breadcrumb-menu.d-md-down-none
+            .btn-group[role="group" aria-label="Button group"]
+              a.btn[href="#"]
+                i.icon-speech
+              a.btn[href="./"]
+                i.icon-graph
+                |   Dashboard
+              a.btn[href="#"]
+                i.icon-settings
+                |   Settings
 
-        = content_for?(:content) ? yield(:content) : yield
+        .container-fluid
+          header.section-header
+            .header-buttons
+              = yield(:action_buttons)
+            h3
+              = yield(:title)
+              small.pl-2.color-blue-grey
+                = yield(:subtitle)
+              - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
+                span.ml-3.label[class="#{label_object.color_class_for_status}"]
+                  = label_object.status_i18n
+            .color-blue-grey.small
+              = yield(:hint)
 
-        = render 'layouts/footer'
+            ol.breadcrumb.breadcrumb-simple
+              = render_breadcrumbs :tag => :li, :separator => ""
 
-    = render 'layouts/flash'
+          = content_for?(:content) ? yield(:content) : yield
 
-    / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
-    / = react_component('Copyright', year: Time.zone.today.year)
+          = render 'layouts/footer'
 
-    #generic-modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+      = render 'layouts/flash'
+
+      / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
+      / = react_component('Copyright', year: Time.zone.today.year)
+
+      #generic-modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]
