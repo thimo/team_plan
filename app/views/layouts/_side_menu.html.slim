@@ -2,189 +2,190 @@
   nav.sidebar-nav
   ul.nav
     li.nav-item
-      a.nav-link[href="index.html"]
-        i.icon-speedometer
-        |  Dashboard
+      a.nav-link.active[href="index.html"]
+        i
+          i.far.fa-fw.fa-tachometer
+        | Dashboard
         span.badge.badge-primary
           | NEW
+
+    li.nav-item.dirty-blue class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
+      = link_to dashboard_index_path, class: "nav-link"
+        span
+          i
+            i.far.fa-fw.fa-tachometer
+          span.lbl
+            | Dashboard
+
+    li.nav-item.green class="#{'active' if current_page?(program_dashboard_index_path)}"
+      = link_to program_dashboard_index_path, class: "nav-link"
+        span
+          i
+            i.far.fa-fw.fa-futbol
+          span.lbl
+            | Programma
+
+    li.nav-item.grey class="#{'active' if current_page?(results_dashboard_index_path)}"
+      = link_to results_dashboard_index_path, class: "nav-link"
+        span
+          i
+            i.far.fa-fw.fa-trophy
+          span.lbl
+            | Uitslagen
+
+    li.nav-item.orange-red class="#{'active' if current_page?(cancellations_dashboard_index_path)}"
+      = link_to cancellations_dashboard_index_path, class: "nav-link"
+        span
+          i
+            i.far.fa-fw.fa-ban
+          span.lbl
+            | Afgelastingen
+
+    - if (season = policy_scope(Season).active.last).present?
+      li.nav-item.aquamarine class="#{'active' if current_page?(season_path(season))}"
+        = link_to season, class: "nav-link"
+          span
+            i
+              i.far.fa-fw.fa-users
+            span.lbl
+              | Teams
+
+    - if (season = policy_scope(Season).draft.last).present?
+      li.nav-item.gold class="#{'active' if current_page?(season_path(season))}"
+        = link_to season, class: "nav-link"
+          span
+            i
+              i.far.fa-fw.fa-calendar-alt
+            span.lbl
+              | #{season.name}
+
+
+    - if current_user.active_teams.size > 0
+      li.nav-title
+        | Mijn teams
+      - current_user.active_teams.asc.each do |team|
+        li.nav-item.green
+          = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+            i
+              i.far.fa-fw.fa-futbol
+            = team.name
+
+    - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
+      li.nav-title
+        | Favorieten
+      - human_sort(current_user.favorite_teams, :name).each do |team|
+        li.nav-item.gold
+          = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+            i
+              i.far.fa-fw.fa-star
+            = team.name
+
+      - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
+        li.nav-item.gold
+          = link_to age_group, class: "nav-link #{'active' if current_page?(age_group_path(age_group))}"
+            i
+              i.far.fa-fw.fa-star
+            = age_group.name
+
     li.nav-title
-      |  Theme
-    li.nav-item
-      a.nav-link[href="colors.html"]
-        i.icon-drop
-        |  Colors
-    li.nav-item
-      a.nav-link[href="typography.html"]
-        i.icon-pencil
-        |  Typograhy
-    li.nav-title
-      |  Components
+      | Components
     li.nav-item.nav-dropdown
       a.nav-link.nav-dropdown-toggle[href="#"]
         i.icon-puzzle
-        |  Base
+        | Base
       ul.nav-dropdown-items
         li.nav-item
           a.nav-link[href="base-breadcrumb.html"]
             i.icon-puzzle
-            |  Breadcrumb
+            | Breadcrumb
         li.nav-item
           a.nav-link[href="base-cards.html"]
             i.icon-puzzle
-            |  Cards
+            | Cards
         li.nav-item
           a.nav-link[href="base-carousel.html"]
             i.icon-puzzle
-            |  Carousel
+            | Carousel
         li.nav-item
           a.nav-link[href="base-collapse.html"]
             i.icon-puzzle
-            |  Collapse
+            | Collapse
         li.nav-item
           a.nav-link[href="base-forms.html"]
             i.icon-puzzle
-            |  Forms
+            | Forms
         li.nav-item
           a.nav-link[href="base-jumbotron.html"]
             i.icon-puzzle
-            |  Jumbotron
+            | Jumbotron
         li.nav-item
           a.nav-link[href="base-list-group.html"]
             i.icon-puzzle
-            |  List group
+            | List group
         li.nav-item
           a.nav-link[href="base-navs.html"]
             i.icon-puzzle
-            |  Navs
+            | Navs
         li.nav-item
           a.nav-link[href="base-pagination.html"]
             i.icon-puzzle
-            |  Pagination
+            | Pagination
         li.nav-item
           a.nav-link[href="base-popovers.html"]
             i.icon-puzzle
-            |  Popovers
+            | Popovers
         li.nav-item
           a.nav-link[href="base-progress.html"]
             i.icon-puzzle
-            |  Progress
+            | Progress
         li.nav-item
           a.nav-link[href="base-switches.html"]
             i.icon-puzzle
-            |  Switches
+            | Switches
         li.nav-item
           a.nav-link[href="base-tables.html"]
             i.icon-puzzle
-            |  Tables
+            | Tables
         li.nav-item
           a.nav-link[href="base-tabs.html"]
             i.icon-puzzle
-            |  Tabs
+            | Tabs
         li.nav-item
           a.nav-link[href="base-tooltips.html"]
             i.icon-puzzle
-            |  Tooltips
-    li.nav-item.nav-dropdown
-      a.nav-link.nav-dropdown-toggle[href="#"]
-        i.icon-cursor
-        |  Buttons
-      ul.nav-dropdown-items
-        li.nav-item
-          a.nav-link[href="buttons-buttons.html"]
-            i.icon-cursor
-            |  Buttons
-        li.nav-item
-          a.nav-link[href="buttons-button-group.html"]
-            i.icon-cursor
-            |  Buttons Group
-        li.nav-item
-          a.nav-link[href="buttons-dropdowns.html"]
-            i.icon-cursor
-            |  Dropdowns
-        li.nav-item
-          a.nav-link[href="buttons-social-buttons.html"]
-            i.icon-cursor
-            |  Social Buttons
-    li.nav-item
-      a.nav-link[href="charts.html"]
-        i.icon-pie-chart
-        |  Charts
-    li.nav-item.nav-dropdown
-      a.nav-link.nav-dropdown-toggle[href="#"]
-        i.icon-star
-        |  Icons
-      ul.nav-dropdown-items
-        li.nav-item
-          a.nav-link[href="icons-flags.html"]
-            i.icon-star
-            |  Flags
-            span.badge.badge-success
-              | NEW
-        li.nav-item
-          a.nav-link[href="icons-font-awesome.html"]
-            i.icon-star
-            |  Font Awesome
-            span.badge.badge-secondary
-              | 4.7
-        li.nav-item
-          a.nav-link[href="icons-simple-line-icons.html"]
-            i.icon-star
-            |  Simple Line Icons
-    li.nav-item.nav-dropdown
-      a.nav-link.nav-dropdown-toggle[href="#"]
-        i.icon-bell
-        |  Notifications
-      ul.nav-dropdown-items
-        li.nav-item
-          a.nav-link[href="notifications-alerts.html"]
-            i.icon-bell
-            |  Alerts
-        li.nav-item
-          a.nav-link[href="notifications-badge.html"]
-            i.icon-bell
-            |  Badge
-        li.nav-item
-          a.nav-link[href="notifications-modals.html"]
-            i.icon-bell
-            |  Modals
-    li.nav-item
-      a.nav-link[href="widgets.html"]
-        i.icon-calculator
-        |  Widgets
-        span.badge.badge-primary
-          | NEW
+            | Tooltips
     li.divider
     li.nav-title
-      |  Extras
+      | Extras
     li.nav-item.nav-dropdown
       a.nav-link.nav-dropdown-toggle[href="#"]
         i.icon-star
-        |  Pages
+        | Pages
       ul.nav-dropdown-items
         li.nav-item
           a.nav-link[href="pages-login.html" target="_top"]
             i.icon-star
-            |  Login
+            | Login
         li.nav-item
           a.nav-link[href="pages-register.html" target="_top"]
             i.icon-star
-            |  Register
+            | Register
         li.nav-item
           a.nav-link[href="pages-404.html" target="_top"]
             i.icon-star
-            |  Error 404
+            | Error 404
         li.nav-item
           a.nav-link[href="pages-500.html" target="_top"]
             i.icon-star
-            |  Error 500
+            | Error 500
     li.nav-item.mt-auto
       a.nav-link.nav-link-success[href="http://coreui.io/" target="_top"]
         i.icon-cloud-download
-        |  Download CoreUI
+        | Download CoreUI
     li.nav-item
       a.nav-link.nav-link-danger[href="http://coreui.io/pro/" target="_top"]
         i.icon-layers
-        |  Try CoreUI
+        | Try CoreUI
         strong
           | PRO
 

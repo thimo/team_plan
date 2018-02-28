@@ -18,7 +18,6 @@ html
     = javascript_include_tag 'application', async: Rails.env.production?
     = javascript_pack_tag 'application', async: Rails.env.production?
 
-  / body.with-side-menu[class="#{yield(:body_class)}"]
   body.app.header-fixed.aside-menu-fixed.aside-menu-hidden[class="#{yield(:body_class)}"]
     - unless Rails.env.production? || Rails.env.development?
       div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]

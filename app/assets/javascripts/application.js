@@ -25,3 +25,5 @@
 //= require fa-regular
 //= require fa-solid
 //= require fontawesome
+//= require @coreui/ajax/Static_Starter_GULP/src/js/app
+//= require @coreui/ajax/Static_Starter_GULP/src/js/views/main
