@@ -40,11 +40,11 @@ document.addEventListener("turbolinks:load", function() {
 		if ($('body').hasClass('menu-left-opened')) {
 			$(this).removeClass('is-active');
 			$('body').removeClass('menu-left-opened');
-			$('html').css('overflow','auto');
+			// $('html').css('overflow','auto');
 		} else {
 			$(this).addClass('is-active');
 			$('body').addClass('menu-left-opened');
-			$('html').css('overflow','hidden');
+			// $('html').css('overflow','hidden');
 		}
 	});
 
