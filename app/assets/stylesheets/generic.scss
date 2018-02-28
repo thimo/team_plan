@@ -12,35 +12,16 @@
   text-decoration: line-through;
 }
 
-.box-typical-footer {
-  .pagination {
-    margin: 0;
-
-    a, span.current {
-      padding: 4px;
-    }
-  }
+b,
+strong,
+.b,
+.strong,
+.table thead th {
+  font-weight: 600;
 }
 
-.header-buttons {
-  float: right;
-
-  .btn-group {
-    a {
-      min-height: 38px;
-      min-width: 44px;
-    }
-  }
-}
-
-.dropdown-toggle {
-  a {
-    i {
-      display: inline-block;
-      width: 1rem;
-      height: 1rem;
-    }
-  }
+.nowrap {
+  white-space: nowrap;
 }
 
 .datepicker{
@@ -67,6 +48,13 @@
   &:hover {
     opacity: 1;
     transition: all .2s ease-in-out;
+  }
+}
+
+tbody tr.clickable {
+  cursor: pointer;
+  &:hover {
+    background-color: #f6f8fa;
   }
 }
 
@@ -116,16 +104,170 @@ th {
   }
 }
 
-.tabs-section-nav {
-  &.tabs-section-nav-inline {
-    .nav-link.active {
-      border-bottom: solid 3px #00a8ff;
-    }
-  }
-}
-
 tr.b-t-0 {
   td {
     border-top: none;
   }
+}
+
+@media (min-width: 576px) {
+  @for $i from 1 through 20 {
+    .width-sm-#{$i * 5} {
+      width: 5% * $i;
+    }
+  }
+}
+@for $i from 1 through 20 {
+  .width-#{$i * 5} {
+    width: 5% * $i;
+  }
+}
+
+.w-1 {
+  width: 1px;
+}
+.w-44 {
+  width: 44px;
+}
+
+// Make Bootstrap 4 breadcrumb work nicely with gem
+.breadcrumb li {
+  float: left;
+}
+
+.breadcrumb li + li::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: #636c72;
+  content: "/";
+}
+
+.breadcrumb li + li:hover::before {
+  text-decoration: underline;
+}
+
+.breadcrumb li + li:hover::before {
+  text-decoration: none;
+}
+
+.breadcrumb li.active {
+  color: #636c72;
+}
+// Extra alert CSS to support Devise
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #ebcccc;
+  color: #a94442;
+
+  hr {
+    border-top-color: #e4b9b9;
+  }
+
+  .alert-link {
+    color: #843534;
+  }
+}
+
+.alert-notice {
+  background-color: #dff0d8;
+  border-color: #d0e9c6;
+  color: #3c763d;
+
+  hr {
+    border-top-color: #c1e2b3;
+  }
+
+  .alert-link {
+    color: #2b542c;
+  }
+}
+
+.alert {
+  &.alert-notice {
+    &.alert-fill {
+      background-color: #46c35f;
+
+      .alert-btns .btn:hover {
+        color: #46c35f !important;
+      }
+    }
+  }
+}
+
+// Icons voor alerts
+// fa-check
+
+.fa-notice:before,
+.fa-success:before {
+  content: "\f00c";
+}
+// fa-info-circle
+// .fa-info:before {
+//   content: "\f05a";
+// }
+// fa-times
+.fa-alert:before,
+.fa-danger:before {
+  content: "\f00d";
+}
+
+// Generic styles
+
+.bootstrap-table .table a, .fixed-table-body .table a, .table a {
+  border-bottom: none;
+}
+
+a:hover, a:hover:hover {
+  text-decoration: underline;
+
+  &.nav-link {
+    text-decoration: none;
+  }
+}
+
+.supplier {
+  .side-menu-list {
+    margin-bottom: 10px;
+
+    img {
+      width: 96px;
+    }
+  }
+}
+
+.sign-box .list-inline {
+  text-align: center;
+
+  li:not(:first-child) a {
+    padding-left: 5px;
+  }
+
+  li + li:before {
+    content: "•";
+  }
+}
+
+.field_with_errors,
+.has-error {
+  color: #a94543;
+}
+
+.field_with_errors input,
+.has-error input,
+.has-error textarea {
+  border-color: #a94543;
+}
+
+// Correct spacing for inline radio buttons
+.form-group span.radio {
+  margin: 0 4px;
+
+  label input {
+    margin-right: 4px;
+  }
+}
+
+.form-control:focus {
+  box-shadow: 0px 0px 4px #00a8ff
 }

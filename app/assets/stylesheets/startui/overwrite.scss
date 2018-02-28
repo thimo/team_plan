@@ -1,6 +1,38 @@
+// Main logo
+.site-header {
+  position: relative;
+  top: auto;
+  left: auto;
+  padding: 8px 0;
+  height: 58px;
+
+  .site-logo {
+    margin-right: 10px;
+
+    img {
+      height: 40px;
+      top: 0;
+      padding-right: 10px;
+    }
+  }
+}
+
+
+@media (max-width: 767px) {
+  .site-header {
+    .site-logo {
+      img {
+        height: auto;
+        width: 48px;
+        top: 2px;
+      }
+    }
+  }
+}
+
 .page-content {
-  transition: none;
-  
+  padding: 24px 15px 10px;
+
   ol {
     margin-bottom: 1rem;
     padding-left: 2rem;
@@ -22,6 +54,50 @@
   nav {
     ul {
       padding-left: 0;
+    }
+  }
+}
+
+.side-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0;
+  padding-top: 58px;
+}
+
+// Highlight navigation
+.side-menu-list .active .lbl {
+  color: black;
+}
+
+.side-menu-list, .side-menu {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.box-typical {
+  .box-typical-header {
+    .tbl-cell.tbl-cell-title {
+      padding-right: 15px;
+    }
+  }
+}
+
+.box-typical-body {
+  .side-menu-list {
+    border-top: 1px solid #eceeef;
+  }
+}
+
+.box-typical-footer {
+  .pagination {
+    margin: 0;
+
+    a, span.current {
+      padding: 4px;
     }
   }
 }
@@ -172,14 +248,6 @@ abbr[title] {
   }
 }
 
-.box-typical {
-  .box-typical-header {
-    .tbl-cell.tbl-cell-title {
-      padding-right: 15px;
-    }
-  }
-}
-
 th {
   .action-btn {
     color: #6c7a86;
@@ -236,12 +304,6 @@ trix-toolbar {
   top: inherit;
 }
 
-.b,
-.strong,
-.table thead th {
-  font-weight: 600;
-}
-
 @media (max-width: 576px) {
   .site-header .site-header-search-container {
     width: 100px;
@@ -263,4 +325,54 @@ trix-toolbar {
 
 .nav-pills .nav-link.active, .show > .nav-pills .nav-link {
   background-color: inherit;
+}
+
+.header-buttons {
+  float: right;
+
+  .btn-group {
+    a {
+      min-height: 38px;
+      min-width: 44px;
+    }
+  }
+}
+
+.dropdown-toggle {
+  a {
+    i {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.tabs-section-nav {
+  &.tabs-section-nav-inline {
+    .nav-link.active {
+      border-bottom: solid 3px #00a8ff;
+    }
+  }
+}
+
+.top-nav {
+  margin-bottom: 10px;
+  background-color: #f6f8fa;
+  padding-top: 4px;
+
+  ul.nav.nav-tabs {
+    padding-left: 4px;
+    .nav-link {
+      color: #8b9295;
+      &.active {
+        color: #495057;
+      }
+    }
+  }
+
+  li.nav-item {
+    min-height: 40px;
+    min-width: 50px;
+  }
 }
