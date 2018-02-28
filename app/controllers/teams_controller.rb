@@ -20,8 +20,6 @@ class TeamsController < ApplicationController
         @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
         @old_members = policy_scope(@team.team_members).ended.group_by(&:member)
 
-        @team_evaluations = policy_scope(@team.team_evaluations).desc
-
         todos = policy_scope(@team.todos).unfinished.includes(:todoable)
         @todos_active = todos.active.to_a
         @todos_defered = todos.defered.to_a
@@ -31,6 +29,7 @@ class TeamsController < ApplicationController
 
       when 'dossier'
         @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
+        @team_evaluations = policy_scope(@team.team_evaluations).desc
 
       when 'statistics'
         team_presence_graphs

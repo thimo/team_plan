@@ -5,7 +5,7 @@ layout:
       -
         layout:
           -
-            - SCOUT_DEV_TRACE=true rails s
+            - SCOUT_DEV_TRACE=false rails s
           -
             - guard
           -
