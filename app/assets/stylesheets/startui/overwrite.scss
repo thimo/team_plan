@@ -68,8 +68,12 @@
 }
 
 // Highlight navigation
-.side-menu-list .active .lbl {
-  color: black;
+.side-menu-list .active {
+  background-color: #f6f8fa;
+
+  .lbl {
+    color: #343434;
+  }
 }
 
 .side-menu-list, .side-menu {
@@ -375,4 +379,50 @@ trix-toolbar {
     min-height: 40px;
     min-width: 50px;
   }
+}
+
+.supplier {
+  .side-menu-list {
+    margin-bottom: 10px;
+
+    img {
+      width: 96px;
+    }
+  }
+}
+
+.sign-box .list-inline {
+  text-align: center;
+
+  li:not(:first-child) a {
+    padding-left: 5px;
+  }
+
+  li + li:before {
+    content: "•";
+  }
+}
+
+.field_with_errors,
+.has-error {
+  color: #a94543;
+}
+
+.field_with_errors input,
+.has-error input,
+.has-error textarea {
+  border-color: #a94543;
+}
+
+// Correct spacing for inline radio buttons
+.form-group span.radio {
+  margin: 0 4px;
+
+  label input {
+    margin-right: 4px;
+  }
+}
+
+.form-control:focus {
+  box-shadow: 0px 0px 4px #00a8ff
 }
