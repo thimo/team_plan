@@ -55,17 +55,17 @@ section.tabs-section
   .tab-content
     - if @active_tab == 'schedule'
       .row
-        .col-xl-6
+        .col-lg-6
           = render "matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
           = render "matches/list", matches: @played_matches, title: "Uitslagen", team: @team
 
-        .col-xl-6
+        .col-lg-6
           = render "trainings/list", trainings: @trainings, team: @team
           = render "training_schedules/list", team: @team, training_schedules: @training_schedules
 
     - if @active_tab == 'competitions'
       .row
-        .col-xl-6
+        .col-lg-6
           - if @competitions_regular.any?
             - @competitions_regular.each do |competition|
               = render "competitions/standing", competition: competition, compact: true
@@ -73,7 +73,7 @@ section.tabs-section
             .box-typical.box-typical-padding
               i Geen competitie gevonden
 
-        .col-xl-6
+        .col-lg-6
           - if @competitions_other.any?
             - @competitions_other.each do |competition|
               = render "competitions/standing", competition: competition, compact: true
@@ -83,12 +83,12 @@ section.tabs-section
 
     - if @active_tab == 'team'
       .row
-        .col-xl-6
-          = render 'team_members'
+        .col-lg-6
+          = render 'team_players'
 
-        .col-xl-6
-          - if policy(@team).show_todos?
-            = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
+        .col-lg-6
+          - if @staff.size > 0
+            = render 'team_staff'
 
           - if @old_members.present?
             section.box-typical
@@ -110,6 +110,9 @@ section.tabs-section
               = render "comments/tabs", parent: @team
 
         .col-md-6
+          - if policy(@team).show_todos?
+            = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
+
           - if policy(@team).show_evaluations? && @team_evaluations.present?
             = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
 
