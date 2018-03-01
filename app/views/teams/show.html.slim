@@ -38,7 +38,7 @@ section.tabs-section
       - if policy(@team).show_dossier?
         li.nav-item
           a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
-            i.far.fa-folder-open
+            i.far.fa-book
             .pl-2.d-none.d-md-inline  Dossier
       - if policy(@team).show_statistics?
         li.nav-item

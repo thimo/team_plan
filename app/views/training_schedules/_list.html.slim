@@ -19,7 +19,7 @@ section.box-typical
           thead
             th Dag
             th Veld
-            th Trainer
+            th.d-none.d-sm-table-cell Trainer
             th
         tbody
           - training_schedules.each do |ts|
@@ -36,7 +36,7 @@ section.box-typical
                     | #{ts.present_minutes_i18n} aanwezig
               td
                 = ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")
-              td
+              td.d-none.d-sm-table-cell
                 - ts.team_members.each do |trainer|
                   div #{trainer.name}
                 div

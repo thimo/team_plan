@@ -33,8 +33,9 @@ html
           .header-buttons
             = yield(:action_buttons)
           h3
-            = yield(:title)
-            small.pl-2.color-blue-grey
+            .pr-2.d-inline
+              = yield(:title)
+            small.color-blue-grey.d-block.d-md-inline
               = yield(:subtitle)
             - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
               span.ml-3.label[class="#{label_object.color_class_for_status}"]

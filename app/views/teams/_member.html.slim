@@ -17,7 +17,7 @@ tr
       div
         = team_member.role_i18n
         - if team_member.ended_on
-          span.color-blue-grey
+          span.color-blue-grey.d-none.d-sm-inline
             = " - tot #{l team_member.ended_on, format: :long}"
 
   td.w-1.nowrap
@@ -33,7 +33,8 @@ tr
 
         - if policy(team_member).show_status?
           div
-            = team_member.status_to_label.html_safe
+            .d-none.d-sm-inline
+              = team_member.status_to_label.html_safe
             - if policy(team_member).activate?
               = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
                 i.far.fa-check.m-1.ml-2
