@@ -1,3 +1,6 @@
+body {
+  background-color: #eef3f7;
+}
 // Main logo
 .site-header {
   position: relative;
@@ -93,8 +96,17 @@
       padding-right: 15px;
     }
 
+    .tbl-cell.tbl-cell-action-bordered {
+      padding: 0px;
+    }
+    .tbl-cell.tbl-cell-actions {
+      padding: 0 8px 0 0;
+    }
+
     .action-btn {
+      margin: 0;
       color: rgba(black, .4);
+      padding: 10px;
     }
   }
 
