@@ -25,21 +25,26 @@ section.tabs-section
     ul.nav[role="tablist" style="background-color: #f6f8fa; /*border-top: 0; border-left: 0; border-right: 0;*/"]
       li.nav-item
         a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
-          | Programma
+          i.far.fa-calendar-alt
+          .pl-2.d-none.d-sm-inline Programma
       li.nav-item
         a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
-          | Competities
+          i.far.fa-futbol
+          .pl-2.d-none.d-sm-inline Competities
       li.nav-item
         a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
-          | Team
+          i.far.fa-users
+          .pl-2.d-none.d-sm-inline Team
       - if policy(@team).show_dossier?
         li.nav-item
           a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
-            | Dossier
+            i.far.fa-folder-open
+            .pl-2.d-none.d-md-inline  Dossier
       - if policy(@team).show_statistics?
         li.nav-item
           a.nav-link[href="?tab=statistics" class="#{'active' if @active_tab == 'statistics'}"]
-            | Statistieken
+            i.far.fa-chart-bar
+            .pl-2.d-none.d-md-inline Statistieken
 
 - if @active_tab == 'schedule'
   .row
