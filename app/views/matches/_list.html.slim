@@ -2,6 +2,7 @@
 - disable_line_through ||= false
 - team ||= nil
 - include_presences ||= false
+- highlight_own_teams ||= false
 
 section.box-typical.schedule-list
   header.box-typical-header
@@ -29,13 +30,13 @@ section.box-typical.schedule-list
             tbody
               = render partial: 'shared/match',
                 collection: matches,
-                locals: { disable_line_through: disable_line_through, include_presences: include_presences, team: team },
+                locals: { disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams },
                 cache: true
         - else
           tbody
             = render partial: 'shared/match',
               collection: matches,
-              locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team },
+              locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams },
               cache: true
       - else
         tbody

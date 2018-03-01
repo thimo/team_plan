@@ -43,7 +43,7 @@ section.box-typical
               | DS
           tbody
             - competition.ranking.each do |line|
-              tr[class="#{'strong table-active' if line['eigenteam'] == 'true'}"]
+              tr[class="#{'strong table-success' if line['eigenteam'] == 'true'}"]
                 td.text-right
                   = line['positie']
                 td

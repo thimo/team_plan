@@ -6,7 +6,7 @@
 
 .row
   .col-sm-6
-    = render "matches/list", matches: @not_played_matches, title: "Programma"
+    = render "matches/list", matches: @not_played_matches, title: "Programma", highlight_own_teams: true
 
   .col-sm-6
-    = render "matches/list", matches: @played_matches, title: "Uitslagen"
+    = render "matches/list", matches: @played_matches, title: "Uitslagen", highlight_own_teams: true
