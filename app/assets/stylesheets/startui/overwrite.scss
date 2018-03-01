@@ -83,25 +83,38 @@
 }
 
 .box-typical {
+  border-top:    solid 4px #00a8ff;
+  border-bottom: solid 4px #d8e2e8;
+
   .box-typical-header {
+    background-color: #ebf5ff;
+
     .tbl-cell.tbl-cell-title {
       padding-right: 15px;
     }
+
+    .action-btn {
+      color: rgba(black, .4);
+    }
   }
-}
 
-.box-typical-body {
-  .side-menu-list {
-    border-top: 1px solid #eceeef;
+  .box-typical-body {
+    .side-menu-list {
+      border-top: 1px solid #eceeef;
+    }
+
+    > .table {
+      border-radius: 3px;
+    }
   }
-}
 
-.box-typical-footer {
-  .pagination {
-    margin: 0;
+  .box-typical-footer {
+    .pagination {
+      margin: 0;
 
-    a, span.current {
-      padding: 4px;
+      a, span.current {
+        padding: 4px;
+      }
     }
   }
 }
