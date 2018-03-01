@@ -1,5 +1,5 @@
 section.box-typical
-  .row.mb-3
+  .row
     - if @active_teams.present?
       .col-6
         header.box-typical-header
@@ -7,7 +7,7 @@ section.box-typical
             .tbl-cell.tbl-cell-title
               h4 Mijn teams
 
-        .box-typical-body.mb-3
+        .box-typical-body
           ul.side-menu-list
             - @active_teams.each do |team|
               li.green
@@ -23,7 +23,7 @@ section.box-typical
             .tbl-cell.tbl-cell-title
               h4 Favorieten
 
-        .box-typical-body.mb-3
+        .box-typical-body
           ul.side-menu-list
             - @favorite_teams.each do |team|
               li.gold
