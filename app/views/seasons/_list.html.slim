@@ -5,18 +5,18 @@
         .tbl-row
           .tbl-cell.tbl-cell-title
             h4 Seizoenen
-          - if policy(Season).create?
-            .tbl-cell.tbl-cell-action-bordered
+          .tbl-cell.tbl-cell-actions
+            - if policy(Season).create?
               = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
                 i.far.fa-file
       .box-typical-body
         table.table.table-sm.tr-links
           thead
             tr
-              th 
+              th
               th
                 | Van
-              th 
+              th
                 | Tot
               th
           tbody
@@ -26,7 +26,7 @@
                   = link_to season.name, season, class: "#{"font-weight-bold" if season.active?} #{"font-italic" if season.draft?}"
                 td
                   = I18n.l season.started_on, format: :long if season.started_on.present?
-                td 
+                td
                   = I18n.l season.ended_on, format: :long if season.ended_on.present?
                 td.text-right
                   - if policy(season).show_status?

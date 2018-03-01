@@ -15,23 +15,20 @@ section.box-typical
     .tbl-row
       .tbl-cell.tbl-cell-title
         h4 Leeftijdsgroepen
-      - if policy(@season).bulk_email?
-        .tbl-cell.tbl-cell-action-bordered
+      .tbl-cell.tbl-cell-actions
+        - if policy(@season).bulk_email?
           = link_to new_season_team_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
             i.far.fa-envelope
-      - if policy(@season).download_team_members?
-        .tbl-cell.tbl-cell-action-bordered
+        - if policy(@season).download_team_members?
           = link_to new_season_team_action_path(@season, type: :download_team_members), title: "Download teams naar Excel", class: "action-btn", remote: true
             i.far.fa-file-excel
-      - if policy(AgeGroup.new(season: @season)).create?
-        .tbl-cell.tbl-cell-action-bordered
+        - if policy(AgeGroup.new(season: @season)).create?
           = link_to new_season_age_group_path(@season), title: "Leeftijdsgroep toevoegen", class: "action-btn"
             i.far.fa-file
-      - if policy(AgeGroup.new(season: @season)).create?
-        .tbl-cell.tbl-cell-action-bordered
+        - if policy(AgeGroup.new(season: @season)).create?
           = link_to new_season_age_group_bulk_update_path(@season), title: "Leeftijdsgroepen toevoegen", class: "action-btn"
             i.far.fa-copy
-            
+
   - if @age_groups_male.any? || @age_groups_female.any?
     .row.box-typical-body
       - if @age_groups_male.size > 0
@@ -39,12 +36,12 @@ section.box-typical
 
       - if @age_groups_female.size > 0
         = render 'age_groups/list', age_groups: @age_groups_female, title: "Vrouwen"
-                    
+
   - else
     .box-typical-section
       p
         i Geen leeftijdsgroepen gevonden
       = link_to "Overnemen van #{Season.active.first.name}", [:inherit_age_groups, @season], class: "btn", method: :post
-      
+
 
 = render 'seasons/list'

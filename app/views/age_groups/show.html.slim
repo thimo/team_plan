@@ -27,20 +27,17 @@
         .tbl-row
           .tbl-cell.tbl-cell-title
             h4 Teams
-          - if policy(@age_group).bulk_email?
-            .tbl-cell.tbl-cell-action-bordered
+          .tbl-cell.tbl-cell-actions
+            - if policy(@age_group).bulk_email?
               = link_to new_age_group_team_action_path(@age_group, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
                 i.far.fa-envelope
-          - if policy(@age_group).download_team_members?
-            .tbl-cell.tbl-cell-action-bordered
+            - if policy(@age_group).download_team_members?
               = link_to new_age_group_team_action_path(@age_group, type: :download_team_members), title: "Download teams naar Excel", class: "action-btn", remote: true
                 i.far.fa-file-excel
-          - if policy(Team.new(age_group: @age_group)).create?
-            .tbl-cell.tbl-cell-action-bordered
+            - if policy(Team.new(age_group: @age_group)).create?
               = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
                 i.far.fa-file
-          - if policy(Team.new(age_group: @age_group)).create?
-            .tbl-cell.tbl-cell-action-bordered
+            - if policy(Team.new(age_group: @age_group)).create?
               = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
                 i.far.fa-copy
 

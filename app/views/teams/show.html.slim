@@ -56,19 +56,16 @@ section.tabs-section
     - if @active_tab == 'schedule'
       .row
         .col-xl-6
-          h4 Wedstrijden
           = render "matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
           = render "matches/list", matches: @played_matches, title: "Uitslagen", team: @team
 
         .col-xl-6
-          h4 Trainingen
           = render "trainings/list", trainings: @trainings, team: @team
           = render "training_schedules/list", team: @team, training_schedules: @training_schedules
 
     - if @active_tab == 'competitions'
       .row
         .col-xl-6
-          h4 Regulier
           - if @competitions_regular.any?
             - @competitions_regular.each do |competition|
               = render "competitions/standing", competition: competition, compact: true
@@ -77,7 +74,6 @@ section.tabs-section
               i Geen competitie gevonden
 
         .col-xl-6
-          h4 Beker
           - if @competitions_other.any?
             - @competitions_other.each do |competition|
               = render "competitions/standing", competition: competition, compact: true
@@ -107,41 +103,48 @@ section.tabs-section
                     = render 'member', member: member, team_members: team_members
 
     - if @active_tab == 'dossier' && policy(@team).show_dossier?
-      - if policy(@team).show_comments?
-        #comments-tabs
-          = render "comments/tabs", parent: @team
+      .row
+        .col-md-6
+          - if policy(@team).show_comments?
+            #comments-tabs
+              = render "comments/tabs", parent: @team
 
-      - if policy(@team).show_evaluations? && @team_evaluations.present?
-        = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
+        .col-md-6
+          - if policy(@team).show_evaluations? && @team_evaluations.present?
+            = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
 
-      - if policy(@team).show_notes?
-        = render "notes/list", team: @team, notes: @notes
+          - if policy(@team).show_notes?
+            = render "notes/list", team: @team, notes: @notes
 
     - if @active_tab == 'statistics' && policy(@team).show_statistics?
       - if policy(@team).show_presence_chart?
         h4 Aanwezigheid
 
-        section.box-typical
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                h4
-                  | Trainingen
-          .box-typical-body.box-typical-padding
-            canvas#trainingChart.presenceChart
+        .row
+          .col-lg-6
+            section.box-typical
+              header.box-typical-header
+                .tbl-row
+                  .tbl-cell.tbl-cell-title
+                    h4
+                      | Trainingen
+              .box-typical-body.box-typical-padding
+                canvas#trainingChart.presenceChart
 
-          = render 'presence_table', team: @team, presentable_class: Training
+              = render 'presence_table', team: @team, presentable_class: Training
 
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                h4
-                  | Wedstrijden
-          .box-typical-body.box-typical-padding
-            canvas#matchChart.presenceChart
+          .col-lg-6
+            section.box-typical
+              header.box-typical-header
+                .tbl-row
+                  .tbl-cell.tbl-cell-title
+                    h4
+                      | Wedstrijden
+              .box-typical-body.box-typical-padding
+                canvas#matchChart.presenceChart
 
 
-        = render 'presence_table', team: @team, presentable_class: Match
+              = render 'presence_table', team: @team, presentable_class: Match
 
         - if @training_presences_data&.any? && @match_presences_data&.any?
           script
