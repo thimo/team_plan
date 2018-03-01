@@ -1,11 +1,5 @@
 section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = link_to "Seizoen #{@season.name}", @season
-
-  .row.mb-3
+  .row
     .col-6
       .box-typical-body
         - if @age_groups_male.size > 0
