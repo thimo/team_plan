@@ -4,7 +4,7 @@ html
     title
       = full_title(yield(:title))
     meta[charset="utf-8"]
-    meta name="description" content="#{full_title(yield(:title))}"
+    meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
     meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     / TurboLinks caching disabled to prevent flickering (fonts-init)
