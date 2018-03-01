@@ -15,8 +15,9 @@ html
     = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
 
-    = javascript_include_tag 'application', async: Rails.env.production?
-    = javascript_pack_tag 'application', async: Rails.env.production?
+    / Use 'defer' here as with 'async' 'turbolinks:load' is not called
+    = javascript_include_tag 'application', defer: Rails.env.production?
+    = javascript_pack_tag 'application', defer: Rails.env.production?
 
   body.with-side-menu[class="#{yield(:body_class)}"]
     - unless Rails.env.production? || Rails.env.development?
