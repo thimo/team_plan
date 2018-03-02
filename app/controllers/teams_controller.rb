@@ -12,8 +12,10 @@ class TeamsController < ApplicationController
 
     case @active_tab
       when 'competitions'
-        @competitions_regular = @team.competitions.desc.active.regular
-        @competitions_other = @team.competitions.desc.active.other
+        @competitions_regular = @team.competitions.knvb.desc.active.regular
+        @competitions_other   = @team.competitions.knvb.desc.active.other
+
+        @custom_competition_matches = @team.matches.for_competition(Competition.custom).desc.group_by(&:competition).sort_by{ |competition, matches| competition.id }
 
       when 'team'
         @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions).not_ended)

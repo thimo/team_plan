@@ -11,6 +11,7 @@ class Competition < ApplicationRecord
   scope :desc,    -> { order(created_at: :desc) }
   scope :regular, -> { where(competitiesoort: 'regulier') }
   scope :other,   -> { where.not(competitiesoort: 'regulier') }
+  scope :knvb,    -> { where('poulecode > 0')}
   scope :custom,  -> { where('poulecode < 0')}
 
   def self.new_custom_poulecode

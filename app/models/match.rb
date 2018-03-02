@@ -12,20 +12,21 @@ class Match < ApplicationRecord
 
   enum edit_level: { knvb: 0, club_staff: 1, team_staff: 2 }
 
-  scope :asc,           -> { order(:wedstrijddatum) }
-  scope :desc,          -> { order(wedstrijddatum: :desc) }
-  scope :in_period,     -> (start_date, end_date) { where('wedstrijddatum > ?', start_date).where('wedstrijddatum < ?', end_date) }
-  scope :from_now,      -> { where('wedstrijddatum > ?', Time.zone.now) }
-  scope :from_today,    -> { where('wedstrijddatum > ?', Time.zone.today) }
-  scope :in_past,       -> { where('wedstrijddatum < ?', Time.zone.now) }
-  scope :played,        -> { where.not(uitslag: nil) }
-  scope :not_played,    -> { where(uitslag: nil) }
-  scope :own,           -> { where(eigenteam: true) }
-  scope :uitslag_at,    -> { order(uitslag_at: :desc) }
-  scope :afgelast,      -> { where(afgelast: true) }
-  scope :niet_afgelast, -> { where(afgelast: false) }
-  scope :active,        -> { where(afgelast: false) }
-  scope :for_team,      -> (team_ids) { includes(:teams).where(teams: { id: team_ids }) }
+  scope :asc,             -> { order(:wedstrijddatum) }
+  scope :desc,            -> { order(wedstrijddatum: :desc) }
+  scope :in_period,       -> (start_date, end_date) { where('wedstrijddatum > ?', start_date).where('wedstrijddatum < ?', end_date) }
+  scope :from_now,        -> { where('wedstrijddatum > ?', Time.zone.now) }
+  scope :from_today,      -> { where('wedstrijddatum > ?', Time.zone.today) }
+  scope :in_past,         -> { where('wedstrijddatum < ?', Time.zone.now) }
+  scope :played,          -> { where.not(uitslag: nil) }
+  scope :not_played,      -> { where(uitslag: nil) }
+  scope :own,             -> { where(eigenteam: true) }
+  scope :uitslag_at,      -> { order(uitslag_at: :desc) }
+  scope :afgelast,        -> { where(afgelast: true) }
+  scope :niet_afgelast,   -> { where(afgelast: false) }
+  scope :active,          -> { where(afgelast: false) }
+  scope :for_team,        -> (team_ids) { includes(:teams).where(teams: { id: team_ids }) }
+  scope :for_competition, -> (competition_ids) { where(competition_id: competition_ids) }
 
   def started_at
     wedstrijddatum

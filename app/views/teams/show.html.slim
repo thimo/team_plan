@@ -81,6 +81,9 @@ section.tabs-section
             .box-typical.box-typical-padding
               i Geen competitie gevonden
 
+          - @custom_competition_matches.each do |competition, matches|
+            = render "matches/list", matches: matches, title: competition.competitienaam, team: @team
+
     - if @active_tab == 'team'
       .row
         .col-lg-6
