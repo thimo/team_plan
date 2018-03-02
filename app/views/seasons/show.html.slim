@@ -5,10 +5,10 @@
     .btn-group
       - if policy(@season).update?
         = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "btn btn-secondary"
-          i.far.fa-pencil
+          i.fa.far.fa-pencil
       - if policy(@season).destroy?
         = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "btn btn-secondary"
-          i.far.fa-trash-alt
+          i.fa.far.fa-trash-alt
 
 section.box-typical
   header.box-typical-header
@@ -18,16 +18,16 @@ section.box-typical
       .tbl-cell.tbl-cell-actions
         - if policy(@season).bulk_email?
           = link_to new_season_team_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
-            i.far.fa-envelope
+            i.fa.far.fa-envelope
         - if policy(@season).download_team_members?
           = link_to new_season_team_action_path(@season, type: :download_team_members), title: "Download teams naar Excel", class: "action-btn", remote: true
-            i.far.fa-file-excel
+            i.fa.far.fa-file-excel
         - if policy(AgeGroup.new(season: @season)).create?
           = link_to new_season_age_group_path(@season), title: "Leeftijdsgroep toevoegen", class: "action-btn"
-            i.far.fa-file
+            i.fa.far.fa-file
         - if policy(AgeGroup.new(season: @season)).create?
           = link_to new_season_age_group_bulk_update_path(@season), title: "Leeftijdsgroepen toevoegen", class: "action-btn"
-            i.far.fa-copy
+            i.fa.far.fa-copy
 
   - if @age_groups_male.any? || @age_groups_female.any?
     .row.box-typical-body

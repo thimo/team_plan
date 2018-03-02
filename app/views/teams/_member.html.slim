@@ -5,7 +5,7 @@ tr
     - if policy(member).show_private_data?
       = link_to member.name, member
       - if policy(member).show_conduct? && member.conduct_number.present?
-        i.far.fa-shield-check.green.ml-1[title="VOG-nummer geregistreerd"]
+        i.fa.far.fa-shield-check.green.ml-1[title="VOG-nummer geregistreerd"]
     - else
       = member.name
     - if policy(member).show_private_data?
@@ -25,11 +25,11 @@ tr
       .text-right
         - if policy(team_member).edit?
           => link_to edit_team_member_path(team_member), title: "Aanpassen"
-            i.far.fa-pencil.m-1.ml-2
+            i.fa.far.fa-pencil.m-1.ml-2
 
         - if policy(team_member).destroy?
           => link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-            i.far.fa-times.m-1
+            i.fa.far.fa-times.m-1
 
         - if policy(team_member).show_status?
           div
@@ -37,4 +37,4 @@ tr
               = team_member.status_to_label.html_safe
             - if policy(team_member).activate?
               = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
-                i.far.fa-check.m-1.ml-2
+                i.fa.far.fa-check.m-1.ml-2

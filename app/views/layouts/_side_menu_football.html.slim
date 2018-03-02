@@ -2,28 +2,28 @@ ul.side-menu-list
   li.dirty-blue class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
     = link_to dashboard_index_path
       span
-        i.far.fa-fw.fa-tachometer
+        i.fa.far.fa-fw.fa-tachometer
         span.lbl
           | Dashboard
 
   li.green class="#{'active' if current_page?(program_dashboard_index_path)}"
     = link_to program_dashboard_index_path
       span
-        i.far.fa-fw.fa-futbol
+        i.fa.far.fa-fw.fa-futbol
         span.lbl
           | Programma
 
   li.grey class="#{'active' if current_page?(results_dashboard_index_path)}"
     = link_to results_dashboard_index_path
       span
-        i.far.fa-fw.fa-trophy
+        i.fa.far.fa-fw.fa-trophy
         span.lbl
           | Uitslagen
 
   li.orange-red class="#{'active' if current_page?(cancellations_dashboard_index_path)}"
     = link_to cancellations_dashboard_index_path
       span
-        i.far.fa-fw.fa-ban
+        i.fa.far.fa-fw.fa-ban
         span.lbl
           | Afgelastingen
 
@@ -31,7 +31,7 @@ ul.side-menu-list
     li.aquamarine class="#{'active' if current_page?(season_path(season))}"
       = link_to season
         span
-          i.far.fa-fw.fa-users
+          i.fa.far.fa-fw.fa-users
           span.lbl
             | Teams
 
@@ -39,7 +39,7 @@ ul.side-menu-list
     li.gold class="#{'active' if current_page?(season_path(season))}"
       = link_to season
         span
-          i.far.fa-fw.fa-calendar-alt
+          i.fa.far.fa-fw.fa-calendar-alt
           span.lbl
             | #{season.name}
 
@@ -51,7 +51,7 @@ ul.side-menu-list
       - current_user.active_teams.asc.each do |team|
         li.green class="#{'active' if current_page?(team_path(team))}"
           = link_to team
-            i.far.fa-fw.fa-futbol
+            i.fa.far.fa-fw.fa-futbol
             span.lbl
               = team.name
 
@@ -63,13 +63,13 @@ ul.side-menu-list
       - human_sort(current_user.favorite_teams, :name).each do |team|
         li.gold class="#{'active' if current_page?(team_path(team))}"
           = link_to team
-            i.far.fa-fw.fa-star
+            i.fa.far.fa-fw.fa-star
             span.lbl
               = team.name
 
       - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
         li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
           = link_to age_group
-            i.far.fa-fw.fa-star
+            i.fa.far.fa-fw.fa-star
             span.lbl
               = age_group.name

@@ -5,7 +5,7 @@
     .btn-group
       - if policy(@match).update?
         = link_to edit_match_path(@match), class: "btn btn-secondary", title: "Aanpassen"
-          i.far.fa-pencil
+          i.fa.far.fa-pencil
 
 - if @match.afgelast?
   div.alert.alert-danger

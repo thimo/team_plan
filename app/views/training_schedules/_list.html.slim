@@ -10,7 +10,7 @@ section.box-typical
       - if defined?(team) && policy(TrainingSchedule.new(team: team)).create?
         .tbl-cell.tbl-cell-actions
           = link_to new_team_training_schedule_path(team), title: "Reguliere training toevoegen", class: "action-btn"
-            i.far.fa-plus-square
+            i.fa.far.fa-plus-square
 
   .box-typical-body
     table.table.table-sm.tr-links

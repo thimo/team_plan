@@ -4,19 +4,19 @@ nav.side-menu
       ul.nav.nav-tabs
         li.nav-item
           = link_to dashboard_index_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
-            i.far.fa-futbol
+            i.fa.far.fa-futbol
         - if policy(:org).show?
           li.nav-item
             = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
-              i.far.fa-sitemap
+              i.fa.far.fa-sitemap
         - if policy(:intranet).show?
           li.nav-item
             = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
-              i.far.fa-folder-open
+              i.fa.far.fa-folder-open
         - if policy(:admin).show?
           li.nav-item
             = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
-              i.far.fa-cog
+              i.fa.far.fa-cog
 
   = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
   = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
@@ -28,7 +28,7 @@ nav.side-menu
     ul.side-menu-list
       li.brown
         = link_to support_path do
-          i.far.fa-fw.fa-question-circle
+          i.fa.far.fa-fw.fa-question-circle
           span.lbl
             | Support
 
@@ -36,7 +36,7 @@ nav.side-menu
     ul.side-menu-list
       li.red
         a[href="https://www.defrog.nl/" target="_blank"]
-          i.fas.fa-fw.fa-heart
+          i.fa.far.fa-fw.fa-heart
           span.lbl
             | Handcrafted in Arnhem by
             = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'

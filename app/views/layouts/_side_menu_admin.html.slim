@@ -2,43 +2,43 @@ ul.side-menu-list
   li class="#{'active' if controller.class == Admin::MembersController}"
     = link_to admin_members_path do
       span
-        i.far.fa-fw.fa-users
+        i.fa.far.fa-fw.fa-users
         span.lbl
           | Leden
   li class="#{'active' if controller.class == Admin::UsersController}"
     = link_to admin_users_path do
       span
-        i.far.fa-fw.fa-user
+        i.fa.far.fa-fw.fa-user
         span.lbl
           | Gebruikers
   li class="#{'active' if controller.class == Admin::SoccerFieldsController}"
     = link_to admin_soccer_fields_path do
       span
-        i.far.fa-fw.fa-leaf
+        i.fa.far.fa-fw.fa-leaf
         span.lbl
           | Velden
   li class="#{'active' if controller.class == Admin::EmailLogsController}"
     = link_to admin_email_logs_path do
       span
-        i.far.fa-fw.fa-envelope
+        i.fa.far.fa-fw.fa-envelope
         span.lbl
           | E-mail log
   li class="#{'active' if controller.class == Admin::VersionUpdatesController}"
     = link_to admin_version_updates_path do
       span
-        i.far.fa-fw.fa-code-branch
+        i.fa.far.fa-fw.fa-code-branch
         span.lbl
           | Versie updates
   li class="#{'active' if controller.class == Admin::SettingsController}"
     = link_to admin_settings_path do
       span
-        i.far.fa-fw.fa-sliders-h
+        i.fa.far.fa-fw.fa-sliders-h
         span.lbl
           | Instellingen
   li class="#{'active' if controller.class == Admin::CompetitionsController}"
     = link_to admin_competitions_path do
       span
-        i.far.fa-fw.fa-trophy
+        i.fa.far.fa-fw.fa-trophy
         span.lbl
           | Wedstrijdsoorten
 
@@ -48,23 +48,23 @@ ul.side-menu-list
     / li class="#{'active' if current_page?(dashboard_index_path)}"
     / = link_to admin_club_data_dashboards_path do
       span
-      /   i.far.fa-tachometer
+      /   i.fa.far.fa-tachometer
       /   | Dashboard
     li class="#{'active' if controller.class == Admin::Knvb::ClubDataTeamsController}"
       = link_to admin_knvb_club_data_teams_path do
         span
-          i.far.fa-fw.fa-database
+          i.fa.far.fa-fw.fa-database
           span.lbl
             | Teams
     li class="#{'active' if controller.class == Admin::Knvb::CompetitionsController}"
       = link_to admin_knvb_competitions_path do
         span
-          i.far.fa-fw.fa-database
+          i.fa.far.fa-fw.fa-database
           span.lbl
             | Competities
     li class="#{'active' if controller.class == Admin::Knvb::MatchesController}"
       = link_to admin_knvb_matches_path do
         span
-          i.far.fa-fw.fa-database
+          i.fa.far.fa-fw.fa-database
           span.lbl
             | Wedstrijden

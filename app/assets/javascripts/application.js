@@ -22,6 +22,3 @@
 //= require chart.js/dist/Chart
 //= require turbolinks
 //= require trix
-//= require fa-regular
-//= require fa-solid
-//= require fontawesome
