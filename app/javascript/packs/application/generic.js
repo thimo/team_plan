@@ -1,8 +1,4 @@
 document.addEventListener("turbolinks:load", () => {
-  // Init font awesome icons
-  // TODO also call after partial update
-  FontAwesome.dom.i2svg();
-
   // Auto-size all textarea's
   autosize($('textarea'));
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
