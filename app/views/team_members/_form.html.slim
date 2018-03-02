@@ -4,7 +4,7 @@
   - if @team_member.persisted?
     .form-group.row
       = f.label :name, class: "col-md-3 col-form-label"
-      .col-md-9.form-control-static
+      .col-md-9.form-control-plaintext
         = @team_member.member.name
   - else
     = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on,
@@ -16,18 +16,11 @@
 
   - if @team_member.persisted?
     - if @team_member.player?
-      .form-group.row[class="#{'form-control-error' if f.error("field_position_ids").present?}"]
-        = f.label :field_position_ids, class: "col-md-3 col-form-label"
-        .col-md-9
-          = f.select :field_position_ids, options_for_select(FieldPosition.options_for_select, f.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
-
-      .form-group.row[class="#{'form-control-error' if f.error("prefered_foot").present?}"]
-        = f.label :prefered_foot, class: "col-md-3 col-form-label"
-        .col-md-9
-          = f.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, f.object.prefered_foot), {include_blank: true}, {class: "form-control custom-select #{'form-control-error' if f.error(:prefered_foot).present?}"}
+      = f.select :field_position_ids, options_for_select(FieldPosition.options_for_select, f.object.field_positions.map(&:id)), {include_blank: true}, {class: "field_positions", multiple: "multiple"}
+      = f.select :prefered_foot, options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, f.object.prefered_foot), {include_blank: true}
 
   - if policy(@team_member).set_status?
-    = f.input :status
+    = f.collection_radio_buttons :status, TeamMember.statuses_i18n, :first, :second
 
   - if policy(@team_member).set_initial_status?
     = f.collection_radio_buttons :initial_status, TeamMember.initial_statuses_i18n, :first, :second
