@@ -5,10 +5,10 @@
     .btn-group
       - if policy(@org_position).update?
         = link_to edit_org_position_path(@org_position), title: "Positie aanpassen", class: "btn btn-secondary"
-          i.far.fa-pencil
+          i.fa.far.fa-pencil
       - if policy(@org_position).destroy?
         = link_to org_position_path(@org_position),  method: :delete, data: { confirm: 'Positie wordt verwijderd. Doorgaan?' }, title: "Positie verwijderen", class: "btn btn-secondary"
-          i.far.fa-trash-alt
+          i.fa.far.fa-trash-alt
 
 section.box-typical
   header.box-typical-header
@@ -21,7 +21,7 @@ section.box-typical
 
         h4
           = @org_position.working_group? || @org_position.committee? ? "Leden" : "Persoon"
-          i.far.fa-plus-square.ml-2
+          i.fa.far.fa-plus-square.ml-2
         - @org_position.org_position_members.each do |member|
           div
             = member.member.name

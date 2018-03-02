@@ -19,12 +19,12 @@
               = @team_evaluation.status
         .tbl-cell.text-right
           = link_to "/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf", target: "_blank" do
-            i.far.fa-book.mr-1
+            i.fa.far.fa-book.mr-1
             | Handleiding
         - if policy(@team_evaluation).destroy?
           .tbl-cell.tbl-cell-action-bordered
             = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "action-btn"
-              i.far.fa-trash-alt
+              i.fa.far.fa-trash-alt
 
     .box-typical-body
       table.table.table-xxs

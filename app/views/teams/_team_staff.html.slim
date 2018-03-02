@@ -6,10 +6,10 @@ section.box-typical
       .tbl-cell.tbl-cell-actions
         - if policy(@team).bulk_email?
           a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
-            i.far.fa-envelope
+            i.fa.far.fa-envelope
         - if policy(TeamMember.new(team: @team)).create?
           = link_to new_team_team_member_path(@team), title: "Teamleiding toevoegen", class: "action-btn" do
-            i.far.fa-user
+            i.fa.far.fa-user
 
   .box-typical-body.table-responsive
     table.table.table-sm.tr-links

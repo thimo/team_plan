@@ -23,7 +23,7 @@ section.box-typical
       - if policy(User).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_admin_user_path, title: "Gebruiker toevoegen"
-            i.far.fa-file
+            i.fa.far.fa-file
 
   .box-typical-body
     table.table.table-sm.tr-links
@@ -50,7 +50,7 @@ section.box-typical
             td.text-right
               - if current_user != user
                 = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
-                  i.far.fa-sign-in.m-1.ml-2
+                  i.fa.far.fa-sign-in.m-1.ml-2
 
 .text-right
   = paginate @users, theme: 'twitter-bootstrap-4'
