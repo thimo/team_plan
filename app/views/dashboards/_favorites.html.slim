@@ -1,7 +1,7 @@
-section.box-typical
-  .row
-    - if @active_teams.present?
-      .col-6
+.row
+  - if @active_teams.present?
+    .col-6
+      section.box-typical
         header.box-typical-header
           .tbl-row
             .tbl-cell.tbl-cell-title
@@ -16,8 +16,9 @@ section.box-typical
                   span.lbl
                     = team.name
 
-    - if @favorite_teams.present? || @favorite_age_groups.present?
-      .col-6
+  - if @favorite_teams.present? || @favorite_age_groups.present?
+    .col-6
+      section.box-typical
         header.box-typical-header
           .tbl-row
             .tbl-cell.tbl-cell-title

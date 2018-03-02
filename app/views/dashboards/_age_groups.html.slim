@@ -1,6 +1,6 @@
-section.box-typical
-  .row
-    .col-6
+.row
+  .col-6
+    section.box-typical
       .box-typical-body
         - if @age_groups_male.size > 0
           header.box-typical-header
@@ -14,7 +14,8 @@ section.box-typical
                   i.far.fa-users
                   span.lbl
                     = age_group.name
-    .col-6
+  .col-6
+    section.box-typical
       .box-typical-body
         - if @age_groups_female.size > 0
           header.box-typical-header
