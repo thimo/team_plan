@@ -20,13 +20,11 @@
     .color-blue-grey.small
       = member.status.capitalize
       - if member.deregistered_at.present?
-        |  per
-        = I18n.l member.deregistered_at, format: :long
+        |  per #{I18n.l member.deregistered_at, format: :long}
   - else
     - unless member.status_definitief?
       .color-blue-grey.small
         = member.status.capitalize
     - unless member.deregistered_at.blank?
       .color-blue-grey.small
-        | Afmelddatum:
-        = I18n.l member.deregistered_at, format: :long
+        | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
