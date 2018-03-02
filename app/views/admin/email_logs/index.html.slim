@@ -1,14 +1,20 @@
 - provide(:title, 'E-mail log')
 
-table.table.tr-links
-  thead
-    tr
-      th
-        | E-mail
-      th
-        | Verzonden
+- content_for :action_buttons
+  = paginate @email_logs, theme: 'twitter-bootstrap-4'
 
-  tbody
-    = render @email_logs
-    
-= paginate @email_logs, theme: 'twitter-bootstrap-4'
+section.box-typical
+  .box-typical-body.table-responsive
+    table.table.tr-links
+      thead
+        tr
+          th
+            | E-mail
+          th
+            | Verzonden
+
+      tbody
+        = render @email_logs
+
+.text-right
+  = paginate @email_logs, theme: 'twitter-bootstrap-4'
