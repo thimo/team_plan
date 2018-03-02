@@ -24,7 +24,7 @@ document.addEventListener("turbolinks:load", () => {
     if (links.length > 0) {
       $(tr).on('click', function(event) {
         // Only execute if clicked on anything else in table row
-        if ($.inArray(event.target.tagName.toLowerCase(), ['a', 'i', 'button', 'input']) < 0) {
+        if ($.inArray(event.target.tagName.toLowerCase(), ['a', 'i', 'button', 'input', 'path']) < 0) {
           document.location = links[0].href;
         }
       });
