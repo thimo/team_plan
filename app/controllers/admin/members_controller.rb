@@ -4,6 +4,7 @@ class Admin::MembersController < Admin::BaseController
   def index
     @members = policy_scope(Member).asc.filter(params.slice(:query))
     @members = params[:inactive] ? @members.sportlink_inactive : @members.sportlink_active
+    @members = @members.page(params[:page]).per(50)
   end
 
   private

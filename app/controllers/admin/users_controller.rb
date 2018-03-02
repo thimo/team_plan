@@ -6,6 +6,7 @@ class Admin::UsersController < Admin::BaseController
   def index
     @users = policy_scope(User).asc.filter(params.slice(:role, :query))
     @users = params[:inactive] ? @users.archived : @users.active
+    @users = @users.page(params[:page]).per(50)
   end
 
   def new

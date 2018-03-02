@@ -1,11 +1,14 @@
 - provide(:title, "Gebruikers")
 
+- content_for :action_buttons
+  = paginate @users, theme: 'twitter-bootstrap-4'
+
 section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
         h3
-          | #{@users.count} Gebruikers
+          | #{@users.total_count} Gebruikers
 
       .tbl-cell.float-right
         - if params[:inactive]
@@ -16,7 +19,7 @@ section.box-typical
             | Inactieve gebruikers
         = form_with url: admin_users_path, method: :get, local: true, class: 'form-inline float-right'
           = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
-          = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["-- Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
+          = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
       - if policy(User).create?
         .tbl-cell.tbl-cell-action-bordered
           = link_to new_admin_user_path, title: "Gebruiker toevoegen"
@@ -48,3 +51,6 @@ section.box-typical
               - if current_user != user
                 = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
                   i.far.fa-sign-in.m-1.ml-2
+
+.text-right
+  = paginate @users, theme: 'twitter-bootstrap-4'
