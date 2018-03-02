@@ -45,6 +45,7 @@ document.addEventListener("turbolinks:before-cache", () => {
   $('select.field_positions').each((index, target) => {
     $(target).select2('destroy');
   })
+  $('.no-touch [title]').tooltip('dispose');
 })
 
 function initCommentTabs() {
