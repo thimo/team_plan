@@ -22,3 +22,4 @@
 //= require chart.js/dist/Chart
 //= require turbolinks
 //= require trix
+//= require vanilla-lazyload/dist/lazyload
