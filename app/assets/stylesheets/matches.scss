@@ -19,10 +19,38 @@
       flex-basis: 120px;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      .clublogo {
+        height: 20px;
+        opacity: .6;
+        mix-blend-mode: multiply;
+      }
     }
+
+    .match-hometeam {
+      .clublogo {
+        float: left;
+      }
+    }
+
+    .match-awayteam {
+      .clublogo {
+        float: right;
+      }
+    }
+
     .match-separator {
       flex-grow: 0;
       flex-basis: 20px;
+    }
+  }
+}
+
+.match-row:hover {
+  .match-hometeam,
+  .match-awayteam {
+    .clublogo {
+      opacity: 1;
     }
   }
 }

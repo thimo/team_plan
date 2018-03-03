@@ -22,6 +22,8 @@
 
       .match-teams
         .match-hometeam.nowrap.text-right
+          - if (relatiecode = match.thuisteamclubrelatiecode).present?
+            = image_tag "#{Setting['clubdata.urls.club_logos']}#{relatiecode}.png", class: 'clublogo d-none d-sm-inline-block'
           - if (thuisteam = Team.by_teamcode(match.thuisteamid).first).present?
             - if team
               = link_to [match, team: thuisteam]
@@ -34,6 +36,8 @@
         .match-separator.text-center.color-blue-grey-lighter
           = " - "
         .match-awayteam.nowrap.text-left
+          - if (relatiecode = match.uitteamclubrelatiecode).present?
+            = image_tag "#{Setting['clubdata.urls.club_logos']}#{relatiecode}.png", class: 'clublogo d-none d-sm-inline-block'
           - if (uitteam = Team.by_teamcode(match.uitteamid).first).present?
             - if team
               = link_to [match, team: uitteam]
