@@ -1,9 +1,9 @@
 - provide(:title, "Instelling #{@setting.var}")
 
 .box-typical.box-typical-padding
-  = simple_form_for @setting, url: admin_setting_path(@setting.var), method: 'patch', wrapper: :horizontal_form do |f|
-    = f.input :value, label: @setting.var, input_html: { value: @setting.value }, as: :text, rows: 10
-    
+  = bootstrap_form_for @setting, url: admin_setting_path(@setting.var), method: 'patch', layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+    = f.text_area :value, label: @setting.var, value: @setting.value
+
     div
-      = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+      = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
       = link_to "Annuleren", [:admin, :settings], class: 'btn btn-secondary-outline btn-inline'

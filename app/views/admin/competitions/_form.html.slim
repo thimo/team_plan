@@ -1,11 +1,11 @@
-= simple_form_for [:admin, @competition], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [:admin, @competition], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :competitienaam
-  = f.input :competitiesoort
+  = f.text_field :competitienaam
+  = f.text_field :competitiesoort
 
   div
-    = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+    = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
     - if policy(@competition).destroy?
       = link_to "Verwijderen", admin_competition_path(@competition),  method: :delete, data: { confirm: 'Wedstrijdsoort wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
     = link_to "Annuleren", [:admin, :competitions], class: 'btn btn-secondary-outline btn-inline'
