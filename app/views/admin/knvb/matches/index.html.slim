@@ -23,7 +23,7 @@
                     = "#{l date, format: :weekday} "
                     = "#{l date, format: :date_long} "
               tbody
-                = render partial: 'shared/match', collection: matches, cache: true
+                = render partial: 'shared/match', collection: matches, cached: true
 
   .col-md-6
     section.box-typical
@@ -41,4 +41,4 @@
                   = "#{l date, format: :weekday} "
                   = "#{l date, format: :date_long} "
             tbody
-              = render partial: 'shared/match', collection: matches, cache: true
+              = render partial: 'shared/match', collection: matches, cached: true
