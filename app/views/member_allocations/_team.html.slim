@@ -1,4 +1,4 @@
-- cache [team]
+- cache team
   tr
     td.w-1
       - if policy(TeamMember.new(team: team)).create?
@@ -16,10 +16,10 @@
         .color-blue-grey.small
           = team.remark
     td
-      
+
   - TeamMember.players_by_year(team.team_members.draft_or_active).each do |year, team_members|
     - team_members.each_with_index do |team_member, index|
       = render 'member_allocations/team_member', member: team_member.member, team_members: [team_member], first_column: (year if index == 0)
-  
+
   - TeamMember.staff_by_member(team.team_members.draft_or_active).each do |member, team_members|
     = render 'member_allocations/team_member', member: member, team_members: team_members
