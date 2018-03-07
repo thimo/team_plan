@@ -12,6 +12,7 @@ defaults: &defaults
   club.phone:
   club.contact_name: Thimo Jansen
   club.helpdesk_email: helpdesk@defrog.nl
+  club.relatiecode:
   clubdata.urls.competities: https://data.sportlink.com/teams?teamsoort=bond&spelsoort=ve&gebruiklokaleteamgegevens=NEE
   clubdata.urls.poulestand: https://data.sportlink.com/poulestand?gebruiklokaleteamgegevens=NEE
   clubdata.urls.poule-programma: https://data.sportlink.com/poule-programma?eigenwedstrijden=NEE&gebruiklokaleteamgegevens=NEE&aantaldagen=365
@@ -20,6 +21,7 @@ defaults: &defaults
   clubdata.urls.team-indeling: https://data.sportlink.com/team-indeling?lokaleteamcode=-1&teampersoonrol=ALLES&toonlidfoto=JA
   clubdata.urls.wedstrijd-accommodatie: https://data.sportlink.com/wedstrijd-accommodatie
   clubdata.urls.afgelastingen: https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1
+  clubdata.urls.club_logos: http://bin617.website-voetbal.nl/sites/voetbal.nl/files/knvblogos/
   clubdata.client_id:
   google.maps.base_url: https://www.google.com/maps/embed/v1/
   google.maps.api-key: AIzaSyAOFIRg1PtqSjCzQfGoyPJTi-XH7TvPfkc

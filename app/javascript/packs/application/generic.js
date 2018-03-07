@@ -35,6 +35,7 @@ document.addEventListener("turbolinks:load", () => {
   })
 
   initCommentTabs();
+  new LazyLoad();
 });
 
 document.addEventListener("turbolinks:before-cache", () => {
