@@ -45,6 +45,12 @@ document.addEventListener("turbolinks:before-cache", () => {
   $('.no-touch [title]').tooltip('dispose');
 })
 
+document.addEventListener("turbolinks:before-render", function(event) {
+  FontAwesome.dom.i2svg({
+    node: event.data.newBody
+  });
+});
+
 function initCommentTabs() {
   $('#comments-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.ajax({

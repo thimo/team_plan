@@ -23,3 +23,5 @@
 //= require turbolinks
 //= require trix
 //= require vanilla-lazyload/dist/lazyload
+//= require fa-regular
+//= require fontawesome
