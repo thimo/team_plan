@@ -863,7 +863,9 @@ function perform(mutations, callback) {
   if (mutations.length === 0) {
     callbackFunction();
   } else {
-    var frame = WINDOW.requestAnimationFrame || function (op) {
+    // var frame = WINDOW.requestAnimationFrame || function (op) {
+    // Patch to prevent flicker with TurboLinks
+    var frame = function (op) {
       return op();
     };
 
