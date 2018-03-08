@@ -6,6 +6,7 @@ class Admin::Knvb::CompetitionsController < Admin::BaseController
   def show
     @competition = Competition.find(params[:id])
     authorize @competition
-    @matches = @competition.matches.asc
+    @not_played_matches = @competition.matches.not_played.group_by{ |match| match.started_at.to_date }.sort_by{|date, matches| date}
+    @played_matches = @competition.matches.played.group_by{ |match| match.started_at.to_date }.sort_by{|date, matches| date}
   end
 end
