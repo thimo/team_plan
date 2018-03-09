@@ -19,7 +19,7 @@ class AgeGroup < ApplicationRecord
 
   PLAYER_COUNT = [6, 7, 8, 9, 11]
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45]
-  
+
   def is_not_member(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
   end
@@ -34,7 +34,7 @@ class AgeGroup < ApplicationRecord
 
   def active_members
     # All active players
-    members = Member.sportlink_active.sportlink_player.asc
+    members = Member.sportlink_active.sportlink_active_for_season(season).sportlink_player.asc
     # Filter on year of birth
     members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
     members = members.to_year(year_of_birth_to) if year_of_birth_to.present?

@@ -31,15 +31,16 @@ class Member < ApplicationRecord
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :from_year, -> (year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year) }
-  scope :to_year, -> (year) { where("born_on <= ?", Time.zone.local(year).end_of_year) }
-  scope :sportlink_active, -> { where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today)) }
+  scope :to_year,   -> (year) { where("born_on <= ?", Time.zone.local(year).end_of_year) }
+  scope :sportlink_active,            ->          { where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today)) }
+  scope :sportlink_active_for_season, -> (season) { where(deregistered_at: nil).or(where("deregistered_at > ?", season.started_on)) }
   scope :sportlink_inactive, -> { where.not(deregistered_at: nil).where("deregistered_at <= ?", Time.zone.today) }
   scope :sportlink_player, -> {
     where("sport_category <> ''").
     or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)).
     where('(local_teams != ?) OR local_teams IS NULL', 'Wachtlijst onbekend')
   }
-  scope :male, -> { where(gender: "M") }
+  scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :gender, -> (gender) { where(gender: gender) }
   scope :by_team, -> (team) { joins(:team_members).where(team_members: {team: team, ended_on: nil}) }
