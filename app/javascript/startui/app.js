@@ -1,6 +1,4 @@
-console.log('before tb:load')
 document.addEventListener("turbolinks:load", function() {
-  console.log('tb:load')
 /* ==========================================================================
     Header mobile menu
     ========================================================================== */
