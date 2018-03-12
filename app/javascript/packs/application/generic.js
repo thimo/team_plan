@@ -46,9 +46,11 @@ document.addEventListener("turbolinks:before-cache", () => {
 })
 
 document.addEventListener("turbolinks:before-render", function(event) {
-  FontAwesome.dom.i2svg({
-    node: event.data.newBody
-  });
+  if (typeof FontAwesome !== 'undefined') {
+    FontAwesome.dom.i2svg({
+      node: event.data.newBody
+    });
+  }
 });
 
 function initCommentTabs() {
