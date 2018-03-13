@@ -1,13 +1,14 @@
-= simple_form_for [@member, @injury], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [@member, @injury], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :title, autofocus: true
-  = render 'input/datepicker', f: f, field: :started_on
-  = render 'input/datepicker', f: f, field: :ended_on, hint: "Invullen als de blessure voorbij is"
+  = f.text_field :title, autofocus: true
+
+  = f.text_field :started_on, date_picker_options
+  = f.text_field :ended_on, date_picker_options(help: "Invullen als de blessure voorbij is")
 
   = render 'input/trix', f: f, field: :body
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @injury.new_record? ? @injury.member : @injury, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@injury).destroy?
     = link_to "Verwijderen", injury_path(@injury), method: :delete, data: { confirm: 'Blessure wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
