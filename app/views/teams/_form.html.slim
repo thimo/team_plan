@@ -1,14 +1,14 @@
-= simple_form_for [@age_group, @team], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [@age_group, @team], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :name, autofocus: true
-  = f.input :division, as: :select, collection: Team::DIVISION_OPTIONS
-  = f.input :players_per_team, as: :select, collection: AgeGroup::PLAYER_COUNT, prompt: "-- Selecteer het standaard aantal veldspelers", hint: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.players_per_team})"
-  = f.input :minutes_per_half, as: :select, collection: AgeGroup::MINUTES_PER_HALF, prompt: "-- Selecteer het aantal speelminuten per wedstrijdhelft", hint: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.minutes_per_half})"
-  = f.input :remark
+  = f.text_field :name, autofocus: true
+  = f.select :division, Team::DIVISION_OPTIONS, include_blank: "-- Selecteer de klasse"
+  = f.select :players_per_team, AgeGroup::PLAYER_COUNT, include_blank: "-- Selecteer het standaard aantal veldspelers", help: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.players_per_team})"
+  = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF, include_blank: "-- Selecteer het aantal speelminuten per wedstrijdhelft", help: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.minutes_per_half})"
+  = f.text_area :remark
 
   - if policy(@team).set_status?
-    = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :status}, layout: 'input/col_3_9_wrapper'
+    = f.collection_radio_buttons :status, Team.statuses_i18n, :first, :second
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team.new_record? ? @age_group : @team, class: 'btn btn-secondary-outline btn-inline'

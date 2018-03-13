@@ -4,11 +4,6 @@
   = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :position_type}, layout: 'input/col_3_9_wrapper'
   = f.input :name, autofocus: true
   = f.input :remark
-  / = render 'input/datepicker', f: f, field: :started_on, hint: 'Normaal gesproken per 1 juli'
-  / = render 'input/datepicker', f: f, field: :ended_on, hint: 'Alleen invullen als de functie niet meer bestaat'
-
-  / - if policy(@org_position).set_status?
-  /   = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :status}, layout: 'input/col_3_9_wrapper'
 
   = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @org_position.new_record? ? OrgPosition : @org_position, class: 'btn btn-secondary-outline btn-inline'
