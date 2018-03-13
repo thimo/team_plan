@@ -4,19 +4,24 @@
   .alert.alert-warning
     | Deze training is niet meer actief
 
-= simple_form_for [@team, @training_schedule], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [@team, @training_schedule], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :day, prompt: "-- Selecteer een dag", input_html: { class: 'width-sm-25' }
-  = f.input :start_time, minute_step: 5, wrapper: :time
-  = f.input :end_time, minute_step: 5, wrapper: :time
-  = f.input :present_minutes, include_blank: false, input_html: { class: 'width-sm-25' }
-  = f.input :soccer_field_id, as: :select, collection: SoccerField.asc.training, prompt: "-- Selecteer een veld", input_html: { class: 'width-sm-25' }
-  = f.input :field_part, prompt: "-- Selecteer het deel van het veld", input_html: { class: 'width-25' }
-  = render 'input/habtm_checkboxes', f: f, field: :team_member_ids, collection: trainers, row_class: 'mb-0'
-  = render partial: 'input/boolean_checkbox', locals: {f: f, field: :cios, hide_label: true}, layout: 'input/col_3_9_wrapper'
+  = f.collection_select :day, TrainingSchedule.days_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
+    { class: 'width-sm-50' }
+  = f.time_select :start_time, minute_step: 5
+  = f.time_select :end_time, minute_step: 5
+  = f.collection_select :present_minutes, TrainingSchedule.present_minutes_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
+    { class: 'width-sm-50' }
+  = f.collection_select :soccer_field, SoccerField.asc.training, :id, :name, { prompt: "-- Selecteer een veld" },
+    { class: 'width-sm-50' }
+  = f.collection_select :field_part, TrainingSchedule.field_parts_i18n, :first, :second, { prompt: "-- Selecteer het deel van het veld" },
+    { class: 'width-sm-50' }
+  = f.collection_check_boxes :team_member_ids, trainers, :id, :name, {row_class: 'yo'}
+  = f.form_group
+    = f.check_box :cios
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @training_schedule.team, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@training_schedule).destroy? && @training_schedule.active?
       = link_to "Verwijderen", training_schedule_path(@training_schedule), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
