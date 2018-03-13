@@ -1,27 +1,16 @@
-= simple_form_for [@season, @age_group], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
-  = f.input :name, autofocus: true
-  = f.input :year_of_birth_from, html5: true
-  = f.input :year_of_birth_to, html5: true
-  = f.input :players_per_team, as: :select, collection: AgeGroup::PLAYER_COUNT, prompt: "-- Selecteer het standaard aantal veldspelers"
-  = f.input :minutes_per_half, as: :select, collection: AgeGroup::MINUTES_PER_HALF, prompt: "-- Selecteer het aantal speelminuten per wedstrijdhelft"
+= bootstrap_form_for [@season, @age_group], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  .form-group.row class="#{'has-error' if has_error(@age_group, :gender)}"
-    .col-form-legend.col-sm-3
-      = AgeGroup.human_attribute_name(:gender)
-    .col-sm-9
-      .radio
-        => f.radio_button :gender, "m", class: "form-check-input"
-        = f.label :gender_m, class: "form-check-label"
-          | Man
-      .radio
-        => f.radio_button :gender, "v", class: "form-check-input"
-        = f.label :gender_v, class: "form-check-label"
-          | Vrouw
-      = errors_for(@age_group, :gender)
+  = f.text_field :name, autofocus: true
+  = f.text_field :year_of_birth_from, html5: true
+  = f.text_field :year_of_birth_to, html5: true
+  = f.select :players_per_team, AgeGroup::PLAYER_COUNT
+  = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF
+
+  = f.collection_radio_buttons :gender, AgeGroup::GENDER, :second, :first
 
   - if policy(@age_group).set_status?
-    = render partial: 'input/enum_radio_buttons', locals: {f: f, field: :status}, layout: 'input/col_3_9_wrapper'
+    = f.collection_radio_buttons :status, AgeGroup.statuses_i18n, :first, :second
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-secondary-outline btn-inline'

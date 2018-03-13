@@ -16,6 +16,8 @@ section.tabs-section
               aria-expanded="#{is_active}"
               class="#{'active' if is_active}"
               data-set-active-tab-url="#{url_for [:set_active_tab, :comments]}"
+              data-controller='comment-tab'
+              data-action="comment-tab#activateTab"
             ]
               span.nav-link-in
                 = Comment.comment_types_i18n[comment_type]

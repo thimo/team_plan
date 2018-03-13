@@ -19,6 +19,7 @@ class AgeGroup < ApplicationRecord
 
   PLAYER_COUNT = [6, 7, 8, 9, 11]
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45]
+  GENDER = [['Man', 'm'], ['Vrouw', 'v']]
 
   def is_not_member(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?

@@ -34,7 +34,6 @@ document.addEventListener("turbolinks:load", () => {
     $(target).select2({placeholder: "Veldpositie"});
   })
 
-  initCommentTabs();
   new LazyLoad();
 });
 
@@ -52,15 +51,3 @@ document.addEventListener("turbolinks:before-render", function(event) {
     });
   }
 });
-
-function initCommentTabs() {
-  $('#comments-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    $.ajax({
-      dataType: 'script',
-      type: "POST",
-      url: $(this).data('set-active-tab-url'),
-      data: { tab: $(this).data('tab') }
-    })
-  })
-}
-window.initCommentTabs = initCommentTabs

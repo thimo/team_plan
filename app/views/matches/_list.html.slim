@@ -31,13 +31,13 @@ section.box-typical.schedule-list
               = render partial: 'shared/match',
                 collection: matches,
                 locals: { disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams },
-                cache: true
+                cached: true
         - else
           tbody
             = render partial: 'shared/match',
               collection: matches,
               locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams },
-              cache: true
+              cached: true
       - else
         tbody
           tr

@@ -73,7 +73,7 @@
               tr
                 td.strong[colspan="100"]
                   | #{l date, format: :weekday} #{l date, format: :date_long}
-              = render partial: 'shared/match', collection: human_sort(matches, :team_name), cache: true
+              = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
     - if @played_matches.any?
       section.box-typical.schedule-list
@@ -88,7 +88,7 @@
               tr
                 td.strong[colspan="100"]
                   | #{l date, format: :weekday} #{l date, format: :date_long}
-              = render partial: 'shared/match', collection: human_sort(matches, :team_name), cache: true
+              = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
   .col-xl-6
     - if policy(@age_group).show_available_members? && @available_members.present?
