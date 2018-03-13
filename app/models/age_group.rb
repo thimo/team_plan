@@ -35,7 +35,7 @@ class AgeGroup < ApplicationRecord
 
   def active_members
     # All active players
-    members = Member.sportlink_active.sportlink_player.asc
+    members = Member.sportlink_active.sportlink_active_for_season(season).sportlink_player.asc
     # Filter on year of birth
     members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
     members = members.to_year(year_of_birth_to) if year_of_birth_to.present?

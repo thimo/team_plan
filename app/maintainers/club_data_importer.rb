@@ -7,7 +7,7 @@ module ClubDataImporter
         club_data_team.write_attribute(field, data[field])
       end
       ClubDataLog.create level: :info, source: :teams_and_competitions_import, body: "Team '#{club_data_team.teamnaam}' aangemaakt" if club_data_team.new_record?
-      club_data_team.save
+      club_data_team.save if club_data_team.changed? || club_data_team.new_record?
 
       club_data_team.link_to_team
 
@@ -17,7 +17,8 @@ module ClubDataImporter
       end
       if competition.valid?
         ClubDataLog.create level: :info, source: :teams_and_competitions_import, body: "Competitie '#{competition.competitiesoort} - #{competition.klasse}' aangemaakt voor '#{club_data_team.teamnaam}'" if competition.new_record?
-        competition.save
+        competition.save if competition.changed? || competition.new_record?
+
         competition.club_data_teams << club_data_team unless competition.club_data_team_ids.include?(club_data_team.id)
       end
     end
@@ -48,7 +49,7 @@ module ClubDataImporter
         json = JSON.load(open("#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
         if json.present?
           competition.ranking = json
-          competition.save
+          competition.save if competition.changed?
         end
 
       rescue OpenURI::HTTPError
@@ -67,12 +68,7 @@ module ClubDataImporter
         # Fetch upcoming matches
         json = JSON.load(open("#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
         json.each do |data|
-          match = Match.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
-          %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
-            match.write_attribute(field, data[field])
-          end
-          match.competition = competition
-          match.save
+          match = update_match(data, competition)
 
           if match.eigenteam?
             add_team_to_match(match, match.thuisteamid)
@@ -101,7 +97,7 @@ module ClubDataImporter
       begin
         json = JSON.load(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
         json.each do |data|
-          Match.find_by(wedstrijdcode: data['wedstrijdcode'])&.update_uitslag(data['uitslag'])
+          update_match(data, competition).update_uitslag(data['uitslag'])
         end
       rescue OpenURI::HTTPError
         # TODO handle error, maybe de-activate competition
@@ -119,7 +115,7 @@ module ClubDataImporter
           member = Member.find_by(full_name: data['naam'])
           if member
             member.photo_data = data['foto']
-            member.save
+            member.save if member.changed?
           end
         end
       end
@@ -140,7 +136,7 @@ module ClubDataImporter
         end
         match.write_attribute('telefoonnummer', wedstrijd['telefoonnummer'])
         match.write_attribute('route', wedstrijd['route'])
-        match.save
+        match.save if match.changed?
       end
     end
   rescue OpenURI::HTTPError
@@ -182,4 +178,15 @@ module ClubDataImporter
         match.teams << club_data_team.team
       end
     end
+
+    def self.update_match(data, competition)
+      match = Match.find_or_initialize_by(wedstrijdcode: data['wedstrijdcode'])
+      %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
+        match.write_attribute(field, data[field]) if data.include?(field)
+      end
+      match.competition = competition
+      match.save if match.changed? || match.new_record?
+      match
+    end
+
 end
