@@ -1,8 +1,8 @@
 module FormsHelper
-  def date_picker_options(placeholder: "dd-mm-jjjj", hint: nil, style_class: 'width-sm-25')
+  def date_picker_options(placeholder: "dd-mm-jjjj", help: nil, style_class: 'width-sm-25')
     {
       placeholder: placeholder,
-      hint: hint,
+      help: help,
       data: { provide: "datepicker",
         date_format: "dd-mm-yyyy",
         date_language: "nl",

@@ -1,21 +1,22 @@
-.comment.chat-message
-  .chat-message-photo
-    = image_tag avatar_url(comment.user), alt: ""
-  .chat-message-header
-    .tbl-row
-      .tbl-cell.tbl-cell-name.d-block.d-lg-table-cell
-        = comment.user.name
-      .tbl-cell.tbl-cell-date.d-block.d-lg-table-cell.pl-0
-        span[title="#{l comment.created_at, format: :long}"]
-          = time_ago_in_words(comment.created_at)
-          |  geleden
-        - if policy(comment).update?
-          = link_to edit_comment_path(comment), title: "Aanpassen", class: "pl-2"
-            i.fa.far.fa-pencil.color-blue-grey-lighter
+- cache comment
+  .comment.chat-message
+    .chat-message-photo
+      = image_tag avatar_url(comment.user), alt: ""
+    .chat-message-header
+      .tbl-row
+        .tbl-cell.tbl-cell-name.d-block.d-lg-table-cell
+          = comment.user.name
+        .tbl-cell.tbl-cell-date.d-block.d-lg-table-cell.pl-0
+          span[title="#{l comment.created_at, format: :long}"]
+            = time_ago_in_words(comment.created_at)
+            |  geleden
+          - if policy(comment).update?
+            = link_to edit_comment_path(comment), title: "Aanpassen", class: "pl-2"
+              i.fa.far.fa-pencil.color-blue-grey-lighter
 
-  .chat-message-content
-    .chat-message-txt
-      - if parent != comment.commentable
-        div.strong.float-left.pr-2
-          = link_to comment.commentable.name, comment.commentable
-      = markdown(comment.body).html_safe
+    .chat-message-content
+      .chat-message-txt
+        - if parent != comment.commentable
+          div.strong.float-left.pr-2
+            = link_to comment.commentable.name, comment.commentable
+        = markdown(comment.body).html_safe
