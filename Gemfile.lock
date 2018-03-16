@@ -120,10 +120,10 @@ GEM
       countries (~> 2.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.3)
-    devise (4.4.2)
+    devise (4.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 6.0)
+      railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
     em-websocket (0.5.1)
@@ -414,7 +414,7 @@ DEPENDENCIES
   carrierwave (~> 1.1.0)
   carrierwave-imageoptimizer
   country_select
-  devise (~> 4.4.0)
+  devise (= 4.4.1)
   enum_help (~> 0.0.17)
   exception_notification
   factory_bot_rails
