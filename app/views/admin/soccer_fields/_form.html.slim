@@ -3,10 +3,9 @@
 
   = f.text_field :name, autofocus: true
 
-  = f.form_group
-    .checkbox-toggle
-      = f.check_box :match, class: 'checkbox-toggle'
-    = f.check_box :training, { class: 'checkbox-toggle', custom: true }
+  = f.form_group class: 'checkbox-toggle'
+    = f.check_box :match
+    = f.check_box :training
 
   div
     = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
