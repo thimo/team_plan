@@ -145,53 +145,6 @@
   }
 }
 
-.box-typical {
-  border-top:    solid 4px #00a8ff;
-  border-bottom: solid 4px #d8e2e8;
-
-  .box-typical-header {
-    background-color: #f6f8fa;
-    border-bottom: solid 1px #d8e2e9;
-
-    .tbl-cell.tbl-cell-title {
-      padding-right: 15px;
-    }
-
-    .tbl-cell.tbl-cell-action-bordered {
-      padding: 0px;
-    }
-    .tbl-cell.tbl-cell-actions {
-      padding: 0 8px 0 0;
-    }
-
-    .action-btn {
-      margin: 0;
-      color: rgba(black, .4);
-      padding: 10px;
-    }
-  }
-
-  .box-typical-body {
-    .side-menu-list {
-      border-top: 1px solid #eceeef;
-    }
-
-    > .table {
-      border-radius: 3px;
-    }
-  }
-
-  .box-typical-footer {
-    .pagination {
-      margin: 0;
-
-      a, span.current {
-        padding: 4px;
-      }
-    }
-  }
-}
-
 .comment-row-item {
   &.no-photo {
     padding-left: 15px;
