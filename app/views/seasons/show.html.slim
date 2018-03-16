@@ -21,9 +21,10 @@
         = render 'age_groups/list', age_groups: @age_groups_female, title: "Vrouwen"
 
 - else
-  .box-typical-section
-    p
-      i Geen leeftijdsgroepen gevonden
-    = link_to "Overnemen van #{Season.active.first.name}", [:inherit_age_groups, @season], class: "btn", method: :post
+  .box-typical
+    .box-typical-section
+      p
+        i Geen leeftijdsgroepen gevonden
+      = link_to "Overnemen van #{Season.active.first.name}", [:inherit_age_groups, @season], class: "btn", method: :post
 
 = render 'seasons/list'
