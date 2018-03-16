@@ -1,14 +1,14 @@
 - cancel_url = @todo.todoable.present? ? @todo.todoable : root_path
 
-= simple_form_for [@todoable, @todo], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [@todoable, @todo], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
   = hidden_field_tag :return, params[:return]
 
-  = f.input :body, placeholder: "Todo", autofocus: true
-  = render 'input/datepicker', f: f, field: :started_on, hint: "Optioneel: De datum waarop de todo actief wordt."
-  = render 'input/datepicker', f: f, field: :ended_on, hint: "Optioneel: De deadline voor deze todo"
+  = f.text_area :body, placeholder: "Todo", autofocus: true
+  = f.text_field :started_on, date_picker_options(help: "Optioneel: De datum waarop de todo actief wordt.")
+  = f.text_field :ended_on, date_picker_options(help: "Optioneel: De deadline voor deze todo")
 
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", cancel_url, class: 'btn btn-secondary-outline btn-inline'
   - if policy(@todo).destroy?
     = link_to "Verwijderen", todo_path(@todo),  method: :delete, data: { confirm: 'Todo wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'

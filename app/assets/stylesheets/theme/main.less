@@ -1,0 +1,85 @@
+@import 'vendor/theme';
+// @import 'vendor/jscrollpane';
+// @import 'vendor/flag-icon/flag-icon';
+
+@import 'partials/reset';
+@import 'partials/mixins';
+@import 'partials/vars';
+@import 'partials/helpers';
+@import 'partials/icons';
+@import 'partials/fonts';
+@import 'partials/typography';
+@import 'partials/forms';
+@import 'partials/grids';
+@import 'partials/interface';
+@import 'partials/base';
+@import 'partials/side';
+@import 'partials/print';
+
+@import 'pages/chat';
+@import 'pages/login';
+
+@media (max-width: @md-max-width) {
+  .tabs-section, .box-typical {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+}
+
+@media (max-width: @xs-max-width) {
+  .tabs-section, .box-typical {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .box-typical {
+    border-radius: 0;
+  }
+}
+
+.box-typical {
+  border-top:    solid 4px @color-blue;
+  border-bottom: solid 4px @color-border-light;
+
+  .box-typical-header {
+    background-color: @color-bg-grey-light;
+    border-bottom: solid 1px @color-border-light;
+
+    .tbl-cell.tbl-cell-title {
+      padding-right: 15px;
+    }
+
+    .tbl-cell.tbl-cell-action-bordered {
+      padding: 0px;
+    }
+    .tbl-cell.tbl-cell-actions {
+      padding: 0 8px 0 0;
+    }
+
+    .action-btn {
+      margin: 0;
+      // color: rgba(black, .4);
+      padding: 10px;
+    }
+  }
+
+  .box-typical-body {
+    .side-menu-list {
+      border-top: 1px solid @color-border-light;
+    }
+
+    > .table {
+      border-radius: 3px;
+    }
+  }
+
+  .box-typical-footer {
+    .pagination {
+      margin: 0;
+
+      a, span.current {
+        padding: 4px;
+      }
+    }
+  }
+}

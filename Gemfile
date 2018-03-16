@@ -12,6 +12,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'webpacker'
 gem 'webpacker-react'
 
+gem 'less-rails', '~> 3.0.0'
+gem 'therubyracer'
+
 gem 'slim'
 gem 'faker'
 gem 'carrierwave',                '~> 1.1.0'

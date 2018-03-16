@@ -6,7 +6,8 @@
 
 - cache [match, compact, disable_line_through, include_presences, team, highlight_own_teams]
   tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through} #{'strong table-success' if highlight_own_teams && match.eigenteam?}"]
-    td
+    / 'max-width' is a bit of a hack to force table to fit within parent div on smaller screens
+    td[style="max-width: 200px;"]
       .match-row-header.small
         .match-datetime.color-blue-grey
           - if compact
