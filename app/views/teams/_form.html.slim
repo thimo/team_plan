@@ -8,7 +8,8 @@
   = f.text_area :remark
 
   - if policy(@team).set_status?
-    = f.collection_radio_buttons :status, Team.statuses_i18n, :first, :second
+    .radio
+      = f.collection_radio_buttons :status, Team.statuses_i18n, :first, :second
 
   = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @team.new_record? ? @age_group : @team, class: 'btn btn-secondary-outline btn-inline'

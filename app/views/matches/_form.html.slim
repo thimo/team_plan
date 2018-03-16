@@ -5,7 +5,7 @@
   = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
 
   - if @team.present?
-    = f.form_group :is_home_match, label: { text: "" }
+    = f.form_group :is_home_match, label: { text: "" }, class: "radio"
       = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true
       = f.radio_button :is_home_match, false, label: "Uit", inline: true
     = f.text_field :opponent
@@ -14,7 +14,8 @@
     = f.text_field :thuisteam
     = f.text_field :uitteam
 
-  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name
+  .radio
+    = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name
   = f.text_area :remark
 
   = f.submit "Opslaan", class: 'btn btn-primary btn-inline'

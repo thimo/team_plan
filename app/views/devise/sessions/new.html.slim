@@ -4,12 +4,7 @@
   = f.error_notification
 
   = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
-  = f.input :password, autocomplete: 'off', class: 'form-control', placeholder: User.human_attribute_name(:password), label: false 
-  / - if devise_mapping.rememberable?
-  /   .form-group
-  /     .checkbox.float-left
-  /       = f.check_box :remember_me, class: 'form-check-input', id: 'remember-me'
-  /       = f.label t('.remember_me', default: 'Remember me'), :remember_me, class: 'form-check-label', for: 'remember-me'
+  = f.input :password, autocomplete: 'off', class: 'form-control', placeholder: User.human_attribute_name(:password), label: false
   = f.button :submit,  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary'
 
   = render 'devise/shared/links'

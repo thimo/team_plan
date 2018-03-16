@@ -2,7 +2,8 @@
   = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
   = f.collection_select :parent_id, @org_positions, :id, :name_for_selects, label: "Parent", include_blank: "-- Selecteer de parent"
-  = f.collection_radio_buttons :position_type, OrgPosition.position_types_i18n, :first, :second
+  .radio
+    = f.collection_radio_buttons :position_type, OrgPosition.position_types_i18n, :first, :second
   = f.text_field :name, autofocus: true
   = f.text_area :remark
 

@@ -1,26 +1,28 @@
 div[class="#{column_class}"]
-  .form-check
+  .form-check.checkbox
     input.form-check-input.age-groups-male-select-toggle#age_group_ids_male[type="checkbox" checked]
     label.form-check-label.strong[for="age_group_ids_male"]
       |  Mannen
   - @age_groups_male.each do |age_group|
-    = f.check_box 'age_group_ids[]', { checked: true,
-      class: 'age-groups-male-select',
-      id: "age_group_ids_#{age_group.id}",
-      label: age_group.name },
-      age_group.id, nil
+    .checkbox
+      = f.check_box 'age_group_ids[]', { checked: true,
+        class: 'age-groups-male-select',
+        id: "age_group_ids_#{age_group.id}",
+        label: age_group.name },
+        age_group.id, nil
 
 div[class="#{column_class}"]
-  .form-check
+  .form-check.checkbox
     input.form-check-input.age-groups-female-select-toggle#age_group_ids_female[type="checkbox" checked]
     label.form-check-label.strong[for="age_group_ids_female"]
       |  Vrouwen
   - @age_groups_female.each do |age_group|
-    = f.check_box 'age_group_ids[]', { checked: true,
-      class: 'age-groups-female-select',
-      id: "age_group_ids_#{age_group.id}",
-      label: age_group.name },
-      age_group.id, nil
+    .checkbox
+      = f.check_box 'age_group_ids[]', { checked: true,
+        class: 'age-groups-female-select',
+        id: "age_group_ids_#{age_group.id}",
+        label: age_group.name },
+        age_group.id, nil
 
 script
   | $('.age-groups-male-select-toggle').change(function() {

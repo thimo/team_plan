@@ -7,7 +7,8 @@
 
   = f.collection_select :member_id, @note.team.active_members.asc.distinct, :id, :name,  include_blank: "-- Selecteer een teamgenoot",
     help: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
-  = f.collection_radio_buttons :visibility, Note.visibilities_i18n, :first, :second
+  .radio
+    = f.collection_radio_buttons :visibility, Note.visibilities_i18n, :first, :second
 
   = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-secondary-outline btn-inline'

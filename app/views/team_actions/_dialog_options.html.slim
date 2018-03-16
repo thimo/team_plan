@@ -3,61 +3,66 @@ div[class="#{column_class}"]
     .form-check
       strong
         | Selectie e-mailadressen
-    = f.radio_button :email_selection, "all",
-      label:   "Hele team",
-      id:      "email_selection_all",
-      checked: true
-    = f.radio_button :email_selection, "staff",
-      label:   "Teamleiding",
-      id:      "email_selection_staff"
-    = f.radio_button :email_selection, "player",
-      label:   "Spelers",
-      id:      "email_selection_player"
+    .radio
+      = f.radio_button :email_selection, "all",
+        label:   "Hele team",
+        id:      "email_selection_all",
+        checked: true
+      = f.radio_button :email_selection, "staff",
+        label:   "Teamleiding",
+        id:      "email_selection_staff"
+      = f.radio_button :email_selection, "player",
+        label:   "Spelers",
+        id:      "email_selection_player"
 
     .form-check
       strong
         | Voor gebruik met
-    = f.radio_button :email_separator, ";",
-      label:   "Outlook",
-      id:      "email_separator_semicolon",
-      checked: current_user.settings.email_separator == ';'
-    = f.radio_button :email_separator, ",",
-      label:   "Apple Mail, Gmail",
-      id:      "email_separator_comma",
-      checked: current_user.settings.email_separator == ','
+    .radio
+      = f.radio_button :email_separator, ";",
+        label:   "Outlook",
+        id:      "email_separator_semicolon",
+        checked: current_user.settings.email_separator == ';'
+      = f.radio_button :email_separator, ",",
+        label:   "Apple Mail, Gmail",
+        id:      "email_separator_comma",
+        checked: current_user.settings.email_separator == ','
 
     .form-check
       strong
         | Invullen in veld
-    = f.radio_button :to_field, "to",
-      label:   "Aan",
-      id:      "to_field_to",
-      checked: true
-    = f.radio_button :to_field, "cc",
-      label:   "CC",
-      id:      "to_field_cc"
-    = f.radio_button :to_field, "bcc",
-      label:   "BCC",
-      id:      "to_field_bcc"
+    .radio
+      = f.radio_button :to_field, "to",
+        label:   "Aan",
+        id:      "to_field_to",
+        checked: true
+      = f.radio_button :to_field, "cc",
+        label:   "CC",
+        id:      "to_field_cc"
+      = f.radio_button :to_field, "bcc",
+        label:   "BCC",
+        id:      "to_field_bcc"
 
   - if params[:type] == 'download_team_members'
     .form-check
       strong
         | Status van teams
-    = f.radio_button :status, "",
-      label:   "Alle statussen",
-      id:      "status_all",
-      checked: true
-    - AgeGroup.statuses.each do |status, index|
-      = f.radio_button :status, status,
-        label:   AgeGroup.statuses_i18n[status],
-        id:      "status_#{status}"
+    .radio
+      = f.radio_button :status, "",
+        label:   "Alle statussen",
+        id:      "status_all",
+        checked: true
+      - AgeGroup.statuses.each do |status, index|
+        = f.radio_button :status, status,
+          label:   AgeGroup.statuses_i18n[status],
+          id:      "status_#{status}"
 
     .form-check
       strong
         | Kolommen
-    - Member.export_columns(current_user).each do |column, index|
-      = f.check_box 'columns[]', { checked: current_user.export_columns.include?(column.to_s),
-        id: "columns_#{column.to_s}",
-        label: t(column) },
-        column, nil
+    .checkbox
+      - Member.export_columns(current_user).each do |column, index|
+        = f.check_box 'columns[]', { checked: current_user.export_columns.include?(column.to_s),
+          id: "columns_#{column.to_s}",
+          label: t(column) },
+          column, nil
