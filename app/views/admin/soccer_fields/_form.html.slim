@@ -1,12 +1,14 @@
-= simple_form_for [:admin, @soccer_field], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [:admin, @soccer_field], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :name
-  = render partial: 'input/boolean_checkbox', locals: {f: f, field: :match, row_class: 'mb-0', hide_label: true, checkbox_class: 'checkbox-toggle'}, layout: 'input/col_3_9_wrapper'
-  = render partial: 'input/boolean_checkbox', locals: {f: f, field: :training, hide_label: true, checkbox_class: 'checkbox-toggle'}, layout: 'input/col_3_9_wrapper'
-  
+  = f.text_field :name, autofocus: true
+
+  = f.form_group class: 'checkbox-toggle'
+    = f.check_box :match
+    = f.check_box :training
+
   div
-    = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+    = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
     - if policy(@soccer_field).destroy?
       = link_to "Verwijderen", admin_soccer_field_path(@soccer_field),  method: :delete, data: { confirm: 'Veld wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
     = link_to "Annuleren", [:admin, :soccer_fields], class: 'btn btn-secondary-outline btn-inline'
