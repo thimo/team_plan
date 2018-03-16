@@ -4,7 +4,7 @@
 - team ||= nil
 - highlight_own_teams ||= false
 
-- cache [match, compact, disable_line_through, include_presences, team]
+- cache [match, compact, disable_line_through, include_presences, team, highlight_own_teams]
   tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through} #{'strong table-success' if highlight_own_teams && match.eigenteam?}"]
     td
       .match-row-header.small

@@ -28,16 +28,16 @@ section.box-typical.schedule-list
                 th[colspan="100"]
                   | #{l date, format: :weekday} #{l date, format: :date_long}
             tbody
+              / Note: cannot be cached because of parameters
               = render partial: 'shared/match',
                 collection: matches,
-                locals: { disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams },
-                cached: true
+                locals: { disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams }
         - else
           tbody
+            / Note: cannot be cached because of parameters
             = render partial: 'shared/match',
               collection: matches,
-              locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams },
-              cached: true
+              locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams }
       - else
         tbody
           tr
