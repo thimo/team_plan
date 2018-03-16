@@ -13,14 +13,12 @@
  *= require fontawesome/fontawesome
  *= require fontawesome/fa-solid
  *= require fontawesome/fa-regular
+ *= require theme/main
  */
 
-@import 'startui/main';
-@import 'startui/chat';
-@import 'startui/login';
 @import './*';
 @import './admin/*';
 @import './org/*';
 @import './intranet/*';
 @import 'custom/*';
-@import 'startui/overwrite';
+@import 'theme/overwrite';
