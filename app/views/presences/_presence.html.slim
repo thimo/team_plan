@@ -2,22 +2,23 @@
 
 - if policy(presence).update?
   div.presence-form[id="presence-#{presence.id}"]
-    = simple_form_for presence, html: { class: 'row' }, data: { behavior: "autosave" }, remote: true do |f|
+    = bootstrap_form_for presence, html: { class: 'row' }, data: { behavior: "autosave" }, remote: true do |f|
       = hidden_field_tag :compact, compact
       div[class="#{compact ? 'col-12' : 'col-md-4'}"]
         - label = "#{presence.member.name} #{'<i class="fa fa-medkit p-1 pl-2 red"></i>' if presence.member.injured?}".html_safe
-        = render 'input/boolean_checkbox', f: f,
-          field: :present,
-          label: label.html_safe,
-          checkbox_class: "checkbox-toggle #{'mt-2 mb-1' if compact}",
-          label_class: "#{'color-blue-grey line-through' unless presence.present?}"
+        .checkbox-toggle
+          = f.check_box :present,
+            id: "presence_present_#{presence.id}",
+            label: label.html_safe,
+            class: "#{'mt-2 mb-1' if compact}",
+            label_class: "#{'color-blue-grey line-through' unless presence.present?}"
       div.extra_fields[class="#{compact ? 'col-12' : 'col-md-2'}"]
         - if presence.present?
-          = f.input :on_time, include_blank: false, input_html: {class: " #{color_for_on_time(presence.send(:on_time))}"}, wrapper_html: {class: "mb-2"}, label: false
+          = f.collection_select :on_time, Presence.on_times_i18n, :first, :second, { hide_label: true }, { class: " #{color_for_on_time(presence.send(:on_time))}" }
           = f.hidden_field :signed_off, value: :signed_off_on_time
         - unless presence.present?
-          = f.input :signed_off, include_blank: false, input_html: {class: " #{color_for_on_time(presence.send(:signed_off))}"}, wrapper_html: {class: "mb-2"}, label: false
+          = f.collection_select :signed_off, Presence.signed_offs_i18n, :first, :second, { hide_label: true }, { class: " #{color_for_on_time(presence.send(:signed_off))}" }
           = f.hidden_field :on_time, value: :on_time
 
       div.extra_fields[class="#{compact ? 'col-12' : 'col-md-6'}"]
-        = f.text_area :remark, class: "form-control", placeholder: f.object.class.human_attribute_name(:remark), rows: 1
+        = f.text_area :remark, class: "form-control", placeholder: f.object.class.human_attribute_name(:remark), rows: 1, hide_label: true
