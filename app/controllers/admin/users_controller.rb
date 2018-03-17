@@ -18,7 +18,7 @@ class Admin::UsersController < Admin::BaseController
     @user.skip_confirmation!
     if @user.save
       @user.send_new_account(generated_password)
-      flash[:success] = 'Gebruiker is toegevoegd.'
+      flash_message(:success, 'Gebruiker is toegevoegd.')
       if params[:member].present?
         redirect_to policy_scope(Member).find(params[:member])
       else
@@ -46,7 +46,7 @@ class Admin::UsersController < Admin::BaseController
       @user.send_password_reset(generated_password)
       redirect_to admin_users_path, notice: 'Er is een nieuw wachtwoord aan de gebruiker verstuurd.'
     else
-      flash[:alert] = 'Er kon geen nieuw wachtwoord worden verstuurd.'
+      flash_message(:alert, 'Er kon geen nieuw wachtwoord worden verstuurd.')
       render 'edit'
     end
   end

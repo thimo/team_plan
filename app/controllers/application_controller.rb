@@ -17,12 +17,12 @@ class ApplicationController < ActionController::Base
   private
 
     def invalid_auth_token
-      flash[:danger] = "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer."
+      flash_message(:danger, "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer.")
       redirect_to back_url
     end
 
     def permission_denied
-      flash[:danger] = "Je hebt niet genoeg rechten om deze pagina te bekijken."
+      flash_message(:danger, "Je hebt niet genoeg rechten om deze pagina te bekijken.")
       redirect_to root_path
     end
 

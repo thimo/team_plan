@@ -41,7 +41,7 @@ class TeamEvaluationsController < ApplicationController
 
   def re_open
     @team_evaluation.update_columns(finished_at: nil)
-    flash[:success] = 'De teamevaluatie staat weer open voor wijzigingen.'
+    flash_message(:success, "De teamevaluatie staat weer open voor wijzigingen.")
     redirect_to [:edit, @team_evaluation]
   end
 
@@ -94,17 +94,17 @@ class TeamEvaluationsController < ApplicationController
     def post_save_actions
       if finish_evaluation?
         @team_evaluation.finish_evaluation(current_user)
-        flash[:success] = 'De teamevaluatie is afgerond.'
+        flash_message(:success, "De teamevaluatie is afgerond.")
       elsif send_invite?
         mail_count = @team_evaluation.send_invites(current_user)
 
         if mail_count == 0
-          flash[:alert] = "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd."
+          flash_message(:alert, "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd.")
         else
-          flash[:success] = "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}."
+          flash_message(:success, "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}.")
         end
       else
-        flash[:success] = 'De teamevaluatie is opgeslagen.'
+        flash_message(:success, "De teamevaluatie is opgeslagen.")
       end
 
       if stay_open?

@@ -21,11 +21,11 @@ class TeamBulkUpdatesController < ApplicationController
     end
 
     if count == 0
-      flash[:alert] = "Er zijn geen teams aangemaakt"
+      flash_message(:alert, "Er zijn geen teams aangemaakt")
     elsif count == 1
-      flash[:success] = "Er is één team aangemaakt"
+      flash_message(:success, "Er is één team aangemaakt")
     else
-      flash[:success] = "Er zijn #{count} teams aangemaakt"
+      flash_message(:success, "Er zijn #{count} teams aangemaakt")
     end
 
     redirect_to @age_group

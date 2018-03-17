@@ -21,9 +21,9 @@ class MembersController < ApplicationController
 
     if @user.save
       @user.send_new_account(generated_password)
-      flash[:success] = "Login is aangemaakt en verstuurd naar #{@user.email}."
+      flash_message(:success, "Login is aangemaakt en verstuurd naar #{@user.email}.")
     else
-      flash[:alert] = "Login kon niet worden aangemaakt"
+      flash_message(:alert, "Login kon niet worden aangemaakt")
     end
     redirect_to @member
   end
@@ -32,9 +32,9 @@ class MembersController < ApplicationController
     generated_password = @member.user.set_new_password
     if @member.user.save
       @member.user.send_password_reset(generated_password)
-      flash[:success] = "Er is een nieuw wachtwoord aan #{@member.user.email} verstuurd."
+      flash_message(:success, "Er is een nieuw wachtwoord aan #{@member.user.email} verstuurd.")
     else
-      flash[:alert] = 'Er kon geen nieuw wachtwoord worden verstuurd.'
+      flash_message(:alert, 'Er kon geen nieuw wachtwoord worden verstuurd.')
     end
     redirect_to @member
   end

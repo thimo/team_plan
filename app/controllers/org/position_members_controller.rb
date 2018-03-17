@@ -28,9 +28,9 @@ class Org::PositionMembersController < Org::BaseController
 
       if @position_member.save
         @position_member.member.logs << Log.new(body: "Toegevoegd aan #{@position_member.team.name}.", user: current_user)
-        flash[:success] = "#{@position_member.member.name} is aan #{@position_member.team.name} toegevoegd"
+        flash_message(:success, "#{@position_member.member.name} is aan #{@position_member.team.name} toegevoegd")
       else
-        flash[:alert] = "Er is iets mis gegaan, de speler is niet toegevoegd"
+        flash_message(:alert, "Er is iets mis gegaan, de speler is niet toegevoegd")
       end
 
       respond_to do |format|
@@ -80,7 +80,7 @@ class Org::PositionMembersController < Org::BaseController
     # TODO check if this works correctly for positions
     @position_member.deactivate(user: current_user)
 
-    flash[:success] = "#{@position_member.member.name} is verwijderd uit #{@position_member.team.name}."
+    flash_message(:success, "#{@position_member.member.name} is verwijderd uit #{@position_member.team.name}.")
     redirect_to back_url
   end
 

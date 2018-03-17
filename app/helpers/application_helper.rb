@@ -54,4 +54,9 @@ module ApplicationHelper
     uri.query = Rack::Utils.build_query(query)
     uri.to_s
   end
+
+  def flash_message(type, text)
+    flash[type] ||= []
+    flash[type] << text
+  end
 end

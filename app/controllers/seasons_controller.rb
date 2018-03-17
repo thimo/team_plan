@@ -45,7 +45,7 @@ class SeasonsController < ApplicationController
   def inherit_age_groups
     @season.inherit_age_groups
 
-    flash[:success] = "Leeftijdsgroepen zijn overgenomen van #{Season.active.first.name}"
+    flash_message(:success, "Leeftijdsgroepen zijn overgenomen van #{Season.active.first.name}")
     redirect_to @season
   end
 

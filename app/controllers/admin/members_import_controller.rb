@@ -12,11 +12,11 @@ class Admin::MembersImportController < Admin::BaseController
     authorize(Member)
 
     if params[:file].nil?
-      flash[:danger] = "Selecteer eerst een bestand."
+      flash_message(:danger, "Selecteer eerst een bestand.")
       render :new
 
     elsif params[:file].content_type != "text/csv"
-      flash[:danger] = "Alleen CSV bestanden zoals je kunt downloaden uit Sportlink worden ondersteund."
+      flash_message(:danger, "Alleen CSV bestanden zoals je kunt downloaden uit Sportlink worden ondersteund.")
       render :new
 
     else

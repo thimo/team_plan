@@ -10,7 +10,7 @@ class TodosController < ApplicationController
 
   def create
     if @todo.save
-      flash[:success] = "Todo is toegevoegd."
+      flash_message(:success, "Todo is toegevoegd.")
       redirect_to @todo.todoable.present? ? @todo.todoable : root_path
     else
       render :new

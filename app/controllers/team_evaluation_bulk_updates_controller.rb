@@ -29,11 +29,11 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
     end
 
     if count == 0
-      flash[:alert] = "Er zijn geen teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)"
+      flash_message(:alert, "Er zijn geen teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)")
     elsif count == 1
-      flash[:success] = "Er is één teamevaluatie aangemaakt (#{mail_count} e-mails verstuurd)"
+      flash_message(:success, "Er is één teamevaluatie aangemaakt (#{mail_count} e-mails verstuurd)")
     else
-      flash[:success] = "Er zijn #{count} teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)"
+      flash_message(:success, "Er zijn #{count} teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)")
     end
 
     redirect_to @age_group

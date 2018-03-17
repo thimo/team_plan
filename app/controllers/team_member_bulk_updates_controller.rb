@@ -24,11 +24,11 @@ class TeamMemberBulkUpdatesController < ApplicationController
     end
 
     if count == 0
-      flash[:alert] = "Er zijn geen teamgenoten toegevoegd aan #{@team.name}"
+      flash_message(:alert, "Er zijn geen teamgenoten toegevoegd aan #{@team.name}")
     elsif count == 1
-      flash[:success] = "Er is één teamgenoot toegevoegd aan #{@team.name}"
+      flash_message(:success, "Er is één teamgenoot toegevoegd aan #{@team.name}")
     else
-      flash[:success] = "Er zijn #{count} teamgenoten toegevoegd aan #{@team.name}"
+      flash_message(:success, "Er zijn #{count} teamgenoten toegevoegd aan #{@team.name}")
     end
 
     case params[:from]
