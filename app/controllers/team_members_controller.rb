@@ -50,6 +50,8 @@ class TeamMembersController < ApplicationController
         }
         format.js {
           @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
+          @season = @age_group.season
+          @previous_season = @season.previous
           render "create"
         }
       end
