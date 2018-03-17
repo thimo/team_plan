@@ -96,6 +96,10 @@ class Member < ApplicationRecord
     player_evaluations.for_season(season).finished_desc.first
   end
 
+  def evaluation_for_team(team)
+    player_evaluations.for_team(team).finished_desc.first
+  end
+
   def last_evaluation
     player_evaluations.finished_desc.first
   end

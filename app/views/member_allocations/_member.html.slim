@@ -9,7 +9,7 @@
           = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
           span.pl-1
             = "#{previous_team.division}"
-          - if (evaluation = member.evaluation_for_season(@previous_season)).present?
+          - if (evaluation = member.evaluation_for_team(previous_team)).present?
             span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at, format: :date_long}, advies: #{evaluation.advise_next_season}"]
               i.fa[class="#{evaluation.advise_to_icon_class}"]
             - if evaluation.remark.present?
