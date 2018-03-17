@@ -4,8 +4,10 @@ $('#teamMemberNew').modal('hide');
   $('#teams').html("<%= j render('member_allocations/teams') %>");
 <% end %>
 
-<% if @team_member.present? && @team_member.member.present? %>
-  $('#available_member_<%= @team_member.member.id %>').hide()
+<% @team_members.each do |team_member| %>
+  <% if team_member.member.present? %>
+    $('#available_member_<%= team_member.member.id %>').hide()
+  <% end %>
 <% end %>
 
 <% flash.each do |message_type, messages| %>

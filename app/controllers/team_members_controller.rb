@@ -18,24 +18,30 @@ class TeamMembersController < ApplicationController
 
       if params[:team_member_id].present?
         # Remove player from previous team
-        @team_member = TeamMember.find(params[:team_member_id])
-        authorize @team_member
-        @team_member.deactivate
+        team_member = TeamMember.find(params[:team_member_id])
+        authorize team_member
+        team_member.deactivate
       end
 
-      if (@team_member = TeamMember.find_by(permitted_attributes(TeamMember.new).to_h)).present?
-        # Member already was in the team, but has previously been removed. Reset its status
-        @team_member.attributes = permitted_attributes(TeamMember.new).merge(role: :player, ended_on: nil, status: @team_member.team.status)
-      else
-        @team_member = TeamMember.new(permitted_attributes(TeamMember.new))
-      end
-      authorize @team_member
+      attrs = permitted_attributes(TeamMember.new).to_h
+      member_ids = attrs.delete(:member_id).split(',')
+      member_ids.each do |member_id|
+        if (team_member = TeamMember.find_by(attrs.merge(member_id: member_id))).present?
+          # Member already was in the team, but has previously been removed. Reset its status
+          team_member.attributes = attrs.merge(role: :player, ended_on: nil, status: team_member.team.status)
+        else
+          team_member = TeamMember.new(attrs.merge(member_id: member_id))
+        end
+        authorize team_member
 
-      if @team_member.save
-        @team_member.member.logs << Log.new(body: "Toegevoegd aan #{@team_member.team.name}.", user: current_user)
-        flash[:success] = "#{@team_member.member.name} is aan #{@team_member.team.name} toegevoegd"
-      else
-        flash[:alert] = "Er is iets mis gegaan, de speler is niet toegevoegd"
+        if team_member.save
+          team_member.member.logs << Log.new(body: "Toegevoegd aan #{team_member.team.name}.", user: current_user)
+          flash_message(:success, "#{team_member.member.name} is aan #{team_member.team.name} toegevoegd")
+          @team_members ||= []
+          @team_members << team_member
+        else
+          flash_message(:alert, "Er is iets mis gegaan, de speler is niet toegevoegd")
+        end
       end
 
       respond_to do |format|

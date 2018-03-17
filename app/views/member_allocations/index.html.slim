@@ -22,11 +22,11 @@
       .box-typical-header
         .tbl-row
           .tbl-cell.pt-0
-            = form_with scope: :member_allocation_filters, url: member_allocation_filters_path, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f|
+            = form_with scope: :member_allocation_filters, url: member_allocation_filters_path do |f|
               div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
                 = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position),
                   { include_blank: true },
-                  { class: "form-control field_position", onchange: "$('#filter-button').click()", data: { controller: 'select2', placeholder: "Filter op veldpositie" } }
+                  { id: "member_allocation_filters_field_position", class: "form-control field_position", onchange: "$('#filter-button').click()", data: { controller: 'select2', placeholder: "Filter op veldpositie" } }
                 = f.button :button, title: 'Filter toepassen', class: "btn btn-primary ml-1", id: 'filter-button' do
                   i.fa.far.fa-search
                 = link_to member_allocation_filter_path(0),  method: :delete, title: "Filters verwijderen", class: "btn btn-secondary ml-1"
@@ -35,15 +35,18 @@
                 div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
                   = f.select :team, options_for_select(@teams_for_filter, @filter_team),
                     { include_blank: true },
-                    { class: "form-control", onchange: "$('#filter-button').click()", data: { controller: 'select2', placeholder: "Filter op team" } }
+                    { id: "member_allocation_filters_team", class: "form-control", onchange: "$('#filter-button').click()", data: { controller: 'select2', placeholder: "Filter op team" } }
 
       .box-typical-body.table-responsive
         table.table.table-sm
-          thead
           tbody
             - @filtered_available_members.each do |team, members|
               tr
-                th
+                th.w-1
+                  - if team.present? && policy(TeamMember.new(team: team)).create?
+                    a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{members.map(&:id).join(',')}" data-member-name="#{team.name}" title="Toevoegen aan team"]
+                      i.fa.far.fa-chevron-left.m-1
+
                 th[colspan="2"]
                   = team.name if team.present?
                   = "Nieuwe spelers" if team.nil?

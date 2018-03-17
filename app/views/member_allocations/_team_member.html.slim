@@ -18,5 +18,5 @@ tr
           a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Verplaatsen naar team"]
             i.fa.far.fa-bars.m-1
         - if policy(team_member).destroy?
-          = link_to member_allocation_path(team_member),  method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
+          = link_to member_allocation_path(team_member), remote: true, method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
             i.fa.far.fa-times.m-1
