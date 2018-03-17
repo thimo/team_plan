@@ -70,9 +70,9 @@ class TeamMembersController < ApplicationController
 
     if @team_member.save
       @team_member.member.logs << Log.new(body: "Geactiveerd voor #{@team_member.team.name}.", user: current_user)
-      flash[:success] = "#{@team_member.member.name} is geactiveerd voor #{@team_member.team.name}."
+      flash_message(:success, "#{@team_member.member.name} is geactiveerd voor #{@team_member.team.name}.")
     else
-      flash[:alert] = "Er is iets mis gegaan, de teamgenoot is niet geactiveerd"
+      flash_message(:alert, "Er is iets mis gegaan, de teamgenoot is niet geactiveerd")
     end
 
     redirect_to back_url
@@ -95,7 +95,7 @@ class TeamMembersController < ApplicationController
   def destroy
     @team_member.deactivate(user: current_user)
 
-    flash[:success] = "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}."
+    flash_message(:success, "#{@team_member.member.name} is verwijderd uit #{@team_member.team.name}.")
     redirect_to back_url
   end
 

@@ -35,6 +35,9 @@ document.addEventListener("turbolinks:load", () => {
   })
 
   new LazyLoad();
+
+  PNotify.defaults.styling = "bootstrap4";
+  PNotify.defaults.icons = "fontawesome5";
 });
 
 document.addEventListener("turbolinks:before-cache", () => {

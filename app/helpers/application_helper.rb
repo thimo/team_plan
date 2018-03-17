@@ -9,17 +9,29 @@ module ApplicationHelper
     end
   end
 
-  def notie_type(message_type)
-    # 1 - success, 2 - warning, 3 - error, 4 - info
+  def pnotify_type(message_type)
     case message_type
     when "success", "notice"
-      1
+      "success"
     when "alert", "warning"
-      2
+      "notice"
     when "danger", "error"
-      3
+      "error"
     else
-      4
+      "info"
+    end
+  end
+
+  def pnotify_duration(message_type)
+    case message_type
+    when "success", "notice"
+      4000
+    when "alert", "warning"
+      8000
+    when "danger", "error"
+      8000
+    else
+      4000
     end
   end
 

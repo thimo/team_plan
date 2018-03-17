@@ -11,10 +11,10 @@ $('#teamMemberNew').modal('hide');
 <% flash.each do |message_type, messages| %>
   <% [messages].flatten.each do |message| %>
     $(function() {
-      notie.alert({
-        type: <%= notie_type(message_type) %>,
+      PNotify.alert({
+        type: "<%= pnotify_type(message_type) %>",
         text: "<%= message %>",
-        time: 2
+        delay: <%= pnotify_duration(message_type) %>
       })
     })
   <% end %>
