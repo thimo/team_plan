@@ -8,13 +8,15 @@ $('#teamMemberNew').modal('hide');
   $('#available_member_<%= @team_member.member.id %>').hide()
 <% end %>
 
-<% flash.each do |message_type, message| %>
-  $(function() {
-    notie.alert({
-      type: <%= notie_type(message_type) %>,
-      text: "<%= message %>",
-      time: 2
+<% flash.each do |message_type, messages| %>
+  <% [messages].flatten.each do |message| %>
+    $(function() {
+      notie.alert({
+        type: <%= notie_type(message_type) %>,
+        text: "<%= message %>",
+        time: 2
+      })
     })
-  })
+  <% end %>
 <% end %>
 <% flash.clear %>
