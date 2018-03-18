@@ -22,7 +22,7 @@ class TodosController < ApplicationController
 
   def update
     if @todo.update_attributes(todo_params)
-      flash[:success] =  "Todo is aangepast."
+      flash_message(:success, "Todo is aangepast.")
       url = if params[:return].present?
         params[:return]
       elsif @todo.todoable.present?
@@ -37,7 +37,7 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    flash[:success] =  "Todo is verwijderd."
+    flash_message(:success, "Todo is verwijderd.")
     redirect_to @todo.todoable.present? ? @todo.todoable : root_path
     @todo.destroy
   end
