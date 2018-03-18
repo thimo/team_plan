@@ -1,9 +1,9 @@
-= simple_form_for [@commentable, @comment] do |f|
-  = f.error_notification
-  = f.input :body, label: false, placeholder: "Opmerking"
-  / .float-right
-  /   = f.input :private
-  = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+= bootstrap_form_for [@commentable, @comment], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+  
+  = f.text_area :body, label: false, placeholder: "Opmerking"
+
+  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   - if f.object.comment_type.blank?
     = f.hidden_field :comment_type
   = link_to "Annuleren", @comment.new_record? ? @commentable : @comment.commentable, class: 'btn btn-secondary-outline btn-inline'
