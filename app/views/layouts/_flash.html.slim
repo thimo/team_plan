@@ -2,8 +2,10 @@
   - flash.each do |message_type, messages|
     - [messages].flatten.each do |message|
       script
-        | PNotify.alert({
-            type: '#{pnotify_type(message_type)}',
-            text: '#{message}',
-            delay: #{pnotify_duration(message_type)}
+        | document.addEventListener("turbolinks:load", function() {
+            PNotify.alert({
+              type: '#{pnotify_type(message_type)}',
+              text: '#{message}',
+              delay: #{pnotify_duration(message_type)}
+            })
           })
