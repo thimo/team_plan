@@ -2,10 +2,8 @@
   - flash.each do |message_type, messages|
     - [messages].flatten.each do |message|
       script
-        | $(function() {
-            PNotify.alert({
-              type: '#{pnotify_type(message_type)}',
-              text: '#{message}',
-              delay: #{pnotify_duration(message_type)}
-            })
+        | PNotify.alert({
+            type: '#{pnotify_type(message_type)}',
+            text: '#{message}',
+            delay: #{pnotify_duration(message_type)}
           })
