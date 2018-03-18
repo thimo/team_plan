@@ -84,6 +84,7 @@ nl:
         endurance: Uithoudingsvermogen
         duel_strength: Duelkracht
       comment:
+        body: Opmerking
         private: Privé
       note:
         title: Titel
