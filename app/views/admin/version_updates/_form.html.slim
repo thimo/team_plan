@@ -1,14 +1,15 @@
-= simple_form_for [:admin, @version_update], {wrapper: :horizontal_form} do |f|
-  = f.error_notification
+= bootstrap_form_for [:admin, @version_update], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :name
-  = f.input :body, hint: 'Gebruik <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="_new">Markdown</a> bij het opmaken van de tekst'.html_safe
-  = render 'input/datepicker', f: f, field: :released_at
+  = f.text_field :name
+  = f.text_area :body, help: 'Gebruik <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="_new">Markdown</a> bij het opmaken van de tekst'.html_safe
+  = f.text_field :released_at, date_picker_options
 
-  = f.input :for_role
-  
+  .radio
+    = f.collection_radio_buttons :for_role, VersionUpdate.for_roles_i18n, :first, :second
+
   div
-    = f.button :submit, "Opslaan", class: 'btn btn-primary btn-inline'
+    = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
     - if policy(@version_update).destroy?
       = link_to "Verwijderen", admin_version_update_path(@version_update),  method: :delete, data: { confirm: 'Versie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
     = link_to "Annuleren", [:admin, :version_updates], class: 'btn btn-secondary-outline btn-inline'
