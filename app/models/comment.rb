@@ -13,7 +13,7 @@ class Comment < ApplicationRecord
   def self.active_tab(user, parent, tab)
     user.set_active_comments_tab(tab) if tab.present?
 
-    if parent.comment_types.include? user.settings.active_comments_tab
+    if parent.class.comment_types.include? user.settings.active_comments_tab
       user.settings.active_comments_tab
     else
       'generic'

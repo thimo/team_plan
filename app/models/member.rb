@@ -120,7 +120,7 @@ class Member < ApplicationRecord
     status == STATUS_AF_TE_MELDEN
   end
 
-  def comment_types
+  def self.comment_types
     Comment.comment_types
   end
 

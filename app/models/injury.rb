@@ -12,7 +12,7 @@ class Injury < ApplicationRecord
   scope :desc, -> { order(created_at: :desc) }
   scope :active, -> { where(ended_on: nil) }
 
-  def comment_types
+  def self.comment_types
     { 'generic' => 0 }
   end
 

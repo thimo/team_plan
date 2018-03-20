@@ -44,7 +44,7 @@ class Team < ApplicationRecord
     team_members
   end
 
-  def comment_types
+  def self.comment_types
     Comment.comment_types.except(:membership)
   end
 

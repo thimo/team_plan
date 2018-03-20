@@ -1,7 +1,12 @@
 module CommentsHelper
 
   def comment_types_for(parent)
-    @comment_types_for ||= parent.comment_types.select{ |type, id| policy(Comment).public_send("show_#{type}?") }
+    comment_types = if parent.class == Team && current_user.settings.include_member_comments
+                      Member.comment_types
+                    else
+                      parent.class.comment_types
+                    end
+    @comment_types_for ||= comment_types.select{ |type, id| policy(Comment).public_send("show_#{type}?") }
   end
 
   def comments_for(parent, comment_type)
