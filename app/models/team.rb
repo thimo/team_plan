@@ -24,6 +24,8 @@ class Team < ApplicationRecord
 
   validates_presence_of :name, :age_group
 
+  delegate :season, to: :age_group
+
   scope :asc, -> { order(:name) }
   scope :for_members, -> (members) { joins(:team_members).where(team_members: { member_id: members }) }
   scope :as_player, -> { joins(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }

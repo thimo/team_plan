@@ -43,7 +43,7 @@ section.tabs-section
                 span.color-blue-grey
                   input[type="checkbox" checked=current_user.settings.include_member_comments]
                   label
-                    | Inclusief teamleden
+                    | Inclusief teamleden (seizoen #{parent.season.name})
 
 
         - if (comments = comments_for(parent, comment_type)).present?
