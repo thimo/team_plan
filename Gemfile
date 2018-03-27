@@ -38,6 +38,7 @@ gem 'devise',                     '4.4.1' # 4.4.2 causes 'Devise.secret_key was 
 gem 'rails-settings-cached'
 
 gem 'pundit',                     '~> 1.1.0'
+gem 'rolify'
 gem 'awesome_print', require: 'awesome_print'
 gem 'redcarpet',                  '~> 3.4.0' # Markdown parser
 gem 'paper_trail'

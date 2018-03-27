@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   include Filterable
   include Statussable
 
