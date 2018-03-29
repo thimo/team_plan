@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.5.1'
 
 gem 'rails', '~> 5.2.0-pre'
 gem 'pg', '~> 0.18'
@@ -15,7 +15,7 @@ gem 'webpacker-react'
 gem 'less-rails', '~> 3.0.0'
 gem 'therubyracer'
 
-gem 'slim'
+gem 'slim-rails'
 gem 'faker'
 gem 'carrierwave',                '~> 1.1.0'
 gem 'carrierwave-imageoptimizer' # also do: brew install optipng jpegoptim (or via 'apt-get' on Ubuntu)
@@ -54,7 +54,7 @@ gem 'simple_calendar',            '~> 2.0'
 gem 'icalendar',                  '~> 2.4.1'
 gem 'bootsnap', require: false
 gem 'ancestry'
-gem "redis", "~> 4.0"
+gem 'redis', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -89,7 +89,7 @@ group :test do
   # gem 'mini_backtrace'
   gem 'launchy' # For 'save_and_open_page' debugging during testing
   gem 'minitest'
-  # Disabled to prevent "uninitialized constant Minitest::Rails::TestUnit"
+  # Disabled to prevent 'uninitialized constant Minitest::Rails::TestUnit'
   # gem 'minitest-rails'
   gem 'selenium-webdriver'
 end
