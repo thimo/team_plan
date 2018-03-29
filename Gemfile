@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.5.1'
 
 gem 'rails', '~> 5.2.0-pre'
 gem 'pg', '~> 0.18'
@@ -15,7 +15,7 @@ gem 'webpacker-react'
 gem 'less-rails', '~> 3.0.0'
 gem 'therubyracer'
 
-gem 'slim'
+gem 'slim-rails'
 gem 'faker'
 gem 'carrierwave',                '~> 1.1.0'
 gem 'carrierwave-imageoptimizer' # also do: brew install optipng jpegoptim (or via 'apt-get' on Ubuntu)
