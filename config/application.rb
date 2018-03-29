@@ -35,6 +35,7 @@ module TeamPlan
 
     # Enable to prevent loading all helpers all the time
     # config.action_controller.include_all_helpers = false
+    config.generators.javascripts = false
 
     console do
       ActiveRecord::Base.connection
