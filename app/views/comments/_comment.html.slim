@@ -1,4 +1,6 @@
-- cache comment
+- show_commentable_name = parent != comment.commentable
+
+- cache [comment, show_commentable_name]
   .comment.chat-message
     .chat-message-photo
       = image_tag avatar_url(comment.user), alt: ""
@@ -16,7 +18,7 @@
 
     .chat-message-content
       .chat-message-txt
-        - if parent != comment.commentable
+        - if show_commentable_name
           div.strong.float-left.pr-2
             = link_to comment.commentable.name, comment.commentable
         = markdown(comment.body).html_safe
