@@ -26,7 +26,7 @@ gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 
 gem 'simple_form',                '~> 3.5.0'
-gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/bootstrap_form.git', branch: 'master'
+gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/bootstrap_form.git'
 gem 'country_select'
 
 gem 'breadcrumbs_on_rails',       '~> 3.0.1'
