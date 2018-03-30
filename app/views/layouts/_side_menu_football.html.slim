@@ -1,27 +1,27 @@
 ul.side-menu-list
-  li.dirty-blue class="#{'active' if current_page?(dashboard_index_path) || current_page?(root_path)}"
-    = link_to dashboard_index_path
+  li.dirty-blue class="#{'active' if current_page?(dashboard_path) || current_page?(root_path)}"
+    = link_to dashboard_path
       span
         i.fa.far.fa-fw.fa-tachometer
         span.lbl
           | Dashboard
 
-  li.green class="#{'active' if current_page?(program_dashboard_index_path)}"
-    = link_to program_dashboard_index_path
+  li.green class="#{'active' if current_page?(program_dashboards_path)}"
+    = link_to program_dashboards_path
       span
         i.fa.far.fa-fw.fa-futbol
         span.lbl
           | Programma
 
-  li.grey class="#{'active' if current_page?(results_dashboard_index_path)}"
-    = link_to results_dashboard_index_path
+  li.grey class="#{'active' if current_page?(results_dashboards_path)}"
+    = link_to results_dashboards_path
       span
         i.fa.far.fa-fw.fa-trophy
         span.lbl
           | Uitslagen
 
-  li.orange-red class="#{'active' if current_page?(cancellations_dashboard_index_path)}"
-    = link_to cancellations_dashboard_index_path
+  li.orange-red class="#{'active' if current_page?(cancellations_dashboards_path)}"
+    = link_to cancellations_dashboards_path
       span
         i.fa.far.fa-fw.fa-ban
         span.lbl

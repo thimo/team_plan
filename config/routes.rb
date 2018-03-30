@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   end
 
   authenticate :user do
-    root to: "dashboards#index"
+    root to: "dashboards#show"
 
-    resources :dashboard, only: [:index], controller: :dashboards do
+    get 'dashboard' => 'dashboards#show'
+    resource :dashboards do
       collection do
         get :program
         get :results

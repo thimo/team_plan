@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
 
   before_action :set_season
 
-  def index
+  def show
     @age_groups_male = policy_scope(@season.age_groups).male.asc
     @age_groups_female = policy_scope(@season.age_groups).female.asc
 
@@ -34,7 +34,7 @@ class DashboardsController < ApplicationController
     @todos = policy_scope(Todo).includes(:todoable).asc.unfinished
     @new_members = policy_scope(Member).recent_members(30).page(params[:member_page]).per(6) if policy(Member).show_new_members?
 
-    skip_policy_scope
+    skip_authorization
   end
 
   def program

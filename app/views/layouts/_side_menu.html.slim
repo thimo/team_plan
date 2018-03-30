@@ -3,7 +3,7 @@ nav.side-menu
     section.top-nav
       ul.nav.nav-tabs
         li.nav-item
-          = link_to dashboard_index_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
+          = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
             i.fa.far.fa-futbol
         - if policy(:org).show?
           li.nav-item
