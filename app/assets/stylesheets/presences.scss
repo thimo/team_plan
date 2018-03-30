@@ -7,6 +7,13 @@
     flex: 1;
     padding: .5rem;
   }
+
+  .checkbox-toggle.m-0 {
+    .form-check {
+      margin-top: .25rem;
+      margin-bottom: .25rem;
+    }
+  }
 }
 
 .presences-dropdown {
