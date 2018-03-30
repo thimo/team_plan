@@ -1,6 +1,6 @@
 class Presence < ApplicationRecord
   belongs_to :member
-  belongs_to :presentable, polymorphic: true
+  belongs_to :presentable, polymorphic: true, touch: true
   belongs_to :team
 
   scope :asc, -> { includes(:member).order('members.last_name ASC, members.first_name ASC') }

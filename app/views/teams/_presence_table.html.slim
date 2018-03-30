@@ -13,6 +13,7 @@
                 = "#{l(presentable.started_at, format: :weekday)} #{l(presentable.started_at, format: :date_short)}"
           th
           th
+
       tbody
         - team.team_members.player.asc.each do |team_member|
           - member = team_member.member
@@ -25,15 +26,18 @@
               td
                 - if presences.has_key? presentable.id
                   - if presences[presentable.id].present
-                    i.fa.far.fa-check.green
+                    - title = [presences[presentable.id].on_time_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
+                    i.fa.far.fa-check.green[title="#{title}"]
                     - presence_count += 1
                   - else
-                    i.fa.far.fa-times.red
+                    - title = [presences[presentable.id].signed_off_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
+                    i.fa.far.fa-times.red[title="#{title}"]
                 - else
                   i.fa.far.fa-minus.grey
             td.w-1.text-right.color-blue-grey
               = presence_count
             td
+
       tfooter
         tr
           th

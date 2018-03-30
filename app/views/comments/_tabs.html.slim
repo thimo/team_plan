@@ -30,9 +30,12 @@ section.tabs-section
       .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type}" class="#{is_active ? 'active in' : 'fade'}"]
         - if parent.class.comment_types.key? comment_type
           = bootstrap_form_for [parent, Comment.new], html: { class: 'pb-3' } do |f|
-            = f.text_area :body, hide_label: true, placeholder: "Opmerking", rows: 1
-            = f.submit "Toevoegen", class: 'btn btn-primary btn-sm float-right'
+            = f.text_area :body, hide_label: true, placeholder: "Opmerking", rows: 1, wrapper: { class: 'mb-1' }
             = f.hidden_field :comment_type, value: comment_type
+            = f.submit "Toevoegen", class: 'btn btn-primary btn-sm float-right'
+            small.form-text.text-muted.pt-0
+              | Tip: beperk je opmerking tot feiten, vermijdt meningen en oordelen
+
 
         div.small.mb-2[style="height: 20px;"]
           - if parent.is_a? Team

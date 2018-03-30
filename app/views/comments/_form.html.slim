@@ -1,7 +1,7 @@
 = bootstrap_form_for [@commentable, @comment], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
   = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
-  
-  = f.text_area :body, label: false, placeholder: "Opmerking"
+
+  = f.text_area :body, label: false, placeholder: "Opmerking", help: "Tip: beperk je opmerking tot feiten, vermijdt meningen en oordelen"
 
   = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
   - if f.object.comment_type.blank?

@@ -45,11 +45,6 @@ ul.side-menu-list
   - if policy(:club_data_dashboard).index?
     .dropdown-header
       | KNVB
-    / li class="#{'active' if current_page?(dashboard_index_path)}"
-    / = link_to admin_club_data_dashboards_path do
-      span
-      /   i.fa.far.fa-tachometer
-      /   | Dashboard
     li class="#{'active' if controller.class == Admin::Knvb::ClubDataTeamsController}"
       = link_to admin_knvb_club_data_teams_path do
         span

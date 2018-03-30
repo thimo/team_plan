@@ -12,6 +12,6 @@
 - unless version_updates.last_page?
   #version_updates_list
     .box-typical-footer.text-right
-      = link_to dashboard_index_path(version_page: version_updates.next_page), remote: true
+      = link_to dashboard_path(version_page: version_updates.next_page), remote: true
         | Meer
         i.fa.far.fa-angle-down.ml-1

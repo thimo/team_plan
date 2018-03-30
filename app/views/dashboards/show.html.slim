@@ -22,18 +22,18 @@
       - if @not_played_matches.present?
         = render "matches/list",
           matches: @not_played_matches,
-          title: link_to("Volgende wedstrijden", program_dashboard_index_path, title: "Bekijk het programma voor de komende week")
+          title: link_to("Volgende wedstrijden", program_dashboards_path, title: "Bekijk het programma voor de komende week")
 
       - if @canceled_matches.present?
         = render "matches/list",
           matches: @canceled_matches,
           disable_line_through: true,
-          title: link_to("Afgelaste wedstrijden", cancellations_dashboard_index_path, title: "Bekijk de afgelaste wedstrijden")
+          title: link_to("Afgelaste wedstrijden", cancellations_dashboards_path, title: "Bekijk de afgelaste wedstrijden")
 
       - if @played_matches.present?
         = render "matches/list",
           matches: @played_matches,
-          title: link_to("Laatste uitslagen", results_dashboard_index_path, title: "Bekijk alle uitslagen van de afgelopen week")
+          title: link_to("Laatste uitslagen", results_dashboards_path, title: "Bekijk alle uitslagen van de afgelopen week")
 
       - if @open_team_evaluations.present?
         = render "team_evaluations/list",
