@@ -1,16 +1,18 @@
 div[class="#{column_class}"]
-  .form-check
-    input.form-check-input.team-select-toggle#team_ids_all[type="checkbox" checked]
-    label.form-check-label[for="team_ids_all"]
-      strong
-        |  Teams
+  .checkbox
+    .form-check
+      input.form-check-input.team-select-toggle#team_ids_all[type="checkbox" checked]
+      label.form-check-label[for="team_ids_all"]
+        strong
+          |  Teams
 
   - @teams.each do |team|
-    = f.check_box 'team_ids[]', { checked: true,
-      class: 'team-select',
-      id: "team_ids_#{team.id}",
-      label: team.name },
-      team.id, nil
+    .checkbox
+      = f.check_box 'team_ids[]', { checked: true,
+        class: 'team-select',
+        id: "team_ids_#{team.id}",
+        label: team.name },
+        team.id, nil
 
 script
   | $('.team-select-toggle').change(function() {
