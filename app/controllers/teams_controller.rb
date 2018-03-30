@@ -41,6 +41,8 @@ class TeamsController < ApplicationController
 
         @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
         @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 4.weeks.from_now.beginning_of_day).asc
+
+        # @program_items = (@not_played_matches + @trainings).sort_by &:started_at
     end
   end
 

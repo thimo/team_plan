@@ -1,0 +1,41 @@
+- title ||= "Programma"
+- disable_line_through ||= false
+- team ||= nil
+- include_presences ||= false
+- highlight_own_teams ||= false
+
+section.box-typical.schedule-list
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h4
+          == title
+      .tbl-cell.tbl-cell-actions
+        - if team.present?
+          - if policy(team).create_match?
+            = link_to new_team_match_path(team), title: "Een wedstrijd toevoegen", class: "action-btn"
+              i.fa.far.fa-plus-square
+          - if policy(Training.new(team: team)).create?
+            = link_to new_team_training_path(team), title: "Eénmalige training toevoegen", class: "action-btn"
+              i.fa.far.fa-plus-square
+          = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
+            i.fa.far.fa-calendar-alt
+
+  .box-typical-body
+    table.table.table-sm.tr-links.align-top
+      - if program_items.any?
+        tbody
+          - program_items.each do |program_item|
+            - if program_item.is_a? Match
+              / Note: cannot be cached because of parameters
+              = render partial: 'shared/match',
+                locals: { match: program_item, compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams }
+            - elsif program_item.is_a? Training
+              = render partial: 'shared/training',
+                locals: { training: program_item, include_presences: include_presences, team: team }
+
+      - else
+        tbody
+          tr
+            td
+              i Geen programma gevonden
