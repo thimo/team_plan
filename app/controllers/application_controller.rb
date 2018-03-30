@@ -5,10 +5,10 @@ class ApplicationController < ActionController::Base
   impersonates :user
 
   before_action :set_locale
-  after_action :verify_authorized, except: :index, unless: :devise_controller?
-  after_action :verify_policy_scoped, only: :index
   before_action :default_breadcrumb
   before_action :set_paper_trail_whodunnit
+  after_action :verify_authorized, except: :index, unless: :devise_controller?
+  after_action :verify_policy_scoped, only: :index
 
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied
