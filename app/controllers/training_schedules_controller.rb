@@ -14,7 +14,7 @@ class TrainingSchedulesController < ApplicationController
 
   def create
     if @training_schedule.save
-      redirect_to @training_schedule, notice: "Reguliere training is toegevoegd."
+      redirect_to @training_schedule, notice: "Trainingsdag is toegevoegd."
     else
       render :new
     end
@@ -24,19 +24,19 @@ class TrainingSchedulesController < ApplicationController
 
   def update
     if @training_schedule.update_attributes(training_schedule_params)
-      redirect_to @training_schedule, notice: "Reguliere training is aangepast."
+      redirect_to @training_schedule, notice: "Trainingsdag is aangepast."
     else
       render 'edit'
     end
   end
 
   def destroy
-    redirect_to @training_schedule.team, notice: "Reguliere training is verwijderd."
+    redirect_to @training_schedule.team, notice: "Trainingsdag is verwijderd."
     @training_schedule.deactivate
   end
 
   def activate
-    redirect_to @training_schedule.team, notice: "Reguliere training is geactiveerd."
+    redirect_to @training_schedule.team, notice: "Trainingsdag is geactiveerd."
     @training_schedule.activate
   end
 
