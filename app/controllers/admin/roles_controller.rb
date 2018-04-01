@@ -35,7 +35,7 @@ class Admin::RolesController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Gebruikers', admin_roles_path
+      add_breadcrumb 'Rollen', admin_roles_path
       unless @role.nil?
         if @role.new_record?
           add_breadcrumb 'Nieuw'

@@ -34,7 +34,7 @@ class Admin::GroupsController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Gebruikers', admin_groups_path
+      add_breadcrumb 'Groepen', admin_groups_path
       unless @group.nil?
         if @group.new_record?
           add_breadcrumb 'Nieuw'

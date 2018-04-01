@@ -1,2 +1,27 @@
-h1 Admin::Groups#index
-p Find me in app/views/admin/groups/index.html.slim
+- provide(:title, "Groepen")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@groups.count} Groepen
+
+      .tbl-cell.float-right
+      - if policy(Group).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_group_path, title: "Groep toevoegen"
+            i.fa.far.fa-file
+
+  .box-typical-body
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th = Group.human_attribute_name(:name)
+          th
+
+      tbody
+        - @groups.each do |group|
+          tr
+            td
+              = link_to group.name, [:edit, :admin, group]

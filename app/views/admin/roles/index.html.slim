@@ -1,2 +1,27 @@
-h1 Admin::Roles#index
-p Find me in app/views/admin/roles/index.html.slim
+- provide(:title, "Rollen")
+
+section.box-typical
+  header.box-typical-header
+    .tbl-row
+      .tbl-cell.tbl-cell-title
+        h3
+          | #{@roles.count} Rollen
+
+      .tbl-cell.float-right
+      - if policy(Role).create?
+        .tbl-cell.tbl-cell-action-bordered
+          = link_to new_admin_role_path, title: "Rol toevoegen"
+            i.fa.far.fa-file
+
+  .box-typical-body
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th = Role.human_attribute_name(:name)
+          th
+
+      tbody
+        - @roles.each do |role|
+          tr
+            td
+              = link_to role.name, [:edit, :admin, role]
