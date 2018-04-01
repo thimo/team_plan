@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_29_201938) do
+ActiveRecord::Schema.define(version: 2018_04_01_154733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -135,6 +135,21 @@ ActiveRecord::Schema.define(version: 2018_03_29_201938) do
     t.bigint "team_member_id", null: false
     t.index ["field_position_id", "team_member_id"], name: "position_member_index"
     t.index ["team_member_id", "field_position_id"], name: "member_position_index"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "title"
+    t.boolean "default", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups_roles", id: false, force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "role_id"
+    t.index ["group_id", "role_id"], name: "index_groups_roles_on_group_id_and_role_id"
+    t.index ["group_id"], name: "index_groups_roles_on_group_id"
+    t.index ["role_id"], name: "index_groups_roles_on_role_id"
   end
 
   create_table "injuries", force: :cascade do |t|
@@ -517,8 +532,10 @@ ActiveRecord::Schema.define(version: 2018_03_29_201938) do
     t.string "unconfirmed_email"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }
     t.integer "status", default: 1
+    t.bigint "group_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uuid"], name: "index_users_on_uuid"
   end
@@ -584,4 +601,5 @@ ActiveRecord::Schema.define(version: 2018_03_29_201938) do
   add_foreign_key "trainings", "teams"
   add_foreign_key "trainings", "training_schedules"
   add_foreign_key "user_settings", "users"
+  add_foreign_key "users", "groups"
 end

@@ -1,40 +1,18 @@
 ul.side-menu-list
+  .dropdown-header
+    | Vereniging
   li class="#{'active' if controller.class == Admin::MembersController}"
     = link_to admin_members_path do
       span
         i.fa.far.fa-fw.fa-users
         span.lbl
           | Leden
-  li class="#{'active' if controller.class == Admin::UsersController}"
-    = link_to admin_users_path do
-      span
-        i.fa.far.fa-fw.fa-user
-        span.lbl
-          | Gebruikers
   li class="#{'active' if controller.class == Admin::SoccerFieldsController}"
     = link_to admin_soccer_fields_path do
       span
         i.fa.far.fa-fw.fa-leaf
         span.lbl
           | Velden
-  li class="#{'active' if controller.class == Admin::EmailLogsController}"
-    = link_to admin_email_logs_path do
-      span
-        i.fa.far.fa-fw.fa-envelope
-        span.lbl
-          | E-mail log
-  li class="#{'active' if controller.class == Admin::VersionUpdatesController}"
-    = link_to admin_version_updates_path do
-      span
-        i.fa.far.fa-fw.fa-code-branch
-        span.lbl
-          | Versie updates
-  li class="#{'active' if controller.class == Admin::SettingsController}"
-    = link_to admin_settings_path do
-      span
-        i.fa.far.fa-fw.fa-sliders-h
-        span.lbl
-          | Instellingen
   li class="#{'active' if controller.class == Admin::CompetitionsController}"
     = link_to admin_competitions_path do
       span
@@ -63,3 +41,30 @@ ul.side-menu-list
           i.fa.far.fa-fw.fa-database
           span.lbl
             | Wedstrijden
+
+  .dropdown-header
+    | Beheer
+  li class="#{'active' if controller.class == Admin::UsersController}"
+    = link_to admin_users_path do
+      span
+        i.fa.far.fa-fw.fa-user
+        span.lbl
+          | Gebruikers
+  li class="#{'active' if controller.class == Admin::SettingsController}"
+    = link_to admin_settings_path do
+      span
+        i.fa.far.fa-fw.fa-sliders-h
+        span.lbl
+          | Instellingen
+  li class="#{'active' if controller.class == Admin::EmailLogsController}"
+    = link_to admin_email_logs_path do
+      span
+        i.fa.far.fa-fw.fa-envelope
+        span.lbl
+          | E-mail log
+  li class="#{'active' if controller.class == Admin::VersionUpdatesController}"
+    = link_to admin_version_updates_path do
+      span
+        i.fa.far.fa-fw.fa-code-branch
+        span.lbl
+          | Versie updates
