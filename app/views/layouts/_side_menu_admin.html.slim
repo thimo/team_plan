@@ -50,6 +50,18 @@ ul.side-menu-list
         i.fa.far.fa-fw.fa-user
         span.lbl
           | Gebruikers
+  li class="#{'active' if controller.class == Admin::GroupsController}"
+    = link_to admin_groups_path do
+      span
+        i.fa.far.fa-fw.fa-users
+        span.lbl
+          | Groepen
+  li class="#{'active' if controller.class == Admin::RolesController}"
+    = link_to admin_roles_path do
+      span
+        i.fa.far.fa-fw.fa-user-secret
+        span.lbl
+          | Rollen
   li class="#{'active' if controller.class == Admin::SettingsController}"
     = link_to admin_settings_path do
       span

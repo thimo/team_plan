@@ -145,6 +145,8 @@ Rails.application.routes.draw do
       end
       resources :soccer_fields
       resources :competitions
+      resources :groups
+      resources :roles
     end
   end
 
