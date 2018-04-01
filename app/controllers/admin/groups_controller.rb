@@ -30,7 +30,7 @@ class Admin::GroupsController < Admin::BaseController
     end
 
     def group_params
-      params.require(:group).permit(:title, :default)
+      params.require(:group).permit(:name, :default)
     end
 
     def add_breadcrumbs
