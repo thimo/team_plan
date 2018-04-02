@@ -12,12 +12,12 @@ class CommentsController < ApplicationController
 
   def set_active_tab
     authorize current_user, :update_settings?
-    current_user.set_active_comments_tab(params[:tab])
+    current_user.active_comments_tab = params[:tab]
   end
 
   def create
     if @comment.save
-      redirect_to @commentable, notice: "Opmerking is toegevoegd."
+      redirect_to @commentable, notice: 'Opmerking is toegevoegd.'
     else
       render :new
     end
@@ -27,15 +27,15 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update_attributes(comment_params)
-      redirect_to @comment.commentable, notice: "Opmerking is aangepast."
+    if @comment.update(comment_params)
+      redirect_to @comment.commentable, notice: 'Opmerking is aangepast.'
     else
       render 'edit'
     end
   end
 
   def destroy
-    redirect_to @comment.commentable, notice: "Opmerking is verwijderd."
+    redirect_to @comment.commentable, notice: 'Opmerking is verwijderd.'
     @comment.destroy
   end
 
@@ -65,7 +65,7 @@ class CommentsController < ApplicationController
       if @comment.new_record?
         add_breadcrumb 'Nieuw'
       else
-        add_breadcrumb "Opmerking"
+        add_breadcrumb 'Opmerking'
       end
     end
 end

@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
   scope :season, -> (season) { where("created_at >= ? AND created_at <= ?", season&.started_on || 100.years.ago, season&.ended_on || Time.zone.now) }
 
   def self.active_tab(user, parent, tab)
-    user.set_active_comments_tab(tab) if tab.present?
+    user.active_comments_tab = tab if tab.present?
 
     if parent.class.comment_types.include? user.settings.active_comments_tab
       user.settings.active_comments_tab

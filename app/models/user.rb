@@ -160,11 +160,11 @@ class User < ApplicationRecord
 
   def toggle_include_member_comments
     include_member_comments = settings.include_member_comments
-    settings.update_attributes(include_member_comments: !include_member_comments)
+    settings.update(include_member_comments: !include_member_comments)
   end
 
-  def set_active_comments_tab(tab)
-    settings.update_attributes(active_comments_tab: tab) if tab.present?
+  def active_comments_tab=(tab)
+    settings.update(active_comments_tab: tab) if tab.present?
   end
 
   def self.deactivate_for_inactive_members
