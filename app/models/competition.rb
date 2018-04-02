@@ -1,11 +1,12 @@
 class Competition < ApplicationRecord
   include Activatable
 
-  validates_presence_of :poulecode, :competitienaam
-  validates_uniqueness_of :poulecode
+  validates :poulecode, presence: true
+  validates :competitienaam, presence: true
+  validates :poulecode, uniqueness: true
 
   has_and_belongs_to_many :club_data_teams
-  has_many :matches
+  has_many :matches, dependent: :destroy
 
   scope :asc,     -> { order(:created_at) }
   scope :desc,    -> { order(created_at: :desc) }
@@ -22,5 +23,4 @@ class Competition < ApplicationRecord
   def name
     competitienaam
   end
-
 end
