@@ -2,7 +2,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def index?
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_staff_for?(@record)
+    @user.team_staff_for?(@record)
   end
 
   def show?
@@ -18,7 +18,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def update?
     return false if @record.finished_at.present?
 
-    create? || @user.is_team_staff_for?(@record)
+    create? || @user.team_staff_for?(@record)
   end
 
   def destroy?

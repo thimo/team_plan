@@ -10,7 +10,7 @@ class MatchPolicy < ApplicationPolicy
   def create?
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_staff_for?(@record)
+    @user.team_staff_for?(@record)
   end
 
   def update?
@@ -20,7 +20,7 @@ class MatchPolicy < ApplicationPolicy
     # Admin/club_staff can edit all matches, team staff only those created by themselves
     @user.admin? ||
     @user.club_staff? ||
-    (@record.team_staff? && @user.is_team_staff_for?(@record))
+    (@record.team_staff? && @user.team_staff_for?(@record))
   end
 
   def destroy?

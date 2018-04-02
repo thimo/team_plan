@@ -6,7 +6,7 @@ class TrainingSchedulePolicy < ApplicationPolicy
   def create?
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_staff_for?(@record.team)
+    @user.team_staff_for?(@record.team)
   end
 
   def update?

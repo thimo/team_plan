@@ -78,7 +78,7 @@ class TeamPolicy < ApplicationPolicy
 
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_member_for?(@record)
+    @user.team_member_for?(@record)
   end
 
   def show_status?
@@ -134,6 +134,6 @@ class TeamPolicy < ApplicationPolicy
     def club_or_team_staff?
       @user.admin? ||
       @user.club_staff? ||
-      @user.is_team_staff_for?(@record)
+      @user.team_staff_for?(@record)
     end
 end

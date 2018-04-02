@@ -12,18 +12,18 @@ class User < ApplicationRecord
   has_many :email_logs, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :todos, dependent: :destroy
-  has_many :injuries
-  has_one :user_setting
+  has_many :injuries, dependent: :destroy
+  has_one :user_setting, dependent: :destroy
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise
-  validates_presence_of :email
+  validates :email, presence: true
 
   enum role: { member: 0, admin: 1, club_staff: 2 }
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
-  scope :role, -> (role) { where(role: role) }
-  scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%") }
+  scope :role, ->(role) { where(role: role) }
+  scope :query, ->(query) { where('email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?', "%#{query}%", "%#{query}%", "%#{query}%") }
 
   # Setter
   def name=(name)
@@ -41,15 +41,15 @@ class User < ApplicationRecord
   end
 
   def email_with_name
-    if self.name == self.email
-      self.email
+    if name == email
+      email
     else
-      %("#{self.name}" <#{self.email}>)
+      %("#{name}" <#{email}>)
     end
   end
 
   def members
-    Member.where("lower(email) = ?", email.downcase).sportlink_active
+    Member.where('lower(email) = ?', email.downcase).sportlink_active
   end
 
   def teams
@@ -72,29 +72,29 @@ class User < ApplicationRecord
     Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
   end
 
-  def has_member?(member)
-    self.members.where(id: member.id).size > 0
+  def member?(member)
+    members.where(id: member.id).size.positive?
   end
 
-  def is_team_member_for?(record)
+  def team_member_for?(record)
     team_id = team_id_for record
-    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, ended_on: nil}).size > 0
+    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil }).size.positive?
   end
 
-  def is_team_staff_for?(record)
+  def team_staff_for?(record)
     team_id = team_id_for record, true
-    return team_id != 0 && self.members.joins(:team_members).where(team_members: {team_id: team_id, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).size > 0
+    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil }).where.not(team_members: { role: TeamMember.roles[:player] }).size.positive?
   end
 
   def favorite_teams
-    @favorite_teams ||= Team.joins(:favorites).where(favorites: {user_id: id, favorable_type: Team.to_s})
+    @favorite_teams ||= Team.joins(:favorites).where(favorites: { user_id: id, favorable_type: Team.to_s })
   end
 
   def favorite_age_groups
-    @favorite_age_groups ||= AgeGroup.joins(:favorites).where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
+    @favorite_age_groups ||= AgeGroup.joins(:favorites).where(favorites: { user_id: id, favorable_type: AgeGroup.to_s })
   end
 
-  def has_favorite?(member)
+  def favorite?(member)
     @favorite_members ||= favorites.where(favorable_type: Member.to_s).pluck(:id)
     @favorite_members.include?(member.id)
   end
@@ -125,9 +125,7 @@ class User < ApplicationRecord
   def self.find_or_create_and_invite(member)
     user = User.where(email: member.email).first_or_initialize(
       password: (generated_password = User.password),
-      first_name: member.first_name,
-      middle_name: member.middle_name,
-      last_name: member.last_name,
+      first_name: member.first_name, middle_name: member.middle_name, last_name: member.last_name,
     )
 
     if user.new_record?
@@ -141,7 +139,7 @@ class User < ApplicationRecord
 
   def settings
     # Auto-create user_setting
-    user_setting || self.create_user_setting
+    user_setting || create_user_setting
   end
 
   def export_columns
@@ -153,11 +151,11 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super and self.active?
+    super && active?
   end
 
   def inactive_message
-    "Je account is uitgeschakeld."
+    'Je account is uitgeschakeld.'
   end
 
   def toggle_include_member_comments
@@ -197,19 +195,18 @@ class User < ApplicationRecord
       when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
         team_id = record.team_id
       when [Comment]
-        team_id = record.commentable_id if record.commentable_type == "Team"
-        team_id = record.commentable.active_team.id if record.commentable_type == "Member"
+        team_id = record.commentable_id if record.commentable_type == 'Team'
+        team_id = record.commentable.active_team.id if record.commentable_type == 'Member'
       when [Presence]
-        team_id = if record.presentable_type == "Match"
-          record.presentable.teams.pluck(:id)
-        else
-          record.presentable.team_id
-        end
+        team_id = if record.presentable_type == 'Match'
+                    record.presentable.teams.pluck(:id)
+                  else
+                    record.presentable.team_id
+                  end
       when [Match]
         team_id = record.teams.pluck(:id)
       end
 
       team_id
     end
-
 end

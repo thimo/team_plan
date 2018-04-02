@@ -18,7 +18,7 @@ class MemberPolicy < AdminPolicy
   def show_private_data?
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_member_for?(@record)
+    @user.team_member_for?(@record)
   end
 
   def show_conduct?
@@ -33,13 +33,13 @@ class MemberPolicy < AdminPolicy
   def show_evaluations?
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_staff_for?(@record) ||
-    @user.has_member?(@record)
+    @user.team_staff_for?(@record) ||
+    @user.member?(@record)
   end
 
   def show_comments?
     show_evaluations? ||
-    @user.has_member?(@record)
+    @user.member?(@record)
   end
 
   def show_injuries?

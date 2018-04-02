@@ -4,7 +4,7 @@ class PresencePolicy < ApplicationPolicy
 
     @user.admin? ||
     @user.club_staff? ||
-    @user.is_team_staff_for?(@record)
+    @user.team_staff_for?(@record)
   end
 
   class Scope < Scope
