@@ -65,17 +65,18 @@ h4 Contactgegevens
           i Heeft geen toegang tot TeamPlan
 
   div.pt-4
-  - unless member.person_type.blank?
-    div
-      span.color-blue-grey
-        = "#{member.person_type}: "
-      = "#{member.local_teams} "
-      = "#{member.sport_category} "
-    - if member.association_number.present?
+  - if member.person_type.present?
+    - if policy(member).show_sportlink_status?
       div
         span.color-blue-grey
-          = "KNVB-nummer: "
-        = member.association_number
+          = "#{member.person_type}: "
+        = "#{member.local_teams} "
+        = "#{member.sport_category} "
+      - if member.association_number.present?
+        div
+          span.color-blue-grey
+            = "KNVB-nummer: "
+          = member.association_number
     - if policy(member).show_conduct? && member.conduct_number.present?
       div
         span.color-blue-grey
