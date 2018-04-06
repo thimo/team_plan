@@ -42,7 +42,7 @@ section.box-typical
                 div
                   = ts.class.human_attribute_name(:cios) if ts.cios?
               td.w-1.nowrap.text-right
-                - if (present = ts.presences.present).any?
+                - if policy(ts).show_presences? && (present = ts.presences.present).any?
                   .label.ml-1[title="Standaard aanwezig"]
                     = present.size
 
