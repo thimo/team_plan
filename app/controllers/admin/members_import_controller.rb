@@ -5,25 +5,25 @@ class Admin::MembersImportController < Admin::BaseController
     authorize(Member)
 
     add_breadcrumb 'Leden', admin_members_path
-    add_breadcrumb "Import"
+    add_breadcrumb 'Import'
   end
 
   def create
     authorize(Member)
 
     if params[:file].nil?
-      flash_message(:danger, "Selecteer eerst een bestand.")
+      flash_message(:danger, 'Selecteer eerst een bestand.')
       render :new
 
-    elsif params[:file].content_type != "text/csv"
-      flash_message(:danger, "Alleen CSV bestanden zoals je kunt downloaden uit Sportlink worden ondersteund.")
+    elsif params[:file].content_type != 'text/csv'
+      flash_message(:danger, 'Alleen CSV bestanden zoals je kunt downloaden uit Sportlink worden ondersteund.')
       render :new
 
     else
       @import_result = Member.import(params[:file])
 
       # After an import with at least one member, cleanup members that were last imported 7 days ago
-      if @import_result[:counters][:imported] > 0
+      if @import_result[:counters][:imported].positive?
         @cleanup_result = Member.cleanup(7.days.ago)
 
         # Deactivate users with no matching members
@@ -38,5 +38,4 @@ class Admin::MembersImportController < Admin::BaseController
     def add_breadcrumbs
       add_breadcrumb 'Leden', admin_members_path
     end
-
 end

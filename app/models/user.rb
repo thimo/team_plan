@@ -183,11 +183,7 @@ class User < ApplicationRecord
         team_id = record.id
       when [Member]
         # Find overlap in teams between current user and given member
-        team_members = if as_team_staf
-          record.team_members.staff
-        else
-          record.team_members
-        end
+        team_members = as_team_staf ? record.team_members.staff : record.team_members
         team_members = team_members.active_or_archived if member?
         team_id = team_members.pluck(:team_id).uniq
       when [PlayerEvaluation]

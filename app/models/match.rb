@@ -14,7 +14,7 @@ class Match < ApplicationRecord
 
   scope :asc,             -> { order(:wedstrijddatum) }
   scope :desc,            -> { order(wedstrijddatum: :desc) }
-  scope :in_period,       -> (start_date, end_date) { where('wedstrijddatum > ?', start_date).where('wedstrijddatum < ?', end_date) }
+  scope :in_period,       ->(start_date, end_date) { where('wedstrijddatum > ?', start_date).where('wedstrijddatum < ?', end_date) }
   scope :from_now,        -> { where('wedstrijddatum > ?', Time.zone.now) }
   scope :from_today,      -> { where('wedstrijddatum > ?', Time.zone.today) }
   scope :in_past,         -> { where('wedstrijddatum < ?', Time.zone.now) }
@@ -25,8 +25,8 @@ class Match < ApplicationRecord
   scope :afgelast,        -> { where(afgelast: true) }
   scope :niet_afgelast,   -> { where(afgelast: false) }
   scope :active,          -> { where(afgelast: false) }
-  scope :for_team,        -> (team_ids) { includes(:teams).where(teams: { id: team_ids }) }
-  scope :for_competition, -> (competition_ids) { where(competition_id: competition_ids) }
+  scope :for_team,        ->(team_ids) { includes(:teams).where(teams: { id: team_ids }) }
+  scope :for_competition, ->(competition_ids) { where(competition_id: competition_ids) }
 
   def started_at
     wedstrijddatum

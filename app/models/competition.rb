@@ -1,7 +1,6 @@
 class Competition < ApplicationRecord
   include Activatable
 
-  validates :poulecode, presence: true
   validates :competitienaam, presence: true
   validates :poulecode, uniqueness: true
 
