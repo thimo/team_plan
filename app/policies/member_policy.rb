@@ -26,6 +26,11 @@ class MemberPolicy < AdminPolicy
     @user.club_staff?
   end
 
+  def show_sportlink_status?
+    @user.admin? ||
+      @user.club_staff?
+  end
+
   def show_todos?
     show_private_data?
   end

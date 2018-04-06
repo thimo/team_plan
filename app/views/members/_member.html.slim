@@ -13,6 +13,7 @@
   .color-blue-grey-lighter.small
     => l member.born_on, format: :date_long unless member.born_on.nil?
     = "(#{member.gender})"
+- if policy(member).show_sportlink_status?
   - unless member.local_teams.blank?
     .color-blue-grey.small
       = "#{member.local_teams}"

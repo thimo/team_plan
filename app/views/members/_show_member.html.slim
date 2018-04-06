@@ -64,53 +64,54 @@ h4 Contactgegevens
         .color-blue-grey
           i Heeft geen toegang tot TeamPlan
 
-  div.pt-4
-  - unless member.person_type.blank?
-    div
-      span.color-blue-grey
-        = "#{member.person_type}: "
-      = "#{member.local_teams} "
-      = "#{member.sport_category} "
-    - if member.association_number.present?
+  - if policy(member).show_sportlink_status?
+    div.pt-4
+    - if member.person_type.present?
       div
         span.color-blue-grey
-          = "KNVB-nummer: "
-        = member.association_number
-    - if policy(member).show_conduct? && member.conduct_number.present?
+          = "#{member.person_type}: "
+        = "#{member.local_teams} "
+        = "#{member.sport_category} "
+      - if member.association_number.present?
+        div
+          span.color-blue-grey
+            = "KNVB-nummer: "
+          = member.association_number
+      - if policy(member).show_conduct? && member.conduct_number.present?
+        div
+          span.color-blue-grey
+            = "VOG-nummer: "
+          = member.conduct_number
       div
         span.color-blue-grey
-          = "VOG-nummer: "
-        = member.conduct_number
-    div
-      span.color-blue-grey
-        = "Lid sinds: "
-      = I18n.l member.member_since, format: :long
+          = "Lid sinds: "
+        = I18n.l member.member_since, format: :long
 
-  - unless member.registered_at.blank? || member.registered_at == member.member_since
-    div
-      span.color-blue-grey
-        = "Registratiedatum: "
-      = I18n.l member.registered_at, format: :long
+    - unless member.registered_at.blank? || member.registered_at == member.member_since
+      div
+        span.color-blue-grey
+          = "Registratiedatum: "
+        = I18n.l member.registered_at, format: :long
 
-  - if member.status_af_te_melden?
-    div
-      span.color-blue-grey
-        = "Status: "
-      = member.status.capitalize
-      - if member.deregistered_at.present?
-        |  per
-        = I18n.l member.deregistered_at, format: :long
-  - else
-    - unless member.status_definitief?
+    - if member.status_af_te_melden?
       div
         span.color-blue-grey
           = "Status: "
         = member.status.capitalize
-    - unless member.deregistered_at.blank?
-      div
-        span.color-blue-grey
-          = "Afmelddatum: "
-        = I18n.l member.deregistered_at, format: :long
+        - if member.deregistered_at.present?
+          |  per
+          = I18n.l member.deregistered_at, format: :long
+    - else
+      - unless member.status_definitief?
+        div
+          span.color-blue-grey
+            = "Status: "
+          = member.status.capitalize
+      - unless member.deregistered_at.blank?
+        div
+          span.color-blue-grey
+            = "Afmelddatum: "
+          = I18n.l member.deregistered_at, format: :long
 
 hr
 

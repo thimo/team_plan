@@ -1,4 +1,4 @@
-- title ||= 'Reguliere trainingen'
+- title ||= 'Vaste trainingsdagen'
 - disable_header ||= false
 
 section.box-typical
@@ -9,7 +9,7 @@ section.box-typical
           = title
       - if defined?(team) && policy(TrainingSchedule.new(team: team)).create?
         .tbl-cell.tbl-cell-actions
-          = link_to new_team_training_schedule_path(team), title: "Reguliere training toevoegen", class: "action-btn"
+          = link_to new_team_training_schedule_path(team), title: "Trainingsdag toevoegen", class: "action-btn"
             i.fa.far.fa-plus-square
 
   .box-typical-body
@@ -42,7 +42,7 @@ section.box-typical
                 div
                   = ts.class.human_attribute_name(:cios) if ts.cios?
               td.w-1.nowrap.text-right
-                - if (present = ts.presences.present).any?
+                - if policy(ts).show_presences? && (present = ts.presences.present).any?
                   .label.ml-1[title="Standaard aanwezig"]
                     = present.size
 
