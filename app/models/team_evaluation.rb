@@ -16,8 +16,8 @@ class TeamEvaluation < ApplicationRecord
   scope :open_at_team, -> { where(finished_at: nil).where.not(invited_at: nil) }
   scope :finished, -> { where.not(finished_at: nil) }
   scope :desc_finished, -> { order(finished_at: :desc) }
-  scope :by_team, -> (team) { includes(:team).where(team: team) }
-  scope :by_age_group, -> (age_group) { joins(:team).where(teams: {age_group: age_group}) }
+  scope :by_team, ->(team) { includes(:team).where(team: team) }
+  scope :by_age_group, ->(age_group) { joins(:team).where(teams: {age_group: age_group}) }
 
   def draft?
     team.draft?

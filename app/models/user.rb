@@ -20,8 +20,8 @@ class User < ApplicationRecord
   enum role: { member: 0, admin: 1, club_staff: 2 }
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
-  scope :role, -> (role) { where(role: role) }
-  scope :query, -> (query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%") }
+  scope :role, ->(role) { where(role: role) }
+  scope :query, ->(query) { where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%") }
 
   # Setter
   def name=(name)
@@ -183,11 +183,7 @@ class User < ApplicationRecord
         team_id = record.id
       when [Member]
         # Find overlap in teams between current user and given member
-        team_members = if as_team_staf
-          record.team_members.staff
-        else
-          record.team_members
-        end
+        team_members = as_team_staf ? record.team_members.staff : record.team_members
         team_members = team_members.active_or_archived if member?
         team_id = team_members.pluck(:team_id).uniq
       when [PlayerEvaluation]

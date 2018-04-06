@@ -1,8 +1,8 @@
 class Competition < ApplicationRecord
   include Activatable
 
-  validates_presence_of :poulecode, :competitienaam
-  validates_uniqueness_of :poulecode
+  validates :poulecode, :competitienaam, presence: true
+  validates :poulecode, uniqueness: true
 
   has_and_belongs_to_many :club_data_teams
   has_many :matches

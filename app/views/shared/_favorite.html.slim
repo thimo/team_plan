@@ -1,7 +1,7 @@
 - styleClass ||= ''
 
 - if policy(parent).show_favorite?
-  - if parent.is_favorite?(current_user)
+  - if parent.favorite?(current_user)
     = link_to parent.favorite(current_user), method: :delete, title: "Favoriet verwijderen", class: styleClass
       i.fa.far.fa-star.favorable.selected
   - else
