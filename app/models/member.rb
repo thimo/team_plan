@@ -24,8 +24,8 @@ class Member < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
-  has_many :logs, as: :logable, dependent: :nillify
-  has_many :todos, as: :todoable, dependent: :nillify
+  has_many :logs, as: :logable, dependent: :nullify
+  has_many :todos, as: :todoable, dependent: :nullify
   has_many :injuries, dependent: :destroy
   has_many :presences, dependent: :destroy
   has_paper_trail
