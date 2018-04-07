@@ -1,3 +1,7 @@
+import autosize from 'autosize'
+window.autosize = autosize
+import LazyLoad from 'vanilla-lazyload'
+
 document.addEventListener("turbolinks:load", () => {
   // Auto-size all textarea's
   autosize($('textarea'));

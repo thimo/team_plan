@@ -1,7 +1,20 @@
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
+import 'jquery'
+import 'jquery-ujs'
+import 'bootstrap'
+import 'popper.js'
+import 'select2'
+import 'bootstrap-datepicker'
+import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min'
+import 'chart.js'
+import 'trix'
+
 require('../startui/app.js')
+
+import Turbolinks from "turbolinks"
+Turbolinks.start()
 
 // Which will recursively load all modules within the current folder that end in .js.
 var requireApplication = require.context('./application', true, /\.js$/);
