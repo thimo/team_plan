@@ -4,19 +4,19 @@ class Admin::MembersImportController < Admin::BaseController
   def new
     authorize(Member)
 
-    add_breadcrumb 'Leden', admin_members_path
-    add_breadcrumb 'Import'
+    add_breadcrumb "Leden", admin_members_path
+    add_breadcrumb "Import"
   end
 
   def create
     authorize(Member)
 
     if params[:file].nil?
-      flash_message(:danger, 'Selecteer eerst een bestand.')
+      flash.now[:danger] = "Selecteer eerst een bestand."
       render :new
 
     elsif params[:file].content_type != 'text/csv'
-      flash_message(:danger, 'Alleen CSV bestanden zoals je kunt downloaden uit Sportlink worden ondersteund.')
+      flash.now[:danger] = "Alleen CSV bestanden zoals je kunt downloaden uit Sportlink worden ondersteund."
       render :new
 
     else
@@ -36,6 +36,6 @@ class Admin::MembersImportController < Admin::BaseController
   private
 
     def add_breadcrumbs
-      add_breadcrumb 'Leden', admin_members_path
+      add_breadcrumb "Leden", admin_members_path
     end
 end

@@ -1,11 +1,11 @@
 module ApplicationHelper
   # Returns the full title on a per-page basis.
-  def full_title(page_title = '')
+  def full_title(page_title = "")
     base_title = "#{Setting['application.name']} · #{Setting['club.name']}"
     if page_title.empty?
       base_title
     else
-      page_title + ' | ' + base_title
+      page_title + " | " + base_title
     end
   end
 
@@ -36,12 +36,12 @@ module ApplicationHelper
   end
 
   def errors_for(model, attribute)
-    html_builder = lambda {|error_message| "<div class='form-text text-muted'>#{model.class.human_attribute_name(attribute)} #{error_message}</div>" }
-    model.errors[attribute].map { |error_message|  html_builder.call(error_message) }.join(' ').html_safe
+    html_builder = lambda { |error_message| "<div class='form-text text-muted'>#{model.class.human_attribute_name(attribute)} #{error_message}</div>" }
+    model.errors[attribute].map { |error_message| html_builder.call(error_message) }.join(" ").html_safe
   end
 
-  def has_error(model, attribute)
-    not model.errors[attribute].blank?
+  def error?(model, attribute)
+    model.errors[attribute].present?
   end
 
   def avatar_url(user)
@@ -52,7 +52,8 @@ module ApplicationHelper
   end
 
   def markdown(content)
-    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true, fenced_code_blocks: true)
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true,
+                                                                   fenced_code_blocks: true)
     @markdown.render(content)
   end
 

@@ -28,9 +28,9 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
       mail_count += team_evaluation.send_invites(current_user)
     end
 
-    if count == 0
+    if count.zero?
       flash_message(:alert, "Er zijn geen teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)")
-    elsif count == 1
+    elsif count.one?
       flash_message(:success, "Er is één teamevaluatie aangemaakt (#{mail_count} e-mails verstuurd)")
     else
       flash_message(:success, "Er zijn #{count} teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)")
@@ -47,8 +47,8 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@age_group.season.name}", @age_group.season
+      add_breadcrumb @age_group.season.name, @age_group.season
       add_breadcrumb @age_group.name, @age_group
-      add_breadcrumb 'Nieuw'
+      add_breadcrumb "Nieuw"
     end
   end

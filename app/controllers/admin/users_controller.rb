@@ -9,6 +9,8 @@ class Admin::UsersController < Admin::BaseController
     @users = @users.page(params[:page]).per(50)
   end
 
+  def show; end
+
   def new
     prefill_from_member
   end
@@ -18,7 +20,7 @@ class Admin::UsersController < Admin::BaseController
     @user.skip_confirmation!
     if @user.save
       @user.send_new_account(generated_password)
-      flash_message(:success, 'Gebruiker is toegevoegd.')
+      flash_message(:success, "Gebruiker is toegevoegd.")
       if params[:member].present?
         redirect_to policy_scope(Member).find(params[:member])
       else
@@ -34,9 +36,9 @@ class Admin::UsersController < Admin::BaseController
   def update
     @user.skip_reconfirmation!
     if @user.update_attributes(user_params)
-      redirect_to admin_users_path, notice: 'Gebruiker is aangepast.'
+      redirect_to admin_users_path, notice: "Gebruiker is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -44,16 +46,16 @@ class Admin::UsersController < Admin::BaseController
     generated_password = @user.set_new_password
     if @user.save
       @user.send_password_reset(generated_password)
-      redirect_to admin_users_path, notice: 'Er is een nieuw wachtwoord aan de gebruiker verstuurd.'
+      redirect_to admin_users_path, notice: "Er is een nieuw wachtwoord aan de gebruiker verstuurd."
     else
-      flash_message(:alert, 'Er kon geen nieuw wachtwoord worden verstuurd.')
-      render 'edit'
+      flash.now[:alert] = "Er kon geen nieuw wachtwoord worden verstuurd."
+      render "edit"
     end
   end
 
   def destroy
     @user.to_archive
-    redirect_to admin_users_path, notice: 'Gebruiker is verwijderd.'
+    redirect_to admin_users_path, notice: "Gebruiker is verwijderd."
   end
 
   def impersonate
@@ -64,7 +66,7 @@ class Admin::UsersController < Admin::BaseController
   private
 
     def create_user
-      @user = if action_name == 'new'
+      @user = if action_name == "new"
                 User.new
               else
                 User.new(user_params)
@@ -82,20 +84,20 @@ class Admin::UsersController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Gebruikers', admin_users_path
-      unless @user.nil?
-        if @user.new_record?
-          add_breadcrumb 'Nieuw'
-        else
-          add_breadcrumb @user.email, [:edit, :admin, @user]
-        end
+      add_breadcrumb "Gebruikers", admin_users_path
+      return if @user.nil?
+
+      if @user.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @user.email, [:edit, :admin, @user]
       end
     end
 
     def prefill_from_member
-      if params[:member].present?
-        member = policy_scope(Member).find(params[:member])
-        @user.prefill(member)
-      end
+      return if params[:member].blank?
+
+      member = policy_scope(Member).find(params[:member])
+      @user.prefill(member)
     end
 end

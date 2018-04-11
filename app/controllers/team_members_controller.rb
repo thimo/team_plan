@@ -57,7 +57,7 @@ class TeamMembersController < ApplicationController
       end
     else
       # @team_member.initial_draft? does not seem to work here
-      if @team_member.initial_status != 'initial_draft'
+      if @team_member.initial_status != "initial_draft"
         # By default use team's status, otherwise use default 'status' value (draft)
         @team_member.status = @team.status
       end
@@ -71,7 +71,7 @@ class TeamMembersController < ApplicationController
   end
 
   def activate
-    # TODO send notification to member administration
+    # TODO: send notification to member administration
     @team_member.status = TeamMember.statuses[:active]
     @team_member.ended_on = nil
     @team_member.started_on = Time.zone.today if @team_member.draft?
@@ -86,7 +86,7 @@ class TeamMembersController < ApplicationController
     redirect_to back_url
   end
 
-  def edit;end
+  def edit; end
 
   def update
     old_status = @team_member.status
@@ -94,9 +94,9 @@ class TeamMembersController < ApplicationController
     if @team_member.update_attributes(permitted_attributes(@team_member))
       @team_member.transmit_status(@team_member.status, old_status)
 
-      redirect_to @team_member.team, notice: 'Teamgenoot is aangepast.'
+      redirect_to @team_member.team, notice: "Teamgenoot is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -114,7 +114,7 @@ class TeamMembersController < ApplicationController
 
       @team = Team.find(params[:team_id])
 
-      @team_member = if action_name == 'new'
+      @team_member = if action_name == "new"
                        @team.team_members.new
                      else
                        TeamMember.new(permitted_attributes(TeamMember.new(team: @team)))
@@ -130,11 +130,11 @@ class TeamMembersController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@team_member.team.age_group.season.name}", @team_member.team.age_group.season
+      add_breadcrumb @team_member.team.age_group.season.name, @team_member.team.age_group.season
       add_breadcrumb @team_member.team.age_group.name, @team_member.team.age_group
       add_breadcrumb @team_member.team.name, @team_member.team
       if @team_member.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @team_member.member.name, @team_member
       end

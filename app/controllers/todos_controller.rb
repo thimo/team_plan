@@ -11,34 +11,33 @@ class TodosController < ApplicationController
   def create
     if @todo.save
       flash_message(:success, "Todo is toegevoegd.")
-      redirect_to @todo.todoable.present? ? @todo.todoable : root_path
+      redirect_to @todo.todoable.presence || root_path
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @todo.update_attributes(todo_params)
       flash_message(:success, "Todo is aangepast.")
       url = if params[:return].present?
-        params[:return]
-      elsif @todo.todoable.present?
-        @todo.todoable
-      else
-        root_path
-      end
+              params[:return]
+            elsif @todo.todoable.present?
+              @todo.todoable
+            else
+              root_path
+            end
       redirect_to url
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
     flash_message(:success, "Todo is verwijderd.")
-    redirect_to @todo.todoable.present? ? @todo.todoable : root_path
+    redirect_to @todo.todoable.presence || root_path
     @todo.destroy
   end
 
@@ -50,7 +49,7 @@ class TodosController < ApplicationController
   private
 
     def create_todo
-      @todo = if action_name == 'new'
+      @todo = if action_name == "new"
                 current_user.todos.new
               else
                 current_user.todos.new(todo_params)
@@ -66,10 +65,10 @@ class TodosController < ApplicationController
     end
 
     def load_todoable
-      if (path_split = request.path.split('/')).size > 3
-        resource, id = path_split[1, 2]
-        @todoable = resource.singularize.classify.constantize.find(id)
-      end
+      return if (path_split = request.path.split("/")).size <= 3
+
+      resource, id = path_split[1, 2]
+      @todoable = resource.singularize.classify.constantize.find(id)
     end
 
     def todo_params
@@ -80,10 +79,9 @@ class TodosController < ApplicationController
       add_breadcrumb @todo.todoable.name, @todo.todoable if @todo.todoable
       add_breadcrumb "Todo's"
       if @todo.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
-        add_breadcrumb 'Todo'
+        add_breadcrumb "Todo"
       end
     end
-
 end
