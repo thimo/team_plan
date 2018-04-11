@@ -17,9 +17,9 @@ import Turbolinks from "turbolinks"
 Turbolinks.start()
 
 // Which will recursively load all modules within the current folder that end in .js.
-var requireApplication = require.context('./application', true, /\.js$/);
+var requireApplication = require.context('../application', true, /\.js$/);
 requireApplication.keys().forEach(requireApplication);
 
 const application = Application.start()
-const context = require.context("./controllers", true, /\.js$/)
+const context = require.context("../controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
