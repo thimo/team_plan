@@ -1,6 +1,6 @@
 class Admin::VersionUpdatesController < Admin::BaseController
   before_action :create_version_update, only: [:new, :create]
-  before_action :set_version_update, only: [:show, :edit, :update, :destroy]
+  before_action :set_version_update, only: [:edit, :update, :destroy]
   before_action :add_breadcrumbs
 
   def index
@@ -12,7 +12,7 @@ class Admin::VersionUpdatesController < Admin::BaseController
 
   def create
     if @version_update.save
-      redirect_to admin_version_updates_path, notice: 'Versie is toegevoegd.'
+      redirect_to admin_version_updates_path, notice: "Versie is toegevoegd."
     else
       render :new
     end
@@ -22,21 +22,21 @@ class Admin::VersionUpdatesController < Admin::BaseController
 
   def update
     if @version_update.update_attributes(version_update_params)
-      redirect_to admin_version_updates_path, notice: 'Versie is aangepast.'
+      redirect_to admin_version_updates_path, notice: "Versie is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    redirect_to admin_version_updates_path, notice: 'Versie is verwijderd.'
+    redirect_to admin_version_updates_path, notice: "Versie is verwijderd."
     @version_update.destroy
   end
 
   private
 
     def create_version_update
-      @version_update = if action_name == 'new'
+      @version_update = if action_name == "new"
                           VersionUpdate.new(released_at: Time.zone.today)
                         else
                           VersionUpdate.new(version_update_params)
@@ -54,13 +54,13 @@ class Admin::VersionUpdatesController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Versie updates', admin_version_updates_path
-      unless @version_update.nil?
-        if @version_update.new_record?
-          add_breadcrumb 'Nieuw'
-        else
-          add_breadcrumb @version_update.released_at, [:edit, :admin, @version_update]
-        end
+      add_breadcrumb "Versie updates", admin_version_updates_path
+      return if @version_update.nil?
+
+      if @version_update.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @version_update.released_at, [:edit, :admin, @version_update]
       end
     end
 end

@@ -1,6 +1,6 @@
 class Admin::SoccerFieldsController < Admin::BaseController
   before_action :create_soccer_field, only: [:new, :create]
-  before_action :set_soccer_field, only: [:show, :edit, :update, :destroy]
+  before_action :set_soccer_field, only: [:edit, :update, :destroy]
   before_action :add_breadcrumbs
 
   def index
@@ -11,7 +11,7 @@ class Admin::SoccerFieldsController < Admin::BaseController
 
   def create
     if @soccer_field.save
-      redirect_to admin_soccer_fields_path, notice: 'Veld is toegevoegd.'
+      redirect_to admin_soccer_fields_path, notice: "Veld is toegevoegd."
     else
       render :new
     end
@@ -20,26 +20,26 @@ class Admin::SoccerFieldsController < Admin::BaseController
   def edit; end
 
   def update
-    if @soccer_field.update_attributes(soccer_field_params)
-      redirect_to admin_soccer_fields_path, notice: 'Veld is aangepast.'
+    if @soccer_field.update(soccer_field_params)
+      redirect_to admin_soccer_fields_path, notice: "Veld is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    redirect_to admin_soccer_fields_path, notice: 'Veld is verwijderd.'
+    redirect_to admin_soccer_fields_path, notice: "Veld is verwijderd."
     @soccer_field.destroy
   end
 
   private
 
     def create_soccer_field
-      @soccer_field = if action_name == 'new'
-                          SoccerField.new
-                        else
-                          SoccerField.new(soccer_field_params)
-                        end
+      @soccer_field = if action_name == "new"
+                        SoccerField.new
+                      else
+                        SoccerField.new(soccer_field_params)
+                      end
       authorize @soccer_field
     end
 
@@ -53,13 +53,13 @@ class Admin::SoccerFieldsController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Velden', admin_soccer_fields_path
-      unless @soccer_field.nil?
-        if @soccer_field.new_record?
-          add_breadcrumb 'Nieuw'
-        else
-          add_breadcrumb @soccer_field.name, [:edit, :admin, @soccer_field]
-        end
+      add_breadcrumb "Velden", admin_soccer_fields_path
+      return if @soccer_field.nil?
+
+      if @soccer_field.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @soccer_field.name, [:edit, :admin, @soccer_field]
       end
     end
 end

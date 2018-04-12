@@ -11,7 +11,7 @@ class Admin::CompetitionsController < Admin::BaseController
 
   def create
     if @competition.save
-      redirect_to admin_competitions_path, notice: 'Wedstrijdsoort is toegevoegd.'
+      redirect_to admin_competitions_path, notice: "Wedstrijdsoort is toegevoegd."
     else
       render :new
     end
@@ -21,21 +21,21 @@ class Admin::CompetitionsController < Admin::BaseController
 
   def update
     if @competition.update_attributes(competition_params)
-      redirect_to admin_competitions_path, notice: 'Wedstrijdsoort is aangepast.'
+      redirect_to admin_competitions_path, notice: "Wedstrijdsoort is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    redirect_to admin_competitions_path, notice: 'Wedstrijdsoort is verwijderd.'
+    redirect_to admin_competitions_path, notice: "Wedstrijdsoort is verwijderd."
     @competition.destroy
   end
 
   private
 
     def create_competition
-      @competition = if action_name == 'new'
+      @competition = if action_name == "new"
                        Competition.new
                      else
                        Competition.new(competition_params.merge(poulecode: Competition.new_custom_poulecode))
@@ -53,10 +53,10 @@ class Admin::CompetitionsController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Wedstrijdsoorten', admin_competitions_path
+      add_breadcrumb "Wedstrijdsoorten", admin_competitions_path
       unless @competition.nil?
         if @competition.new_record?
-          add_breadcrumb 'Nieuw'
+          add_breadcrumb "Nieuw"
         else
           add_breadcrumb @competition.competitienaam, [:edit, :admin, @competition]
         end

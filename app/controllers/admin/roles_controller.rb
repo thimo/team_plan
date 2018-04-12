@@ -23,7 +23,7 @@ class Admin::RolesController < Admin::BaseController
   private
 
     def create_role
-      @role = if action_name == 'new'
+      @role = if action_name == "new"
                 Role.new
               else
                 Role.new(role_params)
@@ -41,11 +41,11 @@ class Admin::RolesController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Rollen', admin_roles_path
+      add_breadcrumb "Rollen", admin_roles_path
       return if @role.nil?
 
       if @role.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @role.email, [:edit, :admin, @role]
       end

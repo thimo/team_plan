@@ -15,7 +15,7 @@ class Admin::MembersImportController < Admin::BaseController
       flash.now[:danger] = "Selecteer eerst een bestand."
       render :new
 
-    elsif params[:file].content_type != 'text/csv'
+    elsif params[:file].content_type != "text/csv"
       flash.now[:danger] = "Alleen CSV bestanden zoals je kunt downloaden uit Sportlink worden ondersteund."
       render :new
 

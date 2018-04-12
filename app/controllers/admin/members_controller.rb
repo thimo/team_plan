@@ -10,10 +10,10 @@ class Admin::MembersController < Admin::BaseController
   private
 
     def add_breadcrumbs
-      add_breadcrumb 'Leden', admin_members_path
+      add_breadcrumb "Leden", admin_members_path
       unless @member.nil?
         if @member.new_record?
-          add_breadcrumb 'Nieuw'
+          add_breadcrumb "Nieuw"
         else
           add_breadcrumb @member.name, @member
         end

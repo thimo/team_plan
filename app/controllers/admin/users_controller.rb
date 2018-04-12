@@ -35,7 +35,7 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     @user.skip_reconfirmation!
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       redirect_to admin_users_path, notice: "Gebruiker is aangepast."
     else
       render "edit"

@@ -13,7 +13,7 @@ class Admin::SettingsController < Admin::BaseController
     if @setting.value != params[:setting][:value]
       @setting.value = params[:setting][:value]
       @setting.save
-      redirect_to admin_settings_path, notice: 'Setting has updated.'
+      redirect_to admin_settings_path, notice: "Setting has updated."
     else
       redirect_to admin_settings_path
     end

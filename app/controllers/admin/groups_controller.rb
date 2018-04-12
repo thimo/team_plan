@@ -14,7 +14,7 @@ class Admin::GroupsController < Admin::BaseController
   private
 
     def create_group
-      @group = if action_name == 'new'
+      @group = if action_name == "new"
                  Group.new
                else
                  Group.new(group_params)
@@ -32,11 +32,11 @@ class Admin::GroupsController < Admin::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb 'Groepen', admin_groups_path
+      add_breadcrumb "Groepen", admin_groups_path
       return if @group.nil?
 
       if @group.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @group.email, [:edit, :admin, @group]
       end
