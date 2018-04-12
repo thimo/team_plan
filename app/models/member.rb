@@ -84,7 +84,7 @@ class Member < ApplicationRecord
   end
 
   def favorite?(user)
-    favorites.where(user: user).positive?
+    favorites.where(user: user).size.positive?
   end
 
   def favorite(user)
