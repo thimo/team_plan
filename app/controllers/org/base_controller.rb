@@ -1,25 +1,29 @@
-class Org::BaseController < ApplicationController
-  add_breadcrumb "Home", "/"
-  before_action :admin_user # TODO remove this, should be more open
-  before_action :default_breadcrumb
+# frozen_string_literal: true
 
-  def index
-    authorize :org
-    redirect_to org_positions_path
-  end
+module Org
+  class BaseController < ApplicationController
+    add_breadcrumb "Home", "/"
+    before_action :admin_user # TODO: remove this, should be more open
+    before_action :default_breadcrumb
 
-  def show
-    authorize :org
-    redirect_to org_positions_path
-  end
-
-  private
-
-    def admin_user
-      permission_denied unless policy(:org).show?
+    def index
+      authorize :org
+      redirect_to org_positions_path
     end
 
-    def default_breadcrumb
-      add_breadcrumb "Organisatie", org_path
+    def show
+      authorize :org
+      redirect_to org_positions_path
     end
+
+    private
+
+      def admin_user
+        permission_denied unless policy(:org).show?
+      end
+
+      def default_breadcrumb
+        add_breadcrumb "Organisatie", org_path
+      end
+  end
 end
