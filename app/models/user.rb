@@ -23,11 +23,13 @@ class User < ApplicationRecord
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :role, ->(role) { where(role: role) }
-  scope :query, ->(query) { where('email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?', "%#{query}%", "%#{query}%", "%#{query}%") }
+  scope :query, ->(query) {
+    where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+  }
 
   # Setter
   def name=(name)
-    split = name.split(' ', 2)
+    split = name.split(" ", 2)
     self.first_name = split.first
     self.last_name = split.last
   end
@@ -49,27 +51,31 @@ class User < ApplicationRecord
   end
 
   def members
-    Member.where('lower(email) = ?', email.downcase).sportlink_active
+    Member.where("lower(email) = ?", email.downcase).sportlink_active
   end
 
   def teams
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).distinct
+    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil }).distinct
   end
 
   def active_teams
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}).distinct
+    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
+        .joins(age_group: :season).where(seasons: { status: Season.statuses[:active] }).distinct
   end
 
   def teams_as_staff
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).distinct.asc
+    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
+        .where.not(team_members: { role: TeamMember.roles[:player] }).distinct.asc
   end
 
   def teams_as_staff_in_season(season)
     member_ids = members.map(&:id).uniq
-    Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
+    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
+        .where.not(team_members: { role: TeamMember.roles[:player] }).joins(age_group: :season)
+        .where(age_groups: { season: season }).distinct.asc
   end
 
   # TODO: can't rename this to `member?` because of conflict with enum role
@@ -84,7 +90,8 @@ class User < ApplicationRecord
 
   def team_staff_for?(record)
     team_id = team_id_for record, true
-    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil }).where.not(team_members: { role: TeamMember.roles[:player] }).size.positive?
+    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil })
+                           .where.not(team_members: { role: TeamMember.roles[:player] }).size.positive?
   end
 
   def favorite_teams
@@ -126,7 +133,7 @@ class User < ApplicationRecord
   def self.find_or_create_and_invite(member)
     user = User.where(email: member.email).first_or_initialize(
       password: (generated_password = User.password),
-      first_name: member.first_name, middle_name: member.middle_name, last_name: member.last_name,
+      first_name: member.first_name, middle_name: member.middle_name, last_name: member.last_name
     )
 
     if user.new_record?
@@ -156,7 +163,7 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    'Je account is uitgeschakeld.'
+    "Je account is uitgeschakeld."
   end
 
   def toggle_include_member_comments
@@ -192,10 +199,10 @@ class User < ApplicationRecord
       when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
         team_id = record.team_id
       when [Comment]
-        team_id = record.commentable_id if record.commentable_type == 'Team'
-        team_id = record.commentable.active_team.id if record.commentable_type == 'Member'
+        team_id = record.commentable_id if record.commentable_type == "Team"
+        team_id = record.commentable.active_team.id if record.commentable_type == "Member"
       when [Presence]
-        team_id = if record.presentable_type == 'Match'
+        team_id = if record.presentable_type == "Match"
                     record.presentable.teams.pluck(:id)
                   else
                     record.presentable.team_id
