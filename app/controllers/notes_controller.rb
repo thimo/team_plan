@@ -6,8 +6,7 @@ class NotesController < ApplicationController
 
   def show; end
 
-  def new
-  end
+  def new; end
 
   def create
     if @note.save
@@ -17,8 +16,7 @@ class NotesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @note.update_attributes(note_params)
@@ -34,6 +32,7 @@ class NotesController < ApplicationController
   end
 
   private
+
     def set_team
       @team = @note&.team || Team.find(params[:team_id])
     end

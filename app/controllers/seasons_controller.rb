@@ -17,7 +17,7 @@ class SeasonsController < ApplicationController
 
   def create
     if @season.save
-      redirect_to @season, notice: 'Seizoen is toegevoegd.'
+      redirect_to @season, notice: "Seizoen is toegevoegd."
     else
       render :new
     end
@@ -28,18 +28,18 @@ class SeasonsController < ApplicationController
   def update
     old_status = @season.status
 
-    if @season.update_attributes(permitted_attributes(@season))
+    if @season.update(permitted_attributes(@season))
       @season.transmit_status(@season.status, old_status)
 
-      redirect_to @season, notice: 'Seizoen is aangepast.'
+      redirect_to @season, notice: "Seizoen is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
     @season.destroy
-    redirect_to root_path, notice: 'Seizoen is verwijderd.'
+    redirect_to root_path, notice: "Seizoen is verwijderd."
   end
 
   def inherit_age_groups
@@ -55,7 +55,7 @@ class SeasonsController < ApplicationController
       start_year = Time.zone.today.year + (Time.zone.today.month >= 7 ? 1 : 0)
       started_on = Time.zone.local(start_year, 7, 1)
       ended_on = Time.zone.local(start_year + 1, 6, 30)
-      @season = if action_name == 'new'
+      @season = if action_name == "new"
                   Season.new(started_on: started_on, ended_on: ended_on)
                 else
                   Season.new(permitted_attributes(Season.new))
@@ -78,13 +78,13 @@ class SeasonsController < ApplicationController
     end
 
     def add_breadcrumbs
-      unless @season.nil?
-        if @season.new_record?
-          add_breadcrumb 'Seizoenen', seasons_path
-          add_breadcrumb 'Nieuw'
-        else
-          add_breadcrumb "#{@season.name}", @season
-        end
+      return if @season.nil?
+
+      if @season.new_record?
+        add_breadcrumb "Seizoenen", seasons_path
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @season.name, @season
       end
     end
 end

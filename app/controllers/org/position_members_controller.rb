@@ -27,20 +27,19 @@ class Org::PositionMembersController < Org::BaseController
       authorize @position_member
 
       if @position_member.save
-        @position_member.member.logs << Log.new(body: "Toegevoegd aan #{@position_member.team.name}.", user: current_user)
+        @position_member.member.logs << Log.new(body: "Toegevoegd aan #{@position_member.team.name}.",
+                                                user: current_user)
         flash_message(:success, "#{@position_member.member.name} is aan #{@position_member.team.name} toegevoegd")
       else
         flash_message(:alert, "Er is iets mis gegaan, de speler is niet toegevoegd")
       end
 
       respond_to do |format|
-        format.html {
-          redirect_to age_group_member_allocations_path(@age_group)
-        }
-        format.js {
+        format.html { redirect_to age_group_member_allocations_path(@age_group) }
+        format.js do
           @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
           render "create"
-        }
+        end
       end
     else
       @team = Team.find(params[:team_id])
@@ -49,7 +48,7 @@ class Org::PositionMembersController < Org::BaseController
       authorize @position_member
 
       # @position_member.initial_draft? does not seem to work here
-      if @position_member.initial_status != 'initial_draft'
+      if @position_member.initial_status != "initial_draft"
         # By default use team's status, otherwise use default 'status' value (draft)
         @position_member.status = @team.status
       end
@@ -62,22 +61,22 @@ class Org::PositionMembersController < Org::BaseController
     end
   end
 
-  def edit;end
+  def edit; end
 
   def update
     old_status = @position_member.status
 
-    if @position_member.update_attributes(permitted_attributes(@position_member))
+    if @position_member.update(permitted_attributes(@position_member))
       @position_member.transmit_status(@position_member.status, old_status)
 
-      redirect_to @position_member.team, notice: 'Teamgenoot is aangepast.'
+      redirect_to @position_member.team, notice: "Teamgenoot is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    # TODO check if this works correctly for positions
+    # TODO: check if this works correctly for positions
     @position_member.deactivate(user: current_user)
 
     flash_message(:success, "#{@position_member.member.name} is verwijderd uit #{@position_member.team.name}.")
@@ -92,14 +91,13 @@ class Org::PositionMembersController < Org::BaseController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@position_member.team.age_group.season.name}", @position_member.team.age_group.season
+      add_breadcrumb @position_member.team.age_group.season.name, @position_member.team.age_group.season
       add_breadcrumb @position_member.team.age_group.name, @position_member.team.age_group
       add_breadcrumb @position_member.team.name, @position_member.team
       if @position_member.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @position_member.member.name, @position_member
       end
     end
-
 end

@@ -9,19 +9,16 @@
           button.close[type="button" data-dismiss="modal" aria-label="Close"]
             span[aria-hidden="true"]
               | ×
-        = simple_form_for TeamMember.new, remote: true do |f|
+        = bootstrap_form_for TeamMember.new, remote: true do |f|
           .modal-body
             .form-group
-              - teams.each do |team|
-                .radio
-                  = f.radio_button :team_id, "#{team.id}", id: "team_id_#{team.id}"
-                  label for="team_id_#{team.id}"
-                    = team.name
+              .radio
+                = f.collection_radio_buttons :team_id, teams, :id, :name, hide_label: true
             = f.hidden_field :member_id
             = hidden_field_tag :team_member_id
             = hidden_field_tag :age_group_id, "#{age_group.id}"
 
           .modal-footer
-            = f.button :submit, "Toevoegen", class: 'btn btn-primary'
+            = f.submit "Toevoegen", class: 'btn btn-primary'
             button.btn.btn-secondary-outline[type="button" data-dismiss="modal"]
               | Annuleren

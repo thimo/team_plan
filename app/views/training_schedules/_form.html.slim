@@ -13,7 +13,7 @@
   = f.time_select :end_time, minute_step: 5
   = f.collection_select :present_minutes, TrainingSchedule.present_minutes_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
     { class: 'width-sm-50' }
-  = f.collection_select :soccer_field, SoccerField.asc.training, :id, :name, { prompt: "-- Selecteer een veld" },
+  = f.collection_select :soccer_field_id, SoccerField.asc.training, :id, :name, { prompt: "-- Selecteer een veld" },
     { class: 'width-sm-50' }
   = f.collection_select :field_part, TrainingSchedule.field_parts_i18n, :first, :second, { prompt: "-- Selecteer het deel van het veld" },
     { class: 'width-sm-50' }

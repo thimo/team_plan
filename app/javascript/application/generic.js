@@ -1,3 +1,7 @@
+import autosize from 'autosize'
+window.autosize = autosize
+import LazyLoad from 'vanilla-lazyload'
+
 document.addEventListener("turbolinks:load", () => {
   // Auto-size all textarea's
   autosize($('textarea'));
@@ -51,18 +55,3 @@ document.addEventListener("turbolinks:before-render", function(event) {
     });
   }
 });
-
-const stack_topright = {
-  "dir1": "down",
-  "dir2": "left",
-  "firstpos1": 10,
-  "firstpos2": 10,
-  "spacing1": 10,
-  "spacing2": 10
-};
-
-PNotify.defaults.styling = "bootstrap3";
-PNotify.defaults.icons = "fontawesome5";
-PNotify.defaults.shadow = false;
-PNotify.defaults.cornerClass = "alert-fill";
-PNotify.defaults.stack = stack_topright;

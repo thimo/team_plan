@@ -13,19 +13,18 @@ class TeamMemberBulkUpdatesController < ApplicationController
       ids = params[type.pluralize]
       ids.each do |id|
         member = Member.find_by(id: id)
-        unless member.nil?
-          @team_member = @team.team_members.new(member: member, role: TeamMember.roles["#{type}"])
-          @team_member.status = @team.status
-          if @team_member.save
-            count += 1
-          end
-        end
+        next if member.nil?
+
+        @team_member = @team.team_members.new(member: member, role: TeamMember.roles["#{type}"])
+        @team_member.status = @team.status
+
+        count += 1 if @team_member.save
       end unless ids.nil?
     end
 
-    if count == 0
+    if count.zero?
       flash_message(:alert, "Er zijn geen teamgenoten toegevoegd aan #{@team.name}")
-    elsif count == 1
+    elsif count.one?
       flash_message(:success, "Er is één teamgenoot toegevoegd aan #{@team.name}")
     else
       flash_message(:success, "Er zijn #{count} teamgenoten toegevoegd aan #{@team.name}")
@@ -46,9 +45,8 @@ class TeamMemberBulkUpdatesController < ApplicationController
       authorize TeamMember.new(team: @team)
     end
 
-
     def add_breadcrumbs
-      add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
+      add_breadcrumb @team.age_group.season.name, @team.age_group.season
       add_breadcrumb @team.age_group.name, @team.age_group
       add_breadcrumb @team.name, @team
       add_breadcrumb 'Nieuw'

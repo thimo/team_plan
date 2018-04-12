@@ -1,4 +1,4 @@
-.row.form-group class="#{'has-error' if has_error(f.object, field)}"
+.row.form-group class="#{'has-error' if error?(f.object, field)}"
   label.col-md-3.col-form-label.text[for="#{f.object.class.name.downcase}_#{field.to_s}"]
     = f.label field, class: 'required'
   .col-md-9

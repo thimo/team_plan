@@ -19,3 +19,5 @@
 /public/packs-test
 /node_modules
 /public/uploads
+yarn-debug.log*
+.yarn-integrity

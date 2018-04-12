@@ -14,7 +14,7 @@ class TrainingSchedulesController < ApplicationController
 
   def create
     if @training_schedule.save
-      redirect_to @training_schedule, notice: "Trainingsdag is toegevoegd."
+      redirect_to @training_schedule, notice: 'Trainingsdag is toegevoegd.'
     else
       render :new
     end
@@ -23,20 +23,20 @@ class TrainingSchedulesController < ApplicationController
   def edit; end
 
   def update
-    if @training_schedule.update_attributes(training_schedule_params)
-      redirect_to @training_schedule, notice: "Trainingsdag is aangepast."
+    if @training_schedule.update(training_schedule_params)
+      redirect_to @training_schedule, notice: 'Trainingsdag is aangepast.'
     else
       render 'edit'
     end
   end
 
   def destroy
-    redirect_to @training_schedule.team, notice: "Trainingsdag is verwijderd."
+    redirect_to @training_schedule.team, notice: 'Trainingsdag is verwijderd.'
     @training_schedule.deactivate
   end
 
   def activate
-    redirect_to @training_schedule.team, notice: "Trainingsdag is geactiveerd."
+    redirect_to @training_schedule.team, notice: 'Trainingsdag is geactiveerd.'
     @training_schedule.activate
   end
 
@@ -48,10 +48,11 @@ class TrainingSchedulesController < ApplicationController
 
     def create_training_schedule
       @training_schedule = if action_name == 'new'
-                @team.training_schedules.new(start_time: Time.zone.local(2000, 1, 1, 19, 0), end_time: Time.zone.local(2000, 1, 1, 20, 0))
-              else
-                TrainingSchedule.new(training_schedule_params)
-              end
+                             @team.training_schedules.new(start_time: Time.zone.local(2000, 1, 1, 19, 0),
+                                                          end_time: Time.zone.local(2000, 1, 1, 20, 0))
+                           else
+                             TrainingSchedule.new(training_schedule_params)
+                           end
       @training_schedule.team = @team
 
       authorize @training_schedule
@@ -63,11 +64,12 @@ class TrainingSchedulesController < ApplicationController
     end
 
     def training_schedule_params
-      params.require(:training_schedule).permit(:day, :present_minutes, :start_time, :end_time, :soccer_field_id, :field_part, :cios, team_member_ids: [])
+      params.require(:training_schedule).permit(:day, :present_minutes, :start_time, :end_time, :soccer_field_id,
+                                                :field_part, :cios, team_member_ids: [])
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@training_schedule.team.age_group.season.name}", @training_schedule.team.age_group.season
+      add_breadcrumb @training_schedule.team.age_group.season.name, @training_schedule.team.age_group.season
       add_breadcrumb @training_schedule.team.age_group.name, @training_schedule.team.age_group
       add_breadcrumb @training_schedule.team.name, @training_schedule.team
       if @training_schedule.new_record?
@@ -76,5 +78,4 @@ class TrainingSchedulesController < ApplicationController
         add_breadcrumb @training_schedule.day_i18n, @training_schedule
       end
     end
-
 end

@@ -15,7 +15,8 @@ class Member < ApplicationRecord
   DEFAULT_COLUMNS = %w[team association_number name born_on role address zipcode city phone email].freeze
 
   has_many :team_members, dependent: :destroy
-  has_many :team_members_as_player, -> { where(role: TeamMember.roles[:player]) }, class_name: 'TeamMember'
+  has_many :team_members_as_player, -> { where(role: TeamMember.roles[:player]) },
+           class_name: 'TeamMember', inverse_of: :member
   has_many :teams, through: :team_members
   has_many :teams_as_player, through: :team_members_as_player, class_name: 'Team', source: :team
 
@@ -24,8 +25,8 @@ class Member < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
-  has_many :logs, as: :logable, dependent: :nillify
-  has_many :todos, as: :todoable, dependent: :nillify
+  has_many :logs, as: :logable, dependent: :nullify
+  has_many :todos, as: :todoable, dependent: :nullify
   has_many :injuries, dependent: :destroy
   has_many :presences, dependent: :destroy
   has_paper_trail
@@ -33,34 +34,37 @@ class Member < ApplicationRecord
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :to_year,   ->(year) { where('born_on <= ?', Time.zone.local(year).end_of_year.to_date) }
   scope :from_year, ->(year) { where('born_on >= ?', Time.zone.local(year).beginning_of_year.to_date) }
-  scope :sportlink_active,            ->         { where(deregistered_at: nil).or(where('deregistered_at > ?', Time.zone.today)) }
-  scope :sportlink_active_for_season, ->(season) { where(deregistered_at: nil).or(where('deregistered_at > ?', season.started_on)) }
+  scope :sportlink_active, -> { where(deregistered_at: nil).or(where('deregistered_at > ?', Time.zone.today)) }
+  scope :sportlink_active_for_season, ->(season) {
+    where(deregistered_at: nil)
+      .or(where('deregistered_at > ?', season.started_on))
+  }
   scope :sportlink_inactive, -> { where.not(deregistered_at: nil).where('deregistered_at <= ?', Time.zone.today) }
   scope :sportlink_player, -> {
-    where('sport_category <> ""')
+    where("sport_category <> ''")
       .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
       .where('(local_teams != ?) OR local_teams IS NULL', 'Wachtlijst onbekend')
   }
   scope :male,   -> { where(gender: 'M') }
   scope :female, -> { where(gender: 'V') }
   scope :gender, ->(gender) { where(gender: gender) }
-  scope :by_team, ->(team) { joins(:team_members).where(team_members: {team: team, ended_on: nil}) }
-  scope :team_staff, -> { joins(:team_members).where.not(team_members: {role: TeamMember.roles[:player]}) }
+  scope :by_team, ->(team) { joins(:team_members).where(team_members: { team: team, ended_on: nil }) }
+  scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
 
   scope :query, ->(query) {
                   where('email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?',
                         "%#{query}%", "%#{query}%", "%#{query}%")
                 }
-  scope :by_season, ->(season) { includes(team_members: {team: :age_group}).where(age_groups: {season_id: season}) }
-  scope :not_in_team, -> { includes(team_members: {team: :age_group}).where(age_groups: {season_id: nil}) }
-  scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: {age_group_id: age_group}) }
+  scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
+  scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
+  scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: { age_group_id: age_group }) }
   # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that
   # it's renamed everywhere
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
                               includes(team_members: :field_positions)
-                                .where(field_positions: {id: field_positions})
+                                .where(field_positions: { id: field_positions })
                             }
   scope :recent_members, ->(days_ago) {
                            where('registered_at >= ?', days_ago.days.ago.beginning_of_day)
@@ -120,7 +124,7 @@ class Member < ApplicationRecord
     active_team_member.present?
   end
 
-  def has_active_field_position?(field_positions)
+  def active_field_position?(field_positions)
     active? && (field_positions & active_team_member.field_positions.map(&:id)).present?
   end
 
@@ -137,7 +141,7 @@ class Member < ApplicationRecord
   end
 
   def user
-    @user ||= User.active.find_by("lower(email) = ?", email.downcase) if email.present?
+    @user ||= User.active.find_by('lower(email) = ?', email.downcase) if email.present?
   end
 
   def reactivated?
@@ -145,7 +149,7 @@ class Member < ApplicationRecord
   end
 
   def update_injured
-    update_columns(injured: injuries.active.any?)
+    update(injured: injuries.active.any?)
   end
 
   def photo_data=(data)
@@ -167,7 +171,7 @@ class Member < ApplicationRecord
     CSV.foreach(
       file.path,
       headers: true,
-      header_converters: lambda { |h| I18n.t("member.import.#{h.downcase.gsub(' ', '_')}") }
+      header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_')}") }
     ) do |row|
       row_hash = row.to_hash
       association_number = row_hash['association_number']
@@ -177,18 +181,16 @@ class Member < ApplicationRecord
       old_deregistered_at = member.deregistered_at
       row_hash.each do |key, value|
         if Member.column_names.include?(key)
-          if key.ends_with?("_at") || key.ends_with?("_since")
+          if key.ends_with?('_at') || key.ends_with?('_since')
             member.send("#{key}=", value.to_date)
           else
-            member.send("#{key}=", value.present? ? value : nil)
+            member.send("#{key}=", value.presence)
           end
         end
       end
 
       result[:counters][:imported] += 1
-      if member.changed?
-        result[:counters][:changed] += 1
-      end
+      result[:counters][:changed] += 1 if member.changed?
       result[:activated] << member if old_deregistered_at.present? && member.deregistered_at.nil?
 
       member.imported_at = Time.zone.now
@@ -200,7 +202,7 @@ class Member < ApplicationRecord
 
   def self.cleanup(imported_before)
     result = { deregistered: [] }
-    Member.where(deregistered_at: nil).where('imported_at < ?', imported_before).each do |member|
+    Member.where(deregistered_at: nil).where('imported_at < ?', imported_before).find_each do |member|
       member.deregistered_at = member.imported_at
       member.save
       result[:deregistered] << member
@@ -210,7 +212,7 @@ class Member < ApplicationRecord
   end
 
   def self.export_columns(user)
-    Member::EXPORT_COLUMNS + ((user.admin? || user.club_staff?) ? Member::EXPORT_COLUMNS_ADVANCED : [])
+    Member::EXPORT_COLUMNS + (user.admin? || user.club_staff? ? Member::EXPORT_COLUMNS_ADVANCED : [])
   end
 
   def self.imported_at

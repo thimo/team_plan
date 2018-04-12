@@ -2,27 +2,26 @@ class TeamBulkUpdatesController < ApplicationController
   before_action :set_age_group, only: [:new, :create]
   before_action :add_breadcrumbs
 
-  def new
-  end
+  def new; end
 
   def create
     teams = params[:teams]
     count = 0
 
     teams.each_line do |line|
-      parts = line.split(',')
-      unless parts[0].blank?
-        team = @age_group.teams.build
-        team.name = parts[0].strip
-        team.save
+      parts = line.split(",")
+      next if parts[0].blank?
 
-        count += 1
-      end
+      team = @age_group.teams.build
+      team.name = parts[0].strip
+      team.save
+
+      count += 1
     end
 
-    if count == 0
+    if count.zero?
       flash_message(:alert, "Er zijn geen teams aangemaakt")
-    elsif count == 1
+    elsif count.one?
       flash_message(:success, "Er is één team aangemaakt")
     else
       flash_message(:success, "Er zijn #{count} teams aangemaakt")
@@ -38,10 +37,9 @@ class TeamBulkUpdatesController < ApplicationController
       authorize Team.new(age_group: @age_group)
     end
 
-
     def add_breadcrumbs
-      add_breadcrumb "#{@age_group.season.name}", @age_group.season
+      add_breadcrumb @age_group.season.name, @age_group.season
       add_breadcrumb @age_group.name, @age_group
-      add_breadcrumb 'Nieuw'
+      add_breadcrumb "Nieuw"
     end
   end

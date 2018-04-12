@@ -16,6 +16,7 @@ class TeamEvaluationsController < ApplicationController
     if @team_evaluation.save
       post_save_actions
     else
+      flash.now[:error] = "Controleer alsjeblieft de fouten hieronder"
       render :new
     end
   end
@@ -27,20 +28,21 @@ class TeamEvaluationsController < ApplicationController
   def update
     @team_evaluation.enable_validation = finish_evaluation?
 
-    if @team_evaluation.update_attributes(team_evaluation_params)
+    if @team_evaluation.update(team_evaluation_params)
       post_save_actions
     else
+      flash.now[:error] = "Controleer alsjeblieft de fouten hieronder"
       render :new
     end
   end
 
   def destroy
-    redirect_to @team_evaluation.team, notice: 'Teamevaluatie is verwijderd.'
+    redirect_to @team_evaluation.team, notice: "Teamevaluatie is verwijderd."
     @team_evaluation.destroy
   end
 
   def re_open
-    @team_evaluation.update_columns(finished_at: nil)
+    @team_evaluation.update(finished_at: nil)
     flash_message(:success, "De teamevaluatie staat weer open voor wijzigingen.")
     redirect_to [:edit, @team_evaluation]
   end
@@ -50,7 +52,7 @@ class TeamEvaluationsController < ApplicationController
     def create_team_evaluation
       @team = Team.find(params[:team_id])
 
-      @team_evaluation = if action_name == 'new'
+      @team_evaluation = if action_name == "new"
                            @team.team_evaluations.new
                          else
                            TeamEvaluation.new(team_evaluation_params)
@@ -65,18 +67,26 @@ class TeamEvaluationsController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb @team_evaluation.team.age_group.season.name, @team_evaluation.team.age_group.season unless @team_evaluation.team.age_group.nil?
-      add_breadcrumb @team_evaluation.team.age_group.name, @team_evaluation.team.age_group unless @team_evaluation.team.age_group.nil?
+      season = @team_evaluation.team.age_group.season
+      add_breadcrumb season.name, season if season.present?
+
+      age_group = @team_evaluation.team.age_group
+      add_breadcrumb age_group.name, @team_evaluation.team.age_group if age_group.present?
+
       add_breadcrumb @team_evaluation.team.name, @team_evaluation.team
       if @team_evaluation.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
-        add_breadcrumb 'Teamevaluatie'
+        add_breadcrumb "Teamevaluatie"
       end
     end
 
     def team_evaluation_params
-      params.require(:team_evaluation).permit(player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season, :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance, :duel_strength, :remark, team_member_attributes: [:id, field_position_ids: []]])
+      params.require(:team_evaluation)
+            .permit(player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season,
+                                                    :behaviour, :technique, :handlingspeed, :insight, :passes,
+                                                    :speed, :locomotion, :physical, :endurance, :duel_strength,
+                                                    :remark, team_member_attributes: [:id, field_position_ids: []]])
     end
 
     def finish_evaluation?
@@ -98,7 +108,7 @@ class TeamEvaluationsController < ApplicationController
       elsif send_invite?
         mail_count = @team_evaluation.send_invites(current_user)
 
-        if mail_count == 0
+        if mail_count.zero?
           flash_message(:alert, "De teamevaluatie is opgeslagen, maar er zijn geen uitnodigingen verstuurd.")
         else
           flash_message(:success, "De teamevaluatie is opgeslagen en #{t(:invites_sent, count: mail_count)}.")
@@ -117,7 +127,7 @@ class TeamEvaluationsController < ApplicationController
     def update_team_members
       player_evaluations = @team_evaluation.player_evaluations
       @team_evaluation.team.team_members.active.player.asc.each do |player|
-        unless player_evaluations.any?{|player_evaluation| player_evaluation.team_member_id == player.id}
+        unless player_evaluations.any? { |player_evaluation| player_evaluation.team_member_id == player.id }
           @team_evaluation.player_evaluations.build(team_member: player)
         end
       end

@@ -32,10 +32,9 @@ class ApplicationController < ActionController::Base
     end
 
     def default_breadcrumb
-      unless devise_controller? || self.class == DashboardsController
-        add_breadcrumb "Home", :root_path
-        # add_breadcrumb "Seizoenen", Season unless self.class.parent == Admin || self.class == StaticPagesController
-      end
+      return if devise_controller? || self.class == DashboardsController
+
+      add_breadcrumb "Home", :root_path
     end
 
     def back_url

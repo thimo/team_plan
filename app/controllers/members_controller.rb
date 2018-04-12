@@ -9,8 +9,7 @@ class MembersController < ApplicationController
     @player_evaluations = policy_scope(@member.player_evaluations).finished_desc if policy(@member).show_evaluations?
   end
 
-  def edit
-  end
+  def edit; end
 
   def create_login
     @user = User.find_or_create_by(email: @member.email)
@@ -34,7 +33,7 @@ class MembersController < ApplicationController
       @member.user.send_password_reset(generated_password)
       flash_message(:success, "Er is een nieuw wachtwoord aan #{@member.user.email} verstuurd.")
     else
-      flash_message(:alert, 'Er kon geen nieuw wachtwoord worden verstuurd.')
+      flash_message(:alert, "Er kon geen nieuw wachtwoord worden verstuurd.")
     end
     redirect_to @member
   end
@@ -52,15 +51,14 @@ class MembersController < ApplicationController
         team = @member.active_team_member.team if @member.active_team_member.present?
 
         if team.present?
-          add_breadcrumb "#{team.age_group.season.name}", team.age_group.season
-          add_breadcrumb "#{team.age_group.name}", team.age_group
-          add_breadcrumb "#{team.name}", team
+          add_breadcrumb team.age_group.season.name, team.age_group.season
+          add_breadcrumb team.age_group.name, team.age_group
+          add_breadcrumb team.name, team
         end
 
-        add_breadcrumb "#{@member.name}", @member
+        add_breadcrumb @member.name, @member
       else
         add_breadcrumb "Leden"
       end
     end
-
 end
