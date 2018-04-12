@@ -17,13 +17,13 @@ class MemberPolicy < AdminPolicy
 
   def show_private_data?
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_member_for?(@record)
+      @user.club_staff? ||
+      @user.team_member_for?(@record)
   end
 
   def show_conduct?
     @user.admin? ||
-    @user.club_staff?
+      @user.club_staff?
   end
 
   def show_sportlink_status?
@@ -37,14 +37,14 @@ class MemberPolicy < AdminPolicy
 
   def show_evaluations?
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_staff_for?(@record) ||
-    @user.member?(@record)
+      @user.club_staff? ||
+      @user.team_staff_for?(@record) ||
+      @user.has_member?(@record)
   end
 
   def show_comments?
     show_evaluations? ||
-    @user.member?(@record)
+      @user.has_member?(@record)
   end
 
   def show_injuries?
@@ -53,7 +53,7 @@ class MemberPolicy < AdminPolicy
 
   def show_new_members?
     @user.admin? ||
-    @user.club_staff?
+      @user.club_staff?
   end
 
   def show_login?
@@ -66,7 +66,7 @@ class MemberPolicy < AdminPolicy
 
   def create_login?
     @user.admin? ||
-    @user.club_staff?
+      @user.club_staff?
   end
 
   class Scope < Scope

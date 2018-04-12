@@ -72,7 +72,8 @@ class User < ApplicationRecord
     Team.joins(:team_members).where(team_members: {member_id: member_ids, ended_on: nil}).where.not(team_members: {role: TeamMember.roles[:player]}).joins(age_group: :season).where(age_groups: {season: season}).distinct.asc
   end
 
-  def member?(member)
+  # TODO: can't rename this to `member?` because of conflict with enum role
+  def has_member?(member)
     members.where(id: member.id).size.positive?
   end
 

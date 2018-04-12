@@ -1,8 +1,8 @@
 class NotePolicy < ApplicationPolicy
   def show?
-    return true if @record.self? && @record.user = @user
+    return true if @record.self? && @record.user == @user
     return true if @record.staff? && (@user.admin? || @user.club_staff? || @user.team_staff_for?(@record))
-    return true if @record.member? && @record.member = @user
+    return true if @record.member? && @record.member == @user
 
     false
   end
@@ -13,8 +13,8 @@ class NotePolicy < ApplicationPolicy
 
   def create?
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_member_for?(@record)
+      @user.club_staff? ||
+      @user.team_member_for?(@record)
   end
 
   def update?

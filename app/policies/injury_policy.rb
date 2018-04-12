@@ -1,7 +1,7 @@
 class InjuryPolicy < ApplicationPolicy
   def show?
     # Visible for club staff, author, member's team staff, member
-    create? || @record.user = @user || @user.member?(@record.member)
+    create? || @record.user = @user || @user.has_member?(@record.member)
   end
 
   def new?
@@ -38,7 +38,7 @@ class InjuryPolicy < ApplicationPolicy
 
     def club_or_team_staff?
       @user.admin? ||
-      @user.club_staff? ||
-      @user.team_staff_for?(@record.member)
+        @user.club_staff? ||
+        @user.team_staff_for?(@record.member)
     end
 end
