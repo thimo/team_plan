@@ -1,18 +1,24 @@
 class Admin::RolesController < Admin::BaseController
   before_action :create_role, only: [:new, :create]
-  before_action :set_role, only: [:show, :edit, :update, :resend_password, :destroy, :impersonate]
+  before_action :set_role, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumbs
 
   def index
-    # TODO filter on roles without resource
+    # TODO: filter on roles without resource
     @roles = policy_scope(Role).asc
   end
 
-  def new
-  end
+  def show; end
 
-  def edit
-  end
+  def new; end
+
+  def create; end
+
+  def edit; end
+
+  def update; end
+
+  def destroy; end
 
   private
 
@@ -36,13 +42,12 @@ class Admin::RolesController < Admin::BaseController
 
     def add_breadcrumbs
       add_breadcrumb 'Rollen', admin_roles_path
-      unless @role.nil?
-        if @role.new_record?
-          add_breadcrumb 'Nieuw'
-        else
-          add_breadcrumb @role.email, [:edit, :admin, @role]
-        end
+      return if @role.nil?
+
+      if @role.new_record?
+        add_breadcrumb 'Nieuw'
+      else
+        add_breadcrumb @role.email, [:edit, :admin, @role]
       end
     end
-
 end

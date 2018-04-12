@@ -7,19 +7,17 @@ class Admin::GroupsController < Admin::BaseController
     @groups = policy_scope(Group).asc
   end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 
   private
 
     def create_group
       @group = if action_name == 'new'
-                Group.new
-              else
-                Group.new(group_params)
+                 Group.new
+               else
+                 Group.new(group_params)
               end
       authorize @group
     end
@@ -35,12 +33,12 @@ class Admin::GroupsController < Admin::BaseController
 
     def add_breadcrumbs
       add_breadcrumb 'Groepen', admin_groups_path
-      unless @group.nil?
-        if @group.new_record?
-          add_breadcrumb 'Nieuw'
-        else
-          add_breadcrumb @group.email, [:edit, :admin, @group]
-        end
+      return if @group.nil?
+
+      if @group.new_record?
+        add_breadcrumb 'Nieuw'
+      else
+        add_breadcrumb @group.email, [:edit, :admin, @group]
       end
     end
 end
