@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TrainingSchedulesController < ApplicationController
   before_action :set_team, only: [:new, :create]
   before_action :create_training_schedule, only: [:new, :create]
@@ -14,7 +16,7 @@ class TrainingSchedulesController < ApplicationController
 
   def create
     if @training_schedule.save
-      redirect_to @training_schedule, notice: 'Trainingsdag is toegevoegd.'
+      redirect_to @training_schedule, notice: "Trainingsdag is toegevoegd."
     else
       render :new
     end
@@ -24,19 +26,19 @@ class TrainingSchedulesController < ApplicationController
 
   def update
     if @training_schedule.update(training_schedule_params)
-      redirect_to @training_schedule, notice: 'Trainingsdag is aangepast.'
+      redirect_to @training_schedule, notice: "Trainingsdag is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    redirect_to @training_schedule.team, notice: 'Trainingsdag is verwijderd.'
+    redirect_to @training_schedule.team, notice: "Trainingsdag is verwijderd."
     @training_schedule.deactivate
   end
 
   def activate
-    redirect_to @training_schedule.team, notice: 'Trainingsdag is geactiveerd.'
+    redirect_to @training_schedule.team, notice: "Trainingsdag is geactiveerd."
     @training_schedule.activate
   end
 
@@ -47,7 +49,7 @@ class TrainingSchedulesController < ApplicationController
     end
 
     def create_training_schedule
-      @training_schedule = if action_name == 'new'
+      @training_schedule = if action_name == "new"
                              @team.training_schedules.new(start_time: Time.zone.local(2000, 1, 1, 19, 0),
                                                           end_time: Time.zone.local(2000, 1, 1, 20, 0))
                            else
@@ -73,7 +75,7 @@ class TrainingSchedulesController < ApplicationController
       add_breadcrumb @training_schedule.team.age_group.name, @training_schedule.team.age_group
       add_breadcrumb @training_schedule.team.name, @training_schedule.team
       if @training_schedule.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @training_schedule.day_i18n, @training_schedule
       end

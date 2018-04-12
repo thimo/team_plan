@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamBulkUpdatesController < ApplicationController
   before_action :set_age_group, only: [:new, :create]
   before_action :add_breadcrumbs
@@ -42,4 +44,4 @@ class TeamBulkUpdatesController < ApplicationController
       add_breadcrumb @age_group.name, @age_group
       add_breadcrumb "Nieuw"
     end
-  end
+end

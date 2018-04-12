@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InjuriesController < ApplicationController
   before_action :set_member, only: [:new, :create]
   before_action :create_injury, only: [:new, :create]
@@ -16,14 +18,13 @@ class InjuriesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @injury.update(injury_params)
       redirect_to @injury, notice: "Blessure is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -39,7 +40,7 @@ class InjuriesController < ApplicationController
     end
 
     def create_injury
-      @injury = if action_name == 'new'
+      @injury = if action_name == "new"
                   @member.injuries.new(started_on: Time.zone.today)
                 else
                   Injury.new(injury_params.merge(user: current_user))
@@ -61,7 +62,7 @@ class InjuriesController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb @injury.member.name, @injury.member
       if @injury.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @injury.title, @injury
       end

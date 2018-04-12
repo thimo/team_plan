@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class PresencesController < ApplicationController
   before_action :set_parent, only: [:index]
-  before_action :set_presence, only: [:show, :edit, :update, :destroy]
+  before_action :set_presence, only: [:update]
 
   def index
     @team = Team.find(params[:team]) if params[:team]
@@ -18,10 +20,10 @@ class PresencesController < ApplicationController
 
     def set_parent
       @parent = if params[:training_id]
-         Training.find(params[:training_id])
-       elsif params[:match_id]
-         Match.find(params[:match_id])
-       end
+                  Training.find(params[:training_id])
+                elsif params[:match_id]
+                  Match.find(params[:match_id])
+                end
     end
 
     def set_presence
@@ -32,5 +34,4 @@ class PresencesController < ApplicationController
     def presence_params
       params.require(:presence).permit(:present, :on_time, :signed_off, :remark)
     end
-
 end

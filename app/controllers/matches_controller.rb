@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MatchesController < ApplicationController
   include SchedulesHelper
 
@@ -18,7 +20,7 @@ class MatchesController < ApplicationController
 
   def create
     if @team.present?
-      if @match.is_home_match == 'true'
+      if @match.is_home_match == "true"
         @match.thuisteamid = @team.club_data_team.teamcode
         @match.thuisteam   = @team.club_data_team.teamnaam
         @match.uitteamid   = nil
@@ -48,7 +50,7 @@ class MatchesController < ApplicationController
     if @match.update(match_params.merge(user_modified: true))
       redirect_to @match, notice: "Wedstrijd is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -69,17 +71,15 @@ class MatchesController < ApplicationController
     end
 
     def create_match
-      @match = if action_name == 'new'
+      @match = if action_name == "new"
                  Match.new(
                    wedstrijddatum: Match.new_match_datetime,
                    competition: Competition.custom.asc.first
                  )
                else
-                 Match.new(match_params.merge(
-                   user_modified: true,
-                   wedstrijdcode: Match.new_custom_wedstrijdcode,
-                   eigenteam: true
-                 ))
+                 Match.new(match_params.merge(user_modified: true,
+                                              wedstrijdcode: Match.new_custom_wedstrijdcode,
+                                              eigenteam: true))
                end
 
       authorize @match
@@ -92,8 +92,8 @@ class MatchesController < ApplicationController
 
     def match_params
       params.require(:match).permit(:competition_id, :wedstrijddatum, :wedstrijdtijd, :thuisteam, :uitteam, :uitslag,
-        :opponent, :is_home_match,
-        :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
+                                    :opponent, :is_home_match,
+                                    :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
       # Automatisch
       # wedstrijd (string, team - team)
       # wedstrijdcode, negatief, zoals bij competitie
@@ -103,7 +103,6 @@ class MatchesController < ApplicationController
       # uitslag_at
       # afgelast
       # afgelast_status
-
     end
 
     def add_breadcrumbs
@@ -111,7 +110,7 @@ class MatchesController < ApplicationController
         add_breadcrumb team.name, team
       end
       if @match.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb schedule_title(@match), @match
       end

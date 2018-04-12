@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamEvaluationsController < ApplicationController
   before_action :create_team_evaluation, only: [:new, :create]
   before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy, :re_open]

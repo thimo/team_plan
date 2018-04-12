@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DownloadTeamMembersController < ApplicationController
   include SortHelper
 
@@ -27,11 +29,11 @@ class DownloadTeamMembersController < ApplicationController
       teams = @age_group.teams
       teams = teams.where(status: params[:status].to_sym) if params[:status].present?
 
-      if params[:team_ids].present?
-        @teams += hashes_for(teams.where(id: params[:team_ids]))
-      else
-        @teams += hashes_for(teams)
-      end
+      @teams += if params[:team_ids].present?
+                  hashes_for(teams.where(id: params[:team_ids]))
+                else
+                  hashes_for(teams)
+                end
 
       @previous_season = @age_group.season.previous
 
@@ -52,7 +54,7 @@ class DownloadTeamMembersController < ApplicationController
     filename += "_#{Time.zone.now}.xlsx"
 
     respond_to do |format|
-       format.xlsx {render xlsx: 'download', filename: filename.gsub(' ', '')}
+      format.xlsx { render xlsx: "download", filename: filename.delete(" ") }
     end
   end
 

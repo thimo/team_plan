@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :load_commentable, only: [:toggle_include_member, :create]
   before_action :create_comment, only: [:create]
@@ -7,7 +9,7 @@ class CommentsController < ApplicationController
   def toggle_include_member
     authorize @commentable, :show_comments?
     current_user.toggle_include_member_comments
-    render 'tabs'
+    render "tabs"
   end
 
   def set_active_tab
@@ -17,25 +19,24 @@ class CommentsController < ApplicationController
 
   def create
     if @comment.save
-      redirect_to @commentable, notice: 'Opmerking is toegevoegd.'
+      redirect_to @commentable, notice: "Opmerking is toegevoegd."
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @comment.update(comment_params)
-      redirect_to @comment.commentable, notice: 'Opmerking is aangepast.'
+      redirect_to @comment.commentable, notice: "Opmerking is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    redirect_to @comment.commentable, notice: 'Opmerking is verwijderd.'
+    redirect_to @comment.commentable, notice: "Opmerking is verwijderd."
     @comment.destroy
   end
 
@@ -52,7 +53,7 @@ class CommentsController < ApplicationController
     end
 
     def load_commentable
-      resource, id = request.path.split('/')[1, 2]
+      resource, id = request.path.split("/")[1, 2]
       @commentable = resource.singularize.classify.constantize.find(id)
     end
 
@@ -63,9 +64,9 @@ class CommentsController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb @comment.commentable.name, @comment.commentable
       if @comment.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
-        add_breadcrumb 'Opmerking'
+        add_breadcrumb "Opmerking"
       end
     end
 end

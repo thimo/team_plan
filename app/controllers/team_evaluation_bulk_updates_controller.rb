@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamEvaluationBulkUpdatesController < ApplicationController
   include SortHelper
 
@@ -51,4 +53,4 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
       add_breadcrumb @age_group.name, @age_group
       add_breadcrumb "Nieuw"
     end
-  end
+end

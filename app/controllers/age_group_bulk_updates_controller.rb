@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AgeGroupBulkUpdatesController < ApplicationController
   before_action :set_season, only: [:new, :create]
   before_action :add_breadcrumbs

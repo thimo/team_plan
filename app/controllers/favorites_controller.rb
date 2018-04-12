@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FavoritesController < ApplicationController
   before_action :set_favorite, only: [:destroy]
   before_action :load_favorable, only: [:create]
@@ -18,13 +20,14 @@ class FavoritesController < ApplicationController
   end
 
   private
+
     def set_favorite
       @favorite = Favorite.find(params[:id])
       authorize @favorite
     end
 
     def load_favorable
-      resource, id = request.path.split('/')[1, 2]
+      resource, id = request.path.split("/")[1, 2]
       @favorable = resource.singularize.classify.constantize.find(id)
     end
 

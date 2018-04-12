@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TrainingsController < ApplicationController
   include SchedulesHelper
 
@@ -7,9 +9,7 @@ class TrainingsController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    if policy(@training).show_presences?
-      @presences = @training.find_or_create_presences.asc
-    end
+    @presences = @training.find_or_create_presences.asc if policy(@training).show_presences?
   end
 
   def new; end
@@ -30,7 +30,7 @@ class TrainingsController < ApplicationController
     if @training.update(training_params.merge(user_modified: true))
       redirect_to @training, notice: "Training is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -46,8 +46,9 @@ class TrainingsController < ApplicationController
     end
 
     def create_training
-      @training = if action_name == 'new'
-                    @team.trainings.new(started_at: Time.zone.now.change(hour: 19), ended_at: Time.zone.now.change(hour: 20))
+      @training = if action_name == "new"
+                    @team.trainings.new(started_at: Time.zone.now.change(hour: 19),
+                                        ended_at: Time.zone.now.change(hour: 20))
                   else
                     Training.new(training_params.merge(user_modified: true))
                   end
@@ -66,9 +67,9 @@ class TrainingsController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@training.team.name}", @training.team
+      add_breadcrumb @training.team.name, @training.team
       if @training.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb schedule_title(@training), @training
       end

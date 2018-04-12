@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchedulesController < ApplicationController
   before_action :set_team, only: [:index]
   before_action :add_breadcrumbs

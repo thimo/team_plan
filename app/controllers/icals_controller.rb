@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class IcalsController < ApplicationController
-  require 'icalendar/tzinfo'
+  require "icalendar/tzinfo"
 
   def show
     skip_authorization
@@ -10,7 +12,8 @@ class IcalsController < ApplicationController
     user = User.find_by(uuid: params[:check])
     raise "Check invalid" if user.nil?
 
-    schedules = team.matches.niet_afgelast.in_period(1.months.ago, 3.months.from_now) + team.trainings.in_period(1.months.ago, 3.months.from_now)
+    schedules = team.matches.niet_afgelast.in_period(1.month.ago, 3.months.from_now) \
+                  + team.trainings.in_period(1.month.ago, 3.months.from_now)
 
     respond_to do |format|
       format.html
@@ -20,7 +23,7 @@ class IcalsController < ApplicationController
         tzid = "Europe/Amsterdam"
         tz = TZInfo::Timezone.get(tzid)
 
-        cal.append_custom_property("X-WR-CALNAME","#{Setting['club.name_short']} #{team.name}")
+        cal.append_custom_property("X-WR-CALNAME", "#{Setting['club.name_short']} #{team.name}")
         schedules.each do |schedule|
           timezone = tz.ical_timezone(schedule.started_at)
           cal.add_timezone timezone

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotesController < ApplicationController
   before_action :set_team, only: [:new, :create]
   before_action :create_note, only: [:new, :create]
@@ -22,7 +24,7 @@ class NotesController < ApplicationController
     if @note.update(note_params)
       redirect_to @note, notice: "Notitie is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -38,7 +40,7 @@ class NotesController < ApplicationController
     end
 
     def create_note
-      @note = if action_name == 'new'
+      @note = if action_name == "new"
                 @team.notes.new
               else
                 Note.new(note_params.merge(user: current_user))
@@ -58,11 +60,11 @@ class NotesController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@note.team.age_group.season.name}", @note.team.age_group.season
+      add_breadcrumb @note.team.age_group.season.name, @note.team.age_group.season
       add_breadcrumb @note.team.age_group.name, @note.team.age_group
       add_breadcrumb @note.team.name, @note.team
       if @note.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @note.title, @note
       end

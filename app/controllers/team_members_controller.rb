@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamMembersController < ApplicationController
   include SortHelper
 
@@ -24,7 +26,7 @@ class TeamMembersController < ApplicationController
       end
 
       attrs = permitted_attributes(TeamMember.new).to_h
-      member_ids = attrs.delete(:member_id).split(',')
+      member_ids = attrs.delete(:member_id).split(",")
       member_ids.each do |member_id|
         if (team_member = TeamMember.find_by(attrs.merge(member_id: member_id))).present?
           # Member already was in the team, but has previously been removed. Reset its status
@@ -45,15 +47,13 @@ class TeamMembersController < ApplicationController
       end
 
       respond_to do |format|
-        format.html {
-          redirect_to age_group_member_allocations_path(@age_group)
-        }
-        format.js {
+        format.html { redirect_to age_group_member_allocations_path(@age_group) }
+        format.js do
           @teams = human_sort(policy_scope(Team).where(age_group_id: @age_group.id).includes(:age_group), :name)
           @season = @age_group.season
           @previous_season = @season.previous
           render "create"
-        }
+        end
       end
     else
       # @team_member.initial_draft? does not seem to work here
@@ -63,7 +63,7 @@ class TeamMembersController < ApplicationController
       end
 
       if @team_member.save
-        return redirect_to @team
+        redirect_to @team
       else
         render :new
       end

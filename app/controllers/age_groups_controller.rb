@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AgeGroupsController < ApplicationController
   include SortHelper
 
@@ -18,10 +20,12 @@ class AgeGroupsController < ApplicationController
     todos = policy_scope(@age_group.todos).unfinished.asc.includes(:todoable)
     @todos_active = todos.active.to_a
     @todos_defered = todos.defered.to_a
-    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id)).unfinished.asc.includes(:todoable)
+    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id))
+                              .unfinished.asc.includes(:todoable)
     @todos_active += todos.active
     @todos_defered += todos.defered
-    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_age_group(@age_group).map(&:id)).unfinished.asc.includes(:todoable)
+    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member)
+                              .by_age_group(@age_group).map(&:id)).unfinished.asc.includes(:todoable)
     @todos_active += todos.active
     @todos_defered += todos.defered
 
@@ -37,7 +41,7 @@ class AgeGroupsController < ApplicationController
 
   def create
     if @age_group.save
-      redirect_to @age_group, notice: 'Leeftijdsgroep is toegevoegd.'
+      redirect_to @age_group, notice: "Leeftijdsgroep is toegevoegd."
     else
       render :new
     end
@@ -51,14 +55,14 @@ class AgeGroupsController < ApplicationController
     if @age_group.update(permitted_attributes(@age_group))
       @age_group.transmit_status(@age_group.status, old_status)
 
-      redirect_to @age_group, notice: 'Leeftijdsgroep is aangepast.'
+      redirect_to @age_group, notice: "Leeftijdsgroep is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    redirect_to @age_group.season, notice: 'Leeftijdsgroep is verwijderd.'
+    redirect_to @age_group.season, notice: "Leeftijdsgroep is verwijderd."
     @age_group.destroy
   end
 
@@ -67,11 +71,11 @@ class AgeGroupsController < ApplicationController
     def create_age_group
       @season = Season.find(params[:season_id])
 
-      @age_group = if action_name == 'new'
-                      @season.age_groups.new
-                    else
-                      AgeGroup.new(permitted_attributes(AgeGroup.new))
-                    end
+      @age_group = if action_name == "new"
+                     @season.age_groups.new
+                   else
+                     AgeGroup.new(permitted_attributes(AgeGroup.new))
+                   end
       @age_group.season = @season
 
       authorize @age_group
@@ -83,16 +87,11 @@ class AgeGroupsController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@age_group.season.name}", @age_group.season
+      add_breadcrumb @age_group.season.name, @age_group.season
       if @age_group.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @age_group.name.to_s, @age_group
       end
     end
-
-    # def age_group_params
-    #   params.require(:age_group).permit(:name, :year_of_birth_from, :year_of_birth_to, :gender)
-    #   # :status if policy change status
-    # end
 end

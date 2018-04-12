@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   include TeamsHelper
 
@@ -11,38 +13,41 @@ class TeamsController < ApplicationController
     @previous_season = @team.age_group.season.previous
 
     case @active_tab
-      when 'competitions'
-        @competitions_regular = @team.competitions.knvb.desc.active.regular
-        @competitions_other   = @team.competitions.knvb.desc.active.other
+    when "competitions"
+      @competitions_regular = @team.competitions.knvb.desc.active.regular
+      @competitions_other   = @team.competitions.knvb.desc.active.other
 
-        @custom_competition_matches = @team.matches.for_competition(Competition.custom).desc.group_by(&:competition).sort_by{ |competition, matches| competition.id }
+      @custom_competition_matches = @team.matches.for_competition(Competition.custom).desc.group_by(&:competition)
+                                         .sort_by { |competition, matches| competition.id }
 
-      when 'team'
-        @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:teammembers_field_positions, :field_positions).not_ended)
-        @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
-        @old_members = policy_scope(@team.team_members).ended.group_by(&:member)
+    when "team"
+      @players = TeamMember.players_by_year(policy_scope(@team.team_members)
+                           .includes(:teammembers_field_positions, :field_positions).not_ended)
+      @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
+      @old_members = policy_scope(@team.team_members).ended.group_by(&:member)
 
-        todos = policy_scope(@team.todos).unfinished.includes(:todoable)
-        @todos_active = todos.active.to_a
-        @todos_defered = todos.defered.to_a
-        todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_team(@team).map(&:id)).unfinished.asc
-        @todos_active += todos.active
-        @todos_defered += todos.defered
+      todos = policy_scope(@team.todos).unfinished.includes(:todoable)
+      @todos_active = todos.active.to_a
+      @todos_defered = todos.defered.to_a
+      todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member).by_team(@team)
+                                .map(&:id)).unfinished.asc
+      @todos_active += todos.active
+      @todos_defered += todos.defered
 
-      when 'dossier'
-        @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
-        @team_evaluations = policy_scope(@team.team_evaluations).desc
+    when "dossier"
+      @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
+      @team_evaluations = policy_scope(@team.team_evaluations).desc
 
-      when 'statistics'
-        team_presence_graphs
-      else # 'schedule'
-        @not_played_matches = @team.matches.not_played.from_today.asc
-        @played_matches = @team.matches.played.desc
+    when "statistics"
+      team_presence_graphs
+    else # "schedule"
+      @not_played_matches = @team.matches.not_played.from_today.asc
+      @played_matches = @team.matches.played.desc
 
-        @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
-        @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 4.weeks.from_now.beginning_of_day).asc
+      @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
+      @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 4.weeks.from_now.beginning_of_day).asc
 
-        # @program_items = (@not_played_matches + @trainings).sort_by &:started_at
+      # @program_items = (@not_played_matches + @trainings).sort_by &:started_at
     end
   end
 
@@ -50,7 +55,7 @@ class TeamsController < ApplicationController
 
   def create
     if @team.save
-      redirect_to @team, notice: 'Team is toegevoegd.'
+      redirect_to @team, notice: "Team is toegevoegd."
     else
       render :new
     end
@@ -64,14 +69,14 @@ class TeamsController < ApplicationController
     if @team.update(permitted_attributes(@team))
       @team.transmit_status(@team.status, old_status)
 
-      redirect_to @team, notice: 'Team is aangepast.'
+      redirect_to @team, notice: "Team is aangepast."
     else
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
-    redirect_to @team.age_group, notice: 'Team is verwijderd.'
+    redirect_to @team.age_group, notice: "Team is verwijderd."
     @team.destroy
   end
 
@@ -80,7 +85,7 @@ class TeamsController < ApplicationController
     def create_team
       @age_group = AgeGroup.find(params[:age_group_id])
 
-      @team = if action_name == 'new'
+      @team = if action_name == "new"
                 @age_group.teams.new
               else
                 Team.new(permitted_attributes(Team.new))
@@ -96,22 +101,18 @@ class TeamsController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
+      add_breadcrumb @team.age_group.season.name, @team.age_group.season
       add_breadcrumb @team.age_group.name, @team.age_group
       if @team.new_record?
-        add_breadcrumb 'Nieuw'
+        add_breadcrumb "Nieuw"
       else
         add_breadcrumb @team.name, @team
       end
     end
 
     def set_active_tab
-      @active_tab = if params[:tab].present?
-        params[:tab]
-      else
-        current_user.settings.active_team_tab || 'schedule'
-      end
-      @active_tab = 'schedule' unless policy(@team).try("show_#{@active_tab}?")
+      @active_tab = params[:tab].presence || current_user.settings.active_team_tab || "schedule"
+      @active_tab = "schedule" unless policy(@team).try("show_#{@active_tab}?")
       current_user.settings.update(active_team_tab: @active_tab)
     end
 end

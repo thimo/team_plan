@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DashboardsController < ApplicationController
   include SortHelper
 
@@ -15,24 +17,27 @@ class DashboardsController < ApplicationController
     team_ids = (
       current_user.active_teams.pluck(:id) +
       current_user.favorite_teams.pluck(:id) +
-      current_user.favorite_age_groups.map{ |age_group| age_group.teams.pluck(:id)}
+      current_user.favorite_age_groups.map { |age_group| age_group.teams.pluck(:id) }
     ).flatten.uniq
     matches = policy_scope(Match).for_team(team_ids)
 
     not_played_matches = matches.not_played.in_period(0.days.ago.beginning_of_day, 1.week.from_now.beginning_of_day).asc
     # On many results, hide matches from over an hour ago (handy on match day if you have many favorites)
-    not_played_matches = matches.not_played.in_period(1.hour.ago, 1.week.from_now.beginning_of_day) if not_played_matches.size > 20
-    @not_played_matches = not_played_matches.niet_afgelast.group_by{ |match| match.wedstrijddatum.to_date }
-    @canceled_matches = not_played_matches.afgelast.group_by{ |match| match.wedstrijddatum.to_date }
+    not_played_matches = matches.not_played.in_period(1.hour.ago, 1.week.from_now.beginning_of_day) \
+      if not_played_matches.size > 20
+    @not_played_matches = not_played_matches.niet_afgelast.group_by { |match| match.wedstrijddatum.to_date }
+    @canceled_matches = not_played_matches.afgelast.group_by { |match| match.wedstrijddatum.to_date }
 
-    @played_matches = matches.played.in_period(1.week.ago.end_of_day, 0.hour.ago).desc.limit(10).group_by{ |match| match.wedstrijddatum.to_date }
+    @played_matches = matches.played.in_period(1.week.ago.end_of_day, 0.hours.ago).desc.limit(10)
+                             .group_by { |match| match.wedstrijddatum.to_date }
 
     team_ids = current_user.teams_as_staff_in_season(@season).collect(&:id).uniq
     @open_team_evaluations = policy_scope(TeamEvaluation).desc.where(team_id: team_ids)
 
     @version_updates = policy_scope(VersionUpdate).desc.page(params[:version_page]).per(3)
     @todos = policy_scope(Todo).includes(:todoable).asc.unfinished
-    @new_members = policy_scope(Member).recent_members(30).page(params[:member_page]).per(6) if policy(Member).show_new_members?
+    @new_members = policy_scope(Member).recent_members(30).page(params[:member_page]).per(6) \
+      if policy(Member).show_new_members?
 
     skip_authorization
   end
@@ -40,13 +45,14 @@ class DashboardsController < ApplicationController
   def program
     authorize Match, :show?
     matches = policy_scope(Match).own.not_played.asc.in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day)
-    @not_played_matches = matches.niet_afgelast.group_by{ |match| match.wedstrijddatum.to_date }
-    @canceled_matches = matches.afgelast.group_by{ |match| match.wedstrijddatum.to_date }
+    @not_played_matches = matches.niet_afgelast.group_by { |match| match.wedstrijddatum.to_date }
+    @canceled_matches = matches.afgelast.group_by { |match| match.wedstrijddatum.to_date }
   end
 
   def results
     authorize Match, :show?
-    @played_matches = policy_scope(Match).own.played.desc.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).group_by{ |match| match.wedstrijddatum.to_date }
+    @played_matches = policy_scope(Match).own.played.desc.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day)
+                                         .group_by { |match| match.wedstrijddatum.to_date }
   end
 
   def cancellations

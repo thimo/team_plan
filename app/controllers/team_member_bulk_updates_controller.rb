@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamMemberBulkUpdatesController < ApplicationController
   before_action :set_team, only: [:new, :create]
   before_action :add_breadcrumbs
@@ -11,15 +13,17 @@ class TeamMemberBulkUpdatesController < ApplicationController
 
     %w[player coach trainer].each do |type|
       ids = params[type.pluralize]
+      next if ids.nil?
+
       ids.each do |id|
         member = Member.find_by(id: id)
         next if member.nil?
 
-        @team_member = @team.team_members.new(member: member, role: TeamMember.roles["#{type}"])
+        @team_member = @team.team_members.new(member: member, role: TeamMember.roles[type])
         @team_member.status = @team.status
 
         count += 1 if @team_member.save
-      end unless ids.nil?
+      end
     end
 
     if count.zero?
@@ -49,6 +53,6 @@ class TeamMemberBulkUpdatesController < ApplicationController
       add_breadcrumb @team.age_group.season.name, @team.age_group.season
       add_breadcrumb @team.age_group.name, @team.age_group
       add_breadcrumb @team.name, @team
-      add_breadcrumb 'Nieuw'
+      add_breadcrumb "Nieuw"
     end
 end

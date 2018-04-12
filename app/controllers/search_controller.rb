@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchController < ApplicationController
   before_action :add_breadcrumbs
 
@@ -15,6 +17,6 @@ class SearchController < ApplicationController
   private
 
     def add_breadcrumbs
-      add_breadcrumb 'Zoekresultaten'
+      add_breadcrumb "Zoekresultaten"
     end
 end
