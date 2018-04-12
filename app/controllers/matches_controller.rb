@@ -45,7 +45,7 @@ class MatchesController < ApplicationController
   def edit; end
 
   def update
-    if @match.update_attributes(match_params.merge(user_modified: true))
+    if @match.update(match_params.merge(user_modified: true))
       redirect_to @match, notice: "Wedstrijd is aangepast."
     else
       render 'edit'
@@ -53,7 +53,7 @@ class MatchesController < ApplicationController
   end
 
   def destroy
-    @match.update_attributes(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
+    @match.update(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
     redirect_to @match, notice: "Wedstrijd is afgelast."
   end
 

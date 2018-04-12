@@ -27,7 +27,7 @@ class TrainingsController < ApplicationController
   end
 
   def update
-    if @training.update_attributes(training_params.merge(user_modified: true))
+    if @training.update(training_params.merge(user_modified: true))
       redirect_to @training, notice: "Training is aangepast."
     else
       render 'edit'

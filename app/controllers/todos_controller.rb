@@ -20,7 +20,7 @@ class TodosController < ApplicationController
   def edit; end
 
   def update
-    if @todo.update_attributes(todo_params)
+    if @todo.update(todo_params)
       flash_message(:success, "Todo is aangepast.")
       url = if params[:return].present?
               params[:return]

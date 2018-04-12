@@ -91,7 +91,7 @@ class TeamMembersController < ApplicationController
   def update
     old_status = @team_member.status
 
-    if @team_member.update_attributes(permitted_attributes(@team_member))
+    if @team_member.update(permitted_attributes(@team_member))
       @team_member.transmit_status(@team_member.status, old_status)
 
       redirect_to @team_member.team, notice: "Teamgenoot is aangepast."

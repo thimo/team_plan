@@ -8,7 +8,7 @@ class PresencesController < ApplicationController
   end
 
   def update
-    if @presence.update_attributes(presence_params)
+    if @presence.update(presence_params)
       @presence.set_presentable_user_modified
       @present_count = @presence.presentable.presences.present.size
     end

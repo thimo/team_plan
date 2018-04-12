@@ -61,7 +61,7 @@ class TeamsController < ApplicationController
   def update
     old_status = @team.status
 
-    if @team.update_attributes(permitted_attributes(@team))
+    if @team.update(permitted_attributes(@team))
       @team.transmit_status(@team.status, old_status)
 
       redirect_to @team, notice: 'Team is aangepast.'
@@ -112,6 +112,6 @@ class TeamsController < ApplicationController
         current_user.settings.active_team_tab || 'schedule'
       end
       @active_tab = 'schedule' unless policy(@team).try("show_#{@active_tab}?")
-      current_user.settings.update_attributes(active_team_tab: @active_tab)
+      current_user.settings.update(active_team_tab: @active_tab)
     end
 end

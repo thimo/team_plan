@@ -20,7 +20,7 @@ class InjuriesController < ApplicationController
   end
 
   def update
-    if @injury.update_attributes(injury_params)
+    if @injury.update(injury_params)
       redirect_to @injury, notice: "Blessure is aangepast."
     else
       render 'edit'

@@ -19,7 +19,7 @@ class NotesController < ApplicationController
   def edit; end
 
   def update
-    if @note.update_attributes(note_params)
+    if @note.update(note_params)
       redirect_to @note, notice: "Notitie is aangepast."
     else
       render 'edit'

@@ -26,7 +26,7 @@ class Org::PositionsController < Org::BaseController
   end
 
   def update
-    if @org_position.update_attributes(permitted_attributes(@org_position))
+    if @org_position.update(permitted_attributes(@org_position))
       redirect_to @org_position, notice: 'Positie is aangepast.'
     else
       render :edit

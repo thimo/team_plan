@@ -48,7 +48,7 @@ class AgeGroupsController < ApplicationController
   def update
     old_status = @age_group.status
 
-    if @age_group.update_attributes(permitted_attributes(@age_group))
+    if @age_group.update(permitted_attributes(@age_group))
       @age_group.transmit_status(@age_group.status, old_status)
 
       redirect_to @age_group, notice: 'Leeftijdsgroep is aangepast.'

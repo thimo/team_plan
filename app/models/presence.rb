@@ -15,7 +15,7 @@ class Presence < ApplicationRecord
 
   def set_presentable_user_modified
     if presentable.respond_to?(:user_modified) && presentable.user_modified?
-      presentable.update_attributes(user_modified: true) unless presentable.user_modified?
+      presentable.update(user_modified: true) unless presentable.user_modified?
     end
   end
 
