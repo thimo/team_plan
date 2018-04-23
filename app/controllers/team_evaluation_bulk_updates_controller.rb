@@ -32,7 +32,7 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
 
     if count.zero?
       flash_message(:alert, "Er zijn geen teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)")
-    elsif count.one?
+    elsif count == 1
       flash_message(:success, "Er is één teamevaluatie aangemaakt (#{mail_count} e-mails verstuurd)")
     else
       flash_message(:success, "Er zijn #{count} teamevaluaties aangemaakt (#{mail_count} e-mails verstuurd)")

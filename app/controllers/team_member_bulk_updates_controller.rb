@@ -28,7 +28,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
 
     if count.zero?
       flash_message(:alert, "Er zijn geen teamgenoten toegevoegd aan #{@team.name}")
-    elsif count.one?
+    elsif count == 1
       flash_message(:success, "Er is één teamgenoot toegevoegd aan #{@team.name}")
     else
       flash_message(:success, "Er zijn #{count} teamgenoten toegevoegd aan #{@team.name}")

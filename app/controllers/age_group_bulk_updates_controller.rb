@@ -26,7 +26,7 @@ class AgeGroupBulkUpdatesController < ApplicationController
 
     if count.zero?
       flash_message(:alert, "Er zijn geen leeftijdsgroepen aangemaakt")
-    elsif count.one?
+    elsif count == 1
       flash_message(:success, "Er is één leeftijdsgroep aangemaakt")
     else
       flash_message(:success, "Er zijn #{count} leeftijdsgroepen aangemaakt")
