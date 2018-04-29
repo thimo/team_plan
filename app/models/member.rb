@@ -1,5 +1,6 @@
-# Member
-#
+# frozen_string_literal: true
+
+# Imported members from Sportlink
 class Member < ApplicationRecord
   include Filterable
   include PgSearch
@@ -7,9 +8,9 @@ class Member < ApplicationRecord
 
   mount_uploader :photo, PhotoUploader
 
-  STATUS_DEFINITIEF = "definitief".freeze
-  STATUS_AF_TE_MELDEN = "af te melden".freeze
-  STATUS_OVERSCHRIJVING_SPELACTIVITEIT = "overschrijving spelactiviteit".freeze
+  STATUS_DEFINITIEF = "definitief"
+  STATUS_AF_TE_MELDEN = "af te melden"
+  STATUS_OVERSCHRIJVING_SPELACTIVITEIT = "overschrijving spelactiviteit"
 
   EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on \
                       role address zipcode city phone email member_since previous_team].freeze
@@ -33,7 +34,7 @@ class Member < ApplicationRecord
   has_many :presences, dependent: :destroy
   has_paper_trail
 
-  validates :last_name, :born_on, :gender, :email, :association_number, presence: true
+  validates :last_name, :born_on, :gender, :association_number, presence: true
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :to_year,   ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }

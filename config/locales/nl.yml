@@ -265,18 +265,24 @@ nl:
       last: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>'
   member:
     import:
-      relatienr: association_number
-      soort_persoon: person_type        # Bondslid, Verenigingslid
+      relatienr: association_number # oud
+      relatiecode: association_number # nieuw
+      soort_persoon: person_type        # Bondslid, Verenigingslid - oud
+      lidsoort: person_type             # - nieuw
       volledige_naam_(1): full_name     # "Lastname, Initials"
-      voorletters: initials
+      voorletters: initials # oud
+      voorletter(s): initials # nieuw
       roepnaam: first_name
-      tussenvoegsels: middle_name
+      tussenvoegsels: middle_name # oud
+      tussenvoegsel(s): middle_name # nieuw
       achternaam: last_name
       geslacht: gender
-      geb_datum: born_on
+      geb_datum: born_on # oud
+      geboortedatum: born_on # nieuw
       volledig_adres: address
       postcode: zipcode
-      woonplaats: city
+      woonplaats: city # oud
+      plaats: city # nieuw
       mobiel: phone
       2e_mobiel: phone_2
       e-mail: email
@@ -290,12 +296,17 @@ nl:
       nationaliteit: nationality
       2e_nationaliteit: nationality_2
       legitimatietype: id_type
-      legitimatienr: id_number
+      legitimatienr: id_number # oud
+      legitimatienummer: id_number # nieuw
       laatste_wijz: last_change_at
+      laatste_wijziging: last_change_at
       privacyniveau: privacy_level
-      straat: street
-      huisnr: house_number
-      huisnr_toev: house_number_addition
+      straat: street # oud
+      straatnaam: street # nieuw
+      huisnr: house_number # oud
+      huisnummer: house_number # nieuw
+      huisnr_toev: house_number_addition # oud
+      toevoeging: house_number_addition # nieuw
       land: country
       telefoon: phone_home
       contact_via_ouder(s)/verzorger(s): contact_via_parent
@@ -307,11 +318,13 @@ nl:
       bankrek_nr: bank_account_number
       bic: bank_bic
       machtiging?: bank_authorization
-      contrib_cat: contribution_category
+      contrib_cat: contribution_category # oud
+      contributiecategorie: contribution_category # nieuw
       registratiedatum: registered_at
       afmelddatum: deregistered_at
       lid_sinds: member_since
-      leeftijdscat: age_category
+      leeftijdscat: age_category # oud
+      leeftijdscategorie: age_category # nieuw
       lokale_teams: local_teams
       verenigingssporten: club_sports
       bondssporten_(elders): association_sports
@@ -326,6 +339,7 @@ nl:
       overlijdensdatum: date_of_death
       leeftijd: age
       heeft_foto?: has_photo
+      datum_pasfoto: date_photo
       bedrijfsnaam: company_name
       fax: fax
       aantal_jaar_lid: member_for_years
@@ -335,6 +349,7 @@ nl:
       vrij_veld_5: free_entry_5
       vrij_veld_6: free_entry_6
       vrij_datumveld_1: free_date_1
+      vog-datum: vog_date
       vrij_datumveld_2: free_date_2
       vrije_dropdown_1: free_dropdown_1
       vrije_dropdown_2: free_dropdown_2
