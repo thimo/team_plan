@@ -1,14 +1,14 @@
 class PlayerEvaluationPolicy < ApplicationPolicy
   def index?
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_staff_for?(@record)
+      @user.club_staff? ||
+      @user.team_staff_for?(@record)
   end
 
   def show?
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_staff_for?(@record)
+      @user.club_staff? ||
+      @user.team_staff_for?(@record)
   end
 
   def create?
@@ -18,13 +18,13 @@ class PlayerEvaluationPolicy < ApplicationPolicy
   end
 
   def update?
-    return false unless @record.team_evaluation.finished_at.present?
+    return false if @record.team_evaluation.finished_at.blank?
 
     create?
   end
 
   def destroy?
-    return false unless @record.team_evaluation.finished_at.present?
+    return false if @record.team_evaluation.finished_at.blank?
 
     @user.admin? || @user.club_staff?
   end
