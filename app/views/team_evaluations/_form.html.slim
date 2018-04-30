@@ -9,8 +9,7 @@
               small.pl-1 #{@team_evaluation.team.division}
             div.color-blue-grey-lighter.small
               = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
-              |  -
-              = @team_evaluation.status
+              = " - #{@team_evaluation.status}"
         .tbl-cell.text-right
           = link_to "/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf", target: "_blank" do
             i.fa.far.fa-book.mr-1
