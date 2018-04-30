@@ -34,7 +34,7 @@ class PlayerEvaluationPolicy < ApplicationPolicy
       if user.admin? || user.club_staff?
         scope.all.finished
       else
-        scope.public_or_as_team_staff(user)
+        scope.public_or_as_team_staff(user).finished
       end
     end
   end
