@@ -1,5 +1,10 @@
 - provide(:title, "Teamevaluatie")
 - provide(:body_class, "sidebar-hidden")
 
+- content_for :action_buttons
+  .alert.alert-info
+    div
+      | <b>Herinnering:</b> na het afronden van de teamevalutie kan een speler de eigen evaluatie inzien.
+
 .evaluation
   = render "form"
