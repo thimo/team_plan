@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_01_193716) do
+ActiveRecord::Schema.define(version: 2018_04_30_065114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -245,28 +245,16 @@ ActiveRecord::Schema.define(version: 2018_04_01_193716) do
     t.datetime "imported_at"
     t.string "status"
     t.string "full_name_2"
-    t.string "place_of_birth"
-    t.string "country_of_birth"
-    t.string "nationality"
-    t.string "nationality_2"
-    t.string "id_type"
-    t.string "id_number"
     t.date "last_change_at"
     t.string "privacy_level"
     t.string "street"
     t.string "house_number"
     t.string "house_number_addition"
     t.string "phone_home"
-    t.string "contact_via_parent"
     t.string "phone_parent"
     t.string "phone_parent_2"
     t.string "email_parent"
     t.string "email_parent_2"
-    t.string "bank_account_type"
-    t.string "bank_account_number"
-    t.string "bank_bic"
-    t.string "bank_authorization"
-    t.string "contribution_category"
     t.date "registered_at"
     t.date "deregistered_at"
     t.date "member_since"

@@ -268,7 +268,7 @@ nl:
       relatienr: association_number # oud
       relatiecode: association_number # nieuw
       soort_persoon: person_type        # Bondslid, Verenigingslid - oud
-      lidsoort: person_type             # - nieuw
+      lidsoort: person_type             # Bondslid, Verenigingslid - nieuw
       volledige_naam_(1): full_name     # "Lastname, Initials"
       voorletters: initials # oud
       voorletter(s): initials # nieuw
@@ -291,13 +291,6 @@ nl:
       bondssporten: sport_category
       status: status                    # definitief, af te melden
       volledige_naam_(2): full_name_2   # "Initials Lastname"
-      geboorteplaats: place_of_birth
-      geboorteland: country_of_birth
-      nationaliteit: nationality
-      2e_nationaliteit: nationality_2
-      legitimatietype: id_type
-      legitimatienr: id_number # oud
-      legitimatienummer: id_number # nieuw
       laatste_wijz: last_change_at
       laatste_wijziging: last_change_at
       privacyniveau: privacy_level
@@ -309,17 +302,10 @@ nl:
       toevoeging: house_number_addition # nieuw
       land: country
       telefoon: phone_home
-      contact_via_ouder(s)/verzorger(s): contact_via_parent
       telefoon_ouder/verzorger_1: phone_parent
       telefoon_ouder/verzorger_2: phone_parent_2
       e-mail_ouder/verzorger_1: email_parent
       e-mail_ouder/verzorger_2: email_parent_2
-      bankrek_type: bank_account_type
-      bankrek_nr: bank_account_number
-      bic: bank_bic
-      machtiging?: bank_authorization
-      contrib_cat: contribution_category # oud
-      contributiecategorie: contribution_category # nieuw
       registratiedatum: registered_at
       afmelddatum: deregistered_at
       lid_sinds: member_since
@@ -328,6 +314,22 @@ nl:
       lokale_teams: local_teams
       verenigingssporten: club_sports
       bondssporten_(elders): association_sports
+
+      # removed from database
+      geboorteplaats: place_of_birth
+      geboorteland: country_of_birth
+      nationaliteit: nationality
+      2e_nationaliteit: nationality_2
+      legitimatietype: id_type
+      legitimatienr: id_number # oud
+      legitimatienummer: id_number # nieuw
+      contact_via_ouder(s)/verzorger(s): contact_via_parent
+      bankrek_type: bank_account_type
+      bankrek_nr: bank_account_number
+      bic: bank_bic
+      machtiging?: bank_authorization
+      contrib_cat: contribution_category # oud
+      contributiecategorie: contribution_category # nieuw
 
       # not implemented yet
       interne_code: internal_number
