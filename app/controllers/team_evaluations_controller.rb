@@ -55,9 +55,9 @@ class TeamEvaluationsController < ApplicationController
       @team = Team.find(params[:team_id])
 
       @team_evaluation = if action_name == "new"
-                           @team.team_evaluations.new
+                           @team.team_evaluations.new(private: false)
                          else
-                           TeamEvaluation.new(team_evaluation_params)
+                           TeamEvaluation.new(team_evaluation_params.merge(private: false))
                          end
       @team_evaluation.team = @team
       authorize @team_evaluation

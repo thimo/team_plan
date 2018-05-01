@@ -55,25 +55,25 @@ class User < ApplicationRecord
     Member.where("lower(email) = ?", email.downcase).sportlink_active
   end
 
+  def member_ids
+    members.map(&:id).uniq
+  end
+
   def teams
-    member_ids = members.map(&:id).uniq
     Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil }).distinct
   end
 
   def active_teams
-    member_ids = members.map(&:id).uniq
     Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
         .joins(age_group: :season).where(seasons: { status: Season.statuses[:active] }).distinct
   end
 
   def teams_as_staff
-    member_ids = members.map(&:id).uniq
     Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
         .where.not(team_members: { role: TeamMember.roles[:player] }).distinct.asc
   end
 
   def teams_as_staff_in_season(season)
-    member_ids = members.map(&:id).uniq
     Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
         .where.not(team_members: { role: TeamMember.roles[:player] }).joins(age_group: :season)
         .where(age_groups: { season: season }).distinct.asc

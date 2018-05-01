@@ -1,8 +1,8 @@
 class TeamEvaluationPolicy < ApplicationPolicy
   def index?
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_staff_for?(@record)
+      @user.club_staff? ||
+      @user.team_staff_for?(@record)
   end
 
   def show?
