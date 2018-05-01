@@ -6,7 +6,7 @@ default: &default
 development:
   <<: *default
   # database: team_plan_development
-  database: svs_defrog_nl
+  database: teamplan_defrog_nl
 
 test:
   <<: *default
