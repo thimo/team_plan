@@ -42,13 +42,11 @@ document.addEventListener("turbolinks:load", () => {
 });
 
 document.addEventListener("turbolinks:before-cache", () => {
-  $('select.field_positions').each((index, target) => {
-    $(target).select2('destroy');
-  })
   $('.no-touch [title]').tooltip('dispose');
+  $('.select2-hidden-accessible').select2('destroy');
 })
 
-document.addEventListener("turbolinks:before-render", function(event) {
+document.addEventListener("turbolinks:before-render", (event) => {
   if (typeof FontAwesome !== 'undefined') {
     FontAwesome.dom.i2svg({
       node: event.data.newBody
