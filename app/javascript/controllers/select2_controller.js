@@ -7,7 +7,5 @@ export default class extends Controller {
     });
   }
 
-  disconnect() {
-    $(this.element).select2('destroy');
-  }
+  disconnect() {}
 }
