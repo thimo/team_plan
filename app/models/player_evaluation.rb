@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class PlayerEvaluation < ApplicationRecord
-  RATING_FIELDS = %w[behaviour technique handlingspeed insight passes speed locomotion physical endurance\
-                     duel_strength].freeze
+  RATING_FIELDS = %w[behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength].freeze
   RATING_OPTIONS = [["zeer goed", "9"], %w[goed 8], %w[voldoende 6], %w[matig 5], %w[onvoldoende 4]].freeze
   ADVISE_NEXT_SEASON_OPTIONS = %w[hoger zelfde lager].freeze
 
