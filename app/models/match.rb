@@ -1,23 +1,23 @@
 class Match < ApplicationRecord
   include Presentable
 
-  validates_presence_of :wedstrijdcode, :wedstrijddatum, :thuisteam, :uitteam
-  validates_uniqueness_of :wedstrijdcode
+  validates :wedstrijdcode, :wedstrijddatum, :thuisteam, :uitteam, presence: true
+  validates :wedstrijdcode, uniqueness: true
 
   belongs_to :competition
   belongs_to :created_by, class_name: "User", required: false
   has_and_belongs_to_many :teams
 
-  attr_accessor :wedstrijdtijd, :opponent, :is_home_match
+  attr_accessor :opponent, :is_home_match
 
   enum edit_level: { knvb: 0, club_staff: 1, team_staff: 2 }
 
   scope :asc,             -> { order(:wedstrijddatum) }
   scope :desc,            -> { order(wedstrijddatum: :desc) }
-  scope :in_period,       ->(start_date, end_date) { where('wedstrijddatum > ?', start_date).where('wedstrijddatum < ?', end_date) }
-  scope :from_now,        -> { where('wedstrijddatum > ?', Time.zone.now) }
-  scope :from_today,      -> { where('wedstrijddatum > ?', Time.zone.today) }
-  scope :in_past,         -> { where('wedstrijddatum < ?', Time.zone.now) }
+  scope :in_period,       ->(start_date, end_date) { where("wedstrijddatum > ?", start_date).where("wedstrijddatum < ?", end_date) }
+  scope :from_now,        -> { where("wedstrijddatum > ?", Time.zone.now) }
+  scope :from_today,      -> { where("wedstrijddatum > ?", Time.zone.today) }
+  scope :in_past,         -> { where("wedstrijddatum < ?", Time.zone.now) }
   scope :played,          -> { where.not(uitslag: nil) }
   scope :not_played,      -> { where(uitslag: nil) }
   scope :own,             -> { where(eigenteam: true) }
@@ -54,7 +54,7 @@ class Match < ApplicationRecord
   end
 
   def google_maps_address
-    full_address.join(',')
+    full_address.join(",")
   end
 
   def team_name
@@ -62,13 +62,12 @@ class Match < ApplicationRecord
   end
 
   def update_uitslag(data_uitslag)
-    data_uitslag = nil if data_uitslag.strip == '-'
+    data_uitslag = nil if data_uitslag.strip == "-"
+    return if uitslag == data_uitslag
 
-    if uitslag != data_uitslag
-      self.uitslag = data_uitslag
-      self.uitslag_at = Time.zone.now
-      save
-    end
+    self.uitslag = data_uitslag
+    self.uitslag_at = Time.zone.now
+    save
   end
 
   # Accessors for time aspects of start and end dates
@@ -87,6 +86,10 @@ class Match < ApplicationRecord
 
   def self.new_match_datetime
     Time.zone.today.at_middle_of_day
+  end
+
+  def wedstrijddatum_date
+    wedstrijddatum.to_date
   end
 
   def active?
