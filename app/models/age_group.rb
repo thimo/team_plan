@@ -10,16 +10,16 @@ class AgeGroup < ApplicationRecord
   has_many :matches, through: :teams
   has_paper_trail
 
-  validates :name, :season, :gender, presence: true
+  validates :name, :season, presence: true
 
-  scope :male, -> { where(gender: 'm').or(AgeGroup.where(gender: nil)) }
-  scope :female, -> { where(gender: 'v') }
+  scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: [nil, "all", ""])) }
+  scope :female, -> { where(gender: "v") }
   scope :asc, -> { order(year_of_birth_to: :asc) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
 
   PLAYER_COUNT = [6, 7, 8, 9, 11].freeze
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45].freeze
-  GENDER = [%w[Man m], %w[Vrouw v]].freeze
+  GENDER = [%w[Man m], %w[Vrouw v], %w[Alle all]].freeze
 
   def not_member?(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
@@ -42,9 +42,9 @@ class AgeGroup < ApplicationRecord
     # Filter on gender
     if gender.present?
       case gender.upcase
-      when 'M'
+      when "M"
         members = members.male
-      when 'V'
+      when "V"
         members = members.female
       end
     end
