@@ -7,17 +7,19 @@
 
   = form_with url: age_group_team_evaluation_bulk_updates_path(@age_group), method: :post do |f|
     div
-      .form-check
-        label.form-check-label
-          input.form-check-input.team-select-toggle[type="checkbox" checked]
-          strong
-            |  Teams
+      .form-check.checkbox
+        input.form-check-input.team-select-toggle#team_ids[type="checkbox" checked]
+        label.form-check-label.strong[for="team_ids"]
+          | Teams
 
       - @teams.each do |team|
-        .form-check
-          label.form-check-label
-            = f.check_box 'team_ids[]', { checked: true, class: 'form-check-input team-select' }, team.id, nil
-            = " #{team.name}"
+        .form-check.checkbox
+          = f.check_box 'team_ids[]', { checked: true,
+            class: 'form-check-input team-select',
+            id: "team_ids_#{team.id}" },
+            team.id, nil
+          label.form-check-label[for="team_ids_#{team.id}"]
+            = "#{team.name}"
 
     div
       = f.submit "Aanmaken en versturen", class: "btn btn-primary"
