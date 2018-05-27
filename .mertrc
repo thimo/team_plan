@@ -9,4 +9,6 @@ layout:
           -
             - guard
           -
+            - ./bin/webpack-dev-server
+          -
             - ls
