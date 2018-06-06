@@ -1,28 +1,35 @@
 .published_teams
 - @age_groups.each do |age_group|
   - if age_group[:teams].any?
-    h3
-      = age_group[:name]
+    .alert.alert-info
+      h3
+        = age_group[:name]
+      .pull-right.small
+        = l(Time.zone.now, format: :date_time_short)
 
-      - age_group[:teams].each do |team|
-        - players = team.team_members.active_for_team(team).player.asc.group_by(&:member)
-        - if players.any?
-          - staff = team.team_members.active_for_team(team).staff.asc.group_by(&:member)
-          h4
-            = "ESA #{team.name}"
-            - if team.division.present?
-              .small.lighter
-                = team.division
+    - age_group[:teams].each do |team|
+      - players = team.team_members.active_for_team(team).player.asc.group_by(&:member)
+      - if players.any?
+        - staff = team.team_members.active_for_team(team).staff.asc.group_by(&:member)
+        h4
+          = "ESA #{team.name}"
+          - if team.division.present?
+            small.lighter
+              = team.division
+
+        h5 Spelers
+
+        ul
+          - players.each do |member, team_members|
+            li
+              = member.name
+
+        - if staff.any?
+          h5 Teamleiding
 
           ul
-            - players.each do |member, team_members|
+            - staff.each do |member, team_members|
               li
                 = member.name
 
-          - if staff.any?
-            h5 Teamleiding
-
-            ul
-              - staff.each do |member, team_members|
-                li
-                  = member.name
+        hr
