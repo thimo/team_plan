@@ -6,6 +6,8 @@ class DownloadTeamMembersController < ApplicationController
   def index
     @teams = []
     if params[:season_id].present?
+      # TODO: check if policy needs to be checked for download_team_members?
+      # TODO: Filter for team status
       @season = policy_scope(Season).find(params[:season_id])
 
       if params[:age_group_ids].present?
@@ -24,6 +26,8 @@ class DownloadTeamMembersController < ApplicationController
       @previous_season = @season.previous
 
     elsif params[:age_group_id].present?
+      # TODO: check if policy needs to be checked for download_team_members?
+      # TODO: Filter for team status
       @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
       @season = @age_group.season
       teams = @age_group.teams
@@ -38,6 +42,8 @@ class DownloadTeamMembersController < ApplicationController
       @previous_season = @age_group.season.previous
 
     elsif params[:team_id].present?
+      # TODO: check if policy needs to be checked for download_team_members?
+      # TODO: Filter for team status
       @team = policy_scope(Team).find(params[:team_id])
       @season = @team.age_group.season
 

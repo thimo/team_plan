@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       end
       resources :age_group_bulk_updates, only: [:new, :create]
       resources :download_team_members, only: [:index]
+      resources :publish_team_members, only: [:index]
       resources :team_actions, only: [:new, :create]
       resources :age_groups, shallow: true do
         resources :team_bulk_updates, only: [:new, :create]

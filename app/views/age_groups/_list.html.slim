@@ -5,6 +5,9 @@ section.box-typical
         h4
           = title || 'Leeftijdsgroepen'
       .tbl-cell.tbl-cell-actions
+        - if policy(@season).bulk_publish?
+          = link_to new_season_team_action_path(@season, type: :publish), title: "Publiseer teams", class: "action-btn", remote: true
+            i.fa.far.fa-inbox-out
         - if policy(@season).bulk_email?
           = link_to new_season_team_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
             i.fa.far.fa-envelope
