@@ -1,27 +1,27 @@
-- cache member
-  td
-    = render member, target: '_blank'
+/ - cache member
+td
+  = render member, target: '_blank'
 
-  td.color-blue-grey.small
-    - if (previous_teams = member.teams_for_season(@previous_season).as_player.distinct).present?
-      - previous_teams.each do |previous_team|
-        div
-          = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
-          span.pl-1
-            = "#{previous_team.division}"
-          - if (evaluation = member.evaluation_for_team(previous_team)).present?
-            span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at, format: :date_long}, advies: #{evaluation.advise_next_season}"]
-              i.fa[class="#{evaluation.advise_to_icon_class}"]
-            - if evaluation.remark.present?
-              i.fa.far.fa-info-circle.blue.ml-1[title="#{evaluation.remark}"]
+td.color-blue-grey.small
+  - if (previous_teams = member.teams_for_season(@previous_season).as_player.distinct).present?
+    - previous_teams.each do |previous_team|
+      div
+        = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
+        span.pl-1
+          = "#{previous_team.division}"
+        - if (evaluation = member.evaluation_for_team(previous_team)).present?
+          span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at, format: :date_long}, advies: #{evaluation.advise_next_season}"]
+            i.fa[class="#{evaluation.advise_to_icon_class}"]
+          - if evaluation.remark.present?
+            i.fa.far.fa-info-circle.blue.ml-1[title="#{evaluation.remark}"]
 
-    - if (active_team_member = member.active_team_member).present?
-      - if (field_positions = active_team_member.field_positions).present?
-        .mb-1
-          - field_positions.each do |field_position|
-            div = "#{field_position.name}"
+  - if (active_team_member = member.active_team_member).present?
+    - if (field_positions = active_team_member.field_positions).present?
+      .mb-1
+        - field_positions.each do |field_position|
+          div = "#{field_position.name}"
 
-    - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
-      - last_comments.each do |last_comment|
-        .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at, format: :date_short})"]
-          = last_comment.body
+  - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
+    - last_comments.each do |last_comment|
+      .comment.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at, format: :date_short})"]
+        = last_comment.body

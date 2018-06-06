@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 ruby "2.5.1"
@@ -5,7 +7,7 @@ ruby "2.5.1"
 gem "jbuilder", "~> 2.5"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
-gem "rails", "~> 5.2.0-pre"
+gem "rails", "~> 5.2.0"
 gem "sass-rails", "~> 5.0"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
@@ -27,10 +29,10 @@ gem "rails-i18n"
 
 gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git"
 gem "country_select"
-gem "simple_form",                "~> 3.5.0"
+gem "simple_form",                "~> 4.0"
 
 gem "breadcrumbs_on_rails",       "~> 3.0.1"
-gem "devise",                     "4.4.1" # 4.4.2 causes "Devise.secret_key was not set."
+gem "devise",                     "~> 4.4.3"
 gem "enum_help",                  "~> 0.0.17"
 gem "figaro",                     "~> 1.1.1"
 gem "net-ssh",                    "~> 4.1.0"
