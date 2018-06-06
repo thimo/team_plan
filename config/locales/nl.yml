@@ -174,7 +174,9 @@ nl:
         keeper_trainer: Keeperstrainer
         team_parent: Teamouder
         manager: Teammanager
+        leader: Leider
         physio: Fysiotherapeut
+        referee: Scheidsrechter
         assistant_referee: Assistent scheidsrechter
       status:
         draft: Concept

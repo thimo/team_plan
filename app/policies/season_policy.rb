@@ -38,6 +38,10 @@ class SeasonPolicy < ApplicationPolicy
     download_team_members?
   end
 
+  def bulk_publish?
+    @user.admin?
+  end
+
   def inherit_age_groups?
     update?
   end
