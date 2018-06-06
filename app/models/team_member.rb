@@ -14,7 +14,8 @@ class TeamMember < ApplicationRecord
 
   attr_accessor :initial_status
 
-  enum role: { player: 0, head_coach: 5, coach: 1, trainer: 2, assistant_trainer: 7, keeper_trainer: 9, team_parent: 3, manager: 4, physio: 6, assistant_referee: 8 }
+  enum role: { player: 0, head_coach: 5, coach: 1, trainer: 2, assistant_trainer: 7, keeper_trainer: 9, team_parent: 3,
+               manager: 4, leader: 10, physio: 6, referee: 9, assistant_referee: 8 }
   enum initial_status: { initial_active: 1, initial_draft: 0 }
 
   validates_presence_of :team_id, :member_id, :role
