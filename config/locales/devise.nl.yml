@@ -13,7 +13,7 @@ nl:
       user: Gebruiker
   devise:
     confirmations:
-      confirmed: Je account is bevestigd.
+      confirmed: Je account is bevestigd, je kunt er nu mee inloggen.
       new:
         resend_confirmation_instructions: Verstuur bevestiging-instructies opnieuw
       send_instructions: Je ontvangt via e-mail instructies hoe je je account kan bevestigen.
@@ -21,10 +21,10 @@ nl:
     failure:
       already_authenticated: Je bent al aangemeld.
       inactive: Je account is nog niet geactiveerd.
-      invalid: Ongeldig e-mail of wachtwoord.
+      invalid: Ongeldig e-mailadres of wachtwoord.
       last_attempt: Je hebt nog één poging voordat je account vergrendeld wordt.
       locked: Je account is vergrendeld.
-      not_found_in_database: Ongeldig e-mail of wachtwoord.
+      not_found_in_database: Ongeldig e-mailadres of wachtwoord.
       timeout: Je sessie is verlopen, meld je opnieuw aan om door te gaan.
       # unauthenticated: Log in om door te gaan.
       unauthenticated: ''
@@ -63,9 +63,9 @@ nl:
         new_password: Nieuw wachtwoord
       new:
         forgot_your_password: Wachtwoord vergeten?
-        send_me_reset_password_instructions: Stuur me wachtwoord reset
+        send_me_reset_password_instructions: Verstuur wachtwoord reset
       no_token: Deze pagina is alleen bereikbaar via een wachtwoord vergeten e-mail. Als je wel via een wachtwoord vergeten e-mail komt, zorg er dan voor dat je de volledige URL gebruikt.
-      send_instructions: Je ontvangt een e-mail met instructies hoe je je wachtwoord opnieuw kan instellen.
+      send_instructions: Je ontvangt een e-mail met instructies hoe je je wachtwoord opnieuw kunt instellen.
       send_paranoid_instructions: Als we je e-mailadres terugvinden in onze database, zal je binnen enkele ogenblikken via e-mail een link ontvangen om je wachtwoord opnieuw in te stellen.
       updated: Je wachtwoord is gewijzigd. Je bent nu aangemeld.
       updated_not_active: Je wachtwoord is met succes gewijzigd.
@@ -83,7 +83,7 @@ nl:
         current_password: Huidig wachtwoord
         new_password: Nieuw wachtwoord
       new:
-        sign_up: Maak account aan
+        sign_up: Maak een account aan
       signed_up: Je bent ingeschreven.
       signed_up_but_inactive: Je bent ingeschreven, maar we konden je niet inloggen omdat je account nog niet is geactiveerd.
       signed_up_but_locked: Je bent ingeschreven, maar we konden je niet inloggen omdat je account is vergrendeld.

@@ -84,6 +84,10 @@ class User < ApplicationRecord
     members.where(id: member.id).size.positive?
   end
 
+  def active_members?
+    members.sportlink_active.any?
+  end
+
   def team_member_for?(record)
     team_id = team_id_for record
     team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil }).size.positive?
@@ -160,11 +164,11 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super && active?
+    super && active? && active_members?
   end
 
   def inactive_message
-    "Je account is uitgeschakeld."
+    "Je account is uitgeschakeld. Het zou kunnen dat je via dit e-mailadres geen lid (meer) bent van #{Setting["club.name_short"]}."
   end
 
   def toggle_include_member_comments
@@ -178,7 +182,7 @@ class User < ApplicationRecord
 
   def self.deactivate_for_inactive_members
     User.active.each do |user|
-      user.deactivate if user.members.none?
+      user.deactivate unless user.active_members?
     end
   end
 

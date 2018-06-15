@@ -1,19 +1,16 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  get 'support', to: 'static_pages#support'
-  get 'about', to: 'static_pages#about'
+  get "support", to: "static_pages#support"
+  get "about", to: "static_pages#about"
 
   # Devise setup, with limit on creating new accounts
-  devise_for :users, :skip => [:registrations]
-  as :user do
-    get 'users/new' => 'devise/registrations#new', :as => 'new_user_registration'
-    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
-    put 'users' => 'devise/registrations#update', :as => 'user_registration'
-  end
+  devise_for :users
 
   authenticate :user do
     root to: "dashboards#show"
 
-    get 'dashboard' => 'dashboards#show'
+    get "dashboard" => "dashboards#show"
     resource :dashboards do
       collection do
         get :program
@@ -109,17 +106,17 @@ Rails.application.routes.draw do
       end
     end
 
-    get 'org' => 'org/base#show'
+    get "org" => "org/base#show"
     namespace :org do
       resources :positions
     end
 
-    get 'intranet' => 'intranet/base#show'
+    get "intranet" => "intranet/base#show"
     namespace :intranet do
       resources :files
     end
 
-    get 'admin' => 'admin/base#show'
+    get "admin" => "admin/base#show"
     namespace :admin do
       resources :users, except: [:show], shallow: true do
         resources :email_logs, only: [:index, :show]
@@ -133,7 +130,7 @@ Rails.application.routes.draw do
       resources :email_logs, only: [:index, :show]
       resources :version_updates
       resources :settings,
-        :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
+                constraints: { id: /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
       namespace :knvb do
         resources :dashboards
         resources :club_data_teams
@@ -153,8 +150,8 @@ Rails.application.routes.draw do
 
   resources :icals, only: [:show]
 
-  get '/check.txt', to: proc {[200, {}, ['it_works']]}
-  match '/404', to: 'errors#file_not_found', via: :all
-  match '/422', to: 'errors#unprocessable', via: :all
-  match '/500', to: 'errors#internal_server_error', via: :all
+  get "/check.txt", to: proc { [200, {}, ["it_works"]] }
+  match "/404", to: "errors#file_not_found", via: :all
+  match "/422", to: "errors#unprocessable", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
 end

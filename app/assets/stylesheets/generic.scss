@@ -193,6 +193,12 @@ tr.b-t-0 {
       }
     }
   }
+  &.alert-fill {
+    a {
+      color: white;
+      font-weight: bold;
+    }
+  }
 }
 
 // Icons voor alerts
