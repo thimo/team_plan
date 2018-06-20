@@ -186,6 +186,12 @@ class User < ApplicationRecord
     end
   end
 
+  def self.activate_for_active_members
+    User.archived.each do |user|
+      user.activate if user.active_members?
+    end
+  end
+
   private
 
     def team_id_for(record, as_team_staf = false)
