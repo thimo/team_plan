@@ -9,20 +9,23 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
 
   body.devise
     .page-center
       .page-center-in
         .container-fluid
-          - if flash.present?
-            .text-center
+          .text-center
+            - if flash.present?
               - flash.each do |message_type, messages|
                 - [messages].flatten.each do |message|
                   - if message.present?
-                    .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
-                      | #{message}
+                    div
+                      .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
+                        | #{message}
+            div
+              = yield(:flash)
 
           .sign-box
             .sign-avatar.sign-logo.mt-2.mb-5
@@ -31,12 +34,3 @@ html
               = yield(:title)
 
             = yield
-
-        section.supplier
-          ul.side-menu-list
-            li.red
-              a[href="https://www.defrog.nl/" target="_blank"]
-                i.fa.far.fa-fw.fa-heart
-                span.lbl
-                  | Handcrafted in Arnhem by
-                  = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'

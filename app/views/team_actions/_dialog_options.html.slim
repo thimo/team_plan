@@ -43,7 +43,7 @@ div[class="#{column_class}"]
         label:   "BCC",
         id:      "to_field_bcc"
 
-  - if params[:type] == 'download_team_members'
+  - if params[:type] == 'download_team_members' || params[:type] == 'publish'
     .form-check
       strong
         | Status van teams
@@ -57,6 +57,7 @@ div[class="#{column_class}"]
           label:   AgeGroup.statuses_i18n[status],
           id:      "status_#{status}"
 
+  - if params[:type] == 'download_team_members'
     .form-check
       strong
         | Kolommen

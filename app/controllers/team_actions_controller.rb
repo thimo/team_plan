@@ -12,6 +12,9 @@ class TeamActionsController < ApplicationController
     when "download_team_members"
       @title = "Download teams naar Excel"
       @button_label = "Downloaden"
+    when "publish"
+      @title = "Teams publiceren naar een website"
+      @button_label = "Publiceren"
     end
   end
 
@@ -49,6 +52,10 @@ class TeamActionsController < ApplicationController
                     season_download_team_members_path(@season, format: "xlsx", age_group_ids: params[:age_group_ids],
                                                                status: params[:status])
                   end
+    when "publish"
+      # debugger
+      @redirect = redirect_to season_publish_team_members_path(@season, age_group_ids: params[:age_group_ids],
+                                                                        status: params[:status])
     end
   end
 

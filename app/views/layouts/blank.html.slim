@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title
+      = full_title(yield(:title))
+    meta[charset="utf-8"]
+    = csrf_meta_tags
+
+  body
+    = yield

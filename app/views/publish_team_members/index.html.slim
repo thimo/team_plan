@@ -1,0 +1,36 @@
+- @age_groups.each do |age_group|
+  - if age_group[:teams].any?
+    .alert.alert-info
+      h3
+        = age_group[:name]
+      .pull-right.small
+        = l(Time.zone.now, format: :date_time_short)
+
+    - age_group[:teams].each do |team|
+      - players = team.team_members.active_for_team(team).player.asc.group_by(&:member)
+      - if players.any?
+        - staff = team.team_members.active_for_team(team).staff.asc.group_by(&:member)
+        .published_team
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title
+                = "ESA #{team.name}"
+                - if team.division.present?
+                  small.lighter
+                    = team.division
+
+            .panel-body
+              h5 Spelers
+
+              ul
+                - players.each do |member, team_members|
+                  li
+                    = member.name
+
+              - if staff.any?
+                h5 Teamleiding
+
+                ul
+                  - staff.each do |member, team_members|
+                    li
+                      = member.name

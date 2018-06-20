@@ -1,11 +1,16 @@
 - provide(:title, t('.sign_up', default: 'Sign up'))
 
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form' }) do |f|
-  = f.error_notification
-  
-  = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
-  = f.input :password, class: 'form-control', placeholder: User.human_attribute_name(:password), label: false
-  = f.input :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name(:password_confirmation), label: false
-  = f.button :submit, t('.sign_up', default: 'Sign up'), class: 'btn btn-primary'
-  
+- content_for :flash
+  - if resource.errors.details[:email].any? { |error| error[:error] == :taken }
+    .alert.alert-danger.alert-fill
+      | Dit e-mailadres is al in gebruik. Wil je misschien een #{link_to "nieuw wachtwoord", new_password_path(resource_name)} aanvragen?
+
+= bootstrap_form_for resource, url: user_registration_path do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.text_field :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), hide_label: true
+  = f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name(:password), hide_label: true
+  = f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name(:password_confirmation), hide_label: true
+  = f.submit t('.sign_up', default: 'Sign up'), class: 'btn btn-primary'
+
   = render 'devise/shared/links'
