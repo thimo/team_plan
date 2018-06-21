@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+# Concern to give a model status methods
 module Statussable
   extend ActiveSupport::Concern
 
@@ -15,6 +17,7 @@ module Statussable
     return if new_status == old_status
 
     update(status: self.class.statuses[new_status]) if status != new_status
+
     unless self.class == Season
       update(ended_on: Time.zone.today) if user_invoked_archivation?(old_status)
       update(ended_on: nil) if unarchived_with_end_date?
@@ -55,8 +58,5 @@ module Statussable
 
     def unarchived_with_end_date?
       (draft? || active?) && ended_on.present?
-    end
-
-    module ClassMethods
     end
 end
