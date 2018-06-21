@@ -20,7 +20,7 @@ class User < ApplicationRecord
   # Add conditional validation on first_name and last_name, not executed for devise
   validates :email, presence: true
 
-  enum role: { member: 0, admin: 1, club_staff: 2 }
+  enum role: { member: 0, club_staff: 2, admin: 1 }
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :role, ->(role) { where(role: role) }
