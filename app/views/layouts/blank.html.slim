@@ -4,7 +4,17 @@ html
     title
       = full_title(yield(:title))
     meta[charset="utf-8"]
+    meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
+    meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    link rel="shortcut icon" href="#{image_url "favicon.ico"}"
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
+
+    / Use 'defer' here as with 'async' 'turbolinks:load' is not called
+    = javascript_pack_tag 'application', defer: Rails.env.production?
 
   body
     = yield
