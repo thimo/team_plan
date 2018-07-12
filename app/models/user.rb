@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   rolify
   include Filterable
@@ -100,11 +102,15 @@ class User < ApplicationRecord
   end
 
   def favorite_teams
-    @favorite_teams ||= Team.joins(:favorites).where(favorites: { user_id: id, favorable_type: Team.to_s })
+    @favorite_teams ||= Team.joins(:favorites)
+                            .where(favorites: { user_id: id, favorable_type: Team.to_s })
+                            .active
   end
 
   def favorite_age_groups
-    @favorite_age_groups ||= AgeGroup.joins(:favorites).where(favorites: { user_id: id, favorable_type: AgeGroup.to_s })
+    @favorite_age_groups ||= AgeGroup.joins(:favorites)
+                                     .where(favorites: { user_id: id, favorable_type: AgeGroup.to_s })
+                                     .active
   end
 
   def favorite?(member)
@@ -168,7 +174,7 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    "Je account is uitgeschakeld. Het zou kunnen dat je via dit e-mailadres geen lid (meer) bent van #{Setting["club.name_short"]}."
+    "Je account is uitgeschakeld. Het zou kunnen dat je via dit e-mailadres geen lid (meer) bent van #{Setting['club.name_short']}."
   end
 
   def toggle_include_member_comments
