@@ -2,7 +2,7 @@
   .col-6
     section.box-typical
       .box-typical-body
-        - if @age_groups_male.size > 0
+        - if @age_groups_male.present? && @age_groups_male.any?
           header.box-typical-header
             .tbl-row
               .tbl-cell.tbl-cell-title
@@ -17,7 +17,7 @@
   .col-6
     section.box-typical
       .box-typical-body
-        - if @age_groups_female.size > 0
+        - if @age_groups_female.present? && @age_groups_female.any?
           header.box-typical-header
             .tbl-row
               .tbl-cell.tbl-cell-title

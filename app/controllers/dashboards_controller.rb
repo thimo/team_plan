@@ -6,8 +6,8 @@ class DashboardsController < ApplicationController
   before_action :set_season
 
   def show
-    @age_groups_male = policy_scope(@season.age_groups).male.asc
-    @age_groups_female = policy_scope(@season.age_groups).female.asc
+    @age_groups_male = policy_scope(@season.age_groups).male.asc if @season
+    @age_groups_female = policy_scope(@season.age_groups).female.asc if @season
 
     @active_teams = human_sort(policy_scope(current_user.active_teams), :name)
     @favorite_teams = human_sort(policy_scope(current_user.favorite_teams), :name)
