@@ -1,29 +1,25 @@
 - provide(:title, "Leden")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        .text-right
+.card
+  .card-header
+    .text-right
           = paginate @members, theme: 'twitter-bootstrap-4'
-        h3
-          | #{@members.total_count} Leden
-      .tbl-cell.float-right
-        - if params[:inactive]
-          = link_to admin_members_path, class: 'btn btn-link'
-            | Actieve leden
-        - else
-          = link_to admin_members_path(inactive: true), class: 'btn btn-link'
-            | Inactieve leden
-        = form_with url: admin_members_path, method: :get, local: true, class: 'form-inline float-right'
-          = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
+    | #{@members.total_count} Leden
+    .card-header-actions
+      - if params[:inactive]
+        = link_to admin_members_path, class: 'card-header-action'
+          | Actieve leden
+      - else
+        = link_to admin_members_path(inactive: true), class: 'card-header-action'
+          | Inactieve leden
+      = form_with url: admin_members_path, method: :get, local: true, class: 'form-inline card-header-action'
+        = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
 
       - if policy(Member).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_members_import_path, title: "Importeer leden", class: "action-btn"
-            i.fa.far.fa-upload
+        = link_to new_admin_members_import_path, title: "Importeer leden", class: "card-header-action"
+          i.fa.far.fa-upload
 
-  .box-typical-body.table-responsive
+  .card-body.table-responsive
     table.table.table-sm.tr-links
       thead
         tr

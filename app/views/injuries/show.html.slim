@@ -10,23 +10,20 @@
 
 .row
   .col-xl-6
-    .box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h4
-              = @injury.title
-            | #{l @injury.started_on, format: :long}
-            - if @injury.ended_on.present?
-              |  - #{l @injury.ended_on, format: :long}
-            - else
-              |  - ...
+    .card
+      .card-header
+        = @injury.title
+        | #{l @injury.started_on, format: :long}
+        - if @injury.ended_on.present?
+          |  - #{l @injury.ended_on, format: :long}
+        - else
+          |  - ...
 
-            .color-blue-grey-lighter.small
-              = "#{@injury.user.name}"
-              = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
+        .color-blue-grey-lighter.small
+          = "#{@injury.user.name}"
+          = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
 
-      .box-typical-body
+      .card-body
         .comment-row-item.no-photo
           = @injury.body.html_safe
 

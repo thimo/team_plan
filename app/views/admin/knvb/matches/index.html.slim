@@ -3,17 +3,14 @@
 
 .row
   .col-md-6
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h3
-              | Uitslagen
+    .card
+      .card-header
+        | Uitslagen
+        .card-header-actions
           - if policy(Match).create?
-            .tbl-cell.tbl-cell-action-bordered
-              = link_to new_admin_knvb_club_data_results_import_path, title: "Importeer uitslagen", class: "action-btn"
-                i.fa.far.fa-sync
-      .box-typical-body.table-responsive
+            = link_to new_admin_knvb_club_data_results_import_path, title: "Importeer uitslagen", class: "card-header-action"
+              i.fa.far.fa-sync
+      .card-body.table-responsive
         table.table.table-sm.tr-links.align-top
           tbody
             - @played_matches.each do |date, matches|
@@ -26,13 +23,10 @@
                 = render partial: 'shared/match', collection: matches, cached: true
 
   .col-md-6
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h3
-              | Programma
-      .box-typical-body.table-responsive
+    .card
+      .card-header
+        | Programma
+      .card-body.table-responsive
         table.table.table-sm.tr-links.align-top
           - @not_played_matches.each do |date, matches|
             thead

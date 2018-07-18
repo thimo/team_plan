@@ -1,18 +1,15 @@
 - title ||= 'Vaste trainingsdagen'
 - disable_header ||= false
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = title
+.card
+  .card-header
+    = title
+    .card-header-actions
       - if defined?(team) && policy(TrainingSchedule.new(team: team)).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_team_training_schedule_path(team), title: "Trainingsdag toevoegen", class: "action-btn"
-            i.fa.far.fa-plus-square
+        = link_to new_team_training_schedule_path(team), title: "Trainingsdag toevoegen", class: "card-header-action"
+          i.fa.far.fa-plus-square
 
-  .box-typical-body
+  .card-body
     table.table.table-sm.tr-links
       - if training_schedules.size > 0
         - unless disable_header

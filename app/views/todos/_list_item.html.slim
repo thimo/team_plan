@@ -3,6 +3,7 @@
     = link_to [:toggle, todo], method: :post, remote: true
       i.fa.far[class="#{todo.finished? ? 'fa-check-square' : 'fa-square'}"]
   .chat-message-header
+    / TODO: Replace styling
     .tbl-row
       .tbl-cell.tbl-cell-name[class="#{'strong' if todo.due?} #{'line-through' if todo.finished?}"]
         = todo.body

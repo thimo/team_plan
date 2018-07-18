@@ -29,30 +29,26 @@ ul.nav
         i.fa.far.fa-fw.fa-calendar-alt.nav-icon
         | #{season.name}
 
-- if current_user.active_teams.size > 0
-  section
-    header.side-menu-title
+  - if current_user.active_teams.size > 0
+    li.nav-title
       | Mijn teams
-    ul.side-menu-list
-      - current_user.active_teams.asc.each do |team|
-        li.nav-item
-          = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
-            i.fa.far.fa-fw.fa-futbol.nav-icon
-            = team.name
+    - current_user.active_teams.asc.each do |team|
+      li.nav-item
+        = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+          i.fa.far.fa-fw.fa-futbol.nav-icon
+          = team.name
 
-- if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
-  section
-    header.side-menu-title
+  - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
+    li.nav-title
       | Favorieten
-    ul.side-menu-list
-      - human_sort(current_user.favorite_teams, :name).each do |team|
-        li.nav-item
-           = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
-            i.fa.far.fa-fw.fa-star.nav-icon
-            = team.name
+    - human_sort(current_user.favorite_teams, :name).each do |team|
+      li.nav-item
+         = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+          i.fa.far.fa-fw.fa-star.nav-icon
+          = team.name
 
-      - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
-        li.nav-item
-          = link_to age_group, class: "nav-link #{'active' if current_page?(age_group_path(age_group))}"
-            i.fa.far.fa-fw.fa-star.nav-icon
-            = age_group.name
+    - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
+      li.nav-item
+        = link_to age_group, class: "nav-link #{'active' if current_page?(age_group_path(age_group))}"
+          i.fa.far.fa-fw.fa-star.nav-icon
+          = age_group.name

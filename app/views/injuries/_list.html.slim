@@ -1,14 +1,13 @@
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 Blessures
+.card
+  .card-header
+    | Blessures
+    .card-header-actions
       - if policy(Injury.new(member: member)).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "action-btn"
+        .card-header-actions
+          = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "card-header-action"
             i.fa.far.fa-medkit
 
-  .box-typical-body
+  .card-body
     table.table.table-sm.tr-links
       - if injuries.size > 0
         tbody
@@ -35,5 +34,5 @@ section.box-typical
               i Geen blessures gevonden
 
   - if injuries.total_pages > 1
-    .box-typical-footer
+    .card-footer
       = paginate injuries, param_name: 'injury_page'

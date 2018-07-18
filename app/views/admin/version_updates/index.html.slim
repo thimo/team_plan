@@ -1,26 +1,20 @@
 - provide(:title, "Versie updates")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | Versie updates
+.card
+  .card-header
+    | Versie updates
+    .card-header-actions
       - if policy(VersionUpdate).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_admin_version_update_path, title: "Toevoegen", class: "action-btn"
+          = link_to new_admin_version_update_path, title: "Toevoegen", class: "card-header-action"
             i.fa.far.fa-file
-            
-  .box-typical-body
+
+  .card-body
     - @version_updates.each do |version_update|
-      .comment-row-item.no-photo
-        .tbl.comment-row-item-header
-          .tbl-row
-            .tbl-cell.tbl-cell-name
-              = link_to version_update.name, edit_admin_version_update_path(version_update)
-              small.pl-3
-                | #{version_update.for_role_i18n}
-            .tbl-cell.tbl-cell-date
-              = l version_update.released_at, format: :long
-        .comment-row-item-content
-          = markdown(version_update.body).html_safe
+      div
+        = link_to version_update.name, edit_admin_version_update_path(version_update)
+        small.pl-3
+          | #{version_update.for_role_i18n}
+      .small
+        = l version_update.released_at, format: :long
+      div
+        = markdown(version_update.body).html_safe

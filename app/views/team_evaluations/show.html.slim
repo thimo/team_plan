@@ -2,32 +2,28 @@
 - provide(:body_class, "sidebar-hidden")
 
 .evaluation
-  section.box-typical
-    header.box-typical-header
-      .tbl-row
-        .tbl-cell.tbl-cell-title
-          h4 
-            | Teamevaluatie #{@team_evaluation.team.name}
-            - if @team_evaluation.team.division.present?
-              small.pl-1 #{@team_evaluation.team.division}
-            div.color-blue-grey-lighter.small
-              = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record? || @team_evaluation.finished_at.present?
-              = l @team_evaluation.finished_at, format: :date_long if @team_evaluation.finished_at.present?
-              |  - 
-              = @team_evaluation.status
-        .tbl-cell.tbl-cell-action-bordered
-          a.action-btn[href="#" onclick="window.print(); return false;"]
-            i.fa.far.fa-print
-        - if policy(@team_evaluation).re_open?
-          .tbl-cell.tbl-cell-action-bordered
-            = link_to re_open_team_evaluation_path(@team_evaluation),  method: :post, data: { confirm: 'Teamevaluatie wordt weer open gezet voor wijzigingen. Doorgaan?' }, title: "Teamevaluatie open zetten voor wijzigingen", class: "action-btn"
-              i.fa.far.fa-undo
-        - if policy(@team_evaluation).destroy?
-          .tbl-cell.tbl-cell-action-bordered
-            = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "action-btn"
-              i.fa.far.fa-trash-alt
-        
-    .box-typical-body.table-responsive
+  .card
+    .card-header
+      h4
+        | Teamevaluatie #{@team_evaluation.team.name}
+        - if @team_evaluation.team.division.present?
+          small.pl-1 #{@team_evaluation.team.division}
+        div.color-blue-grey-lighter.small
+          = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record? || @team_evaluation.finished_at.present?
+          = l @team_evaluation.finished_at, format: :date_long if @team_evaluation.finished_at.present?
+          |  -
+          = @team_evaluation.status
+      .card-header-actions
+        a.card-header-action[href="#" onclick="window.print(); return false;"]
+          i.fa.far.fa-print
+      - if policy(@team_evaluation).re_open?
+        = link_to re_open_team_evaluation_path(@team_evaluation),  method: :post, data: { confirm: 'Teamevaluatie wordt weer open gezet voor wijzigingen. Doorgaan?' }, title: "Teamevaluatie open zetten voor wijzigingen", class: "card-header-action"
+          i.fa.far.fa-undo
+      - if policy(@team_evaluation).destroy?
+        = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "card-header-action"
+          i.fa.far.fa-trash-alt
+
+    .card-body.table-responsive
       table.table.table-xxs
         thead
           tr
@@ -44,12 +40,12 @@
             tr
               td.member-name[class="#{'line-through' if evaluation.team_member.inactive_for?(@team_evaluation)}", rowspan="2"]
                 = render evaluation.team_member.member
-              
+
               = render "player_evaluations/td_columns", evaluation: evaluation
-              
+
             tr
               td.color-blue-grey.b-t-0[colspan="11", style="padding-left: 2px;"]
                 = evaluation.remark
 
 
-    footer.box-typical-footer
+    .card-footer

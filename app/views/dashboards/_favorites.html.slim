@@ -1,13 +1,11 @@
 .row
   - if @active_teams.present?
     .col-6
-      section.box-typical
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Mijn teams
+      .card
+        .card-header
+          | Mijn teams
 
-        .box-typical-body
+        .card-body
           ul.side-menu-list
             - @active_teams.each do |team|
               li.green
@@ -18,13 +16,11 @@
 
   - if @favorite_teams.present? || @favorite_age_groups.present?
     .col-6
-      section.box-typical
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Favorieten
+      .card
+        .card-header
+          | Favorieten
 
-        .box-typical-body
+        .card-body
           ul.side-menu-list
             - @favorite_teams.each do |team|
               li.gold

@@ -20,26 +20,24 @@
 
 .row
   .col-xl-6
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h4 Teams
-          .tbl-cell.tbl-cell-actions
-            - if policy(@age_group).bulk_email?
-              = link_to new_age_group_team_action_path(@age_group, type: :email), title: "Stuur e-mail aan teams", class: "action-btn", remote: true
-                i.fa.far.fa-envelope
-            - if policy(@age_group).download_team_members?
-              = link_to new_age_group_team_action_path(@age_group, type: :download_team_members), title: "Download teams naar Excel", class: "action-btn", remote: true
-                i.fa.far.fa-file-excel
-            - if policy(Team.new(age_group: @age_group)).create?
-              = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "action-btn"
-                i.fa.far.fa-file
-            - if policy(Team.new(age_group: @age_group)).create?
-              = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "action-btn"
-                i.fa.far.fa-copy
+    .card
+      .card-header
+        | Teams
+        .card-header-actions
+          - if policy(@age_group).bulk_email?
+            = link_to new_age_group_team_action_path(@age_group, type: :email), title: "Stuur e-mail aan teams", class: "card-header-action", remote: true
+              i.fa.far.fa-envelope
+          - if policy(@age_group).download_team_members?
+            = link_to new_age_group_team_action_path(@age_group, type: :download_team_members), title: "Download teams naar Excel", class: "card-header-action", remote: true
+              i.fa.far.fa-file-excel
+          - if policy(Team.new(age_group: @age_group)).create?
+            = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "card-header-action"
+              i.fa.far.fa-file
+          - if policy(Team.new(age_group: @age_group)).create?
+            = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "card-header-action"
+              i.fa.far.fa-copy
 
-      .box-typical-body
+      .card-body
         table.table.table-sm.tr-links
           tbody
             - @teams.each do |team|
@@ -59,13 +57,11 @@
                       = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).active_for_team(team).staff.pluck(:member_id).uniq.size}"
 
     - if @not_played_matches.any?
-      section.box-typical.schedule-list
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Programma
+      .card.schedule-list
+        .card-header
+          | Programma
 
-        .box-typical-body
+        .card-body
           table.table.table-sm.tr-links.align-top
             - @not_played_matches.each do |date, matches|
               tr
@@ -74,13 +70,11 @@
               = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
     - if @played_matches.any?
-      section.box-typical.schedule-list
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Uitslagen
+      .card.schedule-list
+        .card-header
+          | Uitslagen
 
-        .box-typical-body
+        .card-body
           table.table.table-sm.tr-links.align-top
             - @played_matches.each do |date, matches|
               tr

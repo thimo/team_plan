@@ -1,15 +1,13 @@
 .row
   .col-xl-6
-    section.box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h4 Seizoenen
-          .tbl-cell.tbl-cell-actions
-            - if policy(Season).create?
-              = link_to new_season_path, title: "Seizoen toevoegen", class: "action-btn"
-                i.fa.far.fa-file
-      .box-typical-body
+    .card
+      .card-header
+        | Seizoenen
+        .card-header-actions
+          - if policy(Season).create?
+            = link_to new_season_path, title: "Seizoen toevoegen", class: "card-header-action"
+              i.fa.far.fa-file
+      .card-body
         table.table.table-sm.tr-links
           thead
             tr

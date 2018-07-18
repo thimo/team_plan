@@ -1,30 +1,26 @@
 - provide(:title, "Gebruikers")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        .text-right
-          = paginate @users, theme: 'twitter-bootstrap-4'
-        h3
-          | #{@users.total_count} Gebruikers
+.card
+  .card-header
+    .text-right
+      = paginate @users, theme: 'twitter-bootstrap-4'
+    | #{@users.total_count} Gebruikers
 
-      .tbl-cell.float-right
-        - if params[:inactive]
-          = link_to admin_users_path, class: 'btn btn-link'
-            | Actieve gebruikers
-        - else
-          = link_to admin_users_path(inactive: true), class: 'btn btn-link'
-            | Inactieve gebruikers
-        = form_with url: admin_users_path, method: :get, local: true, class: 'form-inline float-right'
-          = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
-          = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
+    .card-header-actions
+      - if params[:inactive]
+        = link_to admin_users_path, class: 'btn btn-link card-header-action'
+          | Actieve gebruikers
+      - else
+        = link_to admin_users_path(inactive: true), class: 'btn btn-link card-header-action'
+          | Inactieve gebruikers
+      = form_with url: admin_users_path, method: :get, local: true, class: 'form-inline card-header-action'
+        = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
+        = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
       - if policy(User).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_user_path, title: "Gebruiker toevoegen"
+          = link_to new_admin_user_path, title: "Gebruiker toevoegen", class: "card-header-action"
             i.fa.far.fa-file
 
-  .box-typical-body
+  .card-body
     table.table.table-sm.tr-links
       thead
         tr

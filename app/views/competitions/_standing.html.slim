@@ -1,22 +1,19 @@
 - compact ||= false
 - compact_header ||= false
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          - if compact_header
-            | Stand
-          - else
-            = link_to competition_path(competition)
-              = "#{competition.competitiesoort.humanize} - #{competition.klasse}"
-            span.color-blue-grey-lighter.pl-2
-              = "#{competition.poule}"
-            .color-blue-grey.small
-              = "#{competition.competitienaam}"
+.card
+  .card-header
+    - if compact_header
+      | Stand
+    - else
+      = link_to competition_path(competition)
+        = "#{competition.competitiesoort.humanize} - #{competition.klasse}"
+      span.color-blue-grey-lighter.pl-2
+        = "#{competition.poule}"
+      .color-blue-grey.small
+        = "#{competition.competitienaam}"
 
-  .box-typical-body
+  .card-body
     table.table.table-sm.tr-links
       - if competition.ranking
         thead

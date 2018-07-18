@@ -1,17 +1,14 @@
 - title ||= 'Nieuw in TeamPlan'
 
-section.box-typical.d-none.d-sm-block
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = title
+.card.d-none.d-sm-block
+  .card-header
+    = title
+    .card-header-actions
       - if policy(VersionUpdate).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_admin_version_update_path, title: "Versie toevoegen", class: "action-btn"
-            i.fa.far.fa-file
+        = link_to new_admin_version_update_path, title: "Versie toevoegen", class: "card-header-action"
+          i.fa.far.fa-file
 
-  .box-typical-body
+  .card-body
     - if version_updates.present?
       = render 'version_updates/list_body', version_updates: version_updates
     - else

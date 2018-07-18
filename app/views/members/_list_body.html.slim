@@ -19,7 +19,7 @@ table.table.table-sm.tr-links
 
 - unless members.last_page?
   #members_list
-    .box-typical-footer.text-right
+    .text-right
       = link_to replace_param_in_request_path(member_page: members.next_page), remote: true
         | Meer
         i.fa.far.fa-angle-down.ml-1

@@ -1,17 +1,14 @@
 - title ||= 'Leden'
 - subtitle ||= ''
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = title
-          - if subtitle
-            small.pl-2.color-blue-grey
-              = subtitle
+.card
+  .card-header
+    = title
+    - if subtitle
+      small.pl-2.color-blue-grey
+        = subtitle
 
-  .box-typical-body
+  .card-body
     - if members.any?
       = render 'members/list_body', members: members
 

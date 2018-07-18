@@ -1,12 +1,10 @@
 .row
   .col-6
-    section.box-typical
-      .box-typical-body
-        - if @age_groups_male.present? && @age_groups_male.any?
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                h4 Mannen
+    .card
+      - if @age_groups_male.present? && @age_groups_male.any?
+        .card-header
+          | Mannen
+        .card-body
           ul.side-menu-list
             - @age_groups_male.each do |age_group|
               li
@@ -15,13 +13,11 @@
                   span.lbl
                     = age_group.name
   .col-6
-    section.box-typical
-      .box-typical-body
-        - if @age_groups_female.present? && @age_groups_female.any?
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                h4 Vrouwen
+    .card
+      - if @age_groups_female.present? && @age_groups_female.any?
+        .card-header
+          | Vrouwen
+        .card-body
           ul.side-menu-list
             - @age_groups_female.each do |age_group|
               li

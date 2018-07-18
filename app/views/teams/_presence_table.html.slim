@@ -1,7 +1,7 @@
 / TODO move code to helper/controller
 - presentables = team.send(presentable_class.model_name.plural).in_past.active.left_outer_joins(:presences).where('presences.id IS NOT NULL').distinct.desc
 - if presentables&.any?
-  .box-typical-body.box-typical-padding.table-responsive
+  .card-body.table-responsive
     - ids = presentables.map(&:id)
     table.table.table-xxs.presences
       thead

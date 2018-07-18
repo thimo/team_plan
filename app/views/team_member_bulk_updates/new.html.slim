@@ -1,7 +1,7 @@
 - provide(:title, "Selecteer teamgenoten")
 - active_members_as_options = options_from_collection_for_select(@members.sportlink_active, :id, :name_and_born_on)
 
-.box-typical.box-typical-padding
+.card.card-body
   p Gebruik dit formulier om meerdere teamgenoten in één keer toe te voegen.
    Niet genoemde rollen (hoofdcoach, teamouder, teammanager, etc.) kun je vanuit
    #{link_to "het individuele formulier", new_team_team_member_path(@team)} toevoegen.

@@ -1,10 +1,8 @@
-section.box-typical.evaluation
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 Evaluaties
+.card.evaluation
+  .card-header
+    | Evaluaties
 
-  .box-typical-body.table-responsive
+  .card-body.table-responsive
     table.table.table-sm
       - if player_evaluations.finished_desc.size > 0
         thead

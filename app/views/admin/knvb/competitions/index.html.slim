@@ -1,16 +1,13 @@
 - provide(:title, "Competities")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | #{@competitions.count} Competities
+.card
+  .card-header
+    | #{@competitions.count} Competities
+    .card-header-actions
       - if policy(Competition).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_knvb_competitions_import_path, title: "Importeer competities", class: "action-btn"
-            i.fa.far.fa-sync
-  .box-typical-body.table-responsive
+        = link_to new_admin_knvb_competitions_import_path, title: "Importeer competities", class: "card-header-action"
+          i.fa.far.fa-sync
+  .card-body.table-responsive
     table.table.table-sm.tr-links
       thead
         tr

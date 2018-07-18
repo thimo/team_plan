@@ -1,18 +1,15 @@
 - provide(:title, "Wedstrijdsoorten")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | Wedstrijdsoorten
-        .small Voer de soorten wedstrijden in die je handmatig wil toevoegen, zoals "Oefenwedstrijden" of "Toernooien"
-      - if policy(Competition).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_admin_competition_path, title: "Toevoegen", class: "action-btn"
-            i.fa.far.fa-file
+.card
+  .card-header
+    | Wedstrijdsoorten
+    - if policy(Competition).create?
+      .card-header-actions
+        = link_to new_admin_competition_path, title: "Toevoegen", class: "card-header-action"
+          i.fa.far.fa-file
+    .small Voer de soorten wedstrijden in die je handmatig wil toevoegen, zoals "Oefenwedstrijden" of "Toernooien"
 
-  .box-typical-body.table-responsive
+  .card-body.table-responsive
     table.table.table-sm.tr-links
       thead
         tr

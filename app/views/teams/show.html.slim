@@ -72,7 +72,7 @@ section.tabs-section
             - @competitions_regular.each do |competition|
               = render "competitions/standing", competition: competition, compact: true
           - else
-            .box-typical.box-typical-padding
+            .card.card-body
               i Geen competitie gevonden
 
         .col-lg-6
@@ -80,7 +80,7 @@ section.tabs-section
             - @competitions_other.each do |competition|
               = render "competitions/standing", competition: competition, compact: true
           - else
-            .box-typical.box-typical-padding
+            .card.card-body
               i Geen competitie gevonden
 
           - @custom_competition_matches.each do |competition, matches|
@@ -96,13 +96,10 @@ section.tabs-section
             = render 'team_staff'
 
           - if @old_members.present?
-            section.box-typical
-              header.box-typical-header
-                .tbl-row
-                  .tbl-cell.tbl-cell-title
-                    h4
-                      | Oud teamgenoten
-              .box-typical-body.table-responsive
+            .card
+              .card-header
+                | Oud teamgenoten
+              .card-body.table-responsive
                 table.table.table-sm.tr-links
                   - @old_members.each do |member, team_members|
                     = render 'member', member: member, team_members: team_members
@@ -130,25 +127,19 @@ section.tabs-section
 
         .row
           .col-lg-6
-            section.box-typical
-              header.box-typical-header
-                .tbl-row
-                  .tbl-cell.tbl-cell-title
-                    h4
-                      | Trainingen
-              .box-typical-body.box-typical-padding
+            .card
+              .card-header
+                | Trainingen
+              .card-body
                 canvas#trainingChart.presenceChart
 
               = render 'presence_table', team: @team, presentable_class: Training
 
           .col-lg-6
-            section.box-typical
-              header.box-typical-header
-                .tbl-row
-                  .tbl-cell.tbl-cell-title
-                    h4
-                      | Wedstrijden
-              .box-typical-body.box-typical-padding
+            .card
+              .card-header
+                | Wedstrijden
+              .card-body
                 canvas#matchChart.presenceChart
 
 

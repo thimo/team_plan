@@ -1,25 +1,22 @@
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          | Spelers
-          .label.label-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
-      .tbl-cell.tbl-cell-actions
-        - if policy(@team).bulk_email?
-          a.action-btn[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan alle teamgenoten"]
-            i.fa.far.fa-envelope
-        - if policy(@team).download_team_members?
-          = link_to team_download_team_members_path(@team, format: "xlsx"), title: "Download team naar Excel", class: "action-btn"
-            i.fa.far.fa-file-excel
-        - if policy(TeamMember.new(team: @team)).create?
-          = link_to new_team_team_member_path(@team), title: "Speler toevoegen", class: "action-btn" do
-            i.fa.far.fa-user
-        - if policy(TeamMember.new(team: @team)).create?
-          = link_to new_team_team_member_bulk_update_path(@team), title: "Teamgenoten toevoegen", class: "action-btn" do
-            i.fa.far.fa-users
+.card
+  .card-header
+    | Spelers
+    .label.label-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
+    .card-header-actions
+      - if policy(@team).bulk_email?
+        a.card-header-action[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan alle teamgenoten"]
+          i.fa.far.fa-envelope
+      - if policy(@team).download_team_members?
+        = link_to team_download_team_members_path(@team, format: "xlsx"), title: "Download team naar Excel", class: "card-header-action"
+          i.fa.far.fa-file-excel
+      - if policy(TeamMember.new(team: @team)).create?
+        = link_to new_team_team_member_path(@team), title: "Speler toevoegen", class: "card-header-action" do
+          i.fa.far.fa-user
+      - if policy(TeamMember.new(team: @team)).create?
+        = link_to new_team_team_member_bulk_update_path(@team), title: "Teamgenoten toevoegen", class: "card-header-action" do
+          i.fa.far.fa-users
 
-  .box-typical-body.table-responsive
+  .card-body.table-responsive
     table.table.table-sm.tr-links
       tbody
         - if @players.size > 0
