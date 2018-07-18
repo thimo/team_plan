@@ -103,7 +103,6 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
     coderay (1.1.2)
-    commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     countries (2.1.4)
       i18n_data (~> 0.8.0)
@@ -144,7 +143,6 @@ GEM
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    grease (0.3.1)
     guard (2.14.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -188,17 +186,8 @@ GEM
     kaminari-core (1.1.1)
     launchy (2.4.3)
       addressable (~> 2.3)
-    less (2.6.0)
-      commonjs (~> 0.2.7)
-    less-rails (3.0.0)
-      actionpack (>= 4.0)
-      grease
-      less (~> 2.6.0)
-      sprockets (> 2, < 4)
-      tilt
     letter_opener (1.6.0)
       launchy (~> 2.2)
-    libv8 (3.16.14.19)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -308,7 +297,6 @@ GEM
       ffi (>= 0.5.0, < 2)
     redcarpet (3.4.0)
     redis (4.0.1)
-    ref (2.0.0)
     request_store (1.4.1)
       rack (>= 1.4)
     responders (2.4.0)
@@ -363,9 +351,6 @@ GEM
       sprockets (>= 3.0.0)
     temple (0.8.0)
     terminal-notifier-guard (1.7.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -427,7 +412,6 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   kaminari
   launchy
-  less-rails (~> 3.0.0)
   letter_opener
   listen (~> 3.0.5)
   mini_magick (~> 4.7.0)
@@ -460,7 +444,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   terminal-notifier-guard
-  therubyracer
   trix!
   turbolinks (~> 5)
   tzinfo-data

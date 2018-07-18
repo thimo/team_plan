@@ -14,9 +14,6 @@ gem "uglifier", ">= 1.3.0"
 gem "webpacker"
 gem "webpacker-react"
 
-gem "less-rails", "~> 3.0.0"
-gem "therubyracer"
-
 gem "carrierwave", "~> 1.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
 gem "faker"
