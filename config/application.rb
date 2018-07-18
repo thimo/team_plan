@@ -32,6 +32,8 @@ module TeamPlan
     config.time_zone = "Amsterdam"
 
     config.assets.paths << Rails.root.join("vendor", "assets", "images")
+    # A bit dirty, but needed to get @coreui's 'node_modules/*' links working
+    config.assets.paths << Rails.root
 
     config.exceptions_app = routes
 

@@ -1,138 +1,99 @@
-// Bootstrap overrides
-
-//
-// Color system
-//
-
-$white:                           #fff;
-$gray-100:                        #edf2f6;
-// $gray-200:                        #c2cfd6;
-$gray-300:                        #ced2d6;
-$gray-400:                        #989c9e;
-// $gray-500:                        #678898;
-$gray-600:                        #536c79;
-// $gray-700:                        #3e515b;
-$gray-800:                        #272c2e;
-$gray-900:                        #151819;
-$black:                           #000 !default;
-
-$blue:                            #2a82b0;
-$indigo:                          #6610f2 !default;
-$purple:                          #6f42c1 !default;
-$pink:                            #e83e8c !default;
-$red:                             #d0201f;
-$orange:                          #e27e15;
-$yellow:                          #ffc107 !default;
-$green:                           #6ec326;
-$teal:                            #20c997 !default;
-$cyan:                            #3797c9;
-
-$color-primary:     $blue;
-$color-warning:     $orange;
-$color-danger:      $red;
-$color-inactive:    #62747c;
-$color-success:     $green;
-$color-highlight:   $cyan;
-
-$color-background: #edf2f6;
-
-$colors: (
-  blue:                           $blue,
-  indigo:                         $indigo,
-  purple:                         $purple,
-  pink:                           $pink,
-  red:                            $red,
-  orange:                         $orange,
-  yellow:                         $yellow,
-  green:                          $green,
-  teal:                           $teal,
-  cyan:                           $cyan,
-  white:                          $white,
-  gray:                           $gray-600,
-  gray-dark:                      $gray-800
-);
-
-$theme-colors: (
-  primary:                        $blue,
-  secondary:                      $gray-600,
-  success:                        $green,
-  info:                           $cyan,
-  warning:                        $yellow,
-  danger:                         $red,
-  light:                          $gray-100,
-  dark:                           $gray-800,
-
-  blue:                           $blue,
-  indigo:                         $indigo,
-  purple:                         $purple,
-  pink:                           $pink,
-  red:                            $red,
-  orange:                         $orange,
-  yellow:                         $yellow,
-  green:                          $green,
-  teal:                           $teal,
-  cyan:                           $cyan,
-
-  gray-100:                       $gray-100,
-  gray-200:                       $gray-200,
-  gray-300:                       $gray-300,
-  gray-400:                       $gray-400,
-  gray-500:                       $gray-500,
-  gray-600:                       $gray-600,
-  gray-700:                       $gray-700,
-  gray-800:                       $gray-800,
-  gray-900:                       $gray-900
-);
-
-// Options
-//
-// Quickly modify global styling by enabling or disabling optional features.
-
-// Breadcrumbs
-
-// $breadcrumb-bg:                   #fff;
-// $breadcrumb-margin-bottom:        1.5rem;
-
-// Cards
-
-// $card-border-color:               $gray-200;
-// $card-cap-bg:                     $gray-100;
-
-// Dropdowns
-
-// $dropdown-padding-y:              0;
-// $dropdown-border-color:           $gray-200;
-// $dropdown-divider-bg:             $gray-100;
-
-// Buttons
-
-// $btn-secondary-border:            $gray-300;
-
-// Progress bars
-
-// $progress-bg:                     $gray-100;
-
-// Tables
-
-// $table-bg-accent:                 $gray-100;
-// $table-bg-hover:                  $gray-100;
-
-// Forms
-
-// $input-group-addon-bg:            $gray-100;
-// $input-border-color:              $gray-200;
-// $input-group-addon-border-color:  $gray-200;
-
-
-
-// // Twitter Bootstrap variables
-// Copy of the original _variables.scss file from Bootstrap. Included to copy variable names from
-
 // // Variables
 // //
 // // Variables should follow the `$component-state-property-size` formula for
 // // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 //
+//
+// //
+// // Color system
+// //
+//
+// $white:    #fff !default;
+// $gray-100: #f8f9fa !default;
+// $gray-200: #e9ecef !default;
+// $gray-300: #dee2e6 !default;
+// $gray-400: #ced4da !default;
+// $gray-500: #adb5bd !default;
+// $gray-600: #6c757d !default;
+// $gray-700: #495057 !default;
+// $gray-800: #343a40 !default;
+// $gray-900: #212529 !default;
+// $black:    #000 !default;
+//
+// $grays: () !default;
+// // stylelint-disable-next-line scss/dollar-variable-default
+// $grays: map-merge(
+//   (
+//     "100": $gray-100,
+//     "200": $gray-200,
+//     "300": $gray-300,
+//     "400": $gray-400,
+//     "500": $gray-500,
+//     "600": $gray-600,
+//     "700": $gray-700,
+//     "800": $gray-800,
+//     "900": $gray-900
+//   ),
+//   $grays
+// );
+//
+//
+// $blue:    #007bff !default;
+// $indigo:  #6610f2 !default;
+// $purple:  #6f42c1 !default;
+// $pink:    #e83e8c !default;
+// $red:     #dc3545 !default;
+// $orange:  #fd7e14 !default;
+// $yellow:  #ffc107 !default;
+// $green:   #28a745 !default;
+// $teal:    #20c997 !default;
+// $cyan:    #17a2b8 !default;
+//
+// $colors: () !default;
+// // stylelint-disable-next-line scss/dollar-variable-default
+// $colors: map-merge(
+//   (
+//     "blue":       $blue,
+//     "indigo":     $indigo,
+//     "purple":     $purple,
+//     "pink":       $pink,
+//     "red":        $red,
+//     "orange":     $orange,
+//     "yellow":     $yellow,
+//     "green":      $green,
+//     "teal":       $teal,
+//     "cyan":       $cyan,
+//     "white":      $white,
+//     "gray":       $gray-600,
+//     "gray-dark":  $gray-800
+//   ),
+//   $colors
+// );
+//
+// $primary:       $blue !default;
+// $secondary:     $gray-600 !default;
+// $success:       $green !default;
+// $info:          $cyan !default;
+// $warning:       $yellow !default;
+// $danger:        $red !default;
+// $light:         $gray-100 !default;
+// $dark:          $gray-800 !default;
+//
+// $theme-colors: () !default;
+// // stylelint-disable-next-line scss/dollar-variable-default
+// $theme-colors: map-merge(
+//   (
+//     "primary":    $primary,
+//     "secondary":  $secondary,
+//     "success":    $success,
+//     "info":       $info,
+//     "warning":    $warning,
+//     "danger":     $danger,
+//     "light":      $light,
+//     "dark":       $dark
+//   ),
+//   $theme-colors
+// );
 //
 // // Set a specific jump point for requesting color jumps
 // $theme-color-interval:      8% !default;
@@ -149,7 +110,7 @@ $theme-colors: (
 // // Quickly modify global styling by enabling or disabling optional features.
 //
 // $enable-caret:              true !default;
-$enable-rounded:            true;
+// $enable-rounded:            true !default;
 // $enable-shadows:            false !default;
 // $enable-gradients:          false !default;
 // $enable-transitions:        true !default;
@@ -164,34 +125,40 @@ $enable-rounded:            true;
 // // variables. Mostly focused on spacing.
 // // You can add more entries to the $spacers map, should you need more variation.
 //
-// // stylelint-disable
 // $spacer: 1rem !default;
 // $spacers: () !default;
-// $spacers: map-merge((
-//   0: 0,
-//   1: ($spacer * .25),
-//   2: ($spacer * .5),
-//   3: $spacer,
-//   4: ($spacer * 1.5),
-//   5: ($spacer * 3)
-// ), $spacers);
+// // stylelint-disable-next-line scss/dollar-variable-default
+// $spacers: map-merge(
+//   (
+//     0: 0,
+//     1: ($spacer * .25),
+//     2: ($spacer * .5),
+//     3: $spacer,
+//     4: ($spacer * 1.5),
+//     5: ($spacer * 3)
+//   ),
+//   $spacers
+// );
 //
 // // This variable affects the `.h-*` and `.w-*` classes.
 // $sizes: () !default;
-// $sizes: map-merge((
-//   25: 25%,
-//   50: 50%,
-//   75: 75%,
-//   100: 100%,
-//   auto: auto
-// ), $sizes);
-// // stylelint-enable
+// // stylelint-disable-next-line scss/dollar-variable-default
+// $sizes: map-merge(
+//   (
+//     25: 25%,
+//     50: 50%,
+//     75: 75%,
+//     100: 100%,
+//     auto: auto
+//   ),
+//   $sizes
+// );
 //
 // // Body
 // //
 // // Settings for the `<body>` element.
 //
-$body-bg:                         $gray-100;
+// $body-bg:                   $white !default;
 // $body-color:                $gray-900 !default;
 //
 // // Links
@@ -281,7 +248,7 @@ $body-bg:                         $gray-100;
 // // Font, line-height, and color for body text, headings, and more.
 //
 // // stylelint-disable value-keyword-case
-$font-family-sans-serif:      'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+// $font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 // $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 // $font-family-base:            $font-family-sans-serif !default;
 // // stylelint-enable value-keyword-case
@@ -356,7 +323,7 @@ $font-family-sans-serif:      'Open Sans', 'Helvetica Neue', Helvetica, Arial, s
 // $table-cell-padding-sm:       .3rem !default;
 //
 // $table-bg:                    transparent !default;
-$table-accent-bg:             rgba($black, .03) !default;
+// $table-accent-bg:             rgba($black, .05) !default;
 // $table-hover-bg:              rgba($black, .075) !default;
 // $table-active-bg:             $table-hover-bg !default;
 //
@@ -501,6 +468,8 @@ $table-accent-bg:             rgba($black, .03) !default;
 // $input-group-addon-bg:                  $gray-200 !default;
 // $input-group-addon-border-color:        $input-border-color !default;
 //
+// $custom-forms-transition:               background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+//
 // $custom-control-gutter:                 1.5rem !default;
 // $custom-control-spacer-x:               1rem !default;
 //
@@ -549,9 +518,11 @@ $table-accent-bg:             rgba($black, .03) !default;
 // $custom-select-border-width:        $input-btn-border-width !default;
 // $custom-select-border-color:        $input-border-color !default;
 // $custom-select-border-radius:       $border-radius !default;
+// $custom-select-box-shadow:          inset 0 1px 2px rgba($black, .075) !default;
 //
 // $custom-select-focus-border-color:  $input-focus-border-color !default;
-// $custom-select-focus-box-shadow:    inset 0 1px 2px rgba($black, .075), 0 0 5px rgba($custom-select-focus-border-color, .5) !default;
+// $custom-select-focus-width:         $input-btn-focus-width !default;
+// $custom-select-focus-box-shadow:    0 0 0 $custom-select-focus-width rgba($custom-select-focus-border-color, .5) !default;
 //
 // $custom-select-font-size-sm:        75% !default;
 // $custom-select-height-sm:           $input-height-sm !default;
@@ -579,6 +550,7 @@ $table-accent-bg:             rgba($black, .03) !default;
 // $custom-file-height-inner:          $input-height-inner !default;
 // $custom-file-focus-border-color:    $input-focus-border-color !default;
 // $custom-file-focus-box-shadow:      $input-btn-focus-box-shadow !default;
+// $custom-file-disabled-bg:           $input-disabled-bg !default;
 //
 // $custom-file-padding-y:             $input-btn-padding-y !default;
 // $custom-file-padding-x:             $input-btn-padding-x !default;

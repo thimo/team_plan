@@ -1,44 +1,11 @@
-// Overwrite bootstrap and theme's variables
-
-// scss-lint:disable all
-// Core Admin Variables
-
+// // CoreUI Variables
+//
+// // stylelint-disable
 // $enable-sidebar-nav-rounded:          false !default;
-
-// $border-color:                        $gray-200 !default;
 // $layout-transition-speed:             .25s !default;
-
-// Social Colors
-
-// $facebook:                            #3b5998 !default;
-// $twitter:                             #00aced !default;
-// $linkedin:                            #4875b4 !default;
-// $google-plus:                         #d34836 !default;
-// $flickr:                              #ff0084 !default;
-// $tumblr:                              #32506d !default;
-// $xing:                                #026466 !default;
-// $github:                              #4183c4 !default;
-// $html5:                               #e34f26 !default;
-// $openid:                              #f78c40 !default;
-// $stack-overflow:                      #fe7a15 !default;
-// $youtube:                             #b00 !default;
-// $css3:                                #0170ba !default;
-// $dribbble:                            #ea4c89 !default;
-// $google-plus:                         #bb4b39 !default;
-// $instagram:                           #517fa4 !default;
-// $pinterest:                           #cb2027 !default;
-// $vk:                                  #45668e !default;
-// $yahoo:                               #400191 !default;
-// $behance:                             #1769ff !default;
-// $dropbox:                             #007ee5 !default;
-// $reddit:                              #ff4500 !default;
-// $spotify:                             #7ab800 !default;
-// $vine:                                #00bf8f !default;
-// $foursquare:                          #1073af !default;
-// $vimeo:                               #aad450 !default;
-
-// Navbar
-
+//
+// // Navbar
+//
 // $navbar-height:                       55px !default;
 // $navbar-bg:                           #fff !default;
 // $navbar-border: (
@@ -49,21 +16,11 @@
 //   )
 // )  !default;
 // $navbar-brand-width:                  155px !default;
-// $navbar-brand-bg:                     #fff !default;
-$navbar-brand-logo:                   url(image_path('logo/logo_z-tickets.svg')) !default;
-$navbar-brand-logo-size:              100px auto !default;
-// $navbar-brand-border: (
-//   bottom: (
-//     size:                             1px,
-//     style:                            solid,
-//     color:                            $border-color
-//   )
-// ) !default;
+// $navbar-brand-bg:                     transparent !default;
+// $navbar-brand-border:                 0 !default;
 //
 // $navbar-brand-minimized-width:        50px !default;
 // $navbar-brand-minimized-bg:           $navbar-brand-bg !default;
-// $navbar-brand-minimized-logo:         url('../img/logo-symbol.png') !default;
-// $navbar-brand-minimized-logo-size:    24px !default;
 // $navbar-brand-minimized-border:       $navbar-brand-border !default;
 //
 // $navbar-color:                        $gray-600 !default;
@@ -83,7 +40,7 @@ $navbar-brand-logo-size:              100px auto !default;
 // $sidebar-compact-width:               150px !default;
 // $sidebar-compact-height:              $sidebar-compact-width !default;
 // $sidebar-color:                       #fff !default;
-$sidebar-bg:                          $gray-800 !default;
+// $sidebar-bg:                          $gray-800 !default;
 // $sidebar-borders:                     none !default;
 // $mobile-sidebar-width:                220px !default;
 //
@@ -151,32 +108,6 @@ $sidebar-bg:                          $gray-800 !default;
 // $sidebar-minimizer-hover-indicator-color:$sidebar-nav-link-hover-color !default;
 // $sidebar-minimizer-hover-indicator:   str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='#{$sidebar-minimizer-hover-indicator-color}' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E"), "#", "%23") !default;
 //
-//
-// // Top Navigation
-//
-// $top-nav-bg:                          #fff !default;
-// $top-nav-color:                       $body-color !default;
-// $top-nav-borders: (
-//   bottom: (
-//     size:                             1px,
-//     style:                            solid,
-//     color:                            $border-color
-//   )
-// ) !default;
-// $top-nav-ul-borders: (
-//   all: (
-//     size:                             1px,
-//     style:                            solid,
-//     color:                            $border-color
-//   )
-// ) !default;
-//
-// $top-nav-hover-color:                 #fff !default;
-// $top-nav-hover-bg:                    theme-color("primary") !default;
-// $top-nav-active-color:                #fff !default;
-// $top-nav-active-bg:                   theme-color("primary") !default;
-// $top-nav-height:                      $navbar-height - 15px !default;
-//
 // // Breadcrumb
 // $breadcrumb-borders: (
 //   bottom: (
@@ -215,7 +146,41 @@ $sidebar-bg:                          $gray-800 !default;
 //   )
 // ) !default;
 //
+// // Avatars
+//
+// $avatar-width:                        36px !default;
+// $avatar-status-width:                 10px !default;
+//
+// $avatar-lg-width:                     72px !default;
+// $avatar-lg-status-width:              12px !default;
+//
+// $avatar-sm-width:                     24px !default;
+// $avatar-sm-status-width:              8px !default;
+//
+// $avatar-xs-width:                     20px !default;
+// $avatar-xs-status-width:              8px !default;
+//
 // // Cards
 //
 // $card-icon-bg:                        transparent !default;
 // $card-icon-color:                     $body-color !default;
+//
+// // Switches
+//
+// $switch-width:                        40px !default;
+// $switch-height:                       26px !default;
+// $switch-font-size:                    10px !default;
+//
+// $switch-lg-width:                     48px !default;
+// $switch-lg-height:                    30px !default;
+// $switch-lg-font-size:                 12px !default;
+//
+// $switch-sm-width:                     32px !default;
+// $switch-sm-height:                    22px !default;
+// $switch-sm-font-size:                 8px !default;
+//
+// $switch-label-width:                  48px !default;
+// $switch-label-lg-width:               56px !default;
+// $switch-label-sm-width:               40px !default;
+//
+// $switch-handle-margin:                2px !default;
