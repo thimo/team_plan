@@ -27,7 +27,7 @@ gem "bootstrap4-kaminari-views"
 gem "kaminari"
 gem "rails-i18n"
 
-gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git"
+gem "bootstrap_form", "~> 4.0.0.alpha"
 gem "country_select"
 gem "simple_form",                "~> 4.0"
 
@@ -67,7 +67,7 @@ group :development, :test do
   # gem "pry-byebug"
   gem "factory_bot_rails"
   gem "guard"
-  gem "scout_apm" # Disabled to improve loading without internet connction
+  # gem "scout_apm" # Disable to improve loading without internet connction
 end
 
 group :development do
