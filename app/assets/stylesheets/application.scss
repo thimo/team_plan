@@ -8,11 +8,11 @@
  *= require trix
  *= require simple_calendar
  *= require rails_bootstrap_forms
- * require fa-svg-with-js
+ *### require fa-svg-with-js
  *= require fontawesome/fontawesome
  *= require fontawesome/fa-solid
  *= require fontawesome/fa-regular
- *= require theme/main
+ *### require theme/main
  */
 
 @import './*';
@@ -20,4 +20,4 @@
 @import './org/*';
 @import './intranet/*';
 @import 'custom/*';
-@import 'theme/overwrite';
+// @import 'theme-overwrite';
