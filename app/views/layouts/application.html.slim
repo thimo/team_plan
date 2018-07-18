@@ -1,51 +1,53 @@
 doctype html
-html
+html[lang="nl"]
   head
     title
       = full_title(yield(:title))
-    meta[charset="utf-8"]
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
     meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'print/print', media: 'print', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
 
     / Use 'defer' here as with 'async' 'turbolinks:load' is not called
     = javascript_pack_tag 'application', defer: Rails.env.production?
 
-  body.with-side-menu[class="#{yield(:body_class)}"]
+  body.app.header-fixed.sidebar-fixed.aside-menu-fixed.sidebar-lg-show[class="#{yield(:body_class)}"]
     - unless Rails.env.production? || Rails.env.development?
       div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
         |  -= #{Rails.env} =-
 
     = render 'layouts/header'
-    = render 'layouts/side_menu'
+    .app-body
+      = render 'layouts/side_menu'
 
-    .page-content
-      .container-fluid
-        header.section-header
-          .header-buttons
-            = yield(:action_buttons)
-          h3
-            .pr-2.d-inline
-              = yield(:title)
-            small.color-blue-grey.d-block.d-md-inline
-              = yield(:subtitle)
-            - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
-              span.ml-3.label[class="#{label_object.color_class_for_status}"]
-                = label_object.status_i18n
-          .color-blue-grey.small
-            = yield(:hint)
+      main.main
+        .container-fluid
+          header.section-header
+            .header-buttons
+              = yield(:action_buttons)
+            h3
+              .pr-2.d-inline
+                = yield(:title)
+              small.color-blue-grey.d-block.d-md-inline
+                = yield(:subtitle)
+              - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
+                span.ml-3.label[class="#{label_object.color_class_for_status}"]
+                  = label_object.status_i18n
+            .color-blue-grey.small
+              = yield(:hint)
 
-          ol.breadcrumb.breadcrumb-simple
-            = render_breadcrumbs :tag => :li, :separator => ""
+            ol.breadcrumb.breadcrumb-simple
+              = render_breadcrumbs :tag => :li, :separator => ""
 
-        = content_for?(:content) ? yield(:content) : yield
+          = content_for?(:content) ? yield(:content) : yield
 
-        = render 'layouts/footer'
+    = render 'layouts/footer'
 
     = render 'layouts/flash'
 
