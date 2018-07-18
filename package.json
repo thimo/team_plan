@@ -2,6 +2,7 @@
   "name": "team_plan",
   "private": true,
   "dependencies": {
+    "@coreui/coreui": "^2.0.4",
     "@rails/webpacker": "3.4",
     "autoprefixer": "^7.1.2",
     "autosize": "^4.0.0",
