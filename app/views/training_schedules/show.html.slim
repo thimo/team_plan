@@ -1,11 +1,9 @@
 - provide(:title, "Trainingsdag")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@training_schedule).update?
-        = link_to edit_training_schedule_path(@training_schedule), class: "btn btn-secondary", title: "Aanpassen"
-          i.fa.far.fa-pencil
+    - if policy(@training_schedule).update?
+      = link_to edit_training_schedule_path(@training_schedule), class: "btn", title: "Aanpassen"
+        i.fa.far.fa-pencil
 
 section.tabs-section
   .tabs-section-nav

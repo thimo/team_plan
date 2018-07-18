@@ -1,13 +1,3 @@
-.breadcrumb {
-  border-radius: 0;
-
-  .breadcrumb-menu {
-    i {
-      margin: 0 .5rem 0 0;
-    }
-  }
-}
-
 // Generate color classes
 @each $current-color in $theme-colors {
   $i: index($theme-colors, $current-color);

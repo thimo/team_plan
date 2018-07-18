@@ -1,0 +1,9 @@
+- breadcrumbs = render_breadcrumbs(builder: ::Bootstrap4BreadcrumbsBuilder)
+- action_buttons = yield(:action_buttons)
+
+- if breadcrumbs.present? || action_buttons.present?
+  ol.breadcrumb
+    = breadcrumbs
+    li.breadcrumb-menu.d-md-down-none
+      .btn-group role="group" aria-label="Button group"
+        = action_buttons

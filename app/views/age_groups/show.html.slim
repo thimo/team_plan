@@ -2,23 +2,21 @@
 - provide(:subtitle, "#{year_of_birth_range(@age_group)}")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if @age_group.teams.size > 0
-        - if policy(TeamMember.new(team: @age_group.teams.first)).create?
-          = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn btn-secondary"
-            i.fa.far.fa-table
-      - if policy(@age_group).update?
-        = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "btn btn-secondary"
-          i.fa.far.fa-pencil
-      - if policy(@age_group).destroy?
-        = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "btn btn-secondary"
-          i.fa.far.fa-trash-alt
-    .btn-group.ml-1
-      - if policy(Todo).create? && policy(@age_group).show_todos?
-        = link_to new_age_group_todo_path(@age_group), title: "Todo toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-check-square
-      = render "shared/favorite", parent: @age_group, styleClass: "btn btn-secondary"
+  - if @age_group.teams.size > 0
+    - if policy(TeamMember.new(team: @age_group.teams.first)).create?
+      = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn"
+        i.fa.far.fa-table
+  - if policy(@age_group).update?
+    = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "btn"
+      i.fa.far.fa-pencil
+  - if policy(@age_group).destroy?
+    = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "btn"
+      i.fa.far.fa-trash-alt
+  .pl-3
+  - if policy(Todo).create? && policy(@age_group).show_todos?
+    = link_to new_age_group_todo_path(@age_group), title: "Todo toevoegen", class: "btn"
+      i.fa.far.fa-check-square
+  = render "shared/favorite", parent: @age_group, styleClass: "btn"
 
 .row
   .col-xl-6

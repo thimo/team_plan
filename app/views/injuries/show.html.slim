@@ -1,14 +1,12 @@
 - provide(:title, "Blessure - #{@injury.title}")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(Todo).create? && policy(@injury.member).show_todos?
-        = link_to new_member_todo_path(@injury.member, title: "Opvolging voor blessure - #{@injury.title}"), title: "Todo toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-check-square
-      - if policy(@injury).edit?
-        = link_to edit_injury_path(@injury), class: "btn btn-secondary", title: "Aanpassen"
-          i.fa.far.fa-pencil
+  - if policy(Todo).create? && policy(@injury.member).show_todos?
+    = link_to new_member_todo_path(@injury.member, title: "Opvolging voor blessure - #{@injury.title}"), title: "Todo toevoegen", class: "btn"
+      i.fa.far.fa-check-square
+  - if policy(@injury).edit?
+    = link_to edit_injury_path(@injury), class: "btn", title: "Aanpassen"
+      i.fa.far.fa-pencil
 
 .row
   .col-xl-6

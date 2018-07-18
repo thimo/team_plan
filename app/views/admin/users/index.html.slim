@@ -1,12 +1,11 @@
 - provide(:title, "Gebruikers")
 
-- content_for :action_buttons
-  = paginate @users, theme: 'twitter-bootstrap-4'
-
 section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
+        .text-right
+          = paginate @users, theme: 'twitter-bootstrap-4'
         h3
           | #{@users.total_count} Gebruikers
 

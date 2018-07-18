@@ -1,25 +1,22 @@
 - provide(:title, "#{@member.name}")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group.ml-1
-      - if policy(@member).resend_password? && @member.user.present?
-        = link_to resend_password_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
-          i.fa.far.fa-lock.mr-2
-          | Nieuw wachtwoord
-      - if policy(@member).create_login? && @member.user.nil?
-        = link_to create_login_member_path(@member), method: :post, class: "btn btn-secondary", data: { confirm: "#{@member.name} ontvangt login gegevens via e-mail. Doorgaan?" }
-          i.fa.far.fa-user.mr-2
-          | Login
-
-    .btn-group.ml-1
-      - if policy(Injury.new(member: @member)).create? && policy(@member).show_injuries?
-        = link_to new_member_injury_path(@member), title: "Blessure toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-medkit
-      - if policy(Todo).create? && policy(@member).show_todos?
-        = link_to new_member_todo_path(@member), title: "Todo toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-check-square
-      = render "shared/favorite", parent: @member, styleClass: "btn btn-secondary"
+  - if policy(@member).resend_password? && @member.user.present?
+    = link_to resend_password_member_path(@member), method: :post, class: "btn", data: { confirm: "#{@member.name} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
+      i.fa.far.fa-lock.mr-2
+      | Nieuw wachtwoord
+  - if policy(@member).create_login? && @member.user.nil?
+    = link_to create_login_member_path(@member), method: :post, class: "btn", data: { confirm: "#{@member.name} ontvangt login gegevens via e-mail. Doorgaan?" }
+      i.fa.far.fa-user.mr-2
+      | Login
+  .pl-3
+  - if policy(Injury.new(member: @member)).create? && policy(@member).show_injuries?
+    = link_to new_member_injury_path(@member), title: "Blessure toevoegen", class: "btn"
+      i.fa.far.fa-medkit
+  - if policy(Todo).create? && policy(@member).show_todos?
+    = link_to new_member_todo_path(@member), title: "Todo toevoegen", class: "btn"
+      i.fa.far.fa-check-square
+  = render "shared/favorite", parent: @member, styleClass: "btn"
 
 .row
   .col-xl-6

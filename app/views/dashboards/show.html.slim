@@ -1,11 +1,9 @@
 - provide(:title, "Dashboard")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group.ml-1
-      - if policy(Todo).create?
-        = link_to new_todo_path, title: "Todo toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-check-square
+    - if policy(Todo).create?
+      = link_to new_todo_path, title: "Todo toevoegen", class: "btn"
+        i.fa.far.fa-check-square
 
 .dashboard
   .row

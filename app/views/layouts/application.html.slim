@@ -27,10 +27,10 @@ html[lang="nl"]
       = render 'layouts/side_menu'
 
       main.main
+        = render "layouts/breadcrumbs"
+
         .container-fluid
           header.section-header
-            .header-buttons
-              = yield(:action_buttons)
             h3
               .pr-2.d-inline
                 = yield(:title)
@@ -41,9 +41,6 @@ html[lang="nl"]
                   = label_object.status_i18n
             .color-blue-grey.small
               = yield(:hint)
-
-            ol.breadcrumb.breadcrumb-simple
-              = render_breadcrumbs :tag => :li, :separator => ""
 
           = content_for?(:content) ? yield(:content) : yield
 

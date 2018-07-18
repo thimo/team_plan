@@ -1,14 +1,12 @@
 - provide(:title, "#{@org_position.position_type_i18n} \"#{@org_position.name}\"")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@org_position).update?
-        = link_to edit_org_position_path(@org_position), title: "Positie aanpassen", class: "btn btn-secondary"
-          i.fa.far.fa-pencil
-      - if policy(@org_position).destroy?
-        = link_to org_position_path(@org_position),  method: :delete, data: { confirm: 'Positie wordt verwijderd. Doorgaan?' }, title: "Positie verwijderen", class: "btn btn-secondary"
-          i.fa.far.fa-trash-alt
+  - if policy(@org_position).update?
+    = link_to edit_org_position_path(@org_position), title: "Positie aanpassen", class: "btn"
+      i.fa.far.fa-pencil
+  - if policy(@org_position).destroy?
+    = link_to org_position_path(@org_position),  method: :delete, data: { confirm: 'Positie wordt verwijderd. Doorgaan?' }, title: "Positie verwijderen", class: "btn"
+      i.fa.far.fa-trash-alt
 
 section.box-typical
   header.box-typical-header

@@ -3,22 +3,20 @@
 - provide(:hint, "#{@team.remark}") if @team.remark.present?
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(TeamEvaluation.new(team: @team)).create?
-        = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-list-ol
-      - if policy(@team).update?
-        = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn btn-secondary" do
-          i.fa.far.fa-pencil
-      - if policy(@team).destroy?
-        = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "btn btn-secondary"
-          i.fa.far.fa-trash-alt
-    .btn-group.ml-1
-      - if policy(Todo).create? && policy(@team).show_todos?
-        = link_to new_team_todo_path(@team), title: "Todo toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-check-square
-      = render "shared/favorite", parent: @team, styleClass: "btn btn-secondary"
+  - if policy(TeamEvaluation.new(team: @team)).create?
+    = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn"
+      i.fa.far.fa-list-ol
+  - if policy(@team).update?
+    = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn" do
+      i.fa.far.fa-pencil
+  - if policy(@team).destroy?
+    = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "btn"
+      i.fa.far.fa-trash-alt
+  .pl-3
+  - if policy(Todo).create? && policy(@team).show_todos?
+    = link_to new_team_todo_path(@team), title: "Todo toevoegen", class: "btn"
+      i.fa.far.fa-check-square
+  = render "shared/favorite", parent: @team, styleClass: "btn"
 
 section.tabs-section
   .tabs-section-nav

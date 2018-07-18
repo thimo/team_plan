@@ -1,12 +1,11 @@
 - provide(:title, "Leden")
 
-- content_for :action_buttons
-  = paginate @members, theme: 'twitter-bootstrap-4'
-
 section.box-typical
   header.box-typical-header
     .tbl-row
       .tbl-cell.tbl-cell-title
+        .text-right
+          = paginate @members, theme: 'twitter-bootstrap-4'
         h3
           | #{@members.total_count} Leden
       .tbl-cell.float-right

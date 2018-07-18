@@ -301,23 +301,6 @@ trix-toolbar {
   background-color: inherit;
 }
 
-.header-buttons {
-  float: right;
-
-  .btn-group {
-    a {
-      min-height: 38px;
-      min-width: 44px;
-    }
-  }
-}
-
-@media (max-width: 576px) {
-  .header-buttons {
-    margin-top: -12px;
-  }
-}
-
 .dropdown-toggle {
   a {
     i {

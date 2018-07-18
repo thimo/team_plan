@@ -1,11 +1,9 @@
 - provide(:title, schedule_title(@match, no_html: true))
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@match).update?
-        = link_to edit_match_path(@match), class: "btn btn-secondary", title: "Aanpassen"
-          i.fa.far.fa-pencil
+  - if policy(@match).update?
+    = link_to edit_match_path(@match), class: "btn", title: "Aanpassen"
+      i.fa.far.fa-pencil
 
 - if @match.afgelast?
   div.alert.alert-danger

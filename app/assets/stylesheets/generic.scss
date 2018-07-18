@@ -135,12 +135,11 @@ tr.b-t-0 {
   float: left;
 }
 
-.breadcrumb li + li::before {
-  display: inline-block;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  color: #636c72;
-  content: "/";
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    color: #73818f;
+    content: "/";
 }
 
 .breadcrumb li + li:hover::before {
