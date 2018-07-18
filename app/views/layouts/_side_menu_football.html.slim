@@ -1,47 +1,33 @@
-ul.side-menu-list
-  li.dirty-blue class="#{'active' if current_page?(dashboard_path) || current_page?(root_path)}"
-    = link_to dashboard_path
-      span
-        i.fa.far.fa-fw.fa-tachometer
-        span.lbl
-          | Dashboard
+ul.nav
+  li.nav-item
+    = link_to dashboard_path, class: "nav-link #{'active' if current_page?(dashboard_path) || current_page?(root_path)}"
+      i.fa.far.fa-fw.fa-tachometer.nav-icon
+      | Dashboard
 
-  li.green class="#{'active' if current_page?(program_dashboards_path)}"
-    = link_to program_dashboards_path
-      span
-        i.fa.far.fa-fw.fa-futbol
-        span.lbl
-          | Programma
-
-  li.grey class="#{'active' if current_page?(results_dashboards_path)}"
-    = link_to results_dashboards_path
-      span
-        i.fa.far.fa-fw.fa-trophy
-        span.lbl
-          | Uitslagen
-
-  li.orange-red class="#{'active' if current_page?(cancellations_dashboards_path)}"
-    = link_to cancellations_dashboards_path
-      span
-        i.fa.far.fa-fw.fa-ban
-        span.lbl
-          | Afgelastingen
-
+  li.nav-title
+    | Theme
+  li.nav-item
+    = link_to program_dashboards_path, class: "nav-link #{'active' if current_page?(program_dashboards_path)}"
+      i.fa.far.fa-fw.fa-futbol.nav-icon
+      | Programma
+  li.nav-item
+    = link_to results_dashboards_path, class: "nav-link #{'active' if current_page?(results_dashboards_path)}"
+      i.fa.far.fa-fw.fa-trophy.nav-icon
+      | Uitslagen
+  li.nav-item
+    = link_to cancellations_dashboards_path, class: "nav-link #{'active' if current_page?(cancellations_dashboards_path)}"
+      i.fa.far.fa-fw.fa-ban.nav-icon
+      | Afgelastingen
   - if (season = policy_scope(Season).active.last).present?
-    li.aquamarine class="#{'active' if current_page?(season_path(season))}"
-      = link_to season
-        span
-          i.fa.far.fa-fw.fa-users
-          span.lbl
-            | Teams
-
+    li.nav-item
+      = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
+        i.fa.far.fa-fw.fa-users.nav-icon
+        | Teams
   - if (season = policy_scope(Season).draft.last).present?
-    li.gold class="#{'active' if current_page?(season_path(season))}"
-      = link_to season
-        span
-          i.fa.far.fa-fw.fa-calendar-alt
-          span.lbl
-            | #{season.name}
+    li.nav-item
+      = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
+        i.fa.far.fa-fw.fa-calendar-alt.nav-icon
+        | #{season.name}
 
 - if current_user.active_teams.size > 0
   section
@@ -49,11 +35,10 @@ ul.side-menu-list
       | Mijn teams
     ul.side-menu-list
       - current_user.active_teams.asc.each do |team|
-        li.green class="#{'active' if current_page?(team_path(team))}"
-          = link_to team
-            i.fa.far.fa-fw.fa-futbol
-            span.lbl
-              = team.name
+        li.nav-item
+          = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+            i.fa.far.fa-fw.fa-futbol.nav-icon
+            = team.name
 
 - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
   section
@@ -61,15 +46,13 @@ ul.side-menu-list
       | Favorieten
     ul.side-menu-list
       - human_sort(current_user.favorite_teams, :name).each do |team|
-        li.gold class="#{'active' if current_page?(team_path(team))}"
-          = link_to team
-            i.fa.far.fa-fw.fa-star
-            span.lbl
-              = team.name
+        li.nav-item
+           = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+            i.fa.far.fa-fw.fa-star.nav-icon
+            = team.name
 
       - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
-        li.gold class="#{'active' if current_page?(age_group_path(age_group))}"
-          = link_to age_group
-            i.fa.far.fa-fw.fa-star
-            span.lbl
-              = age_group.name
+        li.nav-item
+          = link_to age_group, class: "nav-link #{'active' if current_page?(age_group_path(age_group))}"
+            i.fa.far.fa-fw.fa-star.nav-icon
+            = age_group.name

@@ -8,6 +8,15 @@
   }
 }
 
-.lighter {
-  color: $gray-400;
+// Generate color classes
+@each $current-color in $theme-colors {
+  $i: index($theme-colors, $current-color);
+
+  .color-#{nth($current-color, 1)} {
+    color: nth($current-color, 2);
+  }
+
+  .background-color-#{nth($current-color, 1)} {
+    background-color: nth($current-color, 2);
+  }
 }

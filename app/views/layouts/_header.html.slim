@@ -9,8 +9,25 @@ header.app-header.navbar
     span.navbar-toggler-icon
   ul.nav.navbar-nav.d-md-down-none
     li.nav-item.px-3
-      = link_to root_path, class: "nav-link"
+      = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
+        i.fa.far.fa-home.pr-1
         | Home
+    - if policy(:org).show?
+      li.nav-item.px-3
+        = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
+          i.fa.far.fa-sitemap.pr-1
+          | Organisatie
+    - if policy(:intranet).show?
+      li.nav-item.px-3
+        = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
+          i.fa.far.fa-folder-open.pr-1
+          | Intranet
+    - if policy(:admin).show?
+      li.nav-item.px-3
+        = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
+          i.fa.far.fa-cog.pr-1
+          | Beheer
+
 
   ul.nav.navbar-nav.ml-auto
     li.nav-item

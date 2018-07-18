@@ -1,7 +1,5 @@
-ul.side-menu-list
-  li class="#{'active' if current_page?(files_intranet_path)}"
-    = link_to files_intranet_path do
-      span
-        i.fa.far.fa-fw.fa-files
-        span.lbl
-          | Bestanden
+ul.nav
+  li.nav-item
+    = link_to intranet_files_path, class: "nav-link #{'active' if current_page?(intranet_files_path)}" do
+      i.fa.far.fa-folder-open.nav-icon
+      | Intranet
