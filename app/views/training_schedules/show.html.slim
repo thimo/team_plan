@@ -18,7 +18,7 @@ section.tabs-section
             a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
               span.nav-link-in
                 | Aanwezig
-                span.ml-1.label.label-pill.label-success[id="#{@training_schedule.model_name.singular}-#{@training_schedule.id}-presence-count"]
+                span.ml-1.badge.badge-pill.badge-success[id="#{@training_schedule.model_name.singular}-#{@training_schedule.id}-presence-count"]
                   = @presences.present.size
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]

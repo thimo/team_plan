@@ -10,3 +10,25 @@
     background-color: nth($current-color, 2);
   }
 }
+
+.color-blue-grey {
+  color: $gray-600;
+}
+
+.color-blue-grey-lighter {
+  color: $gray-400;
+}
+
+.main .container-fluid {
+  margin-top: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-header {
+  font-family: 'Montserrat', sans-serif;
+  // font-size: 1rem;
+  font-weight: 600;
+}

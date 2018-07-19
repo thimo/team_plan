@@ -1,7 +1,7 @@
 .card
   .card-header
     | Spelers
-    .label.label-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
+    .badge.badge-secondary.badge-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
     .card-header-actions
       - if policy(@team).bulk_email?
         a.card-header-action[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan alle teamgenoten"]
@@ -58,7 +58,7 @@
 
                   - if policy(team_member).show_status?
                     div
-                      = team_member.status_to_label.html_safe
+                      = team_member.status_to_badge.html_safe
                       - if policy(team_member).activate?
                         = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
                           i.fa.far.fa-check.m-1.ml-2

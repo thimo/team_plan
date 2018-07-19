@@ -22,7 +22,7 @@ section.tabs-section
               span.nav-link-in
                 = Comment.comment_types_i18n[comment_type]
                 - if (count = comments_for(parent, comment_type).size) > 0
-                  .label.ml-1
+                  .badge.badge-secondary.ml-1
                     = count
   .tab-content
     - comment_types_for(parent).each do |comment_type, comment_type_id|

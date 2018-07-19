@@ -23,7 +23,7 @@ section.tabs-section
             a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
               span.nav-link-in
                 | Aanwezig
-                span.ml-1.label.label-pill.label-success[id="#{@match.model_name.singular}-#{@match.id}-presence-count"]
+                span.ml-1.badge.badge-pill.badge-success[id="#{@match.model_name.singular}-#{@match.id}-presence-count"]
                   = @presences.present.size
         - if @match.adres.present?
           li.nav-item

@@ -7,7 +7,7 @@ tr
         = team_member.role_i18n unless team_member.player?
       - if policy(team_member).show_status?
         div
-          = team_member.status_to_label.html_safe
+          = team_member.status_to_badge.html_safe
 
   = render "member_allocations/member", member: member
 
