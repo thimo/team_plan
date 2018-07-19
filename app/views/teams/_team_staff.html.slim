@@ -9,7 +9,7 @@
         = link_to new_team_team_member_path(@team), title: "Teamleiding toevoegen", class: "card-header-action" do
           i.fa.far.fa-user
 
-  .card-body.table-responsive
+  .card-body.table-responsive.p-0
     table.table.table-sm.tr-links
       - @staff.each do |member, team_members|
         = render 'member', member: member, team_members: team_members

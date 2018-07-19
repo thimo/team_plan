@@ -102,7 +102,7 @@
 // // Set a specific jump point for requesting color jumps
 // $theme-color-interval:      8% !default;
 //
-// // The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+// // The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Accep values are between 0 and 255.
 // $yiq-contrasted-threshold:  150 !default;
 //
 // // Customize the light and dark text colors for use in our YIQ color contrast function.
@@ -163,6 +163,7 @@
 // // Settings for the `<body>` element.
 //
 // $body-bg:                   $white !default;
+$body-bg:                   #f2f7fb;
 // $body-color:                $gray-900 !default;
 //
 // // Links
@@ -326,6 +327,7 @@
 //
 // $table-cell-padding:          .75rem !default;
 // $table-cell-padding-sm:       .3rem !default;
+$table-cell-padding-sm:       .5rem .75rem;
 //
 // $table-bg:                    transparent !default;
 // $table-accent-bg:             rgba($black, .05) !default;
@@ -334,6 +336,7 @@
 //
 // $table-border-width:          $border-width !default;
 // $table-border-color:          $gray-300 !default;
+$table-border-color:          $gray-200;
 //
 // $table-head-bg:               $gray-200 !default;
 // $table-head-color:            $gray-700 !default;
@@ -715,7 +718,9 @@
 // // Cards
 //
 // $card-spacer-y:                     .75rem !default;
+$card-spacer-y:                     1rem;
 // $card-spacer-x:                     1.25rem !default;
+$card-spacer-x:                     1rem;
 // $card-border-width:                 $border-width !default;
 // $card-border-radius:                $border-radius !default;
 // $card-border-color:                 rgba($black, .125) !default;
@@ -779,7 +784,7 @@
 // // Badges
 //
 // $badge-font-size:                   75% !default;
-$badge-font-size:                   80%;
+$badge-font-size:                   .75rem;
 // $badge-font-weight:                 $font-weight-bold !default;
 $badge-font-weight:                 $font-weight-normal;
 // $badge-padding-y:                   .25em !default;
