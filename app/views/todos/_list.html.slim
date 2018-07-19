@@ -8,7 +8,7 @@
         = link_to new_path, title: "Todo toevoegen", class: "card-header-action"
           i.fa.far.fa-plus-square
 
-  .card-body
+  .card-body.p-0
     - if todos_active.present? || todos_defered.present?
       - if todos_active.present?
         - todos_active.each do |todo|
@@ -19,8 +19,5 @@
           div[id="todo-#{todo.id}"]
             = render 'todos/list_item', todo: todo
     - else
-      table.table
-        tbody
-          tr
-            td
-              i Geen todo's gevonden
+      .p-2
+        i Geen todo's gevonden

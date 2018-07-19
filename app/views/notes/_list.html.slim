@@ -1,16 +1,16 @@
 .card
   .card-header
     | Notities
-    small
-      | Zoals gespreksverslagen en teambesprekingen
     .card-header-actions
       - if policy(Note.new(team: team)).create?
         = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "card-header-action"
           i.fa.far.fa-plus-square
+    .small
+      | Zoals gespreksverslagen en teambesprekingen
 
-  .card-body
-    table.table.table-sm.tr-links
-      - if notes.size > 0
+  .card-body.p-0
+    - if notes.size > 0
+      table.table.table-sm.tr-links
         tbody
           - notes.each do |note|
             tr.clickable
@@ -23,8 +23,6 @@
                   = ", #{note.user.name}"
 
 
-      - else
-        tbody
-          tr
-            td
-              i Geen notities gevonden
+    - else
+      .p-2
+        i Geen notities gevonden

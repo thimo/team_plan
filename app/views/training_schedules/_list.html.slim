@@ -9,9 +9,9 @@
         = link_to new_team_training_schedule_path(team), title: "Trainingsdag toevoegen", class: "card-header-action"
           i.fa.far.fa-plus-square
 
-  .card-body
-    table.table.table-sm.tr-links
-      - if training_schedules.size > 0
+  .card-body.p-0
+    - if training_schedules.size > 0
+      table.table.table-sm.tr-links
         - unless disable_header
           thead
             th Dag
@@ -43,8 +43,6 @@
                   .badge.badge-secondary.ml-1[title="Standaard aanwezig"]
                     = present.size
 
-      - else
-        tbody
-          tr
-            td
-              i Geen trainingen gevonden
+    - else
+      .p-2
+        i Geen trainingen gevonden

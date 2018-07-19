@@ -12,17 +12,15 @@
             i.fa.far.fa-plus-square
         = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "card-header-action"
           i.fa.far.fa-calendar-alt
-  .card-body
-    table.table.table-sm.tr-links.align-top
-      - if trainings.any?
+  .card-body.p-0
+    - if trainings.any?
+      table.table.table-sm.tr-links.align-top
         tbody
           / Note: cannot be cached because of parameters
           = render partial: 'shared/training',
             collection: trainings,
             locals: { include_presences: include_presences, team: team }
 
-      - else
-        tbody
-          tr
-            td
-              i Geen trainingen gevonden
+    - else
+      .p-2
+        i Geen trainingen gevonden

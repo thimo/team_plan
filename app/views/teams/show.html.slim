@@ -18,134 +18,137 @@
       i.fa.far.fa-check-square
   = render "shared/favorite", parent: @team, styleClass: "btn"
 
-section.tabs-section
-  .tabs-section-nav
-    .tbl
-      ul.nav[role="tablist"]
-        li.nav-item
-          a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
-            span.nav-link-in
-              i.fa.far.fa-calendar-alt
-              .pl-2.d-none.d-sm-inline Programma
-        li.nav-item
-          a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
-            span.nav-link-in
-              i.fa.far.fa-futbol
-              .pl-2.d-none.d-sm-inline Competities
-        li.nav-item
-          a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
-            span.nav-link-in
-              i.fa.far.fa-users
-              .pl-2.d-none.d-sm-inline Team
-        - if policy(@team).show_dossier?
-          li.nav-item
-            a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
-              span.nav-link-in
-                i.fa.far.fa-book
-                .pl-2.d-none.d-md-inline  Dossier
-        - if policy(@team).show_statistics?
-          li.nav-item
-            a.nav-link[href="?tab=statistics" class="#{'active' if @active_tab == 'statistics'}"]
-              span.nav-link-in
-                i.fa.far.fa-chart-bar
-                .pl-2.d-none.d-md-inline Statistieken
+section
+  ul.nav.nav-tabs[role="tablist"]
+    li.nav-item
+      a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
+        span.nav-link-in
+          i.fa.far.fa-calendar-alt
+          .pl-2.d-none.d-sm-inline Programma
+    li.nav-item
+      a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
+        span.nav-link-in
+          i.fa.far.fa-futbol
+          .pl-2.d-none.d-sm-inline Competities
+    li.nav-item
+      a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
+        span.nav-link-in
+          i.fa.far.fa-users
+          .pl-2.d-none.d-sm-inline Team
+    - if policy(@team).show_dossier?
+      li.nav-item
+        a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
+          span.nav-link-in
+            i.fa.far.fa-book
+            .pl-2.d-none.d-md-inline  Dossier
+    - if policy(@team).show_statistics?
+      li.nav-item
+        a.nav-link[href="?tab=statistics" class="#{'active' if @active_tab == 'statistics'}"]
+          span.nav-link-in
+            i.fa.far.fa-chart-bar
+            .pl-2.d-none.d-md-inline Statistieken
 
   .tab-content
     - if @active_tab == 'schedule'
-      .row
-        .col-lg-6
-          = render "matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
-        .col-lg-6
-          = render "trainings/list", trainings: @trainings, team: @team
-      .row
-        .col-lg-6
-          / = render "shared/program_list", program_items: @program_items, team: @team, include_presences: true
-          = render "matches/list", matches: @played_matches, title: "Uitslagen", team: @team
-
-        .col-lg-6
-          = render "training_schedules/list", team: @team, training_schedules: @training_schedules
-
-    - if @active_tab == 'competitions'
-      .row
-        .col-lg-6
-          - if @competitions_regular.any?
-            - @competitions_regular.each do |competition|
-              = render "competitions/standing", competition: competition, compact: true
-          - else
-            .card.card-body
-              i Geen competitie gevonden
-
-        .col-lg-6
-          - if @competitions_other.any?
-            - @competitions_other.each do |competition|
-              = render "competitions/standing", competition: competition, compact: true
-          - else
-            .card.card-body
-              i Geen competitie gevonden
-
-          - @custom_competition_matches.each do |competition, matches|
-            = render "matches/list", matches: matches, title: competition.competitienaam, team: @team
-
-    - if @active_tab == 'team'
-      .row
-        .col-lg-6
-          = render 'team_players'
-
-        .col-lg-6
-          - if @staff.size > 0
-            = render 'team_staff'
-
-          - if @old_members.present?
-            .card
-              .card-header
-                | Oud teamgenoten
-              .card-body.table-responsive
-                table.table.table-sm.tr-links
-                  - @old_members.each do |member, team_members|
-                    = render 'member', member: member, team_members: team_members
-
-    - if @active_tab == 'dossier' && policy(@team).show_dossier?
-      .row
-        .col-md-6
-          - if policy(@team).show_comments?
-            #comments-tabs
-              = render "comments/tabs", parent: @team
-
-        .col-md-6
-          - if policy(@team).show_todos?
-            = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
-
-          - if policy(@team).show_evaluations? && @team_evaluations.present?
-            = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
-
-          - if policy(@team).show_notes?
-            = render "notes/list", team: @team, notes: @notes
-
-    - if @active_tab == 'statistics' && policy(@team).show_statistics?
-      - if policy(@team).show_presence_chart?
-        h4 Aanwezigheid
-
+      .tab-pane.active.show
         .row
           .col-lg-6
-            .card
-              .card-header
-                | Trainingen
-              .card-body
-                canvas#trainingChart.presenceChart
-
-              = render 'presence_table', team: @team, presentable_class: Training
+            = render "matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
+          .col-lg-6
+            = render "trainings/list", trainings: @trainings, team: @team
+        .row
+          .col-lg-6
+            / = render "shared/program_list", program_items: @program_items, team: @team, include_presences: true
+            = render "matches/list", matches: @played_matches, title: "Uitslagen", team: @team
 
           .col-lg-6
-            .card
-              .card-header
-                | Wedstrijden
-              .card-body
-                canvas#matchChart.presenceChart
+            = render "training_schedules/list", team: @team, training_schedules: @training_schedules
+
+    - if @active_tab == 'competitions'
+      .tab-pane.active.show
+        .row
+          .col-lg-6
+            - if @competitions_regular.any?
+              - @competitions_regular.each do |competition|
+                = render "competitions/standing", competition: competition, compact: true
+            - else
+              .card.card-body
+                i Geen competitie gevonden
+
+          .col-lg-6
+            - if @competitions_other.any?
+              - @competitions_other.each do |competition|
+                = render "competitions/standing", competition: competition, compact: true
+            - else
+              .card.card-body
+                i Geen competitie gevonden
+
+            - @custom_competition_matches.each do |competition, matches|
+              = render "matches/list", matches: matches, title: competition.competitienaam, team: @team
+
+    - if @active_tab == 'team'
+      .tab-pane.active.show
+        .row
+          .col-lg-6
+            = render 'team_players'
+
+          .col-lg-6
+            - if @staff.size > 0
+              = render 'team_staff'
+
+            - if @old_members.present?
+              .card
+                .card-header
+                  | Oud teamgenoten
+                .card-body.table-responsive
+                  table.table.table-sm.tr-links
+                    - @old_members.each do |member, team_members|
+                      = render 'member', member: member, team_members: team_members
+
+    - if @active_tab == 'dossier' && policy(@team).show_dossier?
+      .tab-pane.active.show
+        .row
+          .col-md-6
+            - if policy(@team).show_comments?
+              #comments-tabs
+                = render "comments/tabs", parent: @team
+
+          .col-md-6
+            - if policy(@team).show_todos?
+              = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
+
+            - if policy(@team).show_evaluations? && @team_evaluations.present?
+              = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
+
+            - if policy(@team).show_notes?
+              = render "notes/list", team: @team, notes: @notes
+
+    - if @active_tab == 'statistics' && policy(@team).show_statistics?
+      .tab-pane.active.show
+        - if policy(@team).show_presence_chart?
+          h4 Aanwezigheid
+
+          .row
+            .col-lg-6
+              .card
+                .card-header
+                  | Trainingen
+                .card-body
+                  canvas#trainingChart.presenceChart
+
+                = render 'presence_table', team: @team, presentable_class: Training
+
+            .col-lg-6
+              .card
+                .card-header
+                  | Wedstrijden
+                .card-body
+                  canvas#matchChart.presenceChart
 
 
-              = render 'presence_table', team: @team, presentable_class: Match
+                = render 'presence_table', team: @team, presentable_class: Match
 
-        - if @training_presences_data&.any? && @match_presences_data&.any?
-          script
-            | var trainingChartData = #{@training_presences_data.to_json.html_safe}
-              var matchChartData = #{@match_presences_data.to_json.html_safe}
+          - if @training_presences_data&.any? && @match_presences_data&.any?
+            script
+              | var trainingChartData = #{@training_presences_data.to_json.html_safe}
+                var matchChartData = #{@match_presences_data.to_json.html_safe}

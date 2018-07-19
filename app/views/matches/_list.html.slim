@@ -15,7 +15,7 @@
         = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "card-header-action"
           i.fa.far.fa-calendar-alt
 
-  .card-body
+  .card-body.p-0
     - if matches.any?
       table.table.table-sm.tr-links.align-top
         - if matches.first.is_a? Array
@@ -36,4 +36,5 @@
               collection: matches,
               locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams }
     - else
-      i Geen wedstrijden gevonden
+      .p-2
+        i Geen wedstrijden gevonden
