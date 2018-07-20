@@ -4,33 +4,28 @@
       .card
         .card-header
           | Mijn teams
-
-        .card-body
-          ul.side-menu-list
+        .card-body.p-2
+          ul.list-group.list-group-flush.list-group-accent.list-group-compact
             - @active_teams.each do |team|
-              li.green
+              li.list-group-item
                 = link_to team
-                  i.fa.far.fa-futbol
-                  span.lbl
-                    = team.name
+                  i.fa.far.fa-futbol.light.pr-2
+                  = team.name
 
   - if @favorite_teams.present? || @favorite_age_groups.present?
     .col-6
       .card
         .card-header
           | Favorieten
-
-        .card-body
-          ul.side-menu-list
+        .card-body.p-2
+          ul.list-group.list-group-flush.list-group-accent.list-group-compact
             - @favorite_teams.each do |team|
-              li.gold
+              li.list-group-item
                 = link_to team
-                  i.fa.far.fa-star
-                  span.lbl
-                    = team.name
+                  i.fa.far.fa-star.light.pr-2
+                  = team.name
             - @favorite_age_groups.each do |age_group|
-              li.gold
+              li.list-group-item
                 = link_to age_group
-                  i.fa.far.fa-star
-                  span.lbl
-                    = age_group.name
+                  i.fa.far.fa-star.light.pr-2
+                  = age_group.name
