@@ -5,21 +5,17 @@
       = link_to edit_training_schedule_path(@training_schedule), class: "btn", title: "Aanpassen"
         i.fa.far.fa-pencil
 
-section.tabs-section
-  .tabs-section-nav
-    .tbl
-      ul.nav[role="tablist"]
-        li.nav-item
-          a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
-            span.nav-link-in
-              | Training
-        - if @presences.present? && policy(@presences.first).update?
-          li.nav-item
-            a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
-              span.nav-link-in
-                | Aanwezig
-                span.ml-1.badge.badge-pill.badge-success[id="#{@training_schedule.model_name.singular}-#{@training_schedule.id}-presence-count"]
-                  = @presences.present.size
+section
+  ul.nav.nav-tabs[role="tablist"]
+    li.nav-item
+      a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
+        | Training
+    - if @presences.present? && policy(@presences.first).update?
+      li.nav-item
+        a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+          | Aanwezig
+          span.ml-1.badge.badge-pill.badge-success[id="#{@training_schedule.model_name.singular}-#{@training_schedule.id}-presence-count"]
+            = @presences.present.size
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
       .row

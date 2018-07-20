@@ -99,8 +99,7 @@ h4 Contactgegevens
           = "Status: "
         = member.status.capitalize
         - if member.deregistered_at.present?
-          |  per
-          = I18n.l member.deregistered_at, format: :long
+          |  per #{I18n.l member.deregistered_at, format: :long}
     - else
       - unless member.status_definitief?
         div
@@ -116,7 +115,7 @@ h4 Contactgegevens
 hr
 
 h4 Teams
-table.table.table-striped
+table.table
   - @team_members.group_by(&:season).sort_by{|season, season_members| season.name}.reverse.each do |season, season_members|
     - season_members.group_by(&:team).sort_by{|team, team_members| team.name}.each_with_index do |(team, team_members), team_index|
       tr

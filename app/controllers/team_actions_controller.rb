@@ -53,7 +53,6 @@ class TeamActionsController < ApplicationController
                                                                status: params[:status])
                   end
     when "publish"
-      # debugger
       @redirect = redirect_to season_publish_team_members_path(@season, age_group_ids: params[:age_group_ids],
                                                                         status: params[:status])
     end

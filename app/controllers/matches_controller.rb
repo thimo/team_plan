@@ -11,8 +11,8 @@ class MatchesController < ApplicationController
 
   def show
     if policy(@match).show_presences? && @team.present?
-      @presences = @match.find_or_create_presences(@team).asc
-      @players = @presences.present
+      @presences = @match.find_or_create_presences(@team)&.asc
+      @players = @presences&.present
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Activatable
   extend ActiveSupport::Concern
 
@@ -17,9 +19,12 @@ module Activatable
     !active?
   end
 
-  private
-
-  module ClassMethods
+  def archived?
+    inactive?
   end
 
+  private
+
+    module ClassMethods
+    end
 end

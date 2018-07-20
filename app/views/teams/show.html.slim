@@ -22,31 +22,26 @@ section
   ul.nav.nav-tabs[role="tablist"]
     li.nav-item
       a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
-        span.nav-link-in
-          i.fa.far.fa-calendar-alt
-          .pl-2.d-none.d-sm-inline Programma
+        i.fa.far.fa-calendar-alt
+        .pl-2.d-none.d-sm-inline Programma
     li.nav-item
       a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
-        span.nav-link-in
-          i.fa.far.fa-futbol
-          .pl-2.d-none.d-sm-inline Competities
+        i.fa.far.fa-futbol
+        .pl-2.d-none.d-sm-inline Competities
     li.nav-item
       a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
-        span.nav-link-in
-          i.fa.far.fa-users
-          .pl-2.d-none.d-sm-inline Team
+        i.fa.far.fa-users
+        .pl-2.d-none.d-sm-inline Team
     - if policy(@team).show_dossier?
       li.nav-item
         a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
-          span.nav-link-in
-            i.fa.far.fa-book
-            .pl-2.d-none.d-md-inline  Dossier
+          i.fa.far.fa-book
+          .pl-2.d-none.d-md-inline Dossier
     - if policy(@team).show_statistics?
       li.nav-item
         a.nav-link[href="?tab=statistics" class="#{'active' if @active_tab == 'statistics'}"]
-          span.nav-link-in
-            i.fa.far.fa-chart-bar
-            .pl-2.d-none.d-md-inline Statistieken
+          i.fa.far.fa-chart-bar
+          .pl-2.d-none.d-md-inline Statistieken
 
   .tab-content
     - if @active_tab == 'schedule'

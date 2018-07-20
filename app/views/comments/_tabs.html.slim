@@ -1,5 +1,6 @@
 / TODO by default only show for current season, add links to show for previous season
 - active_tab = Comment.active_tab(current_user, parent, params[:comment])
+- allow_create = policy(Comment.new(commentable: parent)).create?
 
 section
   ul.nav.nav-tabs[role="tablist"]
@@ -17,17 +18,16 @@ section
           data-controller='comment-tab'
           data-action="comment-tab#activateTab"
         ]
-          span.nav-link-in
-            = Comment.comment_types_i18n[comment_type]
-            - if (count = comments_for(parent, comment_type).size) > 0
-              .badge.badge-secondary.ml-1
-                = count
+          = Comment.comment_types_i18n[comment_type]
+          - if (count = comments_for(parent, comment_type).size) > 0
+            .badge.badge-secondary.ml-1
+              = count
 
   .tab-content
     - comment_types_for(parent).each do |comment_type, comment_type_id|
       - is_active = comment_type == active_tab
       .tab-pane[role="tabpanel" aria-expanded="#{is_active}" id="comments-tab-#{comment_type}" class="#{is_active ? 'active in' : 'fade'}"]
-        - if parent.class.comment_types.key? comment_type
+        - if allow_create && parent.class.comment_types.key?(comment_type)
           = bootstrap_form_for [parent, Comment.new], html: { class: 'pb-3' } do |f|
             = f.text_area :body, hide_label: true, placeholder: "Opmerking", rows: 1, wrapper: { class: 'mb-1' }
             = f.hidden_field :comment_type, value: comment_type
@@ -36,16 +36,15 @@ section
               | Tip: beperk je opmerking tot feiten, vermijdt meningen en oordelen
 
 
-        div.small.mb-2[style="height: 20px;"]
+        div.mb-2
           - if parent.is_a? Team
-            .checkbox
-              = link_to [:toggle_include_member, parent, :comments, comment: comment_type],
-                remote: true,
-                method: :post do
-                span.light
-                  input[type="checkbox" checked=current_user.settings.include_member_comments]
-                  label
-                    | Inclusief teamleden (seizoen #{parent.season.name})
+            = link_to [:toggle_include_member, parent, :comments, comment: comment_type],
+              remote: true,
+              method: :post do
+              .custom-control.custom-checkbox.light
+                input.custom-control-input[type="checkbox" checked=current_user.settings.include_member_comments]
+                label.custom-control-label
+                  | Inclusief teamleden (seizoen #{parent.season.name})
 
 
         - if (comments = comments_for(parent, comment_type)).present?

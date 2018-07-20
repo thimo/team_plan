@@ -25,7 +25,6 @@ class PublishTeamMembersController < ApplicationController
   private
 
     def sorted_age_groups
-      # debugger
       human_sort(policy_scope(AgeGroup).where(id: params[:age_group_ids]), :name)
     end
 end

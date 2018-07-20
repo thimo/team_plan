@@ -11,7 +11,7 @@ class TrainingSchedulesController < ApplicationController
   def new; end
 
   def show
-    @presences = policy_scope(@training_schedule.find_or_create_presences.asc)
+    @presences = @training_schedule.find_or_create_presences&.asc
   end
 
   def create
