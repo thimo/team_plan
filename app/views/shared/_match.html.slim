@@ -9,7 +9,7 @@
     / 'max-width' is a bit of a hack to force table to fit within parent div on smaller screens
     td[style="max-width: 200px;" colspan="2"]
       .match-row-header.small
-        .match-datetime.color-blue-grey
+        .match-datetime.light
           - if compact
             span.pr-1
               = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
@@ -18,7 +18,7 @@
           - else
             span.pr-1
               | #{I18n.l match.started_at, format: :time_short}
-        .match-type.text-right.color-blue-grey-lighter
+        .match-type.text-right.lighter
           = match.competition.competitiesoort
 
       .match-teams
@@ -34,7 +34,7 @@
                 = match.thuisteam
           - else
             = match.thuisteam
-        .match-separator.text-center.color-blue-grey-lighter
+        .match-separator.text-center.lighter
           = " - "
         .match-awayteam.nowrap.text-left
           - if (relatiecode = match.uitteamclubrelatiecode).present?
@@ -54,7 +54,7 @@
           - uitslag = match.uitslag.split
           .match-hometeam.nowrap.text-right
             = uitslag.first
-          .match-separator.text-center.color-blue-grey-lighter
+          .match-separator.text-center.lighter
             = " - "
           .match-awayteam.nowrap.text-left
             = uitslag.last

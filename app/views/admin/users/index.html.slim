@@ -34,7 +34,7 @@
           tr
             td
               = link_to user.name, [:edit, :admin, user]
-              .color-blue-grey.small
+              .light.small
                 => user.email
                 - if user.unconfirmed_email.present?
                   |  (wijziging naar #{user.unconfirmed_email} nog niet bevestigd)

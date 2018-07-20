@@ -13,11 +13,11 @@
             tr
               td.nowrap[rowspan="2"]
                 = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
-                .color-blue-grey-lighter.small
+                .lighter.small
                   = l evaluation.team_evaluation.finished_at, format: :date_long
               = render "player_evaluations/td_columns", evaluation: evaluation
             tr
-              td.color-blue-grey.b-t-0[colspan="11"]
+              td.light.b-t-0[colspan="11"]
                 = evaluation.remark
 
       - else

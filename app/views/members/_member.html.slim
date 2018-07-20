@@ -10,22 +10,22 @@
   = member.name
 
 - if policy(member).show_private_data?
-  .color-blue-grey-lighter.small
+  .lighter.small
     => l member.born_on, format: :date_long unless member.born_on.nil?
     = "(#{member.gender})"
 - if policy(member).show_sportlink_status?
   - unless member.local_teams.blank?
-    .color-blue-grey.small
+    .light.small
       = "#{member.local_teams}"
   - if member.status_af_te_melden?
-    .color-blue-grey.small
+    .light.small
       = member.status.capitalize
       - if member.deregistered_at.present?
         |  per #{I18n.l member.deregistered_at, format: :long}
   - else
     - unless member.status_definitief?
-      .color-blue-grey.small
+      .light.small
         = member.status.capitalize
     - unless member.deregistered_at.blank?
-      .color-blue-grey.small
+      .light.small
         | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}

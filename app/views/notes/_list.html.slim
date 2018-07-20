@@ -18,7 +18,7 @@
                 = link_to note_path(note)
                   = note.title
                 = " - #{note.member.name}" if note.member.present?
-                .color-blue-grey-lighter.small
+                .lighter.small
                   = l note.updated_at, format: :long
                   = ", #{note.user.name}"
 

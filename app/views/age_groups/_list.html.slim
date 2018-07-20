@@ -31,10 +31,10 @@
                 = year_of_birth_range(age_group)
               td.text-center
                 - if age_group.players_per_team.present?
-                  .color-blue-grey.small
+                  .light.small
                     = "#{age_group.players_per_team} tegen #{age_group.players_per_team}"
                 - if age_group.minutes_per_half.present?
-                  .color-blue-grey.small
+                  .light.small
                     = "2 x #{age_group.minutes_per_half} min"
               td.text-right
                 - if policy(age_group).show_status?

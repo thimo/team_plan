@@ -1,26 +1,5 @@
-// Generate color classes
-@each $current-color in $theme-colors {
-  $i: index($theme-colors, $current-color);
-
-  .color-#{nth($current-color, 1)} {
-    color: nth($current-color, 2);
-  }
-
-  .background-color-#{nth($current-color, 1)} {
-    background-color: nth($current-color, 2);
-  }
-}
-
-.color-blue-grey {
-  color: $gray-600;
-}
-
-.color-blue-grey-lighter {
-  color: $gray-400;
-}
-
 .main .container-fluid {
-  margin-top: 1rem;
+  margin-top: .25rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,7 +7,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card {
-  border-top: solid 4px #00a8ff;
+  border-top: solid 4px $primary;
+  border-bottom: solid 2px #d8e2e7;
 }
 
 .card-header {

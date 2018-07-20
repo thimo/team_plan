@@ -1,29 +1,28 @@
 / TODO by default only show for current season, add links to show for previous season
 - active_tab = Comment.active_tab(current_user, parent, params[:comment])
 
-section.tabs-section
-  .tabs-section-nav
-    .tbl
-      ul.nav[role="tablist"]
-        - comment_types_for(parent).each do |comment_type, comment_type_id|
-          - is_active = comment_type == active_tab
-          li.nav-item
-            a.nav-link[
-              href="#comments-tab-#{comment_type}"
-              role="tab"
-              data-toggle="tab"
-              data-tab="#{comment_type}"
-              aria-expanded="#{is_active}"
-              class="#{'active' if is_active}"
-              data-set-active-tab-url="#{url_for [:set_active_tab, :comments]}"
-              data-controller='comment-tab'
-              data-action="comment-tab#activateTab"
-            ]
-              span.nav-link-in
-                = Comment.comment_types_i18n[comment_type]
-                - if (count = comments_for(parent, comment_type).size) > 0
-                  .badge.badge-secondary.ml-1
-                    = count
+section
+  ul.nav.nav-tabs[role="tablist"]
+    - comment_types_for(parent).each do |comment_type, comment_type_id|
+      - is_active = comment_type == active_tab
+      li.nav-item
+        a.nav-link[
+          href="#comments-tab-#{comment_type}"
+          role="tab"
+          data-toggle="tab"
+          data-tab="#{comment_type}"
+          aria-expanded="#{is_active}"
+          class="#{'active' if is_active}"
+          data-set-active-tab-url="#{url_for [:set_active_tab, :comments]}"
+          data-controller='comment-tab'
+          data-action="comment-tab#activateTab"
+        ]
+          span.nav-link-in
+            = Comment.comment_types_i18n[comment_type]
+            - if (count = comments_for(parent, comment_type).size) > 0
+              .badge.badge-secondary.ml-1
+                = count
+
   .tab-content
     - comment_types_for(parent).each do |comment_type, comment_type_id|
       - is_active = comment_type == active_tab
@@ -43,7 +42,7 @@ section.tabs-section
               = link_to [:toggle_include_member, parent, :comments, comment: comment_type],
                 remote: true,
                 method: :post do
-                span.color-blue-grey
+                span.light
                   input[type="checkbox" checked=current_user.settings.include_member_comments]
                   label
                     | Inclusief teamleden (seizoen #{parent.season.name})

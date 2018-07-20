@@ -5,7 +5,7 @@ h4 Contactgegevens
 .strong
   => member.name
   - if policy(member).show_private_data?
-    .color-blue-grey-lighter.small
+    .lighter.small
       => l member.born_on, format: :long unless member.born_on.nil?
       = "(#{member.gender})"
 
@@ -58,44 +58,44 @@ h4 Contactgegevens
   - if policy(member).show_login? && member.email.present?
     div.mt-2
       - if member.user.present?
-        .color-blue-grey
+        .light
           i Heeft toegang tot TeamPlan
       - else
-        .color-blue-grey
+        .light
           i Heeft geen toegang tot TeamPlan
 
   - if policy(member).show_sportlink_status?
     div.pt-4
     - if member.person_type.present?
       div
-        span.color-blue-grey
+        span.light
           = "#{member.person_type}: "
         = "#{member.local_teams} "
         = "#{member.sport_category} "
       - if member.association_number.present?
         div
-          span.color-blue-grey
+          span.light
             = "KNVB-nummer: "
           = member.association_number
       - if policy(member).show_conduct? && member.conduct_number.present?
         div
-          span.color-blue-grey
+          span.light
             = "VOG-nummer: "
           = member.conduct_number
       div
-        span.color-blue-grey
+        span.light
           = "Lid sinds: "
         = I18n.l member.member_since, format: :long
 
     - unless member.registered_at.blank? || member.registered_at == member.member_since
       div
-        span.color-blue-grey
+        span.light
           = "Registratiedatum: "
         = I18n.l member.registered_at, format: :long
 
     - if member.status_af_te_melden?
       div
-        span.color-blue-grey
+        span.light
           = "Status: "
         = member.status.capitalize
         - if member.deregistered_at.present?
@@ -104,12 +104,12 @@ h4 Contactgegevens
     - else
       - unless member.status_definitief?
         div
-          span.color-blue-grey
+          span.light
             = "Status: "
           = member.status.capitalize
       - unless member.deregistered_at.blank?
         div
-          span.color-blue-grey
+          span.light
             = "Afmelddatum: "
           = I18n.l member.deregistered_at, format: :long
 
@@ -125,7 +125,7 @@ table.table.table-striped
             strong #{season.name}
         td
           = link_to team.name, team
-        td.color-blue-grey
+        td.light
           = "#{team.division}" if team.division.present?
 
         td
@@ -136,10 +136,10 @@ table.table.table-striped
           - team_members.each do |team_member|
             div
               - if team_member.started_on.present?
-                .color-blue-grey
+                .light
                   | Vanaf #{ I18n.l team_member.started_on, format: :long }
               - elsif team_member.ended_on.present?
-                .color-blue-grey
+                .light
                   | Tot #{ I18n.l team_member.ended_on, format: :long }
               - else
                 | &nbsp;

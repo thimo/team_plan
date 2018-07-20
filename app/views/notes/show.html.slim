@@ -7,7 +7,7 @@
       small
         = " - #{@note.member.name}"
 
-    .color-blue-grey-lighter.small
+    .lighter.small
       = "#{l @note.created_at, format: :date_long}"
       = " (aangepast op #{l @note.updated_at, format: :long})" if @note.created_at != @note.updated_at
       = ", #{@note.user.name}"

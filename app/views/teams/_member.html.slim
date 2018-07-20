@@ -9,7 +9,7 @@ tr
     - else
       = member.name
     - if policy(member).show_private_data?
-      .color-blue-grey-lighter.small
+      .lighter.small
         => l member.born_on, format: :long unless member.born_on.nil?
         = "(#{member.gender})"
   td
@@ -17,7 +17,7 @@ tr
       div
         = team_member.role_i18n
         - if team_member.ended_on
-          span.color-blue-grey.d-none.d-sm-inline
+          span.light.d-none.d-sm-inline
             = " - tot #{l team_member.ended_on, format: :long}"
 
   td.w-1.nowrap

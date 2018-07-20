@@ -19,7 +19,7 @@
         - else
           |  - ...
 
-        .color-blue-grey-lighter.small
+        .lighter.small
           = "#{@injury.user.name}"
           = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
 

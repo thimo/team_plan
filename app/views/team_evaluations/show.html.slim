@@ -8,7 +8,7 @@
         | Teamevaluatie #{@team_evaluation.team.name}
         - if @team_evaluation.team.division.present?
           small.pl-1 #{@team_evaluation.team.division}
-        div.color-blue-grey-lighter.small
+        div.lighter.small
           = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record? || @team_evaluation.finished_at.present?
           = l @team_evaluation.finished_at, format: :date_long if @team_evaluation.finished_at.present?
           |  -
@@ -44,7 +44,7 @@
               = render "player_evaluations/td_columns", evaluation: evaluation
 
             tr
-              td.color-blue-grey.b-t-0[colspan="11", style="padding-left: 2px;"]
+              td.light.b-t-0[colspan="11", style="padding-left: 2px;"]
                 = evaluation.remark
 
 

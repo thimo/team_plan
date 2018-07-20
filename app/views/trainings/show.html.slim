@@ -27,12 +27,12 @@ section.tabs-section
           .strong #{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}
           div #{starts_ends(@training)} uur
           - if (ts = @training.training_schedule).present?
-            .color-blue-grey.small
+            .light.small
               | #{ts.present_minutes_i18n} aanwezig
             hr.my-2
             div
               = ts.soccer_field.name
-              span.color-blue-grey.small.ml-2
+              span.light.small.ml-2
                 = ts.field_part_i18n
             - if ts.team_members.any? || ts.cios?
               hr.my-2

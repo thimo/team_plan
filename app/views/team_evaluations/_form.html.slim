@@ -4,7 +4,7 @@
       | Teamevaluatie #{@team_evaluation.team.name}
       - if @team_evaluation.team.division.present?
         small.pl-1 #{@team_evaluation.team.division}
-      div.color-blue-grey-lighter.small
+      div.lighter.small
         = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
         = " - #{@team_evaluation.status}"
       .card-header-actions

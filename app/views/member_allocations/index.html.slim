@@ -12,7 +12,7 @@
           .badge.badge-secondary.badge-one-number.ml-3
             = "#{@available_members.size}"
 
-        .color-blue-grey-lighter.text-right
+        .lighter.text-right
           = year_of_birth_range(@age_group)
           = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
 

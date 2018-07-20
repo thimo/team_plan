@@ -24,7 +24,7 @@
             - team_members.each_with_index do |team_member, index|
               - if index == 0
                 tr
-                  td.strong.small.color-blue-grey-lighter[colspan="100"]
+                  td.strong.small.lighter[colspan="100"]
                     = year
               tr
                 td.w-1
@@ -35,7 +35,7 @@
                   - team_member.field_positions.each do |field_position|
                     div
                       = field_position.name
-                  .color-blue-grey-lighter
+                  .lighter
                     = team_member.prefered_foot
 
                 - if policy(@team).show_previous_team?
@@ -44,7 +44,7 @@
                       - previous_teams.each do |previous_team|
                         div.nowrap
                           = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
-                        div.color-blue-grey-lighter.nowrap
+                        div.lighter.nowrap
                           = "#{previous_team.division}"
 
                 td.w-1.nowrap.text-right

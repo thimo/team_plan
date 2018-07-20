@@ -2,7 +2,7 @@
 td
   = render member, target: '_blank'
 
-td.color-blue-grey.small
+td.light.small
   - if (previous_teams = member.teams_for_season(@previous_season).as_player.distinct).present?
     - previous_teams.each do |previous_team|
       div
