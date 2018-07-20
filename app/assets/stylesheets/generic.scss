@@ -30,7 +30,6 @@ strong,
 
 .fa, .svg-inline--fa {
   &.red {
-    color: #da211d;
     color: #fa424a;
   }
   &.green {
@@ -130,29 +129,6 @@ tr.b-t-0 {
   width: 44px;
 }
 
-// Make Bootstrap 4 breadcrumb work nicely with gem
-.breadcrumb li {
-  float: left;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-    display: inline-block;
-    padding-right: .5rem;
-    color: #73818f;
-    content: "/";
-}
-
-.breadcrumb li + li:hover::before {
-  text-decoration: underline;
-}
-
-.breadcrumb li + li:hover::before {
-  text-decoration: none;
-}
-
-.breadcrumb li.active {
-  color: #636c72;
-}
 // Extra alert CSS to support Devise
 .alert-alert {
   background-color: #f2dede;

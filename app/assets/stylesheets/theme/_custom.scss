@@ -33,3 +33,16 @@ h1, h2, h3, h4, h5, h6 {
     vertical-align: middle;
   }
 }
+
+.breadcrumb {
+  .breadcrumb-item {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+  }
+
+  .breadcrumb-menu {
+    .btn {
+      padding: .75rem;
+    }
+  }
+}

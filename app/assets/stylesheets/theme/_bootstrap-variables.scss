@@ -898,28 +898,29 @@ $badge-padding-y:                   .4em;
 //
 // $figure-caption-font-size:          90% !default;
 // $figure-caption-color:              $gray-600 !default;
-//
-//
-// // Breadcrumbs
-//
+
+
+// Breadcrumbs
+
 // $breadcrumb-padding-y:              .75rem !default;
+$breadcrumb-padding-y:              0;
 // $breadcrumb-padding-x:              1rem !default;
 // $breadcrumb-item-padding:           .5rem !default;
-//
+
 // $breadcrumb-margin-bottom:          1rem !default;
-$breadcrumb-margin-bottom:          0;
-//
+$breadcrumb-margin-bottom:          -1rem;
+
 // $breadcrumb-bg:                     $gray-200 !default;
 $breadcrumb-bg:                     none;
 // $breadcrumb-divider-color:          $gray-600 !default;
 // $breadcrumb-active-color:           $gray-600 !default;
 // $breadcrumb-divider:                quote("/") !default;
-//
+
 // $breadcrumb-border-radius:          $border-radius !default;
-//
-//
-// // Carousel
-//
+
+
+// Carousel
+
 // $carousel-control-color:            $white !default;
 // $carousel-control-width:            15% !default;
 // $carousel-control-opacity:          .5 !default;
