@@ -1,17 +1,16 @@
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
-// @import 'bootstrap/scss/mixins';
 
-// // Variables
-// //
-// // Variables should follow the `$component-state-property-size` formula for
-// // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+// Variables
 //
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+
 //
-// //
-// // Color system
-// //
+// Color system
 //
+
 // $white:    #fff !default;
 // $gray-100: #f8f9fa !default;
 // $gray-200: #e9ecef !default;
@@ -780,28 +779,28 @@ $card-spacer-x:                     1rem;
 // $popover-arrow-color:               $popover-bg !default;
 //
 // $popover-arrow-outer-color:         fade-in($popover-border-color, .05) !default;
-//
-//
-// // Badges
-//
+
+
+// Badges
+
 // $badge-font-size:                   75% !default;
 $badge-font-size:                   .75rem;
 // $badge-font-weight:                 $font-weight-bold !default;
 $badge-font-weight:                 $font-weight-normal;
 // $badge-padding-y:                   .25em !default;
-$badge-padding-y:                   .4em;
+$badge-padding-y:                   .3em;
 // $badge-padding-x:                   .4em !default;
 // $badge-border-radius:               $border-radius !default;
-//
+
 // $badge-pill-padding-x:              .6em !default;
 // // Use a higher than normal value to ensure completely rounded edges when
 // // customizing padding or font-size on labels.
 // $badge-pill-border-radius:          10rem !default;
-//
-//
-// // Modals
-//
-// // Padding applied to the modal body
+
+
+// Modals
+
+// Padding applied to the modal body
 // $modal-inner-padding:               1rem !default;
 //
 // $modal-dialog-margin:               .5rem !default;
