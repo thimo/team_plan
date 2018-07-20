@@ -357,6 +357,7 @@ nl:
       vrij_datumveld_2: free_date_2
       vrije_dropdown_1: free_dropdown_1
       vrije_dropdown_2: free_dropdown_2
+      bondsteams: association_teams
 
   invites_sent:
     one: er is 1 uitnodiging verstuurd
