@@ -18,7 +18,7 @@ table.table.table-sm.tr-links
             i.fa.far.fa-recycle.ml-2.color-green[title="Opnieuw geactiveerd"]
 
 - unless members.last_page?
-  #members_list
+  .p-2#members_list
     .text-right
       = link_to replace_param_in_request_path(member_page: members.next_page), remote: true
         | Meer

@@ -20,6 +20,16 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 .5rem;
 }
 
+.badge {
+  &.badge-one-number {
+    min-width: 26px;
+  }
+
+  &.badge-two-numbers {
+    min-width: 48px;
+  }
+}
+
 .badge-secondary, .badge-warning, .badge-success {
   color: white;
   // Slightly heavier font for low-contrast colors

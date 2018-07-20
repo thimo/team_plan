@@ -51,75 +51,6 @@
     }
   }
 }
-@media (max-width: 576px) {
-  .site-header {
-    .site-header-content {
-      margin-left: -180px;
-
-      .site-header-content-in {
-        margin-left: 180px;
-      }
-    }
-
-    .site-header-search-container {
-      width: 100px;
-    }
-  }
-}
-
-@media (max-width: 767px) {
-  .site-header {
-    h1 {
-      font-size: 1.2rem;
-    }
-
-    .site-logo {
-      img {
-        height: auto;
-        width: 48px;
-        top: 2px;
-      }
-    }
-  }
-}
-
-@media (max-width: 1056px) {
-  .site-header {
-    .site-header-collapsed .dropdown.dropdown-right {
-      float: none;
-      margin: 0;
-      zoom: 1;
-    }
-  }
-}
-
-.page-content {
-  padding: 24px 15px 10px;
-
-  ol {
-    margin-bottom: 1rem;
-    padding-left: 2rem;
-  }
-
-  ul {
-    list-style: inherit;
-    margin-bottom: 1rem;
-    padding-left: 2rem;
-
-    &.nav,
-    &.side-menu-list {
-      list-style: none;
-      margin-bottom: 0;
-      padding-left: 0;
-    }
-  }
-
-  nav {
-    ul {
-      padding-left: 0;
-    }
-  }
-}
 
 .side-menu {
   position: absolute;
@@ -142,38 +73,6 @@
 .side-menu-list, .side-menu {
   a:hover {
     text-decoration: none;
-  }
-}
-
-.comment-row-item {
-  &.no-photo {
-    padding-left: 15px;
-  }
-
-  p {
-    margin-bottom: 1rem;
-  }
-}
-
-.comment {
-  &.chat-message {
-    min-height: 40px;
-    padding-top: 0;
-    padding-bottom: 0;
-
-    .chat-message-photo {
-      top: 4px;
-    }
-  }
-}
-
-.badge {
-  &.badge-one-number {
-    min-width: 26px;
-  }
-
-  &.badge-two-numbers {
-    min-width: 48px;
   }
 }
 

@@ -1,14 +1,10 @@
 - version_updates.each do |version_update|
-  .comment-row-item.no-photo
-    / TODO: Replace styling
-    .tbl.comment-row-item-header
-      .tbl-row
-        .tbl-cell.tbl-cell-name
-          = version_update.name
-        .tbl-cell.tbl-cell-date
-          = l version_update.released_at, format: :date_long
-    .comment-row-item-content
-      = markdown(version_update.body).html_safe
+  .small.light.float-right
+    = l version_update.released_at, format: :date_long
+  .strong.mb-1
+    = version_update.name
+  .mb-3
+    = markdown(version_update.body).html_safe
 
 - unless version_updates.last_page?
   #version_updates_list
