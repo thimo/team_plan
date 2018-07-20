@@ -5,9 +5,9 @@
   .card-header
     = title
 
-  .card-body
-    table.table.table-sm.tr-links
-      - if injureds.size > 0
+  .card-body.p-0
+    - if injureds.size > 0
+      table.table.table-sm.tr-links
         - unless disable_header
           thead
             th Speler
@@ -25,8 +25,6 @@
               td
                 = injury.title
 
-      - else
-        tbody
-          tr
-            td
-              i Geen geblesseerde spelers gevonden
+    - else
+      .p-3
+        i Geen geblesseerde spelers gevonden

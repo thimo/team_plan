@@ -19,8 +19,8 @@
           i.fa.far.fa-copy
 
   .card-body.p-0
-    table.table.table-sm.tr-links
-      - if team_evaluations.size > 0
+    - if team_evaluations.size > 0
+      table.table.table-sm.tr-links
         - unless disable_header
           thead
             - unless hide_team
@@ -63,8 +63,6 @@
                   .progress
                     .progress-bar[role="progressbar" style="width: #{team_evaluation.progress}%" aria-valuenow="#{team_evaluation.progress}" aria-valuemin="0" aria-valuemax="100" title="#{team_evaluation.progress}%"]
 
-      - else
-        tbody
-          tr
-            td
-              i Geen teamevaluaties gevonden
+    - else
+      .p-3
+        i Geen teamevaluaties gevonden

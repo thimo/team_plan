@@ -19,8 +19,8 @@
           i.fa.far.fa-calendar-alt
 
   .card-body
-    table.table.table-sm.tr-links.align-top
-      - if program_items.any?
+    - if program_items.any?
+      table.table.table-sm.tr-links.align-top
         tbody
           - program_items.each do |program_item|
             - if program_item.is_a? Match
@@ -31,8 +31,6 @@
               = render partial: 'shared/training',
                 locals: { training: program_item, include_presences: include_presences, team: team }
 
-      - else
-        tbody
-          tr
-            td
-              i Geen programma gevonden
+    - else
+      .p-3
+        i Geen programma gevonden

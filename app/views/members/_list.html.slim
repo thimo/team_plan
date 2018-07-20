@@ -8,13 +8,10 @@
       small.pl-2.light
         = subtitle
 
-  .card-body
+  .card-body.p-0
     - if members.any?
       = render 'members/list_body', members: members
 
     - else
-      table.table
-        tbody
-          tr
-            td
-              i Geen leden gevonden
+      .p-3
+        i Geen leden gevonden

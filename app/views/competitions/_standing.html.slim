@@ -13,9 +13,9 @@
       .light.small
         = "#{competition.competitienaam}"
 
-  .card-body
-    table.table.table-sm.tr-links
-      - if competition.ranking
+  .card-body.p-0
+    - if competition.ranking
+      table.table.table-sm.tr-links
         thead
           tr
             th
@@ -63,11 +63,9 @@
                     = line['doelpuntentegen']
                 td.text-center
                   = line['doelsaldo']
-      - else
-        tbody
-          tr
-            td
-              i Geen stand gevonden
+    - else
+      .p-3
+        i Geen stand gevonden
 
 .row
   .col-sm-6

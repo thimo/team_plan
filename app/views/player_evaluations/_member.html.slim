@@ -2,9 +2,9 @@
   .card-header
     | Evaluaties
 
-  .card-body.table-responsive
-    table.table.table-sm
-      - if player_evaluations.finished_desc.size > 0
+  .card-body.table-responsive.p-0
+    - if player_evaluations.finished_desc.size > 0
+      table.table.table-sm
         thead
           th
           = render "player_evaluations/th_columns"
@@ -20,8 +20,6 @@
               td.light.b-t-0[colspan="11"]
                 = evaluation.remark
 
-      - else
-        tbody
-          tr
-            td
-              i Geen evaluaties gevonden
+    - else
+      .p-3
+        i Geen evaluaties gevonden

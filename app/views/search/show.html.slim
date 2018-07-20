@@ -3,20 +3,20 @@
 .card
   .card-header
     | #{@members.count} Resultaten
-  .card-body.table-responsive
-    table.table.table-sm.tr-links
-      thead
-        tr
-          th = Member.human_attribute_name(:name)
-          th = Member.human_attribute_name(:email)
-      tbody
-        - @members.each do |member|
+  .card-body.table-responsive.p-0
+    - if @members.size > 0
+      table.table.table-sm.tr-links
+        thead
           tr
-            td
-              = render member
-            td
-              = member.email
-        - if @members.size == 0
-          tr
-            td
-              i Geen leden gevonden
+            th = Member.human_attribute_name(:name)
+            th = Member.human_attribute_name(:email)
+        tbody
+          - @members.each do |member|
+            tr
+              td
+                = render member
+              td
+                = member.email
+    - else
+      .p-3
+        i Geen leden gevonden

@@ -7,9 +7,9 @@
           = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "card-header-action"
             i.fa.far.fa-medkit
 
-  .card-body
-    table.table.table-sm.tr-links
-      - if injuries.size > 0
+  .card-body.p-0
+    - if injuries.size > 0
+      table.table.table-sm.tr-links
         tbody
           - injuries.each do |injury|
             tr.clickable
@@ -27,11 +27,9 @@
               td.w-1.nowrap.text-right
                 - if injury.ended_on.nil?
                   i.fa.far.fa-medkit.red.m-2
-      - else
-        tbody
-          tr
-            td
-              i Geen blessures gevonden
+    - else
+      .p-3
+        i Geen blessures gevonden
 
   - if injuries.total_pages > 1
     .card-footer
