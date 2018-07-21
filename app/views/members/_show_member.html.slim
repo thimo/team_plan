@@ -1,6 +1,6 @@
 h4 Contactgegevens
 
-= image_tag @member.photo_url, style: 'width: 200px; float: right;' if @member.photo.present?
+= image_tag @member.photo_url, class: "member_photo" if @member.photo.present?
 
 .strong
   => member.name

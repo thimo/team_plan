@@ -1,8 +1,15 @@
-.member_photo {
+.member_photo_thumbnail {
   max-width: 50px;
   max-height: 50px;
+  border-radius: $border-radius;
 
   &.placeholder {
     padding: 8px;
   }
+}
+
+.member_photo {
+  width: 200px;
+  float: right;
+  border-radius: $border-radius;
 }
