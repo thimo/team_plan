@@ -28,18 +28,6 @@ strong,
   z-index: 100 !important;
 }
 
-.fa, .svg-inline--fa {
-  &.red {
-    color: #fa424a;
-  }
-  &.green {
-    color: #46c35f;
-  }
-  &.grey {
-    color: #ccc;
-  }
-}
-
 .opacity-5 {
   opacity: .5;
   transition: all .2s ease-in-out;

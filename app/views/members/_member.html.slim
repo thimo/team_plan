@@ -1,9 +1,9 @@
 - if policy(member).show_private_data?
   = link_to member.name, member, target: target ||= ''
   - if member.injured?
-    i.fa-medkit.ml-1.red[title="Geblesseerd" class=fa_class]
+    i.fa-medkit.ml-1.color-red[title="Geblesseerd" class=fa_class]
   - if policy(member).show_conduct? && member.conduct_number.present?
-    i.fa-shield-check.green.ml-1[title="VOG-nummer geregistreerd" class=fa_class]
+    i.fa-shield-check.color-green.ml-1[title="VOG-nummer geregistreerd" class=fa_class]
 - elsif (active_team = member.active_team).present?
   = link_to member.name, active_team
 - else
