@@ -39,6 +39,9 @@ document.addEventListener("turbolinks:load", () => {
   })
 
   new LazyLoad();
+
+  $('.sidebar').sidebar();
+  $('.aside-menu')['aside-menu']();
 });
 
 document.addEventListener("turbolinks:before-cache", () => {

@@ -5,15 +5,16 @@
     = render 'layouts/side_menu_intranet' if [Intranet].include? controller.class.parent
     = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
 
-    section[style="flex-grow: 1;"]
+    / section[style="flex-grow: 1;"]
 
-    section
-      ul.side-menu-list
-        li.brown
-          = link_to support_path do
-            i.fa.far.fa-fw.fa-question-circle
-            span.lbl
-              | Support
+    / section
+    /   ul.side-menu-list
+    /     li.brown
+    /       = link_to support_path do
+    /         i.fa.far.fa-fw.fa-question-circle
+    /         span.lbl
+    /           | Support
+
   button.sidebar-minimizer.brand-minimizer[type="button"]
 
     / section.supplier
