@@ -3,6 +3,9 @@ window.autosize = autosize
 import LazyLoad from 'vanilla-lazyload'
 
 document.addEventListener("turbolinks:load", () => {
+  $('.sidebar').sidebar();
+  // $('.aside-menu')['aside-menu']();
+
   // Auto-size all textarea's
   autosize($('textarea'));
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -39,9 +42,6 @@ document.addEventListener("turbolinks:load", () => {
   })
 
   new LazyLoad();
-
-  $('.sidebar').sidebar();
-  $('.aside-menu')['aside-menu']();
 });
 
 document.addEventListener("turbolinks:before-cache", () => {

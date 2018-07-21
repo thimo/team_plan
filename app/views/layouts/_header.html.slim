@@ -4,9 +4,12 @@ header.app-header.navbar
   a.navbar-brand href="/" title="#{Setting['club.name']} #{Setting['application.name']}"
     img.navbar-brand-full src="#{asset_path 'logo/esa_logo.svg'}" height="25"
     img.navbar-brand-minimized src="#{asset_path 'logo/esa_logo.svg'}" height="30"
-    h1.m-0.ml-1.d-none.d-sm-inline style="font-size: 24px; font-weight: 300; color: black;" TeamPlan
+    h1.navbar-brand-full.m-0.ml-1 style="font-size: 20px; font-weight: 300; color: black;"
+      | TeamPlan
+
   button.navbar-toggler.sidebar-toggler.d-md-down-none[type="button" data-toggle="sidebar-lg-show"]
     span.navbar-toggler-icon
+
   ul.nav.navbar-nav.d-md-down-none
     li.nav-item.px-3
       = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
