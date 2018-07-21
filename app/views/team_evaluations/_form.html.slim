@@ -9,11 +9,11 @@
         = " - #{@team_evaluation.status}"
       .card-header-actions
         = link_to "/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf", target: "_blank", class: "card-header-action" do
-          i.fa.far.fa-book.mr-1
+          i.fa-book.mr-1[class=fa_class]
           | Handleiding
         - if policy(@team_evaluation).destroy?
           = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "card-header-action"
-            i.fa.far.fa-trash-alt
+            i.fa-trash-alt[class=fa_class]
 
     .card-body
       table.table.table-xxs

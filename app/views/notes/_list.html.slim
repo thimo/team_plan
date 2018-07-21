@@ -4,7 +4,7 @@
     .card-header-actions
       - if policy(Note.new(team: team)).create?
         = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "card-header-action"
-          i.fa.far.fa-plus-square
+          i.fa-plus-square[class=fa_class]
     .small
       | Zoals gespreksverslagen en teambesprekingen
 

@@ -16,7 +16,7 @@ h4 Contactgegevens
       br
       => member.zipcode
       => member.city
-      i.fa.far.fa-map.ml-2
+      i.fa-map.ml-2[class=fa_class]
 
   .modal.modal-xl#googleMapsModal
     .modal-dialog.modal-lg
@@ -32,28 +32,28 @@ h4 Contactgegevens
     div.pt-2
       a[href="tel:#{member.phone}"]
         = member.phone
-        i.fa.far.fa-phone.ml-2
+        i.fa-phone.ml-2[class=fa_class]
   - unless member.phone_2.blank?
     div
       a[href="tel:#{member.phone_2}"]
         = member.phone_2
-        i.fa.far.fa-phone.ml-2
+        i.fa-phone.ml-2[class=fa_class]
   - unless member.phone_home.blank?
     div
       a[href="tel:#{member.phone_home}"]
         = member.phone_home
-        i.fa.far.fa-phone.ml-2
+        i.fa-phone.ml-2[class=fa_class]
 
   - unless member.email.blank?
     div
       = mail_to member.email
         = member.email
-        i.fa.far.fa-envelope.ml-2
+        i.fa-envelope.ml-2[class=fa_class]
   - unless member.email_2.blank?
     div
       = mail_to member.email_2
         = member.email_2
-        i.fa.far.fa-envelope.ml-2
+        i.fa-envelope.ml-2[class=fa_class]
 
   - if policy(member).show_login? && member.email.present?
     div.mt-2

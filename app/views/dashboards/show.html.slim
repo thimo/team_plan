@@ -3,7 +3,7 @@
 - content_for :action_buttons
     - if policy(Todo).create?
       = link_to new_todo_path, title: "Todo toevoegen", class: "btn"
-        i.fa.far.fa-check-square
+        i.fa-check-square[class=fa_class]
 
 .dashboard
   .row

@@ -15,13 +15,13 @@
           = @team_evaluation.status
       .card-header-actions
         a.card-header-action[href="#" onclick="window.print(); return false;"]
-          i.fa.far.fa-print
+          i.fa-print[class=fa_class]
       - if policy(@team_evaluation).re_open?
         = link_to re_open_team_evaluation_path(@team_evaluation),  method: :post, data: { confirm: 'Teamevaluatie wordt weer open gezet voor wijzigingen. Doorgaan?' }, title: "Teamevaluatie open zetten voor wijzigingen", class: "card-header-action"
-          i.fa.far.fa-undo
+          i.fa-undo[class=fa_class]
       - if policy(@team_evaluation).destroy?
         = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "card-header-action"
-          i.fa.far.fa-trash-alt
+          i.fa-trash-alt[class=fa_class]
 
     .card-body.table-responsive
       table.table.table-xxs

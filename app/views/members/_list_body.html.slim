@@ -15,11 +15,11 @@ table.table.table-sm.tr-links
                 = last_comment.body
         td.text-right.w-44
           - if member.reactivated?
-            i.fa.far.fa-recycle.ml-2.color-green[title="Opnieuw geactiveerd"]
+            i.fa-recycle.ml-2.color-green[title="Opnieuw geactiveerd" class=fa_class]
 
 - unless members.last_page?
   .p-2#members_list
     .text-right
       = link_to replace_param_in_request_path(member_page: members.next_page), remote: true
         | Meer
-        i.fa.far.fa-angle-down.ml-1
+        i.fa-angle-down.ml-1[class=fa_class]

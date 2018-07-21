@@ -27,13 +27,13 @@
                 - if presences.has_key? presentable.id
                   - if presences[presentable.id].present
                     - title = [presences[presentable.id].on_time_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa.far.fa-check.green[title="#{title}"]
+                    i.fa-check.green[title="#{title}" class=fa_class]
                     - presence_count += 1
                   - else
                     - title = [presences[presentable.id].signed_off_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa.far.fa-times.red[title="#{title}"]
+                    i.fa-times.red[title="#{title}" class=fa_class]
                 - else
-                  i.fa.far.fa-minus.grey
+                  i.fa-minus.grey[class=fa_class]
             td.w-1.text-right.light
               = presence_count
             td

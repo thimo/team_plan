@@ -15,7 +15,7 @@
     .card-header-actions
       - if policy(@note).update?
         = link_to edit_note_path(@note), class: "card-header-action", title: "Aanpassen"
-          i.fa.far.fa-pencil
+          i.fa-pencil[class=fa_class]
 
   .card-body
     .comment-row-item.no-photo

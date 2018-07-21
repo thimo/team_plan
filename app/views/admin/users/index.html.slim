@@ -18,7 +18,7 @@
         = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
       - if policy(User).create?
           = link_to new_admin_user_path, title: "Gebruiker toevoegen", class: "card-header-action"
-            i.fa.far.fa-file
+            i.fa-file[class=fa_class]
 
   .card-body
     table.table.table-sm.tr-links
@@ -45,7 +45,7 @@
             td.text-right
               - if current_user != user
                 = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
-                  i.fa.far.fa-sign-in.m-1.ml-2
+                  i.fa-sign-in.m-1.ml-2[class=fa_class]
 
 .text-right
   = paginate @users, theme: 'twitter-bootstrap-4'

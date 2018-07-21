@@ -3,10 +3,10 @@
 - content_for :action_buttons
   - if policy(@season).update?
     = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "btn"
-      i.fa.far.fa-pencil
+      i.fa-pencil[class=fa_class]
   - if policy(@season).destroy?
     = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "btn"
-      i.fa.far.fa-trash-alt
+      i.fa-trash-alt[class=fa_class]
 
 - if @age_groups_male.any? || @age_groups_female.any?
   .row

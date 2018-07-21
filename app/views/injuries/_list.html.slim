@@ -5,7 +5,7 @@
       - if policy(Injury.new(member: member)).create?
         .card-header-actions
           = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "card-header-action"
-            i.fa.far.fa-medkit
+            i.fa-medkit[class=fa_class]
 
   .card-body.p-0
     - if injuries.size > 0
@@ -26,7 +26,7 @@
                   = "#{injury.user.name}"
               td.w-1.nowrap.text-right
                 - if injury.ended_on.nil?
-                  i.fa.far.fa-medkit.red.m-2
+                  i.fa-medkit.red.m-2[class=fa_class]
     - else
       .p-3
         i Geen blessures gevonden

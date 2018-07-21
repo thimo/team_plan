@@ -5,17 +5,17 @@
   - if @age_group.teams.size > 0
     - if policy(TeamMember.new(team: @age_group.teams.first)).create?
       = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn"
-        i.fa.far.fa-table
+        i.fa-table[class=fa_class]
   - if policy(@age_group).update?
     = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "btn"
-      i.fa.far.fa-pencil
+      i.fa-pencil[class=fa_class]
   - if policy(@age_group).destroy?
     = link_to age_group_path(@age_group),  method: :delete, data: { confirm: 'Leeftijdsgroep wordt verwijderd. Doorgaan?' }, title: "Leeftijdsgroep verwijderen", class: "btn"
-      i.fa.far.fa-trash-alt
+      i.fa-trash-alt[class=fa_class]
   .pl-3
   - if policy(Todo).create? && policy(@age_group).show_todos?
     = link_to new_age_group_todo_path(@age_group), title: "Todo toevoegen", class: "btn"
-      i.fa.far.fa-check-square
+      i.fa-check-square[class=fa_class]
   = render "shared/favorite", parent: @age_group, styleClass: "btn"
 
 .row
@@ -26,16 +26,16 @@
         .card-header-actions
           - if policy(@age_group).bulk_email?
             = link_to new_age_group_team_action_path(@age_group, type: :email), title: "Stuur e-mail aan teams", class: "card-header-action", remote: true
-              i.fa.far.fa-envelope
+              i.fa-envelope[class=fa_class]
           - if policy(@age_group).download_team_members?
             = link_to new_age_group_team_action_path(@age_group, type: :download_team_members), title: "Download teams naar Excel", class: "card-header-action", remote: true
-              i.fa.far.fa-file-excel
+              i.fa-file-excel[class=fa_class]
           - if policy(Team.new(age_group: @age_group)).create?
             = link_to new_age_group_team_path(@age_group), title: "Team toevoegen", class: "card-header-action"
-              i.fa.far.fa-file
+              i.fa-file[class=fa_class]
           - if policy(Team.new(age_group: @age_group)).create?
             = link_to new_age_group_team_bulk_update_path(@age_group), title: "Teams toevoegen", class: "card-header-action"
-              i.fa.far.fa-copy
+              i.fa-copy[class=fa_class]
 
       .card-body.p-0
         table.table.table-sm.tr-links

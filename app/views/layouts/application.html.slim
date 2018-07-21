@@ -9,7 +9,11 @@ html[lang="nl"]
     meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
     meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
-    link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"
+    link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"
+    link[rel="stylesheet"
+      href="https://#{Setting["fontawesome.integrity"].present? ? "pro" : "use"}.fontawesome.com/releases/v5.1.1/css/all.css"
+      integrity="#{Setting["fontawesome.integrity"]}"
+      crossorigin="anonymous"]
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'print/print', media: 'print', 'data-turbolinks-track': 'reload'

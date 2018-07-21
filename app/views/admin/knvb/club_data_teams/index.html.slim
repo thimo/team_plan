@@ -6,9 +6,9 @@
     .card-header-actions
       - if policy(ClubDataTeam).create?
         = link_to new_admin_knvb_club_data_teams_import_path, title: "Importeer teams", class: "card-header-action"
-          i.fa.far.fa-sync
+          i.fa-sync[class=fa_class]
         = link_to new_admin_knvb_club_data_team_photos_import_path, title: "Importeer pasfoto's", class: "card-header-action"
-          i.fa.far.fa-file-image
+          i.fa-file-image[class=fa_class]
 
   .card-body.table-responsive
     table.table.table-sm.tr-links

@@ -4,19 +4,19 @@
     .card-header-actions
       - if policy(@season).bulk_publish?
         = link_to new_season_team_action_path(@season, type: :publish), title: "Publiseer teams", class: "card-header-action", remote: true
-          i.fa.far.fa-inbox-out
+          i.fa-inbox-out[class=fa_class]
       - if policy(@season).bulk_email?
         = link_to new_season_team_action_path(@season, type: :email), title: "Stuur e-mail aan teams", class: "card-header-action", remote: true
-          i.fa.far.fa-envelope
+          i.fa-envelope[class=fa_class]
       - if policy(@season).download_team_members?
         = link_to new_season_team_action_path(@season, type: :download_team_members), title: "Download teams naar Excel", class: "card-header-action", remote: true
-          i.fa.far.fa-file-excel
+          i.fa-file-excel[class=fa_class]
       - if policy(AgeGroup.new(season: @season)).create?
         = link_to new_season_age_group_path(@season), title: "Leeftijdsgroep toevoegen", class: "card-header-action"
-          i.fa.far.fa-file
+          i.fa-file[class=fa_class]
       - if policy(AgeGroup.new(season: @season)).create?
         = link_to new_season_age_group_bulk_update_path(@season), title: "Leeftijdsgroepen toevoegen", class: "card-header-action"
-          i.fa.far.fa-copy
+          i.fa-copy[class=fa_class]
 
 
   .card-body.p-0

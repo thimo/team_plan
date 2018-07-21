@@ -6,7 +6,7 @@
     .card-header-actions
       - if policy(Todo).create?
         = link_to new_path, title: "Todo toevoegen", class: "card-header-action"
-          i.fa.far.fa-plus-square
+          i.fa-plus-square[class=fa_class]
 
   .card-body.p-0
     - if todos_active.present? || todos_defered.present?

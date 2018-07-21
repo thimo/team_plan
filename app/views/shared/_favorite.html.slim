@@ -3,7 +3,7 @@
 - if policy(parent).show_favorite?
   - if parent.favorite?(current_user)
     = link_to parent.favorite(current_user), method: :delete, title: "Favoriet verwijderen", class: styleClass
-      i.fa.far.fa-star.favorable.selected
+      i.fa-star.favorable.selected[class=fa_class]
   - else
     = link_to [parent, Favorite], method: :post, title: "Als favoriet markeren", class: styleClass
-      i.fa.far.fa-star.favorable
+      i.fa-star.favorable[class=fa_class]

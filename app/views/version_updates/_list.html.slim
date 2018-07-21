@@ -6,7 +6,7 @@
     .card-header-actions
       - if policy(VersionUpdate).create?
         = link_to new_admin_version_update_path, title: "Versie toevoegen", class: "card-header-action"
-          i.fa.far.fa-file
+          i.fa-file[class=fa_class]
 
   .card-body
     - if version_updates.present?

@@ -9,7 +9,7 @@
             - @age_groups_male.each do |age_group|
               li.list-group-item
                 = link_to age_group
-                  i.fa.far.fa-users.light.pr-2
+                  i.fa-users.light.pr-2[class=fa_class]
                   = age_group.name
   .col-6
     .card
@@ -21,5 +21,5 @@
             - @age_groups_female.each do |age_group|
               li.list-group-item
                 = link_to age_group
-                  i.fa.far.fa-users.light.pr-2
+                  i.fa-users.light.pr-2[class=fa_class]
                   = age_group.name

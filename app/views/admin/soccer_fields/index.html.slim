@@ -6,8 +6,8 @@
     .card-header-actions
       - if policy(SoccerField).create?
         = link_to new_admin_soccer_field_path, title: "Toevoegen", class: "card-header-action"
-          i.fa.far.fa-file
-            
+          i.fa-file[class=fa_class]
+
   .card-body.table-responsive
     table.table.table-sm.tr-links
       thead

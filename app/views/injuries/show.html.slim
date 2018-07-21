@@ -3,10 +3,10 @@
 - content_for :action_buttons
   - if policy(Todo).create? && policy(@injury.member).show_todos?
     = link_to new_member_todo_path(@injury.member, title: "Opvolging voor blessure - #{@injury.title}"), title: "Todo toevoegen", class: "btn"
-      i.fa.far.fa-check-square
+      i.fa-check-square[class=fa_class]
   - if policy(@injury).edit?
     = link_to edit_injury_path(@injury), class: "btn", title: "Aanpassen"
-      i.fa.far.fa-pencil
+      i.fa-pencil[class=fa_class]
 
 .row
   .col-xl-6

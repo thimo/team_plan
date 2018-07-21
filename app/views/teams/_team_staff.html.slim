@@ -4,10 +4,10 @@
     .card-header-actions
       - if policy(@team).bulk_email?
         a.card-header-action[href="mailto:#{@team.team_members.active_for_team(@team).staff.distinct.map(&:email).uniq.join(current_user.settings.email_separator)}", title="Stuur een e-mail aan de teamleiding"]
-          i.fa.far.fa-envelope
+          i.fa-envelope[class=fa_class]
       - if policy(TeamMember.new(team: @team)).create?
         = link_to new_team_team_member_path(@team), title: "Teamleiding toevoegen", class: "card-header-action" do
-          i.fa.far.fa-user
+          i.fa-user[class=fa_class]
 
   .card-body.table-responsive.p-0
     table.table.table-sm.tr-links

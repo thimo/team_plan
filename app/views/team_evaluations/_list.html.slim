@@ -13,10 +13,10 @@
     .card-header-actions
       - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
         = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "card-header-action"
-          i.fa.far.fa-list-ol
+          i.fa-list-ol[class=fa_class]
       - if show_bulk_create && @age_group.present? && policy(TeamEvaluation.new(team: @teams.first)).create?
         = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "card-header-action"
-          i.fa.far.fa-copy
+          i.fa-copy[class=fa_class]
 
   .card-body.p-0
     - if team_evaluations.size > 0

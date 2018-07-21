@@ -7,7 +7,7 @@
     .card-header-actions
       - if policy(Group).create?
         = link_to new_admin_group_path, title: "Groep toevoegen", class: "card-header-action"
-          i.fa.far.fa-file
+          i.fa-file[class=fa_class]
 
   .card-body
     table.table.table-sm.tr-links

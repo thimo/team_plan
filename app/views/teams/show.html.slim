@@ -5,42 +5,42 @@
 - content_for :action_buttons
   - if policy(TeamEvaluation.new(team: @team)).create?
     = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn"
-      i.fa.far.fa-list-ol
+      i.fa-list-ol[class=fa_class]
   - if policy(@team).update?
     = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn" do
-      i.fa.far.fa-pencil
+      i.fa-pencil[class=fa_class]
   - if policy(@team).destroy?
     = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "btn"
-      i.fa.far.fa-trash-alt
+      i.fa-trash-alt[class=fa_class]
   .pl-3
   - if policy(Todo).create? && policy(@team).show_todos?
     = link_to new_team_todo_path(@team), title: "Todo toevoegen", class: "btn"
-      i.fa.far.fa-check-square
+      i.fa-check-square[class=fa_class]
   = render "shared/favorite", parent: @team, styleClass: "btn"
 
 section
   ul.nav.nav-tabs[role="tablist"]
     li.nav-item
       a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
-        i.fa.far.fa-calendar-alt
+        i.fa-calendar-alt[class=fa_class]
         .pl-2.d-none.d-sm-inline Programma
     li.nav-item
       a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
-        i.fa.far.fa-futbol
+        i.fa-futbol[class=fa_class]
         .pl-2.d-none.d-sm-inline Competities
     li.nav-item
       a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
-        i.fa.far.fa-users
+        i.fa-users[class=fa_class]
         .pl-2.d-none.d-sm-inline Team
     - if policy(@team).show_dossier?
       li.nav-item
         a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
-          i.fa.far.fa-book
+          i.fa-book[class=fa_class]
           .pl-2.d-none.d-md-inline Dossier
     - if policy(@team).show_statistics?
       li.nav-item
         a.nav-link[href="?tab=statistics" class="#{'active' if @active_tab == 'statistics'}"]
-          i.fa.far.fa-chart-bar
+          i.fa-chart-bar[class=fa_class]
           .pl-2.d-none.d-md-inline Statistieken
 
   .tab-content

@@ -1,7 +1,7 @@
 .todo.comment.chat-message[class="#{'opacity-5' if todo.defered?}"]
   .chat-message-photo
     = link_to [:toggle, todo], method: :post, remote: true
-      i.fa.far[class="#{todo.finished? ? 'fa-check-square' : 'fa-square'}"]
+      i[class="#{todo.finished? ? 'fa-check-square' : 'fa-square'}" class=fa_class]
   .chat-message-header
     / TODO: Replace styling
     .tbl-row
@@ -9,7 +9,7 @@
         = todo.body
       .tbl-cell.tbl-cell-date
         = link_to edit_todo_path(todo, return: request.path), title: "Aanpassen", class: "pl-2"
-          i.fa.far.fa-pencil.lighter
+          i.fa-pencil.lighter[class=fa_class]
 
   .chat-message-content
     .chat-message-txt.light

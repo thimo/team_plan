@@ -3,7 +3,7 @@
 - content_for :action_buttons
   - if policy(@match).update?
     = link_to edit_match_path(@match), class: "btn", title: "Aanpassen"
-      i.fa.far.fa-pencil
+      i.fa-pencil[class=fa_class]
 
 - if @match.afgelast?
   div.alert.alert-danger
