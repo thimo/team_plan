@@ -18,7 +18,7 @@
   = f.text_area :remark
 
   = f.submit "Opslaan", class: 'btn btn-primary'
-  = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-outline-secondary'
+  = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-light'
   - if policy(@training).destroy?
     = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
 
