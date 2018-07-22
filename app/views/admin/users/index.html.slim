@@ -1,9 +1,10 @@
 - provide(:title, "Gebruikers")
 
+- content_for :title_action
+  = paginate @users, theme: 'twitter-bootstrap-4'
+
 .card
   .card-header
-    .text-right
-      = paginate @users, theme: 'twitter-bootstrap-4'
     | #{@users.total_count} Gebruikers
 
     .card-header-actions

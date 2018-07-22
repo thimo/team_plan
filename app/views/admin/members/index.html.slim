@@ -1,9 +1,10 @@
 - provide(:title, "Leden")
 
+- content_for :title_action
+  = paginate @members, theme: 'twitter-bootstrap-4'
+
 .card
   .card-header
-    .text-right
-          = paginate @members, theme: 'twitter-bootstrap-4'
     | #{@members.total_count} Leden
     .card-header-actions
       - if params[:inactive]

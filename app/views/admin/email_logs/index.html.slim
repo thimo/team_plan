@@ -1,9 +1,10 @@
 - provide(:title, 'E-mail log')
 
+- content_for :title_action
+  = paginate @email_logs, theme: 'twitter-bootstrap-4'
+
 .card
   .card-body.table-responsive
-    .text-right
-      = paginate @email_logs, theme: 'twitter-bootstrap-4'
 
     table.table.tr-links
       thead

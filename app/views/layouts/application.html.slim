@@ -36,16 +36,21 @@ html[lang="nl"]
 
         .container-fluid
           header.section-header.mt-3
-            h3.mb-3
-              .pr-2.d-inline
-                = yield(:title)
-              small.light.d-block.d-md-inline
-                = yield(:subtitle)
-              - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
-                span.ml-3.badge.badge-secondary[class="#{label_object.color_class_for_status}"]
-                  = label_object.status_i18n
-            .light.small
-              = yield(:hint)
+            .d-flex.w-100.justify-content-between
+              div.mb-3
+                h3
+                  .pr-2.d-inline
+                    = yield(:title)
+                  small.light.d-block.d-md-inline
+                    = yield(:subtitle)
+                  - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
+                    span.ml-3.badge.badge-secondary[class="#{label_object.color_class_for_status}"]
+                      = label_object.status_i18n
+                .light.small
+                  = yield(:hint)
+              .float-right
+                = yield(:title_action)
+
 
           = content_for?(:content) ? yield(:content) : yield
 
