@@ -1,0 +1,15 @@
+.badge {
+  &.badge-one-number {
+    min-width: 26px;
+  }
+
+  &.badge-two-numbers {
+    min-width: 48px;
+  }
+}
+
+.badge-secondary, .badge-warning, .badge-success {
+  color: white;
+  // Slightly heavier font for low-contrast colors
+  font-weight: 500;
+}
