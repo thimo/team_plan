@@ -9,7 +9,6 @@ html[lang="nl"]
     meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
     meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     link rel="shortcut icon" href="#{image_url "favicon.ico"}"
-    link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"
     link[rel="stylesheet"
       href="https://#{Setting["fontawesome.integrity"].present? ? "pro" : "use"}.fontawesome.com/releases/v5.1.1/css/all.css"
       integrity="#{Setting["fontawesome.integrity"]}"
@@ -35,9 +34,9 @@ html[lang="nl"]
         = render "layouts/breadcrumbs"
 
         .container-fluid
-          header.section-header.mt-3
+          header.section-header.my-3
             .d-flex.w-100.justify-content-between
-              div.mb-3
+              div
                 h3
                   .pr-2.d-inline
                     = yield(:title)
