@@ -77,10 +77,10 @@
 
     .card-footer
       - if policy(@team_evaluation).update?
-        = f.submit "Opslaan", name: "save_and_stay_open", class: 'btn btn-primary btn-inline'
-        = f.submit "Opslaan en Sluiten", name: "save", class: 'btn btn-inline'
+        = f.submit "Opslaan", name: "save_and_stay_open", class: 'btn btn-primary'
+        = f.submit "Opslaan en Sluiten", name: "save", class: 'btn'
       - if policy(@team_evaluation).send_invite?
-        = f.submit "Uitnodiging versturen", name: "send_invite", class: 'btn btn-inline'
+        = f.submit "Uitnodiging versturen", name: "send_invite", class: 'btn'
       - if policy(@team_evaluation).finish_evaluation?
-        = f.submit "Evaluatie afronden", name: "finish_evaluation", class: 'btn btn-inline'
-      = link_to "Annuleren", @team_evaluation.new_record? ? @team : @team_evaluation.team, class: 'btn btn-outline-secondary btn-inline'
+        = f.submit "Evaluatie afronden", name: "finish_evaluation", class: 'btn'
+      = link_to "Annuleren", @team_evaluation.new_record? ? @team : @team_evaluation.team, class: 'btn btn-outline-secondary'

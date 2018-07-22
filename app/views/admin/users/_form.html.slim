@@ -10,9 +10,9 @@
     = f.collection_radio_buttons :role, User.roles_i18n, :first, :second
 
   div
-    = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
+    = f.submit "Opslaan", class: 'btn btn-primary'
     - if policy(@user).resend_password?
-      = link_to "Nieuw wachtwoord versturen", resend_password_admin_user_path(@user), class: 'btn btn-secondary btn-inline'
+      = link_to "Nieuw wachtwoord versturen", resend_password_admin_user_path(@user), class: 'btn btn-secondary'
     - if policy(@user).destroy?
-      = link_to "Verwijderen", admin_user_path(@user),  method: :delete, data: { confirm: 'Gebruiker wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
-    = link_to "Annuleren", [:admin, :users], class: 'btn btn-outline-secondary btn-inline'
+      = link_to "Verwijderen", admin_user_path(@user),  method: :delete, data: { confirm: 'Gebruiker wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+    = link_to "Annuleren", [:admin, :users], class: 'btn btn-outline-secondary'

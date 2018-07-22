@@ -9,5 +9,5 @@
     .radio
       = f.collection_radio_buttons :status, Season.statuses_i18n, :first, :second
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @season.new_record? ? Season : @season, class: 'btn btn-outline-secondary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @season.new_record? ? Season : @season, class: 'btn btn-outline-secondary'

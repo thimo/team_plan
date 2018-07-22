@@ -17,10 +17,10 @@
   = render 'input/trix', f: f, field: :body, autofocus: true
   = f.text_area :remark
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-outline-secondary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-outline-secondary'
   - if policy(@training).destroy?
-    = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+    = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
 
 
 - if @trainings_with_program.present?

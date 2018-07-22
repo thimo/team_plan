@@ -5,7 +5,7 @@
   = f.text_field :competitiesoort
 
   div
-    = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
+    = f.submit "Opslaan", class: 'btn btn-primary'
     - if policy(@competition).destroy?
-      = link_to "Verwijderen", admin_competition_path(@competition),  method: :delete, data: { confirm: 'Wedstrijdsoort wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
-    = link_to "Annuleren", [:admin, :competitions], class: 'btn btn-outline-secondary btn-inline'
+      = link_to "Verwijderen", admin_competition_path(@competition),  method: :delete, data: { confirm: 'Wedstrijdsoort wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+    = link_to "Annuleren", [:admin, :competitions], class: 'btn btn-outline-secondary'

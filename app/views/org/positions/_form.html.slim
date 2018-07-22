@@ -7,5 +7,5 @@
   = f.text_field :name, autofocus: true
   = f.text_area :remark
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @org_position.new_record? ? OrgPosition : @org_position, class: 'btn btn-outline-secondary btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @org_position.new_record? ? OrgPosition : @org_position, class: 'btn btn-outline-secondary'
