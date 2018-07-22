@@ -22,22 +22,22 @@ html[lang="nl"]
     = javascript_pack_tag 'application', defer: Rails.env.production?
 
   body.app.header-fixed.sidebar-fixed.aside-menu-fixed.sidebar-lg-show[class="#{yield(:body_class)}"]
-    - unless Rails.env.production? || Rails.env.development?
-      div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
-        |  -= #{Rails.env} =-
 
     = render 'layouts/header'
     .app-body
       = render 'layouts/side_menu'
 
       main.main
-        = render "layouts/breadcrumbs"
+        - unless Rails.env.production? || Rails.env.development?
+          div.color-white.bg-color-red.text-center.p-2
+            |  -= #{Rails.env} =-
+          = render "layouts/breadcrumbs"
 
         .container-fluid
           header.section-header.my-3
             .d-flex.w-100.justify-content-between
               div
-                h3
+                h3.m-0
                   .pr-2.d-inline
                     = yield(:title)
                   small.light.d-block.d-md-inline
