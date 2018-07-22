@@ -83,4 +83,4 @@
         = f.submit "Uitnodiging versturen", name: "send_invite", class: 'btn btn-inline'
       - if policy(@team_evaluation).finish_evaluation?
         = f.submit "Evaluatie afronden", name: "finish_evaluation", class: 'btn btn-inline'
-      = link_to "Annuleren", @team_evaluation.new_record? ? @team : @team_evaluation.team, class: 'btn btn-secondary-outline btn-inline'
+      = link_to "Annuleren", @team_evaluation.new_record? ? @team : @team_evaluation.team, class: 'btn btn-outline-secondary btn-inline'

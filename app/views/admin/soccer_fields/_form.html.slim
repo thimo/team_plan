@@ -11,4 +11,4 @@
     = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
     - if policy(@soccer_field).destroy?
       = link_to "Verwijderen", admin_soccer_field_path(@soccer_field),  method: :delete, data: { confirm: 'Veld wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
-    = link_to "Annuleren", [:admin, :soccer_fields], class: 'btn btn-secondary-outline btn-inline'
+    = link_to "Annuleren", [:admin, :soccer_fields], class: 'btn btn-outline-secondary btn-inline'

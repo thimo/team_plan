@@ -15,4 +15,4 @@
       = link_to "Nieuw wachtwoord versturen", resend_password_admin_user_path(@user), class: 'btn btn-secondary btn-inline'
     - if policy(@user).destroy?
       = link_to "Verwijderen", admin_user_path(@user),  method: :delete, data: { confirm: 'Gebruiker wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
-    = link_to "Annuleren", [:admin, :users], class: 'btn btn-secondary-outline btn-inline'
+    = link_to "Annuleren", [:admin, :users], class: 'btn btn-outline-secondary btn-inline'

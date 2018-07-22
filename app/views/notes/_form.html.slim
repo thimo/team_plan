@@ -11,6 +11,6 @@
     = f.collection_radio_buttons :visibility, Note.visibilities_i18n, :first, :second
 
   = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-secondary-outline btn-inline'
+  = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-outline-secondary btn-inline'
   - if policy(@note).destroy?
     = link_to "Verwijderen", note_path(@note), method: :delete, data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
