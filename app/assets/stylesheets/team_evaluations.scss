@@ -3,9 +3,11 @@
     &.field_positions {
       display: none;
     }
+
     &.custom-select {
       background-image: none;
       padding: .375rem;
+      // background-color: inherit;
     }
   }
 

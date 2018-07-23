@@ -4,9 +4,6 @@
       | Teamevaluatie #{@team_evaluation.team.name}
       - if @team_evaluation.team.division.present?
         small.pl-1 #{@team_evaluation.team.division}
-      div.lighter.small
-        = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
-        = " - #{@team_evaluation.status}"
       .card-header-actions
         = link_to "/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf", target: "_blank", class: "card-header-action" do
           i.fa-book.mr-1[class=fa_class]
@@ -14,8 +11,11 @@
         - if policy(@team_evaluation).destroy?
           = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "card-header-action"
             i.fa-trash-alt[class=fa_class]
+      .lighter.small
+        = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
+        = " - #{@team_evaluation.status}"
 
-    .card-body
+    .card-body.p-0
       table.table.table-xxs
         thead
           tr
@@ -78,9 +78,9 @@
     .card-footer
       - if policy(@team_evaluation).update?
         = f.submit "Opslaan", name: "save_and_stay_open", class: 'btn btn-primary'
-        = f.submit "Opslaan en Sluiten", name: "save", class: 'btn'
+        = f.submit "Opslaan en Sluiten", name: "save", class: 'btn btn-secondary'
       - if policy(@team_evaluation).send_invite?
-        = f.submit "Uitnodiging versturen", name: "send_invite", class: 'btn'
+        = f.submit "Uitnodiging versturen", name: "send_invite", class: 'btn btn-secondary'
       - if policy(@team_evaluation).finish_evaluation?
-        = f.submit "Evaluatie afronden", name: "finish_evaluation", class: 'btn'
+        = f.submit "Evaluatie afronden", name: "finish_evaluation", class: 'btn btn-secondary'
       = link_to "Annuleren", @team_evaluation.new_record? ? @team : @team_evaluation.team, class: 'btn btn-light'

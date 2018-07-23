@@ -37,10 +37,6 @@ document.addEventListener("turbolinks:load", () => {
 
   $('.no-touch [title]').tooltip();
 
-  $('select.field_positions').each((index, target) => {
-    $(target).select2({placeholder: "Veldpositie"});
-  })
-
   new LazyLoad();
 });
 

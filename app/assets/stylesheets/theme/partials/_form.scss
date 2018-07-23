@@ -1,3 +1,9 @@
+// Force white text on these button colors
+.btn-secondary, .btn-warning {
+  color: white;
+  font-weight: 400;
+}
+
 .btn + .btn {
   margin-left: 4px;
 }

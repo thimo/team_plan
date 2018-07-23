@@ -1,13 +1,14 @@
 function setEvaluationClass(target) {
   $(target).removeClass('btn').removeClass('btn-success').removeClass('btn-warning').removeClass('btn-danger')
+
   if (!!target.value) {
     $(target).removeClass('form-control-error')
 
-    apply_class_for_rating(target, target.value)
+    applyClassForRating(target, target.value)
   }
 }
 
-function apply_class_for_rating(target, rating) {
+function applyClassForRating(target, rating) {
   switch (rating) {
     case '10':
     case '9':
@@ -37,9 +38,15 @@ document.addEventListener("turbolinks:load", () => {
     setEvaluationClass(target)
   })
   $('.evaluation div.evaluation-rating[data-evaluation-value]').each((index, target) => {
-    apply_class_for_rating(target, target.dataset.evaluationValue)
+    applyClassForRating(target, target.dataset.evaluationValue)
   })
   $('.evaluation select.evaluation-rating').on('change', (e) => {
     setEvaluationClass(e.target)
+  })
+
+  $('select.field_positions').each((index, target) => {
+    $(target).select2({
+      placeholder: "Veldpositie"
+    });
   })
 })
