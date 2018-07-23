@@ -1,21 +1,16 @@
 doctype html
-html
-  head
-    title
-      = full_title(yield(:title))
-    meta[charset="utf-8"]
-    meta name="description" content="#{full_title(yield(:title))}"
-    meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
-    link rel="shortcut icon" href="#{image_url "favicon.ico"}"
+html lang="nl"
+  = render "layouts/head"
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = csrf_meta_tags
+  body.app.flex-row.align-items-center
+    .container
+      .row.justify-content-center
+        .col-md-8
+          .d-flex.justify-content-center.align-items-center.mb-4
+            img src="#{asset_path 'logo/esa_logo.svg'}" style="max-height: 50px; max-width: 50px;"
+            h1.m-0.pl-3.font-weight-light.color-gray-700
+              = "#{Setting['application.name']}"
 
-  body.devise
-    .page-center
-      .page-center-in
-        .container-fluid
           .text-center
             - if flash.present?
               - flash.each do |message_type, messages|
@@ -27,10 +22,20 @@ html
             div
               = yield(:flash)
 
-          .sign-box
-            .sign-avatar.sign-logo.mt-2.mb-5
-              = image_tag "logo/esa_logo.svg"
-            header.sign-title
-              = yield(:title)
+          .card-group
+            .card.p-4
+              .card-body
+                h1.mb-0
+                  = yield(:title)
+                div.text-muted.mb-3
+                  = yield(:subtitle)
+                  
+                = yield
 
-            = yield
+            - if content_for?(:form_help)
+              .card.text-white.bg-primary.py-5.d-md-down-none[style="width:44%"]
+                .card-body.text-center
+                  div
+                    = yield(:form_help)
+
+          = render 'devise/shared/links'

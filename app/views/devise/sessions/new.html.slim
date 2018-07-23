@@ -1,10 +1,40 @@
 - provide(:title, t('.sign_in', default: 'Sign in'))
+- provide(:subtitle, t('.sign_in_hint', default: 'Sign in to continue'))
 
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
-  = f.error_notification
+= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
-  = f.input :password, autocomplete: 'off', class: 'form-control', placeholder: User.human_attribute_name(:password), label: false
-  = f.button :submit,  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary'
+  = f.text_field :email,
+    prepend: tag.i(class: [fa_class, 'fa-at']),
+    autofocus: true,
+    class: 'form-control',
+    placeholder: User.human_attribute_name(:email),
+    hide_label: true
+  = f.password_field :password,
+    prepend: tag.i(class: [fa_class, 'fa-lock-alt']),
+    autocomplete: 'off',
+    class: 'form-control',
+    placeholder: User.human_attribute_name(:password),
+    hide_label: true
 
-  = render 'devise/shared/links'
+  .row
+    .col-6
+      = f.submit  t('.sign_in', default: 'Sign in'),
+        class: 'btn btn-primary px-4'
+    - if devise_mapping.recoverable? && controller_name != 'passwords'
+      .col-6.text-right
+        = link_to t('devise.shared.links.forgot_your_password', default: 'Forgot your password?'),
+          new_password_path(resource_name),
+          class: "btn btn-link px-0"
+
+
+- content_for :form_help
+  h2
+    | Aanmelden
+  p
+    | Heb je nog geen toegang tot #{Setting["application.name"]}, maar ben je wel lid van #{Setting["club.name_short"]}?
+      Meld je dan nu aan!
+
+  = link_to "Login aanmaken",
+    new_registration_path(resource_name),
+    class: "btn btn-primary active"

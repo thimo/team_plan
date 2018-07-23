@@ -24,6 +24,7 @@ nl:
         name: Naam
         role: Rol
         current_sign_in_at: Laatste login
+        email: E-mail
       season:
         name: Seizoen
         active: Actief

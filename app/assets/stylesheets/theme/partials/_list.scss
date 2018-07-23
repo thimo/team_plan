@@ -1,0 +1,10 @@
+.list-group-compact {
+  .list-group-item {
+    padding: .3rem .5rem;
+  }
+}
+
+.list-inline-dotted li+li:before {
+    content: "•";
+    margin-right: 0.5rem;
+}
