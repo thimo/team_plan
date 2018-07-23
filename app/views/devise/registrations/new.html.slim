@@ -14,7 +14,8 @@
     autofocus: true,
     class: 'form-control',
     placeholder: User.human_attribute_name(:email),
-    hide_label: true
+    hide_label: true,
+    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Setting["club.name_short"]}."
   = f.password_field :password,
     prepend: tag.i(class: [fa_class, 'fa-lock-alt']),
     class: 'form-control',
@@ -35,10 +36,3 @@
         = link_to t('devise.shared.links.sign_in', default: 'Sign in'),
           new_session_path(resource_name),
           class: "btn btn-link px-0"
-
-- content_for :form_help
-  h2
-    | Aanmelden
-  p
-    | Heb je nog geen toegang tot #{Setting["application.name"]}, maar ben je wel lid van #{Setting["club.name_short"]}?
-      Meld je dan nu aan!

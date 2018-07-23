@@ -156,37 +156,37 @@
 //   ),
 //   $sizes
 // );
+
+// Body
 //
-// // Body
-// //
-// // Settings for the `<body>` element.
-//
+// Settings for the `<body>` element.
+
 // $body-bg:                   $white !default;
 $body-bg:                   #f2f7fb;
 // $body-color:                $gray-900 !default;
+
+// Links
 //
-// // Links
-// //
-// // Style anchor elements.
-//
+// Style anchor elements.
+
 // $link-color:                theme-color("primary") !default;
 $link-color:                #0082c6;
 // $link-decoration:           none !default;
 // $link-hover-color:          darken($link-color, 15%) !default;
 // $link-hover-decoration:     underline !default;
+
+// Paragraphs
 //
-// // Paragraphs
-// //
-// // Style p element.
+// Style p element.
+
+$paragraph-margin-bottom:   .5rem;
+
+
+// Grid breakpoints
 //
-// $paragraph-margin-bottom:   1rem !default;
-//
-//
-// // Grid breakpoints
-// //
-// // Define the minimum dimensions at which your layout will change,
-// // adapting to different screen sizes, for use in media queries.
-//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
 // $grid-breakpoints: (
 //   xs: 0,
 //   sm: 576px,
@@ -197,12 +197,12 @@ $link-color:                #0082c6;
 //
 // @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 // @include _assert-starts-at-zero($grid-breakpoints);
+
+
+// Grid containers
 //
-//
-// // Grid containers
-// //
-// // Define the maximum width of `.container` for different screen sizes.
-//
+// Define the maximum width of `.container` for different screen sizes.
+
 // $container-max-widths: (
 //   sm: 540px,
 //   md: 720px,

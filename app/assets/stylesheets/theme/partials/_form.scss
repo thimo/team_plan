@@ -1,3 +1,9 @@
 .btn + .btn {
   margin-left: 4px;
 }
+
+// Overwrite bootstrap_form
+.rails-bootstrap-forms-error-summary {
+  margin-top: inherit;
+  margin-bottom: 0;
+}

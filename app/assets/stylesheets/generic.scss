@@ -20,10 +20,6 @@ strong,
   font-weight: 600;
 }
 
-.nowrap {
-  white-space: nowrap;
-}
-
 .datepicker{
   z-index: 100 !important;
 }
@@ -35,65 +31,6 @@ strong,
   &:hover {
     opacity: 1;
     transition: all .2s ease-in-out;
-  }
-}
-
-tbody tr.clickable {
-  cursor: pointer;
-  &:hover {
-    background-color: #f6f8fa;
-  }
-}
-
-table.align-top th, table.align-top td {
-  vertical-align: top;
-}
-
-.table-xxs {
-  td {
-    height: 25px;
-    padding: 2px;
-
-    &:first-child {
-      padding-left: 15px;
-    }
-    &:last-child {
-      padding-right: 15px;
-    }
-  }
-
-  th {
-    padding-left: 2px;
-    padding-right: 2px;
-
-    &:first-child {
-      padding-left: 15px;
-    }
-    &:last-child {
-      padding-right: 15px;
-    }
-  }
-}
-
-th {
-  &.rotate {
-    white-space: nowrap;
-
-    > div {
-      transform: translate(0, 0) rotate(-45deg);
-      width: 30px;
-
-      > span {
-        border-bottom: 1px solid #ccc;
-        padding: 5px 10px;
-      }
-    }
-  }
-}
-
-tr.b-t-0 {
-  td {
-    border-top: none;
   }
 }
 

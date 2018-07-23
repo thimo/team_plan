@@ -5,3 +5,66 @@
     vertical-align: middle;
   }
 }
+
+tbody {
+  tr.clickable {
+    cursor: pointer;
+    &:hover {
+      background-color: #f6f8fa;
+    }
+  }
+}
+
+table.align-top {
+  th, td {
+    vertical-align: top;
+  }
+}
+
+.table-xxs {
+  td {
+    height: 1.5rem;
+    padding: 2px;
+
+    &:first-child {
+      padding-left: 1rem;
+    }
+    &:last-child {
+      padding-right: 1rem;
+    }
+  }
+
+  th {
+    padding-left: 2px;
+    padding-right: 2px;
+
+    &:first-child {
+      padding-left: 1rem;
+    }
+    &:last-child {
+      padding-right: 1rem;
+    }
+  }
+}
+
+th {
+  &.rotate {
+    white-space: nowrap;
+
+    > div {
+      transform: translate(0, 0) rotate(-45deg);
+      width: 30px;
+
+      > span {
+        border-bottom: 1px solid #ccc;
+        padding: 5px 10px;
+      }
+    }
+  }
+}
+
+tr.b-t-0 {
+  td {
+    border-top: none;
+  }
+}
