@@ -4,6 +4,14 @@
   td, th {
     vertical-align: middle;
   }
+
+  thead {
+    background-color: rgba($black, .025);
+
+    th {
+      border-bottom-width: 1px;
+    }
+  }
 }
 
 tbody {

@@ -319,12 +319,12 @@ $paragraph-margin-bottom:   .5rem;
 // $mark-bg:                     #fcf8e3 !default;
 //
 // $hr-margin-y:                 $spacer !default;
+
+
+// Tables
 //
-//
-// // Tables
-// //
-// // Customizes the `.table` component with basic values, each used across all table variations.
-//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
 // $table-cell-padding:          .75rem !default;
 // $table-cell-padding-sm:       .3rem !default;
 $table-cell-padding-sm:       .5rem .75rem;
@@ -350,11 +350,11 @@ $table-border-color:          $gray-200;
 // $table-striped-order:         odd !default;
 //
 // $table-caption-color:         $text-muted !default;
+
+// Buttons + Forms
 //
-// // Buttons + Forms
-// //
-// // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
-//
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+
 // $input-btn-padding-y:         .375rem !default;
 // $input-btn-padding-x:         .75rem !default;
 // $input-btn-line-height:       $line-height-base !default;
@@ -724,7 +724,7 @@ $card-spacer-x:                     1rem;
 // $card-border-radius:                $border-radius !default;
 // $card-border-color:                 rgba($black, .125) !default;
 // $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width}) !default;
-// $card-cap-bg:                       rgba($black, .03) !default;
+$card-cap-bg:                       rgba($black, .025);
 // $card-bg:                           $white !default;
 //
 // $card-img-overlay-padding:          1.25rem !default;
