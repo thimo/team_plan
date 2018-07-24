@@ -50,7 +50,7 @@
                 = pe.select :prefered_foot,
                   options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot),
                   { include_blank: true },
-                  { class: "form-control custom-select #{'form-control-error' if pe.object.errors[:prefered_foot].present?}",
+                  { class: "form-control #{'form-control-error' if pe.object.errors[:prefered_foot].present?}",
                     title: TeamMember.human_attribute_name(:prefered_foot) }
 
               - PlayerEvaluation::RATING_FIELDS.each do |field_name|
@@ -58,14 +58,14 @@
                   = pe.select field_name.to_s,
                     PlayerEvaluation::RATING_OPTIONS,
                     { include_blank: true },
-                    { class: "form-control custom-select evaluation-rating #{'form-control-error' if pe.object.errors[field_name.to_sym].present?}",
+                    { class: "form-control evaluation-rating #{'form-control-error' if pe.object.errors[field_name.to_sym].present?}",
                       title: PlayerEvaluation.human_attribute_name(field_name) }
 
               td.advise-next-season
                 = pe.select :advise_next_season,
                   PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS,
                   { include_blank: true },
-                  { class: "form-control custom-select #{'form-control-error' if pe.object.errors[:advise_next_season].present?}",
+                  { class: "form-control #{'form-control-error' if pe.object.errors[:advise_next_season].present?}",
                     title: PlayerEvaluation.human_attribute_name(:advise_next_season)}
 
             tr

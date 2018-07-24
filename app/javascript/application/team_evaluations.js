@@ -1,5 +1,5 @@
 function setEvaluationClass(target) {
-  $(target).removeClass('btn').removeClass('btn-success').removeClass('btn-warning').removeClass('btn-danger')
+  $(target).removeClass('select-primary').removeClass('select-success').removeClass('select-secondary').removeClass('select-warning').removeClass('select-danger')
 
   if (!!target.value) {
     $(target).removeClass('form-control-error')
@@ -12,23 +12,23 @@ function applyClassForRating(target, rating) {
   switch (rating) {
     case '10':
     case '9':
-      $(target).addClass('btn').addClass('btn-primary')
+      $(target).addClass('select-primary')
       break;
     case '8':
-      $(target).addClass('btn').addClass('btn-success')
+      $(target).addClass('select-success')
       break;
     case '7':
     case '6':
-      $(target).addClass('btn').addClass('btn-secondary')
+      $(target).addClass('select-secondary')
       break;
     case '5':
-      $(target).addClass('btn').addClass('btn-warning')
+      $(target).addClass('select-warning')
       break;
     case '4':
     case '3':
     case '2':
     case '1':
-      $(target).addClass('btn').addClass('btn-danger')
+      $(target).addClass('select-danger')
       break;
   }
 }
