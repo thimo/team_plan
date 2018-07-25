@@ -4,7 +4,8 @@ module Activatable
   extend ActiveSupport::Concern
 
   included do
-    scope :active, -> { where(active: true) }
+    scope :active,   -> { where(active: true) }
+    scope :inactive, -> { where(active: false) }
   end
 
   def activate
