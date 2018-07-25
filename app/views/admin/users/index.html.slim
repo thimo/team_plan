@@ -7,7 +7,7 @@
   .card-header
     | #{@users.total_count} Gebruikers
 
-    .card-header-actions
+    .card-header-actions.d-flex.align-items-center
       - if params[:inactive]
         = link_to admin_users_path, class: 'btn btn-link card-header-action'
           | Actieve gebruikers

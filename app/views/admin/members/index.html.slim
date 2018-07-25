@@ -6,7 +6,7 @@
 .card
   .card-header
     | #{@members.total_count} Leden
-    .card-header-actions
+    .card-header-actions.d-flex.align-items-center
       - if params[:inactive]
         = link_to admin_members_path, class: 'card-header-action'
           | Actieve leden
