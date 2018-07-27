@@ -55,32 +55,16 @@
     width: 60px;
   }
 
-  .select2-container--default {
-    .select2-selection {
-      background-color: inherit;
-      border-width: 0;
-    }
-
+  .select2-container--bootstrap {
     .select2-selection--multiple {
       .select2-selection__choice {
-        background-color: inherit;
-        border-color: $gray-200;
-        color: $gray-700;
-        padding: 2px 8px;
+        margin-bottom: 2px;
       }
 
       .select2-selection__choice__remove {
-        margin-right: 4px;
-      }
-
-      .select2-selection__rendered {
-        padding: 0;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
       }
     }
-  }
-
-  .select2-container--open .select2-dropdown--below {
-    border-top: 1px solid $gray-200;
-    border-color: $gray-200;
   }
 }

@@ -1,8 +1,6 @@
 .card
   .card-header
     | Teams
-  .card-body.table-responsive
+  .card-body.p-0.table-responsive
     table.table.table-sm
-      thead
-      tbody
-        = render partial: 'member_allocations/team', collection: @teams, cached: true
+      = render partial: 'member_allocations/team', collection: @teams, cached: true
