@@ -10,9 +10,9 @@
   div {
     &.form-control-error {
       background-color: #fff6f6;
-      border: solid 1px #fa424a;
-      border-radius: 4px;
-      color: #fa424a !important;
+      border: solid 1px $red;
+      border-radius: $border-radius;
+      color: $red !important;
     }
   }
 

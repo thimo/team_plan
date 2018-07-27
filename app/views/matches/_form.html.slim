@@ -14,8 +14,7 @@
     = f.text_field :thuisteam
     = f.text_field :uitteam
 
-  .radio
-    = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name
+  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name
   = f.text_area :remark
 
   = f.submit "Opslaan", class: 'btn btn-primary'

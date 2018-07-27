@@ -71,22 +71,6 @@ abbr[title] {
   text-decoration: none;
 }
 
-.checkbox,
-.checkbox-bird,
-.checkbox-detailed,
-.checkbox-slide,
-.checkbox-toggle,
-.radio,
-.form-check {
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
-  padding-left: 0;
-}
-
-.form-check-inline .form-check-input {
-  position: absolute;
-}
-
 label.required:after {
   content:" *";
 }
@@ -164,11 +148,11 @@ trix-toolbar {
   border-color: #a94543;
 }
 
-// Correct spacing for inline radio buttons
-.form-group span.radio {
-  margin: 0 4px;
-
-  label input {
-    margin-right: 4px;
-  }
-}
+// // Correct spacing for inline radio buttons
+// .form-group span.radio {
+//   margin: 0 4px;
+//
+//   label input {
+//     margin-right: 4px;
+//   }
+// }

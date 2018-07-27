@@ -11,9 +11,7 @@
               | ×
         = bootstrap_form_for TeamMember.new, remote: true do |f|
           .modal-body
-            .form-group
-              .radio
-                = f.collection_radio_buttons :team_id, teams, :id, :name, hide_label: true
+            = f.collection_radio_buttons :team_id, teams, :id, :name, hide_label: true
             = f.hidden_field :member_id
             = hidden_field_tag :team_member_id
             = hidden_field_tag :age_group_id, "#{age_group.id}"
