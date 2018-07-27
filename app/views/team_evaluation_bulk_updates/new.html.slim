@@ -5,21 +5,19 @@
 
   hr
 
-  = form_with url: age_group_team_evaluation_bulk_updates_path(@age_group), method: :post do |f|
-    div
-      .form-check.checkbox
-        input.form-check-input.team-select-toggle#team_ids[type="checkbox" checked]
-        label.form-check-label.strong[for="team_ids"]
+  = bootstrap_form_with url: age_group_team_evaluation_bulk_updates_path(@age_group), method: :post do |f|
+    .mb-3
+      .custom-control.custom-checkbox
+        input.custom-control-input.team-select-toggle#team_ids[type="checkbox" checked]
+        label.custom-control-label.strong[for="team_ids"]
           | Teams
 
       - @teams.each do |team|
-        .form-check.checkbox
-          = f.check_box 'team_ids[]', { checked: true,
-            class: 'form-check-input team-select',
-            id: "team_ids_#{team.id}" },
-            team.id, nil
-          label.form-check-label[for="team_ids_#{team.id}"]
-            = "#{team.name}"
+        = f.check_box 'team_ids[]', { checked: true,
+          class: 'team-select',
+          id: "team_ids_#{team.id}",
+          label: team.name,
+          custom: true },
+          team.id, nil
 
-    div
-      = f.submit "Aanmaken en versturen", class: "btn btn-primary"
+    = f.submit "Aanmaken en versturen", class: "btn btn-primary"

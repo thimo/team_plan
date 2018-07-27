@@ -6,6 +6,14 @@ GIT
       rails (> 4.1, <= 6.0)
 
 GIT
+  remote: https://github.com/bootstrap-ruby/bootstrap_form.git
+  revision: 78fd6f9904a97e0cb395f5ddfd056667fd47fcba
+  branch: master
+  specs:
+    bootstrap_form (4.0.0.alpha1)
+      rails (>= 5.0)
+
+GIT
   remote: https://github.com/randym/axlsx.git
   revision: c8ac844572b25fda358cc01d2104720c4c42f450
   ref: c8ac844
@@ -77,8 +85,6 @@ GEM
     bootstrap4-kaminari-views (1.0.0)
       kaminari (>= 0.13)
       rails (>= 3.1)
-    bootstrap_form (4.0.0.alpha1)
-      rails (>= 5.0)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (10.0.2)
@@ -391,7 +397,7 @@ DEPENDENCIES
   axlsx_rails
   bootsnap
   bootstrap4-kaminari-views
-  bootstrap_form (~> 4.0.0.alpha)
+  bootstrap_form!
   breadcrumbs_on_rails (~> 3.0.1)
   byebug
   capybara

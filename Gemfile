@@ -24,7 +24,9 @@ gem "bootstrap4-kaminari-views"
 gem "kaminari"
 gem "rails-i18n"
 
-gem "bootstrap_form", "~> 4.0.0.alpha"
+# gem "bootstrap_form", "~> 4.0.0.alpha"
+# Fixes problem with id's on checkboxes
+gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "master"
 gem "country_select"
 gem "simple_form",                "~> 4.0"
 

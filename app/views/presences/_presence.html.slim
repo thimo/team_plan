@@ -10,7 +10,8 @@
           = f.check_box :present,
             id: "presence_present_#{presence.id}",
             label: label.html_safe,
-            label_class: "#{'light line-through' unless presence.present?}"
+            label_class: "#{'light line-through' unless presence.present?}",
+            custom: true
       div.extra_fields[class="#{compact ? 'col-12' : 'col-md-2'}"]
         - if presence.present?
           = f.collection_select :on_time, Presence.on_times_i18n, :first, :second,

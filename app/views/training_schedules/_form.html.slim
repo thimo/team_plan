@@ -17,10 +17,9 @@
     { class: 'width-sm-50' }
   = f.collection_select :field_part, TrainingSchedule.field_parts_i18n, :first, :second, { prompt: "-- Selecteer het deel van het veld" },
     { class: 'width-sm-50' }
-  .checkbox
-    = f.collection_check_boxes :team_member_ids, trainers, :id, :name
-    = f.form_group
-      = f.check_box :cios
+  = f.collection_check_boxes :team_member_ids, trainers, :id, :name, custom: true
+  = f.form_group
+    = f.check_box :cios, custom: true
 
   = f.submit "Opslaan", class: 'btn btn-primary'
   = link_to "Annuleren", @training_schedule.team, class: 'btn btn-light'
