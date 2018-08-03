@@ -358,6 +358,7 @@ nl:
       vrije_dropdown_1: free_dropdown_1
       vrije_dropdown_2: free_dropdown_2
       bondsteams: association_teams
+      zichtbaarheid: visibility
 
   invites_sent:
     one: er is 1 uitnodiging verstuurd
