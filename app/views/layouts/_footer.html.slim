@@ -1,7 +1,7 @@
 footer.app-footer
   div
-    a[href="https://coreui.io/pro/"]
-      | TeamPlan
+    = link_to Setting["club.website"]
+      = "#{Setting['club.name']} #{Setting['application.name']}"
     span
       = " © #{Time.zone.now.year} "
       a> href="https://www.defrog.nl/"
