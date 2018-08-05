@@ -53,6 +53,7 @@ nl:
         full_name: Achternaam, voornaam
         email: E-mail
         born_on: Geboortedatum
+        gender: Geslacht
         phone: Telefoonnummer
         zipcode: Postcode
         address: Adres
@@ -374,6 +375,7 @@ nl:
   first_name: Voornaam
   middle_name: Tussenvoegsels
   born_on: Geboortedatum
+  gender: Geslacht
   role: Rol
   address: Adres
   zipcode: Postcode
