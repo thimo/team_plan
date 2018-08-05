@@ -10,18 +10,18 @@ class DownloadTeamMembersController < ApplicationController
       # TODO: Filter for team status
       @season = policy_scope(Season).find(params[:season_id])
 
-      if params[:age_group_ids].present?
-        AgeGroup.where(id: params[:age_group_ids]).each do |age_group|
-          @teams += hashes_for(age_group.teams)
-        end
-      else
-        policy_scope(@season.age_groups).male.asc.each do |age_group|
-          @teams += hashes_for(age_group.teams)
-        end
-        policy_scope(@season.age_groups).female.asc.each do |age_group|
-          @teams += hashes_for(age_group.teams)
-        end
-      end
+      @teams = if params[:age_group_ids].present?
+                AgeGroup.where(id: params[:age_group_ids]).map do |age_group|
+                  hashes_for teams_for(age_group)
+                end
+              else
+                policy_scope(@season.age_groups).male.asc.map do |age_group|
+                  hashes_for teams_for(age_group)
+                end
+                policy_scope(@season.age_groups).female.asc.map do |age_group|
+                  hashes_for teams_for(age_group)
+                end
+              end.flatten
 
       @previous_season = @season.previous
 
@@ -82,5 +82,9 @@ class DownloadTeamMembersController < ApplicationController
         players: team.team_members.active_for_team(team).player.asc,
         staff: team.team_members.active_for_team(team).staff.asc
       }
+    end
+
+    def teams_for(age_group)
+      params[:status].present? ? age_group.teams.send(params[:status]) : age_group.teams
     end
 end
