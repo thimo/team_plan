@@ -54,6 +54,7 @@ nl:
         full_name: Achternaam, voornaam
         email: E-mail
         born_on: Geboortedatum
+        gender: Geslacht
         phone: Telefoonnummer
         zipcode: Postcode
         address: Adres
@@ -359,6 +360,7 @@ nl:
       vrije_dropdown_1: free_dropdown_1
       vrije_dropdown_2: free_dropdown_2
       bondsteams: association_teams
+      zichtbaarheid: visibility
 
   invites_sent:
     one: er is 1 uitnodiging verstuurd
@@ -374,6 +376,7 @@ nl:
   first_name: Voornaam
   middle_name: Tussenvoegsels
   born_on: Geboortedatum
+  gender: Geslacht
   role: Rol
   address: Adres
   zipcode: Postcode
