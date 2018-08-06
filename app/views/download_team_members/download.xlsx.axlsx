@@ -69,7 +69,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
       columns << member.middle_name if @export_columns.include? 'middle_name'
       columns << member.born_on if @export_columns.include? 'born_on'
       columns << member.gender if @export_columns.include? 'gender'
-      columns << team_members.map(&:role_i18n).join(', ') if @export_columns.include? 'role'
+      columns << team_members.map(&:role_i18n).sort.join(', ') if @export_columns.include? 'role'
       columns << member.address if @export_columns.include? 'address'
       columns << member.zipcode if @export_columns.include? 'zipcode'
       columns << member.city if @export_columns.include? 'city'
