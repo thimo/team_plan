@@ -3,15 +3,17 @@
 module ClubDataImporter
   def self.teams_and_competitions
     url = "#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"
-    json = JSON.parse(open(url))
+    json = JSON.parse(RestClient.get(url))
     json.each do |data|
       club_data_team = ClubDataTeam.find_or_initialize_by(teamcode: data["teamcode"])
       %w[teamnaam spelsoort geslacht teamsoort leeftijdscategorie kalespelsoort speeldag speeldagteam].each do |field|
         club_data_team.write_attribute(field, data[field])
       end
-      ClubDataLog.create level: :info,
-                         source: :teams_and_competitions_import,
-                         body: "Team '#{club_data_team.teamnaam}' aangemaakt" if club_data_team.new_record?
+      if club_data_team.new_record?
+        ClubDataLog.create level: :info,
+                           source: :teams_and_competitions_import,
+                           body: "Team '#{club_data_team.teamnaam}' aangemaakt"
+      end
       club_data_team.save if club_data_team.changed? || club_data_team.new_record?
 
       club_data_team.link_to_team
@@ -23,9 +25,12 @@ module ClubDataImporter
 
       next unless competition.valid?
 
-      ClubDataLog.create level: :info,
-                         source: :teams_and_competitions_import,
-                         body: "Competitie '#{competition.competitiesoort} - #{competition.klasse}' aangemaakt voor '#{club_data_team.teamnaam}'" if competition.new_record?
+      if competition.new_record?
+        ClubDataLog.create level: :info,
+                           source: :teams_and_competitions_import,
+                           body: "Competitie '#{competition.competitiesoort} - #{competition.klasse}' aangemaakt " \
+                                  "voor '#{club_data_team.teamnaam}'"
+      end
       competition.save if competition.changed? || competition.new_record?
       competition.club_data_teams << club_data_team unless competition.club_data_team_ids.include?(club_data_team.id)
     end
@@ -36,7 +41,7 @@ module ClubDataImporter
   def self.club_results
     # Regular import of all club matches
     url = "#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"
-    json = JSON.parse(open(url))
+    json = JSON.parse(RestClient.get(url))
     json.each do |data|
       Match.find_by(wedstrijdcode: data["wedstrijdcode"])&.update_uitslag(data["uitslag"])
     end
@@ -52,18 +57,19 @@ module ClubDataImporter
 
   def self.poule_standings
     Competition.active.each do |competition|
-      begin
-        # Fetch ranking
-        url = "#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"
-        json = JSON.parse(open(url))
-        if json.present?
-          competition.ranking = json
-          competition.save if competition.changed?
-        end
-
-      rescue OpenURI::HTTPError
-        # TODO handle error, maybe de-activate competition
+      # Fetch ranking
+      url = "#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Setting['clubdata.client_id']}"
+      json = JSON.parse(RestClient.get(url))
+      if json.present?
+        competition.ranking = json
+        competition.save if competition.changed?
       end
+
+    rescue OpenURI::HTTPError
+      ClubDataLog.create level: :error,
+                         source: :poule_standings,
+                         body: "Error opening/parsing #{url}"
     end
 
     ClubDataLog.create level: :info, source: :poule_standings_import, body: "Finished"
@@ -74,8 +80,9 @@ module ClubDataImporter
       imported_wedstrijdnummers = []
 
       # Fetch upcoming matches
-      url = "#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"
-      json = JSON.parse(open(url))
+      url = "#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Setting['clubdata.client_id']}"
+      json = JSON.parse(RestClient.get(url))
       json.each do |data|
         match = update_match(data, competition)
 
@@ -93,8 +100,11 @@ module ClubDataImporter
       competition.matches.not_played.from_now.each do |match|
         match.delete unless imported_wedstrijdnummers.include? match.wedstrijdnummer
       end
+
     rescue OpenURI::HTTPError
-      # TODO: handle error, maybe de-activate competition
+      ClubDataLog.create level: :error,
+                         source: :poule_matches,
+                         body: "Error opening/parsing #{url}"
     end
 
     ClubDataLog.create level: :info, source: :poule_matches_import, body: "Finished"
@@ -102,12 +112,16 @@ module ClubDataImporter
 
   def self.poule_results
     Competition.active.each do |competition|
-      json = JSON.parse(open("#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}&client_id=#{Setting['clubdata.client_id']}"))
+      url = "#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Setting['clubdata.client_id']}"
+      json = JSON.parse(RestClient.get(url))
       json.each do |data|
         update_match(data, competition).update_uitslag(data["uitslag"])
       end
     rescue OpenURI::HTTPError
-      # TODO: handle error, maybe de-activate competition
+      ClubDataLog.create level: :error,
+                         source: :poule_results,
+                         body: "Error opening/parsing #{url}"
     end
 
     ClubDataLog.create level: :info, source: :poule_results_import, body: "Finished"
@@ -115,15 +129,16 @@ module ClubDataImporter
 
   def self.team_photos
     ClubDataTeam.active.each do |club_data_team|
-      url = "#{Setting['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}&client_id=#{Setting['clubdata.client_id']}"
-      json = JSON.parse(open(url))
+      url = "#{Setting['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}" \
+            "&client_id=#{Setting['clubdata.client_id']}"
+      json = JSON.parse(RestClient.get(url))
       json.each do |data|
-        if data["foto"].present?
-          member = Member.find_by(full_name: data["naam"])
-          if member
-            member.photo_data = data["foto"]
-            member.save if member.changed?
-          end
+        next if data["foto"].blank?
+
+        member = Member.find_by(full_name: data["naam"])
+        if member
+          member.photo_data = data["foto"]
+          member.save if member.changed?
         end
       end
     end
@@ -133,8 +148,9 @@ module ClubDataImporter
 
   def self.add_address(match)
     if match.adres.blank?
-      url = "#{Setting['clubdata.urls.wedstrijd-accommodatie']}?wedstrijdcode=#{match.wedstrijdcode}&client_id=#{Setting['clubdata.client_id']}"
-      json = JSON.parse(open(url))
+      url = "#{Setting['clubdata.urls.wedstrijd-accommodatie']}?wedstrijdcode=#{match.wedstrijdcode}" \
+            "&client_id=#{Setting['clubdata.client_id']}"
+      json = JSON.parse(RestClient.get(url))
       if json["wedstrijd"].present?
         wedstrijd = json["wedstrijd"]
 
@@ -147,13 +163,17 @@ module ClubDataImporter
         match.save if match.changed?
       end
     end
+    
   rescue OpenURI::HTTPError
-    # Not all match codes return a valid response, ignore errors
+    ClubDataLog.create level: :error,
+                       source: :add_address,
+                       body: "Error opening/parsing #{url}"
   end
 
   def self.afgelastingen
     # Regular import of all club matches
-    json = JSON.parse(open("#{Setting['clubdata.urls.afgelastingen']}&client_id=#{Setting['clubdata.client_id']}"))
+    url = "#{Setting['clubdata.urls.afgelastingen']}&client_id=#{Setting['clubdata.client_id']}"
+    json = JSON.parse(RestClient.get(url))
     cancelled_matches = []
     json.each do |data|
       next if (match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])).blank?
@@ -178,22 +198,20 @@ module ClubDataImporter
     ClubDataLog.create level: :info, source: :afgelastingen_import, body: "Finished"
   end
 
-  private
+  def self.add_team_to_match(match, teamcode)
+    club_data_team = ClubDataTeam.find_by(teamcode: teamcode)
 
-    def self.add_team_to_match(match, teamcode)
-      club_data_team = ClubDataTeam.find_by(teamcode: teamcode)
-      if club_data_team&.team && !match.team_ids.include?(club_data_team.team.id)
-        match.teams << club_data_team.team
-      end
-    end
+    match.teams << club_data_team.team if club_data_team&.team && !match.team_ids.include?(club_data_team.team.id)
+  end
 
-    def self.update_match(data, competition)
-      match = Match.find_or_initialize_by(wedstrijdcode: data["wedstrijdcode"])
-      %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
-        match.write_attribute(field, data[field]) if data.include?(field)
-      end
-      match.competition = competition
-      match.save if match.changed? || match.new_record?
-      match
+  def self.update_match(data, competition)
+    match = Match.find_or_initialize_by(wedstrijdcode: data["wedstrijdcode"])
+    %w[wedstrijddatum wedstrijdnummer thuisteam uitteam thuisteamclubrelatiecode uitteamclubrelatiecode accommodatie
+       plaats wedstrijd thuisteamid uitteamid eigenteam].each do |field|
+      match.write_attribute(field, data[field]) if data.include?(field)
     end
+    match.competition = competition
+    match.save if match.changed? || match.new_record?
+    match
+  end
 end
