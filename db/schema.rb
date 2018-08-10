@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_30_065114) do
+ActiveRecord::Schema.define(version: 2018_08_10_145052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2018_04_30_065114) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "club_data_team_competitions", force: :cascade do |t|
+    t.bigint "competition_id", null: false
+    t.bigint "club_data_team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_data_team_id", "competition_id"], name: "team_competition", unique: true
+    t.index ["competition_id", "club_data_team_id"], name: "competition_team", unique: true
+  end
+
   create_table "club_data_teams", force: :cascade do |t|
     t.integer "teamcode", null: false
     t.string "teamnaam"
@@ -57,13 +66,6 @@ ActiveRecord::Schema.define(version: 2018_04_30_065114) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
     t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
-  end
-
-  create_table "club_data_teams_competitions", id: false, force: :cascade do |t|
-    t.bigint "competition_id", null: false
-    t.bigint "club_data_team_id", null: false
-    t.index ["club_data_team_id", "competition_id"], name: "team_competition", unique: true
-    t.index ["competition_id", "club_data_team_id"], name: "competition_team", unique: true
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|

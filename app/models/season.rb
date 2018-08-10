@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Season < ApplicationRecord
   include Statussable
 
   has_many :age_groups, dependent: :destroy
   has_paper_trail
 
-  validates_presence_of :name, :status, :started_on, :ended_on
+  validates :name, :status, :started_on, :ended_on, presence: true
 
   scope :asc, -> { order(name: :asc) }
   scope :desc, -> { order(name: :desc) }
@@ -16,12 +18,12 @@ class Season < ApplicationRecord
   end
 
   def previous
-    # TODO properly policy_scope
+    # TODO: properly policy_scope
     self.class.where("created_at < ?", created_at).order(created_at: :asc).last
   end
 
   def next
-    # TODO properly policy_scope
+    # TODO: properly policy_scope
     self.class.where("created_at > ?", created_at).order(created_at: :asc).first
   end
 
@@ -33,5 +35,4 @@ class Season < ApplicationRecord
       new_age_group.save
     end
   end
-
 end

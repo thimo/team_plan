@@ -7,7 +7,8 @@ class ClubDataTeam < ApplicationRecord
   validates :teamcode, uniqueness: true
 
   has_one :team, dependent: :nullify
-  has_and_belongs_to_many :competitions
+  has_many :club_data_team_competitions, dependent: :nullify
+  has_many :competitions, through: :club_data_team_competitions
 
   scope :asc, -> { order(:id) }
 

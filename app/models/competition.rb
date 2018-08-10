@@ -6,7 +6,8 @@ class Competition < ApplicationRecord
   validates :competitienaam, presence: true
   validates :poulecode, uniqueness: true
 
-  has_and_belongs_to_many :club_data_teams
+  has_many :club_data_team_competitions, dependent: :nullify
+  has_many :club_data_teams, through: :club_data_team_competitions
   has_many :matches, dependent: :destroy
 
   scope :asc,     -> { order(:created_at) }
