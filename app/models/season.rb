@@ -35,4 +35,8 @@ class Season < ApplicationRecord
       new_age_group.save
     end
   end
+
+  def self.active_season_for_today
+    active.find_by("started_on <= ? AND ended_on >= ?", Time.zone.today, Time.zone.today)
+  end
 end

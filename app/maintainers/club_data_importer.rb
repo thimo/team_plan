@@ -2,6 +2,8 @@
 
 module ClubDataImporter
   def self.teams_and_competitions
+    return if Season.active_season_for_today.nil?
+
     url = "#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"
     json = JSON.parse(RestClient.get(url))
     json.each do |data|
@@ -39,6 +41,8 @@ module ClubDataImporter
   end
 
   def self.club_results
+    return if Season.active_season_for_today.nil?
+
     # Regular import of all club matches
     url = "#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"
     json = JSON.parse(RestClient.get(url))
@@ -50,12 +54,16 @@ module ClubDataImporter
   end
 
   def self.poules
+    return if Season.active_season_for_today.nil?
+
     poule_standings
     poule_matches
     poule_results
   end
 
   def self.poule_standings
+    return if Season.active_season_for_today.nil?
+
     Competition.active.each do |competition|
       # Fetch ranking
       url = "#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}" \
@@ -76,6 +84,8 @@ module ClubDataImporter
   end
 
   def self.poule_matches
+    return if Season.active_season_for_today.nil?
+
     Competition.active.each do |competition|
       imported_wedstrijdnummers = []
 
@@ -111,6 +121,8 @@ module ClubDataImporter
   end
 
   def self.poule_results
+    return if Season.active_season_for_today.nil?
+
     Competition.active.each do |competition|
       url = "#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}" \
             "&client_id=#{Setting['clubdata.client_id']}"
@@ -128,6 +140,8 @@ module ClubDataImporter
   end
 
   def self.team_photos
+    return if Season.active_season_for_today.nil?
+
     ClubDataTeam.active.each do |club_data_team|
       url = "#{Setting['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}" \
             "&client_id=#{Setting['clubdata.client_id']}"
@@ -170,6 +184,8 @@ module ClubDataImporter
   end
 
   def self.afgelastingen
+    return if Season.active_season_for_today.nil?
+
     # Regular import of all club matches
     url = "#{Setting['clubdata.urls.afgelastingen']}&client_id=#{Setting['clubdata.client_id']}"
     json = JSON.parse(RestClient.get(url))
