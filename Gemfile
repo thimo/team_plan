@@ -82,6 +82,7 @@ group :development do
   # gem "bullet" # help to kill N+1 queries and unused eager loading
   # gem "rack-mini-profiler"
   gem "rack-livereload"
+  # Run `bundle exec erd`
   gem "rails-erd", require: false
   gem "rb-fsevent"
   gem "terminal-notifier-guard"
