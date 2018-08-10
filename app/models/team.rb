@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class Team < ApplicationRecord
   include Statussable
 
-  DIVISION_OPTIONS = %w[2e\ divisie 3e\ divisie 4e\ divisie Hoofdklasse 1e\ klasse 2e\ klasse 3e\ klasse 4e\ klasse 5e\ klasse 6e\ klasse].freeze
+  DIVISION_OPTIONS = %w[2e\ divisie 3e\ divisie 4e\ divisie Hoofdklasse 1e\ klasse 2e\ klasse 3e\ klasse 4e\ klasse
+                        5e\ klasse 6e\ klasse].freeze
 
   belongs_to :age_group, touch: true
   belongs_to :club_data_team, optional: true

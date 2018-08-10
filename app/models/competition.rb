@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Competition < ApplicationRecord
   include Activatable
 
@@ -9,10 +11,10 @@ class Competition < ApplicationRecord
 
   scope :asc,     -> { order(:created_at) }
   scope :desc,    -> { order(created_at: :desc) }
-  scope :regular, -> { where(competitiesoort: 'regulier') }
-  scope :other,   -> { where.not(competitiesoort: 'regulier') }
-  scope :knvb,    -> { where('poulecode > 0')}
-  scope :custom,  -> { where('poulecode < 0')}
+  scope :regular, -> { where(competitiesoort: "regulier") }
+  scope :other,   -> { where.not(competitiesoort: "regulier") }
+  scope :knvb,    -> { where("poulecode > 0") }
+  scope :custom,  -> { where("poulecode < 0") }
 
   def self.new_custom_poulecode
     # Custom competitions have a poulecode < 0
