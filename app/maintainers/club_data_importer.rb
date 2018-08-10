@@ -147,23 +147,22 @@ module ClubDataImporter
   end
 
   def self.add_address(match)
-    if match.adres.blank?
-      url = "#{Setting['clubdata.urls.wedstrijd-accommodatie']}?wedstrijdcode=#{match.wedstrijdcode}" \
-            "&client_id=#{Setting['clubdata.client_id']}"
-      json = JSON.parse(RestClient.get(url))
-      if json["wedstrijd"].present?
-        wedstrijd = json["wedstrijd"]
+    return if match.adres.present?
 
-        match.write_attribute("adres", wedstrijd["adres"])
-        if (zip = wedstrijd["plaats"].split.first)&.match(/\d{4}[a-zA-Z]{2}/)
-          match.write_attribute("postcode", zip)
-        end
-        match.write_attribute("telefoonnummer", wedstrijd["telefoonnummer"])
-        match.write_attribute("route", wedstrijd["route"])
-        match.save if match.changed?
+    url = "#{Setting['clubdata.urls.wedstrijd-accommodatie']}?wedstrijdcode=#{match.wedstrijdcode}" \
+          "&client_id=#{Setting['clubdata.client_id']}"
+    json = JSON.parse(RestClient.get(url))
+    if json["wedstrijd"].present?
+      wedstrijd = json["wedstrijd"]
+
+      match.write_attribute("adres", wedstrijd["adres"])
+      if (zip = wedstrijd["plaats"].split.first)&.match(/\d{4}[a-zA-Z]{2}/)
+        match.write_attribute("postcode", zip)
       end
+      match.write_attribute("telefoonnummer", wedstrijd["telefoonnummer"])
+      match.write_attribute("route", wedstrijd["route"])
+      match.save if match.changed?
     end
-    
   rescue OpenURI::HTTPError
     ClubDataLog.create level: :error,
                        source: :add_address,
