@@ -21,6 +21,7 @@ gem "carrierwave", "~> 1.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
 gem "faker"
 gem "mini_magick", "~> 4.7.0"
+gem "rest-client"
 gem "slim-rails"
 
 gem "bootstrap4-kaminari-views"
