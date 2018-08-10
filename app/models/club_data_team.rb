@@ -6,14 +6,14 @@ class ClubDataTeam < ApplicationRecord
   validates :teamcode, :teamnaam, presence: true
   validates :teamcode, uniqueness: true
 
-  has_one :team, dependent: :nullify
+  has_many :teams, dependent: :nullify
   has_many :club_data_team_competitions, dependent: :nullify
   has_many :competitions, through: :club_data_team_competitions
 
   scope :asc, -> { order(:id) }
 
   def link_to_team
-    return if team.present?
+    return if teams.for_active_season.present?
 
     stripped_teamname = teamnaam.gsub(Setting["club.name"], "").strip
 
