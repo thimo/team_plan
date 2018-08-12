@@ -1,9 +1,18 @@
 .main .container-fluid {
-  padding: 0 1rem 1rem 1rem;
+  padding: 1.5rem;
+  padding-top: 0;
+}
+
+@include media-breakpoint-down(sm) {
+  .main .container-fluid {
+    padding: 1rem;
+    padding-top: 0;
+  }
 }
 
 @include media-breakpoint-down(xs) {
   .main .container-fluid {
-    padding: 0 .5rem .5rem .5rem;
+    padding: .5rem;
+    padding-top: 0;
   }
 }
