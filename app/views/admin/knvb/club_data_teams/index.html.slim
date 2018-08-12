@@ -1,20 +1,16 @@
 - provide(:title, "Teams")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | #{@teams.count} Teams
+.card
+  .card-header
+    | #{@teams.count} Teams
+    .card-header-actions
       - if policy(ClubDataTeam).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_knvb_club_data_teams_import_path, title: "Importeer teams", class: "action-btn"
-            i.fa.far.fa-sync
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_knvb_club_data_team_photos_import_path, title: "Importeer pasfoto's", class: "action-btn"
-            i.fa.far.fa-file-image
+        = link_to new_admin_knvb_club_data_teams_import_path, title: "Importeer teams", class: "card-header-action"
+          i.fa-sync[class=fa_class]
+        = link_to new_admin_knvb_club_data_team_photos_import_path, title: "Importeer pasfoto's", class: "card-header-action"
+          i.fa-file-image[class=fa_class]
 
-  .box-typical-body.table-responsive
+  .card-body.table-responsive
     table.table.table-sm.tr-links
       thead
         tr

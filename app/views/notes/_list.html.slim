@@ -1,18 +1,16 @@
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 Notities
-        small
-          | Zoals gespreksverslagen en teambesprekingen
+.card
+  .card-header
+    | Notities
+    .card-header-actions
       - if policy(Note.new(team: team)).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "action-btn"
-            i.fa.far.fa-plus-square
+        = link_to new_team_note_path(team), title: "Notitie toevoegen", class: "card-header-action"
+          i.fa-plus-square[class=fa_class]
+    .small
+      | Zoals gespreksverslagen en teambesprekingen
 
-  .box-typical-body
-    table.table.table-sm.tr-links
-      - if notes.size > 0
+  .card-body.p-0
+    - if notes.size > 0
+      table.table.table-sm.tr-links
         tbody
           - notes.each do |note|
             tr.clickable
@@ -20,13 +18,11 @@ section.box-typical
                 = link_to note_path(note)
                   = note.title
                 = " - #{note.member.name}" if note.member.present?
-                .color-blue-grey-lighter.small
+                .lighter.small
                   = l note.updated_at, format: :long
                   = ", #{note.user.name}"
 
 
-      - else
-        tbody
-          tr
-            td
-              i Geen notities gevonden
+    - else
+      .p-3
+        i Geen notities gevonden

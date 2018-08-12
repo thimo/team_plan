@@ -1,69 +1,70 @@
 div[class="#{column_class}"]
   - if params[:type] == 'email'
-    .form-check
-      strong
-        | Selectie e-mailadressen
-    .radio
-      = f.radio_button :email_selection, "all",
-        label:   "Hele team",
-        id:      "email_selection_all",
-        checked: true
-      = f.radio_button :email_selection, "staff",
-        label:   "Teamleiding",
-        id:      "email_selection_staff"
-      = f.radio_button :email_selection, "player",
-        label:   "Spelers",
-        id:      "email_selection_player"
+    .strong
+      | Selectie e-mailadressen
+    = f.radio_button :email_selection, "all",
+      label:   "Hele team",
+      id:      "email_selection_all",
+      checked: true,
+      custom: true
+    = f.radio_button :email_selection, "staff",
+      label:   "Teamleiding",
+      id:      "email_selection_staff",
+      custom: true
+    = f.radio_button :email_selection, "player",
+      label:   "Spelers",
+      id:      "email_selection_player",
+      custom: true
 
-    .form-check
-      strong
-        | Voor gebruik met
-    .radio
-      = f.radio_button :email_separator, ";",
-        label:   "Outlook",
-        id:      "email_separator_semicolon",
-        checked: current_user.settings.email_separator == ';'
-      = f.radio_button :email_separator, ",",
-        label:   "Apple Mail, Gmail",
-        id:      "email_separator_comma",
-        checked: current_user.settings.email_separator == ','
+    .strong
+      | Voor gebruik met
+    = f.radio_button :email_separator, ";",
+      label:   "Outlook",
+      id:      "email_separator_semicolon",
+      checked: current_user.settings.email_separator == ';',
+      custom: true
+    = f.radio_button :email_separator, ",",
+      label:   "Apple Mail, Gmail",
+      id:      "email_separator_comma",
+      checked: current_user.settings.email_separator == ',',
+      custom: true
 
-    .form-check
-      strong
-        | Invullen in veld
-    .radio
-      = f.radio_button :to_field, "to",
-        label:   "Aan",
-        id:      "to_field_to",
-        checked: true
-      = f.radio_button :to_field, "cc",
-        label:   "CC",
-        id:      "to_field_cc"
-      = f.radio_button :to_field, "bcc",
-        label:   "BCC",
-        id:      "to_field_bcc"
+    .strong
+      | Invullen in veld
+    = f.radio_button :to_field, "to",
+      label:   "Aan",
+      id:      "to_field_to",
+      checked: true,
+      custom: true
+    = f.radio_button :to_field, "cc",
+      label:   "CC",
+      id:      "to_field_cc",
+      custom: true
+    = f.radio_button :to_field, "bcc",
+      label:   "BCC",
+      id:      "to_field_bcc",
+      custom: true
 
   - if params[:type] == 'download_team_members' || params[:type] == 'publish'
-    .form-check
-      strong
-        | Status van teams
-    .radio
-      = f.radio_button :status, "",
-        label:   "Alle statussen",
-        id:      "status_all",
-        checked: true
-      - AgeGroup.statuses.each do |status, index|
-        = f.radio_button :status, status,
-          label:   AgeGroup.statuses_i18n[status],
-          id:      "status_#{status}"
+    .strong
+      | Status van teams
+    = f.radio_button :status, "",
+      label:   "Alle statussen",
+      id:      "status_all",
+      checked: true,
+      custom: true
+    - AgeGroup.statuses.each do |status, index|
+      = f.radio_button :status, status,
+        label:   AgeGroup.statuses_i18n[status],
+        id:      "status_#{status}",
+        custom: true
 
   - if params[:type] == 'download_team_members'
-    .form-check
-      strong
-        | Kolommen
-    .checkbox
-      - Member.export_columns(current_user).each do |column, index|
-        = f.check_box 'columns[]', { checked: current_user.export_columns.include?(column.to_s),
-          id: "columns_#{column.to_s}",
-          label: t(column) },
-          column, nil
+    .strong
+      | Kolommen
+    - Member.export_columns(current_user).each do |column, index|
+      = f.check_box 'columns[]', { checked: current_user.export_columns.include?(column.to_s),
+        id: "columns_#{column.to_s}",
+        label: t(column),
+        custom: true },
+        column, nil

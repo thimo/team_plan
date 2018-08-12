@@ -1,21 +1,18 @@
 - provide(:title, "Velden")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | Velden
+.card
+  .card-header
+    | Velden
+    .card-header-actions
       - if policy(SoccerField).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_admin_soccer_field_path, title: "Toevoegen", class: "action-btn"
-            i.fa.far.fa-file
-            
-  .box-typical-body.table-responsive
+        = link_to new_admin_soccer_field_path, title: "Toevoegen", class: "card-header-action"
+          i.fa-file[class=fa_class]
+
+  .card-body.table-responsive
     table.table.table-sm.tr-links
       thead
         tr
-          th = SoccerField.human_attribute_name(:name) 
+          th = SoccerField.human_attribute_name(:name)
           th = SoccerField.human_attribute_name(:match)
           th = SoccerField.human_attribute_name(:training)
       tbody
@@ -23,7 +20,7 @@ section.box-typical
           tr
             td
               = link_to soccer_field.name, edit_admin_soccer_field_path(soccer_field)
-            td 
+            td
               = t soccer_field.match?
-            td 
+            td
               = t soccer_field.training?

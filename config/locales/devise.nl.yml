@@ -13,25 +13,26 @@ nl:
       user: Gebruiker
   devise:
     confirmations:
-      confirmed: Je account is bevestigd, je kunt er nu mee inloggen.
+      confirmed: Je gegevens zijn bevestigd, je kunt er nu mee inloggen.
       new:
-        resend_confirmation_instructions: Verstuur bevestiging-instructies opnieuw
-      send_instructions: Je ontvangt via e-mail instructies hoe je je account kan bevestigen.
-      send_paranoid_instructions: Als we je e-mailadres terugvinden in onze database, zal je binnen enkele ogenblikken een e-mail ontvangen met instructies hoe je je account kan bevestigen.
+        resend_confirmation: Bevestiging login
+        resend_confirmation_instructions: Opnieuw versturen
+      send_instructions: Je ontvangt via e-mail instructies hoe je je login kan bevestigen.
+      send_paranoid_instructions: Als we je e-mailadres terugvinden in onze database, zal je binnen enkele ogenblikken een e-mail ontvangen met instructies hoe je je login kan bevestigen.
     failure:
       already_authenticated: Je bent al aangemeld.
-      inactive: Je account is nog niet geactiveerd.
+      inactive: Je login is nog niet geactiveerd.
       invalid: Ongeldig e-mailadres of wachtwoord.
-      last_attempt: Je hebt nog één poging voordat je account vergrendeld wordt.
-      locked: Je account is vergrendeld.
+      last_attempt: Je hebt nog één poging voordat je login vergrendeld wordt.
+      locked: Je login is vergrendeld.
       not_found_in_database: Ongeldig e-mailadres of wachtwoord.
       timeout: Je sessie is verlopen, meld je opnieuw aan om door te gaan.
       # unauthenticated: Log in om door te gaan.
       unauthenticated: ''
-      unconfirmed: Bevestig eerst je account.
+      unconfirmed: Bevestig eerst je login.
     mailer:
       confirmation_instructions:
-        action: Bevestig mijn account
+        action: Bevestig mijn login
         greeting: Welkom %{recipient},
         instruction: 'Je kunt je email bevestigen via onderstaande link:'
         subject: Bevestiging
@@ -47,14 +48,14 @@ nl:
         instruction_3: Je wachtwoord zal niet wijzigen totdat je bovenstaande link hebt gevolgd en een nieuw wachtwoord hebt aangevraagd.
         subject: Instructies om je wachtwoord opnieuw in te stellen
       unlock_instructions:
-        action: Ontgrendel mijn account
+        action: Ontgrendel mijn login
         greeting: Hallo %{recipient},
-        instruction: 'Je kunt je account ontgrendelen via onderstaande link:'
-        message: Je account is vergrendeld wegens te veel mislukte pogingen in te loggen.
+        instruction: 'Je kunt je login ontgrendelen via onderstaande link:'
+        message: Je login is vergrendeld wegens te veel mislukte pogingen in te loggen.
         subject: Ontgrendelinstructies
     omniauth_callbacks:
       failure: We konden je niet aanmelden op je %{kind} omdat "%{reason}".
-      success: Je bent succesvol ingelogd op je %{kind} account.
+      success: Je bent succesvol ingelogd op je %{kind} login.
     passwords:
       edit:
         change_my_password: Verander mijn wachtwoord
@@ -63,37 +64,38 @@ nl:
         new_password: Nieuw wachtwoord
       new:
         forgot_your_password: Wachtwoord vergeten?
-        send_me_reset_password_instructions: Verstuur wachtwoord reset
+        send_me_reset_password_instructions: Instructies versturen
       no_token: Deze pagina is alleen bereikbaar via een wachtwoord vergeten e-mail. Als je wel via een wachtwoord vergeten e-mail komt, zorg er dan voor dat je de volledige URL gebruikt.
       send_instructions: Je ontvangt een e-mail met instructies hoe je je wachtwoord opnieuw kunt instellen.
       send_paranoid_instructions: Als we je e-mailadres terugvinden in onze database, zal je binnen enkele ogenblikken via e-mail een link ontvangen om je wachtwoord opnieuw in te stellen.
       updated: Je wachtwoord is gewijzigd. Je bent nu aangemeld.
       updated_not_active: Je wachtwoord is met succes gewijzigd.
     registrations:
-      destroyed: Je account is verwijderd, wellicht tot ziens!
+      destroyed: Je login is verwijderd, wellicht tot ziens!
       edit:
         are_you_sure: Weet je het zeker?
-        cancel_my_account: Annuleer mijn account
+        cancel_my_account: Annuleer mijn login
         currently_waiting_confirmation_for_email: 'Aan het wachten op de bevestiging voor: %{email}'
         leave_blank_if_you_don_t_want_to_change_it: Alleen invullen als je je wachtwoord wilt wijzigen
-        title: Account aanpassen
+        title: Login aanpassen
         unhappy: Niet blij
         update: Bijwerken
         we_need_your_current_password_to_confirm_your_changes: Je huidige wachtwoord is nodig om de veranderingen te bevestigen
         current_password: Huidig wachtwoord
         new_password: Nieuw wachtwoord
       new:
-        sign_up: Maak een account aan
+        sign_up: Login aanmaken
       signed_up: Je bent ingeschreven.
-      signed_up_but_inactive: Je bent ingeschreven, maar we konden je niet inloggen omdat je account nog niet is geactiveerd.
-      signed_up_but_locked: Je bent ingeschreven, maar we konden je niet inloggen omdat je account is vergrendeld.
-      signed_up_but_unconfirmed: Een e-mail met een confirmatielink is naar je e-mailadres gestuurd. Open de link in je browser om je account te activeren.
-      update_needs_confirmation: Je account is bijgewerkt, maar we moeten je e-mailadres nog valideren. Een e-mail met een confirmatielink is naar je e-mailadres gestuurd. Open de link in je browser om je e-mailadres te confirmeren.
-      updated: Je accountgegevens zijn opgeslagen.
+      signed_up_but_inactive: Je bent ingeschreven, maar we konden je niet inloggen omdat je login nog niet is geactiveerd.
+      signed_up_but_locked: Je bent ingeschreven, maar we konden je niet inloggen omdat je login is vergrendeld.
+      signed_up_but_unconfirmed: Een e-mail met een confirmatielink is naar je e-mailadres gestuurd. Open de link in je browser om je login te activeren.
+      update_needs_confirmation: Je login is bijgewerkt, maar we moeten je e-mailadres nog valideren. Een e-mail met een confirmatielink is naar je e-mailadres gestuurd. Open de link in je browser om je e-mailadres te confirmeren.
+      updated: Je logingegevens zijn opgeslagen.
     sessions:
       already_signed_out: Je bent succesvol uitgelogd.
       new:
         sign_in: Inloggen
+        sign_in_hint: Log in om verder te gaan
         remember_me: Ingelogd blijven
       # signed_in: Je bent succesvol ingelogd.
       signed_in: ''
@@ -107,13 +109,13 @@ nl:
         forgot_your_password: Wachtwoord vergeten?
         sign_in: Inloggen
         sign_in_with_provider: Inloggen met %{provider}
-        sign_up: Maak account aan
+        sign_up: Login aanmaken
     unlocks:
       new:
         resend_unlock_instructions: Verstuur ontgrendel-instructies opnieuw
-      send_instructions: Je ontvangt via e-mail instructies hoe je je account kan ontgrendelen.
-      send_paranoid_instructions: Als we je e-mailadres terugvinden in onze database, zal je binnen enkele ogenblikken een e-mail ontvangen met instructies hoe je je account kan ontgrendelen.
-      unlocked: Je account is ontgrendeld. Je kan nu weer inloggen.
+      send_instructions: Je ontvangt via e-mail instructies hoe je je login kan ontgrendelen.
+      send_paranoid_instructions: Als we je e-mailadres terugvinden in onze database, zal je binnen enkele ogenblikken een e-mail ontvangen met instructies hoe je je login kan ontgrendelen.
+      unlocked: Je login is ontgrendeld. Je kan nu weer inloggen.
   errors:
     messages:
       already_confirmed: is al bevestigd

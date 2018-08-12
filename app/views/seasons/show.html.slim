@@ -1,14 +1,12 @@
 - provide(:title, "Seizoen #{@season.name}")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@season).update?
-        = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "btn btn-secondary"
-          i.fa.far.fa-pencil
-      - if policy(@season).destroy?
-        = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "btn btn-secondary"
-          i.fa.far.fa-trash-alt
+  - if policy(@season).update?
+    = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "btn"
+      i.fa-pencil[class=fa_class]
+  - if policy(@season).destroy?
+    = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "btn"
+      i.fa-trash-alt[class=fa_class]
 
 - if @age_groups_male.any? || @age_groups_female.any?
   .row
@@ -21,8 +19,8 @@
         = render 'age_groups/list', age_groups: @age_groups_female, title: "Vrouwen"
 
 - else
-  .box-typical
-    .box-typical-section
+  .card
+    .card-body
       p
         i Geen leeftijdsgroepen gevonden
       = link_to "Overnemen van #{Season.active.first.name}", [:inherit_age_groups, @season], class: "btn", method: :post

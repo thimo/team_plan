@@ -1,0 +1,38 @@
+// Generate color classes
+@each $color, $value in $grays {
+  .color-gray-#{$color} {
+    color: $value;
+  }
+
+  .bg-color-gray-#{$color} {
+    background-color: $value;
+  }
+}
+
+@each $color, $value in $colors {
+  .color-#{$color} {
+    color: $value;
+  }
+
+  .bg-color-#{$color} {
+    background-color: $value;
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .color-#{$color} {
+    color: $value;
+  }
+
+  .bg-color-#{$color} {
+    background-color: $value;
+  }
+}
+
+.light {
+  color: $gray-600;
+}
+
+.lighter {
+  color: $gray-400;
+}

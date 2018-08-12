@@ -1,31 +1,31 @@
 - if policy(member).show_private_data?
   = link_to member.name, member, target: target ||= ''
   - if member.injured?
-    i.fa.far.fa-medkit.ml-1.red[title="Geblesseerd"]
+    i.fa-medkit.ml-1.color-red[title="Geblesseerd" class=fa_class]
   - if policy(member).show_conduct? && member.conduct_number.present?
-    i.fa.far.fa-shield-check.green.ml-1[title="VOG-nummer geregistreerd"]
+    i.fa-shield-check.color-green.ml-1[title="VOG-nummer geregistreerd" class=fa_class]
 - elsif (active_team = member.active_team).present?
   = link_to member.name, active_team
 - else
   = member.name
 
 - if policy(member).show_private_data?
-  .color-blue-grey-lighter.small
+  .lighter.small
     => l member.born_on, format: :date_long unless member.born_on.nil?
     = "(#{member.gender})"
 - if policy(member).show_sportlink_status?
   - unless member.local_teams.blank?
-    .color-blue-grey.small
+    .light.small
       = "#{member.local_teams}"
   - if member.status_af_te_melden?
-    .color-blue-grey.small
+    .light.small
       = member.status.capitalize
       - if member.deregistered_at.present?
         |  per #{I18n.l member.deregistered_at, format: :long}
   - else
     - unless member.status_definitief?
-      .color-blue-grey.small
+      .light.small
         = member.status.capitalize
     - unless member.deregistered_at.blank?
-      .color-blue-grey.small
+      .light.small
         | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}

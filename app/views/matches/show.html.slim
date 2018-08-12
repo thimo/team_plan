@@ -1,37 +1,30 @@
 - provide(:title, schedule_title(@match, no_html: true))
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@match).update?
-        = link_to edit_match_path(@match), class: "btn btn-secondary", title: "Aanpassen"
-          i.fa.far.fa-pencil
+  - if policy(@match).update?
+    = link_to edit_match_path(@match), class: "btn", title: "Aanpassen"
+      i.fa-pencil[class=fa_class]
 
 - if @match.afgelast?
   div.alert.alert-danger
     h1 De wedstrijd is afgelast
     = @match.afgelast_status
 
-section.tabs-section
-  .tabs-section-nav
-    .tbl
-      ul.nav[role="tablist"]
-        li.nav-item
-          a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
-            span.nav-link-in
-              | Wedstrijd
-        - if @presences.present? && policy(@presences.first).update?
-          li.nav-item
-            a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
-              span.nav-link-in
-                | Aanwezig
-                span.ml-1.label.label-pill.label-success[id="#{@match.model_name.singular}-#{@match.id}-presence-count"]
-                  = @presences.present.size
-        - if @match.adres.present?
-          li.nav-item
-            a.nav-link[href="#tab-address" role="tab" data-toggle="tab" aria-expanded="false"]
-              span.nav-link-in
-                | Adres en route
+section
+  ul.nav.nav-tabs[role="tablist"]
+    li.nav-item
+      a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
+        | Wedstrijd
+    - if @presences.present? && policy(@presences.first).update?
+      li.nav-item
+        a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+          | Aanwezig
+          span.ml-1.badge.badge-pill.badge-success[id="#{@match.model_name.singular}-#{@match.id}-presence-count"]
+            = @presences.present.size
+    - if @match.adres.present?
+      li.nav-item
+        a.nav-link[href="#tab-address" role="tab" data-toggle="tab" aria-expanded="false"]
+          | Adres en route
 
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]

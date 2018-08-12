@@ -1,24 +1,21 @@
 - compact ||= false
 - compact_header ||= false
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          - if compact_header
-            | Stand
-          - else
-            = link_to competition_path(competition)
-              = "#{competition.competitiesoort.humanize} - #{competition.klasse}"
-            span.color-blue-grey-lighter.pl-2
-              = "#{competition.poule}"
-            .color-blue-grey.small
-              = "#{competition.competitienaam}"
+.card
+  .card-header
+    - if compact_header
+      | Stand
+    - else
+      = link_to competition_path(competition)
+        = "#{competition.competitiesoort.humanize} - #{competition.klasse}"
+      span.lighter.pl-2
+        = "#{competition.poule}"
+      .light.small
+        = "#{competition.competitienaam}"
 
-  .box-typical-body
-    table.table.table-sm.tr-links
-      - if competition.ranking
+  .card-body.p-0
+    - if competition.ranking
+      table.table.table-sm.tr-links
         thead
           tr
             th
@@ -66,11 +63,9 @@ section.box-typical
                     = line['doelpuntentegen']
                 td.text-center
                   = line['doelsaldo']
-      - else
-        tbody
-          tr
-            td
-              i Geen stand gevonden
+    - else
+      .p-3
+        i Geen stand gevonden
 
 .row
   .col-sm-6

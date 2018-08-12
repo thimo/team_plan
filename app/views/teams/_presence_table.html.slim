@@ -1,7 +1,7 @@
 / TODO move code to helper/controller
 - presentables = team.send(presentable_class.model_name.plural).in_past.active.left_outer_joins(:presences).where('presences.id IS NOT NULL').distinct.desc
 - if presentables&.any?
-  .box-typical-body.box-typical-padding.table-responsive
+  .card-body.table-responsive
     - ids = presentables.map(&:id)
     table.table.table-xxs.presences
       thead
@@ -27,14 +27,14 @@
                 - if presences.has_key? presentable.id
                   - if presences[presentable.id].present
                     - title = [presences[presentable.id].on_time_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa.far.fa-check.green[title="#{title}"]
+                    i.fa-check.color-green[title="#{title}" class=fa_class]
                     - presence_count += 1
                   - else
                     - title = [presences[presentable.id].signed_off_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa.far.fa-times.red[title="#{title}"]
+                    i.fa-times.color-red[title="#{title}" class=fa_class]
                 - else
-                  i.fa.far.fa-minus.grey
-            td.w-1.text-right.color-blue-grey
+                  i.fa-minus.color-gray[class=fa_class]
+            td.w-1.text-right.light
               = presence_count
             td
 

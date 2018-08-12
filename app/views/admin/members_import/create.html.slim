@@ -1,13 +1,10 @@
 - provide(:title, "#{@import_result[:counters][:imported]} Leden geïmporteerd")
 
 - if @import_result.present?
-  section.box-typical
-    header.box-typical-header
-      .tbl-row
-        .tbl-cell.tbl-cell-title
-          h3
-            | #{@import_result[:created].size} Leden aangemaakt
-    .box-typical-body.table-responsive
+  .card
+    .card-header
+      | #{@import_result[:created].size} Leden aangemaakt
+    .card-body.table-responsive
       table.table.table-sm.tr-links
         thead
           tr
@@ -21,13 +18,10 @@
               td
                 = member.email
 
-  section.box-typical
-    header.box-typical-header
-      .tbl-row
-        .tbl-cell.tbl-cell-title
-          h3
-            | #{@import_result[:activated].size} Leden geactiveerd
-    .box-typical-body.table-responsive
+  .card
+    .card-header
+      | #{@import_result[:activated].size} Leden geactiveerd
+    .card-body.table-responsive
       table.table.table-sm.tr-links
         thead
           tr
@@ -42,13 +36,10 @@
                 = member.email
 
 - if @cleanup_result.present?
-  section.box-typical
-    header.box-typical-header
-      .tbl-row
-        .tbl-cell.tbl-cell-title
-          h3
-            | #{@cleanup_result[:deregistered].size} Leden verwijderd
-    .box-typical-body.table-responsive
+  .card
+    .card-header
+      | #{@cleanup_result[:deregistered].size} Leden verwijderd
+    .card-body.table-responsive
       table.table.table-sm.tr-links
         thead
           tr

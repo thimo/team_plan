@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamPolicy < ApplicationPolicy
   def index?
     true
@@ -77,8 +79,8 @@ class TeamPolicy < ApplicationPolicy
     return false if @record.archived?
 
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_member_for?(@record)
+      @user.club_staff? ||
+      @user.team_member_for?(@record)
   end
 
   def show_status?
@@ -116,7 +118,7 @@ class TeamPolicy < ApplicationPolicy
   def permitted_attributes
     attributes = [:name, :division, :remark, :players_per_team, :minutes_per_half]
     attributes << :status if set_status?
-    return attributes
+    attributes
   end
 
   class Scope < Scope
@@ -133,7 +135,7 @@ class TeamPolicy < ApplicationPolicy
 
     def club_or_team_staff?
       @user.admin? ||
-      @user.club_staff? ||
-      @user.team_staff_for?(@record)
+        @user.club_staff? ||
+        @user.team_staff_for?(@record)
     end
 end

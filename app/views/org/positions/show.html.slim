@@ -1,30 +1,25 @@
 - provide(:title, "#{@org_position.position_type_i18n} \"#{@org_position.name}\"")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@org_position).update?
-        = link_to edit_org_position_path(@org_position), title: "Positie aanpassen", class: "btn btn-secondary"
-          i.fa.far.fa-pencil
-      - if policy(@org_position).destroy?
-        = link_to org_position_path(@org_position),  method: :delete, data: { confirm: 'Positie wordt verwijderd. Doorgaan?' }, title: "Positie verwijderen", class: "btn btn-secondary"
-          i.fa.far.fa-trash-alt
+  - if policy(@org_position).update?
+    = link_to edit_org_position_path(@org_position), title: "Positie aanpassen", class: "btn"
+      i.fa-pencil[class=fa_class]
+  - if policy(@org_position).destroy?
+    = link_to org_position_path(@org_position),  method: :delete, data: { confirm: 'Positie wordt verwijderd. Doorgaan?' }, title: "Positie verwijderen", class: "btn"
+      i.fa-trash-alt[class=fa_class]
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 #{@org_position.position_type_i18n} "#{@org_position.name}"
+.card
+  .card-header
+    | #{@org_position.position_type_i18n} "#{@org_position.name}"
 
-        - if @org_position.remark.present?
-          p #{@org_position.remark}
+    - if @org_position.remark.present?
+      p #{@org_position.remark}
 
-        h4
-          = @org_position.working_group? || @org_position.committee? ? "Leden" : "Persoon"
-          i.fa.far.fa-plus-square.ml-2
-        - @org_position.org_position_members.each do |member|
-          div
-            = member.member.name
-            = ", #{member.name}" if member.name.present?
+    = @org_position.working_group? || @org_position.committee? ? "Leden" : "Persoon"
+    i.fa-plus-square.ml-2[class=fa_class]
+    - @org_position.org_position_members.each do |member|
+      div
+        = member.member.name
+        = ", #{member.name}" if member.name.present?
 
-  .row.box-typical-body
+  .row.card-body

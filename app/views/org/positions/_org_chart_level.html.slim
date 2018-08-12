@@ -2,7 +2,7 @@ ul.list-group
   - objects.each do |object, children|
     li.list-group-item
       h5.mb-0
-        i.fa.far.fa-users.mr-1[title="#{object.position_type_i18n}" class="#{object.role? ? 'fa-user-circle' : 'fa-users'}"]
+        i.fa-users.mr-1[title="#{object.position_type_i18n}" class="#{object.role? ? 'fa-user-circle' : 'fa-users'}" class=fa_class]
         = link_to object
           | #{object.name}
           / | #{object.position_type_i18n} "#{object.name}"

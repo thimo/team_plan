@@ -1,12 +1,16 @@
+# frozen_string_literal: true
+
 class TrainingSchedulePolicy < ApplicationPolicy
   def show?
     true
   end
 
   def create?
+    return false if @record.team.archived?
+
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_staff_for?(@record.team)
+      @user.club_staff? ||
+      @user.team_staff_for?(@record.team)
   end
 
   def update?

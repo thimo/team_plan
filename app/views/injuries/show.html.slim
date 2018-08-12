@@ -1,34 +1,29 @@
 - provide(:title, "Blessure - #{@injury.title}")
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(Todo).create? && policy(@injury.member).show_todos?
-        = link_to new_member_todo_path(@injury.member, title: "Opvolging voor blessure - #{@injury.title}"), title: "Todo toevoegen", class: "btn btn-secondary"
-          i.fa.far.fa-check-square
-      - if policy(@injury).edit?
-        = link_to edit_injury_path(@injury), class: "btn btn-secondary", title: "Aanpassen"
-          i.fa.far.fa-pencil
+  - if policy(Todo).create? && policy(@injury.member).show_todos?
+    = link_to new_member_todo_path(@injury.member, title: "Opvolging voor blessure - #{@injury.title}"), title: "Todo toevoegen", class: "btn"
+      i.fa-check-square[class=fa_class]
+  - if policy(@injury).edit?
+    = link_to edit_injury_path(@injury), class: "btn", title: "Aanpassen"
+      i.fa-pencil[class=fa_class]
 
 .row
   .col-xl-6
-    .box-typical
-      header.box-typical-header
-        .tbl-row
-          .tbl-cell.tbl-cell-title
-            h4
-              = @injury.title
-            | #{l @injury.started_on, format: :long}
-            - if @injury.ended_on.present?
-              |  - #{l @injury.ended_on, format: :long}
-            - else
-              |  - ...
+    .card
+      .card-header
+        = @injury.title
+        | #{l @injury.started_on, format: :long}
+        - if @injury.ended_on.present?
+          |  - #{l @injury.ended_on, format: :long}
+        - else
+          |  - ...
 
-            .color-blue-grey-lighter.small
-              = "#{@injury.user.name}"
-              = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
+        .lighter.small
+          = "#{@injury.user.name}"
+          = ". Bijgewerkt op #{l @injury.updated_at, format: :long}" if @injury.created_at != @injury.updated_at
 
-      .box-typical-body
+      .card-body
         .comment-row-item.no-photo
           = @injury.body.html_safe
 

@@ -127,10 +127,6 @@ class Member < ApplicationRecord
     player_evaluations.finished_desc.first
   end
 
-  def active?
-    active_team_member.present?
-  end
-
   def active_field_position?(field_positions)
     active? && (field_positions & active_team_member.field_positions.map(&:id)).present?
   end

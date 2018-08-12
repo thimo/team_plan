@@ -1,25 +1,22 @@
 - provide(:title, "Notitie - #{@note.title}")
 
-.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = @note.title
-          - if @note.member.present?
-            small
-              = " - #{@note.member.name}"
-              
-        .color-blue-grey-lighter.small
-          = "#{l @note.created_at, format: :date_long}"
-          = " (aangepast op #{l @note.updated_at, format: :long})" if @note.created_at != @note.updated_at
-          = ", #{@note.user.name}"
-          
-      .tbl-cell.tbl-cell-actions
-        - if policy(@note).update?
-          = link_to edit_note_path(@note), class: "action-btn", title: "Aanpassen"
-            i.fa.far.fa-pencil
-          
-  .box-typical-body
+.card
+  .card-header
+    = @note.title
+    - if @note.member.present?
+      small
+        = " - #{@note.member.name}"
+
+    .lighter.small
+      = "#{l @note.created_at, format: :date_long}"
+      = " (aangepast op #{l @note.updated_at, format: :long})" if @note.created_at != @note.updated_at
+      = ", #{@note.user.name}"
+
+    .card-header-actions
+      - if policy(@note).update?
+        = link_to edit_note_path(@note), class: "card-header-action", title: "Aanpassen"
+          i.fa-pencil[class=fa_class]
+
+  .card-body
     .comment-row-item.no-photo
       = @note.body.html_safe

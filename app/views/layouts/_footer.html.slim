@@ -1,7 +1,15 @@
-/ footer#footer
-/   .copyright
-/     .container
-/       p.text-center
-/         | Copyright © #{Time.zone.now.year}
-/         a> href="https://www.defrog.nl/"
-/         | Defrog. Alle rechten voorbehouden 
+footer.app-footer
+  div
+    = link_to Setting["club.website"]
+      = "#{Setting['club.name']} #{Setting['application.name']}"
+    span
+      = " © #{Time.zone.now.year} "
+      a> href="https://www.defrog.nl/"
+        | Defrog
+  .ml-auto
+    span
+      = "Handcrafted with "
+      i.fa-fw.fa-heart.color-red[class=fa_class]
+      = " by "
+    a[href="https://www.defrog.nl/"]
+      = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1', style: 'height: 18px;'

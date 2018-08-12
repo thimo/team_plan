@@ -6,7 +6,7 @@ tr.clickable
   td.py-1.pr-0.align-middle
     .small.nowrap
       = "#{I18n.l training.started_at, format: :weekday} #{I18n.l training.started_at, format: :date_short}"
-      div.color-blue-grey
+      div.light
         = starts_ends(training)
   td.align-middle
     = link_to training
@@ -15,7 +15,7 @@ tr.clickable
       - if ts&.soccer_field
         = " · #{ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")}"
     - if ts.present? && TrainingSchedule.present_minutes[ts.present_minutes] > 0
-      .color-blue-grey-lighter.small
+      .lighter.small
         | #{ts.present_minutes_i18n} aanwezig
   - if include_presences
     td.py-1.w-1.nowrap.pl-0.align-middle.strong.text-center

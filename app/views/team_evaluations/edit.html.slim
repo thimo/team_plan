@@ -1,11 +1,9 @@
 - provide(:title, "Teamevaluatie")
-- provide(:body_class, "sidebar-hidden")
+- provide(:body_class, "evaluation brand-minimized sidebar-minimized")
 
 - unless @team_evaluation.private?
-  - content_for :action_buttons
-    .alert.alert-info
-      div
-        | <b>Herinnering:</b> na het afronden van de teamevalutie kan een speler de eigen evaluatie inzien.
+  - content_for :title_action
+    .alert.alert-primary.mb-0
+      | <b>Ter herinnering:</b> na het afronden van de teamevalutie kan een speler de eigen evaluatie inzien.
 
-.evaluation
-  = render "form"
+= render "form"

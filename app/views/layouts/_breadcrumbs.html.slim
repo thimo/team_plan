@@ -1,0 +1,14 @@
+- breadcrumbs = render_breadcrumbs(builder: ::Bootstrap4BreadcrumbsBuilder)
+- action_buttons = yield(:action_buttons)
+
+- if breadcrumbs.present?
+  ol.breadcrumb
+    = breadcrumbs
+    li.breadcrumb-menu
+      .btn-group role="group"
+        = action_buttons
+- elsif action_buttons.present?
+  ol.breadcrumb.float-right
+    li.breadcrumb-menu
+      .btn-group role="group"
+        = action_buttons

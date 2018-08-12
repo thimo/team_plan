@@ -1,20 +1,18 @@
 .evaluation {
-  select {
-    &.field_positions {
-      display: none;
-    }
-    &.custom-select {
-      background-image: none;
-      padding: .375rem;
+  @each $color, $value in $theme-colors {
+    .select-#{$color} {
+      background-color: $value;
+      color: white;
+      font-weight: 400;
     }
   }
 
   div {
     &.form-control-error {
       background-color: #fff6f6;
-      border: solid 1px #fa424a;
-      border-radius: 4px;
-      color: #fa424a !important;
+      border: solid 1px $red;
+      border-radius: $border-radius;
+      color: $red !important;
     }
   }
 
@@ -57,44 +55,16 @@
     width: 60px;
   }
 
-  .select2-container--default .select2-selection {
-    background-color: inherit;
-    // border-width: 0;
-  }
-  .select2-container--default.select2-container--open {
-    &.select2-container--below .select2-selection {
-      border-bottom-width: 1px;
-    }
+  .select2-container--bootstrap {
+    .select2-selection--multiple {
+      .select2-selection__choice {
+        margin-bottom: 2px;
+      }
 
-    &.select2-container--above .select2-selection {
-      border-top-width: 1px;
+      .select2-selection__choice__remove {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
     }
-  }
-
-  .select2-selection {
-    .select2-selection__choice {
-      background: none;
-      color: #343434;
-      font-weight: normal;
-      height: inherit;
-      line-height: 20px;
-      margin-right: 2px;
-      margin-top: 0;
-      padding: 0 25px 0 0;
-    }
-    .select2-selection__choice__remove {
-      color: #343434 !important;
-      font-weight: normal;
-      font-size: 1.4rem;
-    }
-  }
-
-  .select2-container--default .select2-selection--multiple .select2-selection__rendered {
-    margin-top: 8px;
-  }
-
-  .select2-container .select2-search--inline .select2-search__field {
-    margin-top: 0;
-    height: 20px;
   }
 }

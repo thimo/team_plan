@@ -1,31 +1,27 @@
 - provide(:title, "Gebruikers")
 
-- content_for :action_buttons
+- content_for :title_action
   = paginate @users, theme: 'twitter-bootstrap-4'
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | #{@users.total_count} Gebruikers
+.card
+  .card-header
+    | #{@users.total_count} Gebruikers
 
-      .tbl-cell.float-right
-        - if params[:inactive]
-          = link_to admin_users_path, class: 'btn btn-link'
-            | Actieve gebruikers
-        - else
-          = link_to admin_users_path(inactive: true), class: 'btn btn-link'
-            | Inactieve gebruikers
-        = form_with url: admin_users_path, method: :get, local: true, class: 'form-inline float-right'
-          = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
-          = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
+    .card-header-actions.d-flex.align-items-center
+      - if params[:inactive]
+        = link_to admin_users_path, class: 'btn btn-link card-header-action'
+          | Actieve gebruikers
+      - else
+        = link_to admin_users_path(inactive: true), class: 'btn btn-link card-header-action'
+          | Inactieve gebruikers
+      = form_with url: admin_users_path, method: :get, local: true, class: 'form-inline card-header-action'
+        = text_field_tag "query", params[:query], class: 'form-control ml-2', placeholder: 'Filter op naam'
+        = select_tag "role", options_for_select((User.roles_i18n.map {|k, v| [v, k]}).unshift(["Alle rollen", ""]), params[:role]), class: 'form-control ml-2', onchange: 'this.form.submit();'
       - if policy(User).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_user_path, title: "Gebruiker toevoegen"
-            i.fa.far.fa-file
+          = link_to new_admin_user_path, title: "Gebruiker toevoegen", class: "card-header-action"
+            i.fa-file[class=fa_class]
 
-  .box-typical-body
+  .card-body
     table.table.table-sm.tr-links
       thead
         tr
@@ -39,7 +35,7 @@ section.box-typical
           tr
             td
               = link_to user.name, [:edit, :admin, user]
-              .color-blue-grey.small
+              .light.small
                 => user.email
                 - if user.unconfirmed_email.present?
                   |  (wijziging naar #{user.unconfirmed_email} nog niet bevestigd)
@@ -50,7 +46,7 @@ section.box-typical
             td.text-right
               - if current_user != user
                 = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
-                  i.fa.far.fa-sign-in.m-1.ml-2
+                  i.fa-sign-in.m-1.ml-2[class=fa_class]
 
 .text-right
   = paginate @users, theme: 'twitter-bootstrap-4'

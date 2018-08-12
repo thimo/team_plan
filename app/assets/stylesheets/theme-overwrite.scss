@@ -1,0 +1,158 @@
+.side-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0;
+  padding-top: 58px;
+}
+
+// Highlight navigation
+.side-menu-list .active {
+  background-color: #f6f8fa;
+
+  .lbl {
+    color: #343434;
+  }
+}
+
+.side-menu-list, .side-menu {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.sign-box {
+  max-width: 420px;
+
+  .sign-avatar {
+    &.sign-logo {
+      img {
+        border-radius: 0;
+      }
+    }
+  }
+
+  a:hover,
+  a:hover:hover {
+    text-decoration: none;
+  }
+}
+
+.devise {
+  .alert {
+    display: inline-block;
+  }
+}
+
+.show-hide-sidebar {
+  float: left;
+  margin: 0 12px 0 0;
+}
+
+@media (max-width: 576px) {
+  h3 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 1056px) {
+  body {
+    &.sidebar-hidden {
+      .page-content {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+abbr[title] {
+  border: 0;
+  text-decoration: none;
+}
+
+label.required:after {
+  content:" *";
+}
+
+.form-inline {
+  .form-check-label {
+    padding-left: 24px;
+    padding-right: 20px;
+  }
+}
+
+trix-toolbar {
+  .button_group {
+    border-color: #d6e2e8;
+
+    button:not(:first-child),
+    input[type=button]:not(:first-child) {
+      border-color: #d6e2e8;
+    }
+
+    button,
+    input[type=button] {
+      border-bottom: none;
+    }
+  }
+}
+
+.bootstrap-table .table a,
+.fixed-table-body .table a,
+.table a {
+  top: inherit;
+}
+
+@media (max-width: 576px) {
+  .dropdown.dropdown-typical a.dropdown-toggle {
+    padding-right: 10px;
+    padding-left: 0;
+  }
+}
+
+.popover {
+  font-family: inherit;
+}
+
+.dropdown-toggle {
+  a {
+    i {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.sign-box .list-inline {
+  text-align: center;
+
+  li:not(:first-child) a {
+    padding-left: 5px;
+  }
+
+  li + li:before {
+    content: "•";
+  }
+}
+
+.field_with_errors,
+.has-error {
+  color: #a94543;
+}
+
+.field_with_errors input,
+.has-error input,
+.has-error textarea {
+  border-color: #a94543;
+}
+
+// // Correct spacing for inline radio buttons
+// .form-group span.radio {
+//   margin: 0 4px;
+//
+//   label input {
+//     margin-right: 4px;
+//   }
+// }

@@ -1,20 +1,17 @@
 - title ||= 'Vaste trainingsdagen'
 - disable_header ||= false
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = title
+.card
+  .card-header
+    = title
+    .card-header-actions
       - if defined?(team) && policy(TrainingSchedule.new(team: team)).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_team_training_schedule_path(team), title: "Trainingsdag toevoegen", class: "action-btn"
-            i.fa.far.fa-plus-square
+        = link_to new_team_training_schedule_path(team), title: "Trainingsdag toevoegen", class: "card-header-action"
+          i.fa-plus-square[class=fa_class]
 
-  .box-typical-body
-    table.table.table-sm.tr-links
-      - if training_schedules.size > 0
+  .card-body.p-0
+    - if training_schedules.size > 0
+      table.table.table-sm.tr-links
         - unless disable_header
           thead
             th Dag
@@ -27,12 +24,12 @@ section.box-typical
               td
                 = link_to ts
                   = ts.day_i18n
-                .color-blue-grey
+                .light
                   = I18n.l ts.start_time, format: :time_short
                   |  -
                   = I18n.l ts.end_time, format: :time_short
                 - if TrainingSchedule.present_minutes[ts.present_minutes] > 0
-                  .color-blue-grey.small
+                  .light.small
                     | #{ts.present_minutes_i18n} aanwezig
               td
                 = ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")
@@ -43,11 +40,9 @@ section.box-typical
                   = ts.class.human_attribute_name(:cios) if ts.cios?
               td.w-1.nowrap.text-right
                 - if policy(ts).show_presences? && (present = ts.presences.present).any?
-                  .label.ml-1[title="Standaard aanwezig"]
+                  .badge.badge-secondary.ml-1[title="Standaard aanwezig"]
                     = present.size
 
-      - else
-        tbody
-          tr
-            td
-              i Geen trainingen gevonden
+    - else
+      .p-3
+        i Geen trainingen gevonden

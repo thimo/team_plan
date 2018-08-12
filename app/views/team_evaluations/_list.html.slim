@@ -7,24 +7,20 @@
 - hide_team ||= false
 - show_bulk_create ||= false
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = title
+.card
+  .card-header
+    = title
+    .card-header-actions
       - if defined?(team).present? && policy(TeamEvaluation.new(team: team)).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "action-btn"
-            i.fa.far.fa-list-ol
+        = link_to new_team_team_evaluation_path(team), title: "Evaluatie toevoegen", class: "card-header-action"
+          i.fa-list-ol[class=fa_class]
       - if show_bulk_create && @age_group.present? && policy(TeamEvaluation.new(team: @teams.first)).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "action-btn"
-            i.fa.far.fa-copy
+        = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "card-header-action"
+          i.fa-copy[class=fa_class]
 
-  .box-typical-body
-    table.table.table-sm.tr-links
-      - if team_evaluations.size > 0
+  .card-body.p-0
+    - if team_evaluations.size > 0
+      table.table.table-sm.tr-links
         - unless disable_header
           thead
             - unless hide_team
@@ -67,8 +63,6 @@ section.box-typical
                   .progress
                     .progress-bar[role="progressbar" style="width: #{team_evaluation.progress}%" aria-valuenow="#{team_evaluation.progress}" aria-valuemin="0" aria-valuemax="100" title="#{team_evaluation.progress}%"]
 
-      - else
-        tbody
-          tr
-            td
-              i Geen teamevaluaties gevonden
+    - else
+      .p-3
+        i Geen teamevaluaties gevonden

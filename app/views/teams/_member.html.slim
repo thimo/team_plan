@@ -5,11 +5,11 @@ tr
     - if policy(member).show_private_data?
       = link_to member.name, member
       - if policy(member).show_conduct? && member.conduct_number.present?
-        i.fa.far.fa-shield-check.green.ml-1[title="VOG-nummer geregistreerd"]
+        i.fa-shield-check.color-green.ml-1[title="VOG-nummer geregistreerd" class=fa_class]
     - else
       = member.name
     - if policy(member).show_private_data?
-      .color-blue-grey-lighter.small
+      .lighter.small
         => l member.born_on, format: :long unless member.born_on.nil?
         = "(#{member.gender})"
   td
@@ -17,7 +17,7 @@ tr
       div
         = team_member.role_i18n
         - if team_member.ended_on
-          span.color-blue-grey.d-none.d-sm-inline
+          span.light.d-none.d-sm-inline
             = " - tot #{l team_member.ended_on, format: :long}"
 
   td.w-1.nowrap
@@ -25,16 +25,16 @@ tr
       .text-right
         - if policy(team_member).edit?
           => link_to edit_team_member_path(team_member), title: "Aanpassen"
-            i.fa.far.fa-pencil.m-1.ml-2
+            i.fa-pencil.m-1.ml-2[class=fa_class]
 
         - if policy(team_member).destroy?
           => link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-            i.fa.far.fa-times.m-1
+            i.fa-times.m-1[class=fa_class]
 
         - if policy(team_member).show_status?
           div
             .d-none.d-sm-inline
-              = team_member.status_to_label.html_safe
+              = team_member.status_to_badge.html_safe
             - if policy(team_member).activate?
               = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
-                i.fa.far.fa-check.m-1.ml-2
+                i.fa-check.m-1.ml-2[class=fa_class]

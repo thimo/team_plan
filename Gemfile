@@ -8,14 +8,11 @@ gem "jbuilder", "~> 2.5"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.2.0"
-gem "sass-rails", "~> 5.0"
+gem "sassc-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker"
 gem "webpacker-react"
-
-gem "less-rails", "~> 3.0.0"
-gem "therubyracer"
 
 gem "carrierwave", "~> 1.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
@@ -28,7 +25,9 @@ gem "bootstrap4-kaminari-views"
 gem "kaminari"
 gem "rails-i18n"
 
-gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git"
+# gem "bootstrap_form", "~> 4.0.0.alpha"
+# Fixes problem with id's on checkboxes
+gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "master"
 gem "country_select"
 gem "simple_form",                "~> 4.0"
 
@@ -68,7 +67,7 @@ group :development, :test do
   # gem "pry-byebug"
   gem "factory_bot_rails"
   gem "guard"
-  gem "scout_apm" # Disabled to improve loading without internet connction
+  # gem "scout_apm" # Disable to improve loading without internet connction
 end
 
 group :development do

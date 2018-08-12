@@ -1,0 +1,20 @@
+// Force white text on these button colors
+.btn-secondary, .btn-warning {
+  color: white;
+  font-weight: 400;
+}
+
+.btn + .btn {
+  margin-left: 4px;
+}
+
+// Overwrite bootstrap_form
+.rails-bootstrap-forms-error-summary {
+  margin-top: inherit;
+  margin-bottom: 0;
+}
+
+.form-check {
+  margin-top: .25rem;
+  margin-bottom: .25rem;
+}

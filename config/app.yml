@@ -4,6 +4,7 @@ defaults: &defaults
   club.name: Defrog
   club.name_short: Defrog
   club.hostname: teamplan.defrog.nl
+  club.website: https://teamplan.defrog.nl/
   club.sportscenter:
   club.address:
   club.zip:
@@ -23,6 +24,7 @@ defaults: &defaults
   clubdata.urls.afgelastingen: https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1
   clubdata.urls.club_logos: http://bin617.website-voetbal.nl/sites/voetbal.nl/files/knvblogos/
   clubdata.client_id:
+  fontawesome.integrity:
   google.maps.base_url: https://www.google.com/maps/embed/v1/
   google.maps.api-key: AIzaSyAOFIRg1PtqSjCzQfGoyPJTi-XH7TvPfkc
 

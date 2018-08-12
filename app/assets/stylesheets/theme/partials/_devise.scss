@@ -1,0 +1,25 @@
+.devise {
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $gray-700;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-weight: 300;
+    font-size: 1.875rem;
+    margin: 0;
+  }
+
+  .logo {
+    margin: 0 1rem;
+    max-height: 2rem;
+    max-width: 2rem;
+  }
+
+  .alert {
+    width: 100%;
+  }
+}

@@ -1,16 +1,14 @@
 - new_path ||= new_todo_path
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 Todo's
+.card
+  .card-header
+    | Todo's
+    .card-header-actions
       - if policy(Todo).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_path, title: "Todo toevoegen", class: "action-btn"
-            i.fa.far.fa-plus-square
+        = link_to new_path, title: "Todo toevoegen", class: "card-header-action"
+          i.fa-plus-square[class=fa_class]
 
-  .box-typical-body
+  .card-body.p-0
     - if todos_active.present? || todos_defered.present?
       - if todos_active.present?
         - todos_active.each do |todo|
@@ -21,8 +19,5 @@ section.box-typical
           div[id="todo-#{todo.id}"]
             = render 'todos/list_item', todo: todo
     - else
-      table.table
-        tbody
-          tr
-            td
-              i Geen todo's gevonden
+      .p-3
+        i Geen todo's gevonden

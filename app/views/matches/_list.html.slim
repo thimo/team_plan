@@ -4,23 +4,20 @@
 - include_presences ||= false
 - highlight_own_teams ||= false
 
-section.box-typical.schedule-list
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          == title
-      .tbl-cell.tbl-cell-actions
-        - if team.present?
-          - if policy(team).create_match?
-            = link_to new_team_match_path(team), title: "Een wedstrijd toevoegen", class: "action-btn"
-              i.fa.far.fa-plus-square
-          = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
-            i.fa.far.fa-calendar-alt
+.card.schedule-list
+  .card-header
+    == title
+    .card-header-actions
+      - if team.present?
+        - if policy(team).create_match?
+          = link_to new_team_match_path(team), title: "Een wedstrijd toevoegen", class: "card-header-action"
+            i.fa-plus-square[class=fa_class]
+        = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "card-header-action"
+          i.fa-calendar-alt[class=fa_class]
 
-  .box-typical-body
-    table.table.table-sm.tr-links.align-top
-      - if matches.any?
+  .card-body.p-0
+    - if matches.any?
+      table.table.table-sm.tr-links.align-top
         - if matches.first.is_a? Array
           - matches.each do |date, matches|
             thead
@@ -38,8 +35,6 @@ section.box-typical.schedule-list
             = render partial: 'shared/match',
               collection: matches,
               locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams }
-      - else
-        tbody
-          tr
-            td
-              i Geen wedstrijden gevonden
+    - else
+      .p-3
+        i Geen wedstrijden gevonden

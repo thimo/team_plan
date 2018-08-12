@@ -1,6 +1,8 @@
-require_relative 'boot'
-require 'csv'
-require 'rails/all'
+# frozen_string_literal: true
+
+require_relative "boot"
+require "csv"
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -16,7 +18,7 @@ module TeamPlan
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W[#{config.root}/lib]
 
     config.to_prepare do
       Devise::SessionsController.layout "devise"
@@ -27,15 +29,18 @@ module TeamPlan
       g.javascript_engine :js
     end
 
-    config.time_zone = 'Amsterdam'
+    config.time_zone = "Amsterdam"
 
     config.assets.paths << Rails.root.join("vendor", "assets", "images")
+    # A bit dirty, but needed to get @coreui's 'node_modules/*' links working
+    config.assets.paths << Rails.root
 
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
 
     # Enable to prevent loading all helpers all the time
     # config.action_controller.include_all_helpers = false
     config.generators.javascripts = false
+    config.generators.stylesheets = false
 
     console do
       ActiveRecord::Base.connection

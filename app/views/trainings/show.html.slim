@@ -1,27 +1,21 @@
 - provide(:title, schedule_title(@training))
 
 - content_for :action_buttons
-  .btn-toolbar
-    .btn-group
-      - if policy(@training).update?
-        = link_to edit_training_path(@training), class: "btn btn-secondary", title: "Aanpassen"
-          i.fa.far.fa-pencil
+  - if policy(@training).update?
+    = link_to edit_training_path(@training), class: "btn", title: "Aanpassen"
+      i.fa-pencil[class=fa_class]
 
-section.tabs-section
-  .tabs-section-nav
-    .tbl
-      ul.nav[role="tablist"]
-        li.nav-item
-          a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
-            span.nav-link-in
-              | Programma
-        - if @presences.present? && policy(@presences.first).update?
-          li.nav-item
-            a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
-              span.nav-link-in
-                | Aanwezig
-                span.ml-1.label.label-pill.label-success[id="#{@training.model_name.singular}-#{@training.id}-presence-count"]
-                  = @presences.present.size
+section
+  ul.nav.nav-tabs[role="tablist"]
+    li.nav-item
+      a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
+        | Programma
+    - if @presences.present? && policy(@presences.first).update?
+      li.nav-item
+        a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+          | Aanwezig
+          span.ml-1.badge.badge-pill.badge-success[id="#{@training.model_name.singular}-#{@training.id}-presence-count"]
+            = @presences.present.size
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
       .card.float-right
@@ -29,12 +23,12 @@ section.tabs-section
           .strong #{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}
           div #{starts_ends(@training)} uur
           - if (ts = @training.training_schedule).present?
-            .color-blue-grey.small
+            .light.small
               | #{ts.present_minutes_i18n} aanwezig
             hr.my-2
             div
               = ts.soccer_field.name
-              span.color-blue-grey.small.ml-2
+              span.light.small.ml-2
                 = ts.field_part_i18n
             - if ts.team_members.any? || ts.cios?
               hr.my-2

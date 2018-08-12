@@ -7,7 +7,7 @@
         | Datum
       .col-md-9
         = "#{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}"
-        .color-blue-grey.small
+        .light.small
           = "#{l @training.started_at, format: :time_short} tot #{l @training.ended_at, format: :time_short}"
   - else
     = f.text_field :started_at, date_picker_options
@@ -17,10 +17,10 @@
   = render 'input/trix', f: f, field: :body, autofocus: true
   = f.text_area :remark
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-secondary-outline btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @training.new_record? ? @training.team : @training, class: 'btn btn-light'
   - if policy(@training).destroy?
-    = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+    = link_to "Verwijderen", training_path(@training), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
 
 
 - if @trainings_with_program.present?

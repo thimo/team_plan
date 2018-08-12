@@ -4,11 +4,11 @@
   = f.text_field :name, autofocus: true
 
   = f.form_group class: 'checkbox-toggle'
-    = f.check_box :match
-    = f.check_box :training
+    = f.check_box :match, custom: true
+    = f.check_box :training, custom: true
 
   div
-    = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
+    = f.submit "Opslaan", class: 'btn btn-primary'
     - if policy(@soccer_field).destroy?
-      = link_to "Verwijderen", admin_soccer_field_path(@soccer_field),  method: :delete, data: { confirm: 'Veld wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
-    = link_to "Annuleren", [:admin, :soccer_fields], class: 'btn btn-secondary-outline btn-inline'
+      = link_to "Verwijderen", admin_soccer_field_path(@soccer_field),  method: :delete, data: { confirm: 'Veld wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+    = link_to "Annuleren", [:admin, :soccer_fields], class: 'btn btn-light'

@@ -1,55 +1,41 @@
 doctype html
-html
-  head
-    title
-      = full_title(yield(:title))
-    meta[charset="utf-8"]
-    meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
-    meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
-    link rel="shortcut icon" href="#{image_url "favicon.ico"}"
+html lang="nl"
+  = render "layouts/head"
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'
-    = csrf_meta_tags
-
-    / Use 'defer' here as with 'async' 'turbolinks:load' is not called
-    = javascript_pack_tag 'application', defer: Rails.env.production?
-
-  body.with-side-menu[class="#{yield(:body_class)}"]
-    - unless Rails.env.production? || Rails.env.development?
-      div[style="padding: 4px; background-color: #E51A55; color: white; text-align: center;"]
-        |  -= #{Rails.env} =-
-
+  body.app.header-fixed.sidebar-fixed.aside-menu-fixed.sidebar-lg-show[class="#{yield(:body_class)}"]
     = render 'layouts/header'
-    = render 'layouts/side_menu'
 
-    .page-content
-      .container-fluid
-        header.section-header
-          .header-buttons
-            = yield(:action_buttons)
-          h3
-            .pr-2.d-inline
-              = yield(:title)
-            small.color-blue-grey.d-block.d-md-inline
-              = yield(:subtitle)
-            - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
-              span.ml-3.label[class="#{label_object.color_class_for_status}"]
-                = label_object.status_i18n
-          .color-blue-grey.small
-            = yield(:hint)
+    .app-body
+      = render 'layouts/side_menu'
 
-          ol.breadcrumb.breadcrumb-simple
-            = render_breadcrumbs :tag => :li, :separator => ""
+      main.main
+        - unless Rails.env.production? || Rails.env.development?
+          div.color-white.bg-color-red.text-center.p-2
+            |  -= #{Rails.env} =-
+        = render "layouts/breadcrumbs"
 
-        = content_for?(:content) ? yield(:content) : yield
+        .container-fluid
+          header.section-header.my-3
+            .d-flex.w-100.justify-content-between
+              div
+                h3.m-0
+                  .pr-2.d-inline
+                    = yield(:title)
+                  small.light.pr-2
+                    = yield(:subtitle)
+                  - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
+                    span.badge.badge-secondary[class="#{label_object.color_class_for_status}"]
+                      = label_object.status_i18n
+                .light.small
+                  = yield(:hint)
+              .float-right
+                = yield(:title_action)
 
-        = render 'layouts/footer'
+
+          = content_for?(:content) ? yield(:content) : yield
+
+    = render 'layouts/footer'
 
     = render 'layouts/flash'
-
-    / = javascript_pack_tag 'copyright_react', 'data-turbolinks-eval': 'false'
-    / = react_component('Copyright', year: Time.zone.today.year)
 
     #generic-modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"]

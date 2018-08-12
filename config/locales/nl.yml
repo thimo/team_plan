@@ -147,6 +147,7 @@ nl:
         name: Naam
         role: Rol
         current_sign_in_at: Laatste login
+        email: E-mail
       version_update:
         released_at: Datum
         name: Titel

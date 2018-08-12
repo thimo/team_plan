@@ -2,30 +2,25 @@
 - team ||= nil
 - include_presences ||= true
 
-section.box-typical.schedule-list
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          == title
-      .tbl-cell.tbl-cell-actions
-        - if team.present?
-          - if policy(Training.new(team: team)).create?
-            = link_to new_team_training_path(team), title: "Eénmalige training toevoegen", class: "action-btn"
-              i.fa.far.fa-plus-square
-          = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "action-btn"
-            i.fa.far.fa-calendar-alt
-  .box-typical-body
-    table.table.table-sm.tr-links.align-top
-      - if trainings.any?
+.card.schedule-list
+  .card-header
+    = title
+    .card-header-actions
+      - if team.present?
+        - if policy(Training.new(team: team)).create?
+          = link_to new_team_training_path(team), title: "Eénmalige training toevoegen", class: "card-header-action"
+            i.fa-plus-square[class=fa_class]
+        = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "card-header-action"
+          i.fa-calendar-alt[class=fa_class]
+  .card-body.p-0
+    - if trainings.any?
+      table.table.table-sm.tr-links.align-top
         tbody
           / Note: cannot be cached because of parameters
           = render partial: 'shared/training',
             collection: trainings,
             locals: { include_presences: include_presences, team: team }
 
-      - else
-        tbody
-          tr
-            td
-              i Geen trainingen gevonden
+    - else
+      .p-3
+        i Geen trainingen gevonden

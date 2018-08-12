@@ -36,7 +36,9 @@ module ApplicationHelper
   end
 
   def errors_for(model, attribute)
-    html_builder = lambda { |error_message| "<div class='form-text text-muted'>#{model.class.human_attribute_name(attribute)} #{error_message}</div>" }
+    html_builder = ->(error_message) {
+      "<div class='form-text text-muted'>#{model.class.human_attribute_name(attribute)} #{error_message}</div>"
+    }
     model.errors[attribute].map { |error_message| html_builder.call(error_message) }.join(" ").html_safe
   end
 
@@ -71,5 +73,9 @@ module ApplicationHelper
   def flash_message(type, text)
     flash[type] ||= []
     flash[type] << text
+  end
+
+  def fa_class
+    @fa_class ||= Setting["fontawesome.integrity"].present? ? "far" : "fas"
   end
 end

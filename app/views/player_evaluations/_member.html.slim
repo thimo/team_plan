@@ -1,12 +1,10 @@
-section.box-typical.evaluation
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 Evaluaties
+.card.evaluation
+  .card-header
+    | Evaluaties
 
-  .box-typical-body.table-responsive
-    table.table.table-sm
-      - if player_evaluations.finished_desc.size > 0
+  .card-body.table-responsive.p-0
+    - if player_evaluations.finished_desc.size > 0
+      table.table.table-sm
         thead
           th
           = render "player_evaluations/th_columns"
@@ -15,15 +13,13 @@ section.box-typical.evaluation
             tr
               td.nowrap[rowspan="2"]
                 = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
-                .color-blue-grey-lighter.small
+                .lighter.small
                   = l evaluation.team_evaluation.finished_at, format: :date_long
               = render "player_evaluations/td_columns", evaluation: evaluation
             tr
-              td.color-blue-grey.b-t-0[colspan="11"]
+              td.light.b-t-0[colspan="11"]
                 = evaluation.remark
 
-      - else
-        tbody
-          tr
-            td
-              i Geen evaluaties gevonden
+    - else
+      .p-3
+        i Geen evaluaties gevonden

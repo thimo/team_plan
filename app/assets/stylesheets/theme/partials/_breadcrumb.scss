@@ -1,0 +1,18 @@
+.breadcrumb {
+  .breadcrumb-item {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+  }
+
+  .breadcrumb-menu {
+    .btn {
+      padding: .75rem;
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .breadcrumb {
+    padding: 0 .5rem;
+  }
+}

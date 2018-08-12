@@ -1,25 +1,21 @@
 = form_for [@team, @team_evaluation], { wrapper: :horizontal_form } do |f|
-  section.box-typical
-    header.box-typical-header
-      .tbl-row
-        .tbl-cell.tbl-cell-title
-          h4
-            | Teamevaluatie #{@team_evaluation.team.name}
-            - if @team_evaluation.team.division.present?
-              small.pl-1 #{@team_evaluation.team.division}
-            div.color-blue-grey-lighter.small
-              = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
-              = " - #{@team_evaluation.status}"
-        .tbl-cell.text-right
-          = link_to "/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf", target: "_blank" do
-            i.fa.far.fa-book.mr-1
-            | Handleiding
+  .card
+    .card-header
+      | Teamevaluatie #{@team_evaluation.team.name}
+      - if @team_evaluation.team.division.present?
+        small.pl-1 #{@team_evaluation.team.division}
+      .card-header-actions
+        = link_to "/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf", target: "_blank", class: "card-header-action" do
+          i.fa-book.mr-1[class=fa_class]
+          | Handleiding
         - if policy(@team_evaluation).destroy?
-          .tbl-cell.tbl-cell-action-bordered
-            = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "action-btn"
-              i.fa.far.fa-trash-alt
+          = link_to team_evaluation_path(@team_evaluation),  method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' }, title: "Teamevaluatie verwijderen", class: "card-header-action"
+            i.fa-trash-alt[class=fa_class]
+      .lighter.small
+        = l @team_evaluation.created_at, format: :date_long unless @team_evaluation.new_record?
+        = " - #{@team_evaluation.status}"
 
-    .box-typical-body
+    .card-body.p-0
       table.table.table-xxs
         thead
           tr
@@ -54,7 +50,7 @@
                 = pe.select :prefered_foot,
                   options_for_select(TeamMember::PREFERED_FOOT_OPTIONS, pe.object.prefered_foot),
                   { include_blank: true },
-                  { class: "form-control custom-select #{'form-control-error' if pe.object.errors[:prefered_foot].present?}",
+                  { class: "form-control #{'form-control-error' if pe.object.errors[:prefered_foot].present?}",
                     title: TeamMember.human_attribute_name(:prefered_foot) }
 
               - PlayerEvaluation::RATING_FIELDS.each do |field_name|
@@ -62,14 +58,14 @@
                   = pe.select field_name.to_s,
                     PlayerEvaluation::RATING_OPTIONS,
                     { include_blank: true },
-                    { class: "form-control custom-select evaluation-rating #{'form-control-error' if pe.object.errors[field_name.to_sym].present?}",
+                    { class: "form-control evaluation-rating #{'form-control-error' if pe.object.errors[field_name.to_sym].present?}",
                       title: PlayerEvaluation.human_attribute_name(field_name) }
 
               td.advise-next-season
                 = pe.select :advise_next_season,
                   PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS,
                   { include_blank: true },
-                  { class: "form-control custom-select #{'form-control-error' if pe.object.errors[:advise_next_season].present?}",
+                  { class: "form-control #{'form-control-error' if pe.object.errors[:advise_next_season].present?}",
                     title: PlayerEvaluation.human_attribute_name(:advise_next_season)}
 
             tr
@@ -79,12 +75,12 @@
                   placeholder: PlayerEvaluation.human_attribute_name(:remark),
                   rows: 1
 
-    footer.box-typical-footer
+    .card-footer
       - if policy(@team_evaluation).update?
-        = f.submit "Opslaan", name: "save_and_stay_open", class: 'btn btn-primary btn-inline'
-        = f.submit "Opslaan en Sluiten", name: "save", class: 'btn btn-inline'
+        = f.submit "Opslaan", name: "save_and_stay_open", class: 'btn btn-primary'
+        = f.submit "Opslaan en Sluiten", name: "save", class: 'btn btn-secondary'
       - if policy(@team_evaluation).send_invite?
-        = f.submit "Uitnodiging versturen", name: "send_invite", class: 'btn btn-inline'
+        = f.submit "Uitnodiging versturen", name: "send_invite", class: 'btn btn-secondary'
       - if policy(@team_evaluation).finish_evaluation?
-        = f.submit "Evaluatie afronden", name: "finish_evaluation", class: 'btn btn-inline'
-      = link_to "Annuleren", @team_evaluation.new_record? ? @team : @team_evaluation.team, class: 'btn btn-secondary-outline btn-inline'
+        = f.submit "Evaluatie afronden", name: "finish_evaluation", class: 'btn btn-secondary'
+      = link_to "Annuleren", @team_evaluation.new_record? ? @team : @team_evaluation.team, class: 'btn btn-light'

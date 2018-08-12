@@ -1,16 +1,15 @@
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4 Blessures
+.card
+  .card-header
+    | Blessures
+    .card-header-actions
       - if policy(Injury.new(member: member)).create?
-        .tbl-cell.tbl-cell-actions
-          = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "action-btn"
-            i.fa.far.fa-medkit
+        .card-header-actions
+          = link_to new_member_injury_path(member), title: "Blessure toevoegen", class: "card-header-action"
+            i.fa-medkit[class=fa_class]
 
-  .box-typical-body
-    table.table.table-sm.tr-links
-      - if injuries.size > 0
+  .card-body.p-0
+    - if injuries.size > 0
+      table.table.table-sm.tr-links
         tbody
           - injuries.each do |injury|
             tr.clickable
@@ -23,17 +22,15 @@ section.box-typical
                 - else
                   |  - ...
 
-                .color-blue-grey-lighter.small
+                .lighter.small
                   = "#{injury.user.name}"
               td.w-1.nowrap.text-right
                 - if injury.ended_on.nil?
-                  i.fa.far.fa-medkit.red.m-2
-      - else
-        tbody
-          tr
-            td
-              i Geen blessures gevonden
+                  i.fa-medkit.color-red.m-2[class=fa_class]
+    - else
+      .p-3
+        i Geen blessures gevonden
 
   - if injuries.total_pages > 1
-    .box-typical-footer
+    .card-footer
       = paginate injuries, param_name: 'injury_page'

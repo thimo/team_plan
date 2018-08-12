@@ -1,82 +1,63 @@
-ul.side-menu-list
-  .dropdown-header
+ul.nav
+  li.nav-item
+    = link_to admin_path, class: "nav-link #{'active' if current_page?(admin_path)}"
+      i.fa-fw.fa-cog.nav-icon[class=fa_class]
+      | Beheer
+
+  li.nav-title
     | Vereniging
-  li class="#{'active' if controller.class == Admin::MembersController}"
-    = link_to admin_members_path do
-      span
-        i.fa.far.fa-fw.fa-users
-        span.lbl
-          | Leden
-  li class="#{'active' if controller.class == Admin::SoccerFieldsController}"
-    = link_to admin_soccer_fields_path do
-      span
-        i.fa.far.fa-fw.fa-leaf
-        span.lbl
-          | Velden
-  li class="#{'active' if controller.class == Admin::CompetitionsController}"
-    = link_to admin_competitions_path do
-      span
-        i.fa.far.fa-fw.fa-trophy
-        span.lbl
-          | Wedstrijdsoorten
+  li.nav-item
+    = link_to admin_members_path, class: "nav-link #{'active' if controller.class == Admin::MembersController}" do
+      i.fa-fw.fa-users.nav-icon[class=fa_class]
+      | Leden
+  li.nav-item
+    = link_to admin_soccer_fields_path, class: "nav-link #{'active' if controller.class == Admin::SoccerFieldsController}" do
+      i.fa-fw.fa-leaf.nav-icon[class=fa_class]
+      | Velden
+  li.nav-item
+    = link_to admin_competitions_path, class: "nav-link #{'active' if controller.class == Admin::CompetitionsController}" do
+      i.fa-fw.fa-trophy.nav-icon[class=fa_class]
+      | Wedstrijdsoorten
 
   - if policy(:club_data_dashboard).index?
-    .dropdown-header
+    li.nav-title
       | KNVB
-    li class="#{'active' if controller.class == Admin::Knvb::ClubDataTeamsController}"
-      = link_to admin_knvb_club_data_teams_path do
-        span
-          i.fa.far.fa-fw.fa-database
-          span.lbl
-            | Teams
-    li class="#{'active' if controller.class == Admin::Knvb::CompetitionsController}"
-      = link_to admin_knvb_competitions_path do
-        span
-          i.fa.far.fa-fw.fa-database
-          span.lbl
-            | Competities
-    li class="#{'active' if controller.class == Admin::Knvb::MatchesController}"
-      = link_to admin_knvb_matches_path do
-        span
-          i.fa.far.fa-fw.fa-database
-          span.lbl
-            | Wedstrijden
+    li.nav-item
+      = link_to admin_knvb_club_data_teams_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::ClubDataTeamsController}" do
+        i.fa-fw.fa-database.nav-icon[class=fa_class]
+        | Teams
+    li.nav-item
+      = link_to admin_knvb_competitions_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::CompetitionsController}" do
+        i.fa-fw.fa-database.nav-icon[class=fa_class]
+        | Competities
+    li.nav-item
+      = link_to admin_knvb_matches_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::MatchesController}" do
+        i.fa-fw.fa-database.nav-icon[class=fa_class]
+        | Wedstrijden
 
-  .dropdown-header
+  li.nav-title
     | Beheer
-  li class="#{'active' if controller.class == Admin::UsersController}"
-    = link_to admin_users_path do
-      span
-        i.fa.far.fa-fw.fa-user
-        span.lbl
-          | Gebruikers
-  li class="#{'active' if controller.class == Admin::GroupsController}"
-    = link_to admin_groups_path do
-      span
-        i.fa.far.fa-fw.fa-users
-        span.lbl
-          | Groepen
-  li class="#{'active' if controller.class == Admin::RolesController}"
-    = link_to admin_roles_path do
-      span
-        i.fa.far.fa-fw.fa-user-secret
-        span.lbl
-          | Rollen
-  li class="#{'active' if controller.class == Admin::SettingsController}"
-    = link_to admin_settings_path do
-      span
-        i.fa.far.fa-fw.fa-sliders-h
-        span.lbl
-          | Instellingen
-  li class="#{'active' if controller.class == Admin::EmailLogsController}"
-    = link_to admin_email_logs_path do
-      span
-        i.fa.far.fa-fw.fa-envelope
-        span.lbl
-          | E-mail log
-  li class="#{'active' if controller.class == Admin::VersionUpdatesController}"
-    = link_to admin_version_updates_path do
-      span
-        i.fa.far.fa-fw.fa-code-branch
-        span.lbl
-          | Versie updates
+  li.nav-item
+    = link_to admin_users_path, class: "nav-link #{'active' if controller.class == Admin::UsersController}" do
+      i.fa-fw.fa-user.nav-icon[class=fa_class]
+      | Gebruikers
+  li.nav-item
+    = link_to admin_groups_path, class: "nav-link #{'active' if controller.class == Admin::GroupsController}" do
+      i.fa-fw.fa-users.nav-icon[class=fa_class]
+      | Groepen
+  li.nav-item
+    = link_to admin_roles_path, class: "nav-link #{'active' if controller.class == Admin::RolesController}" do
+      i.fa-fw.fa-user-secret.nav-icon[class=fa_class]
+      | Rollen
+  li.nav-item
+    = link_to admin_settings_path, class: "nav-link #{'active' if controller.class == Admin::SettingsController}" do
+      i.fa-fw.fa-sliders-h.nav-icon[class=fa_class]
+      | Instellingen
+  li.nav-item
+    = link_to admin_email_logs_path, class: "nav-link #{'active' if controller.class == Admin::EmailLogsController}" do
+      i.fa-fw.fa-envelope.nav-icon[class=fa_class]
+      | E-mail log
+  li.nav-item
+    = link_to admin_version_updates_path, class: "nav-link #{'active' if controller.class == Admin::VersionUpdatesController}" do
+      i.fa-fw.fa-code-branch.nav-icon[class=fa_class]
+      | Versie updates

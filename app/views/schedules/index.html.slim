@@ -1,14 +1,14 @@
 - provide(:title, "Kalender #{Setting['club.name_short']} #{@team.name}")
 
 
-section.box-typical
-  header.box-typical-header
+.card
+  .card-header
     .tbl-row
 
   .col-12.table-responsive
     = month_calendar attribute: :started_at, events: @schedules do |date, meetings|
       .text-right
-        .color-blue-grey-lighter
+        .lighter
           = I18n.l date, format: :date_day
       - if meetings.any?
         - meetings.each do |meeting|

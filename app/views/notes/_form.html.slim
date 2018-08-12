@@ -7,10 +7,9 @@
 
   = f.collection_select :member_id, @note.team.active_members.asc.distinct, :id, :name,  include_blank: "-- Selecteer een teamgenoot",
     help: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
-  .radio
-    = f.collection_radio_buttons :visibility, Note.visibilities_i18n, :first, :second
+  = f.collection_radio_buttons :visibility, Note.visibilities_i18n, :first, :second
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-secondary-outline btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-light'
   - if policy(@note).destroy?
-    = link_to "Verwijderen", note_path(@note), method: :delete, data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+    = link_to "Verwijderen", note_path(@note), method: :delete, data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'

@@ -1,19 +1,15 @@
 - provide(:title, "Groepen")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | #{@groups.count} Groepen
+.card
+  .card-header
+    | #{@groups.count} Groepen
 
-      .tbl-cell.float-right
+    .card-header-actions
       - if policy(Group).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_group_path, title: "Groep toevoegen"
-            i.fa.far.fa-file
+        = link_to new_admin_group_path, title: "Groep toevoegen", class: "card-header-action"
+          i.fa-file[class=fa_class]
 
-  .box-typical-body
+  .card-body
     table.table.table-sm.tr-links
       thead
         tr

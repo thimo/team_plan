@@ -6,13 +6,10 @@
   = f.text_field :year_of_birth_to, html5: true
   = f.select :players_per_team, AgeGroup::PLAYER_COUNT
   = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF
-
-  .radio
-    = f.collection_radio_buttons :gender, AgeGroup::GENDER, :second, :first
+  = f.collection_radio_buttons :gender, AgeGroup::GENDER, :second, :first
 
   - if policy(@age_group).set_status?
-    .radio
-      = f.collection_radio_buttons :status, AgeGroup.statuses_i18n, :first, :second
+    = f.collection_radio_buttons :status, AgeGroup.statuses_i18n, :first, :second
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-secondary-outline btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-light'

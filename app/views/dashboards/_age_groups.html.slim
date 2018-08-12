@@ -1,31 +1,25 @@
 .row
   .col-6
-    section.box-typical
-      .box-typical-body
-        - if @age_groups_male.present? && @age_groups_male.any?
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                h4 Mannen
-          ul.side-menu-list
+    .card
+      - if @age_groups_male.present? && @age_groups_male.any?
+        .card-header
+          | Mannen
+        .card-body.p-2
+          ul.list-group.list-group-flush.list-group-accent.list-group-compact
             - @age_groups_male.each do |age_group|
-              li
+              li.list-group-item
                 = link_to age_group
-                  i.fa.far.fa-users
-                  span.lbl
-                    = age_group.name
+                  i.fa-users.light.pr-2[class=fa_class]
+                  = age_group.name
   .col-6
-    section.box-typical
-      .box-typical-body
-        - if @age_groups_female.present? && @age_groups_female.any?
-          header.box-typical-header
-            .tbl-row
-              .tbl-cell.tbl-cell-title
-                h4 Vrouwen
-          ul.side-menu-list
+    .card
+      - if @age_groups_female.present? && @age_groups_female.any?
+        .card-header
+          | Vrouwen
+        .card-body.p-2
+          ul.list-group.list-group-flush.list-group-accent.list-group-compact
             - @age_groups_female.each do |age_group|
-              li
+              li.list-group-item
                 = link_to age_group
-                  i.fa.far.fa-users
-                  span.lbl
-                    = age_group.name
+                  i.fa-users.light.pr-2[class=fa_class]
+                  = age_group.name

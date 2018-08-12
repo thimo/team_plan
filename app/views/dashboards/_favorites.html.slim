@@ -1,40 +1,31 @@
 .row
   - if @active_teams.present?
     .col-6
-      section.box-typical
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Mijn teams
-
-        .box-typical-body
-          ul.side-menu-list
+      .card
+        .card-header
+          | Mijn teams
+        .card-body.p-2
+          ul.list-group.list-group-flush.list-group-accent.list-group-compact
             - @active_teams.each do |team|
-              li.green
+              li.list-group-item
                 = link_to team
-                  i.fa.far.fa-futbol
-                  span.lbl
-                    = team.name
+                  i.fa-futbol.light.pr-2[class=fa_class]
+                  = team.name
 
   - if @favorite_teams.present? || @favorite_age_groups.present?
     .col-6
-      section.box-typical
-        header.box-typical-header
-          .tbl-row
-            .tbl-cell.tbl-cell-title
-              h4 Favorieten
-
-        .box-typical-body
-          ul.side-menu-list
+      .card
+        .card-header
+          | Favorieten
+        .card-body.p-2
+          ul.list-group.list-group-flush.list-group-accent.list-group-compact
             - @favorite_teams.each do |team|
-              li.gold
+              li.list-group-item
                 = link_to team
-                  i.fa.far.fa-star
-                  span.lbl
-                    = team.name
+                  i.fa-star.light.pr-2[class=fa_class]
+                  = team.name
             - @favorite_age_groups.each do |age_group|
-              li.gold
+              li.list-group-item
                 = link_to age_group
-                  i.fa.far.fa-star
-                  span.lbl
-                    = age_group.name
+                  i.fa-star.light.pr-2[class=fa_class]
+                  = age_group.name

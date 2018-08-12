@@ -1,8 +1,17 @@
-- provide(:title, t('.resend_confirmation_instructions', default: 'Resend confirmation instructions'))
+- provide(:title, t('.resend_confirmation', default: 'Confirmation instructions'))
+- provide(:subtitle, "Vraag de instructies voor het bevestigen opnieuw aan")
 
-= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, role: 'form' }) do |f|
-  = f.error_notification
-  = f.input :email, autofocus: true, class: "form-control", placeholder: User.human_attribute_name(:email), label: false
-  = f.button :submit, t('.resend_confirmation_instructions', default: 'Resend confirmation instructions'), class: 'btn btn-primary'
-  
-= render 'devise/shared/links'
+= bootstrap_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, role: 'form' }) do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.text_field :email,
+    prepend: tag.i(class: [fa_class, 'fa-at']),
+    autofocus: true,
+    class: "form-control",
+    placeholder: User.human_attribute_name(:email),
+    hide_label: true
+
+  .row
+    .col-6
+      = f.submit t('.resend_confirmation_instructions', default: 'Resend confirmation instructions'),
+        class: 'btn btn-primary px-4'

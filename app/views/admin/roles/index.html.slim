@@ -1,19 +1,15 @@
 - provide(:title, "Rollen")
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h3
-          | #{@roles.count} Rollen
+.card
+  .card-header
+    | #{@roles.count} Rollen
 
-      .tbl-cell.float-right
+    .card-header-actions
       - if policy(Role).create?
-        .tbl-cell.tbl-cell-action-bordered
-          = link_to new_admin_role_path, title: "Rol toevoegen"
-            i.fa.far.fa-file
+        = link_to new_admin_role_path, title: "Rol toevoegen", class: "card-header-action"
+          i.fa-file[class=fa_class]
 
-  .box-typical-body
+  .card-body
     table.table.table-sm.tr-links
       thead
         tr

@@ -1,36 +1,30 @@
 - title ||= 'Geblesseerde spelers'
 - disable_header ||= false
 
-section.box-typical
-  header.box-typical-header
-    .tbl-row
-      .tbl-cell.tbl-cell-title
-        h4
-          = title
-          
-  .box-typical-body
-    table.table.table-sm.tr-links
-      - if injureds.size > 0
+.card
+  .card-header
+    = title
+
+  .card-body.p-0
+    - if injureds.size > 0
+      table.table.table-sm.tr-links
         - unless disable_header
           thead
             th Speler
             th Sinds
             th Beschrijving
-            
+
         tbody
           - injureds.each do |member|
             - injury = member.injuries.active.first
             tr.clickable
-              td 
+              td
                 = render member
               td
                 = l injury.started_on, format: :long
               td
                 = injury.title
 
-      - else 
-        tbody
-          tr
-            td
-              i Geen geblesseerde spelers gevonden
-              
+    - else
+      .p-3
+        i Geen geblesseerde spelers gevonden

@@ -8,9 +8,9 @@ module Statussable
     enum status: { draft: 0, active: 1, archived: 2 }
   end
 
-  def status_to_label
+  def status_to_badge
     title = ended_on.present? ? "Per #{I18n.l(ended_on, format: :long)}" : ""
-    "<span class=\"label #{color_class_for_status}\" title=\"#{title}\">#{status_i18n}</span>"
+    "<span class=\"badge #{color_class_for_status}\" title=\"#{title}\">#{status_i18n}</span>"
   end
 
   def transmit_status(new_status, old_status = nil)
@@ -27,9 +27,9 @@ module Statussable
   end
 
   def color_class_for_status
-    return "label-warning" if draft?
-    return "label-success" if active?
-    return "label-light-grey" if archived?
+    return "badge-warning" if draft?
+    return "badge-success" if active?
+    return "badge-light" if archived?
   end
 
   def to_archive

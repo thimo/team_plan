@@ -3,52 +3,40 @@
 .dashboard
   .row
     .col-sm-6
-      section.box-typical
+      .card
         .row.mb-3
           .col-6
-            header.box-typical-header
-              .tbl-row
-                .tbl-cell.tbl-cell-title
-                  .strong
-                    | Teams
+            .card-header
+              | Teams
 
-            .box-typical-body.mb-3
+            .card-body.mb-3
               ul.side-menu-list
 
           .col-6
-            header.box-typical-header
-              .tbl-row
-                .tbl-cell.tbl-cell-title
-                  .strong
-                    | Favorieten
+            .card-header
+              | Favorieten
 
-            .box-typical-body.mb-3
+            .card-body.mb-3
               ul.side-menu-list
 
     .col-sm-6
-      section.box-typical
+      .card
         .row.mb-3
           .col-6
-            header.box-typical-header
-              .tbl-row
-                .tbl-cell.tbl-cell-title
-                  .strong
-                    | Update
+            .card-header
+              | Update
 
-            .box-typical-body.mb-3
+            .card-body.mb-3
               ul.side-menu-list
-                li.green
+                li.color-green
                   = link_to root_path
-                    i.fa.far.fa-futbol
+                    i.fa-futbol[class=fa_class]
                     span.lbl
                       = root_path
 
           .col-6
-            header.box-typical-header
-              .tbl-row
-                .tbl-cell.tbl-cell-title
-                  .strong
-                    | Favorieten
+            .card-header
+              | Favorieten
 
-            .box-typical-body.mb-3
+            .card-body.mb-3
               ul.side-menu-list

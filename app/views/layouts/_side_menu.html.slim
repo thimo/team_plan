@@ -1,42 +1,27 @@
-nav.side-menu
-  - if policy(:org).show? || policy(:intranet).show? || policy(:admin).show?
-    section.top-nav
-      ul.nav.nav-tabs
-        li.nav-item
-          = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
-            i.fa.far.fa-futbol
-        - if policy(:org).show?
-          li.nav-item
-            = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
-              i.fa.far.fa-sitemap
-        - if policy(:intranet).show?
-          li.nav-item
-            = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
-              i.fa.far.fa-folder-open
-        - if policy(:admin).show?
-          li.nav-item
-            = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
-              i.fa.far.fa-cog
+.sidebar
+  nav.sidebar-nav
+    = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
+    = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
+    = render 'layouts/side_menu_intranet' if [Intranet].include? controller.class.parent
+    = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
 
-  = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
-  = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
-  = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
+    / section[style="flex-grow: 1;"]
 
-  section[style="flex-grow: 1;"]
+    / section
+    /   ul.side-menu-list
+    /     li.brown
+    /       = link_to support_path do
+    /         i.fa-fw.fa-question-circle[class=fa_class]
+    /         span.lbl
+    /           | Support
 
-  section
-    ul.side-menu-list
-      li.brown
-        = link_to support_path do
-          i.fa.far.fa-fw.fa-question-circle
-          span.lbl
-            | Support
+  button.sidebar-minimizer.brand-minimizer[type="button"]
 
-  section.supplier
-    ul.side-menu-list
-      li.red
-        a[href="https://www.defrog.nl/" target="_blank"]
-          i.fa.far.fa-fw.fa-heart
-          span.lbl
-            | Handcrafted in Arnhem by
-            = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'
+    / section.supplier
+    /   ul.side-menu-list
+    /     li.color-red
+    /       a[href="https://www.defrog.nl/" target="_blank"]
+    /         i.fa-fw.fa-heart[class=fa_class]
+    /         span.lbl
+    /           | Handcrafted in Arnhem by
+    /           = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'

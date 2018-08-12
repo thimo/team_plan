@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Activatable
   extend ActiveSupport::Concern
 
   included do
-    scope :active, -> { where(active: true) }
+    scope :active,   -> { where(active: true) }
+    scope :inactive, -> { where(active: false) }
   end
 
   def activate
@@ -17,9 +20,12 @@ module Activatable
     !active?
   end
 
-  private
-
-  module ClassMethods
+  def archived?
+    inactive?
   end
 
+  private
+
+    module ClassMethods
+    end
 end

@@ -28,5 +28,5 @@
     .radio
       = f.collection_radio_buttons :initial_status, TeamMember.initial_statuses_i18n, :first, :second
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @team_member.new_record? ? @team : @team_member.team, class: 'btn btn-secondary-outline btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @team_member.new_record? ? @team : @team_member.team, class: 'btn btn-light'

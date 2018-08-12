@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentPolicy < ApplicationPolicy
   def show?
     false
@@ -24,17 +26,21 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
+    return false if @record.commentable.archived?
+
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_member_for?(@record)
+      @user.club_staff? ||
+      @user.team_member_for?(@record)
   end
 
   def update?
+    return false if @record.commentable.archived?
+
     @user.admin? || @record.user = @user
   end
 
   def destroy?
-    return false if @record.new_record?
+    return false if @record.new_record? || @record.commentable.archived?
 
     update?
   end

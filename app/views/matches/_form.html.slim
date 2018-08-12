@@ -14,11 +14,10 @@
     = f.text_field :thuisteam
     = f.text_field :uitteam
 
-  .radio
-    = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name
+  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name
   = f.text_area :remark
 
-  = f.submit "Opslaan", class: 'btn btn-primary btn-inline'
-  = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-secondary-outline btn-inline'
+  = f.submit "Opslaan", class: 'btn btn-primary'
+  = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-light'
   - if policy(@match).destroy?
-    = link_to "Afgelasten", match_path(@match), method: :delete, data: { confirm: 'Wedstrijd wordt afgelast. Doorgaan?' }, class: 'btn btn-danger btn-inline'
+    = link_to "Afgelasten", match_path(@match), method: :delete, data: { confirm: 'Wedstrijd wordt afgelast. Doorgaan?' }, class: 'btn btn-danger'

@@ -1,50 +1,71 @@
-header.site-header
-  .container-fluid
-    button#show-hide-sidebar-toggle.show-hide-sidebar
-      span
-        | toggle menu
-    button.hamburger.hamburger--htla
-      span
-        | toggle menu
-    a.site-logo[href="/" alt="#{Setting['club.name']} #{Setting['application.name']}"]
-      img[src="#{asset_path 'logo/esa_logo.svg'}" alt=""]
-      h1.d-none.d-sm-inline TeamPlan
+header.app-header.navbar
+  button.navbar-toggler.sidebar-toggler.d-lg-none.mr-auto[type="button" data-toggle="sidebar-show"]
+    span.navbar-toggler-icon
+  a.navbar-brand href="/" title="#{Setting['club.name']} #{Setting['application.name']}"
+    img.navbar-brand-full src="#{asset_path 'logo/esa_logo.svg'}"
+    img.navbar-brand-minimized src="#{asset_path 'logo/esa_logo.svg'}"
+    h1.navbar-brand-full
+      = Setting["application.name"]
 
-    .site-header-content
-      .site-header-content-in-DISABLED
-        .site-header-shown
-          - if user_signed_in?
-            .dropdown.user-menu
-              button#dd-user-menu.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-                = image_tag avatar_url(current_user), alt: ""
-              .dropdown-menu.dropdown-menu-right[aria-labelledby="dd-user-menu"]
-                = link_to edit_registration_path(current_user), class: "dropdown-item"
-                  i.fa.far.fa-user.font-icon
-                  | Account aanpassen
-                = link_to support_path, class: "dropdown-item"
-                  i.fa.far.fa-question-circle.font-icon
-                  | Help
-                .dropdown-divider
-                = link_to destroy_user_session_path,  method: :delete, class: "dropdown-item"
-                  i.fa.far.fa-sign-out.font-icon
-                  | Uitloggen
-                - if current_user != true_user
-                  = link_to stop_impersonating_users_path, method: :post, class: "dropdown-item"
-                    i.fa.far.fa-sign-in.font-icon
-                    | Terug naar admin
+  button.navbar-toggler.sidebar-toggler.d-md-down-none[type="button" data-toggle="sidebar-lg-show"]
+    span.navbar-toggler-icon
 
-        .site-header-shown
+  ul.nav.navbar-nav.d-md-down-none
+    li.nav-item.px-3
+      = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
+        i.fa-home.pr-1[class=fa_class]
+        | Home
+    - if policy(:org).show?
+      li.nav-item.px-3
+        = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
+          i.fa-sitemap.pr-1[class=fa_class]
+          | Organisatie
+    - if policy(:intranet).show?
+      li.nav-item.px-3
+        = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
+          i.fa-folder-open.pr-1[class=fa_class]
+          | Intranet
+    - if policy(:admin).show?
+      li.nav-item.px-3
+        = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
+          i.fa-cog.pr-1[class=fa_class]
+          | Beheer
 
-        .site-header-shown
-          .site-header-search-container
-            = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
-              = f.text_field :query, placeholder: 'Zoeken', value: @query
-              = f.button
-                i.fa.far.fa-search
-              .overlay
 
-        / .mobile-menu-right-overlay
-        / .site-header-collapsed
-        /   .site-header-collapsed-in
+  ul.nav.navbar-nav.ml-auto
+    li.nav-item
+      = form_with url: search_path(:all), method: :get, class: 'site-header-search', local: true do |f|
+        = f.text_field :query, placeholder: 'Zoeken', value: @query
+        = f.button
+          i.fa-search[class=fa_class]
+        .overlay
 
-.mobile-menu-left-overlay
+    - if user_signed_in?
+      li.nav-item.dropdown
+        a.nav-link.nav-link[data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"]
+          = image_tag avatar_url(current_user), alt: current_user.email, title: current_user.email, class: "img-avatar"
+        .dropdown-menu.dropdown-menu-right
+          .dropdown-header.text-center
+            strong
+              | Account
+          = link_to edit_registration_path(current_user), class: "dropdown-item"
+            i.fa-user.font-icon[class=fa_class]
+            | Aanpassen
+          = link_to destroy_user_session_path,  method: :delete, class: "dropdown-item"
+            i.fa-sign-out.font-icon[class=fa_class]
+            | Uitloggen
+          - if current_user != true_user
+            = link_to stop_impersonating_users_path, method: :post, class: "dropdown-item"
+              i.fa-sign-in.font-icon[class=fa_class]
+              | Terug naar admin
+          .dropdown-header.text-center
+            strong
+              | Overig
+          = link_to support_path, class: "dropdown-item"
+            i.fa-question-circle.font-icon[class=fa_class]
+            | Help
+
+  / button.navbar-toggler.aside-menu-toggler.d-md-down-none[type="button" data-toggle="aside-menu-lg-show"]
+  /   span.navbar-toggler-icon
+  / button.navbar-toggler.aside-menu-toggler.d-lg-none[type="button" data-toggle="aside-menu-show"]
+  /   span.navbar-toggler-icon
