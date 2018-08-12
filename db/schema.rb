@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_10_145052) do
+ActiveRecord::Schema.define(version: 2018_08_12_153929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -65,7 +65,9 @@ ActiveRecord::Schema.define(version: 2018_08_10_145052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
-    t.index ["teamcode"], name: "index_club_data_teams_on_teamcode", unique: true
+    t.bigint "season_id"
+    t.index ["season_id", "teamcode"], name: "index_club_data_teams_on_season_id_and_teamcode", unique: true
+    t.index ["season_id"], name: "index_club_data_teams_on_season_id"
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -557,6 +559,7 @@ ActiveRecord::Schema.define(version: 2018_08_10_145052) do
   end
 
   add_foreign_key "age_groups", "seasons"
+  add_foreign_key "club_data_teams", "seasons"
   add_foreign_key "comments", "users"
   add_foreign_key "email_logs", "users"
   add_foreign_key "favorites", "users"
