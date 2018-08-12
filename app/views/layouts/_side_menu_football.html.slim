@@ -3,9 +3,6 @@ ul.nav
     = link_to dashboard_path, class: "nav-link #{'active' if current_page?(dashboard_path) || current_page?(root_path)}"
       i.fa-fw.fa-tachometer.nav-icon[class=fa_class]
       | Dashboard
-
-  li.nav-title
-    | Theme
   li.nav-item
     = link_to program_dashboards_path, class: "nav-link #{'active' if current_page?(program_dashboards_path)}"
       i.fa-fw.fa-futbol.nav-icon[class=fa_class]
