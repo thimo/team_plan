@@ -1,7 +1,25 @@
 .table {
   margin-bottom: 0;
 
-  td, th {
+  > caption + thead > tr:first-child > {
+   td, th {
+     border-top: 0;
+   }
+ }
+
+ > colgroup + thead > tr:first-child > {
+   td, th {
+     border-top: 0;
+   }
+ }
+
+ > thead:first-child > tr:first-child > {
+   td, th {
+     border-top: 0;
+   }
+ }
+
+ td, th {
     vertical-align: middle;
   }
 
@@ -10,6 +28,7 @@
 
     th {
       border-bottom-width: 1px;
+      border-color: $gray-300;
     }
   }
 }
