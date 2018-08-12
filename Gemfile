@@ -29,7 +29,6 @@ gem "rails-i18n"
 # Fixes problem with id's on checkboxes
 gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "master"
 gem "country_select"
-gem "simple_form",                "~> 4.0"
 
 gem "breadcrumbs_on_rails",       "~> 3.0.1"
 gem "devise",                     "~> 4.4.3"

@@ -1,7 +1,9 @@
 h1
   = t('.resend_unlock_instructions', default: 'Resend unlock instructions')
-= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, html: { role: 'form' } }) do |f|
-  = f.error_notification
-  = f.input :email, autofocus: true, class: 'form-control'
-  = f.button :submit, t('.resend_unlock_instructions', default: 'Resend unlock instructions'), class: 'btn btn-primary'
-= render 'devise/shared/links'
+
+= bootstrap_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, role: 'form' }) do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.text_field :email, autofocus: true, class: 'form-control'
+
+  = f.submit t('.resend_unlock_instructions', default: 'Resend unlock instructions'), class: 'btn btn-primary'

@@ -1,13 +1,29 @@
 - provide(:title, t('.title', default: "Edit account"))
 
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
+= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  = f.input :email, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:email), label: false
-  = f.input :password, class: 'form-control', placeholder: t('.new_password'), label: false, autocomplete: "off"
-  = f.input :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name(:password_confirmation), label: false, autocomplete: "off", hint: t('.leave_blank_if_you_don_t_want_to_change_it', default: "Leave blank if you don't want to change it")
-  = f.input :current_password, class: 'form-control', placeholder: t('.current_password'), label: false, autocomplete: "off", hint: t('.we_need_your_current_password_to_confirm_your_changes', default: 'We need your current password to confirm your changes')
-  
-  = f.button :submit, t('.update', default: 'Update'), class: 'btn btn-primary'
-  
-  / = render 'devise/shared/links'
+  = f.text_field :email,
+    autofocus: true,
+    class: 'form-control',
+    placeholder: User.human_attribute_name(:email),
+    hide_label: true
+  = f.text_field :password,
+    class: 'form-control',
+    placeholder: t('.new_password'),
+    hide_label: true,
+    autocomplete: "off"
+  = f.text_field :password_confirmation,
+    class: 'form-control',
+    placeholder: User.human_attribute_name(:password_confirmation),
+    hide_label: true,
+    autocomplete: "off",
+    hint: t('.leave_blank_if_you_don_t_want_to_change_it', default: "Leave blank if you don't want to change it")
+  = f.text_field :current_password,
+    class: 'form-control',
+    placeholder: t('.current_password'),
+    hide_label: true,
+    autocomplete: "off",
+    hint: t('.we_need_your_current_password_to_confirm_your_changes', default: 'We need your current password to confirm your changes')
+
+  = f.submit t('.update', default: 'Update'), class: 'btn btn-primary'

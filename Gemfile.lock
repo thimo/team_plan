@@ -343,9 +343,6 @@ GEM
     simple-password-gen (0.1.5)
     simple_calendar (2.2.7)
       rails (>= 3.0)
-    simple_form (4.0.1)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
     sixarm_ruby_unaccent (1.2.0)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
@@ -462,7 +459,6 @@ DEPENDENCIES
   selenium-webdriver
   simple-password-gen
   simple_calendar (~> 2.0)
-  simple_form (~> 4.0)
   slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -1,12 +1,19 @@
 - provide(:title, t('.change_my_password', default: 'Change my password'))
 
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: 'form' }) do |f|
-  = f.error_notification
-  
+= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: 'form' }) do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
   = f.hidden_field :reset_password_token
-  = f.input :password, autofocus: true, class: 'form-control', placeholder: User.human_attribute_name(:password), label: false 
-  = f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name(:password_confirmation), label: false 
+  = f.text_field :password,
+    autofocus: true,
+    class: 'form-control',
+    placeholder: User.human_attribute_name(:password),
+    hide_label: true
+  = f.password_field :password_confirmation,
+    class: 'form-control',
+    placeholder: User.human_attribute_name(:password_confirmation),
+    hide_label: true
 
   = f.submit t('.change_my_password', default: 'Change my password'), class: 'btn btn-primary'
-    
+
   = render 'devise/shared/links'
