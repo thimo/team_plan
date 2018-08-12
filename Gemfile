@@ -5,6 +5,7 @@ source "https://rubygems.org"
 ruby "2.5.1"
 
 gem "jbuilder", "~> 2.5"
+gem "jquery-rails"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.2.0"
@@ -48,8 +49,7 @@ gem "rubyzip"
 # gem "axlsx",                      "~> 2.1.0.pre"
 gem "ancestry"
 gem "axlsx", git: "https://github.com/randym/axlsx.git", ref: "c8ac844"
-# gem "axlsx_rails" # TODO: back to release after error "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved
-gem "axlsx_rails", git: "https://github.com/straydogstudio/axlsx_rails.git", branch: "master"
+gem "axlsx_rails"
 gem "bootsnap", require: false
 gem "icalendar", "~> 2.4.1"
 gem "pg_search"
