@@ -10,3 +10,9 @@
     }
   }
 }
+
+@include media-breakpoint-down(xs) {
+  .breadcrumb {
+    padding: 0 .5rem;
+  }
+}

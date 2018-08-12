@@ -21,10 +21,10 @@ html lang="nl"
                 h3.m-0
                   .pr-2.d-inline
                     = yield(:title)
-                  small.light.d-block.d-md-inline
+                  small.light.pr-2
                     = yield(:subtitle)
                   - if (label_object = @team_member || @team || @age_group || @season).present? && label_object.persisted? && label_object.draft?
-                    span.ml-3.badge.badge-secondary[class="#{label_object.color_class_for_status}"]
+                    span.badge.badge-secondary[class="#{label_object.color_class_for_status}"]
                       = label_object.status_i18n
                 .light.small
                   = yield(:hint)

@@ -1,0 +1,9 @@
+.main .container-fluid {
+  padding: 0 1rem 1rem 1rem;
+}
+
+@include media-breakpoint-down(xs) {
+  .main .container-fluid {
+    padding: 0 .5rem .5rem .5rem;
+  }
+}
