@@ -1,4 +1,4 @@
-- provide(:title, "Competitie #{@competition.club_data_teams.map{ |team| team.team&.name }.join(', ')} #{@competition.competitiesoort} - #{@competition.klasse}")
+- provide(:title, "Competitie #{@competition.teams.map(&:name).join(', ')} #{@competition.competitiesoort} - #{@competition.klasse}")
 - provide(:subtitle, "#{@competition.competitienaam}")
 
 .row

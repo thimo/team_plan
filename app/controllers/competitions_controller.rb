@@ -18,7 +18,7 @@ class CompetitionsController < ApplicationController
     end
 
     def add_breadcrumbs
-      @competition.club_data_teams.map(&:team).each do |team|
+      @competition.teams.each do |team|
         add_breadcrumb team.name, team
       end
       add_breadcrumb "#{@competition.competitiesoort} - #{@competition.klasse}"

@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 class Season < ApplicationRecord
   include Statussable
 
   has_many :age_groups, dependent: :destroy
+  has_many :club_data_teams, dependent: :nullify
+  has_many :competitions, through: :club_data_teams
   has_paper_trail
 
-  validates_presence_of :name, :status, :started_on, :ended_on
+  validates :name, :status, :started_on, :ended_on, presence: true
 
   scope :asc, -> { order(name: :asc) }
   scope :desc, -> { order(name: :desc) }
@@ -16,12 +20,12 @@ class Season < ApplicationRecord
   end
 
   def previous
-    # TODO properly policy_scope
+    # TODO: properly policy_scope
     self.class.where("created_at < ?", created_at).order(created_at: :asc).last
   end
 
   def next
-    # TODO properly policy_scope
+    # TODO: properly policy_scope
     self.class.where("created_at > ?", created_at).order(created_at: :asc).first
   end
 
@@ -34,4 +38,7 @@ class Season < ApplicationRecord
     end
   end
 
+  def self.active_season_for_today
+    active.find_by("started_on <= ? AND ended_on >= ?", Time.zone.today, Time.zone.today)
+  end
 end

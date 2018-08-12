@@ -17,7 +17,7 @@ class AgeGroup < ApplicationRecord
   scope :asc, -> { order(year_of_birth_to: :asc) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
 
-  PLAYER_COUNT = [6, 7, 8, 9, 11].freeze
+  PLAYER_COUNT = [4, 5, 6, 7, 8, 9, 11].freeze
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45].freeze
   GENDER = [%w[Man m], %w[Vrouw v], %w[Alle all]].freeze
 

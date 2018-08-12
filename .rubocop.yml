@@ -1,0 +1,32 @@
+Rails:
+  Enabled: true
+
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+
+Style/Documentation:
+
+  Include:
+    - app/models/**/*
+    - lib/**/*
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 1500
+
+Rails/HasAndBelongsToMany:
+  Enabled: false

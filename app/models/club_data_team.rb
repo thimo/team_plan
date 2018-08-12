@@ -1,25 +1,31 @@
+# frozen_string_literal: true
+
 class ClubDataTeam < ApplicationRecord
   include Activatable
 
-  validates_presence_of :teamcode, :teamnaam
-  validates_uniqueness_of :teamcode
+  validates :teamcode, :teamnaam, presence: true
+  validates :teamcode, uniqueness: { scope: :season }
 
-  has_one :team
-  has_and_belongs_to_many :competitions
+  belongs_to :season
+  has_many :teams, dependent: :nullify
+  has_many :club_data_team_competitions, dependent: :nullify
+  has_many :competitions, through: :club_data_team_competitions
 
   scope :asc, -> { order(:id) }
 
   def link_to_team
-    if team.nil?
-      stripped_teamname = teamnaam.gsub(Setting['club.name'], '').strip
+    return if teams.for_active_season.present?
 
-      team = Team.for_active_season.active.find_by(name: [teamnaam, stripped_teamname])
-      team ||= Team.for_active_season.active.where("teams.name like (?) OR teams.name like (?)", "#{teamnaam}%", "#{stripped_teamname}%").first
+    stripped_teamname = teamnaam.gsub(Setting["club.name"], "").strip
 
-      if team&.no_club_data_link?
-        team.club_data_team = self
-        team.save
-      end
+    team = Team.for_active_season.active.find_by(name: [teamnaam, stripped_teamname])
+    team ||= Team.for_active_season.active.find_by("teams.name like (?) OR teams.name like (?)",
+                                                   "#{teamnaam}%",
+                                                   "#{stripped_teamname}%")
+
+    if team&.no_club_data_link?
+      team.club_data_team = self
+      team.save
     end
   end
 end

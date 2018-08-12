@@ -18,6 +18,7 @@ gem "carrierwave", "~> 1.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
 gem "faker"
 gem "mini_magick", "~> 4.7.0"
+gem "rest-client"
 gem "slim-rails"
 
 gem "bootstrap4-kaminari-views"
@@ -80,6 +81,7 @@ group :development do
   # gem "bullet" # help to kill N+1 queries and unused eager loading
   # gem "rack-mini-profiler"
   gem "rack-livereload"
+  # Run `bundle exec erd`
   gem "rails-erd", require: false
   gem "rb-fsevent"
   gem "terminal-notifier-guard"

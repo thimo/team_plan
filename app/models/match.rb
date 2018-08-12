@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Match < ApplicationRecord
   include Presentable
 
@@ -14,7 +16,9 @@ class Match < ApplicationRecord
 
   scope :asc,             -> { order(:wedstrijddatum) }
   scope :desc,            -> { order(wedstrijddatum: :desc) }
-  scope :in_period,       ->(start_date, end_date) { where("wedstrijddatum > ?", start_date).where("wedstrijddatum < ?", end_date) }
+  scope :in_period,       ->(start_date, end_date) {
+    where("wedstrijddatum > ?", start_date).where("wedstrijddatum < ?", end_date)
+  }
   scope :from_now,        -> { where("wedstrijddatum > ?", Time.zone.now) }
   scope :from_today,      -> { where("wedstrijddatum > ?", Time.zone.today) }
   scope :in_past,         -> { where("wedstrijddatum < ?", Time.zone.now) }

@@ -21,20 +21,20 @@ class MatchesController < ApplicationController
   def create
     if @team.present?
       if @match.is_home_match == "true"
-        @match.thuisteamid = @team.club_data_team.teamcode
-        @match.thuisteam   = @team.club_data_team.teamnaam
+        @match.thuisteamid = @team.club_data_team&.teamcode
+        @match.thuisteam   = @team.club_data_team&.teamnaam
         @match.uitteamid   = nil
         @match.uitteam     = @match.opponent
       else
         @match.thuisteamid = nil
         @match.thuisteam   = @match.opponent
-        @match.uitteamid   = @team.club_data_team.teamcode
-        @match.uitteam     = @team.club_data_team.teamnaam
+        @match.uitteamid   = @team.club_data_team&.teamcode
+        @match.uitteam     = @team.club_data_team&.teamnaam
       end
     end
 
     @match.created_by = current_user
-    @match.edit_level = current_user.admin? || current_user.club_staff? ? :club_staff : :team_staff
+    @match.edit_level = (current_user.admin? || current_user.club_staff? ? :club_staff : :team_staff)
 
     if @match.save
       @match.teams << @team

@@ -19,20 +19,23 @@
           th = ClubDataTeam.human_attribute_name(:teamcode)
           th = ClubDataTeam.human_attribute_name(:geslacht)
           th = ClubDataTeam.human_attribute_name(:leeftijdscategorie)
-          th Team
+          th = ClubDataTeam.human_attribute_name(:season)
+          th = ClubDataTeam.human_attribute_name(:team)
       tbody
-        - @teams.each do |team|
+        - @teams.each do |club_data_team|
           tr
             td
-              = team.teamnaam
+              = club_data_team.teamnaam
             td
-              = team.teamcode
+              = club_data_team.teamcode
             td
-              = team.geslacht
+              = club_data_team.geslacht
             td
-              = team.leeftijdscategorie
+              = club_data_team.leeftijdscategorie
             td
-              = team.teamcode
+              = club_data_team.teamcode
             td
-              - if team.team.present?
-                = link_to team.team.name, team.team
+              = club_data_team.season.name
+            td
+              - club_data_team.teams.each do |team|
+                = link_to "#{Setting['club.name_short']} #{team.name}", team
