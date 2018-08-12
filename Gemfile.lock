@@ -24,6 +24,15 @@ GIT
       nokogiri (>= 1.6.6)
       rubyzip (>= 1.2.1)
 
+GIT
+  remote: https://github.com/straydogstudio/axlsx_rails.git
+  revision: cf5a82fd1c18436bd0c471c4671fef32e87b165e
+  branch: master
+  specs:
+    axlsx_rails (0.5.2)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -75,9 +84,6 @@ GEM
     ansi (1.5.0)
     arel (9.0.0)
     awesome_print (1.8.0)
-    axlsx_rails (0.5.2)
-      actionpack (>= 3.1)
-      axlsx (>= 2.0.1)
     bcrypt (3.1.12)
     bindex (0.5.0)
     bootsnap (1.3.1)
@@ -407,7 +413,7 @@ DEPENDENCIES
   ancestry
   awesome_print
   axlsx!
-  axlsx_rails
+  axlsx_rails!
   bootsnap
   bootstrap4-kaminari-views
   bootstrap_form!
