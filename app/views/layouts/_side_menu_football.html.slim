@@ -1,15 +1,15 @@
 ul.nav
   li.nav-item
     = link_to dashboard_path, class: "nav-link #{'active' if current_page?(dashboard_path) || current_page?(root_path)}"
-      i.fa-fw.fa-tachometer.nav-icon.color-blue[class=fa_class]
+      i.fa-fw.fa-tachometer.nav-icon[class=fa_class]
       | Dashboard
   li.nav-item
     = link_to program_dashboards_path, class: "nav-link #{'active' if current_page?(program_dashboards_path)}"
-      i.fa-fw.fa-futbol.nav-icon.color-green[class=fa_class]
+      i.fa-fw.fa-futbol.nav-icon[class=fa_class]
       | Programma
   li.nav-item
     = link_to results_dashboards_path, class: "nav-link #{'active' if current_page?(results_dashboards_path)}"
-      i.fa-fw.fa-trophy.nav-icon.color-gray[class=fa_class]
+      i.fa-fw.fa-trophy.nav-icon[class=fa_class]
       | Uitslagen
   li.nav-item
     = link_to cancellations_dashboards_path, class: "nav-link #{'active' if current_page?(cancellations_dashboards_path)}"
@@ -18,7 +18,7 @@ ul.nav
   - if (season = policy_scope(Season).active.last).present?
     li.nav-item
       = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
-        i.fa-fw.fa-users.nav-icon.color-blue[class=fa_class]
+        i.fa-fw.fa-users.nav-icon[class=fa_class]
         | Teams
   - if (season = policy_scope(Season).draft.last).present?
     li.nav-item
