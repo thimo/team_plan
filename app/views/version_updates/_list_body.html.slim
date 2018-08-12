@@ -1,14 +1,15 @@
 - version_updates.each do |version_update|
-  .d-flex.w-100.justify-content-between
-    .strong.mb-1
-      = version_update.name
-    .small.light
-      = l version_update.released_at, format: :date_long
-  .mb-3
-    = markdown(version_update.body).html_safe
+  .m-3
+    .d-flex.w-100.justify-content-between
+      .strong.mb-1
+        = version_update.name
+      .small.light
+        = l version_update.released_at, format: :date_long
+    .mb-3
+      = markdown(version_update.body).html_safe
 
 - unless version_updates.last_page?
-  #version_updates_list
+  .card-footer#version_updates_list
     .text-right
       = link_to dashboard_path(version_page: version_updates.next_page), remote: true
         | Meer
