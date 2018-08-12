@@ -17,19 +17,6 @@ nl:
       long: "%-d %b %Y %k:%M"
   activerecord:
     attributes:
-      user:
-        first_name: Voornaam
-        middle_name: Tussenvoegsels
-        last_name: Achternaam
-        name: Naam
-        role: Rol
-        current_sign_in_at: Laatste login
-      season:
-        name: Seizoen
-        active: Actief
-        status: Status
-        started_on: Begindatum
-        ended_on: Einddatum
       age_group:
         name: Leeftijdsgroep
         year_of_birth_from: Jaartal geboorte vanaf
@@ -38,13 +25,31 @@ nl:
         status: Status
         players_per_team: Wedstrijdspelers per team
         minutes_per_half: Minuten per helft
-      team:
-        name: Team
-        division: Klasse
-        status: Status
-        remark: Opmerking/aantekening
+      club_data_team:
+        season: Seizoen
+      comment:
+        body: Opmerking
+        private: Privé
+      competition:
+        competitienaam: Competitie
+        competitiesoort: Soort
+      injury:
+        title: Beschrijving
+        body: Omschrijving / behandeling
+        started_on: Begindatum
+        ended_on: Einddatum
+      match:
+        opponent: Tegenstander
+        location: Wedstrijdlocatie
+        started_at: Datum
+        start_time: Aanvang
+        body: Programma/strategie
+        remark: Opmerkingen
         players_per_team: Wedstrijdspelers per team
         minutes_per_half: Minuten per helft
+        half_count: Aantal helften
+        competition_id: Soort
+        is_home_match: Thuis of uit?
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
@@ -61,16 +66,18 @@ nl:
         country: Land
         association_number: KNVB nummer
         member_since: Lid sinds
-      team_member:
-        role: Rol
-        name: Naam
+      note:
+        title: Titel
+        body: Tekst
         member: Teamgenoot
         member_id: Teamgenoot
-        field_positions: Veldpositie
-        field_position_ids: Veldpositie
-        prefered_foot: Links-/rechtsbenig
-        status: Status
-        initial_status: Activeren
+        visibility: Zichtbaar voor
+      org_position:
+        name: Naam
+        remark: Opmerking
+        position_type: Soort positie
+        started_on: Begindatum
+        ended_on: Einddatum
       player_evaluation:
         advise_next_season: Advies niveau
         remark: Opmerking
@@ -84,31 +91,39 @@ nl:
         physical: Fysiek
         endurance: Uithoudingsvermogen
         duel_strength: Duelkracht
-      comment:
-        body: Opmerking
-        private: Privé
-      note:
-        title: Titel
-        body: Tekst
-        member: Teamgenoot
-        member_id: Teamgenoot
-        visibility: Zichtbaar voor
-      version_update:
-        released_at: Datum
-        name: Titel
-        body: Beschrijving
-        for_role: Toon aan
-      injury:
-        title: Beschrijving
-        body: Omschrijving / behandeling
-        started_on: Begindatum
-        ended_on: Einddatum
       presence:
         remark: Opmerking
+      season:
+        name: Seizoen
+        active: Actief
+        status: Status
+        started_on: Begindatum
+        ended_on: Einddatum
       soccer_field:
         name: Veldnaam
         match: Wedstrijdveld
         training: Trainingsveld
+      team:
+        name: Team
+        division: Klasse
+        status: Status
+        remark: Opmerking/aantekening
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
+      team_member:
+        role: Rol
+        name: Naam
+        member: Teamgenoot
+        member_id: Teamgenoot
+        field_positions: Veldpositie
+        field_position_ids: Veldpositie
+        prefered_foot: Links-/rechtsbenig
+        status: Status
+        initial_status: Activeren
+      todo:
+        body: Todo
+        started_on: Actief vanaf
+        ended_on: Einddatum
       training_schedule:
         day: Dag van de week
         present_minutes: Aanwezig
@@ -125,43 +140,69 @@ nl:
         end_time: Einde
         body: Programma
         remark: Opmerkingen
-      todo:
-        body: Todo
-        started_on: Actief vanaf
-        ended_on: Einddatum
-      match:
-        opponent: Tegenstander
-        location: Wedstrijdlocatie
-        started_at: Datum
-        start_time: Aanvang
-        body: Programma/strategie
-        remark: Opmerkingen
-        players_per_team: Wedstrijdspelers per team
-        minutes_per_half: Minuten per helft
-        half_count: Aantal helften
-        competition_id: Soort
-        is_home_match: Thuis of uit?
-      org_position:
+      user:
+        first_name: Voornaam
+        middle_name: Tussenvoegsels
+        last_name: Achternaam
         name: Naam
-        remark: Opmerking
-        position_type: Soort positie
-        started_on: Begindatum
-        ended_on: Einddatum
-      competition:
-        competitienaam: Competitie
-        competitiesoort: Soort
+        role: Rol
+        current_sign_in_at: Laatste login
+      version_update:
+        released_at: Datum
+        name: Titel
+        body: Beschrijving
+        for_role: Toon aan
 
   form:
     an_error:
       one: een fout
       other: enkele fouten
   enums:
-    user:
-      role:
-        admin: Administrator
-        club_staff: Club staf
-        team_staff: Teamleiding
-        member: Lid
+    age_group:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
+    comment:
+      comment_type:
+        generic: Opmerkingen
+        technique: Voetbal
+        behaviour: Gedrag
+        classification: Indeling
+        membership: Lidmaatschap
+    match:
+      location:
+        location_home: Thuis
+        location_opponent: Uit
+    note:
+      visibility:
+        self: Zelf
+        staff: Teamleiding
+        member: Teamgenoot
+    org_position:
+      position_type:
+        role: Functie
+        committee: Comissie
+        working_group: Werkgroep
+    presence:
+      on_time:
+        on_time: Op tijd
+        a_bit_too_late: Iets te laat
+        much_too_late: Veel te laat
+      signed_off:
+        signed_off_on_time: Op tijd afgemeld
+        signed_off_too_late: Te laat afgemeld
+        not_signed_off: Niet afgemeld
+    season:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
+    team:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
     team_member:
       initial_status:
         initial_draft: Nee, als 'concept' toevoegen
@@ -179,51 +220,6 @@ nl:
         physio: Fysiotherapeut
         referee: Scheidsrechter
         assistant_referee: Assistent scheidsrechter
-      status:
-        draft: Concept
-        active: Actief
-        archived: Archief
-    version_update:
-      for_role:
-        admin: Administrator
-        club_staff: Club staf
-        member: Lid
-    comment:
-      comment_type:
-        generic: Opmerkingen
-        technique: Voetbal
-        behaviour: Gedrag
-        classification: Indeling
-        membership: Lidmaatschap
-    match:
-      location:
-        location_home: Thuis
-        location_opponent: Uit
-    note:
-      visibility:
-        self: Zelf
-        staff: Teamleiding
-        member: Teamgenoot
-    season:
-      status:
-        draft: Concept
-        active: Actief
-        archived: Archief
-    age_group:
-      status:
-        draft: Concept
-        active: Actief
-        archived: Archief
-    presence:
-      on_time:
-        on_time: Op tijd
-        a_bit_too_late: Iets te laat
-        much_too_late: Veel te laat
-      signed_off:
-        signed_off_on_time: Op tijd afgemeld
-        signed_off_too_late: Te laat afgemeld
-        not_signed_off: Niet afgemeld
-    team:
       status:
         draft: Concept
         active: Actief
@@ -253,11 +249,17 @@ nl:
         min_30: 30 min vooraf
         min_45: 45 min vooraf
         min_60: 60 min vooraf
-    org_position:
-      position_type:
-        role: Functie
-        committee: Comissie
-        working_group: Werkgroep
+    user:
+      role:
+        admin: Administrator
+        club_staff: Club staf
+        team_staff: Teamleiding
+        member: Lid
+    version_update:
+      for_role:
+        admin: Administrator
+        club_staff: Club staf
+        member: Lid
 
   views:
     pagination:
