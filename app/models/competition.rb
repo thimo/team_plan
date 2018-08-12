@@ -8,6 +8,7 @@ class Competition < ApplicationRecord
 
   has_many :club_data_team_competitions, dependent: :nullify
   has_many :club_data_teams, through: :club_data_team_competitions
+  has_many :teams, through: :club_data_teams
   has_many :matches, dependent: :destroy
 
   scope :asc,     -> { order(:created_at) }

@@ -4,8 +4,9 @@ class ClubDataTeam < ApplicationRecord
   include Activatable
 
   validates :teamcode, :teamnaam, presence: true
-  validates :teamcode, uniqueness: true
+  validates :teamcode, uniqueness: { scope: :season }
 
+  belongs_to :season
   has_many :teams, dependent: :nullify
   has_many :club_data_team_competitions, dependent: :nullify
   has_many :competitions, through: :club_data_team_competitions

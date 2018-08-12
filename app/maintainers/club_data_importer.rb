@@ -7,7 +7,8 @@ module ClubDataImporter
     url = "#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"
     json = JSON.parse(RestClient.get(url))
     json.each do |data|
-      club_data_team = ClubDataTeam.find_or_initialize_by(teamcode: data["teamcode"])
+      club_data_team = ClubDataTeam.find_or_initialize_by(teamcode: data["teamcode"],
+                                                          season: Season.active_season_for_today)
       %w[teamnaam spelsoort geslacht teamsoort leeftijdscategorie kalespelsoort speeldag speeldagteam].each do |field|
         club_data_team.write_attribute(field, data[field])
       end
@@ -64,7 +65,7 @@ module ClubDataImporter
   def self.poule_standings
     return if Season.active_season_for_today.nil?
 
-    Competition.active.each do |competition|
+    Season.active_season_for_today.competitions.active.each do |competition|
       # Fetch ranking
       url = "#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}" \
             "&client_id=#{Setting['clubdata.client_id']}"
@@ -86,7 +87,7 @@ module ClubDataImporter
   def self.poule_matches
     return if Season.active_season_for_today.nil?
 
-    Competition.active.each do |competition|
+    Season.active_season_for_today.competitions.active.each do |competition|
       imported_wedstrijdnummers = []
 
       # Fetch upcoming matches
@@ -123,7 +124,7 @@ module ClubDataImporter
   def self.poule_results
     return if Season.active_season_for_today.nil?
 
-    Competition.active.each do |competition|
+    Season.active_season_for_today.competitions.active.each do |competition|
       url = "#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}" \
             "&client_id=#{Setting['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
@@ -142,7 +143,7 @@ module ClubDataImporter
   def self.team_photos
     return if Season.active_season_for_today.nil?
 
-    ClubDataTeam.active.each do |club_data_team|
+    Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
       url = "#{Setting['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}" \
             "&client_id=#{Setting['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
@@ -201,6 +202,7 @@ module ClubDataImporter
       cancelled_matches << data["wedstrijdcode"]
     end
 
+    # TODO: Limit to current season
     Match.afgelast.each do |match|
       next if cancelled_matches.include? match.wedstrijdcode
 
@@ -214,9 +216,12 @@ module ClubDataImporter
   end
 
   def self.add_team_to_match(match, teamcode)
-    club_data_team = ClubDataTeam.find_by(teamcode: teamcode)
+    club_data_team = ClubDataTeam.find_by(teamcode: teamcode, season: Season.active_season_for_today)
+    return if club_data_team.nil?
 
-    match.teams << club_data_team.team if club_data_team&.team && !match.team_ids.include?(club_data_team.team.id)
+    club_data_team.teams.each do |team|
+      match.teams << team unless match.team_ids.include?(team.id)
+    end
   end
 
   def self.update_match(data, competition)
