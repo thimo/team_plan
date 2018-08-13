@@ -170,11 +170,13 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super && active? && active_members?
+    super && active_members?
   end
 
   def inactive_message
-    "Je account is uitgeschakeld. Het zou kunnen dat je via dit e-mailadres geen lid (meer) bent van #{Setting['club.name_short']}."
+    "Met dit account is het op dit moment niet mogelijk om in te loggen. Je e-mailadres wordt gecontroleerd \
+    via de ledenadministratie van #{Setting['club.name_short']}. Ga alsjeblieft na of je hetzelfde adres \
+    gebruikt."
   end
 
   def toggle_include_member_comments
@@ -217,7 +219,7 @@ class User < ApplicationRecord
         team_id = record.team_id
       when [Comment]
         team_id = record.commentable_id if record.commentable_type == "Team"
-        team_id = record.commentable.active_team.id if record.commentable_type == "Member"
+        team_id = record.commentable.active_team&.id if record.commentable_type == "Member"
       when [Presence]
         team_id = if record.presentable_type == "Match"
                     record.presentable.teams.pluck(:id)
