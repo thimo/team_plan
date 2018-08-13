@@ -3,6 +3,7 @@
 module Admin
   class SettingsController < Admin::BaseController
     before_action :set_setting, only: [:edit, :update]
+    before_action :add_breadcrumbs
 
     def index
       @settings = Setting.get_all
@@ -27,5 +28,12 @@ module Admin
         @setting = Setting.find_by(var: params[:id]) || Setting.new(var: params[:id], value: Setting[params[:id]])
         authorize Setting
       end
-    end
+
+      def add_breadcrumbs
+        add_breadcrumb "Instellingen", admin_settings_path
+        return if @setting.nil?
+
+        add_breadcrumb @setting.var
+      end
+  end
 end
