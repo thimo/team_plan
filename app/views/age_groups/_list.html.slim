@@ -26,8 +26,8 @@
           tr
             td
               = link_to age_group.name, age_group
-            td.text-center
-              = year_of_birth_range(age_group)
+              .small
+                = year_of_birth_range(age_group)
             td.text-center
               - if age_group.players_per_team.present?
                 .light.small

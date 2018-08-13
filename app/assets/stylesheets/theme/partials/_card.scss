@@ -10,3 +10,9 @@
 .card-header-action {
   padding: 0 .5rem;
 }
+
+@include media-breakpoint-down(sm) {
+  .card-header, .card-body {
+    padding: .75rem;
+  }
+}

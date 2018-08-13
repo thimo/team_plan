@@ -19,6 +19,12 @@
    }
  }
 
+ > tbody:first-child > tr:first-child > {
+   td, th {
+     border-top: 0;
+   }
+ }
+
  td, th {
     vertical-align: middle;
   }
@@ -110,8 +116,20 @@ tr.b-t-0 {
   }
 }
 
-@include media-breakpoint-down(sm) {
-  .card-header {
-    padding: .75rem;
+@include media-breakpoint-down(xs) {
+  .table-sm th, .table-sm td {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .card-body > table {
+    td, th {
+      &:first-child {
+        padding-left: .75rem;
+      }
+
+      &:last-child {
+        padding-right: .75rem;
+      }
+    }
   }
 }

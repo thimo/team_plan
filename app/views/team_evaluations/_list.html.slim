@@ -18,8 +18,8 @@
         = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "card-header-action"
           i.fa-copy[class=fa_class]
 
-  .card-body.p-0
-    - if team_evaluations.size > 0
+  - if team_evaluations.size > 0
+    .card-body.p-0
       table.table.table-sm.tr-links
         - unless disable_header
           thead
@@ -63,6 +63,6 @@
                   .progress
                     .progress-bar[role="progressbar" style="width: #{team_evaluation.progress}%" aria-valuenow="#{team_evaluation.progress}" aria-valuemin="0" aria-valuemax="100" title="#{team_evaluation.progress}%"]
 
-    - else
-      .p-3
-        i Geen teamevaluaties gevonden
+  - else
+    .card-body
+      i Geen teamevaluaties gevonden

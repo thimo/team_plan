@@ -9,22 +9,14 @@
               i.fa-file[class=fa_class]
       .card-body.p-0
         table.table.table-sm.tr-links
-          thead
-            tr
-              th
-              th
-                | Van
-              th
-                | Tot
-              th
           tbody
             - @seasons.each do |season|
               tr
                 td
                   = link_to season.name, season, class: "#{"font-weight-bold" if season.active?} #{"font-italic" if season.draft?}"
-                td
+                td.d-none.d-sm-table-cell
                   = I18n.l season.started_on, format: :long if season.started_on.present?
-                td
+                td.d-none.d-sm-table-cell
                   = I18n.l season.ended_on, format: :long if season.ended_on.present?
                 td.text-right
                   - if policy(season).show_status?

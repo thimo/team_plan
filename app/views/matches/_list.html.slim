@@ -15,8 +15,8 @@
         = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "card-header-action"
           i.fa-calendar-alt[class=fa_class]
 
-  .card-body.p-0
-    - if matches.any?
+  - if matches.any?
+    .card-body.p-0
       table.table.table-sm.tr-links.align-top
         - if matches.first.is_a? Array
           - matches.each do |date, matches|
@@ -35,6 +35,6 @@
             = render partial: 'shared/match',
               collection: matches,
               locals: { compact: true, disable_line_through: disable_line_through, include_presences: include_presences, team: team, highlight_own_teams: highlight_own_teams }
-    - else
-      .p-3
-        i Geen wedstrijden gevonden
+  - else
+    .card-body
+      i Geen wedstrijden gevonden
