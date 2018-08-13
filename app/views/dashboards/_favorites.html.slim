@@ -9,7 +9,7 @@
             - @active_teams.each do |team|
               li.list-group-item
                 = link_to team
-                  i.fa-futbol.light.pr-2[class=fa_class]
+                  i.fa-futbol.color-green.pr-2[class=fa_class]
                   = team.name
 
   - if @favorite_teams.present? || @favorite_age_groups.present?
@@ -22,10 +22,10 @@
             - @favorite_teams.each do |team|
               li.list-group-item
                 = link_to team
-                  i.fa-star.light.pr-2[class=fa_class]
+                  i.fa-star.color-yellow.pr-2[class=fa_class]
                   = team.name
             - @favorite_age_groups.each do |age_group|
               li.list-group-item
                 = link_to age_group
-                  i.fa-star.light.pr-2[class=fa_class]
+                  i.fa-star.color-yellow.pr-2[class=fa_class]
                   = age_group.name
