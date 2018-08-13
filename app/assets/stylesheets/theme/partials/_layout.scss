@@ -1,10 +1,18 @@
-@include media-breakpoint-down(xs) {
-  .app-header .navbar-brand {
-    left: 2rem;
-    margin-left: 0;
+.app-header {
+  padding-right: .5rem;
+}
 
-    h1 {
-      visibility: hidden;
+@include media-breakpoint-down(xs) {
+  .app-header {
+    padding-right: .25rem;
+    
+    .navbar-brand {
+      left: 2rem;
+      margin-left: 0;
+
+      h1 {
+        visibility: hidden;
+      }
     }
   }
 }
