@@ -10,27 +10,8 @@ header.app-header.navbar
   button.navbar-toggler.sidebar-toggler.d-md-down-none[type="button" data-toggle="sidebar-lg-show"]
     span.navbar-toggler-icon
 
-  ul.nav.navbar-nav.d-md-down-none
-    li.nav-item.px-3
-      = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
-        i.fa-home.pr-1[class=fa_class]
-        | Home
-    - if policy(:org).show?
-      li.nav-item.px-3
-        = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
-          i.fa-sitemap.pr-1[class=fa_class]
-          | Organisatie
-    - if policy(:intranet).show?
-      li.nav-item.px-3
-        = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
-          i.fa-folder-open.pr-1[class=fa_class]
-          | Intranet
-    - if policy(:admin).show?
-      li.nav-item.px-3
-        = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
-          i.fa-cog.pr-1[class=fa_class]
-          | Beheer
-
+  .d-md-down-none
+    = render "layouts/main_nav"
 
   ul.nav.navbar-nav.ml-auto
     li.nav-item

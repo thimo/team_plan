@@ -57,3 +57,14 @@
     background: none;
   }
 }
+
+.app-header .navbar-nav {
+  li {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .nav-icon {
+    padding-right: .5rem;
+  }
+}

@@ -5,23 +5,7 @@
     = render 'layouts/side_menu_intranet' if [Intranet].include? controller.class.parent
     = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
 
-    / section[style="flex-grow: 1;"]
-
-    / section
-    /   ul.side-menu-list
-    /     li.brown
-    /       = link_to support_path do
-    /         i.fa-fw.fa-question-circle[class=fa_class]
-    /         span.lbl
-    /           | Support
+  .d-lg-none
+    = render "layouts/main_nav"
 
   button.sidebar-minimizer.brand-minimizer[type="button"]
-
-    / section.supplier
-    /   ul.side-menu-list
-    /     li.color-red
-    /       a[href="https://www.defrog.nl/" target="_blank"]
-    /         i.fa-fw.fa-heart[class=fa_class]
-    /         span.lbl
-    /           | Handcrafted in Arnhem by
-    /           = image_tag 'logo/defrog_wide.svg', alt: "Defrog", class: 'pl-1'
