@@ -68,12 +68,12 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = Setting["club.hostname"]
+  host = "penny.defrog.nl"
   config.action_mailer.default_url_options = { host: host, protocol: "https" }
   config.action_mailer.asset_host = "https://" + host
 
   ActionMailer::Base.smtp_settings = {
-    domain:               Setting["mail.server"],
+    domain:               "teamplan.esa-rijkerswoerd.nl",
     enable_starttls_auto: true,
     address:              ENV["SMTP_ADDRESS"],
     port:                 ENV["SMTP_PORT"]
@@ -108,7 +108,7 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
                         email: {
                           email_prefix: "[ERROR] ",
-                          sender_address: %("#{Setting['application.name']} notifier" <teamplan@defrog.nl>),
+                          sender_address: %("TeamPlan notifier" <teamplan@defrog.nl>),
                           exception_recipients: %w[error@defrog.nl]
                         }
 end
