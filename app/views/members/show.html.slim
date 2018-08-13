@@ -20,11 +20,9 @@
 
 .row
   .col-xl-6
-    .card
-      .card-body
-        = render "show_member", member: @member
+    = render "show_member", member: @member
 
-  .col-xl-6
+  .col-xl-6.mb-4
     - if policy(@member).show_comments?
       #comments-tabs
         = render "comments/tabs", parent: @member

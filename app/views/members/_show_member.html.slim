@@ -1,144 +1,148 @@
-h4 Contactgegevens
+.card
+  .card-header
+    | Contactgegevens
 
-= image_tag @member.photo_url, class: "member_photo" if @member.photo.present?
+  .card-body
+    = image_tag @member.photo_url, class: "member_photo" if @member.photo.present?
 
-.strong
-  => member.name
-  - if policy(member).show_private_data?
-    .lighter.small
-      => l member.born_on, format: :long unless member.born_on.nil?
-      = "(#{member.gender})"
+    .strong
+      => member.name
+      - if policy(member).show_private_data?
+        .lighter.small
+          => l member.born_on, format: :long unless member.born_on.nil?
+          = "(#{member.gender})"
 
-- if policy(member).show_private_data?
-  div.pt-2
-    = link_to '#', data: { toggle: "modal", target: "#googleMapsModal" }
-      => member.address
-      br
-      => member.zipcode
-      => member.city
-      i.fa-map.ml-2[class=fa_class]
+    - if policy(member).show_private_data?
+      div.pt-2
+        = link_to '#', data: { toggle: "modal", target: "#googleMapsModal" }
+          => member.address
+          br
+          => member.zipcode
+          => member.city
+          i.fa-map.ml-2[class=fa_class]
 
-  .modal.modal-xl#googleMapsModal
-    .modal-dialog.modal-lg
-      .modal-content
-        .modal-body
-          iframe[frameborder="0" style="width: 100%; height: calc(100vh - 160px); border:0"
-            src="#{google_maps_url(object: member, type: 'place', zoom: 14)}" allowfullscreen]
-        .modal-footer
-          button.btn.btn-secondary[type="button" data-dismiss="modal"]
-            | Sluiten
+      .modal.modal-xl#googleMapsModal
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-body
+              iframe[frameborder="0" style="width: 100%; height: calc(100vh - 160px); border:0"
+                src="#{google_maps_url(object: member, type: 'place', zoom: 14)}" allowfullscreen]
+            .modal-footer
+              button.btn.btn-secondary[type="button" data-dismiss="modal"]
+                | Sluiten
 
-  - unless member.phone.blank?
-    div.pt-2
-      a[href="tel:#{member.phone}"]
-        = member.phone
-        i.fa-phone.ml-2[class=fa_class]
-  - unless member.phone_2.blank?
-    div
-      a[href="tel:#{member.phone_2}"]
-        = member.phone_2
-        i.fa-phone.ml-2[class=fa_class]
-  - unless member.phone_home.blank?
-    div
-      a[href="tel:#{member.phone_home}"]
-        = member.phone_home
-        i.fa-phone.ml-2[class=fa_class]
-
-  - unless member.email.blank?
-    div
-      = mail_to member.email
-        = member.email
-        i.fa-envelope.ml-2[class=fa_class]
-  - unless member.email_2.blank?
-    div
-      = mail_to member.email_2
-        = member.email_2
-        i.fa-envelope.ml-2[class=fa_class]
-
-  - if policy(member).show_login? && member.email.present?
-    div.mt-2
-      - if member.user.present?
-        .light
-          i Heeft toegang tot TeamPlan
-      - else
-        .light
-          i Heeft geen toegang tot TeamPlan
-
-  - if policy(member).show_sportlink_status?
-    div.pt-4
-    - if member.person_type.present?
-      div
-        span.light
-          = "#{member.person_type}: "
-        = "#{member.local_teams} "
-        = "#{member.sport_category} "
-      - if member.association_number.present?
+      - unless member.phone.blank?
+        div.pt-2
+          a[href="tel:#{member.phone}"]
+            = member.phone
+            i.fa-phone.ml-2[class=fa_class]
+      - unless member.phone_2.blank?
         div
-          span.light
-            = "KNVB-nummer: "
-          = member.association_number
-      - if policy(member).show_conduct? && member.conduct_number.present?
+          a[href="tel:#{member.phone_2}"]
+            = member.phone_2
+            i.fa-phone.ml-2[class=fa_class]
+      - unless member.phone_home.blank?
         div
-          span.light
-            = "VOG-nummer: "
-          = member.conduct_number
-      div
-        span.light
-          = "Lid sinds: "
-        = I18n.l member.member_since, format: :long
+          a[href="tel:#{member.phone_home}"]
+            = member.phone_home
+            i.fa-phone.ml-2[class=fa_class]
 
-    - unless member.registered_at.blank? || member.registered_at == member.member_since
-      div
-        span.light
-          = "Registratiedatum: "
-        = I18n.l member.registered_at, format: :long
-
-    - if member.status_af_te_melden?
-      div
-        span.light
-          = "Status: "
-        = member.status.capitalize
-        - if member.deregistered_at.present?
-          |  per #{I18n.l member.deregistered_at, format: :long}
-    - else
-      - unless member.status_definitief?
+      - unless member.email.blank?
         div
-          span.light
-            = "Status: "
-          = member.status.capitalize
-      - unless member.deregistered_at.blank?
+          = mail_to member.email
+            = member.email
+            i.fa-envelope.ml-2[class=fa_class]
+      - unless member.email_2.blank?
         div
-          span.light
-            = "Afmelddatum: "
-          = I18n.l member.deregistered_at, format: :long
+          = mail_to member.email_2
+            = member.email_2
+            i.fa-envelope.ml-2[class=fa_class]
 
-hr
+      - if policy(member).show_login? && member.email.present?
+        div.mt-2
+          - if member.user.present?
+            .light
+              i Heeft toegang tot TeamPlan
+          - else
+            .light
+              i Heeft geen toegang tot TeamPlan
 
-h4 Teams
-table.table
-  - @team_members.group_by(&:season).sort_by{|season, season_members| season.name}.reverse.each do |season, season_members|
-    - season_members.group_by(&:team).sort_by{|team, team_members| team.name}.each_with_index do |(team, team_members), team_index|
-      tr
-        td
-          - if team_index == 0
-            strong #{season.name}
-        td
-          = link_to team.name, team
-        td.light
-          = "#{team.division}" if team.division.present?
-
-        td
-          - team_members.each do |team_member|
+      - if policy(member).show_sportlink_status?
+        div.pt-4
+        - if member.person_type.present?
+          div
+            span.light
+              = "#{member.person_type}: "
+            = "#{member.local_teams} "
+            = "#{member.sport_category} "
+          - if member.association_number.present?
             div
-              = team_member.role_i18n
-        td
-          - team_members.each do |team_member|
+              span.light
+                = "KNVB-nummer: "
+              = member.association_number
+          - if policy(member).show_conduct? && member.conduct_number.present?
             div
-              - if team_member.started_on.present?
-                .light
-                  | Vanaf #{ I18n.l team_member.started_on, format: :long }
-              - elsif team_member.ended_on.present?
-                .light
-                  | Tot #{ I18n.l team_member.ended_on, format: :long }
-              - else
-                | &nbsp;
+              span.light
+                = "VOG-nummer: "
+              = member.conduct_number
+          div
+            span.light
+              = "Lid sinds: "
+            = I18n.l member.member_since, format: :long
+
+        - unless member.registered_at.blank? || member.registered_at == member.member_since
+          div
+            span.light
+              = "Registratiedatum: "
+            = I18n.l member.registered_at, format: :long
+
+        - if member.status_af_te_melden?
+          div
+            span.light
+              = "Status: "
+            = member.status.capitalize
+            - if member.deregistered_at.present?
+              |  per #{I18n.l member.deregistered_at, format: :long}
+        - else
+          - unless member.status_definitief?
+            div
+              span.light
+                = "Status: "
+              = member.status.capitalize
+          - unless member.deregistered_at.blank?
+            div
+              span.light
+                = "Afmelddatum: "
+              = I18n.l member.deregistered_at, format: :long
+
+.card
+  .card-header
+    | Teams
+  .card-body.p-0
+    table.table
+      - @team_members.group_by(&:season).sort_by{|season, season_members| season.name}.reverse.each do |season, season_members|
+        - season_members.group_by(&:team).sort_by{|team, team_members| team.name}.each_with_index do |(team, team_members), team_index|
+          tr
+            td
+              - if team_index == 0
+                strong #{season.name}
+            td
+              = link_to team.name, team
+            td.light
+              = "#{team.division}" if team.division.present?
+
+            td
+              - team_members.each do |team_member|
+                div
+                  = team_member.role_i18n
+            td
+              - team_members.each do |team_member|
+                div
+                  - if team_member.started_on.present?
+                    .light
+                      | Vanaf #{ I18n.l team_member.started_on, format: :long }
+                  - elsif team_member.ended_on.present?
+                    .light
+                      | Tot #{ I18n.l team_member.ended_on, format: :long }
+                  - else
+                    | &nbsp;
