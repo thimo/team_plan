@@ -65,6 +65,11 @@
   }
 
   .nav-icon {
-    padding-right: .5rem;
+    padding-right: .3rem;
+    color: $gray-500;
+  }
+
+  .nav-link.active .nav-icon {
+      color: $blue;
   }
 }
