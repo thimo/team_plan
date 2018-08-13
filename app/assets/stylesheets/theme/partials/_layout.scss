@@ -5,7 +5,7 @@
 @include media-breakpoint-down(xs) {
   .app-header {
     padding-right: .25rem;
-    
+
     .navbar-brand {
       left: 2rem;
       margin-left: 0;
@@ -15,4 +15,12 @@
       }
     }
   }
+}
+
+// .sidebar, .aside-menu
+.app-header,
+.app-footer,
+.main {
+  transition: none;
+  transition: margin-left 0.25s, margin-right 0.25s;
 }
