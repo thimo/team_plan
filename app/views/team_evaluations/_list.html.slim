@@ -29,9 +29,9 @@
             - unless hide_status
               th Status
             - if show_finished_by
-              th.d-none.d-sm-table-cell Afgerond door
+              th.d-down-none Afgerond door
             - if show_last_modified
-              th.d-none.d-sm-table-cell Opgeslagen
+              th.d-down-none Opgeslagen
             - if show_progress
               th Voortgang
         tbody
@@ -53,10 +53,10 @@
                 td
                   = team_evaluation.status
               - if show_finished_by
-                td.d-none.d-sm-table-cell
+                td.d-down-none
                   = team_evaluation.finished_by.name
               - if show_last_modified
-                td.d-none.d-sm-table-cell
+                td.d-down-none
                   = l team_evaluation.last_modified, format: :date_long
               - if show_progress
                 td

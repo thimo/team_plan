@@ -16,7 +16,7 @@
           thead
             th Dag
             th Veld
-            th.d-none.d-sm-table-cell Trainer
+            th.d-down-none Trainer
             th
         tbody
           - training_schedules.each do |ts|
@@ -33,7 +33,7 @@
                     | #{ts.present_minutes_i18n} aanwezig
               td
                 = ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")
-              td.d-none.d-sm-table-cell
+              td.d-down-none
                 - ts.team_members.each do |trainer|
                   div #{trainer.name}
                 div

@@ -39,7 +39,7 @@
                     = team_member.prefered_foot
 
                 - if policy(@team).show_previous_team?
-                  td.small.d-none.d-sm-table-cell
+                  td.small.d-down-none
                     - if (previous_teams = team_member.member.teams_for_season(@previous_season).as_player.distinct).present?
                       - previous_teams.each do |previous_team|
                         div.nowrap
