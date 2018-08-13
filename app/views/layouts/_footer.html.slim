@@ -1,12 +1,12 @@
 footer.app-footer
   div
     = link_to Setting["club.website"]
-      = "#{Setting['club.name']} #{Setting['application.name']}"
+      = "#{Setting['club.name']}"
     span
       = " © #{Time.zone.now.year} "
       a> href="https://www.defrog.nl/"
         | Defrog
-  .ml-auto
+  .ml-auto.d-none.d-sm-inline
     span
       = "Handcrafted with "
       i.fa-fw.fa-heart.color-red[class=fa_class]
