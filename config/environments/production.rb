@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
-    config.webpacker.check_yarn_integrity = false
+  config.webpacker.check_yarn_integrity = false
   # Make javascript_pack_tag lookup digest hash to enable long-term caching
   config.x.webpacker[:digesting] = true
 
@@ -21,7 +21,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress JavaScripts and CSS.
   # config.assets.js_compressor = :uglifier
@@ -53,7 +53,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store
@@ -68,20 +68,19 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'teamplan.esa-rijkerswoerd.nl'
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-  config.action_mailer.asset_host = 'https://' + host
+  host = Setting["club.hostname"]
+  config.action_mailer.default_url_options = { host: host, protocol: "https" }
+  config.action_mailer.asset_host = "https://" + host
 
   ActionMailer::Base.smtp_settings = {
-    :domain               => 'penny.defrog.nl',
-    :enable_starttls_auto => true,
-    :address              => ENV['SMTP_ADDRESS'],
-    :port                 => ENV['SMTP_PORT']
+    domain:               Setting["mail.server"],
+    enable_starttls_auto: true,
+    address:              ENV["SMTP_ADDRESS"],
+    port:                 ENV["SMTP_PORT"]
   }
-  ActionMailer::Base.smtp_settings[:authentication] = ENV['SMTP_AUTH'] unless ENV['SMTP_AUTH'].nil?
-  ActionMailer::Base.smtp_settings[:user_name] = ENV['SMTP_USER_NAME'] unless ENV['SMTP_USER_NAME'].nil?
-  ActionMailer::Base.smtp_settings[:password] = ENV['SMTP_PASSWORD'] unless ENV['SMTP_PASSWORD'].nil?
-
+  ActionMailer::Base.smtp_settings[:authentication] = ENV["SMTP_AUTH"] unless ENV["SMTP_AUTH"].nil?
+  ActionMailer::Base.smtp_settings[:user_name] = ENV["SMTP_USER_NAME"] unless ENV["SMTP_USER_NAME"].nil?
+  ActionMailer::Base.smtp_settings[:password] = ENV["SMTP_PASSWORD"] unless ENV["SMTP_PASSWORD"].nil?
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -98,7 +97,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
@@ -107,10 +106,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => "[ERROR] ",
-      :sender_address => %{"TeamPlan ESA Rijkerswoerd notifier" <teamplan@defrog.nl>},
-      :exception_recipients => %w{error@defrog.nl}
-    }
-
+                        email: {
+                          email_prefix: "[ERROR] ",
+                          sender_address: %("#{Setting['application.name']} notifier" <teamplan@defrog.nl>),
+                          exception_recipients: %w[error@defrog.nl]
+                        }
 end

@@ -27,6 +27,7 @@ defaults: &defaults
   fontawesome.integrity:
   google.maps.base_url: https://www.google.com/maps/embed/v1/
   google.maps.api-key: AIzaSyAOFIRg1PtqSjCzQfGoyPJTi-XH7TvPfkc
+  mail.server: penny.defrog.nl
 
 development:
   <<: *defaults
