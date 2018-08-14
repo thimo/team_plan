@@ -140,6 +140,7 @@ Rails.application.routes.draw do
         resources :competitions_import, only: [:new]
         resources :matches
         resources :club_data_results_import, only: [:new]
+        resources :logs
       end
       resources :soccer_fields
       resources :competitions

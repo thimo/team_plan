@@ -2,18 +2,18 @@
 
 module Admin
   module Knvb
-    class ClubDataTeamsController < Admin::BaseController
+    class LogsController < Admin::BaseController
       before_action :add_breadcrumbs
 
       def index
-        @teams = policy_scope(Season.active_season_for_today.club_data_teams).active.includes(:teams).asc
+        @logs = policy_scope(ClubDataLog).desc.page(params[:page]).per(50)
       end
 
       private
 
         def add_breadcrumbs
           add_breadcrumb "KNVB"
-          add_breadcrumb "Teams"
+          add_breadcrumb "Import Logs"
         end
     end
   end

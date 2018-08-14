@@ -1,0 +1,25 @@
+- provide(:title, "KNVB Import Logs")
+
+- content_for :title_action
+  = paginate @logs, theme: 'twitter-bootstrap-4'
+
+.card
+  .card-header
+    | #{@logs.total_count} Regels
+
+  .card-body.p-0
+    table.table.table-sm
+      tbody
+        - @logs.each do |log|
+          tr
+            td.w-1
+              = log_row_icon(log)
+            td.w-25
+              = log.source
+              .small.light
+                = l(log.created_at, format: :long)
+            td
+              = log.body
+
+.text-right
+  = paginate @logs, theme: 'twitter-bootstrap-4'

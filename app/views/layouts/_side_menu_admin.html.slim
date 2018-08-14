@@ -34,6 +34,10 @@ ul.nav
       = link_to admin_knvb_matches_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::MatchesController}" do
         i.fa-fw.fa-database.nav-icon[class=fa_class]
         | Wedstrijden
+    li.nav-item
+      = link_to admin_knvb_logs_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::LogsController}" do
+        i.fa-fw.fa-database.nav-icon[class=fa_class]
+        | Import Log
 
   li.nav-title
     | Beheer
