@@ -9,6 +9,7 @@ class Match < ApplicationRecord
   belongs_to :competition
   belongs_to :created_by, class_name: "User", required: false
   has_and_belongs_to_many :teams
+  has_paper_trail
 
   attr_accessor :opponent, :is_home_match
 

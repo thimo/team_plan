@@ -4,6 +4,7 @@ class Training < ApplicationRecord
 
   belongs_to :team
   belongs_to :training_schedule, optional: true
+  has_paper_trail
 
   attr_accessor :start_time, :end_time
 

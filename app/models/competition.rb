@@ -10,6 +10,7 @@ class Competition < ApplicationRecord
   has_many :club_data_teams, through: :club_data_team_competitions
   has_many :teams, through: :club_data_teams
   has_many :matches, dependent: :destroy
+  has_paper_trail
 
   scope :asc,     -> { order(:created_at) }
   scope :desc,    -> { order(created_at: :desc) }
