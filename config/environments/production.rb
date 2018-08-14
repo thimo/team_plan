@@ -68,12 +68,12 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = "penny.defrog.nl"
+  host = "teamplan.esa-rijkerswoerd.nl"
   config.action_mailer.default_url_options = { host: host, protocol: "https" }
   config.action_mailer.asset_host = "https://" + host
 
   ActionMailer::Base.smtp_settings = {
-    domain:               "teamplan.esa-rijkerswoerd.nl",
+    domain:               "penny.defrog.nl",
     enable_starttls_auto: true,
     address:              ENV["SMTP_ADDRESS"],
     port:                 ENV["SMTP_PORT"]
