@@ -1,0 +1,7 @@
+@include media-breakpoint-down(xs) {
+  .tab-content {
+    .tab-pane {
+      padding: .5rem;
+    }
+  }
+}

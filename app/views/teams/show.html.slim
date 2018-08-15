@@ -23,25 +23,25 @@ section
     li.nav-item
       a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
         i.fa-calendar-alt[class=fa_class]
-        .pl-2.d-down-none Programma
+        span.pl-2.d-down-none Programma
     li.nav-item
       a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
         i.fa-futbol[class=fa_class]
-        .pl-2.d-down-none Competities
+        span.pl-2.d-down-none Competities
     li.nav-item
       a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
         i.fa-users[class=fa_class]
-        .pl-2.d-down-none Team
+        span.pl-2.d-down-none Team
     - if policy(@team).show_dossier?
       li.nav-item
         a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
           i.fa-book[class=fa_class]
-          .pl-2.d-sm-down-none Dossier
+          span.pl-2.d-sm-down-none Dossier
     - if policy(@team).show_statistics?
       li.nav-item
         a.nav-link[href="?tab=statistics" class="#{'active' if @active_tab == 'statistics'}"]
           i.fa-chart-bar[class=fa_class]
-          .pl-2.d-sm-down-none Statistieken
+          span.pl-2.d-sm-down-none Statistieken
 
   .tab-content
     - if @active_tab == 'schedule'
@@ -103,7 +103,7 @@ section
     - if @active_tab == 'dossier' && policy(@team).show_dossier?
       .tab-pane.active.show
         .row
-          .col-md-6
+          .col-md-6.mb-4
             - if policy(@team).show_comments?
               #comments-tabs
                 = render "comments/tabs", parent: @team

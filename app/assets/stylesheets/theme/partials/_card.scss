@@ -15,4 +15,14 @@
   .card-header, .card-body {
     padding: .75rem;
   }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .card {
+    margin-bottom: .75rem;
+  }
 }
