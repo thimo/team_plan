@@ -66,13 +66,10 @@ class Match < ApplicationRecord
     teams.first.name
   end
 
-  def update_uitslag(data_uitslag)
+  def set_uitslag(data_uitslag)
     data_uitslag = nil if data_uitslag.strip == "-"
-    return if uitslag == data_uitslag
-
     self.uitslag = data_uitslag
-    self.uitslag_at = Time.zone.now
-    save
+    self.uitslag_at = Time.zone.now if uitslag_changed?
   end
 
   # Accessors for time aspects of start and end dates

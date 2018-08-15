@@ -6,6 +6,7 @@ class Season < ApplicationRecord
   has_many :age_groups, dependent: :destroy
   has_many :club_data_teams, dependent: :nullify
   has_many :competitions, through: :club_data_teams
+  has_many :matches, through: :competitions
   has_paper_trail
 
   validates :name, :status, :started_on, :ended_on, presence: true
