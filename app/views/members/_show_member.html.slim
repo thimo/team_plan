@@ -135,7 +135,7 @@
               - team_members.each do |team_member|
                 div
                   = team_member.role_i18n
-            td
+            td.d-down-none
               - team_members.each do |team_member|
                 div
                   - if team_member.started_on.present?
