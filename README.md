@@ -23,4 +23,4 @@ TeamPlan provides the following functionality:
 
 Contact Thimo Jansen <thimo@defrog.nl>
 
-Copyright © 2018 Defrog, Thimo Jansen
+Copyright © 2016 - 2018 Defrog, Thimo Jansen
