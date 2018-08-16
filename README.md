@@ -22,7 +22,3 @@ TeamPlan provides the following functionality:
 ![TeamPlan screenshot](https://user-images.githubusercontent.com/781488/35942258-4fbd2a96-0c55-11e8-8a4d-c3b2be91105b.png)
 
 Contact Thimo Jansen <thimo@defrog.nl>
-
-# Open Source warning
-
-Although the code is here for all to see, there is currently no license attached and therefore cannot be used as open source. Also, the project contains a paid-for theme that cannot be distributed freely.
