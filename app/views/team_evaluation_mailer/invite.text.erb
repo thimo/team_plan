@@ -4,14 +4,7 @@ We hebben een evaluatie klaargezet voor <%= @team_evaluation.team.name %> en vra
 vullen. Als de evaluatie volledig is ingevuld vragen we je deze terug te sturen naar <%= Setting['club.name_short'] %>
 door op de knop "Evaluatie afronden" te klikken.
 
-NIEUW: Openheid en transparantie staan in onze kernwaarden, om die reden wordt na het invullen van de
-evaluatie deze inzichtelijk voor de speler. De (ouders van de) speler kan altijd zijn of haar eigen
-evaluatie inzien, vanzelfsprekend niet die van het hele team. We adviseren de evaluaties persoonlijk
-te spreken met de spelers en/of ouders (afhankelijk van de leeftijd). Zeker als er in de evaluatie
-aspecten omtrent (ongewenst) gedrag spelen of het advies over speelniveau anders is dan het gewenste
-of verwachte speelniveau van speler/ouders.
-
-<%= edit_team_evaluation_url(@team_evaluation)  %>
+<%= edit_team_evaluation_url(@team_evaluation, domain: Setting['club.hostname'])  %>
 
 Als het goed is heb je eerder al een gegevens ontvangen van <%= Setting['club.name_short'] %> om mee in te loggen.
 Zo niet, stuur een mail naar <%= Setting['club.helpdesk_email'] %>.
