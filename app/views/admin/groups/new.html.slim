@@ -1,2 +1,4 @@
-h1 Admin::Groups#new
-p Find me in app/views/admin/groups/new.html.slim
+- provide(:title, "Nieuwe groep")
+
+.card.card-body
+  = render "form"

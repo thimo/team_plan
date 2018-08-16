@@ -38,6 +38,9 @@ nl:
         body: Omschrijving / behandeling
         started_on: Begindatum
         ended_on: Einddatum
+      group:
+        name: Naam
+        users: Gebruikers
       match:
         opponent: Tegenstander
         location: Wedstrijdlocatie
@@ -93,6 +96,8 @@ nl:
         duel_strength: Duelkracht
       presence:
         remark: Opmerking
+      role:
+        name: Naam
       season:
         name: Seizoen
         active: Actief

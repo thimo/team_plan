@@ -30,6 +30,7 @@ class User < ApplicationRecord
     where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
   }
 
+
   # Setter
   def name=(name)
     split = name.split(" ", 2)

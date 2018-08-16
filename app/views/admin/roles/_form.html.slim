@@ -1,0 +1,10 @@
+= bootstrap_form_for [:admin, @role], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.text_field :name, autofocus: true
+
+  div
+    = f.submit "Opslaan", class: 'btn btn-primary'
+    - if policy(@role).destroy?
+      = link_to "Verwijderen", admin_role_path(@role),  method: :delete, data: { confirm: 'Rol wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+    = link_to "Annuleren", [:admin, :roles], class: 'btn btn-light'
