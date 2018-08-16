@@ -9,7 +9,7 @@
 </p>
 
 <p>
-  <%= link_to "Teamevaluatie #{@team_evaluation.team.name}", edit_team_evaluation_url(@team_evaluation) %>
+  <%= link_to "Teamevaluatie #{@team_evaluation.team.name}", edit_team_evaluation_url(@team_evaluation, domain: Setting['club.hostname']) %>
 </p>
 
 <p>
@@ -19,6 +19,6 @@
 
 <p>
   Meer weten? Lees <%= link_to "de beknopte handleiding",
-    "https://#{ActionMailer::Base.default_url_options[:host]}/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf" %>
+    "https://#{Setting['club.hostname']}/pdf/ESA_TeamPlan_Handleiding_Teamevaluaties.pdf" %>
   die we speciaal hebben gemaakt voor het invullen van de teamevaluatie.
 </p>

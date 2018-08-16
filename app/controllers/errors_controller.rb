@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ErrorsController < ApplicationController
-  layout "devise"
+  layout "error"
 
   def file_not_found
     authorize :error

@@ -1,12 +1,12 @@
 - provide(:title, "Pagina niet gevonden")
+- provide(:subtitle, "Oeps!")
 
-h1
-  | Oeps!
 p
-  |  De opgevraagde URL is niet gevonden op de server.
-p.small
-  |  Controleer of het adres van de website in de adresbalk van je browser correct is gespeld en geformatteerd.
+  | De opgevraagde URL is niet gevonden op de server.
+p
+  | Controleer of het adres van de website in de adresbalk van je browser correct is.
 
-= link_to root_path, class: "btn btn-default  btn-lg" do
-  i.fa-tachometer.mr-2[class=fa_class]
-  |  Naar Dashboard
+.mt-4
+  = link_to root_path, class: "btn btn-outline-primary btn-lg" do
+    i.fa-tachometer.mr-2[class=fa_class]
+    |  Naar Dashboard

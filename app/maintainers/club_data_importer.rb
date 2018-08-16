@@ -102,7 +102,7 @@ module ClubDataImporter
             "&client_id=#{Setting['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       if json.present?
-        count[:imported] += 1
+        count[:total] += 1
 
         competition.ranking = json
         if competition.changed?
@@ -135,7 +135,7 @@ module ClubDataImporter
             "&client_id=#{Setting['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
-        count[:imported] += 1
+        count[:total] += 1
 
         match = update_match(data, competition)
 
@@ -188,7 +188,7 @@ module ClubDataImporter
             "&client_id=#{Setting['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
-        count[:imported] += 1
+        count[:total] += 1
         match = update_match(data, competition)
         match.set_uitslag(data["uitslag"])
 
@@ -224,7 +224,7 @@ module ClubDataImporter
       json.each do |data|
         next if data["foto"].blank?
 
-        count[:imported] += 1
+        count[:total] += 1
 
         member = Member.find_by(full_name: data["naam"])
         if member

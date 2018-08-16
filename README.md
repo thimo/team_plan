@@ -23,6 +23,4 @@ TeamPlan provides the following functionality:
 
 Contact Thimo Jansen <thimo@defrog.nl>
 
-# Open Source warning
-
-Although the code is here for all to see, there is currently no license attached and therefore cannot be used as open source. Also, the project contains a paid-for theme that cannot be distributed freely.
+Copyright © 2016 - 2018 Defrog, Thimo Jansen
