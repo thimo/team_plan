@@ -74,6 +74,7 @@ module ClubDataImporter
       match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])
       match.set_uitslag(data["uitslag"])
       if match.changed?
+        match.save
         count[:updated] += 1
       end
     end
