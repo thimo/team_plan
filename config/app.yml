@@ -1,18 +1,17 @@
 # config/app.yml for rails-settings-cached
 defaults: &defaults
   application.name: TeamPlan
+  application.hostname: teamplan.defrog.nl
+  application.email: helpdesk@defrog.nl
+  application.contact_name: Thimo Jansen
   club.name: Defrog
   club.name_short: Defrog
-  club.hostname: teamplan.defrog.nl
   club.website: https://teamplan.defrog.nl/
   club.sportscenter:
   club.address:
   club.zip:
   club.city: Arnhem
-  club.email: helpdesk@defrog.nl
   club.phone:
-  club.contact_name: Thimo Jansen
-  club.helpdesk_email: helpdesk@defrog.nl
   club.relatiecode:
   clubdata.urls.competities: https://data.sportlink.com/teams?teamsoort=bond&spelsoort=ve&gebruiklokaleteamgegevens=NEE
   clubdata.urls.poulestand: https://data.sportlink.com/poulestand?gebruiklokaleteamgegevens=NEE
@@ -26,7 +25,7 @@ defaults: &defaults
   clubdata.client_id:
   fontawesome.integrity:
   google.maps.base_url: https://www.google.com/maps/embed/v1/
-  google.maps.api-key: 
+  google.maps.api-key:
 
 development:
   <<: *defaults

@@ -17,7 +17,7 @@ module DefaultUrlOptions
   private
 
     def host
-      Setting["club.hostname"]
+      Setting["application.hostname"]
     end
 
     def protocol
