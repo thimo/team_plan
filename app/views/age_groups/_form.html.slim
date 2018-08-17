@@ -11,5 +11,7 @@
   - if policy(@age_group).set_status?
     = f.collection_radio_buttons :status, AgeGroup.statuses_i18n, :first, :second
 
-  = f.submit "Opslaan", class: 'btn btn-primary'
-  = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-light'
+  .row
+    .col-sm-9.offset-sm-3
+      = f.submit "Opslaan", class: 'btn btn-primary'
+      = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-light'
