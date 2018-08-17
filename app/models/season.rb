@@ -4,6 +4,7 @@ class Season < ApplicationRecord
   include Statussable
 
   has_many :age_groups, dependent: :destroy
+  has_many :teams, through: :age_groups
   has_many :club_data_teams, dependent: :nullify
   has_many :competitions, through: :club_data_teams
   has_many :matches, through: :competitions
@@ -14,6 +15,7 @@ class Season < ApplicationRecord
   scope :asc, -> { order(name: :asc) }
   scope :desc, -> { order(name: :desc) }
   scope :active_or_archived, -> { where(status: [Season.statuses[:archived], Season.statuses[:active]]) }
+  scope :for_date, ->(date) { where("started_on <= ? AND ended_on >= ?", date, date) }
 
   def status_children
     # Only propagate status when archiving
@@ -40,6 +42,6 @@ class Season < ApplicationRecord
   end
 
   def self.active_season_for_today
-    active.find_by("started_on <= ? AND ended_on >= ?", Time.zone.today, Time.zone.today)
+    active.for_date(Time.zone.today).first
   end
 end
