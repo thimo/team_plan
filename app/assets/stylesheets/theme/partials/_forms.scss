@@ -33,3 +33,11 @@
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
   border-color: $blue;
 }
+
+.form-control {
+  transition: none;
+
+  &:hover, &:focus {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+}
