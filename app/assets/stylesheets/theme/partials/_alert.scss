@@ -9,6 +9,19 @@
     }
   }
 }
+
+.alert-danger {
+  &.alert-fill {
+    background-color: $red;
+    border-color: $red;
+    color: white;
+
+    .alert-btns .btn:hover {
+      color: $red !important;
+    }
+  }
+}
+
 .alert-fill {
   a {
     color: white;
