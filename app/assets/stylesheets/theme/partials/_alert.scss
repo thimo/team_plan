@@ -1,0 +1,28 @@
+.alert-notice {
+  &.alert-fill {
+    background-color: $green;
+    border-color: $green;
+    color: white;
+
+    .alert-btns .btn:hover {
+      color: $green !important;
+    }
+  }
+}
+.alert-fill {
+  a {
+    color: white;
+    font-weight: bold;
+  }
+}
+
+// Icons voor alerts
+.fa-notice:before,
+.fa-success:before {
+  content: "\f00c";
+}
+
+.fa-alert:before,
+.fa-danger:before {
+  content: "\f00d";
+}
