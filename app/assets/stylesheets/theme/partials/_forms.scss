@@ -41,3 +41,7 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 }
+
+textarea {
+  min-height: 3.5rem;
+}
