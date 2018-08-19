@@ -1,6 +1,6 @@
 Hallo <%= @user.name %>,
 
-We hebben een account voor je aangemaakt. Je kunt inloggen op <%= Setting['club.name'] %> <%= Setting['application.name'] %> (<%= new_user_session_url(domain: Setting['club.hostname']) %>) met de volgende gegevens:
+We hebben een account voor je aangemaakt. Je kunt inloggen op <%= Setting['club.name'] %> <%= Setting['application.name'] %> (<%= new_user_session_url %>) met de volgende gegevens:
 
 E-mail: <%= @user.email %>
 Wachtwoord: <%= @generated_password %>

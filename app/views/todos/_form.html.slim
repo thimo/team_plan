@@ -8,7 +8,9 @@
   = f.text_field :started_on, date_picker_options(help: "Optioneel: De datum waarop de todo actief wordt.")
   = f.text_field :ended_on, date_picker_options(help: "Optioneel: De deadline voor deze todo")
 
-  = f.submit "Opslaan", class: 'btn btn-primary'
-  = link_to "Annuleren", cancel_url, class: 'btn btn-light'
-  - if policy(@todo).destroy?
-    = link_to "Verwijderen", todo_path(@todo),  method: :delete, data: { confirm: 'Todo wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+  .row
+    .col-sm-9.offset-sm-3
+      = f.submit "Opslaan", class: 'btn btn-primary'
+      = link_to "Annuleren", cancel_url, class: 'btn btn-light'
+      - if policy(@todo).destroy?
+        = link_to "Verwijderen", todo_path(@todo),  method: :delete, data: { confirm: 'Todo wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'

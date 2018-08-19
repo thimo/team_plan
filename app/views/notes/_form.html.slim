@@ -9,7 +9,9 @@
     help: "Indien van toepassing kun je hier de teamgenoot waarover de notitie gaat selecteren (gespreksverslag, etc.)"
   = f.collection_radio_buttons :visibility, Note.visibilities_i18n, :first, :second
 
-  = f.submit "Opslaan", class: 'btn btn-primary'
-  = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-light'
-  - if policy(@note).destroy?
-    = link_to "Verwijderen", note_path(@note), method: :delete, data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+  .row
+    .col-sm-9.offset-sm-3
+      = f.submit "Opslaan", class: 'btn btn-primary'
+      = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-light'
+      - if policy(@note).destroy?
+        = link_to "Verwijderen", note_path(@note), method: :delete, data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'

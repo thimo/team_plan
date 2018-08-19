@@ -12,11 +12,11 @@ html
       | Met vriendelijke groet,
 
     p
-      | Thimo Jansen
+      = Setting['application.contact_name']
     p
       strong
-        | #{Setting['club.name']}
+        = Setting['club.name']
       br
-      | #{Setting['club.address']}
+      = Setting['club.address']
       br
-      | #{Setting['club.zip']}  #{Setting['club.city']}
+      | #{Setting['club.zip']} #{Setting['club.city']}
