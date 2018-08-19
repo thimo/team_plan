@@ -385,7 +385,7 @@
         position: absolute;
         top: 45%;
         width: 0;
-      } 
+      }
     }
 
     .select2-selection__rendered {
@@ -423,7 +423,7 @@
 
     .select2-selection__choice {
       color: $white;
-      background: $primary;
+      background: $gray-500;
       border-radius: $border-radius;
       cursor: default;
       float: left;
@@ -450,12 +450,12 @@
       cursor: pointer;
       display: inline-block;
       font-weight: bold;
-      background: $primary;
+      background: $gray-500;
       border-radius: $border-radius 0 0 $border-radius;
       padding: .125rem .5rem;
 
       &:hover {
-        background: lighten($primary, 10%);
+        background: lighten($gray-500, 10%);
       }
     }
 
