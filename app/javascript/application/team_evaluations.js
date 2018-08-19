@@ -46,8 +46,9 @@ document.addEventListener("turbolinks:load", () => {
 
   $('select.field_positions').each((index, target) => {
     $(target).select2({
-      theme: "bootstrap",
-      placeholder: "Veldpositie"
+      placeholder: "Veldpositie",
+      width: null,
+      theme: "bootstrap"
     });
   })
 })
