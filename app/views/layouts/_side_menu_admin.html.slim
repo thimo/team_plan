@@ -11,6 +11,10 @@ ul.nav
       i.fa-fw.fa-users.nav-icon[class=fa_class]
       | Leden
   li.nav-item
+    = link_to admin_groups_path, class: "nav-link #{'active' if controller.class == Admin::GroupsController}" do
+      i.fa-fw.fa-users.nav-icon[class=fa_class]
+      | Groepen
+  li.nav-item
     = link_to admin_soccer_fields_path, class: "nav-link #{'active' if controller.class == Admin::SoccerFieldsController}" do
       i.fa-fw.fa-leaf.nav-icon[class=fa_class]
       | Velden
@@ -45,10 +49,6 @@ ul.nav
     = link_to admin_users_path, class: "nav-link #{'active' if controller.class == Admin::UsersController}" do
       i.fa-fw.fa-user.nav-icon[class=fa_class]
       | Gebruikers
-  li.nav-item
-    = link_to admin_groups_path, class: "nav-link #{'active' if controller.class == Admin::GroupsController}" do
-      i.fa-fw.fa-users.nav-icon[class=fa_class]
-      | Groepen
   li.nav-item
     = link_to admin_roles_path, class: "nav-link #{'active' if controller.class == Admin::RolesController}" do
       i.fa-fw.fa-user-secret.nav-icon[class=fa_class]
