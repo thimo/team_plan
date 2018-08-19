@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_19_172702) do
+ActiveRecord::Schema.define(version: 2018_08_19_174301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -280,6 +280,13 @@ ActiveRecord::Schema.define(version: 2018_08_19_172702) do
     t.string "photo"
     t.index ["association_number"], name: "index_members_on_association_number"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "members_users", id: false, force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["member_id", "user_id"], name: "index_members_users_on_member_id_and_user_id"
+    t.index ["user_id", "member_id"], name: "index_members_users_on_user_id_and_member_id"
   end
 
   create_table "notes", force: :cascade do |t|

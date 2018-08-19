@@ -69,7 +69,7 @@ class Member < ApplicationRecord
   scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
   scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: { age_group_id: age_group }) }
-  # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that
+  # TODO: 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that
   # it's renamed everywhere
   scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
@@ -77,6 +77,7 @@ class Member < ApplicationRecord
                               includes(team_members: :field_positions)
                                 .where(field_positions: { id: field_positions })
                             }
+  scope :by_email, ->(email) { where("lower(email) = ?", email.downcase) }
   scope :recent_members, ->(days_ago) {
                            where("registered_at >= ?", days_ago.days.ago.beginning_of_day)
                              .order(registered_at: :desc, created_at: :desc)
@@ -90,12 +91,22 @@ class Member < ApplicationRecord
                   },
                   ignoring: :accents
 
+  before_save :update_users
+
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
   end
 
   def name_and_born_on
     "#{name} (#{I18n.l(born_on, format: :long)})"
+  end
+
+  def sportlink_active?
+    deregistered_at.nil? || deregistered_at > Time.zone.today
+  end
+
+  def sportlink_inactive?
+    !sportlink_active?
   end
 
   def favorite?(user)
@@ -147,9 +158,9 @@ class Member < ApplicationRecord
     Comment.comment_types
   end
 
-  def user
-    @user ||= User.active.find_by("lower(email) = ?", email.downcase) if email.present?
-  end
+  # def user
+  #   @user ||= User.active.find_by("lower(email) = ?", email.downcase) if email.present?
+  # end
 
   def reactivated?
     (registered_at - member_since).to_i > 30
@@ -208,6 +219,8 @@ class Member < ApplicationRecord
   end
 
   def self.cleanup(imported_before)
+    # `cleanup` works with `imported_at` because it can happen that members disappear from
+    # from the Sportlink export. It would prob. be better to handle this in the import
     result = { deregistered: [] }
     Member.where(deregistered_at: nil).where("imported_at < ?", imported_before).find_each do |member|
       member.deregistered_at = member.imported_at
@@ -225,4 +238,32 @@ class Member < ApplicationRecord
   def self.imported_at
     order(imported_at: :desc).limit(1).first.imported_at
   end
+
+  private
+
+    def update_users
+      if new_record?
+        add_to_user email
+
+      elseif sportlink_inactive?
+        remove_from_user email_was if email_changed?
+        remove_from_user email
+
+      elsif email_changed?
+        remove_from_user email_was
+        add_to_user email
+      end
+    end
+
+    def add_to_user(email)
+      if email.present? && (user = User.by_email(email).first).present?
+        user.members << self
+      end
+    end
+
+    def remove_from_user(email)
+      if email.present? && (user = User.by_email(email).first).present?
+        user.members.delete(self)
+      end
+    end
 end

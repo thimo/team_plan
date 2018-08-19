@@ -28,7 +28,9 @@ class User < ApplicationRecord
   scope :query, ->(query) {
     where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
   }
+  scope :by_email, ->(email) { where("lower(email) = ?", email.downcase) }
 
+  after_save :update_members
 
   # Setter
   def name=(name)
@@ -53,30 +55,22 @@ class User < ApplicationRecord
     end
   end
 
-  def members
-    Member.where("lower(email) = ?", email.downcase).sportlink_active
-  end
-
-  def member_ids
-    members.map(&:id).uniq
-  end
-
   def teams
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil }).distinct
+    Team.joins(:team_members).where(team_members: { member: members, ended_on: nil }).distinct
   end
 
   def active_teams
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
+    Team.joins(:team_members).where(team_members: { member: members, ended_on: nil })
         .joins(age_group: :season).where(seasons: { status: Season.statuses[:active] }).distinct
   end
 
   def teams_as_staff
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
+    Team.joins(:team_members).where(team_members: { member: members, ended_on: nil })
         .where.not(team_members: { role: TeamMember.roles[:player] }).distinct.asc
   end
 
   def teams_as_staff_in_season(season)
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
+    Team.joins(:team_members).where(team_members: { member: members, ended_on: nil })
         .where.not(team_members: { role: TeamMember.roles[:player] }).joins(age_group: :season)
         .where(age_groups: { season: season }).distinct.asc
   end
@@ -198,6 +192,16 @@ class User < ApplicationRecord
     User.archived.each do |user|
       user.activate if user.active_members?
     end
+  end
+
+  def after_confirmation
+    update_members
+  end
+
+  # Run on `after_save` because on `before_save` the email may be changed, but not yet
+  # updated because of Devise's :confirmable (see `after_confirmation` above)
+  def update_members
+    self.members = Member.by_email(email).sportlink_active
   end
 
   private
