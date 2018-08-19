@@ -19,11 +19,11 @@
 
       tbody
         - @groups.each do |group|
-          tr
-            td.align-top
+          tr.align-top
+            td
               = link_to group.name, [:edit, :admin, group]
-            td.align-top
+            td
               - group.members.asc.each do |member|
                 div
                   = link_to member.name, member
-            td.align-top
+            td

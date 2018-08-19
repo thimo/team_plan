@@ -80,10 +80,6 @@ class User < ApplicationRecord
     members.where(id: member.id).size.positive?
   end
 
-  def active_members?
-    members.sportlink_active.any?
-  end
-
   def team_member_for?(record)
     team_id = team_id_for record
     team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil }).size.positive?
@@ -164,7 +160,7 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super && active_members?
+    super && members.any?
   end
 
   def inactive_message
@@ -184,13 +180,13 @@ class User < ApplicationRecord
 
   def self.deactivate_for_inactive_members
     User.active.each do |user|
-      user.deactivate unless user.active_members?
+      user.update_members
     end
   end
 
   def self.activate_for_active_members
     User.archived.each do |user|
-      user.activate if user.active_members?
+      user.update_members
     end
   end
 
@@ -202,6 +198,8 @@ class User < ApplicationRecord
   # updated because of Devise's :confirmable (see `after_confirmation` above)
   def update_members
     self.members = Member.by_email(email).sportlink_active
+    activate if members.any?
+    deactivate if members.none?
   end
 
   private

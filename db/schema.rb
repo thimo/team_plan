@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_19_174301) do
+ActiveRecord::Schema.define(version: 2018_08_19_201347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -254,7 +254,6 @@ ActiveRecord::Schema.define(version: 2018_08_19_174301) do
     t.string "initials"
     t.string "conduct_number"
     t.string "sport_category"
-    t.datetime "imported_at"
     t.string "status"
     t.string "full_name_2"
     t.date "last_change_at"
@@ -278,6 +277,7 @@ ActiveRecord::Schema.define(version: 2018_08_19_174301) do
     t.boolean "injured", default: false
     t.string "full_name"
     t.string "photo"
+    t.datetime "missed_import_on"
     t.index ["association_number"], name: "index_members_on_association_number"
     t.index ["user_id"], name: "index_members_on_user_id"
   end

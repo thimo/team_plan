@@ -27,10 +27,12 @@ module Admin
 
         # After an import with at least one member, cleanup members that were last imported 7 days ago
         if @import_result[:counters][:imported].positive?
-          @cleanup_result = Member.cleanup(7.days.ago)
+          @cleanup_result = Member.cleanup(7.days.ago, @import_result[:member_ids])
 
           # Deactivate users with no matching members
+          # TODO: this may not be needed as activating/de-activating is done on member import en user creation
           User.deactivate_for_inactive_members
+          User.activate_for_active_members
         end
 
       end

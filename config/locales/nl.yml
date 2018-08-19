@@ -156,6 +156,7 @@ nl:
         role: Rol
         current_sign_in_at: Laatste login
         email: E-mail
+        members: Leden
       version_update:
         released_at: Datum
         name: Titel

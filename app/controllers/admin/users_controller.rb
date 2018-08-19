@@ -7,7 +7,7 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      @users = policy_scope(User).asc.filter(params.slice(:role, :query))
+      @users = policy_scope(User).asc.filter(params.slice(:role, :query)).includes(:members)
       @users = params[:inactive] ? @users.archived : @users.active
       @users = @users.page(params[:page]).per(50)
     end

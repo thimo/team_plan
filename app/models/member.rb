@@ -158,9 +158,11 @@ class Member < ApplicationRecord
     Comment.comment_types
   end
 
-  # def user
-  #   @user ||= User.active.find_by("lower(email) = ?", email.downcase) if email.present?
-  # end
+  def user
+    # TODO: When in the future a member can belong to multiple users by coupling to multiple emailaddresses, 
+    # than this (and other functionality using this) needs to change
+    users.first
+  end
 
   def reactivated?
     (registered_at - member_since).to_i > 30
@@ -184,7 +186,7 @@ class Member < ApplicationRecord
   end
 
   def self.import(file)
-    result = { counters: { imported: 0, changed: 0 }, created: [], activated: [] }
+    result = { counters: { imported: 0, changed: 0 }, created: [], activated: [], member_ids: [] }
 
     CSV.foreach(
       file.path,
@@ -194,9 +196,7 @@ class Member < ApplicationRecord
       row_hash = row.to_hash
       association_number = row_hash["association_number"]
       member = Member.find_or_initialize_by(association_number: association_number)
-      result[:created] << member if member.new_record?
 
-      old_deregistered_at = member.deregistered_at
       row_hash.each do |key, value|
         if Member.column_names.include?(key)
           if key.ends_with?("_at") || key.ends_with?("_since")
@@ -208,24 +208,39 @@ class Member < ApplicationRecord
       end
 
       result[:counters][:imported] += 1
-      result[:counters][:changed] += 1 if member.changed?
-      result[:activated] << member if old_deregistered_at.present? && member.deregistered_at.nil?
 
-      member.imported_at = Time.zone.now
-      member.save!
+      result[:activated] << member if member.deregistered_at_was.present? && member.deregistered_at.nil?
+
+      if member.new_record?
+        result[:created] << member
+        member.save!
+      elsif member.changed?
+        result[:counters][:changed] += 1
+        member.save!
+      end
+      result[:member_ids] << member.id
     end
 
     result
   end
 
-  def self.cleanup(imported_before)
+  def self.cleanup(imported_before, imported_member_ids)
     # `cleanup` works with `imported_at` because it can happen that members disappear from
     # from the Sportlink export. It would prob. be better to handle this in the import
     result = { deregistered: [] }
-    Member.where(deregistered_at: nil).where("imported_at < ?", imported_before).find_each do |member|
-      member.deregistered_at = member.imported_at
-      member.save
-      result[:deregistered] << member
+
+    Member.sportlink_active.each do |member|
+      if imported_member_ids.include? member.id
+        # Member was imported, make sure `missed_import_on` is cleared
+        member.update(missed_import_on: nil) if member.missed_import_on.present?
+      else
+        # Member was not in import. Set `missed_import_on` if nil
+        member.update(missed_import_on: Time.zone.now) if member.missed_import_on.nil?
+        if member.missed_import_on < imported_before
+          member.update(deregistered_at: member.missed_import_on)
+          result[:deregistered] << member
+        end
+      end
     end
 
     result
@@ -235,17 +250,13 @@ class Member < ApplicationRecord
     Member::EXPORT_COLUMNS + (user.admin? || user.club_staff? ? Member::EXPORT_COLUMNS_ADVANCED : [])
   end
 
-  def self.imported_at
-    order(imported_at: :desc).limit(1).first.imported_at
-  end
-
   private
 
     def update_users
       if new_record?
         add_to_user email
 
-      elseif sportlink_inactive?
+      elsif sportlink_inactive?
         remove_from_user email_was if email_changed?
         remove_from_user email
 
@@ -257,13 +268,15 @@ class Member < ApplicationRecord
 
     def add_to_user(email)
       if email.present? && (user = User.by_email(email).first).present?
-        user.members << self
+        self.users << user
+        user.activate
       end
     end
 
     def remove_from_user(email)
       if email.present? && (user = User.by_email(email).first).present?
         user.members.delete(self)
+        user.deactivate if user.members.none?
       end
     end
 end
