@@ -11,7 +11,13 @@
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-light'
-      - if policy(@note).destroy?
-        = link_to "Verwijderen", note_path(@note), method: :delete, data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", @note.new_record? ? @note.team : @note, class: 'btn btn-light'
+        div
+          - if policy(@note).destroy?
+            = link_to "Verwijderen", note_path(@note),
+                                     method: :delete,
+                                     data: { confirm: 'Notitie wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-outline-danger'

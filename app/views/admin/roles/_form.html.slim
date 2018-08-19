@@ -3,8 +3,15 @@
 
   = f.text_field :name, autofocus: true
 
-  div
-    = f.submit "Opslaan", class: 'btn btn-primary'
-    - if policy(@role).destroy?
-      = link_to "Verwijderen", admin_role_path(@role),  method: :delete, data: { confirm: 'Rol wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
-    = link_to "Annuleren", [:admin, :roles], class: 'btn btn-light'
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", [:admin, :roles], class: 'btn btn-light'
+        div
+          - if policy(@role).destroy?
+            = link_to "Verwijderen", admin_role_path(@role),
+                                     method: :delete,
+                                     data: { confirm: 'Rol wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-outline-danger'

@@ -10,7 +10,13 @@
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      = link_to "Annuleren", @injury.new_record? ? @injury.member : @injury, class: 'btn btn-light'
-      - if policy(@injury).destroy?
-        = link_to "Verwijderen", injury_path(@injury), method: :delete, data: { confirm: 'Blessure wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", @injury.new_record? ? @injury.member : @injury, class: 'btn btn-light'
+        div
+          - if policy(@injury).destroy?
+            = link_to "Verwijderen", injury_path(@injury),
+                                     method: :delete,
+                                     data: { confirm: 'Blessure wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-outline-danger'

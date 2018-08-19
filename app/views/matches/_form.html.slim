@@ -19,7 +19,13 @@
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-light'
-      - if policy(@match).destroy?
-        = link_to "Afgelasten", match_path(@match), method: :delete, data: { confirm: 'Wedstrijd wordt afgelast. Doorgaan?' }, class: 'btn btn-danger'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-light'
+        div
+          - if policy(@match).destroy?
+            = link_to "Afgelasten", match_path(@match),
+                                    method: :delete,
+                                    data: { confirm: 'Wedstrijd wordt afgelast. Doorgaan?' },
+                                    class: 'btn btn-outline-danger'

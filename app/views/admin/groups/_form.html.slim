@@ -9,8 +9,15 @@
       multiple: "multiple" }
 
 
-  div
-    = f.submit "Opslaan", class: 'btn btn-primary'
-    - if policy(@group).destroy?
-      = link_to "Verwijderen", admin_group_path(@group),  method: :delete, data: { confirm: 'Group wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
-    = link_to "Annuleren", [:admin, :groups], class: 'btn btn-light'
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", [:admin, :groups], class: 'btn btn-light'
+        div
+          - if policy(@group).destroy?
+            = link_to "Verwijderen", admin_group_path(@group),
+                                     method: :delete,
+                                     data: { confirm: 'Group wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-outline-danger'
