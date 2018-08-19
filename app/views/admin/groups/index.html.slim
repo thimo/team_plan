@@ -15,13 +15,15 @@
         tr
           th = Group.human_attribute_name(:name)
           th = Group.human_attribute_name(:members)
+          th = Group.human_attribute_name(:roles)
 
       tbody
         - @groups.each do |group|
           tr
-            td
+            td.align-top
               = link_to group.name, [:edit, :admin, group]
-            td
+            td.align-top
               - group.members.asc.each do |member|
                 div
                   = link_to member.name, member
+            td.align-top

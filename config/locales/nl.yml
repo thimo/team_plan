@@ -42,6 +42,8 @@ nl:
         name: Naam
         members: Leden
         member_ids: Leden
+        roles: Rollen
+        role_ids: Rollen
       match:
         opponent: Tegenstander
         location: Wedstrijdlocatie
