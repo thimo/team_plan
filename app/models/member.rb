@@ -33,6 +33,9 @@ class Member < ApplicationRecord
   has_many :todos, as: :todoable, dependent: :nullify
   has_many :injuries, dependent: :destroy
   has_many :presences, dependent: :destroy
+
+  has_many :group_members, dependent: :destroy
+  has_many :groups, through: :group_members
   has_paper_trail
 
   validates :last_name, :born_on, :gender, :association_number, presence: true

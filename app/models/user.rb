@@ -15,8 +15,6 @@ class User < ApplicationRecord
   has_many :todos, dependent: :destroy
   has_many :injuries, dependent: :destroy
   has_one :user_setting, dependent: :destroy
-  has_many :group_users, dependent: :destroy
-  has_many :groups, through: :group_users
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise
