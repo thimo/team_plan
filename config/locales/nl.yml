@@ -40,7 +40,8 @@ nl:
         ended_on: Einddatum
       group:
         name: Naam
-        users: Gebruikers
+        members: Leden
+        member_ids: Leden
       match:
         opponent: Tegenstander
         location: Wedstrijdlocatie

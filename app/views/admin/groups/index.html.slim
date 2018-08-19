@@ -14,7 +14,7 @@
       thead
         tr
           th = Group.human_attribute_name(:name)
-          th = Group.human_attribute_name(:users)
+          th = Group.human_attribute_name(:members)
 
       tbody
         - @groups.each do |group|
@@ -22,6 +22,6 @@
             td
               = link_to group.name, [:edit, :admin, group]
             td
-              - group.users.asc.each do |user|
+              - group.members.asc.each do |member|
                 div
-                  = link_to user.name, [:edit, :admin, user]
+                  = link_to member.name, member

@@ -54,8 +54,7 @@ module Admin
       end
 
       def group_params
-        debugger
-        params.require(:group).permit(:name, user_ids: [])
+        params.require(:group).permit(:name, member_ids: [])
       end
 
       def add_breadcrumbs

@@ -3,7 +3,7 @@
 
   = f.text_field :name, autofocus: true
 
-  = f.collection_select :user_ids, User.active.all, :id, :name,
+  = f.collection_select :member_ids, Member.sportlink_active.all, :id, :name,
     { },
     { data: { controller: 'select2', placeholder: "Filter op gebruikers" },
       multiple: "multiple" }
