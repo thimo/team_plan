@@ -36,6 +36,7 @@ class Member < ApplicationRecord
 
   has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
+  has_and_belongs_to_many :users
   has_paper_trail
 
   validates :last_name, :born_on, :gender, :association_number, presence: true
