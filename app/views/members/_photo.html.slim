@@ -1,4 +1,5 @@
 - if member.photo.present?
-  = image_tag 'avatar-2-64.png', class: 'member_photo_thumbnail', data: { src: member.photo_url }
+  = image_tag 'avatar-2-64.png', class: 'member_photo_thumbnail', 
+                                 data: { src: member.photo_url }
 - else
   = image_tag 'avatar-2-64.png', class: 'member_photo_thumbnail placeholder'

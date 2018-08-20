@@ -3,6 +3,7 @@ nl:
     formats:
       weekday: "%a"
       date_long: "%-d %b %Y"
+      date_long_without_day: "%b %Y"
       date_short: "%-d %b"
       date_day: "%-d"
   time:
@@ -12,6 +13,7 @@ nl:
       weekday: "%a"
       date_time_short: "%-d %b %k:%M"
       date_long: "%-d %b %Y"
+      date_long_without_day: "%b %Y"
       date_short: "%-d %b"
       date_day: "%-d"
       long: "%-d %b %Y %k:%M"

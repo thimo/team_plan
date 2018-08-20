@@ -21,6 +21,12 @@ class MemberPolicy < AdminPolicy
       @user.team_member_for?(@record)
   end
 
+  def show_full_born_on?
+    @user.admin? ||
+      @user.club_staff? ||
+      @user.has_member?(@record)
+  end
+
   def show_conduct?
     @user.admin? ||
       @user.club_staff?

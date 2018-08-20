@@ -19,8 +19,7 @@
                 td.d-down-none
                   = I18n.l season.ended_on, format: :long if season.ended_on.present?
                 td.text-right
-                  - if policy(season).show_status?
-                    => season.status_to_badge.html_safe
+                  => season.status_to_badge.html_safe
                   - if (size = policy_scope(season.age_groups).size) > 0
                     .badge.badge-secondary.badge-one-number>
                       = "#{size}"

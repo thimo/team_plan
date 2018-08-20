@@ -12,4 +12,8 @@
   width: 200px;
   float: right;
   border-radius: $border-radius;
+
+  @include media-breakpoint-down(xs) {
+    width: 100px;
+  }
 }
