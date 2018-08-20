@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 class TeamPolicy < ApplicationPolicy
-  def index?
-    true
-  end
-
   def show?
-    index?
+    @user.admin? || @user.club_staff? || !@record.draft?
   end
 
   def create?
