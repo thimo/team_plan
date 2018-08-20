@@ -62,23 +62,24 @@ class User < ApplicationRecord
   end
 
   def teams
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil }).distinct
+    Team.for_members(members).distinct
   end
 
   def active_teams
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
-        .joins(age_group: :season).where(seasons: { status: Season.statuses[:active] }).distinct
+    Team.for_members(members).active.for_active_season.distinct
   end
 
   def teams_as_staff
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
-        .where.not(team_members: { role: TeamMember.roles[:player] }).distinct.asc
+    Team.for_members(members)
+        .where.not(team_members: { role: TeamMember.roles[:player] })
+        .distinct.asc
   end
 
   def teams_as_staff_in_season(season)
-    Team.joins(:team_members).where(team_members: { member_id: member_ids, ended_on: nil })
+    Team.for_members(members)
         .where.not(team_members: { role: TeamMember.roles[:player] }).joins(age_group: :season)
-        .where(age_groups: { season: season }).distinct.asc
+        .where(age_groups: { season: season })
+        .distinct.asc
   end
 
   # TODO: can't rename this to `member?` because of conflict with enum role
