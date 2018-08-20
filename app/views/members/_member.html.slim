@@ -12,7 +12,11 @@
 
 - if policy(member).show_private_data?
   .lighter.small
-    => l member.born_on, format: :date_long unless member.born_on.nil?
+    - if member.born_on.present?
+      - if policy(member).show_full_born_on?
+        => l member.born_on, format: :date_long
+      - else
+        => l member.born_on, format: :date_long_without_day
     = "(#{member.gender})"
 - if policy(member).show_sportlink_status?
   - unless member.local_teams.blank?
