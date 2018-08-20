@@ -212,7 +212,7 @@ class User < ApplicationRecord
       when [Member]
         # Find overlap in teams between current user and given member
         team_members = as_team_staf ? record.team_members.staff : record.team_members
-        team_members = team_members.active_or_archived if member?
+        team_members = team_members.active if member?
         team_id = team_members.pluck(:team_id).uniq
       when [PlayerEvaluation]
         team_id = record.team_evaluation.team_id
