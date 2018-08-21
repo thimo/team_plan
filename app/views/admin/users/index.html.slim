@@ -53,5 +53,5 @@
                 = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
                   i.fa-sign-in.m-1.ml-2[class=fa_class]
 
-.text-right
+.float-right
   = paginate @users, theme: 'twitter-bootstrap-4'

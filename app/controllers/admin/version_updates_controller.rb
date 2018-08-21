@@ -7,8 +7,7 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      # TODO: add paging
-      @version_updates = policy_scope(VersionUpdate).desc
+      @version_updates = policy_scope(VersionUpdate).desc.page(params[:page]).per(10)
     end
 
     def new; end

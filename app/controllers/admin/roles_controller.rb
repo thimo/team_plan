@@ -7,7 +7,6 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      # TODO: filter on roles without resource
       @roles = policy_scope(Role).asc
     end
 
