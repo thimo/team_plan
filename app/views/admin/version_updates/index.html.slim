@@ -22,5 +22,5 @@
       div
         = markdown(version_update.body).html_safe
 
-.float-right
+.d-flex.flex-row-reverse
   = paginate @version_updates, theme: 'twitter-bootstrap-4'
