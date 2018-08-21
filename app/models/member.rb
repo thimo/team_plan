@@ -69,9 +69,7 @@ class Member < ApplicationRecord
   scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
   scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: { age_group_id: age_group }) }
-  # TODO: 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that
-  # it's renamed everywhere
-  scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
+  scope :player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
                               includes(team_members: :field_positions)
@@ -159,7 +157,7 @@ class Member < ApplicationRecord
   end
 
   def user
-    # TODO: When in the future a member can belong to multiple users by coupling to multiple emailaddresses, 
+    # TODO: When in the future a member can belong to multiple users by coupling to multiple emailaddresses,
     # than this (and other functionality using this) needs to change
     users.first
   end
