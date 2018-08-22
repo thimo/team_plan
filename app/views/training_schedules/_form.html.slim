@@ -8,15 +8,15 @@
   = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
   = f.collection_select :day, TrainingSchedule.days_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.time_select :start_time, minute_step: 5
   = f.time_select :end_time, minute_step: 5
   = f.collection_select :present_minutes, TrainingSchedule.present_minutes_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.collection_select :soccer_field_id, SoccerField.asc.training, :id, :name, { prompt: "-- Selecteer een veld" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.collection_select :field_part, TrainingSchedule.field_parts_i18n, :first, :second, { prompt: "-- Selecteer het deel van het veld" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.collection_check_boxes :team_member_ids, trainers, :id, :name, custom: true
   = f.form_group
     = f.check_box :cios, custom: true

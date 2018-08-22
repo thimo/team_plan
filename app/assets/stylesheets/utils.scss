@@ -1,4 +1,12 @@
-@include media-breakpoint-up(xs) {
+@include media-breakpoint-up(md) {
+  @for $i from 1 through 20 {
+    .width-md-#{$i * 5} {
+      width: 5% * $i;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
   @for $i from 1 through 20 {
     .width-sm-#{$i * 5} {
       width: 5% * $i;
@@ -10,8 +18,11 @@
   .width-#{$i * 5} {
     width: 5% * $i;
   }
+}
 
-  .width-px-#{$i * 5} {
-    width: 5px * $i !important;
-  }
+.w-1 {
+  width: 1px;
+}
+.w-44 {
+  width: 44px;
 }
