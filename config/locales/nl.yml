@@ -74,6 +74,7 @@ nl:
         country: Land
         association_number: KNVB nummer
         member_since: Lid sinds
+        users: Gebruikers
       note:
         title: Titel
         body: Tekst

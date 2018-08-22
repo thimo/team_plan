@@ -26,6 +26,7 @@
         tr
           th = Member.human_attribute_name(:name)
           th = Member.human_attribute_name(:email)
+          th = Member.human_attribute_name(:users)
       tbody
         - @members.each do |member|
           tr
@@ -33,6 +34,9 @@
               = render 'members/member', member: member
             td
               = member.email
+            td
+              - member.users.each do |user|
+                = link_to user.name, [:edit, :admin, user]
 
 .d-flex.flex-row-reverse
   = paginate @members, theme: 'twitter-bootstrap-4'
