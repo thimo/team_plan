@@ -23,4 +23,4 @@ const application = Application.start()
 const context = require.context("../controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
 
-$.fn.select2.defaults.set( "theme", "bootstrap" );
+$.fn.select2.defaults.set("theme", "bootstrap");

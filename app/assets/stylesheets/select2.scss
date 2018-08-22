@@ -9,7 +9,7 @@
     box-sizing: border-box;
     cursor: pointer;
     display: block;
-    height: 28px;
+    height: 1.75rem;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -17,8 +17,8 @@
 
     .select2-selection__rendered {
       display: block;
-      padding-left: 8px;
-      padding-right: 20px;
+      padding-left: .5rem;
+      padding-right: 1.25rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -30,15 +30,15 @@
   }
 
   &[dir="rtl"] .select2-selection--single .select2-selection__rendered {
-    padding-right: 8px;
-    padding-left: 20px;
+    padding-right: .5rem;
+    padding-left: 1.25rem;
   }
 
   .select2-selection--multiple {
     box-sizing: border-box;
     cursor: pointer;
     display: block;
-    min-height: 32px;
+    min-height: 2rem;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -47,7 +47,7 @@
     .select2-selection__rendered {
       display: inline-block;
       overflow: hidden;
-      padding-left: 8px;
+      padding-left: .5rem;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -73,7 +73,7 @@
 .select2-dropdown {
   background-color: $white;
   border: 1px solid $gray-200;
-  border-radius: 4px;
+  border-radius: $border-radius-lg;
   box-sizing: border-box;
   display: block;
   position: absolute;
@@ -127,7 +127,7 @@
   padding: 4px;
 
   .select2-search__field {
-    padding: 4px;
+    padding: .25rem;
     width: 100%;
     box-sizing: border-box;
 
@@ -178,11 +178,11 @@
     border: 1px solid $gray-200;
     color: $gray-700;
     font-size: 0.875rem;
-    border-radius: 0.25rem;
+    border-radius: $border-radius;
     outline: 0;
 
     &.form-control {
-      border-radius: 0.25rem;
+      border-radius: $border-radius;
     }
   }
 
@@ -191,7 +191,7 @@
     border: 1px solid $gray-200;
     color: $gray-700;
     font-size: 0.875rem;
-    border-radius: 0.25rem;
+    border-radius: $border-radius;
   }
 
   .select2-search__field {
@@ -227,6 +227,10 @@
     &[aria-selected=true] {
       background-color: $gray-100;
       color: $gray-base;
+    }
+    &[aria-selected=true]::before {
+      content: "×";
+      padding-right: .5rem;
     }
   }
 
@@ -311,10 +315,17 @@
     cursor: pointer;
     float: right;
     font-weight: bold;
-    margin-right: 10px;
+    padding: 0 .4rem;
+    font-size: 1rem;
+    border-radius: $border-radius;
+    position: absolute;
+    right: .25rem;
+    line-height: 1.4rem;
 
     &:hover {
-      color: $white;
+      // color: $white;
+      background-color: $gray-200;
+      color: $gray-800;
     }
   }
 
@@ -357,14 +368,13 @@
   .select2-selection--single {
     height: calc(2.0625rem + 2px);
     line-height: 1.5;
-    padding: 0.375rem 1.65rem 0.375rem 0.75rem;
+    padding: 0.375rem 1.2rem 0.375rem 0.75rem;
 
     .select2-selection__arrow {
       position: absolute;
       bottom: 0;
-      right: 0.75rem;
+      right: 1.2rem;
       top: 0;
-      width: 0.3rem;
 
       b {
         border-color: $gray-600 transparent transparent transparent;
@@ -372,10 +382,8 @@
         border-width: 0.3rem 0.3rem 0 0.3rem;
         height: 0;
         left: 0;
-        margin-left: -.3rem;
-        margin-top: -.15rem;
         position: absolute;
-        top: 50%;
+        top: 45%;
         width: 0;
       }
     }
@@ -391,7 +399,7 @@
   }
 
   .select2-selection--multiple {
-    min-height: calc(2.0625rem + 2px);
+    // min-height: calc(2.0625rem + 2px);
     padding: 0;
     height: auto;
 
@@ -401,6 +409,7 @@
       margin: 0;
       overflow: hidden;
       padding: 0.1875rem;
+      padding-bottom: 0;
       width: 100%;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -413,51 +422,50 @@
     }
 
     .select2-selection__choice {
-      color: $gray-700;
-      background: $white;
-      border: 1px solid $light-blue;
-      border-radius: 0.25rem;
+      color: $white;
+      background: $gray-500;
+      border-radius: $border-radius;
       cursor: default;
       float: left;
-      margin-right: 0.1875rem;
-      margin-bottom: 0.1875rem;
-      padding: 0 0.375rem 0 0;
-      line-height: 23px;
-      font-size: 12px;
+      margin-right: .1875rem;
+      margin-bottom: .1875rem;
+      padding: 0 .5rem 0 0;
+      line-height: 1.5rem;
     }
 
     .select2-search--inline .select2-search__field {
       background: transparent;
-      padding: 0 0.75rem;
-      height: calc(2.0625rem + 2px) (-2);
-      line-height: 1.5;
+      padding: 0 .5rem;
+      height: 1.5rem;
       margin-top: 0;
-      min-width: 5em;
+      min-width: 5rem;
+    }
+
+    .select2-selection__choice + .select2-search--inline .select2-search__field {
+      padding-left: 0;
     }
 
     .select2-selection__choice__remove {
-      width: 26px;
-      color: $light-blue;
+      color: white;
       cursor: pointer;
       display: inline-block;
       font-weight: bold;
-      text-align: center;
-      margin-right: 0.375rem;
-      border-right: 1px solid $light-blue;
-      background: $white;
+      background: $gray-500;
+      border-radius: $border-radius 0 0 $border-radius;
+      padding: .125rem .5rem;
 
       &:hover {
-        background: lighten($light-blue, 25%);
+        background: lighten($gray-500, 10%);
       }
     }
 
     .select2-selection__clear {
-      margin-top: 0.375rem;
+      // margin-top: .1875rem;
     }
   }
 
   .select2-selection--single.input-sm {
-    border-radius: 0.2rem;
+    border-radius: $border-radius-sm;
     font-size: 0.765625rem;
     height: calc(1.648438rem + 2px);
     line-height: 1.5;
@@ -475,7 +483,7 @@
 
 .form-group-sm .select2-container--bootstrap .select2-selection--single,
 .input-group-sm .select2-container--bootstrap .select2-selection--single {
-  border-radius: 0.2rem;
+  border-radius: $border-radius-sm;
   font-size: 0.765625rem;
   height: calc(1.648438rem + 2px);
   line-height: 1.5;
@@ -492,7 +500,7 @@
 .input-group-sm .select2-container--bootstrap .select2-selection--multiple,
 .select2-container--bootstrap .select2-selection--multiple.input-sm {
   min-height: calc(1.648438rem + 2px);
-  border-radius: 0.2rem;
+  border-radius: $border-radius-sm;
 }
 
 .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice,
@@ -522,7 +530,7 @@
 .form-group-lg .select2-container--bootstrap .select2-selection--single,
 .input-group-lg .select2-container--bootstrap .select2-selection--single,
 .select2-container--bootstrap .select2-selection--single.input-lg {
-  border-radius: 0.3rem;
+  border-radius: $border-radius-lg;
   font-size: 1.09375rem;
   height: calc(2.640625rem + 2px);
   line-height: 1.5;
@@ -556,7 +564,7 @@
 .select2-container--bootstrap .select2-selection--multiple.input-lg .select2-selection__choice {
   font-size: 1.09375rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
+  border-radius: $border-radius;
   margin: -.5rem 0 0 0.5rem;
   padding: 0 0.5rem;
 }
@@ -584,7 +592,7 @@
 
 .select2-container--bootstrap[dir="rtl"] {
   .select2-selection--single {
-    padding-left: 1.65rem;
+    padding-left: 1.2rem;
     padding-right: 0.75rem;
 
     .select2-selection__rendered {
@@ -646,7 +654,7 @@
   line-height: 1;
   color: $white;
   background-color: rgba(77, 189, 116, 0.8);
-  border-radius: 0.2rem;
+  border-radius: $border-radius-sm;
 }
 
 .custom-select.is-valid,
@@ -808,7 +816,7 @@
   line-height: 1;
   color: $white;
   background-color: rgba(248, 108, 107, 0.8);
-  border-radius: 0.2rem;
+  border-radius: $border-radius-sm;
 }
 
 .custom-select.is-invalid,

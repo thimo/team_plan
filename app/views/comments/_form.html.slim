@@ -5,9 +5,15 @@
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      - if f.object.comment_type.blank?
-        = f.hidden_field :comment_type
-      = link_to "Annuleren", @comment.new_record? ? @commentable : @comment.commentable, class: 'btn btn-light'
-      - if policy(@comment).destroy?
-        = link_to "Verwijderen", comment_path(@comment),  method: :delete, data: { confirm: 'Opmerking wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          - if f.object.comment_type.blank?
+            = f.hidden_field :comment_type
+          = link_to "Annuleren", @comment.new_record? ? @commentable : @comment.commentable, class: 'btn btn-light'
+        div
+          - if policy(@comment).destroy?
+            = link_to "Verwijderen", comment_path(@comment),
+                                     method: :delete,
+                                     data: { confirm: 'Opmerking wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-outline-danger'

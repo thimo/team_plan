@@ -9,14 +9,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :registerable, :confirmable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-  # TODO: make this required and set to the defaault group
-  belongs_to :group, optional: true
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :todos, dependent: :destroy
   has_many :injuries, dependent: :destroy
   has_one :user_setting, dependent: :destroy
+  has_and_belongs_to_many :members
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise
@@ -29,6 +28,9 @@ class User < ApplicationRecord
   scope :query, ->(query) {
     where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
   }
+  scope :by_email, ->(email) { where("lower(email) = ?", email.downcase) }
+
+  after_save :update_members
 
   # Setter
   def name=(name)
@@ -51,14 +53,6 @@ class User < ApplicationRecord
     else
       %("#{name}" <#{email}>)
     end
-  end
-
-  def members
-    Member.where("lower(email) = ?", email.downcase).sportlink_active
-  end
-
-  def member_ids
-    members.map(&:id).uniq
   end
 
   def teams
@@ -85,10 +79,6 @@ class User < ApplicationRecord
   # TODO: can't rename this to `member?` because of conflict with enum role
   def has_member?(member)
     members.where(id: member.id).size.positive?
-  end
-
-  def active_members?
-    members.sportlink_active.any?
   end
 
   def team_member_for?(record)
@@ -171,7 +161,7 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super && active_members?
+    super && members.any?
   end
 
   def inactive_message
@@ -191,14 +181,26 @@ class User < ApplicationRecord
 
   def self.deactivate_for_inactive_members
     User.active.each do |user|
-      user.deactivate unless user.active_members?
+      user.update_members
     end
   end
 
   def self.activate_for_active_members
     User.archived.each do |user|
-      user.activate if user.active_members?
+      user.update_members
     end
+  end
+
+  def after_confirmation
+    update_members
+  end
+
+  # Run on `after_save` because on `before_save` the email may be changed, but not yet
+  # updated because of Devise's :confirmable (see `after_confirmation` above)
+  def update_members
+    self.members = Member.by_email(email).sportlink_active
+    activate if members.any?
+    deactivate if members.none?
   end
 
   private

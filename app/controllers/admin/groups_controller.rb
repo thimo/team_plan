@@ -3,7 +3,7 @@
 module Admin
   class GroupsController < Admin::BaseController
     before_action :create_group, only: [:new, :create]
-    before_action :set_group, only: [:show, :edit, :update]
+    before_action :set_group, only: [:show, :edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -14,11 +14,28 @@ module Admin
 
     def new; end
 
-    def create; end
+    def create
+      if @group.save
+        redirect_to admin_groups_path, notice: "Groep is toegevoegd."
+      else
+        render :new
+      end
+    end
 
     def edit; end
 
-    def update; end
+    def update
+      if @group.update(group_params)
+        redirect_to admin_groups_path, notice: "Groep is aangepast."
+      else
+        render "edit"
+      end
+    end
+
+    def destroy
+      redirect_to admin_groups_path, notice: "Groep is verwijderd."
+      @group.destroy
+    end
 
     private
 
@@ -37,7 +54,7 @@ module Admin
       end
 
       def group_params
-        params.require(:group).permit(:name, :default)
+        params.require(:group).permit(:name, member_ids: [])
       end
 
       def add_breadcrumbs
@@ -47,7 +64,7 @@ module Admin
         if @group.new_record?
           add_breadcrumb "Nieuw"
         else
-          add_breadcrumb @group.email, [:edit, :admin, @group]
+          add_breadcrumb @group.name, [:edit, :admin, @group]
         end
       end
   end

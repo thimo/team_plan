@@ -23,9 +23,18 @@
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      = link_to "Annuleren", @training_schedule.team, class: 'btn btn-light'
-      - if policy(@training_schedule).destroy? && @training_schedule.active?
-          = link_to "Verwijderen", training_schedule_path(@training_schedule), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
-      - if policy(@training_schedule).activate? && @training_schedule.inactive?
-          = link_to "Activeren", activate_training_schedule_path(@training_schedule), method: :post, data: { confirm: 'Training wordt weer actief gemaakt. Doorgaan?' }, class: 'btn btn-success'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", @training_schedule.team, class: 'btn btn-light'
+        div
+          - if policy(@training_schedule).destroy? && @training_schedule.active?
+              = link_to "Verwijderen", training_schedule_path(@training_schedule),
+                                       method: :delete,
+                                       data: { confirm: 'Training wordt verwijderd. Doorgaan?' },
+                                       class: 'btn btn-outline-danger'
+          - if policy(@training_schedule).activate? && @training_schedule.inactive?
+              = link_to "Activeren", activate_training_schedule_path(@training_schedule),
+                                     method: :post,
+                                     data: { confirm: 'Training wordt weer actief gemaakt. Doorgaan?' },
+                                     class: 'btn btn-success'

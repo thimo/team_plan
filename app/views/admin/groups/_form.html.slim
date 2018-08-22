@@ -1,0 +1,23 @@
+= bootstrap_form_for [:admin, @group], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.text_field :name, autofocus: true
+
+  = f.collection_select :member_ids, Member.sportlink_active.all, :id, :name,
+    { },
+    { data: { controller: 'select2', placeholder: "Filter op gebruikers" },
+      multiple: "multiple" }
+
+
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", [:admin, :groups], class: 'btn btn-light'
+        div
+          - if policy(@group).destroy?
+            = link_to "Verwijderen", admin_group_path(@group),
+                                     method: :delete,
+                                     data: { confirm: 'Group wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-outline-danger'

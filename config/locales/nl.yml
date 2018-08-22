@@ -40,6 +40,12 @@ nl:
         body: Omschrijving / behandeling
         started_on: Begindatum
         ended_on: Einddatum
+      group:
+        name: Naam
+        members: Leden
+        member_ids: Leden
+        roles: Rollen
+        role_ids: Rollen
       match:
         opponent: Tegenstander
         location: Wedstrijdlocatie
@@ -68,6 +74,7 @@ nl:
         country: Land
         association_number: KNVB nummer
         member_since: Lid sinds
+        users: Gebruikers
       note:
         title: Titel
         body: Tekst
@@ -95,6 +102,8 @@ nl:
         duel_strength: Duelkracht
       presence:
         remark: Opmerking
+      role:
+        name: Naam
       season:
         name: Seizoen
         active: Actief
@@ -150,6 +159,7 @@ nl:
         role: Rol
         current_sign_in_at: Laatste login
         email: E-mail
+        members: Leden
       version_update:
         released_at: Datum
         name: Titel

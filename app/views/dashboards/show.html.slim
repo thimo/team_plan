@@ -54,7 +54,7 @@
 
       - if @new_members.present?
         - cache @new_members
-          = render "members/list", members: @new_members, title: "Nieuwe leden", subtitle: "Laatste import #{l Member.imported_at, format: :long}"
+          = render "members/list", members: @new_members, title: "Nieuwe leden"
 
       - if @version_updates.present?
         - cache [@version_updates, current_user.role]

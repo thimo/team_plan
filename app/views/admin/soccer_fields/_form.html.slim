@@ -9,7 +9,12 @@
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      - if policy(@soccer_field).destroy?
-        = link_to "Verwijderen", admin_soccer_field_path(@soccer_field),  method: :delete, data: { confirm: 'Veld wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
-      = link_to "Annuleren", [:admin, :soccer_fields], class: 'btn btn-light'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", [:admin, :soccer_fields], class: 'btn btn-light'
+        div
+          - if policy(@soccer_field).destroy?
+            = link_to "Verwijderen", admin_soccer_field_path(@soccer_field),
+                                     method: :delete, data: { confirm: 'Veld wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-outline-danger'

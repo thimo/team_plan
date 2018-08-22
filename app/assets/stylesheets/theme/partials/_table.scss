@@ -133,3 +133,9 @@ tr.b-t-0 {
     }
   }
 }
+
+tr.align-top {
+  td, th {
+    vertical-align: top !important;
+  }
+}
