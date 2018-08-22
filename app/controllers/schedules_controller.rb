@@ -15,7 +15,7 @@ class SchedulesController < ApplicationController
 
     def set_team
       @team = Team.find(params[:team_id])
-      authorize @team
+      authorize @team, :show_schedules?
     end
 
     def add_breadcrumbs
