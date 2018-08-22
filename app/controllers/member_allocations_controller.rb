@@ -27,7 +27,7 @@ class MemberAllocationsController < ApplicationController
 
     @filtered_available_members = (filtered_members - assigned_members)
                                   .group_by { |member| member.teams_for_season(@previous_season).player.first }
-                                  .sort_by { |team, members| team.present? ? team.name : "ZZZ" }
+                                  .sort_by { |team, _members| team.present? ? team.name : "ZZZ" }
 
     add_breadcrumb @age_group.season.name.to_s, @age_group.season
     add_breadcrumb @age_group.name.to_s, @age_group

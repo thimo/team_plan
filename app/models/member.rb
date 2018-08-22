@@ -266,7 +266,7 @@ class Member < ApplicationRecord
 
     def add_to_user(email)
       if email.present? && (user = User.by_email(email).first).present?
-        self.users << user
+        users << user
         user.activate
       end
     end

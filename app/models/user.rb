@@ -180,15 +180,11 @@ class User < ApplicationRecord
   end
 
   def self.deactivate_for_inactive_members
-    User.active.each do |user|
-      user.update_members
-    end
+    User.active.each(&:update_members)
   end
 
   def self.activate_for_active_members
-    User.archived.each do |user|
-      user.update_members
-    end
+    User.archived.each(&:update_members)
   end
 
   def after_confirmation

@@ -1,27 +1,27 @@
+# frozen_string_literal: true
+
 module AgeGroupsHelper
   def year_of_birth_range(age_group)
     range = ""
 
     if age_group.year_of_birth_from || age_group.year_of_birth_to
-      if age_group.year_of_birth_from.nil?
-        range += "tot "
-      else
-        range += "#{age_group.year_of_birth_from}"
-      end
+      range += if age_group.year_of_birth_from.nil?
+                 "tot "
+               else
+                 age_group.year_of_birth_from.to_s
+               end
 
       unless age_group.year_of_birth_from == age_group.year_of_birth_to
-        unless age_group.year_of_birth_from.nil? || age_group.year_of_birth_to.nil?
-          range += " - "
-        end
+        range += " - " unless age_group.year_of_birth_from.nil? || age_group.year_of_birth_to.nil?
 
-        if age_group.year_of_birth_to.nil?
-          range += " en jonger"
-        else
-          range += "#{age_group.year_of_birth_to}"
-        end
+        range += if age_group.year_of_birth_to.nil?
+                   " en jonger"
+                 else
+                   age_group.year_of_birth_to.to_s
+                 end
       end
     end
 
-    return range
+    range
   end
 end

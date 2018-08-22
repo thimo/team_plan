@@ -228,12 +228,11 @@ module ClubDataImporter
         count[:total] += 1
 
         member = Member.find_by(full_name: data["naam"])
-        if member
-          member.photo_data = data["foto"]
-          if member.changed?
-            count[:updated] += 1
-            member.save
-          end
+        next unless member
+        member.photo_data = data["foto"]
+        if member.changed?
+          count[:updated] += 1
+          member.save
         end
       end
     rescue OpenURI::HTTPError

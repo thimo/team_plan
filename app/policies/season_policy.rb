@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SeasonPolicy < ApplicationPolicy
   def index?
     true
@@ -49,7 +51,7 @@ class SeasonPolicy < ApplicationPolicy
   def permitted_attributes
     attributes = [:name, :started_on, :ended_on]
     attributes << :status if set_status?
-    return attributes
+    attributes
   end
 
   class Scope < Scope

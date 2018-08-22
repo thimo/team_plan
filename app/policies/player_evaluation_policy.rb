@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlayerEvaluationPolicy < ApplicationPolicy
   def index?
     @user.admin? ||

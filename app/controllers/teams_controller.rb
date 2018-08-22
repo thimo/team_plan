@@ -18,7 +18,7 @@ class TeamsController < ApplicationController
       @competitions_other   = @team.competitions.knvb.desc.active.other
 
       @custom_competition_matches = @team.matches.for_competition(Competition.custom).desc.group_by(&:competition)
-                                         .sort_by { |competition, matches| competition.id }
+                                         .sort_by { |competition, _matches| competition.id }
 
     when "team"
       @players = TeamMember.players_by_year(policy_scope(@team.team_members)

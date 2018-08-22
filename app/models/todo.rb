@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Todo < ApplicationRecord
   belongs_to :user
   belongs_to :todoable, polymorphic: true, optional: true
@@ -5,7 +7,7 @@ class Todo < ApplicationRecord
 
   scope :asc,      -> { order(created_at: :asc) }
   scope :desc,     -> { order(created_at: :desc) }
-  scope :unfinished,     -> { where(finished: false) }
+  scope :unfinished, -> { where(finished: false) }
   scope :finished, -> { where(finished: true) }
   scope :active,   -> { where(started_on: nil).or(where("started_on <= ?", Time.zone.today)) }
   scope :defered,  -> { where("started_on > ?", Time.zone.today) }
@@ -17,5 +19,4 @@ class Todo < ApplicationRecord
   def defered?
     started_on.present? && started_on > Time.zone.now
   end
-
 end

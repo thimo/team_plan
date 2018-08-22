@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SchedulesHelper
   include ActionView::Helpers::TagHelper
 
@@ -6,7 +8,7 @@ module SchedulesHelper
     when [Match]
       "#{object.thuisteam} - #{object.uitteam}".html_safe
     when [Training]
-      "#{I18n.t object.model_name.singular}"
+      (I18n.t object.model_name.singular).to_s
     end
   end
 
@@ -17,5 +19,4 @@ module SchedulesHelper
   def is_uitteam?(object)
     object.is_a?(Match) && Team.by_teamcode(object.uitteamid).present?
   end
-
 end

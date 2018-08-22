@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Note < ApplicationRecord
   belongs_to :user
   belongs_to :team
@@ -6,12 +8,12 @@ class Note < ApplicationRecord
 
   enum visibility: { self: 0, staff: 1, member: 2 }
 
-  validates_presence_of :title, :body, :visibility, :user, :team
+  validates :title, :body, :visibility, :user, :team, presence: true
 
   scope :desc, -> { order(created_at: :desc) }
 
   def self.for_user(scope, team, user)
-    # TODO would prefer to do this through NotePolicy scope, but not sure how to pass team as parameter
+    # TODO: would prefer to do this through NotePolicy scope, but not sure how to pass team as parameter
     # Own notes
     note_scope = scope.self.where(user: user)
 
@@ -23,5 +25,4 @@ class Note < ApplicationRecord
 
     note_scope
   end
-
 end

@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class Admin::RolesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
@@ -15,5 +17,4 @@ class Admin::RolesControllerTest < ActionDispatch::IntegrationTest
     get admin_roles_edit_url
     assert_response :success
   end
-
 end

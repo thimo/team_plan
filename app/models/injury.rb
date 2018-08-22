@@ -9,7 +9,7 @@ class Injury < ApplicationRecord
   after_save :update_member
   after_destroy :update_member
 
-  validates_presence_of :started_on, :title
+  validates :started_on, :title, presence: true
 
   scope :desc, -> { order(created_at: :desc) }
   scope :active, -> { where(ended_on: nil) }

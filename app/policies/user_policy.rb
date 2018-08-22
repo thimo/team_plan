@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserPolicy < AdminPolicy
   def update_settings?
     @record == @user

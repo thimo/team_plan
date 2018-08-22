@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MatchPolicy < ApplicationPolicy
   def show?
     true
@@ -9,8 +11,8 @@ class MatchPolicy < ApplicationPolicy
 
   def create?
     @user.admin? ||
-    @user.club_staff? ||
-    @user.team_staff_for?(@record)
+      @user.club_staff? ||
+      @user.team_staff_for?(@record)
   end
 
   def update?
@@ -19,8 +21,8 @@ class MatchPolicy < ApplicationPolicy
 
     # Admin/club_staff can edit all matches, team staff only those created by themselves
     @user.admin? ||
-    @user.club_staff? ||
-    (@record.team_staff? && @user.team_staff_for?(@record))
+      @user.club_staff? ||
+      (@record.team_staff? && @user.team_staff_for?(@record))
   end
 
   def destroy?
