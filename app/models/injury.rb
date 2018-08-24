@@ -18,6 +18,10 @@ class Injury < ApplicationRecord
     { "generic" => 0 }
   end
 
+  def archived?
+    false
+  end
+
   private
 
     def update_member

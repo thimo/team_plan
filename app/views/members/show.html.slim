@@ -24,7 +24,7 @@
 
   .col-xl-6.mb-4
     - if policy(@member).show_comments?
-      #comments-tabs
+      #comments-tabs.mb-4
         = render "comments/tabs", parent: @member
 
     - if policy(@member).show_todos? && @todos.present?
