@@ -12,8 +12,6 @@
         - if policy(team).create_match?
           = link_to new_team_match_path(team), title: "Een wedstrijd toevoegen", class: "card-header-action"
             i.fa-plus-square[class=fa_class]
-        = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "card-header-action"
-          i.fa-calendar-alt[class=fa_class]
 
   - if matches.any?
     .card-body.p-0

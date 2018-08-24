@@ -1,0 +1,3 @@
+<% if @schedules.present? %>
+$('#month_calendar').html("<%= j render "schedules/month_calendar", events: @schedules %>")
+<% end %>

@@ -21,17 +21,21 @@
 section
   ul.nav.nav-tabs[role="tablist"]
     li.nav-item
+      a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
+        i.fa-users[class=fa_class]
+        span.pl-2.d-down-none Team
+    li.nav-item
       a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
-        i.fa-calendar-alt[class=fa_class]
+        i.fa-list[class=fa_class]
         span.pl-2.d-down-none Programma
     li.nav-item
       a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
         i.fa-futbol[class=fa_class]
         span.pl-2.d-down-none Competities
     li.nav-item
-      a.nav-link[href="?tab=team" class="#{'active' if @active_tab == 'team'}"]
-        i.fa-users[class=fa_class]
-        span.pl-2.d-down-none Team
+      a.nav-link[href="?tab=calendar" class="#{'active' if @active_tab == 'calendar'}"]
+        i.fa-calendar-alt[class=fa_class]
+        span.pl-2.d-sm-down-none Kalender
     - if policy(@team).show_dossier?
       li.nav-item
         a.nav-link[href="?tab=dossier" class="#{'active' if @active_tab == 'dossier'}"]
@@ -44,6 +48,26 @@ section
           span.pl-2.d-sm-down-none Statistieken
 
   .tab-content
+    - if @active_tab == 'team'
+      .tab-pane.active.show
+        .row
+          .col-lg-6
+            = render 'team_players'
+
+          .col-lg-6
+            - if @staff.size > 0
+              = render 'team_staff'
+
+            - if @old_members.present?
+              .card
+                .card-header
+                  | Oud teamgenoten
+                .card-body.table-responsive
+                  table.table.table-sm.tr-links
+                    - @old_members.each do |member, team_members|
+                      = render 'member', member: member, team_members: team_members
+
+
     - if @active_tab == 'schedule'
       .tab-pane.active.show
         .row
@@ -81,24 +105,20 @@ section
             - @custom_competition_matches.each do |competition, matches|
               = render "matches/list", matches: matches, title: competition.competitienaam, team: @team
 
-    - if @active_tab == 'team'
+    - if @active_tab == 'calendar'
       .tab-pane.active.show
-        .row
-          .col-lg-6
-            = render 'team_players'
+        #month_calendar.mb-3
+          = render "schedules/month_calendar", events: @schedules
 
-          .col-lg-6
-            - if @staff.size > 0
-              = render 'team_staff'
+        .alert.alert-info.mb-0
+          h5 Abonneren op deze kalender?
 
-            - if @old_members.present?
-              .card
-                .card-header
-                  | Oud teamgenoten
-                .card-body.table-responsive
-                  table.table.table-sm.tr-links
-                    - @old_members.each do |member, team_members|
-                      = render 'member', member: member, team_members: team_members
+          div
+            | Kopieer onderstaande URL en volg
+              <a href="https://maak-agenda.nl/up-to-date" target="_blank">de instructies op Maakagenda.nl</a>:
+
+          div
+            = ical_url(@team.uuid, format: :ics, check: current_user.uuid)
 
     - if @active_tab == 'dossier' && policy(@team).show_dossier?
       .tab-pane.active.show
