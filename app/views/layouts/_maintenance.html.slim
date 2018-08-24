@@ -1,11 +1,5 @@
 - if Setting["application.maintenance"] == "true"
   .alert.alert-warning.text-center
-    h5
-      | Onderhoud #{Setting["application.name"]}
-    p
-      | Op dit moment wordt onderhoud gepleegd aan #{Setting["application.name"]}.
-        Het kan daardoor voorkomen dat iets niet goed werkt.
-    p
-      | Je kunt een mailtje sturen aan
-      =<> mail_to Setting["application.email"], Setting["application.contact_name"], class: "alert-link"
-      | als je ergens tegenaan loopt.
+    | Op dit moment wordt onderhoud gepleegd aan #{Setting["application.name"]}. Mail  
+    =<> mail_to Setting["application.email"], Setting["application.contact_name"], class: "alert-link"
+    | als je merkt dat iets niet goed werkt.
