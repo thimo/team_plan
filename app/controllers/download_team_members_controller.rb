@@ -11,16 +11,16 @@ class DownloadTeamMembersController < ApplicationController
       @season = policy_scope(Season).find(params[:season_id])
 
       @teams = if params[:age_group_ids].present?
-                AgeGroup.where(id: params[:age_group_ids]).map do |age_group|
-                  hashes_for teams_for(age_group)
-                end
-              else
-                policy_scope(@season.age_groups).male.asc.map do |age_group|
-                  hashes_for teams_for(age_group)
-                end
-                policy_scope(@season.age_groups).female.asc.map do |age_group|
-                  hashes_for teams_for(age_group)
-                end
+                 AgeGroup.where(id: params[:age_group_ids]).map do |age_group|
+                   hashes_for teams_for(age_group)
+                 end
+               else
+                 policy_scope(@season.age_groups).male.asc.map do |age_group|
+                   hashes_for teams_for(age_group)
+                 end
+                 policy_scope(@season.age_groups).female.asc.map do |age_group|
+                   hashes_for teams_for(age_group)
+                 end
               end.flatten
 
       @previous_season = @season.previous

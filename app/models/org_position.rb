@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrgPosition < ApplicationRecord
   has_many :org_position_members
   has_ancestry
@@ -6,9 +8,9 @@ class OrgPosition < ApplicationRecord
 
   scope :active, -> { where(ended_on: nil) }
 
-  validates_presence_of :name, :started_on
+  validates :name, :started_on, presence: true
 
-  def self.arrange_as_array(options={}, hash=nil)
+  def self.arrange_as_array(options = {}, hash = nil)
     hash ||= arrange(options)
 
     arr = []
@@ -24,7 +26,7 @@ class OrgPosition < ApplicationRecord
   end
 
   def possible_parents
-    parents = OrgPosition.arrange_as_array(order: 'name')
-    return new_record? ? parents : parents - subtree
+    parents = OrgPosition.arrange_as_array(order: "name")
+    new_record? ? parents : parents - subtree
   end
 end

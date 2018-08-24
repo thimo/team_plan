@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AgeGroup < ApplicationRecord
   include Statussable
 
@@ -52,7 +54,7 @@ class AgeGroup < ApplicationRecord
   end
 
   def assigned_active_members
-    active_members.by_season(season).as_player.active_in_a_team
+    active_members.by_season(season).player.active_in_a_team
   end
 
   def status_children

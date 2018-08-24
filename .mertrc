@@ -5,10 +5,12 @@ layout:
       -
         layout:
           -
-            - SCOUT_DEV_TRACE=false rails s
-          -
             - guard
           -
             - ./bin/webpack-dev-server
+      -
+        layout:
+          -
+            - SCOUT_DEV_TRACE=false rails s
           -
             - ls

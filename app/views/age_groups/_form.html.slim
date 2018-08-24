@@ -13,5 +13,7 @@
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-light'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-light'

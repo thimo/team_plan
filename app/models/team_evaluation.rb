@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamEvaluation < ApplicationRecord
   belongs_to :team, required: true
   belongs_to :invited_by, class_name: "User", required: false
@@ -17,27 +19,19 @@ class TeamEvaluation < ApplicationRecord
   scope :finished, -> { where.not(finished_at: nil) }
   scope :desc_finished, -> { order(finished_at: :desc) }
   scope :by_team, ->(team) { includes(:team).where(team: team) }
-  scope :by_age_group, ->(age_group) { joins(:team).where(teams: {age_group: age_group}) }
+  scope :by_age_group, ->(age_group) { joins(:team).where(teams: { age_group: age_group }) }
 
-  def draft?
-    team.draft?
-  end
-
-  def active?
-    team.active?
-  end
-
-  def archived?
-    team.archived?
-  end
+  delegate :draft?, to: :team
+  delegate :active?, to: :team
+  delegate :archived?, to: :team
 
   def enable_validation?
     enable_validation || false
   end
 
   def finish_evaluation(user)
-    self.update_attribute(:finished_by, user)
-    self.update_attribute(:finished_at, Time.zone.now)
+    update_attribute(:finished_by, user)
+    update_attribute(:finished_at, Time.zone.now)
   end
 
   def send_invites(user)
@@ -49,11 +43,11 @@ class TeamEvaluation < ApplicationRecord
 
     if users.any?
       TeamEvaluationMailer.invite(users, self).deliver_now
-      self.update_attribute(:invited_by, user)
-      self.update_attribute(:invited_at, Time.zone.now)
+      update_attribute(:invited_by, user)
+      update_attribute(:invited_at, Time.zone.now)
     end
 
-    return users.size
+    users.size
   end
 
   def finished?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :match do
     wedstrijddatum "2017-08-18 21:44:40"

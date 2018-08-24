@@ -1,5 +1,8 @@
 - provide(:title, "Versie updates")
 
+- content_for :title_action
+  = paginate @version_updates, theme: 'twitter-bootstrap-4'
+
 .card
   .card-header
     | Versie updates
@@ -18,3 +21,6 @@
         = l version_update.released_at, format: :long
       div
         = markdown(version_update.body).html_safe
+
+.d-flex.flex-row-reverse
+  = paginate @version_updates, theme: 'twitter-bootstrap-4'

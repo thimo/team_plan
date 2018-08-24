@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Injury < ApplicationRecord
   belongs_to :user
   belongs_to :member
@@ -7,13 +9,13 @@ class Injury < ApplicationRecord
   after_save :update_member
   after_destroy :update_member
 
-  validates_presence_of :started_on, :title
+  validates :started_on, :title, presence: true
 
   scope :desc, -> { order(created_at: :desc) }
   scope :active, -> { where(ended_on: nil) }
 
   def self.comment_types
-    { 'generic' => 0 }
+    { "generic" => 0 }
   end
 
   private
@@ -21,5 +23,4 @@ class Injury < ApplicationRecord
     def update_member
       member.update_injured
     end
-
 end

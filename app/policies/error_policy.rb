@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ErrorPolicy < Struct.new(:user, :error)
   def file_not_found?
     true

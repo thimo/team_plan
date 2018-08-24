@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AgeGroupPolicy < ApplicationPolicy
   def index?
     true
@@ -70,7 +72,7 @@ class AgeGroupPolicy < ApplicationPolicy
   def permitted_attributes
     attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half]
     attributes << :status if set_status?
-    return attributes
+    attributes
   end
 
   class Scope < Scope

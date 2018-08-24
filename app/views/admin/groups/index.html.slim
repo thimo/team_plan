@@ -14,10 +14,16 @@
       thead
         tr
           th = Group.human_attribute_name(:name)
-          th
+          th = Group.human_attribute_name(:members)
+          th = Group.human_attribute_name(:roles)
 
       tbody
         - @groups.each do |group|
-          tr
+          tr.align-top
             td
               = link_to group.name, [:edit, :admin, group]
+            td
+              - group.members.asc.each do |member|
+                div
+                  = link_to member.name, member
+            td

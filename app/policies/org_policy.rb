@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class OrgPolicy < ApplicationPolicy
-  # TODO change to correct access level
-  
+  # TODO: change to correct access level
+
   def index?
     @user.admin?
   end

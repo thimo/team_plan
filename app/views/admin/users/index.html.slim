@@ -27,12 +27,13 @@
         tr
           th = User.human_attribute_name(:name)
           th = User.human_attribute_name(:role)
+          th = User.human_attribute_name(:members)
           th.d-down-none = User.human_attribute_name(:current_sign_in_at)
           th
 
       tbody
         - @users.each do |user|
-          tr
+          tr.align-top
             td
               = link_to user.name, [:edit, :admin, user]
               .light.small
@@ -41,6 +42,10 @@
                   |  (wijziging naar #{user.unconfirmed_email} nog niet bevestigd)
             td
               = user.role_i18n
+            td
+              - user.members.asc.each do |member|
+                div
+                  = link_to member.name, member
             td.d-down-none
               = I18n.l user.current_sign_in_at, format: :long if user.current_sign_in_at.present?
             td.text-right
@@ -48,5 +53,5 @@
                 = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
                   i.fa-sign-in.m-1.ml-2[class=fa_class]
 
-.text-right
+.d-flex.flex-row-reverse
   = paginate @users, theme: 'twitter-bootstrap-4'

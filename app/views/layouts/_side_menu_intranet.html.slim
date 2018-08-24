@@ -1,5 +1,4 @@
-ul.nav
-  li.nav-item.d-md-down-none
-    = link_to intranet_files_path, class: "nav-link #{'active' if current_page?(intranet_files_path)}" do
-      i.fa-folder-open.nav-icon[class=fa_class]
-      | Intranet
+li.nav-item.d-md-down-none
+  = link_to intranet_files_path, class: "nav-link #{'active' if current_page?(intranet_files_path)}" do
+    i.fa-folder-open.nav-icon[class=fa_class]
+    | Intranet

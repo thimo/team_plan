@@ -1,32 +1,34 @@
+# frozen_string_literal: true
+
 User.destroy_all
 Season.destroy_all
 # Member.destroy_all
 
 seasons = [
-  Season.create!({name: '2015 / 2016', status: 2}),
-  Season.create!({name: '2016 / 2017', status: 1}),
-  Season.create!({name: '2017 / 2018', status: 0})
+  Season.create!(name: "2015 / 2016", status: 2),
+  Season.create!(name: "2016 / 2017", status: 1),
+  Season.create!(name: "2017 / 2018", status: 0)
 ]
 
 seasons.each do |season|
-  %w(Senioren JO19 JO17 JO15 JO13 JO11 JO9).each do |name|
-    AgeGroup.create!({name: name, season: season, gender: "m"})
+  %w[Senioren JO19 JO17 JO15 JO13 JO11 JO9].each do |name|
+    AgeGroup.create!(name: name, season: season, gender: "m")
   end
-  %w(MO19 MO17 MO15 MO13 MO11).each do |name|
-    AgeGroup.create!({name: name, season: season, gender: "v"})
+  %w[MO19 MO17 MO15 MO13 MO11].each do |name|
+    AgeGroup.create!(name: name, season: season, gender: "v")
   end
 end
 
-age_groups = AgeGroup.where({name: "JO11"})
+age_groups = AgeGroup.where(name: "JO11")
 age_groups.each do |age_group|
   [*1..13].each do |index|
-    Team.create!({name: "JO11-#{index}", age_group: age_group})
+    Team.create!(name: "JO11-#{index}", age_group: age_group)
   end
 end
-age_groups = AgeGroup.where({name: "MO11"})
+age_groups = AgeGroup.where(name: "MO11")
 age_groups.each do |age_group|
   [*1..2].each do |index|
-    Team.create!({name: "MO11-#{index}", age_group: age_group})
+    Team.create!(name: "MO11-#{index}", age_group: age_group)
   end
 end
 
@@ -43,11 +45,11 @@ end
 #   TeamMember.create!({team: jo11_8, member: coach1, joined_on: Time.zone.local(2016,8,1), role: TeamMember.roles[:coach]})
 # end
 
-User.create!(email: 'admin@defrog.nl',
-              password: '123456789',
-              password_confirmation: '123456789',
-              role: 1)
-User.create!(email: 'member@defrog.nl',
-              password: '123456789',
-              password_confirmation: '123456789',
-              role: 0)
+User.create!(email: "admin@defrog.nl",
+             password: "123456789",
+             password_confirmation: "123456789",
+             role: 1)
+User.create!(email: "member@defrog.nl",
+             password: "123456789",
+             password_confirmation: "123456789",
+             role: 0)

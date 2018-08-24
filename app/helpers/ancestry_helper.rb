@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module AncestryHelper
   # arranged as tree expects 3 arguments. The hash from has_ancestry.arrange() method,
   # options, and a render block
   def arranged_tree_as_list(hash, options = {}, &block)
     options = {
       list_type: :ul,
-      list_style: '',
+      list_style: "",
       ul_class: [],
       ul_class_top: [],
       ul_class_children: [],
@@ -19,12 +21,12 @@ module AncestryHelper
     # options on different lists
     case options[:list_style]
     when :bootstrap_list_group
-      options[:ul_class] << ['list-group']
-      options[:li_class] << ['list-group-item']
+      options[:ul_class] << ["list-group"]
+      options[:li_class] << ["list-group-item"]
     end
-    options[:list_style] = ''
+    options[:list_style] = ""
 
-    output = ''
+    output = ""
 
     # sort the hash key based on sort_by options array
     unless options[:sort_by].empty?
@@ -49,7 +51,7 @@ module AncestryHelper
       end
     end
 
-    unless output.blank?
+    if output.present?
       ul_classes = options[:ul_class]
 
       ul_classes += if current_depth == 0

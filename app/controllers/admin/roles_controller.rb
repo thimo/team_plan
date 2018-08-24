@@ -7,7 +7,6 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      # TODO: filter on roles without resource
       @roles = policy_scope(Role).asc
     end
 
@@ -15,13 +14,28 @@ module Admin
 
     def new; end
 
-    def create; end
+    def create
+      if @role.save
+        redirect_to admin_roles_path, notice: "Rol is toegevoegd."
+      else
+        render :new
+      end
+    end
 
     def edit; end
 
-    def update; end
+    def update
+      if @role.update(role_params)
+        redirect_to admin_roles_path, notice: "Rol is aangepast."
+      else
+        render "edit"
+      end
+    end
 
-    def destroy; end
+    def destroy
+      redirect_to admin_roles_path, notice: "Rol is verwijderd."
+      @role.destroy
+    end
 
     private
 
@@ -50,7 +64,7 @@ module Admin
         if @role.new_record?
           add_breadcrumb "Nieuw"
         else
-          add_breadcrumb @role.email, [:edit, :admin, @role]
+          add_breadcrumb @role.name, [:edit, :admin, @role]
         end
       end
   end

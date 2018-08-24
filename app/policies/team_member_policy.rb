@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamMemberPolicy < ApplicationPolicy
   def index?
     true
@@ -61,7 +63,7 @@ class TeamMemberPolicy < ApplicationPolicy
     attributes << :role if set_role?
     attributes << :status if set_status?
     attributes << :initial_status if set_initial_status?
-    return attributes
+    attributes
   end
 
   class Scope < Scope

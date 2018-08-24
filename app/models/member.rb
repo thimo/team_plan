@@ -33,6 +33,10 @@ class Member < ApplicationRecord
   has_many :todos, as: :todoable, dependent: :nullify
   has_many :injuries, dependent: :destroy
   has_many :presences, dependent: :destroy
+
+  has_many :group_members, dependent: :destroy
+  has_many :groups, through: :group_members
+  has_and_belongs_to_many :users
   has_paper_trail
 
   validates :last_name, :born_on, :gender, :association_number, presence: true
@@ -65,14 +69,13 @@ class Member < ApplicationRecord
   scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
   scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: { age_group_id: age_group }) }
-  # 2017-07-02 This scope to be renamed 'player' after a testing period. 'player' existed previously, must be sure that
-  # it's renamed everywhere
-  scope :as_player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
+  scope :player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
                               includes(team_members: :field_positions)
                                 .where(field_positions: { id: field_positions })
                             }
+  scope :by_email, ->(email) { where("lower(email) = ?", email.downcase) }
   scope :recent_members, ->(days_ago) {
                            where("registered_at >= ?", days_ago.days.ago.beginning_of_day)
                              .order(registered_at: :desc, created_at: :desc)
@@ -86,12 +89,22 @@ class Member < ApplicationRecord
                   },
                   ignoring: :accents
 
+  before_save :update_users
+
   def name
     "#{first_name} #{middle_name} #{last_name}".squish
   end
 
   def name_and_born_on
     "#{name} (#{I18n.l(born_on, format: :long)})"
+  end
+
+  def sportlink_active?
+    deregistered_at.nil? || deregistered_at > Time.zone.today
+  end
+
+  def sportlink_inactive?
+    !sportlink_active?
   end
 
   def favorite?(user)
@@ -144,7 +157,9 @@ class Member < ApplicationRecord
   end
 
   def user
-    @user ||= User.active.find_by("lower(email) = ?", email.downcase) if email.present?
+    # TODO: When in the future a member can belong to multiple users by coupling to multiple emailaddresses,
+    # than this (and other functionality using this) needs to change
+    users.first
   end
 
   def reactivated?
@@ -169,7 +184,7 @@ class Member < ApplicationRecord
   end
 
   def self.import(file)
-    result = { counters: { imported: 0, changed: 0 }, created: [], activated: [] }
+    result = { counters: { imported: 0, changed: 0 }, created: [], activated: [], member_ids: [] }
 
     CSV.foreach(
       file.path,
@@ -179,9 +194,7 @@ class Member < ApplicationRecord
       row_hash = row.to_hash
       association_number = row_hash["association_number"]
       member = Member.find_or_initialize_by(association_number: association_number)
-      result[:created] << member if member.new_record?
 
-      old_deregistered_at = member.deregistered_at
       row_hash.each do |key, value|
         if Member.column_names.include?(key)
           if key.ends_with?("_at") || key.ends_with?("_since")
@@ -193,22 +206,39 @@ class Member < ApplicationRecord
       end
 
       result[:counters][:imported] += 1
-      result[:counters][:changed] += 1 if member.changed?
-      result[:activated] << member if old_deregistered_at.present? && member.deregistered_at.nil?
 
-      member.imported_at = Time.zone.now
-      member.save!
+      result[:activated] << member if member.deregistered_at_was.present? && member.deregistered_at.nil?
+
+      if member.new_record?
+        result[:created] << member
+        member.save!
+      elsif member.changed?
+        result[:counters][:changed] += 1
+        member.save!
+      end
+      result[:member_ids] << member.id
     end
 
     result
   end
 
-  def self.cleanup(imported_before)
+  def self.cleanup(imported_before, imported_member_ids)
+    # `cleanup` works with `imported_at` because it can happen that members disappear from
+    # from the Sportlink export. It would prob. be better to handle this in the import
     result = { deregistered: [] }
-    Member.where(deregistered_at: nil).where("imported_at < ?", imported_before).find_each do |member|
-      member.deregistered_at = member.imported_at
-      member.save
-      result[:deregistered] << member
+
+    Member.sportlink_active.each do |member|
+      if imported_member_ids.include? member.id
+        # Member was imported, make sure `missed_import_on` is cleared
+        member.update(missed_import_on: nil) if member.missed_import_on.present?
+      else
+        # Member was not in import. Set `missed_import_on` if nil
+        member.update(missed_import_on: Time.zone.now) if member.missed_import_on.nil?
+        if member.missed_import_on < imported_before
+          member.update(deregistered_at: member.missed_import_on)
+          result[:deregistered] << member
+        end
+      end
     end
 
     result
@@ -218,7 +248,33 @@ class Member < ApplicationRecord
     Member::EXPORT_COLUMNS + (user.admin? || user.club_staff? ? Member::EXPORT_COLUMNS_ADVANCED : [])
   end
 
-  def self.imported_at
-    order(imported_at: :desc).limit(1).first.imported_at
-  end
+  private
+
+    def update_users
+      if new_record?
+        add_to_user email
+
+      elsif sportlink_inactive?
+        remove_from_user email_was if email_changed?
+        remove_from_user email
+
+      elsif email_changed?
+        remove_from_user email_was
+        add_to_user email
+      end
+    end
+
+    def add_to_user(email)
+      if email.present? && (user = User.by_email(email).first).present?
+        users << user
+        user.activate
+      end
+    end
+
+    def remove_from_user(email)
+      if email.present? && (user = User.by_email(email).first).present?
+        user.members.delete(self)
+        user.deactivate if user.members.none?
+      end
+    end
 end

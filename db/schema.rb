@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_12_153929) do
+ActiveRecord::Schema.define(version: 2018_08_19_201347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -141,9 +141,17 @@ ActiveRecord::Schema.define(version: 2018_08_12_153929) do
     t.index ["team_member_id", "field_position_id"], name: "member_position_index"
   end
 
+  create_table "group_members", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_members_on_group_id"
+    t.index ["member_id"], name: "index_group_members_on_member_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.boolean "default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -246,7 +254,6 @@ ActiveRecord::Schema.define(version: 2018_08_12_153929) do
     t.string "initials"
     t.string "conduct_number"
     t.string "sport_category"
-    t.datetime "imported_at"
     t.string "status"
     t.string "full_name_2"
     t.date "last_change_at"
@@ -270,8 +277,16 @@ ActiveRecord::Schema.define(version: 2018_08_12_153929) do
     t.boolean "injured", default: false
     t.string "full_name"
     t.string "photo"
+    t.datetime "missed_import_on"
     t.index ["association_number"], name: "index_members_on_association_number"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "members_users", id: false, force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["member_id", "user_id"], name: "index_members_users_on_member_id_and_user_id"
+    t.index ["user_id", "member_id"], name: "index_members_users_on_user_id_and_member_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -523,10 +538,8 @@ ActiveRecord::Schema.define(version: 2018_08_12_153929) do
     t.string "unconfirmed_email"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }
     t.integer "status", default: 1
-    t.bigint "group_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uuid"], name: "index_users_on_uuid"
   end
@@ -565,6 +578,8 @@ ActiveRecord::Schema.define(version: 2018_08_12_153929) do
   add_foreign_key "favorites", "users"
   add_foreign_key "field_positions", "field_positions", column: "axis_parent_id"
   add_foreign_key "field_positions", "field_positions", column: "line_parent_id"
+  add_foreign_key "group_members", "groups"
+  add_foreign_key "group_members", "members"
   add_foreign_key "injuries", "members"
   add_foreign_key "injuries", "users"
   add_foreign_key "logs", "users"
@@ -593,5 +608,4 @@ ActiveRecord::Schema.define(version: 2018_08_12_153929) do
   add_foreign_key "trainings", "teams"
   add_foreign_key "trainings", "training_schedules"
   add_foreign_key "user_settings", "users"
-  add_foreign_key "users", "groups"
 end

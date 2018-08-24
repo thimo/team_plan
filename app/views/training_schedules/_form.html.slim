@@ -8,24 +8,33 @@
   = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
   = f.collection_select :day, TrainingSchedule.days_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.time_select :start_time, minute_step: 5
   = f.time_select :end_time, minute_step: 5
   = f.collection_select :present_minutes, TrainingSchedule.present_minutes_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.collection_select :soccer_field_id, SoccerField.asc.training, :id, :name, { prompt: "-- Selecteer een veld" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.collection_select :field_part, TrainingSchedule.field_parts_i18n, :first, :second, { prompt: "-- Selecteer het deel van het veld" },
-    { class: 'width-sm-50' }
+    { class: 'width-md-50' }
   = f.collection_check_boxes :team_member_ids, trainers, :id, :name, custom: true
   = f.form_group
     = f.check_box :cios, custom: true
 
   .row
     .col-sm-9.offset-sm-3
-      = f.submit "Opslaan", class: 'btn btn-primary'
-      = link_to "Annuleren", @training_schedule.team, class: 'btn btn-light'
-      - if policy(@training_schedule).destroy? && @training_schedule.active?
-          = link_to "Verwijderen", training_schedule_path(@training_schedule), method: :delete, data: { confirm: 'Training wordt verwijderd. Doorgaan?' }, class: 'btn btn-danger'
-      - if policy(@training_schedule).activate? && @training_schedule.inactive?
-          = link_to "Activeren", activate_training_schedule_path(@training_schedule), method: :post, data: { confirm: 'Training wordt weer actief gemaakt. Doorgaan?' }, class: 'btn btn-success'
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", @training_schedule.team, class: 'btn btn-light'
+        div
+          - if policy(@training_schedule).destroy? && @training_schedule.active?
+              = link_to "Verwijderen", training_schedule_path(@training_schedule),
+                                       method: :delete,
+                                       data: { confirm: 'Training wordt verwijderd. Doorgaan?' },
+                                       class: 'btn btn-outline-danger'
+          - if policy(@training_schedule).activate? && @training_schedule.inactive?
+              = link_to "Activeren", activate_training_schedule_path(@training_schedule),
+                                     method: :post,
+                                     data: { confirm: 'Training wordt weer actief gemaakt. Doorgaan?' },
+                                     class: 'btn btn-success'

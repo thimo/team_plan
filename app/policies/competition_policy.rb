@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class CompetitionPolicy < AdminPolicy
   def show?
     true
   end
-  
+
   class Scope < Scope
     def resolve
       scope
