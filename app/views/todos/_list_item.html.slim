@@ -1,18 +1,17 @@
-.todo.comment.chat-message[class="#{'opacity-5' if todo.defered?}"]
-  .chat-message-photo
+.todo[class="#{'opacity-5' if todo.defered?}"]
+  .check
     = link_to [:toggle, todo], method: :post, remote: true
       i[class="#{todo.finished? ? 'fa-check-square' : 'fa-square'}" class=fa_class]
-  .chat-message-header
-    / TODO: Replace styling
-    .tbl-row
-      .tbl-cell.tbl-cell-name[class="#{'strong' if todo.due?} #{'line-through' if todo.finished?}"]
+      
+  div.flex-grow-1
+    .d-flex.justify-content-between
+      div[class="#{'strong' if todo.due?} #{'line-through' if todo.finished?}"]
         = todo.body
-      .tbl-cell.tbl-cell-date
+      div
         = link_to edit_todo_path(todo, return: request.path), title: "Aanpassen", class: "pl-2"
           i.fa-pencil.lighter[class=fa_class]
 
-  .chat-message-content
-    .chat-message-txt.light
+    div.light
       = link_to todo.todoable.name, todo.todoable, class: 'pr-2' if todo.todoable.present?
       - if todo.started_on.present?
         span.small.pr-2
