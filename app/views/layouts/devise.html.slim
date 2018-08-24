@@ -2,41 +2,44 @@ doctype html
 html lang="nl"
   = render "layouts/head"
 
-  body.app.flex-row.align-items-center.devise
-    .container
-      .row.justify-content-center
-        .col-md-8.col-lg-6.col-xl-5
-          .header
-            h1
-              = "#{Setting['club.name_short']}"
-            img.logo src="#{asset_path 'logo/esa_logo.svg'}"
-            h1
-              = "#{Setting['application.name']}"
+  body
+    = render "layouts/maintenance"
 
-          .text-center
-            - if flash.present?
-              - flash.each do |message_type, messages|
-                - [messages].flatten.each do |message|
-                  - if message.present?
-                    div
-                      .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
-                        | #{message}
-            div
-              = yield(:flash)
+    .app.devise.flex-row.align-items-center
+      .container
+        .row.justify-content-center
+          .col-md-8.col-lg-6.col-xl-5
+            .header
+              h1
+                = "#{Setting['club.name_short']}"
+              img.logo src="#{asset_path 'logo/esa_logo.svg'}"
+              h1
+                = "#{Setting['application.name']}"
 
-          .card.p-3
-            .card-body
-              h1.mb-0
-                = yield(:title)
-              div.text-muted.mb-3
-                = yield(:subtitle)
+            .text-center
+              - if flash.present?
+                - flash.each do |message_type, messages|
+                  - [messages].flatten.each do |message|
+                    - if message.present?
+                      div
+                        .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
+                          | #{message}
+              div
+                = yield(:flash)
 
-              = yield
+            .card.p-3
+              .card-body
+                h1.mb-0
+                  = yield(:title)
+                div.text-muted.mb-3
+                  = yield(:subtitle)
 
-          - if content_for?(:form_help)
-            .card.text-white.bg-primary
-              .card-body.text-center
-                div
-                  = yield(:form_help)
+                = yield
 
-          = render 'devise/shared/links'
+            - if content_for?(:form_help)
+              .card.text-white.bg-primary
+                .card-body.text-center
+                  div
+                    = yield(:form_help)
+
+            = render 'devise/shared/links'

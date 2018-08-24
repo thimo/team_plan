@@ -9,9 +9,8 @@ html lang="nl"
       = render 'layouts/side_menu'
 
       main.main
-        - unless Rails.env.production? || Rails.env.development?
-          div.color-white.bg-color-red.text-center.p-2
-            |  -= #{Rails.env} =-
+        = render "layouts/env_warning"
+        = render "layouts/maintenance"
         = render "layouts/breadcrumbs"
 
         .container-fluid

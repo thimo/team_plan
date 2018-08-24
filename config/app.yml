@@ -4,6 +4,7 @@ defaults: &defaults
   application.hostname: teamplan.defrog.nl
   application.email: helpdesk@defrog.nl
   application.contact_name: Thimo Jansen
+  application.maintenance: false
   club.name: Defrog
   club.name_short: Defrog
   club.website: https://teamplan.defrog.nl/
