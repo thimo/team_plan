@@ -45,3 +45,9 @@
 textarea {
   min-height: 3.5rem;
 }
+
+// Hack, needed because sass (currently) doesn't add vendor specific rules for appearance
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
