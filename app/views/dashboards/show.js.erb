@@ -1,5 +1,6 @@
 <% if params[:member_page] %>
-$('#members_list').replaceWith("<%= j render("members/list_body", members: @new_members) %>")
+$('#members_list tbody').append("<%= j render("members/list_rows", members: @new_members) %>")
+$('#members_list_footer').replaceWith("<%= j render("members/list_footer", members: @new_members) %>")
 <% end %>
 
 <% if params[:version_page] %>

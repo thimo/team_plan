@@ -32,7 +32,7 @@
               = link_to "Verwijderen", training_schedule_path(@training_schedule),
                                        method: :delete,
                                        data: { confirm: 'Training wordt verwijderd. Doorgaan?' },
-                                       class: 'btn btn-outline-danger'
+                                       class: 'btn btn-danger'
           - if policy(@training_schedule).activate? && @training_schedule.inactive?
               = link_to "Activeren", activate_training_schedule_path(@training_schedule),
                                      method: :post,

@@ -1,4 +1,10 @@
 - provide(:title, @user.name)
 
+- content_for :action_buttons
+  - if current_user != @user
+    = link_to impersonate_admin_user_path(@user), method: :post, title: "Log in als #{@user.name}", class: "btn"
+      i.fa-sign-in[class=fa_class]
+
+
 .card.card-body
   = render "form"
