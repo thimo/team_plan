@@ -23,7 +23,7 @@ module ClubDataImporter
         team_count[:created] += 1
         club_data_team.save
       elsif club_data_team.changed?
-        team_count[:changed] += 1
+        team_count[:updated] += 1
         club_data_team.save
       end
 
