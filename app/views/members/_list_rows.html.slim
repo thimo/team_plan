@@ -1,0 +1,16 @@
+- members.each do |member|
+  tr.clickable
+    td
+      = render member
+    td.small[style="max-width: 160px;"]
+      div[title="Registratiedatum"]
+        span.lighter.pr-1
+          | Registratie
+        = l member.registered_at, format: :long
+      - if (last_comments = member.comments.classification.half_year.includes(:user).desc).present?
+        - last_comments.each do |last_comment|
+          .comment.light.ellipsis[title="#{last_comment.body} (#{last_comment.user.name}, #{l last_comment.created_at, format: :date_short})"]
+            = last_comment.body
+    td.text-right.w-44
+      - if member.reactivated?
+        i.fa-recycle.ml-2.color-green[title="Opnieuw geactiveerd" class=fa_class]

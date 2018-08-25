@@ -1,11 +1,11 @@
 .simple-calendar
   .calendar-heading
-    = link_to calendar.url_for_previous_view
-      i.fa-chevron-left[class=fa_class]
+    = link_to calendar.url_for_previous_view, remote: true
+      i.fa-chevron-left.p-3[class=fa_class]
     span.calendar-title.strong
       | #{t('date.month_names')[start_date.month].capitalize} #{start_date.year}
-    = link_to calendar.url_for_next_view
-      i.fa-chevron-right[class=fa_class]
+    = link_to calendar.url_for_next_view, remote: true
+      i.fa-chevron-right.p-3[class=fa_class]
   table.table
     thead
       tr

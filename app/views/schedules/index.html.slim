@@ -1,21 +1,8 @@
 - provide(:title, "Kalender #{Setting['club.name_short']} #{@team.name}")
 
-
 .card
-  .card-header
-    .tbl-row
-
-  .col-12.table-responsive
-    = month_calendar attribute: :started_at, events: @schedules do |date, meetings|
-      .text-right
-        .lighter
-          = I18n.l date, format: :date_day
-      - if meetings.any?
-        - meetings.each do |meeting|
-          .event
-            span.pr-1.time
-              = l meeting.started_at, format: :time_short
-            = link_to schedule_title(meeting), meeting
+  .card-body#month_calendar
+    = render "schedules/month_calendar", events: @schedules
 
 .alert.alert-info
   h5 Abonneren op deze kalender?

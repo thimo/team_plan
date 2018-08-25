@@ -1,6 +1,4 @@
 .simple-calendar {
-  margin-bottom: 15px;
-
   .day {
     vertical-align: top;
     padding: 2px 5px;
@@ -42,19 +40,20 @@
   .prev-month {
     background: #f6f8fa;
   }
+
   .next-month {
     background: #f6f8fa;
   }
+
   .current-month {}
 
   .has-events {}
 
   .calendar-heading {
     text-align: center;
-    margin: 15px 0;
 
     .calendar-title {
-      padding: 0 40px;
+      padding: 1rem 2rem;
     }
   }
 

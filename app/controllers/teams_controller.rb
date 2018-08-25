@@ -13,13 +13,6 @@ class TeamsController < ApplicationController
     @previous_season = @team.age_group.season.previous
 
     case @active_tab
-    when "competitions"
-      @competitions_regular = @team.competitions.knvb.desc.active.regular
-      @competitions_other   = @team.competitions.knvb.desc.active.other
-
-      @custom_competition_matches = @team.matches.for_competition(Competition.custom).desc.group_by(&:competition)
-                                         .sort_by { |competition, _matches| competition.id }
-
     when "team"
       @players = TeamMember.players_by_year(policy_scope(@team.team_members)
                            .includes(:teammembers_field_positions, :field_positions).not_ended)
@@ -34,20 +27,30 @@ class TeamsController < ApplicationController
       @todos_active += todos.active
       @todos_defered += todos.defered
 
+    when "competitions"
+      @competitions_regular = @team.competitions.knvb.desc.active.regular
+      @competitions_other   = @team.competitions.knvb.desc.active.other
+
+      @custom_competition_matches = @team.matches.for_competition(Competition.custom).desc.group_by(&:competition)
+                                         .sort_by { |competition, _matches| competition.id }
+
     when "dossier"
       @notes = Note.for_user(policy_scope(@team.notes), @team, current_user).desc
       @team_evaluations = policy_scope(@team.team_evaluations).desc
 
     when "statistics"
       team_presence_graphs
-    else # "schedule"
+
+    when "schedule"
       @not_played_matches = @team.matches.not_played.from_today.asc
       @played_matches = @team.matches.played.desc
 
       @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
       @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 4.weeks.from_now.beginning_of_day).asc
 
-      # @program_items = (@not_played_matches + @trainings).sort_by &:started_at
+    when "calendar"
+      date = params[:start_date].present? ? Time.zone.parse(params[:start_date]) : Time.zone.now
+      @schedules = @team.schedules(from: date - 1.month, up_to: date + 1.month)
     end
   end
 
@@ -111,8 +114,8 @@ class TeamsController < ApplicationController
     end
 
     def set_active_tab
-      @active_tab = params[:tab].presence || current_user.settings.active_team_tab || "schedule"
-      @active_tab = "schedule" unless policy(@team).try("show_#{@active_tab}?")
+      @active_tab = params[:tab].presence || current_user.settings.active_team_tab || "team"
+      @active_tab = "team" unless policy(@team).try("show_#{@active_tab}?")
       current_user.settings.update(active_team_tab: @active_tab)
     end
 end

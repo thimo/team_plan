@@ -10,8 +10,6 @@
         - if policy(Training.new(team: team)).create?
           = link_to new_team_training_path(team), title: "Eénmalige training toevoegen", class: "card-header-action"
             i.fa-plus-square[class=fa_class]
-        = link_to [team, :schedules], title: "Volledige kalender voor #{team.name}", class: "card-header-action"
-          i.fa-calendar-alt[class=fa_class]
   .card-body.p-0
     - if trainings.any?
       table.table.table-sm.tr-links.align-top

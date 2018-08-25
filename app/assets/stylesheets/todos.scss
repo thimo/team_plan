@@ -12,33 +12,16 @@
 }
 
 .todo {
-  .chat-message-photo {
-    .fa, .svg-inline--fa {
-      color: #919fa9;
-      font-size: 1.0625rem;
-      margin: 2px 15px;
+  margin-bottom: .5rem;
+  display: flex;
+
+  .check {
+    .far, .fa, .svg-inline--fa {
+      color: $gray-500;
+      margin: .2rem .75rem .2rem 1rem;
 
       &:hover {
-        // background-color: #ecf2f5;
-        color: #0082c6;
-      }
-    }
-  }
-  &.comment {
-    &.chat-message {
-      padding-bottom: 11px;
-      padding-right: 16px;
-
-      .chat-message-photo {
-        top: 0;
-      }
-
-      .chat-message-header {
-      }
-      .chat-message-txt {
-        a {
-          color: #919fa9;
-        }
+        color: $blue;
       }
     }
   }

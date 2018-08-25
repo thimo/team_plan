@@ -27,6 +27,10 @@ class TeamPolicy < ApplicationPolicy
     true
   end
 
+  def show_calendar?
+    true
+  end
+
   def show_competitions?
     true
   end
