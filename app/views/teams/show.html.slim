@@ -62,7 +62,7 @@ section
               .card
                 .card-header
                   | Oud teamgenoten
-                .card-body.table-responsive
+                .card-body.table-responsive.p-0
                   table.table.table-sm.tr-links
                     - @old_members.each do |member, team_members|
                       = render 'member', member: member, team_members: team_members
