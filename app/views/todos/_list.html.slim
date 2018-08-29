@@ -8,8 +8,8 @@
         = link_to new_path, title: "Todo toevoegen", class: "card-header-action"
           i.fa-plus-square[class=fa_class]
 
-  .card-body.pl-0.pb-2
-    - if todos_active.present? || todos_defered.present?
+  - if todos_active.present? || todos_defered.present?
+    .card-body.pl-0.pb-2
       - if todos_active.present?
         - todos_active.each do |todo|
           div[id="todo-#{todo.id}"]
@@ -18,5 +18,6 @@
         - todos_defered.each do |todo|
           div[id="todo-#{todo.id}"]
             = render 'todos/list_item', todo: todo
-    - else
+  - else
+    .card-body
       i Geen todo's gevonden
