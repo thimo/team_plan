@@ -61,7 +61,7 @@
         .card-header
           | Programma
 
-        .card-body
+        .card-body.p-0
           table.table.table-sm.tr-links.align-top
             - @not_played_matches.each do |date, matches|
               tr
@@ -74,7 +74,7 @@
         .card-header
           | Uitslagen
 
-        .card-body
+        .card-body.p-0
           table.table.table-sm.tr-links.align-top
             - @played_matches.each do |date, matches|
               tr

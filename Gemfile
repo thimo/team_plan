@@ -5,7 +5,7 @@ source "https://rubygems.org"
 ruby "2.5.1"
 
 gem "jbuilder", "~> 2.5"
-# TODO: jquery-rails is include to prevent the following blocking error on deploy, thrown from axlsx_rails:
+# TODO: jquery-rails is included to prevent the following blocking error on deploy, thrown from axlsx_rails:
 # "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved
 gem "jquery-rails"
 gem "pg", "~> 0.18"
