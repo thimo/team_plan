@@ -165,9 +165,8 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    "Met dit account is het op dit moment niet mogelijk om in te loggen. Je e-mailadres wordt gecontroleerd \
-    via de ledenadministratie van #{Setting['club.name_short']}. Ga alsjeblieft na of je hetzelfde adres \
-    gebruikt."
+    "Met dit account is het helaas niet mogelijk om in te loggen. Ga alsjeblieft zelf na of het e-mailadres dat \
+    je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van #{Setting['club.name_short']}."
   end
 
   def toggle_include_member_comments
