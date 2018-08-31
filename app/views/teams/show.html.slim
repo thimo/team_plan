@@ -6,13 +6,16 @@
   - if policy(TeamEvaluation.new(team: @team)).create?
     = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn"
       i.fa-list-ol[class=fa_class]
+      span.d-down-none.pl-1
+        | Evaluatie
   - if policy(@team).update?
     = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn" do
       i.fa-pencil[class=fa_class]
+      span.d-down-none.pl-1
+        | Aanpassen
   - if policy(@team).destroy?
     = link_to team_path(@team),  method: :delete, data: { confirm: 'Team wordt verwijderd. Doorgaan?' }, title: "Team verwijderen", class: "btn"
       i.fa-trash-alt[class=fa_class]
-  .pl-3
   - if policy(Todo).create? && policy(@team).show_todos?
     = link_to new_team_todo_path(@team), title: "Todo toevoegen", class: "btn"
       i.fa-check-square[class=fa_class]
