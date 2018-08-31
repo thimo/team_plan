@@ -1,0 +1,13 @@
+.tab-pane.active.show
+  .row
+    .col-lg-6
+      = render "matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
+    .col-lg-6
+      = render "trainings/list", trainings: @trainings, team: @team
+  .row
+    .col-lg-6
+      / = render "shared/program_list", program_items: @program_items, team: @team, include_presences: true
+      = render "matches/list", matches: @played_matches, title: "Uitslagen", team: @team
+
+    .col-lg-6
+      = render "training_schedules/list", team: @team, training_schedules: @training_schedules
