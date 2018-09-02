@@ -10,7 +10,10 @@ gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
-gem "rails", "~> 5.2.0"
+# gem "rails", "~> 5.2.0"
+# Use rails 5.2.0 for now because 5.2.1 prevents HABTM field_positions on team_member from being created,
+# it leads to a validation error when creating an new team_member from the member allocations view
+gem "rails", "5.2.0"
 gem "sassc-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
