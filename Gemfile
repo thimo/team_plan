@@ -48,7 +48,6 @@ gem "awesome_print", require: "awesome_print"
 gem "paper_trail"
 gem "pundit", "~> 1.1.0"
 gem "redcarpet", "~> 3.4.0" # Markdown parser
-gem "rolify"
 gem "rubyzip"
 
 # gem "axlsx",                      "~> 2.1.0.pre"

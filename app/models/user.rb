@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  rolify
   include Filterable
   include Statussable
 
@@ -16,6 +15,8 @@ class User < ApplicationRecord
   has_many :injuries, dependent: :destroy
   has_one :user_setting, dependent: :destroy
   has_and_belongs_to_many :members
+  has_many :groups, through: :members
+  has_many :roles, through: :groups
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise

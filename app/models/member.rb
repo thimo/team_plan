@@ -14,7 +14,8 @@ class Member < ApplicationRecord
   LOCAL_TEAMS_WACHTLIJST_ONBEKEND = "Wachtlijst onbekend"
   LOCAL_TEAMS_WELKOM_BIJ_ESA = "aWelkom bij ESA"
 
-  EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on gender role address zipcode city phone email member_since previous_team].freeze
+  EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on
+                      gender role address zipcode city phone email member_since previous_team].freeze
   EXPORT_COLUMNS_ADVANCED = %w[field_positions prefered_foot advise_next_season].freeze
   DEFAULT_COLUMNS = %w[team association_number name born_on role address zipcode city phone email].freeze
 
