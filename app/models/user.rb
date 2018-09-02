@@ -199,8 +199,16 @@ class User < ApplicationRecord
     deactivate if members.none?
   end
 
-  def has_role?
-    @roles ||= roles.distinct.pluck(:name)
+  def role?(role)
+    all_roles.include?(role.to_s)
+  end
+
+  def any_beheer_role?
+    all_roles.any? { |role| role.start_with?("beheer_") }
+  end
+
+  def all_roles
+    @all_roles ||= roles.distinct.pluck(:name)
   end
 
   private

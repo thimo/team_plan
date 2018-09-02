@@ -29,4 +29,6 @@
             td
               - group.roles.asc.each do |role|
                 div
-                  = "#{role.body} (#{role.name})"
+                  = role.body
+                  span.small.lighter.pl-1
+                    = role.name

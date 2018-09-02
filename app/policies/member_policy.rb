@@ -1,8 +1,24 @@
 # frozen_string_literal: true
 
-class MemberPolicy < AdminPolicy
+class MemberPolicy < ApplicationPolicy
+  def index?
+    @user.role?(:beheer_vereniging)
+  end
+
+  def create?
+    index?
+  end
+
   def show?
     true
+  end
+
+  def update?
+    index?
+  end
+
+  def destroy?
+    index? && @record.persisted?
   end
 
   def import?
@@ -14,7 +30,7 @@ class MemberPolicy < AdminPolicy
   end
 
   def show_favorite?
-    @user.admin? || @user.club_staff?
+    false
   end
 
   def show_private_data?
@@ -79,7 +95,7 @@ class MemberPolicy < AdminPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      scope.all if @user.role?(:beheer_vereniging)
     end
   end
 end

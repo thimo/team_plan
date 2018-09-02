@@ -1,6 +1,26 @@
 # frozen_string_literal: true
 
-class UserPolicy < AdminPolicy
+class UserPolicy < ApplicationPolicy
+  def index?
+    @user.role?(:beheer_applicatie)
+  end
+
+  def create?
+    index?
+  end
+
+  def show?
+    index?
+  end
+
+  def update?
+    index?
+  end
+
+  def destroy?
+    index? && @record.persisted?
+  end
+
   def update_settings?
     @record == @user
   end
@@ -15,5 +35,11 @@ class UserPolicy < AdminPolicy
 
   def stop_impersonating?
     true
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all if @user.role?(:beheer_applicatie)
+    end
   end
 end

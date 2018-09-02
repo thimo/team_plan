@@ -3,7 +3,6 @@
 module Admin
   class BaseController < ApplicationController
     add_breadcrumb "Home", "/"
-    before_action :admin_user
     before_action :default_breadcrumb
 
     def index
@@ -18,12 +17,8 @@ module Admin
 
     private
 
-      def admin_user
-        permission_denied unless policy(:admin).show?
-      end
-
       def default_breadcrumb
-        add_breadcrumb "Admin", admin_path
+        add_breadcrumb "Beheer", admin_path
       end
   end
 end
