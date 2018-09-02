@@ -14,8 +14,6 @@ class TeamMember < ApplicationRecord
   has_and_belongs_to_many :training_schedules
   has_paper_trail
 
-  attr_accessor :initial_status
-
   enum role: { player: 0, head_coach: 5, coach: 1, trainer: 2, assistant_trainer: 7, keeper_trainer: 9, team_parent: 3,
                manager: 4, leader: 10, physio: 6, referee: 11, assistant_referee: 8 }
   enum initial_status: { initial_active: 1, initial_draft: 0 }
@@ -51,9 +49,8 @@ class TeamMember < ApplicationRecord
 
   def self.players_by_year(team_members_scope)
     # used to include includes(:member).includes(:team).includes(:field_positions).
-    team_members_scope.player.asc.group_by do |team_member|
-      team_member.member.born_on.year
-    end.sort_by { |year, _team_members| year }.reverse
+    team_members = team_members_scope.player.asc.group_by { |team_member| team_member.member.born_on.year }
+    team_members.sort_by { |year, _team_members| year }.reverse
   end
 
   def self.staff_by_member(team_members_scope)
@@ -101,10 +98,9 @@ class TeamMember < ApplicationRecord
 
       self.prefered_foot = team_member.prefered_foot if prefered_foot.nil?
 
-      if field_positions.empty?
-        team_member.field_positions.each do |field_position|
-          field_positions << field_position
-        end
+      return if field_positions.present?
+      team_member.field_positions.each do |field_position|
+        field_positions << field_position
       end
     end
 end
