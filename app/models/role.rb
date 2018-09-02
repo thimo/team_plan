@@ -5,4 +5,6 @@ class Role < ApplicationRecord
   has_and_belongs_to_many :groups, join_table: :groups_roles
 
   validates :name, presence: true
+
+  scope :asc, -> { order(name: :asc) }
 end

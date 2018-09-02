@@ -199,6 +199,10 @@ class User < ApplicationRecord
     deactivate if members.none?
   end
 
+  def has_role?
+    @roles ||= roles.distinct.pluck(:name)
+  end
+
   private
 
     def team_id_for(record, as_team_staf = false)

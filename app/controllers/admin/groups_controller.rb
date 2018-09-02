@@ -54,7 +54,7 @@ module Admin
       end
 
       def group_params
-        params.require(:group).permit(:name, member_ids: [])
+        params.require(:group).permit(:name, member_ids: [], role_ids: [])
       end
 
       def add_breadcrumbs

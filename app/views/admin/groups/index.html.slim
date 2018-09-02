@@ -27,3 +27,6 @@
                 div
                   = link_to member.name, member
             td
+              - group.roles.asc.each do |role|
+                div
+                  = "#{role.body} (#{role.name})"

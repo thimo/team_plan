@@ -104,6 +104,7 @@ nl:
         remark: Opmerking
       role:
         name: Naam
+        body: Beschrijving
       season:
         name: Seizoen
         active: Actief
