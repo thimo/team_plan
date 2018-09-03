@@ -6,12 +6,12 @@ module Admin
     before_action :default_breadcrumb
 
     def index
-      authorize :admin
+      skip_authorization
       redirect_to admin_members_path
     end
 
     def show
-      authorize :admin
+      skip_authorization
       redirect_to admin_members_path
     end
 

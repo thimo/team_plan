@@ -25,6 +25,11 @@ li.nav-title
     = link_to admin_competitions_path, class: "nav-link #{'active' if controller.class == Admin::CompetitionsController}" do
       i.fa-fw.fa-trophy.nav-icon[class=fa_class]
       | Wedstrijdsoorten
+- if policy(:match).index?
+  li.nav-item
+    = link_to admin_matches_path, class: "nav-link #{'active' if controller.class == Admin::MatchesController}" do
+      i.fa-fw.fa-futbol.nav-icon[class=fa_class]
+      | Oefenwedstrijden
 
 - if policy(:club_data_dashboard).index?
   li.nav-title

@@ -146,6 +146,7 @@ Rails.application.routes.draw do
       resources :competitions
       resources :groups
       resources :roles
+      resources :matches
     end
   end
 

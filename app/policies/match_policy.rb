@@ -2,7 +2,7 @@
 
 class MatchPolicy < ApplicationPolicy
   def index?
-    @user.role?(:beheer_knvb_club_data)
+    @user.role?(:beheer_knvb_club_data) || @user.role?(:beheer_oefenwedstrijden)
   end
 
   def show?
@@ -47,7 +47,8 @@ class MatchPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      return scope.for_competition(Competition.custom) if @user.role?(:beheer_oefenwedstrijden)
+      return scope if @user.role?(:beheer_knvb_club_data)
     end
   end
 end
