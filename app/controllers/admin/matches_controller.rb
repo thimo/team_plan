@@ -7,7 +7,9 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      @matches = policy_scope(Match).asc.for_competition(Competition.custom)
+      matches = policy_scope(Match).for_competition(Competition.custom)
+      @matches_planned = matches.from_now.asc
+      @matches_played = matches.in_past.desc
     end
 
     def show; end

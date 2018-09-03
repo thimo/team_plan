@@ -1,0 +1,31 @@
+= bootstrap_form_for [@team, @match], { layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" } do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.text_field :wedstrijddatum, date_picker_options
+  = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
+
+  - if @team.present?
+    = f.form_group :is_home_match, label: { text: "" }, class: "radio"
+      = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
+      = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true
+    = f.text_field :opponent
+  - else
+    |
+    = f.text_field :thuisteam
+    = f.text_field :uitteam
+
+  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name, custom: true
+  = f.text_area :remark
+
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-light'
+        div
+          - if policy(@match).destroy?
+            = link_to "Afgelasten", match_path(@match),
+                                    method: :delete,
+                                    data: { confirm: 'Wedstrijd wordt afgelast. Doorgaan?' },
+                                    class: 'btn btn-danger'
