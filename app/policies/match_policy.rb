@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class MatchPolicy < ApplicationPolicy
+  def index?
+    @user.role?(:beheer_knvb_club_data)
+  end
+
   def show?
     true
   end

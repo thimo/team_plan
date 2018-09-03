@@ -3,21 +3,24 @@ li.nav-item.d-md-down-none
     i.fa-fw.fa-cog.nav-icon[class=fa_class]
     | Beheer
 
+li.nav-title
+  | Vereniging
 - if policy(:member).index?
-  li.nav-title
-    | Vereniging
   li.nav-item
     = link_to admin_members_path, class: "nav-link #{'active' if controller.class == Admin::MembersController}" do
       i.fa-fw.fa-users.nav-icon[class=fa_class]
       | Leden
+- if policy(:group).index?
   li.nav-item
     = link_to admin_groups_path, class: "nav-link #{'active' if controller.class == Admin::GroupsController}" do
       i.fa-fw.fa-users.nav-icon[class=fa_class]
       | Groepen
+- if policy(:soccer_field).index?
   li.nav-item
     = link_to admin_soccer_fields_path, class: "nav-link #{'active' if controller.class == Admin::SoccerFieldsController}" do
       i.fa-fw.fa-leaf.nav-icon[class=fa_class]
       | Velden
+- if policy(:competition).index?
   li.nav-item
     = link_to admin_competitions_path, class: "nav-link #{'active' if controller.class == Admin::CompetitionsController}" do
       i.fa-fw.fa-trophy.nav-icon[class=fa_class]
@@ -26,18 +29,22 @@ li.nav-item.d-md-down-none
 - if policy(:club_data_dashboard).index?
   li.nav-title
     | KNVB
+- if policy(:club_data_team).index?
   li.nav-item
     = link_to admin_knvb_club_data_teams_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::ClubDataTeamsController}" do
       i.fa-fw.fa-database.nav-icon[class=fa_class]
       | Teams
+- if policy(:competition).index?
   li.nav-item
     = link_to admin_knvb_competitions_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::CompetitionsController}" do
       i.fa-fw.fa-database.nav-icon[class=fa_class]
       | Competities
+- if policy(:match).index?
   li.nav-item
     = link_to admin_knvb_matches_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::MatchesController}" do
       i.fa-fw.fa-database.nav-icon[class=fa_class]
       | Wedstrijden
+- if policy(:club_data_log).index?
   li.nav-item
     = link_to admin_knvb_logs_path, class: "nav-link #{'active' if controller.class == Admin::Knvb::LogsController}" do
       i.fa-fw.fa-database.nav-icon[class=fa_class]
@@ -46,22 +53,27 @@ li.nav-item.d-md-down-none
 - if policy(:user).index?
   li.nav-title
     | Beheer
+- if policy(:user).index?
   li.nav-item
     = link_to admin_users_path, class: "nav-link #{'active' if controller.class == Admin::UsersController}" do
       i.fa-fw.fa-user.nav-icon[class=fa_class]
       | Gebruikers
+- if policy(:role).index?
   li.nav-item
     = link_to admin_roles_path, class: "nav-link #{'active' if controller.class == Admin::RolesController}" do
       i.fa-fw.fa-user-secret.nav-icon[class=fa_class]
       | Rollen
+- if policy(:setting).index?
   li.nav-item
     = link_to admin_settings_path, class: "nav-link #{'active' if controller.class == Admin::SettingsController}" do
       i.fa-fw.fa-sliders-h.nav-icon[class=fa_class]
       | Instellingen
+- if policy(:email_log).index?
   li.nav-item
     = link_to admin_email_logs_path, class: "nav-link #{'active' if controller.class == Admin::EmailLogsController}" do
       i.fa-fw.fa-envelope.nav-icon[class=fa_class]
       | E-mail log
+- if policy(:version_update).index?
   li.nav-item
     = link_to admin_version_updates_path, class: "nav-link #{'active' if controller.class == Admin::VersionUpdatesController}" do
       i.fa-fw.fa-code-branch.nav-icon[class=fa_class]
