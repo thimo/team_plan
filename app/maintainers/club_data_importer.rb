@@ -23,7 +23,7 @@ module ClubDataImporter
         team_count[:created] += 1
         club_data_team.save
       elsif club_data_team.changed?
-        team_count[:changed] += 1
+        team_count[:updated] += 1
         club_data_team.save
       end
 
@@ -112,10 +112,10 @@ module ClubDataImporter
         end
       end
 
-    rescue OpenURI::HTTPError
+    rescue => e
       ClubDataLog.create level: :error,
                          source: :poule_standings,
-                         body: "Error opening/parsing #{url}"
+                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
     end
 
     ClubDataLog.create level: :info,
@@ -166,10 +166,10 @@ module ClubDataImporter
         end
       end
 
-    rescue OpenURI::HTTPError
+    rescue => e
       ClubDataLog.create level: :error,
                          source: :poule_matches,
-                         body: "Error opening/parsing #{url}"
+                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
     end
 
     ClubDataLog.create level: :info,
@@ -201,10 +201,10 @@ module ClubDataImporter
           match.save
         end
       end
-    rescue OpenURI::HTTPError
+    rescue => e
       ClubDataLog.create level: :error,
                          source: :poule_results,
-                         body: "Error opening/parsing #{url}"
+                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
     end
 
     ClubDataLog.create level: :info,
@@ -235,10 +235,10 @@ module ClubDataImporter
           member.save
         end
       end
-    rescue OpenURI::HTTPError
+    rescue => e
       ClubDataLog.create level: :error,
                          source: :team_photos_import,
-                         body: "Error opening/parsing #{url}"
+                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
     end
 
     ClubDataLog.create level: :info,
@@ -263,10 +263,10 @@ module ClubDataImporter
       match.write_attribute("route", wedstrijd["route"])
       match.save if match.changed?
     end
-  rescue OpenURI::HTTPError
+  rescue => e
     ClubDataLog.create level: :error,
                        source: :add_address,
-                       body: "Error opening/parsing #{url}"
+                       body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
   end
 
   def self.afgelastingen

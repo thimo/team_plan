@@ -94,30 +94,22 @@
               = "Lid sinds: "
             = I18n.l member.member_since, format: :long
 
-        - unless member.registered_at.blank? || member.registered_at == member.member_since
+        - if member.registered_at.present? && member.registered_at != member.member_since
           div
             span.light
               = "Registratiedatum: "
             = I18n.l member.registered_at, format: :long
 
-        - if member.status_af_te_melden?
+        - unless member.status_definitief?
           div
             span.light
               = "Status: "
             = member.status.capitalize
-            - if member.deregistered_at.present?
-              |  per #{I18n.l member.deregistered_at, format: :long}
-        - else
-          - unless member.status_definitief?
-            div
-              span.light
-                = "Status: "
-              = member.status.capitalize
-          - unless member.deregistered_at.blank?
-            div
-              span.light
-                = "Afmelddatum: "
-              = I18n.l member.deregistered_at, format: :long
+        - if member.deregistered_at.present?
+          div
+            span.light
+              = "Afmelddatum: "
+            = I18n.l member.deregistered_at, format: :long
 
 .card
   .card-header

@@ -4,6 +4,8 @@
   - if policy(@season).update?
     = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "btn"
       i.fa-pencil[class=fa_class]
+      span.d-down-none.pl-1
+        | Aanpassen
   - if policy(@season).destroy?
     = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "btn"
       i.fa-trash-alt[class=fa_class]

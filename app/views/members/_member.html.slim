@@ -22,15 +22,9 @@
   - if member.local_teams.present?
     .light.small
       = "#{member.local_teams}"
-  - if member.status_af_te_melden?
+  - unless member.status_definitief?
     .light.small
       = member.status.capitalize
-      - if member.deregistered_at.present?
-        |  per #{I18n.l member.deregistered_at, format: :long}
-  - else
-    - unless member.status_definitief?
-      .light.small
-        = member.status.capitalize
-    - unless member.deregistered_at.blank?
-      .light.small
-        | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
+  - if member.deregistered_at.present?
+    .light.small
+      | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}

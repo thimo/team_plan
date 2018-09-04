@@ -1,0 +1,28 @@
+.tab-pane.active.show
+  - if policy(@team).show_presence_chart?
+    h4 Aanwezigheid
+
+    .row
+      .col-lg-6
+        .card
+          .card-header
+            | Trainingen
+          .card-body
+            canvas#trainingChart.presenceChart
+
+          = render 'presence_table', team: @team, presentable_class: Training
+
+      .col-lg-6
+        .card
+          .card-header
+            | Wedstrijden
+          .card-body
+            canvas#matchChart.presenceChart
+
+
+          = render 'presence_table', team: @team, presentable_class: Match
+
+    - if @training_presences_data&.any? && @match_presences_data&.any?
+      script
+        | var trainingChartData = #{@training_presences_data.to_json.html_safe}
+          var matchChartData = #{@match_presences_data.to_json.html_safe}

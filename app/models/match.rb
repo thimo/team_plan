@@ -37,9 +37,17 @@ class Match < ApplicationRecord
     wedstrijddatum
   end
 
+  def minutes_per_half
+    team = teams.first
+    (team&.minutes_per_half || team&.age_group&.minutes_per_half || 45).minutes
+  end
+
+  def pause_minutes
+    15.minutes
+  end
+
   def ended_at
-    # Fixed time for ical calendar
-    wedstrijddatum + 2.hours
+    wedstrijddatum + (2 * minutes_per_half) + pause_minutes
   end
 
   def title
