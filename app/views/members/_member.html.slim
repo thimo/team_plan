@@ -19,7 +19,7 @@
         => l member.born_on, format: :date_long_without_day
     = "(#{member.gender})"
 - if policy(member).show_sportlink_status?
-  - unless member.local_teams.blank?
+  - if member.local_teams.present?
     .light.small
       = "#{member.local_teams}"
   - if member.status_af_te_melden?
