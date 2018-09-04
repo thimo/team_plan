@@ -23,7 +23,8 @@ class GroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all if @user.role?(:beheer_applicatie)
+      return scope.all if @user.role?(:beheer_applicatie)
+      scope.none
     end
   end
 end

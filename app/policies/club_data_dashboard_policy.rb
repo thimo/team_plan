@@ -23,7 +23,8 @@ class ClubDataDashboardPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all if @user.role?(:beheer_knvb_club_data)
+      return scope.all if @user.role?(:beheer_knvb_club_data)
+      scope.none
     end
   end
 end

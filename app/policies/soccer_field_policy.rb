@@ -23,7 +23,8 @@ class SoccerFieldPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope if @user.role?(:beheer_vereniging)
+      return scope if @user.role?(:beheer_vereniging)
+      scope.none
     end
   end
 end

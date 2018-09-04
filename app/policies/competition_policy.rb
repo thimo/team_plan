@@ -23,7 +23,8 @@ class CompetitionPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all if @user.role?(:beheer_vereniging)
+      return scope.all if @user.role?(:beheer_vereniging)
+      scope.none
     end
   end
 end

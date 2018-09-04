@@ -49,6 +49,7 @@ class MatchPolicy < ApplicationPolicy
     def resolve
       return scope.for_competition(Competition.custom) if @user.role?(:beheer_oefenwedstrijden)
       return scope if @user.role?(:beheer_knvb_club_data)
+      scope.none
     end
   end
 end
