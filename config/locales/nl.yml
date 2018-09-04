@@ -105,6 +105,7 @@ nl:
       role:
         name: Naam
         body: Beschrijving
+        groups: Groepen
       season:
         name: Seizoen
         active: Actief
