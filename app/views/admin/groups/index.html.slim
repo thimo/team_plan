@@ -29,6 +29,9 @@
             td
               - group.roles.asc.each do |role|
                 div
-                  = role.body
-                  span.small.lighter.pl-1
+                  - if role.body.present?
+                    = role.body
+                    span.small.lighter.pl-1
+                      = role.name
+                  - else
                     = role.name
