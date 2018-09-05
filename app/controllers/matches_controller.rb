@@ -22,14 +22,14 @@ class MatchesController < ApplicationController
     if @team.present?
       if @match.is_home_match == "true"
         @match.thuisteamid = @team.club_data_team&.teamcode
-        @match.thuisteam   = @team.club_data_team&.teamnaam
+        @match.thuisteam   = @team.club_data_team&.teamnaam || "#{Setting['club.name_short']} #{@team.name}"
         @match.uitteamid   = nil
         @match.uitteam     = @match.opponent
       else
         @match.thuisteamid = nil
         @match.thuisteam   = @match.opponent
         @match.uitteamid   = @team.club_data_team&.teamcode
-        @match.uitteam     = @team.club_data_team&.teamnaam
+        @match.uitteam     = @team.club_data_team&.teamnaam || "#{Setting['club.name_short']} #{@team.name}"
       end
     end
 
