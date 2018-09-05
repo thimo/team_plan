@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get :cancellations
       end
     end
+    resources :matches
     resources :seasons, shallow: true do
       member do
         post :inherit_age_groups
@@ -57,7 +58,7 @@ Rails.application.routes.draw do
           resources :trainings, shallow: true do
             resources :presences
           end
-          resources :matches, shallow: true do
+          resources :matches do
             resources :presences
           end
           resources :schedules
@@ -99,8 +100,7 @@ Rails.application.routes.draw do
       end
     end
     resources :competitions, only: [:show]
-    # resources :matches
-    resources :comments, only: []  do
+    resources :comments, only: [] do
       collection do
         post :set_active_tab
       end

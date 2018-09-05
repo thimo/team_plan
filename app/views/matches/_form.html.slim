@@ -4,8 +4,11 @@
   = f.text_field :wedstrijddatum, date_picker_options
   = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
 
-  - if @team.present?
-    = f.form_group :is_home_match, label: { text: "" }, class: "radio"
+  - if @match.new_record? && @team.blank?
+    div
+      | Select team if not yet done
+  - elsif @team.present?
+    = f.form_group :is_home_match, hide_label: true, class: "radio"
       = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
       = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true
     = f.text_field :opponent

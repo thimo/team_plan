@@ -62,7 +62,7 @@ class MatchesController < ApplicationController
   private
 
     def set_team
-      @team = Team.find(params[:team_id])
+      @team = Team.find(params[:team_id]) if params[:team_id].present?
     end
 
     def set_team_for_show

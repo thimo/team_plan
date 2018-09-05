@@ -47,6 +47,8 @@ nl:
         roles: Rollen
         role_ids: Rollen
       match:
+        wedstrijddatum: Datum
+        wedstrijdtijd: Aanvangstijd
         opponent: Tegenstander
         location: Wedstrijdlocatie
         started_at: Datum
