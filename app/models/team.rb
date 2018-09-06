@@ -62,4 +62,8 @@ class Team < ApplicationRecord
   def no_club_data_link?
     club_data_team.nil?
   end
+
+  def name_with_club
+    "#{Setting["club.name_short"]} #{name}"
+  end
 end

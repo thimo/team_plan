@@ -9,13 +9,12 @@ class MatchPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    create?
-  end
+  # def new?
+  #   create?
+  # end
 
   def create?
-    @user.admin? ||
-      @user.club_staff? ||
+    @user.role?(:beheer_oefenwedstrijden) ||
       @user.team_staff_for?(@record)
   end
 
@@ -24,8 +23,7 @@ class MatchPolicy < ApplicationPolicy
     return false if @record.knvb?
 
     # Admin/club_staff can edit all matches, team staff only those created by themselves
-    @user.admin? ||
-      @user.club_staff? ||
+    @user.role?(:beheer_oefenwedstrijden) ||
       (@record.team_staff? && @user.team_staff_for?(@record))
   end
 
@@ -38,7 +36,7 @@ class MatchPolicy < ApplicationPolicy
   def update_presences?
     return false if @record.afgelast?
 
-    create?
+    @user.team_staff_for?(@record)
   end
 
   def show_presences?

@@ -92,7 +92,7 @@ class MatchesController < ApplicationController
 
     def match_params
       params.require(:match).permit(:competition_id, :wedstrijddatum, :wedstrijdtijd, :thuisteam, :uitteam, :uitslag,
-                                    :opponent, :is_home_match,
+                                    :opponent, :is_home_match, :team_ids,
                                     :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
       # Automatisch
       # wedstrijd (string, team - team)

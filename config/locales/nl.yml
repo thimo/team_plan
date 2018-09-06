@@ -60,6 +60,7 @@ nl:
         half_count: Aantal helften
         competition_id: Soort
         is_home_match: Thuis of uit?
+        team_ids: Team
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels

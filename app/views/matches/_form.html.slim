@@ -6,7 +6,9 @@
 
   - if @match.new_record? && @team.blank?
     div
-      | Select team if not yet done
+      = f.collection_select :team_ids, human_sort(Season.active_season_for_today.teams.active.asc, :name), :id, :name_with_club,
+        { include_blank: true },
+        data: { controller: 'select2', placeholder: 'Selecteer een team' }
   - elsif @team.present?
     = f.form_group :is_home_match, hide_label: true, class: "radio"
       = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
