@@ -2,6 +2,6 @@
 
 .row
   .col-md-6
-    = render "matches/list", matches: @matches_planned, title: "Gepland"
+    = render "matches/list", matches: @matches_planned, title: "Gepland", allow_create: true
   .col-md-6
     = render "matches/list", matches: @matches_played, title: "Gespeeld"

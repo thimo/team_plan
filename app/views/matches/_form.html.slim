@@ -1,15 +1,18 @@
 = bootstrap_form_for [@team, @match], { layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" } do |f|
   = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
+  = hidden_field_tag :return_url, params[:return_url]
+
   = f.text_field :wedstrijddatum, date_picker_options
   = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
 
-  - if @match.new_record? && @team.blank?
+  - if @match.new_record?
+    / TODO: disable dropdown if you're not allowed to set team
     div
-      = f.collection_select :team_ids, human_sort(Season.active_season_for_today.teams.active.asc, :name), :id, :name_with_club,
+      = f.collection_select :team_id, human_sort(Season.active_season_for_today.teams.active.asc, :name), :id, :name_with_club,
         { include_blank: true },
         data: { controller: 'select2', placeholder: 'Selecteer een team' }
-  - elsif @team.present?
+  - if @team.present? || @match.new_record?
     = f.form_group :is_home_match, hide_label: true, class: "radio"
       = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
       = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true

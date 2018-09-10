@@ -3,8 +3,8 @@
 class MatchesController < ApplicationController
   include SchedulesHelper
 
-  before_action :set_team, only: [:new, :create]
   before_action :create_match, only: [:new, :create]
+  before_action :set_team, only: [:new, :create]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
   before_action :set_team_for_show, only: [:show]
   before_action :add_breadcrumbs, only: [:show, :new, :edit]
@@ -38,7 +38,8 @@ class MatchesController < ApplicationController
 
     if @match.save
       @match.teams << @team
-      redirect_to [@match, team: @team], notice: "Wedstrijd is toegevoegd."
+      flash_message(:success, "Wedstrijd is toegevoegd.")
+      redirect_to params[:return_url] || [@match, team: @team]
     else
       render :new
     end
@@ -48,7 +49,8 @@ class MatchesController < ApplicationController
 
   def update
     if @match.update(match_params.merge(user_modified: true))
-      redirect_to @match, notice: "Wedstrijd is aangepast."
+      flash_message(:success, "Wedstrijd is aangepast.")
+      redirect_to params[:return_url] || @match
     else
       render "edit"
     end
@@ -63,6 +65,7 @@ class MatchesController < ApplicationController
 
     def set_team
       @team = Team.find(params[:team_id]) if params[:team_id].present?
+      @team = Team.find(@match.team_id) if @match.team_id.present?
     end
 
     def set_team_for_show
@@ -92,7 +95,7 @@ class MatchesController < ApplicationController
 
     def match_params
       params.require(:match).permit(:competition_id, :wedstrijddatum, :wedstrijdtijd, :thuisteam, :uitteam, :uitslag,
-                                    :opponent, :is_home_match, :team_ids,
+                                    :opponent, :is_home_match, :team_ids, :team_id,
                                     :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
       # Automatisch
       # wedstrijd (string, team - team)

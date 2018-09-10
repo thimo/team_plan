@@ -11,7 +11,7 @@ class Match < ApplicationRecord
   has_and_belongs_to_many :teams
   has_paper_trail
 
-  attr_accessor :opponent, :is_home_match
+  attr_accessor :opponent, :is_home_match, :team_id
 
   enum edit_level: { knvb: 0, club_staff: 1, team_staff: 2 }
 

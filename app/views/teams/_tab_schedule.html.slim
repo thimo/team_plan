@@ -1,7 +1,11 @@
 .tab-pane.active.show
   .row
     .col-lg-6
-      = render "matches/list", matches: @not_played_matches, title: "Wedstrijden", team: @team, include_presences: true
+      = render "matches/list", matches: @not_played_matches,
+                               title: "Wedstrijden",
+                               team: @team,
+                               include_presences: true,
+                               allow_create: true
     .col-lg-6
       = render "trainings/list", trainings: @trainings, team: @team
   .row
