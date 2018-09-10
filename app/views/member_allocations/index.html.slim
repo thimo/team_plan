@@ -12,25 +12,26 @@
           .badge.badge-secondary.badge-one-number.ml-3
             = "#{@available_members.size}"
 
-        .lighter.text-right
+        .lighter.float-right
           = year_of_birth_range(@age_group)
           = " (#{@age_group.gender.upcase})" unless @age_group.gender.blank?
 
       .card-body.p-2
         = form_with scope: :member_allocation_filters, url: member_allocation_filters_path do |f|
-          div[style="display: flex;flex-grow: 100;justify-content: space-between;"]
-            = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position),
-              { include_blank: true },
-              { id: "member_allocation_filters_field_position",
-                class: "form-control field_position",
-                onchange: "$('#filter-button').click()",
-                data: { controller: 'select2', placeholder: "Filter op veldpositie" } }
+          div.d-flex.justify-content-between
+            div style="flex: 1;"
+              = f.select :field_position, options_for_select(FieldPosition.options_for_select, @filter_field_position),
+                { include_blank: true },
+                { id: "member_allocation_filters_field_position",
+                  class: "form-control field_position",
+                  onchange: "$('#filter-button').click()",
+                  data: { controller: 'select2', placeholder: "Filter op veldpositie" } }
             = f.button :button, title: 'Filter toepassen', class: "btn btn-primary ml-1", id: 'filter-button' do
               i.fa-search[class=fa_class]
             = link_to member_allocation_filter_path(0),  method: :delete, title: "Filters verwijderen", class: "btn btn-secondary ml-1"
               i.fa-trash-alt[class=fa_class]
           - if @teams_for_filter.present?
-            div.mt-1[style="display: flex;flex-grow: 100;justify-content: space-between;"]
+            div.mt-1
               = f.select :team, options_for_select(@teams_for_filter, @filter_team),
                 { include_blank: true },
                 { id: "member_allocation_filters_team",
