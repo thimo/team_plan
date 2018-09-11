@@ -26,7 +26,7 @@ module Org
           @position_member.deactivate
         end
 
-        @position_member = OrgPositionMember.new(permitted_attributes(OrgPositionMember.new))
+        @position_member = OrgPositionMember.new(permitted_attributes(OrgPositionMember))
         authorize @position_member
 
         if @position_member.save
@@ -46,7 +46,7 @@ module Org
         end
       else
         @team = Team.find(params[:team_id])
-        @position_member = OrgPositionMember.new(permitted_attributes(OrgPositionMember.new(team: @team)))
+        @position_member = OrgPositionMember.new(permitted_attributes(OrgPositionMember))
         @position_member.team ||= @team
         authorize @position_member
 

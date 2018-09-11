@@ -25,7 +25,7 @@ class TeamMembersController < ApplicationController
         team_member.deactivate
       end
 
-      attrs = permitted_attributes(TeamMember.new).to_h
+      attrs = permitted_attributes(TeamMember).to_h
       member_ids = attrs.delete(:member_id).split(",")
       member_ids.each do |member_id|
         if (team_member = TeamMember.find_by(attrs.merge(member_id: member_id))).present?

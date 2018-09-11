@@ -40,7 +40,7 @@ module Org
         @org_position = if action_name == "new"
                           OrgPosition.new(started_on: started_on)
                         else
-                          OrgPosition.new(permitted_attributes(OrgPosition.new).merge(started_on: started_on))
+                          OrgPosition.new(permitted_attributes(OrgPosition).merge(started_on: started_on))
                         end
 
         authorize @org_position
