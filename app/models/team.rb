@@ -64,6 +64,6 @@ class Team < ApplicationRecord
   end
 
   def name_with_club
-    "#{Setting["club.name_short"]} #{name}"
+    "#{Setting['club.name_short']} #{name}"
   end
 end

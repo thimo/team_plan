@@ -43,6 +43,16 @@ class MatchPolicy < ApplicationPolicy
     update_presences?
   end
 
+  def set_team?
+    @user.role?(:beheer_oefenwedstrijden)
+  end
+
+  def permitted_attributes
+    attributes = [:wedstrijddatum, :wedstrijdtijd, :uitslag, :opponent, :is_home_match, :competition_id, :remark,
+                  :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route]
+    attributes
+  end
+
   class Scope < Scope
     def resolve
       return scope.for_competition(Competition.custom) if @user.role?(:beheer_oefenwedstrijden)

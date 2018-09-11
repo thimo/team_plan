@@ -3,8 +3,8 @@
 class MatchesController < ApplicationController
   include SchedulesHelper
 
-  before_action :create_match, only: [:new, :create]
   before_action :set_team, only: [:new, :create]
+  before_action :create_match, only: [:new, :create]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
   before_action :set_team_for_show, only: [:show]
   before_action :add_breadcrumbs, only: [:show, :new, :edit]
@@ -19,27 +19,12 @@ class MatchesController < ApplicationController
   def new; end
 
   def create
-    if @team.present?
-      if @match.is_home_match == "true"
-        @match.thuisteamid = @team.club_data_team&.teamcode
-        @match.thuisteam   = @team.club_data_team&.teamnaam || "#{Setting['club.name_short']} #{@team.name}"
-        @match.uitteamid   = nil
-        @match.uitteam     = @match.opponent
-      else
-        @match.thuisteamid = nil
-        @match.thuisteam   = @match.opponent
-        @match.uitteamid   = @team.club_data_team&.teamcode
-        @match.uitteam     = @team.club_data_team&.teamnaam || "#{Setting['club.name_short']} #{@team.name}"
-      end
-    end
-
-    @match.created_by = current_user
-    @match.edit_level = (current_user.admin? || current_user.club_staff? ? :club_staff : :team_staff)
+    set_team_info if @team.present?
 
     if @match.save
       @match.teams << @team
       flash_message(:success, "Wedstrijd is toegevoegd.")
-      redirect_to params[:return_url] || [@match, team: @team]
+      redirect_to params[:return_url].presence || @team
     else
       render :new
     end
@@ -50,7 +35,7 @@ class MatchesController < ApplicationController
   def update
     if @match.update(match_params.merge(user_modified: true))
       flash_message(:success, "Wedstrijd is aangepast.")
-      redirect_to params[:return_url] || @match
+      redirect_to params[:return_url].presence || @match
     else
       render "edit"
     end
@@ -65,7 +50,6 @@ class MatchesController < ApplicationController
 
     def set_team
       @team = Team.find(params[:team_id]) if params[:team_id].present?
-      @team = Team.find(@match.team_id) if @match.team_id.present?
     end
 
     def set_team_for_show
@@ -75,37 +59,28 @@ class MatchesController < ApplicationController
 
     def create_match
       @match = if action_name == "new"
-                 Match.new(
-                   wedstrijddatum: Match.new_match_datetime,
-                   competition: Competition.custom.asc.first
-                 )
+                 Match.new(match_defaults)
                else
-                 Match.new(match_params.merge(user_modified: true,
-                                              wedstrijdcode: Match.new_custom_wedstrijdcode,
-                                              eigenteam: true))
+                 Match.new(match_defaults.merge(permitted_attributes(Match)))
                end
-
+      @match.teams << @team if @team.present?
       authorize @match
+    end
+
+    def match_defaults
+      {
+        wedstrijddatum: Match.new_match_datetime,
+        competition: Competition.custom.asc.first,
+        user_modified: true,
+        eigenteam: true,
+        created_by: current_user,
+        edit_level: current_user.role?(:beheer_oefenwedstrijden) ? :beheer_oefenwedstrijden : :team_staff
+      }
     end
 
     def set_match
       @match = Match.find(params[:id])
       authorize @match
-    end
-
-    def match_params
-      params.require(:match).permit(:competition_id, :wedstrijddatum, :wedstrijdtijd, :thuisteam, :uitteam, :uitslag,
-                                    :opponent, :is_home_match, :team_ids, :team_id,
-                                    :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route)
-      # Automatisch
-      # wedstrijd (string, team - team)
-      # wedstrijdcode, negatief, zoals bij competitie
-      # thuisteamid?
-      # uitteamid?
-      # eigenteam (true|false)
-      # uitslag_at
-      # afgelast
-      # afgelast_status
     end
 
     def add_breadcrumbs
@@ -116,6 +91,19 @@ class MatchesController < ApplicationController
         add_breadcrumb "Nieuw"
       else
         add_breadcrumb schedule_title(@match), @match
+      end
+    end
+
+    def set_team_info
+      @match.thuisteamid = nil
+      @match.uitteamid   = nil
+
+      if @match.is_home_match == "true"
+        @match.thuisteam   = @team.name_with_club
+        @match.uitteam     = @match.opponent
+      else
+        @match.thuisteam   = @match.opponent
+        @match.uitteam     = @team.name_with_club
       end
     end
 end

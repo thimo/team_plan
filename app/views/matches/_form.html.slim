@@ -3,24 +3,27 @@
 
   = hidden_field_tag :return_url, params[:return_url]
 
-  = f.text_field :wedstrijddatum, date_picker_options
-  = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
+  - if policy(@match).set_team?
+    .form-group.row
+      label class=f.label_col
+        | Team
+      div class=f.control_col
+        = select_tag(:team_id, team_options_for_active_season(include_blank: true, default: params[:team_id]), data: { controller: "select2", placeholder: 'Selecteer een team' } )
+  - else
+    .form-group.row
+      label class=f.label_col
+        | Team
+      div class=f.control_col
+        = @team.name_with_club
 
-  - if @match.new_record?
-    / TODO: disable dropdown if you're not allowed to set team
-    div
-      = f.collection_select :team_id, human_sort(Season.active_season_for_today.teams.active.asc, :name), :id, :name_with_club,
-        { include_blank: true },
-        data: { controller: 'select2', placeholder: 'Selecteer een team' }
   - if @team.present? || @match.new_record?
     = f.form_group :is_home_match, hide_label: true, class: "radio"
       = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
       = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true
     = f.text_field :opponent
-  - else
-    |
-    = f.text_field :thuisteam
-    = f.text_field :uitteam
+
+  = f.text_field :wedstrijddatum, date_picker_options
+  = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
 
   = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name, custom: true
   = f.text_area :remark

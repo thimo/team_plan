@@ -11,9 +11,9 @@ class Match < ApplicationRecord
   has_and_belongs_to_many :teams
   has_paper_trail
 
-  attr_accessor :opponent, :is_home_match, :team_id
+  attr_accessor :opponent, :is_home_match
 
-  enum edit_level: { knvb: 0, club_staff: 1, team_staff: 2 }
+  enum edit_level: { knvb: 0, beheer_oefenwedstrijden: 1, team_staff: 2 }
 
   scope :asc,             -> { order(:wedstrijddatum) }
   scope :desc,            -> { order(wedstrijddatum: :desc) }
@@ -32,6 +32,8 @@ class Match < ApplicationRecord
   scope :active,          -> { where(afgelast: false) }
   scope :for_team,        ->(team_ids) { includes(:teams).where(teams: { id: team_ids }) }
   scope :for_competition, ->(competition_ids) { where(competition_id: competition_ids) }
+
+  before_validation :check_wedstrijdcode
 
   def started_at
     wedstrijddatum
@@ -89,13 +91,8 @@ class Match < ApplicationRecord
     self.wedstrijddatum = wedstrijddatum.change(hour: time[4], min: time[5]) unless wedstrijddatum.nil?
   end
 
-  def self.new_custom_wedstrijdcode
-    # Custom competitions have a wedstrijdcode < 0
-    [order(:wedstrijdcode).first.wedstrijdcode, 0].min - 1
-  end
-
   def self.new_match_datetime
-    Time.zone.today.at_middle_of_day
+    Time.zone.tomorrow.at_middle_of_day
   end
 
   def wedstrijddatum_date
@@ -109,4 +106,15 @@ class Match < ApplicationRecord
   def inactive?
     !active?
   end
+
+  def self.new_custom_wedstrijdcode
+    # Custom competitions have a wedstrijdcode < 0
+    [order(:wedstrijdcode).first.wedstrijdcode, 0].min - 1
+  end
+
+  private
+
+    def check_wedstrijdcode
+      self.wedstrijdcode = Match.new_custom_wedstrijdcode if wedstrijdcode.blank?
+    end
 end

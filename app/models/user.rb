@@ -238,7 +238,7 @@ class User < ApplicationRecord
                     record.presentable.team_id
                   end
       when [Match]
-        team_id = record.teams.pluck(:id)
+        team_id = record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
       end
 
       team_id
