@@ -2,17 +2,24 @@
   text-decoration: none !important;
 
   img.navbar-brand-full {
-    max-height: 25px;
-    max-width: 25px;
+    max-height: 2rem;
+    max-width: 2rem;
+  }
+
+  h1.navbar-brand-full {
+    img {
+      max-height: 1.5rem;
+      max-width: 8rem;
+    }
   }
 
   img.navbar-brand-minimized {
-    max-height: 30px;
-    max-width: 30px;
+    max-height: 2rem;
+    max-width: 2rem;
   }
 
   h1 {
-    margin: 0 0 0 .5rem;
+    margin: 0 0 0 .75rem;
     font-size: 20px;
     font-weight: 300;
     color: $dark;
