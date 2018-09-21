@@ -10,7 +10,7 @@ const stack_topright = {
   "spacing2": 10
 };
 
-PNotify.defaults.styling = "bootstrap3";
+PNotify.defaults.styling = "bootstrap4";
 PNotify.defaults.icons = "fontawesome5";
 PNotify.defaults.shadow = false;
 PNotify.defaults.cornerClass = "alert-fill";
@@ -18,6 +18,7 @@ PNotify.defaults.stack = stack_topright;
 
 PNotify.defaults.modules = {
   Buttons: {
+    closer: true,
     sticker: false
   }
 };

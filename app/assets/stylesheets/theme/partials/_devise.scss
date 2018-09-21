@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $gray-700;
     margin-bottom: 1rem;
   }
 
@@ -13,13 +12,22 @@
     margin: 0;
   }
 
-  .logo {
-    margin: 0 1rem;
-    max-height: 2rem;
-    max-width: 2rem;
+  .club-logo, .app-logo {
+    margin: .5rem .75rem;
+  }
+
+  .club-logo {
+    max-height: 4rem;
+    max-width: 4rem;
+  }
+
+  .app-logo {
+    max-height: 3rem;
+    max-width: 16rem;
   }
 
   .alert {
     width: 100%;
+    display: inline-block;
   }
 }

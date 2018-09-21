@@ -10,7 +10,7 @@ class IcalsController < ApplicationController
     return render plain: "" if team.nil?
     # user = User.active.find_by(uuid: params[:check])
     user = User.find_by(uuid: params[:check])
-    raise "Check invalid" if user.nil?
+    return render plain: "" if user.nil?
 
     schedules = team.matches.niet_afgelast.in_period(1.month.ago, 3.months.from_now) \
                   + team.trainings.in_period(1.month.ago, 3.months.from_now)
