@@ -2,7 +2,7 @@
 
 module Admin
   module Knvb
-    class ClubDataDashboardsController < Admin::BaseController
+    class DashboardsController < Admin::BaseController
       before_action :add_breadcrumbs
 
       def index
@@ -13,7 +13,7 @@ module Admin
       private
 
         def add_breadcrumbs
-          add_breadcrumb "KNVB"
+          add_breadcrumb "KNVB", admin_knvb_club_data_teams_path
           add_breadcrumb "Dashboard"
         end
     end
