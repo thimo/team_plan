@@ -40,11 +40,8 @@ module Admin
     private
 
       def create_group
-        @group = if action_name == "new"
-                   Group.new
-                 else
-                   Group.new(permitted_attributes(Group))
-                 end
+        @group = Group.new
+        @group.update(permitted_attributes(@group)) if action_name == "create"
         authorize @group
       end
 

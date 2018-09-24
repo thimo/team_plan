@@ -8,4 +8,6 @@ class Group < ApplicationRecord
   validates :name, presence: true
 
   scope :asc, -> { order(name: :asc) }
+
+  MEMBERABLE_VIA_TYPES = %w[AgeGroup].freeze
 end

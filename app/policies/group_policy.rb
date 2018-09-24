@@ -21,17 +21,23 @@ class GroupPolicy < ApplicationPolicy
     @user.role?(:beheer_applicatie) && @record.persisted?
   end
 
+  def modify_members?
+    @record.persisted? && @record.memberable_via_type.blank?
+  end
+
   def modify_roles?
     @user.role?(:beheer_applicatie)
   end
 
   def set_memberable_via_type?
-    @user.role?(:beheer_applicatie)
+    create? && @record.new_record?
   end
 
   def permitted_attributes
-    attributes = [:name, member_ids: [], role_ids: []]
+    attributes = [:name]
+    attributes << { member_ids: [] } if modify_members?
     attributes << { role_ids: [] } if modify_roles?
+    attributes << :memberable_via_type if set_memberable_via_type?
     attributes
   end
 
