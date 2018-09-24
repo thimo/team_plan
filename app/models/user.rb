@@ -77,20 +77,25 @@ class User < ApplicationRecord
         .distinct.asc
   end
 
-  # TODO: can't rename this to `member?` because of conflict with enum role
+  # NOTE: can't rename this to `member?` because of conflict with enum role
   def has_member?(member)
     members.where(id: member.id).size.positive?
   end
 
   def team_member_for?(record)
-    team_id = team_id_for record
-    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil }).size.positive?
+    team_id = team_id_for(record)
+    members.by_team(team_id).size.positive?
   end
 
   def team_staff_for?(record)
-    team_id = team_id_for record, true
-    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil })
-                           .where.not(team_members: { role: TeamMember.roles[:player] }).size.positive?
+    team_id = team_id_for(record, true)
+    members.by_team(team_id).team_staff.size.positive?
+  end
+
+  def club_staff_for?(record)
+    age_group_id_for(record)
+    # Look up age_group_members as intersection between user's members and age_groups
+    members.joins(:age_group_members).where(age_group_members: { age_group_id: age_group_id }).size.positive?
   end
 
   def favorite_teams
@@ -242,5 +247,9 @@ class User < ApplicationRecord
       end
 
       team_id
+    end
+
+    def age_group_id_for(record)
+      AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
     end
 end

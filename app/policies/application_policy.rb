@@ -14,7 +14,6 @@ class ApplicationPolicy
   end
 
   def show?
-    # scope.where(:id => record.id).exists?
     false
   end
 
@@ -36,10 +35,6 @@ class ApplicationPolicy
 
   def destroy?
     false
-  end
-
-  def show_status?
-    @user.admin? || @user.club_staff?
   end
 
   def scope
