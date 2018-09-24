@@ -5,6 +5,11 @@ class CompetitionPolicy < AdminPolicy
     true
   end
 
+  def destroy?
+    # TODO: Create different checks for local competitions (oefenwedstrijden) en KNVB competitions
+    @user.admin? && @record.persisted?
+  end
+
   class Scope < Scope
     def resolve
       scope

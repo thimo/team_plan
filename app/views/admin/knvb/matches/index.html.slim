@@ -10,17 +10,16 @@
           - if policy(Match).create?
             = link_to new_admin_knvb_club_data_results_import_path, title: "Importeer uitslagen", class: "card-header-action"
               i.fa-sync[class=fa_class]
-      .card-body.table-responsive
+      .card-body.p-0.table-responsive
         table.table.table-sm.tr-links.align-top
-          tbody
-            - @played_matches.each do |date, matches|
-              thead
-                tr
-                  th[colspan="100"]
-                    = "#{l date, format: :weekday} "
-                    = "#{l date, format: :date_long} "
-              tbody
-                = render partial: 'shared/match', collection: matches, cached: true
+          - @played_matches.each do |date, matches|
+            thead
+              tr
+                th[colspan="100"]
+                  = "#{l date, format: :weekday} "
+                  = "#{l date, format: :date_long} "
+            tbody
+              = render partial: 'shared/match', collection: matches, cached: true
 
   .col-md-6
     .card

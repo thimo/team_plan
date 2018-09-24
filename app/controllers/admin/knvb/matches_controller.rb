@@ -17,8 +17,8 @@ module Admin
       private
 
         def add_breadcrumbs
-          add_breadcrumb "KNVB"
-          add_breadcrumb "Wedstrijden"
+          add_breadcrumb "KNVB", admin_knvb_club_data_teams_path
+          add_breadcrumb "Wedstrijden", admin_knvb_matches_path
         end
     end
   end

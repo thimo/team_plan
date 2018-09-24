@@ -1,6 +1,16 @@
 - provide(:title, "Competitie #{@competition.teams.map(&:name).join(', ')} #{@competition.competitiesoort} - #{@competition.klasse}")
 - provide(:subtitle, "#{@competition.competitienaam}")
 
+- content_for :action_buttons
+  - if policy(@competition).destroy?
+    = link_to admin_knvb_competition_path(@competition),
+              method: :delete,
+              data: { confirm: 'Competitie wordt verwijderd. Doorgaan?' },
+              title: "Competitie verwijderen",
+              class: 'btn'
+      i.fa-trash-alt[class=fa_class]
+
+
 .row
   .col-6
     = render "matches/list", matches: @not_played_matches, title: "Programma", highlight_own_teams: true
