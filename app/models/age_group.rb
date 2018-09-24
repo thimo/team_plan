@@ -11,6 +11,7 @@ class AgeGroup < ApplicationRecord
   has_many :todos, as: :todoable, dependent: :destroy
   has_many :matches, through: :teams
   has_many :group_members, as: :memberable, dependent: :destroy
+  has_many :groups, through: :group_members
   has_paper_trail
 
   validates :name, :season, presence: true

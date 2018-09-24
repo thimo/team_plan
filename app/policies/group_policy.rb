@@ -2,11 +2,11 @@
 
 class GroupPolicy < ApplicationPolicy
   def index?
-    @user.role?(:beheer_applicatie)
+    @user.role?(:beheer_vereniging) || @user.role?(:beheer_applicatie)
   end
 
   def create?
-    index?
+    @user.role?(:beheer_applicatie)
   end
 
   def show?
@@ -18,7 +18,21 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def destroy?
-    index? && @record.persisted?
+    @user.role?(:beheer_applicatie) && @record.persisted?
+  end
+
+  def modify_roles?
+    @user.role?(:beheer_applicatie)
+  end
+
+  def set_memberable_via_type?
+    @user.role?(:beheer_applicatie)
+  end
+
+  def permitted_attributes
+    attributes = [:name, member_ids: [], role_ids: []]
+    attributes << { role_ids: [] } if modify_roles?
+    attributes
   end
 
   class Scope < Scope
