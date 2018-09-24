@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_02_173017) do
+ActiveRecord::Schema.define(version: 2018_09_24_190351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -146,8 +146,11 @@ ActiveRecord::Schema.define(version: 2018_09_02_173017) do
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "memberable_type"
+    t.bigint "memberable_id"
     t.index ["group_id"], name: "index_group_members_on_group_id"
     t.index ["member_id"], name: "index_group_members_on_member_id"
+    t.index ["memberable_type", "memberable_id"], name: "index_group_members_on_memberable_type_and_memberable_id"
   end
 
   create_table "groups", force: :cascade do |t|
