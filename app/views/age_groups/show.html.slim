@@ -90,6 +90,27 @@
               = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
   .col-xl-6
+    - if (groups = Group.by_model(AgeGroup.to_s).asc).any?
+      - groups.each do |group|
+        .card
+          .card-header
+            = group.name
+            .card-header-actions
+              - if policy(@age_group).modify_members?
+                / Link naar new group_member met age_group en group params
+                / Toont pagina met dropdown voor members
+                = link_to new_match_path, title: "#{group.name} toevoegen", class: "card-header-action"
+                  i.fa-plus-square[class=fa_class]
+
+          .card-body.p-0
+            - if group.members.any?
+              = render 'members/list_body', members: group.members
+
+            - else
+              .p-3
+                i Geen #{group.name.downcase} gevonden
+
+
     - if policy(@age_group).show_available_members? && @available_members.present?
       = render "members/list", members: @available_members, title: "Wachtlijst"
 
