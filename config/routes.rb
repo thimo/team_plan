@@ -77,7 +77,6 @@ Rails.application.routes.draw do
       end
     end
     resources :member_allocation_filters, only: [:create, :destroy]
-
     resources :members, only: [:show], shallow: true do
       member do
         post :create_login
@@ -105,6 +104,7 @@ Rails.application.routes.draw do
         post :set_active_tab
       end
     end
+    resources :group_members, only: [:new, :create, :destroy]
 
     get "org" => "org/base#show"
     namespace :org do

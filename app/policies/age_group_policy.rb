@@ -70,7 +70,8 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def modify_members?
-    @record.persisted? && @user.role?(:beheer_applicatie)
+    @user.role?(:beheer_vereniging) &&
+      @record.persisted? && !@record.archived?
   end
 
   def permitted_attributes

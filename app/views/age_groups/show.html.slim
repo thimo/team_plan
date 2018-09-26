@@ -99,7 +99,7 @@
               - if policy(@age_group).modify_members?
                 / Link naar new group_member met age_group en group params
                 / Toont pagina met dropdown voor members
-                = link_to new_match_path, title: "#{group.name} toevoegen", class: "card-header-action"
+                = link_to new_group_member_path(group_id: group, memberable_type: AgeGroup, memberable_id: @age_group), title: "#{group.name} toevoegen", class: "card-header-action"
                   i.fa-plus-square[class=fa_class]
 
           .card-body.p-0

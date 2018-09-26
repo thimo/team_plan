@@ -1,0 +1,12 @@
+= bootstrap_form_for @group_member, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on,
+    { include_blank: true },
+    { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer lid' } }
+
+  .row
+    .col-sm-9.offset-sm-3
+      = f.submit "Opslaan", class: 'btn btn-primary'
+      / TODO: to group or memberable
+      = link_to "Annuleren", admin_groups_path, class: 'btn btn-light'
