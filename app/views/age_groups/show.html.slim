@@ -97,15 +97,21 @@
             = group.name
             .card-header-actions
               - if policy(@age_group).modify_members?
-                / Link naar new group_member met age_group en group params
-                / Toont pagina met dropdown voor members
-                = link_to new_group_member_path(group_id: group, memberable_type: AgeGroup, memberable_id: @age_group), title: "#{group.name} toevoegen", class: "card-header-action"
+                = link_to new_age_group_group_member_path(@age_group, group_id: group), title: "#{group.name} toevoegen", class: "card-header-action"
                   i.fa-plus-square[class=fa_class]
 
           .card-body.p-0
             - if group.members.any?
-              = render 'members/list_body', members: group.members
-
+              table.table.table-sm.tr-links
+                tbody
+                  - group.members.each do |member|
+                    tr
+                      td
+                        = member.name
+                      td.small[style="max-width: 160px;"]
+                        = member.email
+                      td.w-1
+                        | x
             - else
               .p-3
                 i Geen #{group.name.downcase} gevonden

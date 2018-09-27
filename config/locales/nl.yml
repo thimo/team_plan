@@ -47,6 +47,9 @@ nl:
         roles: Rollen
         role_ids: Rollen
         memberable_via_type: Leden via
+      group_member:
+        member: Lid
+        member_id: Lid
       match:
         wedstrijddatum: Datum
         wedstrijdtijd: Aanvangstijd
