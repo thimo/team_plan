@@ -36,6 +36,7 @@ class Team < ApplicationRecord
   scope :for_active_season, -> { joins(age_group: :season).where(seasons: { status: Season.statuses[:active] }) }
   scope :active_or_archived, -> { where(status: [Team.statuses[:archived], Team.statuses[:active]]) }
   scope :by_teamcode, ->(teamcode) { joins(:club_data_team).where(club_data_teams: { teamcode: teamcode }) }
+  scope :by_status, ->(status) { where(status: status) }
 
   def favorite?(user)
     !favorites.where(user: user).empty?
