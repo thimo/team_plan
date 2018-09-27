@@ -23,7 +23,15 @@
             td
               = link_to group.name, [:edit, :admin, group]
             td
-              - group.members.asc.each do |member|
+              - group.members.distinct.asc.each do |member|
                 div
                   = link_to member.name, member
             td
+              - group.roles.asc.each do |role|
+                div
+                  - if role.body.present?
+                    = role.body
+                    span.small.lighter.pl-1
+                      = role.name
+                  - else
+                    = role.name

@@ -6,10 +6,14 @@ class AgeGroup < ApplicationRecord
   belongs_to :season
   has_many :teams, dependent: :destroy
   has_many :team_members, through: :teams
-  has_many :members, through: :team_members
+  # This association does not seem to be used
+  # has_many :members, through: :team_members
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :todos, as: :todoable, dependent: :destroy
   has_many :matches, through: :teams
+  has_many :group_members, as: :memberable, dependent: :destroy
+  has_many :members, through: :group_members
+  has_many :groups, through: :group_members
   has_paper_trail
 
   validates :name, :season, presence: true
@@ -17,7 +21,9 @@ class AgeGroup < ApplicationRecord
   scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: [nil, "all", ""])) }
   scope :female, -> { where(gender: "v") }
   scope :asc, -> { order(year_of_birth_to: :asc) }
+  scope :draft_or_active, -> { where(status: [AgeGroup.statuses[:draft], AgeGroup.statuses[:active]]) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
+  scope :by_team, ->(team) { joins(:teams).where(teams: { id: team }).distinct }
 
   PLAYER_COUNT = [4, 5, 6, 7, 8, 9, 11].freeze
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45].freeze

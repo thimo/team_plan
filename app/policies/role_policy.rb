@@ -1,9 +1,30 @@
 # frozen_string_literal: true
 
-class RolePolicy < AdminPolicy
+class RolePolicy < ApplicationPolicy
+  def index?
+    @user.role?(:beheer_applicatie)
+  end
+
+  def create?
+    index?
+  end
+
+  def show?
+    index?
+  end
+
+  def update?
+    index?
+  end
+
+  def destroy?
+    index? && @record.persisted?
+  end
+
   class Scope < Scope
     def resolve
-      scope
+      return scope.all if @user.role?(:beheer_applicatie)
+      scope.none
     end
   end
 end

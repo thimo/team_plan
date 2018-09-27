@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  rolify
   include Filterable
   include Statussable
 
@@ -16,6 +15,8 @@ class User < ApplicationRecord
   has_many :injuries, dependent: :destroy
   has_one :user_setting, dependent: :destroy
   has_and_belongs_to_many :members
+  has_many :groups, through: :members
+  has_many :roles, through: :groups
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise
@@ -76,20 +77,25 @@ class User < ApplicationRecord
         .distinct.asc
   end
 
-  # TODO: can't rename this to `member?` because of conflict with enum role
+  # NOTE: can't rename this to `member?` because of conflict with enum role
   def has_member?(member)
     members.where(id: member.id).size.positive?
   end
 
   def team_member_for?(record)
-    team_id = team_id_for record
-    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil }).size.positive?
+    team_id = team_id_for(record)
+    members.by_team(team_id).size.positive?
   end
 
   def team_staff_for?(record)
-    team_id = team_id_for record, true
-    team_id != 0 && members.joins(:team_members).where(team_members: { team_id: team_id, ended_on: nil })
-                           .where.not(team_members: { role: TeamMember.roles[:player] }).size.positive?
+    team_id = team_id_for(record, true)
+    members.by_team(team_id).team_staff.size.positive?
+  end
+
+  def club_staff_for?(record)
+    age_group_id_for(record)
+    # Look up age_group_members as intersection between user's members and age_groups
+    members.joins(:age_group_members).where(age_group_members: { age_group_id: age_group_id }).size.positive?
   end
 
   def favorite_teams
@@ -198,6 +204,18 @@ class User < ApplicationRecord
     deactivate if members.none?
   end
 
+  def role?(role)
+    all_roles.include?(role.to_s)
+  end
+
+  def any_beheer_role?
+    all_roles.any? { |role| role.start_with?("beheer_") }
+  end
+
+  def all_roles
+    @all_roles ||= roles.distinct.pluck(:name)
+  end
+
   private
 
     def team_id_for(record, as_team_staf = false)
@@ -225,9 +243,13 @@ class User < ApplicationRecord
                     record.presentable.team_id
                   end
       when [Match]
-        team_id = record.teams.pluck(:id)
+        team_id = record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
       end
 
       team_id
+    end
+
+    def age_group_id_for(record)
+      AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
     end
 end

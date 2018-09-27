@@ -321,7 +321,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rolify (5.2.0)
     ruby-graphviz (1.2.3)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
@@ -458,7 +457,6 @@ DEPENDENCIES
   redcarpet (~> 3.4.0)
   redis (~> 4.0)
   rest-client
-  rolify
   rubyzip
   sassc-rails
   selenium-webdriver

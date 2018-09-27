@@ -54,7 +54,7 @@ module Admin
       end
 
       def role_params
-        params.require(:role).permit(:name, :description)
+        params.require(:role).permit(:name, :body)
       end
 
       def add_breadcrumbs

@@ -95,4 +95,11 @@ module TeamsHelper
       @match_presences_data[:datasets][3][:data] << presences.not_present.not_signed_off.size
     end
   end
+
+  def team_options_for_active_season(include_blank: false, default: nil)
+    teams = human_sort(Season.active_season_for_today.teams.active.asc, :name)
+    teams_array = teams.collect { |t| [t.name_with_club, t.id] }
+    teams_array.unshift(["", ""]) if include_blank
+    options_for_select(teams_array, default)
+  end
 end

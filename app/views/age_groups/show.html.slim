@@ -63,6 +63,10 @@
       .card.schedule-list
         .card-header
           | Programma
+          .card-header-actions
+            - if policy(Match).create?
+              = link_to new_match_path(return_url: request.original_fullpath), title: "Een wedstrijd toevoegen", class: "card-header-action"
+                i.fa-plus-square[class=fa_class]
 
         .card-body.p-0
           table.table.table-sm.tr-links.align-top
@@ -86,6 +90,8 @@
               = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
   .col-xl-6
+    = render "age_groups/member_groups"
+
     - if policy(@age_group).show_available_members? && @available_members.present?
       = render "members/list", members: @available_members, title: "Wachtlijst"
 

@@ -1,0 +1,29 @@
+- if (groups = Group.by_model(AgeGroup.to_s).asc).any?
+  - groups.each do |group|
+    .card
+      .card-header
+        = group.name
+        .card-header-actions
+          - if policy(@age_group).modify_members?
+            = link_to new_age_group_group_member_path(@age_group, group_id: group), title: "#{group.name} toevoegen", class: "card-header-action"
+              i.fa-plus-square[class=fa_class]
+
+      .card-body.p-0
+        - if @age_group.group_members.any?
+          table.table.table-sm.tr-links
+            tbody
+              - @age_group.group_members.each do |group_member|
+                tr
+                  td
+                    = group_member.member.name
+                  td
+                    = mail_to group_member.member.email
+                      i.fa-envelope.mr-1[class=fa_class]
+                      = group_member.member.email
+                  - if policy(group_member).destroy?
+                    td.w-1
+                      = link_to group_member_path(group_member),  method: :delete, data: { confirm: "#{group_member.member.name} wordt verwijderd. Doorgaan?" }, title: "#{group_member.member.name} verwijderen"
+                        i.fa-trash-alt[class=fa_class]
+        - else
+          .p-3
+            i Geen #{group.name.downcase} gevonden

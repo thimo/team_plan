@@ -25,7 +25,7 @@ module Admin
     def edit; end
 
     def update
-      if @group.update(group_params)
+      if @group.update(permitted_attributes(@group))
         redirect_to admin_groups_path, notice: "Groep is aangepast."
       else
         render "edit"
@@ -40,21 +40,14 @@ module Admin
     private
 
       def create_group
-        @group = if action_name == "new"
-                   Group.new
-                 else
-                   Group.new(group_params)
-                 end
+        @group = Group.new
+        @group.update(permitted_attributes(@group)) if action_name == "create"
         authorize @group
       end
 
       def set_group
         @group = Group.find(params[:id])
         authorize @group
-      end
-
-      def group_params
-        params.require(:group).permit(:name, member_ids: [])
       end
 
       def add_breadcrumbs

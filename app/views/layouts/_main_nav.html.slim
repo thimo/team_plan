@@ -12,7 +12,7 @@ li.nav-item
     = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
       i.fa-folder-open.nav-icon[class=fa_class]
       | Intranet
-- if policy(:admin).show?
+- if current_user.any_beheer_role?
   li.nav-item
     = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
       i.fa-cog.nav-icon[class=fa_class]

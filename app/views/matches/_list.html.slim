@@ -3,14 +3,18 @@
 - team ||= nil
 - include_presences ||= false
 - highlight_own_teams ||= false
+- allow_create ||= false
 
 .card.schedule-list
   .card-header
     == title
     .card-header-actions
-      - if team.present?
-        - if policy(team).create_match?
+      - if allow_create && (policy(Match).create? || (team.present? && policy(team).create_match?))
+        - if team.present?
           = link_to new_team_match_path(team), title: "Een wedstrijd toevoegen", class: "card-header-action"
+            i.fa-plus-square[class=fa_class]
+        - else
+          = link_to new_match_path(return_url: request.original_fullpath), title: "Een wedstrijd toevoegen", class: "card-header-action"
             i.fa-plus-square[class=fa_class]
 
   - if matches.any?

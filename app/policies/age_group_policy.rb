@@ -69,6 +69,11 @@ class AgeGroupPolicy < ApplicationPolicy
     download_team_members?
   end
 
+  def modify_members?
+    @user.role?(:beheer_vereniging) &&
+      @record.persisted? && !@record.archived?
+  end
+
   def permitted_attributes
     attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half]
     attributes << :status if set_status?

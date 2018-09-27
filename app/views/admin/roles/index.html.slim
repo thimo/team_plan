@@ -14,10 +14,17 @@
       thead
         tr
           th = Role.human_attribute_name(:name)
-          th
+          th = Role.human_attribute_name(:body)
+          th = Role.human_attribute_name(:groups)
 
       tbody
         - @roles.each do |role|
           tr
             td
               = link_to role.name, [:edit, :admin, role]
+            td
+                = role.body
+            td
+              - role.groups.asc.each do |group|
+                div
+                  = group.name

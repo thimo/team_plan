@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get :cancellations
       end
     end
+    resources :matches
     resources :seasons, shallow: true do
       member do
         post :inherit_age_groups
@@ -57,11 +58,12 @@ Rails.application.routes.draw do
           resources :trainings, shallow: true do
             resources :presences
           end
-          resources :matches, shallow: true do
+          resources :matches do
             resources :presences
           end
           resources :schedules
         end
+        resources :group_members, only: [:new, :create]
       end
     end
 
@@ -76,7 +78,6 @@ Rails.application.routes.draw do
       end
     end
     resources :member_allocation_filters, only: [:create, :destroy]
-
     resources :members, only: [:show], shallow: true do
       member do
         post :create_login
@@ -99,12 +100,12 @@ Rails.application.routes.draw do
       end
     end
     resources :competitions, only: [:show]
-    # resources :matches
-    resources :comments, only: []  do
+    resources :comments, only: [] do
       collection do
         post :set_active_tab
       end
     end
+    resources :group_members, only: [:new, :create, :destroy]
 
     get "org" => "org/base#show"
     namespace :org do
@@ -146,6 +147,7 @@ Rails.application.routes.draw do
       resources :competitions
       resources :groups
       resources :roles
+      resources :matches
     end
   end
 

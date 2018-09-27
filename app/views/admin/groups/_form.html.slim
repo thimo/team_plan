@@ -3,11 +3,36 @@
 
   = f.text_field :name, autofocus: true
 
-  = f.collection_select :member_ids, Member.sportlink_active.all, :id, :name,
-    { },
-    { data: { controller: 'select2', placeholder: "Filter op gebruikers" },
-      multiple: "multiple" }
+  - if policy(@group).set_memberable_via_type?
+    = f.select :memberable_via_type, [["Via deze group", ""]] + Group::MEMBERABLE_VIA_TYPES
 
+  - if policy(@group).modify_members?
+    = f.collection_select :member_ids, Member.sportlink_active.all, :id, :name,
+      { },
+      { data: { controller: 'select2', placeholder: "Selecteer leden" },
+        multiple: "multiple" }
+  - elsif @group.memberable_via_type.present?
+    .form-group.row
+      label class=f.label_col
+        | Leden
+      div class=f.control_col
+        - @group.members.distinct.asc.each do |member|
+          div
+            = member.name
+
+  - if policy(@group).modify_roles?
+    = f.collection_select :role_ids, Role.all, :id, :name,
+      { },
+      { data: { controller: 'select2', placeholder: "Selecteer rollen" },
+        multiple: "multiple" }
+  - else
+    .form-group.row
+      label class=f.label_col
+        | Rollen
+      div class=f.control_col
+        - @group.roles.each do |role|
+          div
+            = role.name
 
   .row
     .col-sm-9.offset-sm-3

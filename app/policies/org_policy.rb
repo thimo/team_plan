@@ -25,7 +25,8 @@ class OrgPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope if @user.admin?
+      return scope if @user.admin?
+      scope.none
     end
   end
 end

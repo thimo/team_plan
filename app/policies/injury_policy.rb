@@ -32,6 +32,7 @@ class InjuryPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
+      # TODO: limit scope if this is used
       scope
     end
   end

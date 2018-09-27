@@ -46,7 +46,13 @@ nl:
         member_ids: Leden
         roles: Rollen
         role_ids: Rollen
+        memberable_via_type: Leden via
+      group_member:
+        member: Lid
+        member_id: Lid
       match:
+        wedstrijddatum: Datum
+        wedstrijdtijd: Aanvangstijd
         opponent: Tegenstander
         location: Wedstrijdlocatie
         started_at: Datum
@@ -58,6 +64,7 @@ nl:
         half_count: Aantal helften
         competition_id: Soort
         is_home_match: Thuis of uit?
+        team_ids: Team
       member:
         first_name: Voornaam
         middle_name: Tussenvoegsels
@@ -104,6 +111,8 @@ nl:
         remark: Opmerking
       role:
         name: Naam
+        body: Beschrijving
+        groups: Groepen
       season:
         name: Seizoen
         active: Actief
