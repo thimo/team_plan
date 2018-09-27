@@ -90,32 +90,7 @@
               = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
   .col-xl-6
-    - if (groups = Group.by_model(AgeGroup.to_s).asc).any?
-      - groups.each do |group|
-        .card
-          .card-header
-            = group.name
-            .card-header-actions
-              - if policy(@age_group).modify_members?
-                = link_to new_age_group_group_member_path(@age_group, group_id: group), title: "#{group.name} toevoegen", class: "card-header-action"
-                  i.fa-plus-square[class=fa_class]
-
-          .card-body.p-0
-            - if group.members.any?
-              table.table.table-sm.tr-links
-                tbody
-                  - group.members.each do |member|
-                    tr
-                      td
-                        = member.name
-                      td.small[style="max-width: 160px;"]
-                        = member.email
-                      td.w-1
-                        | x
-            - else
-              .p-3
-                i Geen #{group.name.downcase} gevonden
-
+    = render "age_groups/member_groups"
 
     - if policy(@age_group).show_available_members? && @available_members.present?
       = render "members/list", members: @available_members, title: "Wachtlijst"

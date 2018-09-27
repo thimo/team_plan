@@ -23,7 +23,7 @@
             td
               = link_to group.name, [:edit, :admin, group]
             td
-              - group.members.asc.each do |member|
+              - group.members.distinct.asc.each do |member|
                 div
                   = link_to member.name, member
             td

@@ -16,10 +16,9 @@
       label class=f.label_col
         | Leden
       div class=f.control_col
-        | TODO: Fetch all members via correct model and show them here
-        / - @group.roles.each do |role|
-        /   div
-        /     = role.name
+        - @group.members.distinct.asc.each do |member|
+          div
+            = member.name
 
   - if policy(@group).modify_roles?
     = f.collection_select :role_ids, Role.all, :id, :name,
