@@ -1,16 +1,6 @@
 - provide(:title, "#{@member.name}")
 
 - content_for :action_buttons
-  - if policy(@member).resend_password? && @member.user.present?
-    = link_to resend_password_member_path(@member), method: :post, class: "btn", data: { confirm: "#{@member.name} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
-      i.fa-lock[class=fa_class]
-      span.d-down-none.pl-1
-        | Nieuw wachtwoord
-  - if policy(@member).create_login? && @member.user.nil?
-    = link_to create_login_member_path(@member), method: :post, class: "btn", data: { confirm: "#{@member.name} ontvangt login gegevens via e-mail. Doorgaan?" }
-      i.fa-user[class=fa_class]
-      span.d-down-none.pl-1
-        | Login aanmaken
   - if policy(Injury.new(member: @member)).create? && policy(@member).show_injuries?
     = link_to new_member_injury_path(@member), title: "Blessure toevoegen", class: "btn"
       i.fa-medkit[class=fa_class]

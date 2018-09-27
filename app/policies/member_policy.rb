@@ -80,17 +80,17 @@ class MemberPolicy < ApplicationPolicy
       @user.club_staff?
   end
 
+  def create_login?
+    @user.admin? ||
+      @user.club_staff?
+  end
+
   def show_login?
     create_login?
   end
 
   def resend_password?
     create_login?
-  end
-
-  def create_login?
-    @user.admin? ||
-      @user.club_staff?
   end
 
   class Scope < Scope

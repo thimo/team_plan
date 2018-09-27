@@ -15,9 +15,10 @@ class Member < ApplicationRecord
   LOCAL_TEAMS_WELKOM_BIJ_ESA = "aWelkom bij ESA"
 
   EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on
-                      gender role address zipcode city phone email member_since previous_team].freeze
+                      gender role address zipcode city phone email email_2 member_since previous_team].freeze
   EXPORT_COLUMNS_ADVANCED = %w[field_positions prefered_foot advise_next_season].freeze
-  DEFAULT_COLUMNS = %w[team association_number name born_on role address zipcode city phone email].freeze
+  DEFAULT_COLUMNS = %w[team association_number name born_on role address zipcode city phone email email_2].freeze
+  EMAIL_ADDRESSES = %w[email email_2 email_parent email_parent_2].freeze
 
   has_many :team_members, dependent: :destroy
   has_many :team_members_as_player, -> { where(role: TeamMember.roles[:player]) },
@@ -64,8 +65,8 @@ class Member < ApplicationRecord
   scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
 
   scope :query, ->(query) {
-                  where("email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",
-                        "%#{query}%", "%#{query}%", "%#{query}%")
+                  where("email ILIKE ? OR email_2 ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",
+                        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
                 }
   scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
   scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
@@ -76,7 +77,10 @@ class Member < ApplicationRecord
                               includes(team_members: :field_positions)
                                 .where(field_positions: { id: field_positions })
                             }
-  scope :by_email, ->(email) { where("lower(email) = ?", email.downcase) }
+  scope :by_email, ->(email) {
+    where(EMAIL_ADDRESSES.map { |mail| "lower(#{mail}) = ?" }.join(" OR "),
+          *([email.downcase] * EMAIL_ADDRESSES.size))
+  }
   scope :recent_members, ->(days_ago) {
                            where("registered_at >= ?", days_ago.days.ago.beginning_of_day)
                              .order(registered_at: :desc, created_at: :desc)
@@ -253,27 +257,37 @@ class Member < ApplicationRecord
 
     def update_users
       if new_record?
-        add_to_user email
-
+        EMAIL_ADDRESSES.each do |mail|
+          add_to_user(mail)
+        end
       elsif sportlink_inactive?
-        remove_from_user email_was if email_changed?
-        remove_from_user email
-
-      elsif email_changed?
-        remove_from_user email_was
-        add_to_user email
+        EMAIL_ADDRESSES.each do |mail|
+          remove_from_user(send("#{mail}_was")) if send("#{mail}_changed?")
+          remove_from_user(send(mail))
+        end
+      else
+        EMAIL_ADDRESSES.each do |mail|
+          if send("#{mail}_changed?")
+            remove_from_user(send("#{mail}_was"))
+            add_to_user(send(mail))
+          end
+        end
       end
     end
 
     def add_to_user(email)
-      if email.present? && (user = User.by_email(email).first).present?
+      return if email.blank?
+
+      if (user = User.by_email(email).first).present?
         users << user
         user.activate
       end
     end
 
     def remove_from_user(email)
-      if email.present? && (user = User.by_email(email).first).present?
+      return if email.blank?
+
+      if (user = User.by_email(email).first).present?
         user.members.delete(self)
         user.deactivate if user.members.none?
       end

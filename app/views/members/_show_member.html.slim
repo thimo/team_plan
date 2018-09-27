@@ -35,32 +35,48 @@
               button.btn.btn-secondary[type="button" data-dismiss="modal"]
                 | Sluiten
 
-      - unless member.phone.blank?
+      - if member.phone.present?
         div.pt-2
           a[href="tel:#{member.phone}"]
             = member.phone
             i.fa-phone.ml-2[class=fa_class]
-      - unless member.phone_2.blank?
+      - if member.phone_2.present?
         div
           a[href="tel:#{member.phone_2}"]
             = member.phone_2
             i.fa-phone.ml-2[class=fa_class]
-      - unless member.phone_home.blank?
+      - if member.phone_home.present?
         div
           a[href="tel:#{member.phone_home}"]
             = member.phone_home
             i.fa-phone.ml-2[class=fa_class]
 
-      - unless member.email.blank?
-        div
-          = mail_to member.email
-            = member.email
-            i.fa-envelope.ml-2[class=fa_class]
-      - unless member.email_2.blank?
-        div
-          = mail_to member.email_2
-            = member.email_2
-            i.fa-envelope.ml-2[class=fa_class]
+      div.pt-2
+        - Member::EMAIL_ADDRESSES.each do |mail|
+          - if (email = member.send(mail)).present?
+            div.d-flex.justify-content-between
+              div
+                = mail_to email
+                  = email
+                  i.fa-envelope.ml-2[class=fa_class]
+
+              - user = User.by_email(email)
+              - if policy(@member).resend_password? && user.any?
+                div
+                  = link_to resend_password_member_path(@member, email: email), method: :post,
+                                                                                class: "color-gray",
+                                                                                data: { confirm: "#{email} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
+                    i.fa-lock[class=fa_class]
+                    span.d-down-none.pl-1
+                      | Nieuw wachtwoord
+              - if policy(@member).create_login? && user.none?
+                div
+                  = link_to create_login_member_path(@member, email: email), method: :post,
+                                                                             class: "color-gray",
+                                                                             data: { confirm: "#{email} ontvangt login gegevens via e-mail. Doorgaan?" }
+                    i.fa-user[class=fa_class]
+                    span.d-down-none.pl-1
+                      | Login aanmaken
 
       - if policy(member).show_login? && member.email.present?
         div.mt-2
