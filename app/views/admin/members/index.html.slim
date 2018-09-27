@@ -33,10 +33,12 @@
             td
               = render 'members/member', member: member
             td
-              = member.email
+              - Member::EMAIL_ADDRESSES.each do |mail|
+                - if (email = member.send(mail)).present?
+                  div = email
             td
               - member.users.each do |user|
-                = link_to user.name, [:edit, :admin, user]
+                div = link_to user.name, [:edit, :admin, user]
 
 .d-flex.flex-row-reverse
   = paginate @members, theme: 'twitter-bootstrap-4'
