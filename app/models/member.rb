@@ -258,7 +258,7 @@ class Member < ApplicationRecord
     def update_users
       if new_record?
         EMAIL_ADDRESSES.each do |mail|
-          add_to_user(mail)
+          add_to_user(send(mail))
         end
       elsif sportlink_inactive?
         EMAIL_ADDRESSES.each do |mail|
