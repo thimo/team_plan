@@ -19,11 +19,12 @@ export default class extends Controller {
           i++;
         }
         return data;
-      }
+      },
+      width: null,       // Prevent select2 calculating width
+      theme: "bootstrap" // In case the select2 is initialized before the default theme is set
     });
   }
 
   disconnect() {
-    $(this.element).select2('destroy');
   }
 }
