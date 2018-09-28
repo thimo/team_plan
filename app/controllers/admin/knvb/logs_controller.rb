@@ -7,6 +7,7 @@ module Admin
 
       def index
         @logs = policy_scope(ClubDataLog).desc.page(params[:page]).per(50)
+        authorize @logs
       end
 
       private

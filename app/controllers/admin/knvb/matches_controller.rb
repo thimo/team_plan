@@ -12,6 +12,7 @@ module Admin
         @played_matches = policy_scope(Match).own.played.desc
                                              .in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day)
                                              .group_by { |match| match.wedstrijddatum.to_date }
+        authorize Match
       end
 
       private

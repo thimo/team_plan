@@ -8,6 +8,7 @@ module Admin
 
     def index
       @roles = policy_scope(Role).asc
+      authorize @roles
     end
 
     def show; end

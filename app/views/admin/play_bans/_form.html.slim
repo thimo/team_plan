@@ -1,7 +1,6 @@
 = bootstrap_form_for [:admin, @play_ban], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
   = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
 
-  / = f.hidden_field :group_id
   = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on,
     { include_blank: true },
     { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer de speler' } }

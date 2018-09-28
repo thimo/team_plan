@@ -8,6 +8,7 @@ module Admin
 
     def index
       @soccer_fields = policy_scope(SoccerField).asc
+      authorize @soccer_fields
     end
 
     def new; end

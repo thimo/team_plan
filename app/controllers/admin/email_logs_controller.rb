@@ -6,7 +6,7 @@ module Admin
 
     def index
       @email_logs = policy_scope(EmailLog).order(:created_at).reverse_order.page(params[:page]).per(50)
-      authorize EmailLog
+      authorize @email_logs
     end
 
     def show

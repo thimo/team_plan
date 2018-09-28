@@ -8,6 +8,7 @@ module Admin
 
     def index
       @play_bans = policy_scope(PlayBan).asc
+      authorize @play_bans
     end
 
     def show; end

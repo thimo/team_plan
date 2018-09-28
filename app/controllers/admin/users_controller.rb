@@ -10,6 +10,7 @@ module Admin
       @users = policy_scope(User).asc.filter(params.slice(:role, :query)).includes(:members)
       @users = params[:inactive] ? @users.archived : @users.active
       @users = @users.page(params[:page]).per(50)
+      authorize @users
     end
 
     def show; end

@@ -8,6 +8,7 @@ module Admin
 
     def index
       @competitions = policy_scope(Competition).custom.asc
+      authorize @competitions
     end
 
     def new; end

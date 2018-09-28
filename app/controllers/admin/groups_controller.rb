@@ -8,6 +8,7 @@ module Admin
 
     def index
       @groups = policy_scope(Group).asc
+      authorize @groups
     end
 
     def show; end

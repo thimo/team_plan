@@ -10,6 +10,7 @@ module Admin
       matches = policy_scope(Match).for_competition(Competition.custom)
       @matches_planned = matches.from_now.asc
       @matches_played = matches.in_past.desc
+      authorize matches
     end
 
     def show; end

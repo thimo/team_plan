@@ -7,6 +7,7 @@ module Admin
 
       def index
         @teams = policy_scope(Season.active_season_for_today.club_data_teams).active.includes(:teams).asc
+        authorize @teams
       end
 
       private

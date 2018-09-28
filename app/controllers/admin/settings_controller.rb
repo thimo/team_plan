@@ -8,6 +8,7 @@ module Admin
     def index
       @settings = Setting.get_all
       skip_policy_scope
+      authorize Setting
     end
 
     def edit; end

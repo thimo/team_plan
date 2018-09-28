@@ -8,6 +8,7 @@ module Admin
 
     def index
       @version_updates = policy_scope(VersionUpdate).desc.page(params[:page]).per(10)
+      authorize @version_updates
     end
 
     def new; end

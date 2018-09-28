@@ -11,6 +11,7 @@ module Admin
                                                                                  .includes(:club_data_team_competitions,
                                                                                            :club_data_teams,
                                                                                            club_data_teams: :teams).asc
+        authorize @competitions
       end
 
       def show
