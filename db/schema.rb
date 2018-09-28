@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_183231) do
+ActiveRecord::Schema.define(version: 2018_09_28_190828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -332,6 +332,17 @@ ActiveRecord::Schema.define(version: 2018_09_28_183231) do
     t.index ["ancestry"], name: "index_org_positions_on_ancestry"
   end
 
+  create_table "play_bans", force: :cascade do |t|
+    t.bigint "member_id"
+    t.date "starts_at"
+    t.date "ends_at"
+    t.integer "play_ban_type"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_play_bans_on_member_id"
+  end
+
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_evaluation_id"
     t.string "advise_next_season"
@@ -597,6 +608,7 @@ ActiveRecord::Schema.define(version: 2018_09_28_183231) do
   add_foreign_key "notes", "users"
   add_foreign_key "org_position_members", "members"
   add_foreign_key "org_position_members", "org_positions"
+  add_foreign_key "play_bans", "members"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
   add_foreign_key "presences", "members"
