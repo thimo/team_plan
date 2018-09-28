@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_190828) do
+ActiveRecord::Schema.define(version: 2018_09_28_192231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -334,8 +334,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_190828) do
 
   create_table "play_bans", force: :cascade do |t|
     t.bigint "member_id"
-    t.date "starts_at"
-    t.date "ends_at"
+    t.date "started_on"
+    t.date "ended_on"
     t.integer "play_ban_type"
     t.text "body"
     t.datetime "created_at", null: false
