@@ -1,0 +1,25 @@
+= bootstrap_form_for [:admin, @play_ban], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+
+  / = f.hidden_field :group_id
+  = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on,
+    { include_blank: true },
+    { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer de speler' } }
+
+  = f.text_field :started_on, date_picker_options
+  = f.text_field :ended_on, date_picker_options(help: "Invullen als het speelverbod ingetrokken is")
+
+  = f.text_field :body, autofocus: true
+
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", [:admin, :play_bans], class: 'btn btn-light'
+        div
+          - if policy(@play_ban).destroy?
+            = link_to "Verwijderen", admin_play_ban_path(@play_ban),
+                                     method: :delete,
+                                     data: { confirm: 'Speelverbod wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-danger'

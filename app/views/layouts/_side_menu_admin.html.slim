@@ -30,6 +30,11 @@ li.nav-title
     = link_to admin_matches_path, class: "nav-link #{'active' if controller.class == Admin::MatchesController}" do
       i.fa-fw.fa-futbol.nav-icon[class=fa_class]
       | Oefenwedstrijden
+- if policy(:play_ban).index?
+  li.nav-item
+    = link_to admin_play_bans_path, class: "nav-link #{'active' if controller.class == Admin::PlayBansController}" do
+      i.fa-fw.fa-ban.nav-icon[class=fa_class]
+      | Speelverboden
 
 - if policy(:club_data_dashboard).index?
   li.nav-title

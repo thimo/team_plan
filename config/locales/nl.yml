@@ -94,6 +94,13 @@ nl:
         position_type: Soort positie
         started_on: Begindatum
         ended_on: Einddatum
+      play_ban:
+        member: Speler
+        member_id: Speler
+        started_on: Vanaf
+        ended_on: Tot en met
+        body: Beschrijving
+        play_ban_type: Soort speelverbod
       player_evaluation:
         advise_next_season: Advies niveau
         remark: Opmerking

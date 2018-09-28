@@ -148,6 +148,7 @@ Rails.application.routes.draw do
       resources :groups
       resources :roles
       resources :matches
+      resources :play_bans
     end
   end
 
