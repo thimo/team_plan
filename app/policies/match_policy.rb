@@ -2,7 +2,7 @@
 
 class MatchPolicy < ApplicationPolicy
   def index?
-    @user.role?(:beheer_knvb_club_data) || @user.role?(:beheer_oefenwedstrijden)
+    @user.role?(Role::BEHEER_KNVB_CLUB_DATA) || @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN)
   end
 
   def show?
@@ -14,7 +14,7 @@ class MatchPolicy < ApplicationPolicy
   # end
 
   def create?
-    @user.role?(:beheer_oefenwedstrijden) ||
+    @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN) ||
       @user.team_staff_for?(@record)
   end
 
@@ -23,7 +23,7 @@ class MatchPolicy < ApplicationPolicy
     return false if @record.knvb?
 
     # Admin/club_staff can edit all matches, team staff only those created by themselves
-    @user.role?(:beheer_oefenwedstrijden) ||
+    @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN) ||
       (@record.team_staff? && @user.team_staff_for?(@record))
   end
 
@@ -44,7 +44,7 @@ class MatchPolicy < ApplicationPolicy
   end
 
   def set_team?
-    @user.role?(:beheer_oefenwedstrijden)
+    @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN)
   end
 
   def permitted_attributes
@@ -55,8 +55,8 @@ class MatchPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.for_competition(Competition.custom) if @user.role?(:beheer_oefenwedstrijden)
-      return scope if @user.role?(:beheer_knvb_club_data)
+      return scope.for_competition(Competition.custom) if @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN)
+      return scope if @user.role?(Role::BEHEER_KNVB_CLUB_DATA)
       scope.none
     end
   end

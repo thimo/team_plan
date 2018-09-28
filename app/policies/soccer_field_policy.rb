@@ -2,7 +2,7 @@
 
 class SoccerFieldPolicy < ApplicationPolicy
   def index?
-    @user.role?(:beheer_vereniging)
+    @user.role?(Role::BEHEER_VERENIGING)
   end
 
   def create?
@@ -23,7 +23,7 @@ class SoccerFieldPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope if @user.role?(:beheer_vereniging)
+      return scope if @user.role?(Role::BEHEER_VERENIGING)
       scope.none
     end
   end

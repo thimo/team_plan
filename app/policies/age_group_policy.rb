@@ -70,7 +70,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def modify_members?
-    @user.role?(:beheer_vereniging) &&
+    @user.role?(Role::BEHEER_VERENIGING) &&
       @record.persisted? && !@record.archived?
   end
 

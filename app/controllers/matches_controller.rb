@@ -74,7 +74,7 @@ class MatchesController < ApplicationController
         user_modified: true,
         eigenteam: true,
         created_by: current_user,
-        edit_level: current_user.role?(:beheer_oefenwedstrijden) ? :beheer_oefenwedstrijden : :team_staff
+        edit_level: current_user.role?(Role::BEHEER_OEFENWEDSTRIJDEN) ? :beheer_oefenwedstrijden : :team_staff
       }
     end
 

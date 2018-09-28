@@ -2,7 +2,7 @@
 
 class CompetitionPolicy < ApplicationPolicy
   def index?
-    @user.role?(:beheer_vereniging)
+    @user.role?(Role::BEHEER_VERENIGING)
   end
 
   def create?
@@ -24,7 +24,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.all if @user.role?(:beheer_vereniging)
+      return scope.all if @user.role?(Role::BEHEER_VERENIGING)
       scope.none
     end
   end

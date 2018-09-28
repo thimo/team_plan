@@ -2,7 +2,7 @@
 
 class ClubDataLogPolicy < ApplicationPolicy
   def index?
-    @user.role?(:beheer_knvb_club_data)
+    @user.role?(Role::BEHEER_KNVB_CLUB_DATA)
   end
 
   def create?
@@ -23,7 +23,7 @@ class ClubDataLogPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.all if @user.role?(:beheer_knvb_club_data)
+      return scope.all if @user.role?(Role::BEHEER_KNVB_CLUB_DATA)
       scope.none
     end
   end
