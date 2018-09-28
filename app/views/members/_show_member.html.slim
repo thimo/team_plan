@@ -3,7 +3,7 @@
     | Contactgegevens
 
   .card-body
-    = image_tag @member.photo_url, class: "member_photo" if @member.photo.present?
+    = image_tag @member.photo_url, class: "member_photo pl-2 pb-2" if @member.photo.present?
 
     .strong
       => member.name
@@ -52,31 +52,30 @@
             i.fa-phone.ml-2[class=fa_class]
 
       div.pt-2
-        - Member::EMAIL_ADDRESSES.each do |mail|
-          - if (email = member.send(mail)).present?
-            div.d-flex.justify-content-between
-              div
-                = mail_to email
-                  = email
-                  i.fa-envelope.ml-2[class=fa_class]
+        - member.emails.each do |email|
+          div.d-flex.justify-content-between
+            div
+              = mail_to email
+                = email
+                i.fa-envelope.ml-2[class=fa_class]
 
-              - user = User.by_email(email)
-              - if policy(@member).resend_password? && user.any?
-                div
-                  = link_to resend_password_member_path(@member, email: email), method: :post,
-                                                                                class: "color-gray",
-                                                                                data: { confirm: "#{email} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
-                    i.fa-lock[class=fa_class]
-                    span.d-down-none.pl-1
-                      | Nieuw wachtwoord
-              - if policy(@member).create_login? && user.none?
-                div
-                  = link_to create_login_member_path(@member, email: email), method: :post,
-                                                                             class: "color-gray",
-                                                                             data: { confirm: "#{email} ontvangt login gegevens via e-mail. Doorgaan?" }
-                    i.fa-user[class=fa_class]
-                    span.d-down-none.pl-1
-                      | Login aanmaken
+            - user = User.by_email(email)
+            - if policy(@member).resend_password? && user.any?
+              div
+                = link_to resend_password_member_path(@member, email: email), method: :post,
+                                                                              class: "color-gray",
+                                                                              data: { confirm: "#{email} ontvangt een nieuw wachtwoord. Het oude wachtwoord is hierna niet meer te gebruiken. Doorgaan?" }
+                  i.fa-lock[class=fa_class]
+                  span.d-down-none.pl-1
+                    | Wachtwoord
+            - if policy(@member).create_login? && user.none?
+              div
+                = link_to create_login_member_path(@member, email: email), method: :post,
+                                                                           class: "color-gray",
+                                                                           data: { confirm: "#{email} ontvangt login gegevens via e-mail. Doorgaan?" }
+                  i.fa-user[class=fa_class]
+                  span.d-down-none.pl-1
+                    | Login
 
       - if policy(member).show_login? && member.email.present?
         div.mt-2

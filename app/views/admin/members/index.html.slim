@@ -33,9 +33,8 @@
             td
               = render 'members/member', member: member
             td
-              - Member::EMAIL_ADDRESSES.each do |mail|
-                - if (email = member.send(mail)).present?
-                  div = email
+              - member.emails.each do |email|
+                div = email
             td
               - member.users.each do |user|
                 div = link_to user.name, [:edit, :admin, user]

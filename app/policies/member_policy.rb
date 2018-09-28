@@ -81,8 +81,7 @@ class MemberPolicy < ApplicationPolicy
   end
 
   def create_login?
-    @user.admin? ||
-      @user.club_staff?
+    @user.admin?
   end
 
   def show_login?

@@ -253,6 +253,10 @@ class Member < ApplicationRecord
     Member::EXPORT_COLUMNS + (user.admin? || user.club_staff? ? Member::EXPORT_COLUMNS_ADVANCED : [])
   end
 
+  def emails
+    EMAIL_ADDRESSES.map { |mail| send(mail) }.compact.uniq
+  end
+
   private
 
     def update_users
