@@ -17,9 +17,10 @@
                   td
                     = group_member.member.name
                   td
-                    = mail_to group_member.member.email
+                    - email = group_member.member.email_2.presence || group_member.member.email
+                    = mail_to email
                       i.fa-envelope.mr-1[class=fa_class]
-                      = group_member.member.email
+                      = email
                   - if policy(group_member).destroy?
                     td.w-1
                       = link_to group_member_path(group_member),  method: :delete, data: { confirm: "#{group_member.member.name} wordt verwijderd. Doorgaan?" }, title: "#{group_member.member.name} verwijderen"
