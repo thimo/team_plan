@@ -1,5 +1,5 @@
 = bootstrap_form_for [:admin, @user], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
-  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+  = f.alert_message t("bootstrap_form.check_errors")
   = hidden_field_tag :member, params[:member]
 
   = f.text_field :first_name

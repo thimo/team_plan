@@ -1,7 +1,7 @@
 - provide(:title, t('.change_my_password', default: 'Change my password'))
 
 = bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: 'form' }) do |f|
-  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+  = f.alert_message t("bootstrap_form.check_errors")
 
   = f.hidden_field :reset_password_token
   = f.text_field :password,

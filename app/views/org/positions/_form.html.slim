@@ -1,5 +1,5 @@
 = bootstrap_form_for @org_position, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
-  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+  = f.alert_message t("bootstrap_form.check_errors")
 
   = f.collection_select :parent_id, @org_positions, :id, :name_for_selects, label: "Parent", include_blank: "-- Selecteer de parent"
   = f.collection_radio_buttons :position_type, OrgPosition.position_types_i18n, :first, :second

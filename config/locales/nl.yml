@@ -427,3 +427,6 @@ nl:
   simple_calendar:
     previous: Vorige maand
     next: Volgende maand
+
+  bootstrap_form:
+    check_errors: "Controleer alsjeblieft de velden hieronder:"

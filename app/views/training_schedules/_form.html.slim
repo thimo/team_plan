@@ -5,7 +5,7 @@
     | Deze training is niet meer actief
 
 = bootstrap_form_for [@team, @training_schedule], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
-  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+  = f.alert_message t("bootstrap_form.check_errors")
 
   = f.collection_select :day, TrainingSchedule.days_i18n, :first, :second, { prompt: "-- Selecteer een dag" },
     { class: 'width-md-50' }

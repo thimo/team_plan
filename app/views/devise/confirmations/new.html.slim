@@ -2,7 +2,7 @@
 - provide(:subtitle, "Vraag de instructies voor het bevestigen opnieuw aan")
 
 = bootstrap_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, role: 'form' }) do |f|
-  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+  = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_field :email,
     prepend: tag.i(class: [fa_class, 'fa-at']),

@@ -18,7 +18,7 @@ class TeamEvaluationsController < ApplicationController
     if @team_evaluation.save
       post_save_actions
     else
-      flash.now[:error] = "Controleer alsjeblieft de fouten hieronder"
+      flash.now[:error] = "Controleer alsjeblieft de velden hieronder"
       render :new
     end
   end
@@ -33,7 +33,7 @@ class TeamEvaluationsController < ApplicationController
     if @team_evaluation.update(team_evaluation_params)
       post_save_actions
     else
-      flash.now[:error] = "Controleer alsjeblieft de fouten hieronder"
+      flash.now[:error] = "Controleer alsjeblieft de velden hieronder"
       render :new
     end
   end

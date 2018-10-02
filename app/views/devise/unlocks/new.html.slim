@@ -2,7 +2,7 @@ h1
   = t('.resend_unlock_instructions', default: 'Resend unlock instructions')
 
 = bootstrap_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, role: 'form' }) do |f|
-  = f.alert_message "Controleer alsjeblieft de fouten hieronder:"
+  = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_field :email, autofocus: true, class: 'form-control'
 
