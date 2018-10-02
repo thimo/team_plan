@@ -6,9 +6,6 @@ module Admin
 
     def new
       authorize(Member)
-
-      add_breadcrumb "Leden", admin_members_path
-      add_breadcrumb "Import"
     end
 
     def create
@@ -42,6 +39,7 @@ module Admin
 
       def add_breadcrumbs
         add_breadcrumb "Leden", admin_members_path
+        add_breadcrumb "Import"
       end
   end
 end
