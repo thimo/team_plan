@@ -5,8 +5,10 @@
   = hidden_field_tag :return, params[:return]
 
   = f.text_area :body, placeholder: "Todo", autofocus: true
-  = f.text_field :started_on, date_picker_options(help: "Optioneel: De datum waarop de todo actief wordt.")
-  = f.text_field :ended_on, date_picker_options(help: "Optioneel: De deadline voor deze todo")
+  div data-controller="clickable-append"
+    = f.text_field :started_on, date_picker_options(help: "Optioneel: De datum waarop de todo actief wordt.")
+  div data-controller="clickable-append"
+    = f.text_field :ended_on, date_picker_options(help: "Optioneel: De deadline voor deze todo")
 
   .row
     .col-sm-9.offset-sm-3

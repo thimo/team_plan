@@ -3,7 +3,8 @@
 
   = f.text_field :name
   = f.text_area :body, help: 'Gebruik <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="_new">Markdown</a> bij het opmaken van de tekst'.html_safe
-  = f.text_field :released_at, date_picker_options
+  div data-controller="clickable-append"
+    = f.text_field :released_at, date_picker_options
   = f.collection_radio_buttons :for_role, VersionUpdate.for_roles_i18n, :first, :second
 
   .row

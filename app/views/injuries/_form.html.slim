@@ -3,8 +3,10 @@
 
   = f.text_field :title, autofocus: true
 
-  = f.text_field :started_on, date_picker_options
-  = f.text_field :ended_on, date_picker_options(help: "Invullen als de blessure voorbij is")
+  div data-controller="clickable-append"
+    = f.text_field :started_on, date_picker_options
+  div data-controller="clickable-append"
+    = f.text_field :ended_on, date_picker_options(help: "Invullen als de blessure voorbij is")
 
   = render 'input/trix', f: f, field: :body
 

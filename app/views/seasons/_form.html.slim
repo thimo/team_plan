@@ -2,8 +2,10 @@
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_field :name, autofocus: true
-  = f.text_field :started_on, date_picker_options(help: 'Normaal gesproken per 1 juli')
-  = f.text_field :ended_on, date_picker_options(help: '30 juni van het volgende jaar')
+  div data-controller="clickable-append"
+    = f.text_field :started_on, date_picker_options(help: 'Normaal gesproken per 1 juli')
+  div data-controller="clickable-append"
+    = f.text_field :ended_on, date_picker_options(help: '30 juni van het volgende jaar')
 
   - if policy(@season).set_status?
     = f.collection_radio_buttons :status, Season.statuses_i18n, :first, :second

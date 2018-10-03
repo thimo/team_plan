@@ -22,7 +22,8 @@
       = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true
     = f.text_field :opponent
 
-  = f.text_field :wedstrijddatum, date_picker_options
+  div data-controller="clickable-append"
+    = f.text_field :wedstrijddatum, date_picker_options
   = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
 
   = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name, custom: true
