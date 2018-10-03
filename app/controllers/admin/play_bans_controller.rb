@@ -7,7 +7,9 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      @play_bans = policy_scope(PlayBan).asc
+      @play_bans = policy_scope(PlayBan).start_in_past.end_in_future.order_started_on
+      @play_bans_future = policy_scope(PlayBan).start_in_future.end_in_future.order_started_on
+      @play_bans_past = policy_scope(PlayBan).end_in_past.order_ended_on
       authorize @play_bans
     end
 

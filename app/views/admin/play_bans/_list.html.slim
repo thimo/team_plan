@@ -1,0 +1,30 @@
+- if play_bans.any?
+  .card
+    .card-header
+      | #{title} (#{play_bans.count})
+    .card-body.p-0
+      table.table.table-sm.tr-links
+        thead
+          tr
+            th = PlayBan.human_attribute_name(:member)
+            th = Member.human_attribute_name(:association_number)
+            th = Team.human_attribute_name(:name)
+            th = PlayBan.human_attribute_name(:started_on)
+            th = PlayBan.human_attribute_name(:ended_on)
+
+        tbody
+          - play_bans.each do |play_ban|
+            tr.align-top
+              td
+                = link_to play_ban.member.name, [:edit, :admin, play_ban]
+              td
+                = play_ban.member.association_number
+              td
+                - if (team = play_ban.member.active_team)
+                  = team.name_with_club
+                - else
+                  | -
+              td
+                = play_ban.started_on
+              td
+                = play_ban.ended_on

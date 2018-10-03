@@ -1,37 +1,13 @@
 - provide(:title, "Speelverboden")
 
-.card
-  .card-header
-    | #{@play_bans.count} Speelverboden
+- content_for :action_buttons
+  - if policy(PlayBan).create?
+    = link_to new_admin_play_ban_path, title: "Speelverbod toevoegen", class: "btn"
+      i.fa-file[class=fa_class]
 
-    .card-header-actions
-      - if policy(PlayBan).create?
-        = link_to new_admin_play_ban_path, title: "Speelverbod toevoegen", class: "card-header-action"
-          i.fa-file[class=fa_class]
+    = link_to new_admin_play_bans_import_path, title: "Importeer speelverboden", class: "btn"
+      i.fa-upload[class=fa_class]
 
-        = link_to new_admin_play_bans_import_path, title: "Importeer speelverboden", class: "card-header-action"
-          i.fa-upload[class=fa_class]
-
-  .card-body.p-0
-    table.table.table-sm.tr-links
-      thead
-        tr
-          th = PlayBan.human_attribute_name(:member)
-          th = Member.human_attribute_name(:association_number)
-          th = Team.human_attribute_name(:name)
-          th = PlayBan.human_attribute_name(:started_on)
-          th = PlayBan.human_attribute_name(:ended_on)
-
-      tbody
-        - @play_bans.each do |play_ban|
-          tr.align-top
-            td
-              = link_to play_ban.member.name, [:edit, :admin, play_ban]
-            td
-              = play_ban.member.association_number
-            td
-              = play_ban.member.active_team.name
-            td
-              = play_ban.started_on
-            td
-              = play_ban.ended_on
+= render "list", play_bans: @play_bans, title: "Actief"
+= render "list", play_bans: @play_bans_future, title: "Toekomstig"
+= render "list", play_bans: @play_bans_past, title: "Afgerond"
