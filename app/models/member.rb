@@ -35,6 +35,7 @@ class Member < ApplicationRecord
   has_many :todos, as: :todoable, dependent: :nullify
   has_many :injuries, dependent: :destroy
   has_many :presences, dependent: :destroy
+  has_many :play_bans, dependent: :destroy
 
   has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
@@ -86,6 +87,11 @@ class Member < ApplicationRecord
                              .order(registered_at: :desc, created_at: :desc)
                          }
   scope :injured, -> { where(injured: true) }
+  scope :with_active_play_ban, -> {
+    joins(:play_bans).where("play_bans.started_on <= ? AND (play_bans.ended_on >= ? OR play_bans.ended_on IS null)",
+                            Time.zone.today, Time.zone.today)
+  }
+  scope :with_future_play_ban, -> { joins(:play_bans).where("play_bans.started_on > ?", Time.zone.today) }
 
   pg_search_scope :search_by_name,
                   against: [:first_name, :middle_name, :last_name, :email, :email2, :phone, :phone2],
@@ -255,6 +261,10 @@ class Member < ApplicationRecord
 
   def emails
     EMAIL_ADDRESSES.map { |mail| send(mail) }.compact.uniq
+  end
+
+  def play_ban?
+    play_bans.active.any?
   end
 
   private

@@ -6,6 +6,8 @@ class PlayBan < ApplicationRecord
 
   enum play_ban_type: { contribution: 0 }
 
+  scope :by_member, ->(member) { where(member: member) }
+  scope :active, -> { start_in_past.end_in_future }
   scope :start_in_past, -> { where("started_on <= ?", Time.zone.today) }
   scope :start_in_future, -> { where("started_on > ?", Time.zone.today) }
   scope :end_in_future, -> { where(ended_on: nil).or(where("ended_on >= ?", Time.zone.today)) }

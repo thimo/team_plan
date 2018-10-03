@@ -66,6 +66,13 @@ class MemberPolicy < ApplicationPolicy
       @user.has_member?(@record)
   end
 
+  def show_play_ban?
+    @user.admin? ||
+      @user.club_staff? ||
+      @user.team_staff_for?(@record) ||
+      @user.has_member?(@record)
+  end
+
   def show_comments?
     show_evaluations? ||
       @user.has_member?(@record)

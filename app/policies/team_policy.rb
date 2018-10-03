@@ -101,6 +101,12 @@ class TeamPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def show_play_bans?
+    return false if @record.archived?
+
+    club_or_team_staff?
+  end
+
   def create_match?
     return false if @record.archived?
 

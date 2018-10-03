@@ -35,6 +35,12 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff?
   end
 
+  def show_play_bans?
+    return false if @record.archived?
+    
+    @user.admin? || @user.club_staff?
+  end
+
   def show_todos?
     return false if @record.archived?
 
