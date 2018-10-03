@@ -97,8 +97,8 @@ nl:
       play_ban:
         member: Speler
         member_id: Speler
-        started_on: Vanaf
-        ended_on: Tot en met
+        started_on: Startdatum
+        ended_on: Einddatum
         body: Beschrijving
         play_ban_type: Soort speelverbod
       player_evaluation:

@@ -1,4 +1,8 @@
-= bootstrap_form_with url: admin_play_bans_import_index_path, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+= bootstrap_form_with url: admin_play_bans_import_index_path,
+                      layout: :horizontal,
+                      local: true,
+                      label_col: "col-sm-3",
+                      control_col: "col-sm-9" do |f|
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_area :association_numbers, autofocus: true,
@@ -6,7 +10,15 @@
                                       help: "Plak hier de KNVB nummers is van leden van wie een speelverbod aangemaakt of afgerond moet worden",
                                       value: params[:association_numbers]
 
-  = f.text_field :date, { value: Time.zone.today, label: "Datum" }.merge(date_picker_options(help: "Invullen als het speelverbod ingetrokken is"))
+
+  = f.form_group :date_type, class: "radio"
+    = f.radio_button :date_type, "started_on", label: "Aanmaken", inline: true, checked: true, custom: true
+    = f.radio_button :date_type, "ended_on", label: "Afronden", inline: true, custom: true
+
+  div data-controller="clickable-append"
+    = f.text_field :date, { value: Time.zone.today, label: "Datum" }.merge( \
+        date_picker_options(help: "Vul hier bij het aanmaken de <b>startdatum</b> in of bij het afronden de <b>einddatum</b>".html_safe) \
+      )
 
   = f.text_area :body, label: "Opmerking"
 
@@ -14,5 +26,5 @@
     .col-sm-9.offset-sm-3
       .d-flex.justify-content-between
         div
-          = f.submit "Opslaan", class: 'btn btn-primary'
+          = f.submit "Volgende stap", class: 'btn btn-primary'
           = link_to "Annuleren", [:admin, :play_bans], class: 'btn btn-light'

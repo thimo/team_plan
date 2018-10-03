@@ -8,9 +8,10 @@
   div data-controller="clickable-append"
     = f.text_field :started_on, date_picker_options
   div data-controller="clickable-append"
-    = f.text_field :ended_on, date_picker_options(help: "Invullen als het speelverbod ingetrokken is")
+    = f.text_field :ended_on, \
+      date_picker_options(help: "Invullen als het speelverbod ingetrokken is. Dit is de laatste dag dat het speelverbod actief is.")
 
-  = f.text_field :body, autofocus: true
+  = f.text_area :body, autofocus: true
 
   .row
     .col-sm-9.offset-sm-3
