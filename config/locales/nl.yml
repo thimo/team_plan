@@ -400,6 +400,7 @@ nl:
   age_group: Leeftijdsgroep
   team: Team
   association_number: KNVB nummer
+  association_numbers: KNVB nummers
   name: Naam
   full_name: Achternaam, voornaam
   last_name: Achternaam

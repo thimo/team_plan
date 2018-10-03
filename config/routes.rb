@@ -149,6 +149,7 @@ Rails.application.routes.draw do
       resources :roles
       resources :matches
       resources :play_bans
+      resources :play_bans_import, only: [:new, :create]
     end
   end
 
