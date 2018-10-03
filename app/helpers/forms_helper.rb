@@ -12,7 +12,8 @@ module FormsHelper
         date_today_highlight: true,
         date_autoclose: true
       },
-      class: style_class
+      class: style_class,
+      autocomplete: "off"
     }
   end
 end
