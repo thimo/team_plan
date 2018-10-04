@@ -51,3 +51,9 @@ textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+
+trix-editor {
+  &.form-control {
+    height: auto;
+  }
+}
