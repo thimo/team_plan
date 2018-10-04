@@ -11,6 +11,9 @@ document.addEventListener("turbolinks:load", () => {
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     autosize.update($('textarea'))
   })
+  // After initial page load, textarea's no longer properly size. This 'fixes' it.
+  // Behaviour difference can be seen between Cmd-Shift-R and Cmd-R reloads
+  setTimeout(function() { autosize.update(document.querySelectorAll('textarea')); }, 50)
 
   // Initialize date pickers
   $('[data-provide="datepicker"]').datepicker();

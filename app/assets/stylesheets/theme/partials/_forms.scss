@@ -44,6 +44,10 @@
 
 textarea {
   min-height: 3.5rem;
+
+  &.form-control {
+    height: auto;
+  }
 }
 
 // Hack, needed because sass (currently) doesn't add vendor specific rules for appearance
