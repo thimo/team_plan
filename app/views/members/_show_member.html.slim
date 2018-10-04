@@ -128,7 +128,8 @@
 
       - if policy(member).show_play_ban? && member.play_ban?
         .alert.alert-danger.m-0.mt-3
-          i.fa-ban.fa-lg.color-red.mr-2[class=fa_class]
+          span.mr-2
+            = render "shared/icons/play_ban"
           | Er is een actief speelverbod gevonden.
 
 .card

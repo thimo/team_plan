@@ -1,0 +1,11 @@
+.card
+  .card-header.p-2
+    span.mr-2
+      = render "shared/icons/play_ban"
+    | Speelverboden
+
+  .card-body.p-0
+    table.table.table-sm.tr-links
+      tbody
+        = render "play_bans/rows", title: "Actief", play_bans: @play_bans
+        = render "play_bans/rows", title: "Aanstaand", play_bans: @play_bans_future
