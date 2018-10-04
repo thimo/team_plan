@@ -11,20 +11,17 @@
                                       value: params[:association_numbers]
 
 
-  = f.form_group :date_type, class: "radio"
-    = f.radio_button :date_type, "started_on", label: "Aanmaken", inline: true, checked: true, custom: true
-    = f.radio_button :date_type, "ended_on", label: "Afronden", inline: true, custom: true
+  = f.form_group :play_ban_action, class: "radio"
+    = f.radio_button :play_ban_action, "create", label: "Aanmaken", inline: true, checked: true, custom: true
+    = f.radio_button :play_ban_action, "finish", label: "Afronden", inline: true, custom: true
 
   div data-controller="clickable-append"
     = f.text_field :date, { value: Time.zone.today, label: "Datum" }.merge( \
         date_picker_options(help: "Vul hier bij het aanmaken de <b>startdatum</b> in of bij het afronden de <b>einddatum</b>".html_safe) \
       )
 
-  = f.text_area :body, label: "Opmerking"
+  = f.text_area :body, label: "Opmerking", help: "Wordt alleen overgenomen bij het aanmaken van een nieuw speelverbod."
 
-  .row
-    .col-sm-9.offset-sm-3
-      .d-flex.justify-content-between
-        div
-          = f.submit "Volgende stap", class: 'btn btn-primary'
-          = link_to "Annuleren", [:admin, :play_bans], class: 'btn btn-light'
+  .text-right
+    = link_to "Annuleren", [:admin, :play_bans], class: 'btn btn-light'
+    = f.submit "Volgende stap", class: 'btn btn-primary'

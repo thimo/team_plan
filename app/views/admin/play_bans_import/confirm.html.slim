@@ -1,0 +1,28 @@
+- provide(:title, "Speelverboden bevestigen")
+
+.card.card-body.p-0
+  table.table
+    thead
+      th Speler
+      th Resultaat
+    tbody
+      - @confirm_messages.each do |member, message|
+        tr
+          td
+            = member.name
+          td
+            = message.html_safe
+
+
+.p-3
+  = bootstrap_form_with url: admin_play_bans_import_index_path, local: true do |f|
+
+    = f.hidden_field :association_numbers, value: params[:association_numbers]
+    = f.hidden_field :play_ban_action, value: params[:play_ban_action]
+    = f.hidden_field :date, value: params[:date]
+    = f.hidden_field :body, value: params[:body]
+    = f.hidden_field :confirmed, value: "true"
+
+    .text-right
+      = link_to "Annuleren", [:admin, :play_bans], class: 'btn btn-light'
+      = f.submit "Bevestigen", class: 'btn btn-primary'
