@@ -2,13 +2,13 @@
 
 class TeamPolicy < ApplicationPolicy
   def show?
-    @user.admin? || @user.club_staff? || !@record.draft?
+    !@record.draft? || @user.admin? || @user.club_staff_for?(@record)
   end
 
   def create?
     return false if @record.age_group.archived?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def update?
@@ -18,7 +18,7 @@ class TeamPolicy < ApplicationPolicy
   def destroy?
     return false unless @record.draft?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   # Tabs
@@ -79,20 +79,20 @@ class TeamPolicy < ApplicationPolicy
     return false if @record.archived?
 
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.team_member_for?(@record)
   end
 
   def show_status?
     return false if @record.status == @record.age_group.status
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def show_previous_team?
     return false if @record.archived?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def set_status?
@@ -129,7 +129,7 @@ class TeamPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.club_staff?
+      if @user.admin? || @user.club_staff_for?(@record)
         scope
       else
         scope.active_or_archived
@@ -141,7 +141,7 @@ class TeamPolicy < ApplicationPolicy
 
     def club_or_team_staff?
       @user.admin? ||
-        @user.club_staff? ||
+        @user.club_staff_for?(@record) ||
         @user.team_staff_for?(@record)
     end
 end

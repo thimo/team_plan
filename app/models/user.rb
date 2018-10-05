@@ -64,6 +64,10 @@ class User < ApplicationRecord
     Team.for_members(members).active.for_active_season.distinct
   end
 
+  def active_age_groups
+    AgeGroup.for_members(members).active.for_active_season.distinct
+  end
+
   def teams_as_staff
     Team.for_members(members)
         .where.not(team_members: { role: TeamMember.roles[:player] })
@@ -93,9 +97,9 @@ class User < ApplicationRecord
   end
 
   def club_staff_for?(record)
-    age_group_id_for(record)
+    age_group_id = age_group_id_for(record)
     # Look up age_group_members as intersection between user's members and age_groups
-    members.joins(:age_group_members).where(age_group_members: { age_group_id: age_group_id }).size.positive?
+    members.joins(:group_members).where(group_members: { memberable_type: "AgeGroup", memberable_id: age_group_id }).size.positive?
   end
 
   def favorite_teams
@@ -219,37 +223,45 @@ class User < ApplicationRecord
   private
 
     def team_id_for(record, as_team_staf = false)
-      team_id = 0
-
       case [record.class]
       when [Team]
-        team_id = record.id
+        record.id
       when [Member]
         # Find overlap in teams between current user and given member
         team_members = as_team_staf ? record.team_members.staff : record.team_members
         team_members = team_members.active if member?
-        team_id = team_members.pluck(:team_id).uniq
+        team_members.pluck(:team_id).uniq
       when [PlayerEvaluation]
-        team_id = record.team_evaluation.team_id
+        record.team_evaluation.team_id
       when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
-        team_id = record.team_id
+        record.team_id
       when [Comment]
-        team_id = record.commentable_id if record.commentable_type == "Team"
-        team_id = record.commentable.active_team&.id if record.commentable_type == "Member"
+        if record.commentable_type == "Team"
+          record.commentable_id
+        elsif record.commentable_type == "Member"
+          record.commentable.active_team&.id
+        else
+          0
+        end
       when [Presence]
-        team_id = if record.presentable_type == "Match"
-                    record.presentable.teams.pluck(:id)
-                  else
-                    record.presentable.team_id
-                  end
+        if record.presentable_type == "Match"
+          record.presentable.teams.pluck(:id)
+        else
+          record.presentable.team_id
+        end
       when [Match]
-        team_id = record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
+        record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
+      else
+        0
       end
-
-      team_id
     end
 
     def age_group_id_for(record)
-      AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+      case [record.class]
+      when [AgeGroup]
+        record.id
+      else
+        AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+      end
     end
 end
