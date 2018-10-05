@@ -1,15 +1,22 @@
 - provide(:title, "Speelverboden bevestigen")
 
+- content_for :title_icon
+  span.mr-2
+    = render "shared/icons/play_ban"
+
 .card.card-body.p-0
   table.table
     thead
       th Speler
+      th Team
       th Resultaat
     tbody
       - @confirm_messages.each do |member, message|
         tr
           td
             = member.name
+          td
+            = member.active_team&.name
           td
             = message.html_safe
 
