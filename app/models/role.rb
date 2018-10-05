@@ -7,7 +7,7 @@ class Role < ApplicationRecord
   BEHEER_ROLES = %w[beheer_applicatie beheer_vereniging beheer_knvb_club_data beheer_oefenwedstrijden
                     beheer_contributie_speelverboden].freeze
   TEAM_ROLES = %w[team_show_evaluations].freeze
-  MEMBER_ROLES = %w[member_show_private_data member_show_evaluations].freeze
+  MEMBER_ROLES = %w[member_show_private_data member_previous_team member_show_evaluations].freeze
   ROLES = BEHEER_ROLES + TEAM_ROLES + MEMBER_ROLES
   ROLES.each do |role|
     const_set(role.upcase, role.to_sym)
