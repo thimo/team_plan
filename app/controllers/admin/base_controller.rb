@@ -12,7 +12,7 @@ module Admin
 
     def show
       skip_authorization
-      redirect_to admin_members_path
+      redirect_to admin_members_path if policy(Member).index?
     end
 
     private
