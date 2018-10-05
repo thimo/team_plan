@@ -16,7 +16,7 @@ class ClubDataTeam < ApplicationRecord
   def link_to_team
     return if teams.for_active_season.present?
 
-    stripped_teamname = teamnaam.gsub(Setting["club.name"], "").strip
+    stripped_teamname = teamnaam.gsub(Setting["club.name"], "").gsub(Setting["club.name_short"], "").strip
 
     team = Team.for_active_season.active.find_by(name: [teamnaam, stripped_teamname])
     team ||= Team.for_active_season.active.find_by("teams.name like (?) OR teams.name like (?)",
