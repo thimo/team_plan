@@ -28,6 +28,7 @@ module Admin
         end
 
         if @confirmed
+          flash_message(:success, "Speelverboden zijn aangemaakt en/of aangepast.")
           redirect_to [:admin, :play_bans]
         else
           render :confirm
