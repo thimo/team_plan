@@ -55,9 +55,7 @@ class MatchPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.for_competition(Competition.custom) if @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN)
-      return scope if @user.role?(Role::BEHEER_KNVB_CLUB_DATA)
-      scope.none
+      scope
     end
   end
 end
