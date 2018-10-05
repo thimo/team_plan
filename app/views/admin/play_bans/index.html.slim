@@ -1,5 +1,9 @@
 - provide(:title, "Speelverboden")
 
+- content_for :title_icon
+  span.mr-2
+    = render "shared/icons/play_ban"
+
 - content_for :action_buttons
   - if policy(PlayBan).create?
     = link_to new_admin_play_ban_path, title: "Speelverbod toevoegen", class: "btn"
