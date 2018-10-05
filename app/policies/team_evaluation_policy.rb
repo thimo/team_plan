@@ -3,7 +3,7 @@
 class TeamEvaluationPolicy < ApplicationPolicy
   def index?
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.team_staff_for?(@record)
   end
 
@@ -14,7 +14,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def create?
     return false if @record.team.nil? || !@record.team.active?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def update?
@@ -26,13 +26,13 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def destroy?
     return false if @record.new_record? || @record.finished_at.present?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def send_invite?
     return false if @record.invited_at.present?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def finish_evaluation?
@@ -44,7 +44,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def re_open?
     return false if @record.archived? || @record.new_record? || @record.finished_at.nil?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   class Scope < Scope

@@ -9,7 +9,7 @@ class TrainingSchedulePolicy < ApplicationPolicy
     return false if @record.team.archived?
 
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record.team) ||
       @user.team_staff_for?(@record.team)
   end
 

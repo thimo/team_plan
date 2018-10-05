@@ -12,7 +12,7 @@ class TeamMemberPolicy < ApplicationPolicy
   def create?
     return false if @record&.team.archived?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def update?
@@ -22,14 +22,14 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def set_role?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def destroy?
     return false if @record.team.archived? # Never edit a team member for an archived team
     return true if @record.active? && @user.admin? # Admin can always remove team members in an active season
 
-    (@record.draft? || @record.active?) && (@user.admin? || @user.club_staff?)
+    (@record.draft? || @record.active?) && (@user.admin? || @user.club_staff_for?(@record))
   end
 
   def activate?
@@ -37,13 +37,13 @@ class TeamMemberPolicy < ApplicationPolicy
     return false unless @record.team.active?
     return false if @record.active?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def show_status?
     return false if @record.status == @record.team.status
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def set_status?
@@ -55,7 +55,7 @@ class TeamMemberPolicy < ApplicationPolicy
   def set_initial_status?
     return false if @record.persisted? || @record.team.nil? || @record.team.draft? || @record.team.archived?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def permitted_attributes
@@ -68,7 +68,7 @@ class TeamMemberPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.club_staff?
+      if @user.admin? || @user.club_staff_for?(@record)
         scope
       else
         scope.active_or_archived

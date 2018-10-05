@@ -5,7 +5,7 @@ class PresencePolicy < ApplicationPolicy
     return false if @record.presentable.inactive?
 
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.team_staff_for?(@record)
   end
 
