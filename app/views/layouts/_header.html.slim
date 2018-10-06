@@ -28,7 +28,7 @@ header.app-header.navbar
         .dropdown-menu.dropdown-menu-right
           .dropdown-header.text-center
             strong
-              | Account
+              = current_user.name
           = link_to edit_registration_path(current_user), class: "dropdown-item"
             i.fa-user.font-icon[class=fa_class]
             | Aanpassen
