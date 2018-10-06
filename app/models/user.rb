@@ -257,11 +257,12 @@ class User < ApplicationRecord
     end
 
     def age_group_id_for(record)
-      case [record.class]
-      when [AgeGroup]
-        record.id
-      else
-        AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
-      end
+      @age_group_id_for ||= {}
+      @age_group_id_for[record] ||= case [record.class]
+                                    when [AgeGroup]
+                                      record.id
+                                    else
+                                      AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+                                    end
     end
 end
