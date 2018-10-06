@@ -62,6 +62,12 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin? || @user.club_staff_for?(@record)
   end
 
+  def show_member_count?
+    return false if @record.season.archived?
+
+    @user.admin? || @user.club_staff_for?(@record)
+  end
+
   def set_status?
     return false if @record.new_record? || @record.season.archived?
 
