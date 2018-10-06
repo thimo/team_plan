@@ -58,7 +58,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_evaluations?
-    club_or_team_staff?
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_EVALUATIONS)
   end
 
   def show_presence_chart?
@@ -92,7 +92,7 @@ class TeamPolicy < ApplicationPolicy
   def show_previous_team?
     return false if @record.archived?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.club_staff_for?(@record) || @user.role?(Role::MEMBER_PREVIOUS_TEAM)
   end
 
   def set_status?
