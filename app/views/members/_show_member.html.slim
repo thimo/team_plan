@@ -126,6 +126,12 @@
               = "Afmelddatum: "
             = I18n.l member.deregistered_at, format: :long
 
+      - if policy(member).show_play_ban? && member.play_ban?
+        .alert.alert-danger.m-0.mt-3
+          span.mr-2
+            = render "shared/icons/play_ban"
+          | Er is een actief speelverbod gevonden.
+
 .card
   .card-header
     | Teams

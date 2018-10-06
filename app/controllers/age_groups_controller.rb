@@ -35,6 +35,13 @@ class AgeGroupsController < ApplicationController
     @not_played_matches = matches.group_by { |match| match.started_at.to_date }.sort_by { |date, _matches| date }
     matches = @age_group.matches.played.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).distinct
     @played_matches = matches.group_by { |match| match.started_at.to_date }.sort_by { |date, _matches| date }
+
+    if policy(@age_group).show_play_bans?
+      members = Member.by_age_group(@age_group)
+      play_bans = PlayBan.by_member(members).order_started_on
+      @play_bans = play_bans.active
+      @play_bans_future = play_bans.start_in_future
+    end
   end
 
   def new; end

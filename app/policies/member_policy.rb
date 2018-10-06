@@ -35,24 +35,24 @@ class MemberPolicy < ApplicationPolicy
 
   def show_private_data?
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.team_member_for?(@record)
   end
 
   def show_full_born_on?
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.has_member?(@record)
   end
 
   def show_conduct?
     @user.admin? ||
-      @user.club_staff?
+      @user.club_staff_for?(@record)
   end
 
   def show_sportlink_status?
     @user.admin? ||
-      @user.club_staff?
+      @user.club_staff_for?(@record)
   end
 
   def show_todos?
@@ -61,7 +61,14 @@ class MemberPolicy < ApplicationPolicy
 
   def show_evaluations?
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
+      @user.team_staff_for?(@record) ||
+      @user.has_member?(@record)
+  end
+
+  def show_play_ban?
+    @user.admin? ||
+      @user.club_staff_for?(@record) ||
       @user.team_staff_for?(@record) ||
       @user.has_member?(@record)
   end
@@ -77,7 +84,7 @@ class MemberPolicy < ApplicationPolicy
 
   def show_new_members?
     @user.admin? ||
-      @user.club_staff?
+      @user.club_staff_for?(@record)
   end
 
   def create_login?
@@ -95,7 +102,7 @@ class MemberPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       # TODO: Scope is also used for showing new members on dashboard, or injureds
-      return scope.all if @user.role?(Role::BEHEER_VERENIGING) || @user.admin? || @user.club_staff?
+      return scope.all if @user.role?(Role::BEHEER_VERENIGING) || @user.admin? || @user.club_staff_for?(@record)
       scope.none
     end
   end

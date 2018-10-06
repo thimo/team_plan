@@ -12,7 +12,8 @@ class AgeGroupPolicy < ApplicationPolicy
   def create?
     return false if @record.season.archived?
 
-    @user.admin? || @user.club_staff?
+    # TODO: add role to create age groups
+    @user.admin?
   end
 
   def update?
@@ -32,13 +33,19 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_evaluations?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
+  end
+
+  def show_play_bans?
+    return false if @record.archived?
+
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def show_todos?
     return false if @record.archived?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def show_injureds?
@@ -52,7 +59,7 @@ class AgeGroupPolicy < ApplicationPolicy
   def show_status?
     return false if @record.status == @record.season.status
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def set_status?
@@ -62,7 +69,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def download_team_members?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def bulk_email?
@@ -82,7 +89,7 @@ class AgeGroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.club_staff?
+      if @user.admin? || @user.club_staff_for?(@record)
         scope
       else
         scope.active_or_archived

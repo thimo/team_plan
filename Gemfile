@@ -61,7 +61,8 @@ gem "pretender"
 gem "redis", "~> 4.0"
 gem "simple-password-gen"
 gem "simple_calendar", "~> 2.0"
-gem "trix", git: "https://github.com/bcoia/trix.git" # Fix for "wrong number of arguments" - https://github.com/maclover7/trix/issues/54
+# gem "trix", git: "https://github.com/bcoia/trix.git" # Fix for "wrong number of arguments" - https://github.com/maclover7/trix/issues/54
+gem "trix-rails", require: "trix"
 
 group :development, :test do
   gem "byebug", platform: :mri

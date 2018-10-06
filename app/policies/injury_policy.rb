@@ -41,7 +41,7 @@ class InjuryPolicy < ApplicationPolicy
 
     def club_or_team_staff?
       @user.admin? ||
-        @user.club_staff? ||
+        @user.club_staff_for?(@record) ||
         @user.team_staff_for?(@record.member)
     end
 end

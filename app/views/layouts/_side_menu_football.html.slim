@@ -25,14 +25,21 @@ li.nav-item
       i.fa-fw.fa-calendar-alt.nav-icon[class=fa_class]
       | #{season.name}
 
-- if current_user.active_teams.size > 0
+- teams = current_user.active_teams
+- age_groups = current_user.active_age_groups
+- if teams.size > 0 || age_groups.size > 0
   li.nav-title
     | Mijn teams
-  - current_user.active_teams.asc.each do |team|
+  - teams.asc.each do |team|
     li.nav-item
       = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
         i.fa-fw.fa-futbol.nav-icon.color-green[class=fa_class]
         = team.name
+  - age_groups.asc.each do |age_group|
+    li.nav-item
+      = link_to age_group, class: "nav-link #{'active' if current_page?(age_group_path(age_group))}"
+        i.fa-fw.fa-futbol.nav-icon.color-green[class=fa_class]
+        = age_group.name
 
 - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
   li.nav-title

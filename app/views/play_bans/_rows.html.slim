@@ -1,0 +1,15 @@
+- if play_bans.any?
+  tr
+    th
+      = title
+    td.lighter Team
+    td.lighter Vanaf
+  - play_bans.each do |play_ban|
+    tr
+      td
+        = link_to play_ban.member
+          = play_ban.member.name
+      td
+        = play_ban.member.active_team&.name_with_club
+      td
+        = l(play_ban.started_on, format: :date_long)

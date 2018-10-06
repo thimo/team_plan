@@ -27,6 +27,12 @@ class TeamsController < ApplicationController
       @todos_active += todos.active
       @todos_defered += todos.defered
 
+      if policy(@team).show_play_bans?
+        play_bans = PlayBan.by_member(@team.members).order_started_on
+        @play_bans = play_bans.active
+        @play_bans_future = play_bans.start_in_future
+      end
+
     when "competitions"
       @competitions_regular = @team.competitions.knvb.desc.active.regular
       @competitions_other   = @team.competitions.knvb.desc.active.other
@@ -91,7 +97,7 @@ class TeamsController < ApplicationController
       @team = if action_name == "new"
                 @age_group.teams.new
               else
-                Team.new(permitted_attributes(Team))
+                Team.new(permitted_attributes(Team.new))
               end
       @team.age_group = @age_group
 

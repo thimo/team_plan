@@ -6,7 +6,7 @@ class TeamActionPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   class Scope < Scope

@@ -24,6 +24,10 @@ class AgeGroup < ApplicationRecord
   scope :draft_or_active, -> { where(status: [AgeGroup.statuses[:draft], AgeGroup.statuses[:active]]) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
   scope :by_team, ->(team) { joins(:teams).where(teams: { id: team }).distinct }
+  scope :for_members, ->(members) {
+    joins(:group_members).where(group_members: { memberable_type: "AgeGroup", member: members })
+  }
+  scope :for_active_season, -> { joins(:season).where(seasons: { status: Season.statuses[:active] }) }
 
   PLAYER_COUNT = [4, 5, 6, 7, 8, 9, 11].freeze
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45].freeze

@@ -29,7 +29,7 @@ class CommentPolicy < ApplicationPolicy
     return false if @record.commentable.archived?
 
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.team_member_for?(@record)
   end
 

@@ -3,20 +3,20 @@
 class PlayerEvaluationPolicy < ApplicationPolicy
   def index?
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.team_staff_for?(@record)
   end
 
   def show?
     @user.admin? ||
-      @user.club_staff? ||
+      @user.club_staff_for?(@record) ||
       @user.team_staff_for?(@record)
   end
 
   def create?
     return false unless @record.team_evaluation.active?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   def update?
@@ -28,7 +28,7 @@ class PlayerEvaluationPolicy < ApplicationPolicy
   def destroy?
     return false if @record.team_evaluation.finished_at.blank?
 
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.club_staff_for?(@record)
   end
 
   class Scope < Scope

@@ -1,4 +1,8 @@
 - provide(:title, "Speelverbod aanpassen")
 
+- content_for :title_icon
+  span.mr-2
+    = render "shared/icons/play_ban"
+
 .card.card-body
   = render "form"

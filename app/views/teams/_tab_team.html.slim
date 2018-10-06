@@ -7,6 +7,9 @@
       - if @staff.size > 0
         = render 'team_staff'
 
+      - if policy(@team).show_play_bans? && (@play_bans.present? || @play_bans_future.present?)
+        = render "play_bans/card"
+
       - if @old_members.present?
         .card
           .card-header
