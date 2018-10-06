@@ -43,5 +43,8 @@
                   = "#{size}"
               - if policy(age_group).show_member_count?
                 div
-                  .badge.badge-light.badge-one-number>
-                    = "#{age_group.assigned_active_members.size} / #{age_group.active_members.size}"
+                  - assigned_members_size = age_group.assigned_active_members.size
+                  - waiting_members_size = age_group.active_members.size - assigned_members_size
+                  - title = "#{assigned_members_size} leden ingedeeld, #{waiting_members_size} op de wachtlijst"
+                  .badge.badge-light.badge-one-number> title=title
+                    = "#{assigned_members_size} / #{waiting_members_size}"
