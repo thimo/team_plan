@@ -44,21 +44,21 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_statistics?
-    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_STATISTICS)
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_STATISTICS, @record)
   end
 
   # Sections
 
   def show_comments?
-    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_COMMENTS)
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_COMMENTS, @record)
   end
 
   def show_notes?
-    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_NOTES)
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_NOTES, @record)
   end
 
   def show_evaluations?
-    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_EVALUATIONS)
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_EVALUATIONS, @record)
   end
 
   def show_presence_chart?
@@ -92,7 +92,7 @@ class TeamPolicy < ApplicationPolicy
   def show_previous_team?
     return false if @record.archived?
 
-    @user.admin? || @user.club_staff_for?(@record) || @user.role?(Role::MEMBER_PREVIOUS_TEAM)
+    @user.admin? || @user.club_staff_for?(@record) || @user.role?(Role::MEMBER_PREVIOUS_TEAM, @record)
   end
 
   def set_status?
