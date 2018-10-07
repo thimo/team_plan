@@ -40,21 +40,21 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_dossier?
-    club_or_team_staff?
+    show_comments? || show_notes? || show_evaluations?
   end
 
   def show_statistics?
-    club_or_team_staff?
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_STATISTICS)
   end
 
   # Sections
 
   def show_comments?
-    show_dossier?
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_COMMENTS)
   end
 
   def show_notes?
-    show_dossier?
+    club_or_team_staff? || @user.role?(Role::TEAM_SHOW_NOTES)
   end
 
   def show_evaluations?

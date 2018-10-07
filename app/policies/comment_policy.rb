@@ -10,26 +10,26 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def show_technique?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.role?(Role::COMMENT_TECHNIQUE)
   end
 
   def show_behaviour?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.role?(Role::COMMENT_BEHAVIOUR)
   end
 
   def show_classification?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.role?(Role::COMMENT_CLASSIFICATION)
   end
 
   def show_membership?
-    @user.admin? || @user.club_staff?
+    @user.admin? || @user.role?(Role::COMMENT_MEMBERSHIP)
   end
 
   def create?
     return false if @record.commentable.archived?
 
     @user.admin? ||
-      @user.club_staff_for?(@record) ||
+      @user.role?(Role::COMMENT_CREATE) ||
       @user.team_member_for?(@record)
   end
 
