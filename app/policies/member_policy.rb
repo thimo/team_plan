@@ -35,15 +35,14 @@ class MemberPolicy < ApplicationPolicy
 
   def show_private_data?
     @user.admin? ||
-      @user.club_staff_for?(@record) ||
       @user.team_member_for?(@record) ||
       @user.role?(Role::MEMBER_SHOW_PRIVATE_DATA)
   end
 
   def show_full_born_on?
     @user.admin? ||
-      @user.club_staff_for?(@record) ||
-      @user.has_member?(@record)
+      @user.has_member?(@record) ||
+      @user.role?(Role::MEMBER_SHOW_FULL_BORN_ON)
   end
 
   def show_conduct?
