@@ -95,7 +95,7 @@ class AgeGroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.club_staff_for?(@record)
+      if @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
         scope
       else
         scope.active_or_archived

@@ -103,9 +103,8 @@ class MemberPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      # TODO: Scope is also used for showing new members on dashboard, or injureds
-      return scope.all if @user.role?(Role::BEHEER_VERENIGING) || @user.admin? || @user.club_staff_for?(@record)
-      scope.none
+      # Scope is also used for showing new members on dashboard, or injureds
+      scope
     end
   end
 end

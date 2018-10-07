@@ -15,8 +15,18 @@ class User < ApplicationRecord
   has_many :injuries, dependent: :destroy
   has_one :user_setting, dependent: :destroy
   has_and_belongs_to_many :members
-  has_many :groups, through: :members
-  has_many :roles, through: :groups
+  has_many :group_members, through: :members
+  has_many :all_groups, through: :group_members, source: :group
+  has_many :direct_groups, -> { where(group_members: { memberable_type: nil, memberable_id: nil }) },
+           through: :group_members,
+           source: :group
+  has_many :direct_roles, through: :direct_groups, source: :roles
+
+  has_many :indirect_groups, -> { where.not(group_members: { memberable_type: nil, memberable_id: nil }) },
+           through: :group_members,
+           source: :group
+  has_many :indirect_roles, through: :indirect_groups, source: :roles
+
   has_paper_trail
 
   # Add conditional validation on first_name and last_name, not executed for devise
@@ -99,7 +109,8 @@ class User < ApplicationRecord
   def club_staff_for?(record)
     age_group_id = age_group_id_for(record)
     # Look up age_group_members as intersection between user's members and age_groups
-    members.joins(:group_members).where(group_members: { memberable_type: "AgeGroup", memberable_id: age_group_id }).size.positive?
+    members.joins(:group_members)
+           .where(group_members: { memberable_type: "AgeGroup", memberable_id: age_group_id }).size.positive?
   end
 
   def favorite_teams
@@ -208,52 +219,54 @@ class User < ApplicationRecord
     deactivate if members.none?
   end
 
-  def role?(role)
-    all_roles.include?(role.to_s)
-  end
-
   def any_beheer_role?
-    all_roles.any? { |role| role.start_with?("beheer_") }
+    direct_role_names.any? { |role| role.start_with?("beheer_") }
   end
 
-  def all_roles
-    @all_roles ||= roles.distinct.pluck(:name)
+  def role?(role, record = nil)
+    direct_role_names.include?(role.to_s) || indirect_role_names_for(record).include?(role.to_s)
+  end
+
+  def indirect_role?(role)
+    indirect_role_names.include?(role.to_s)
   end
 
   private
 
     def team_id_for(record, as_team_staf = false)
-      case [record.class]
-      when [Team]
-        record.id
-      when [Member]
-        # Find overlap in teams between current user and given member
-        team_members = as_team_staf ? record.team_members.staff : record.team_members
-        team_members = team_members.active if member?
-        team_members.pluck(:team_id).uniq
-      when [PlayerEvaluation]
-        record.team_evaluation.team_id
-      when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
-        record.team_id
-      when [Comment]
-        if record.commentable_type == "Team"
-          record.commentable_id
-        elsif record.commentable_type == "Member"
-          record.commentable.active_team&.id
-        else
-          0
-        end
-      when [Presence]
-        if record.presentable_type == "Match"
-          record.presentable.teams.pluck(:id)
-        else
-          record.presentable.team_id
-        end
-      when [Match]
-        record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
-      else
-        0
-      end
+      @team_id_for ||= {}
+      key = [record, as_team_staf]
+      @team_id_for[key] ||= case [record.class]
+                            when [Team]
+                              record.id
+                            when [Member]
+                              # Find overlap in teams between current user and given member
+                              team_members = as_team_staf ? record.team_members.staff : record.team_members
+                              team_members = team_members.active if member?
+                              team_members.pluck(:team_id).uniq
+                            when [PlayerEvaluation]
+                              record.team_evaluation.team_id
+                            when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
+                              record.team_id
+                            when [Comment]
+                              if record.commentable_type == "Team"
+                                record.commentable_id
+                              elsif record.commentable_type == "Member"
+                                record.commentable.active_team&.id
+                              else
+                                0
+                              end
+                            when [Presence]
+                              if record.presentable_type == "Match"
+                                record.presentable.teams.pluck(:id)
+                              else
+                                record.presentable.team_id
+                              end
+                            when [Match]
+                              record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
+                            else
+                              0
+                            end
     end
 
     def age_group_id_for(record)
@@ -264,5 +277,28 @@ class User < ApplicationRecord
                                     else
                                       AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
                                     end
+    end
+
+    def direct_role_names
+      @direct_role_names ||= direct_roles.distinct.pluck(:name)
+    end
+
+    # All role names from indirect groups, should only be used on special occasions. Preferred
+    # way is through `indirect_role_names_for(record)``
+    def indirect_role_names
+      @indirect_role_names ||= indirect_roles.distinct.pluck(:name)
+    end
+
+    def indirect_role_names_for(record)
+      return [] if record.nil?
+
+      @indirect_role_names_for ||= {}
+      @indirect_role_names_for[record] ||= indirect_roles_for(record).distinct.pluck(:name)
+    end
+
+    def indirect_roles_for(record)
+      age_group_id = age_group_id_for(record)
+      group = Group.for_member(members).for_memberable("AgeGroup", age_group_id)
+      Role.by_group(group)
     end
 end

@@ -25,9 +25,7 @@ class Member < ApplicationRecord
            class_name: "TeamMember", inverse_of: :member
   has_many :teams, through: :team_members
   has_many :teams_as_player, through: :team_members_as_player, class_name: "Team", source: :team
-
   has_many :org_position_members, dependent: :destroy
-
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
@@ -36,9 +34,7 @@ class Member < ApplicationRecord
   has_many :injuries, dependent: :destroy
   has_many :presences, dependent: :destroy
   has_many :play_bans, dependent: :destroy
-
   has_many :group_members, dependent: :destroy
-  has_many :groups, through: :group_members
   has_and_belongs_to_many :users
   has_paper_trail
 

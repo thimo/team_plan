@@ -33,7 +33,7 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def download_team_members?
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin?
   end
 
   def bulk_email?
@@ -56,7 +56,7 @@ class SeasonPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.club_staff_for?(@record)
+      if @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
         scope
       else
         scope.active_or_archived
