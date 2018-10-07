@@ -26,7 +26,7 @@ module Admin
     def edit; end
 
     def update
-      if @role.update(role_params)
+      if @role.update(permitted_attributes(@role))
         redirect_to admin_roles_path, notice: "Rol is aangepast."
       else
         render "edit"
@@ -41,21 +41,14 @@ module Admin
     private
 
       def create_role
-        @role = if action_name == "new"
-                  Role.new
-                else
-                  Role.new(role_params)
-                end
+        @role = Role.new
+        @role.update(permitted_attributes(@role)) if action_name == "create"
         authorize @role
       end
 
       def set_role
         @role = Role.find(params[:id])
         authorize @role
-      end
-
-      def role_params
-        params.require(:role).permit(:name, :body)
       end
 
       def add_breadcrumbs

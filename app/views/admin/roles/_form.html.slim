@@ -4,6 +4,20 @@
   = f.text_field :name, autofocus: true
   = f.text_area :body
 
+  - if policy(@role).modify_groups?
+    = f.collection_select :group_ids, Group.all, :id, :name,
+      { },
+      { data: { controller: 'select2', placeholder: "Selecteer groepen" },
+        multiple: "multiple" }
+  - else
+    .form-group.row
+      label class=f.label_col
+        | Groepen
+      div class=f.control_col
+        - @role.groups.each do |group|
+          div
+            = group.name
+
   .row
     .col-sm-9.offset-sm-3
       .d-flex.justify-content-between

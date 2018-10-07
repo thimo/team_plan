@@ -120,6 +120,7 @@ nl:
         name: Naam
         body: Beschrijving
         groups: Groepen
+        group_ids: Groepen
       season:
         name: Seizoen
         active: Actief
