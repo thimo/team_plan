@@ -84,7 +84,7 @@ class MemberPolicy < ApplicationPolicy
 
   def show_new_members?
     @user.admin? ||
-      @user.club_staff_for?(@record)
+      @user.role?(Role::MEMBER_SHOW_NEW) || @user.indirect_role?(Role::MEMBER_SHOW_NEW)
   end
 
   def create_login?
