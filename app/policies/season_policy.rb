@@ -32,16 +32,20 @@ class SeasonPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def team_actions?
+    @user.admin? || @user.role?(Role::SEASON_TEAM_ACTIONS, @record)
+  end
+
   def download_team_members?
-    @user.admin?
+    team_actions?
   end
 
   def bulk_email?
-    download_team_members?
+    team_actions?
   end
 
   def bulk_publish?
-    @user.admin?
+    team_actions?
   end
 
   def inherit_age_groups?

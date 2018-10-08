@@ -33,19 +33,19 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_evaluations?
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::AGE_GROUP_SHOW_EVALUATIONS, @record)
   end
 
   def show_play_bans?
     return false if @record.archived?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::PLAY_BAN_SHOW, @record)
   end
 
   def show_todos?
     return false if @record.archived?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::AGE_GROUP_SHOW_TODOS, @record)
   end
 
   def show_injureds?
@@ -65,7 +65,7 @@ class AgeGroupPolicy < ApplicationPolicy
   def show_member_count?
     return false if @record.season.archived?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::AGE_GROUP_SHOW_MEMBER_COUNT, @record)
   end
 
   def set_status?
@@ -74,12 +74,16 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.admin?
   end
 
+  def team_actions?
+    @user.admin? || @user.role?(Role::AGE_GROUP_TEAM_ACTIONS, @record)
+  end
+
   def download_team_members?
-    @user.admin? || @user.club_staff_for?(@record)
+    team_actions?
   end
 
   def bulk_email?
-    download_team_members?
+    team_actions?
   end
 
   def modify_members?

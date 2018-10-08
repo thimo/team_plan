@@ -10,9 +10,9 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def create?
-    return false if @record&.team.archived?
+    return false if @record&.team&.archived?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::TEAM_MEMBER_CREATE, @record)
   end
 
   def update?
@@ -22,14 +22,14 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def set_role?
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_ROLE, @record)
   end
 
   def destroy?
-    return false if @record.team.archived? # Never edit a team member for an archived team
-    return true if @record.active? && @user.admin? # Admin can always remove team members in an active season
+    return false if @record.team.archived?
+    return true if @record.active? && @user.admin?
 
-    (@record.draft? || @record.active?) && (@user.admin? || @user.club_staff_for?(@record))
+    (@record.draft? || @record.active?) && (@user.admin? || @user.role?(Role::TEAM_MEMBER_DESTROY, @record))
   end
 
   def activate?
@@ -37,7 +37,7 @@ class TeamMemberPolicy < ApplicationPolicy
     return false unless @record.team.active?
     return false if @record.active?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
   end
 
   def show_status?
@@ -49,13 +49,13 @@ class TeamMemberPolicy < ApplicationPolicy
   def set_status?
     return false if @record.new_record? || @record.team.archived?
 
-    @user.admin?
+    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
   end
 
   def set_initial_status?
     return false if @record.persisted? || @record.team.nil? || @record.team.draft? || @record.team.archived?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
   end
 
   def permitted_attributes

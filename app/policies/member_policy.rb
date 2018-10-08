@@ -48,12 +48,12 @@ class MemberPolicy < ApplicationPolicy
 
   def show_conduct?
     @user.admin? ||
-      @user.club_staff_for?(@record)
+      @user.role?(Role::MEMBER_SHOW_CONDUCT, @record)
   end
 
   def show_sportlink_status?
     @user.admin? ||
-      @user.club_staff_for?(@record)
+      @user.role?(Role::MEMBER_SHOW_SPORTLINK_STATUS, @record)
   end
 
   def show_todos?
@@ -69,7 +69,7 @@ class MemberPolicy < ApplicationPolicy
 
   def show_play_ban?
     @user.admin? ||
-      @user.club_staff_for?(@record) ||
+      @user.role?(Role::PLAY_BAN_SHOW, @record) ||
       @user.team_staff_for?(@record) ||
       @user.has_member?(@record)
   end

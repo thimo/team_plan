@@ -79,7 +79,7 @@ class TeamPolicy < ApplicationPolicy
     return false if @record.archived?
 
     @user.admin? ||
-      @user.club_staff_for?(@record) ||
+      @user.role?(Role::TEAM_SHOW_TODOS, @record) ||
       @user.team_member_for?(@record)
   end
 
@@ -104,7 +104,7 @@ class TeamPolicy < ApplicationPolicy
   def show_play_bans?
     return false if @record.archived?
 
-    club_or_team_staff?
+    club_or_team_staff? || @user.role?(Role::PLAY_BAN_SHOW, @record)
   end
 
   def create_match?
@@ -114,7 +114,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def download_team_members?
-    club_or_team_staff?
+    club_or_team_staff? || @user.role?(Role::TEAM_MEMBER_DOWNLOAD, @record)
   end
 
   def bulk_email?
@@ -141,7 +141,6 @@ class TeamPolicy < ApplicationPolicy
 
     def club_or_team_staff?
       @user.admin? ||
-        @user.club_staff_for?(@record) ||
         @user.team_staff_for?(@record)
     end
 end

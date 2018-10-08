@@ -63,6 +63,7 @@ class TeamActionsController < ApplicationController
     def set_base
       if params[:age_group_id].present?
         @age_group = policy_scope(AgeGroup).find(params[:age_group_id])
+        authorize(@age_group, :team_actions?)
         @base_class = @age_group.class
         @teams = if params[:team_ids].present?
                    policy_scope(Team).where(id: params[:team_ids])
@@ -72,6 +73,7 @@ class TeamActionsController < ApplicationController
 
       elsif params[:season_id].present?
         @season = policy_scope(Season).find(params[:season_id])
+        authorize(@season, :team_actions?)
         @base_class = @season.class
 
         if params[:age_group_ids].present?
@@ -82,9 +84,7 @@ class TeamActionsController < ApplicationController
           @age_groups_female = policy_scope(@season.age_groups).female.asc
           @teams = policy_scope(Team).includes(:age_group).where(age_groups: { season: @season })
         end
-
       end
-      authorize :team_action
     end
 
     def include_staff?

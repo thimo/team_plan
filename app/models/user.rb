@@ -106,12 +106,12 @@ class User < ApplicationRecord
     members.by_team(team_id).team_staff.size.positive?
   end
 
-  def club_staff_for?(record)
-    age_group_id = age_group_id_for(record)
-    # Look up age_group_members as intersection between user's members and age_groups
-    members.joins(:group_members)
-           .where(group_members: { memberable_type: "AgeGroup", memberable_id: age_group_id }).size.positive?
-  end
+  # def club_staff_for?(record)
+  #   age_group_id = age_group_id_for(record)
+  #   # Look up age_group_members as intersection between user's members and age_groups
+  #   members.joins(:group_members)
+  #          .where(group_members: { memberable_type: "AgeGroup", memberable_id: age_group_id }).size.positive?
+  # end
 
   def favorite_teams
     @favorite_teams ||= Team.joins(:favorites)
