@@ -2,13 +2,13 @@
 
 class TeamPolicy < ApplicationPolicy
   def show?
-    !@record.draft? || @user.admin? || @user.club_staff_for?(@record)
+    !@record.draft? || @user.admin? || @user.role?(Role::STATUS_DRAFT, @record)
   end
 
   def create?
     return false if @record.age_group.archived?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::TEAM_CREATE, @record)
   end
 
   def update?
@@ -18,7 +18,7 @@ class TeamPolicy < ApplicationPolicy
   def destroy?
     return false unless @record.draft?
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::TEAM_DESTROY, @record)
   end
 
   # Tabs
@@ -86,19 +86,19 @@ class TeamPolicy < ApplicationPolicy
   def show_status?
     return false if @record.status == @record.age_group.status
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
   end
 
   def show_previous_team?
     return false if @record.archived?
 
-    @user.admin? || @user.club_staff_for?(@record) || @user.role?(Role::MEMBER_PREVIOUS_TEAM, @record)
+    @user.admin? || @user.role?(Role::MEMBER_PREVIOUS_TEAM, @record)
   end
 
   def set_status?
     return false if @record.new_record? || @record.age_group.archived?
 
-    @user.admin?
+    @user.admin? || @user.role?(Role::TEAM_SET_STATUS, @record)
   end
 
   def show_play_bans?

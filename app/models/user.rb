@@ -274,6 +274,8 @@ class User < ApplicationRecord
       @age_group_id_for[record] ||= case [record.class]
                                     when [AgeGroup]
                                       record.id
+                                    when [Team]
+                                      record.age_group_id # Included here to make sure it works for new Team objects
                                     else
                                       AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
                                     end

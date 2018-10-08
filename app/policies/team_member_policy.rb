@@ -43,7 +43,7 @@ class TeamMemberPolicy < ApplicationPolicy
   def show_status?
     return false if @record.status == @record.team.status
 
-    @user.admin? || @user.club_staff_for?(@record)
+    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
   end
 
   def set_status?
