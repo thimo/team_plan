@@ -49,7 +49,8 @@ class TeamEvaluationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin? || user.club_staff?
+      # TODO: This will probably not work for coordinators
+      if user.admin? || @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
         scope.all
       else
         scope.invited

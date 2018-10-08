@@ -33,7 +33,8 @@ class PlayerEvaluationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin? || user.club_staff?
+      # TODO: This will probably not work for coordinators
+      if user.admin? || @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record)
         scope.all.finished
       else
         scope.public_or_as_team_staff(user).finished

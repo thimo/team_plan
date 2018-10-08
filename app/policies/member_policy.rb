@@ -61,7 +61,6 @@ class MemberPolicy < ApplicationPolicy
 
   def show_evaluations?
     @user.admin? ||
-      @user.club_staff_for?(@record) ||
       @user.team_staff_for?(@record) ||
       @user.has_member?(@record) ||
       @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record)
