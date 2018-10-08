@@ -229,7 +229,7 @@
       color: $gray-base;
     }
     &[aria-selected=true]::before {
-      content: "×";
+      content: "✓";
       padding-right: .5rem;
     }
   }
