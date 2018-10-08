@@ -36,7 +36,8 @@ class MemberPolicy < ApplicationPolicy
   def show_private_data?
     @user.admin? ||
       @user.team_member_for?(@record) ||
-      @user.role?(Role::MEMBER_SHOW_PRIVATE_DATA, @record)
+      @user.role?(Role::MEMBER_SHOW_PRIVATE_DATA, @record) ||
+      @user.indirect_role?(Role::MEMBER_SHOW_PRIVATE_DATA)
   end
 
   def show_full_born_on?

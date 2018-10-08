@@ -4,9 +4,6 @@
     i.fa-medkit.ml-1.color-red[title="Geblesseerd" class=fa_class]
   - if policy(member).show_conduct? && member.conduct_number.present?
     i.fa-shield-check.color-green.ml-1[title="VOG-nummer geregistreerd" class=fa_class]
-/ It's not clear where this is used and/or useful
-/ - elsif (active_team = member.active_team).present?
-/   = link_to member.name, active_team
 - else
   = member.name
 

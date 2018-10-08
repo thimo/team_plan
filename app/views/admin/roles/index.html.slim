@@ -14,7 +14,6 @@
       thead
         tr
           th = Role.human_attribute_name(:name)
-          th = Role.human_attribute_name(:body)
           th = Role.human_attribute_name(:groups)
 
       tbody
@@ -22,7 +21,7 @@
           tr
             td
               = link_to role.name, [:edit, :admin, role]
-            td
+              .small
                 = role.body
             td
               - role.groups.asc.each do |group|
