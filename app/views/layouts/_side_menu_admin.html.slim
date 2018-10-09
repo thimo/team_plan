@@ -73,6 +73,11 @@ li.nav-title
     = link_to admin_roles_path, class: "nav-link #{'active' if controller.class == Admin::RolesController}" do
       i.fa-fw.fa-user-secret.nav-icon[class=fa_class]
       | Rollen
+- if policy(:group).index? && policy(:role).index?
+  li.nav-item
+    = link_to admin_groups_roles_path, class: "nav-link #{'active' if controller.class == Admin::GroupsRolesController}" do
+      i.fa-fw.fa-users.nav-icon[class=fa_class]
+      | Matrix
 - if policy(:setting).index?
   li.nav-item
     = link_to admin_settings_path, class: "nav-link #{'active' if controller.class == Admin::SettingsController}" do

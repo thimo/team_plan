@@ -1,0 +1,22 @@
+- provide(:title, "Rollen matrix")
+
+.card
+  .card-body.p-0
+    table.table.table-sm
+      thead
+        tr style="height: 160px;"
+          th
+          - @groups.each do |group|
+            th.rotate
+              div.w-1
+                span = "#{group.name} (#{group.roles.size})"
+          th
+
+      tbody.table-bordered
+        - @roles.each do |role|
+          tr
+            td = role.name
+            - @groups.each do |group|
+              - has_role = group.roles.include?(role)
+              td class=("bg-color-success" if has_role)
+            td
