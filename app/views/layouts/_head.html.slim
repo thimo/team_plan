@@ -6,7 +6,7 @@ head
   meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
   meta name="author" content="#{Setting['club.name']} #{Setting['application.name']}"
   meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-  link rel="shortcut icon" href="#{image_url "favicon.ico"}"
+  link rel="shortcut icon" href="#{Setting["application.favicon_url"]}"
   link[rel="stylesheet"
     href="https://#{Setting["fontawesome.integrity"].present? ? "pro" : "use"}.fontawesome.com/releases/v5.2.0/css/all.css"
     integrity="#{Setting["fontawesome.integrity"]}"
