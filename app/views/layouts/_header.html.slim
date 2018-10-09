@@ -2,8 +2,9 @@ header.app-header.navbar
   button.navbar-toggler.sidebar-toggler.d-lg-none.mr-auto[type="button" data-toggle="sidebar-show"]
     span.navbar-toggler-icon
   a.navbar-brand href="/" title="#{Setting['club.name']} #{Setting['application.name']}"
-    img.navbar-brand-full src="#{asset_path 'logo/esa_logo.svg'}"
-    img.navbar-brand-minimized src="#{asset_path 'logo/esa_logo.svg'}"
+    - if Setting["club.logo_url"].present?
+      img.navbar-brand-full src="#{Setting["club.logo_url"]}"
+      img.navbar-brand-minimized src="#{Setting["club.logo_url"]}"
     h1.navbar-brand-full
       img src="#{asset_path 'logo/teamplan.svg'}" alt=Setting["application.name"]
 

@@ -5,6 +5,7 @@ defaults: &defaults
   application.email: helpdesk@defrog.nl
   application.contact_name: Thimo Jansen
   application.maintenance: false
+  application.favicon_url: /favicon.ico
   club.name: Defrog
   club.name_short: Defrog
   club.website: https://teamplan.defrog.nl/
@@ -14,6 +15,7 @@ defaults: &defaults
   club.city: Arnhem
   club.phone:
   club.relatiecode:
+  club.logo_url: 
   clubdata.urls.competities: https://data.sportlink.com/teams?teamsoort=bond&spelsoort=ve&gebruiklokaleteamgegevens=NEE
   clubdata.urls.poulestand: https://data.sportlink.com/poulestand?gebruiklokaleteamgegevens=NEE
   clubdata.urls.poule-programma: https://data.sportlink.com/poule-programma?eigenwedstrijden=NEE&gebruiklokaleteamgegevens=NEE&aantaldagen=365&weekoffset=-2
