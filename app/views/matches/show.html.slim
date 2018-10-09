@@ -41,6 +41,9 @@ section
               div
                 | Aangemaakt door #{@match.created_by.name}
 
+      div
+        | #{schedule_title(@match, no_html: true)}
+        = " (#{@match.uitslag})" if @match.uitslag.present?
       - if @players.present?
         table.table
           - @players.each do |player|
