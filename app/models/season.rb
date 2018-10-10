@@ -33,11 +33,15 @@ class Season < ApplicationRecord
   end
 
   def inherit_age_groups
-    Season.active.first.age_groups.active.each do |age_group|
+    Season.active.first.age_groups.draft_or_active.each do |age_group|
       new_age_group = AgeGroup.new(age_group.attributes.merge(id: nil, status: :draft, season: self))
       new_age_group.year_of_birth_from += 1 if new_age_group.year_of_birth_from.present?
       new_age_group.year_of_birth_to += 1 if new_age_group.year_of_birth_to.present?
       new_age_group.save
+
+      age_group.group_members.each do |gm|
+        GroupMember.create(member: gm.member, group: gm.group, memberable: new_age_group)
+      end
     end
   end
 
