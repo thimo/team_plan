@@ -2,12 +2,11 @@
 - provide(:subtitle, "#{year_of_birth_range(@age_group)}")
 
 - content_for :action_buttons
-  - if @age_group.teams.size > 0
-    - if policy(TeamMember.new(team: @age_group.teams.first)).create?
-      = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn"
-        i.fa-table[class=fa_class]
-        span.d-down-none.pl-1
-          | Spelersindeling
+  - if policy(TeamMember.new(team: @age_group.teams.first)).create?
+    = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn"
+      i.fa-table[class=fa_class]
+      span.d-down-none.pl-1
+        | Spelersindeling
   - if policy(@age_group).update?
     = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "btn"
       i.fa-pencil[class=fa_class]
