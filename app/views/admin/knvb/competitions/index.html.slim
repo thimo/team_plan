@@ -2,7 +2,7 @@
 
 .card
   .card-header
-    | #{@competitions.count} Competities
+    | #{@competitions.size} Competities
     .card-header-actions
       - if policy(Competition).create?
         = link_to new_admin_knvb_competitions_import_path, title: "Importeer competities", class: "card-header-action"
