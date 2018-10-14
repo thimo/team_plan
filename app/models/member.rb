@@ -41,15 +41,20 @@ class Member < ApplicationRecord
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :to_year,   ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }
   scope :from_year, ->(year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year.to_date) }
-  scope :sportlink_active, -> { where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today)) }
+  scope :sportlink_active, -> {
+    where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today))
+  }
   scope :sportlink_active_for_season, ->(season) {
-    where(deregistered_at: nil)
-      .or(where("deregistered_at > ?", season.started_on))
+    where(deregistered_at: nil).or(where("deregistered_at > ?", season.started_on))
   }
   scope :sportlink_inactive, -> { where.not(deregistered_at: nil).where("deregistered_at <= ?", Time.zone.today) }
   scope :sportlink_player, -> {
-    where("sport_category <> ''")
-      .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
+    where.not(sport_category: nil)
+         .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
+  }
+  scope :sportlink_non_player, -> {
+    where(sport_category: nil)
+      .where.not(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
   }
   scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
