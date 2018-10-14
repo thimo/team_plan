@@ -52,6 +52,9 @@ GEM
       activemodel (= 5.2.0)
       activesupport (= 5.2.0)
       arel (>= 9.0)
+    activerecord-multi-tenant (0.9.0)
+      rails (>= 4.0)
+      request_store (>= 1.0.5)
     activestorage (5.2.0)
       actionpack (= 5.2.0)
       activerecord (= 5.2.0)
@@ -400,6 +403,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-multi-tenant
   ancestry
   awesome_print
   axlsx!
