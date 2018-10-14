@@ -9,7 +9,7 @@
         | Team
       div class=f.control_col
         = select_tag(:team_id, team_options_for_active_season(include_blank: true, default: params[:team_id]), data: { controller: "select2", placeholder: 'Selecteer een team' } )
-  - else
+  - elsif @team.present?
     .form-group.row
       label class=f.label_col
         | Team
