@@ -7,7 +7,9 @@ module CommentsHelper
                     else
                       parent.class.comment_types
                     end
-    @comment_types_for ||= comment_types.select { |type, _id| policy(Comment).public_send("show_#{type}?") }
+    @comment_types_for ||= comment_types.select do |type, _id|
+      policy(Comment.new(commentable: parent)).public_send("show_#{type}?")
+    end
   end
 
   def comments_for(parent, comment_type)

@@ -29,7 +29,7 @@ class CommentPolicy < ApplicationPolicy
     return false if @record.commentable.archived?
 
     @user.admin? ||
-      @user.role?(Role::COMMENT_CREATE) ||
+      @user.role?(Role::COMMENT_CREATE, @record) ||
       @user.team_member_for?(@record)
   end
 

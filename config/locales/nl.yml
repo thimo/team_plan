@@ -392,6 +392,8 @@ nl:
       vrije_dropdown_2: free_dropdown_2
       bondsteams: association_teams
       zichtbaarheid: visibility
+      naam_ouder/verzorger_1: name_parent
+      naam_ouder/verzorger_2: name_parent_2
 
   invites_sent:
     one: er is 1 uitnodiging verstuurd
