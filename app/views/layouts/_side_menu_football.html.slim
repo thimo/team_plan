@@ -24,6 +24,11 @@ li.nav-item
     = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
       i.fa-fw.fa-calendar-alt.nav-icon[class=fa_class]
       | #{season.name}
+- if policy(Season).index?
+  li.nav-item
+    = link_to seasons_path, class: "nav-link #{'active' if current_page?(seasons_path)}"
+      i.fa-fw.fa-calendar-alt.nav-icon[class=fa_class]
+      | Seizoenen
 
 - teams = current_user.active_teams
 - age_groups = current_user.active_age_groups

@@ -2,7 +2,7 @@
 
 class SeasonPolicy < ApplicationPolicy
   def index?
-    true
+    @user.admin? || @user.role?(Role::SEASON_INDEX) || @user.indirect_role?(Role::SEASON_INDEX)
   end
 
   def show?
