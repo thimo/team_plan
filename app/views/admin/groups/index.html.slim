@@ -2,7 +2,7 @@
 
 .card
   .card-header
-    | #{@groups.count} Groepen
+    | #{@groups.size} Groepen
 
     .card-header-actions
       - if policy(Group).create?

@@ -45,29 +45,47 @@ class AgeGroup < ApplicationRecord
     favorites.find_by(user: user)
   end
 
-  def active_members
-    # All active players
+  def active_players
     members = Member.sportlink_active.sportlink_active_for_season(season).sportlink_player.asc
-    # Filter on year of birth
-    members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
-    members = members.to_year(year_of_birth_to) if year_of_birth_to.present?
-    # Filter on gender
-    if gender.present?
-      case gender.upcase
-      when "M"
-        members = members.male
-      when "V"
-        members = members.female
-      end
-    end
-    members
+    filter_for_birth_date_and_gender(members)
   end
 
-  def assigned_active_members
-    active_members.by_season(season).player.active_in_a_team
+  def assigned_active_players
+    active_players.by_season(season).player.active_in_a_team
+  end
+
+  def active_non_players
+    return AgeGroup.none if year_of_birth_from.blank?
+
+    members = Member.sportlink_active.sportlink_active_for_season(season).sportlink_non_player.asc
+    filter_for_birth_date_and_gender(members)
+  end
+
+  def assigned_active_non_players
+    return AgeGroup.none if year_of_birth_from.blank?
+
+    active_non_players.by_season(season).active_in_a_team
   end
 
   def status_children
     teams
   end
+
+  private
+
+    def filter_for_birth_date_and_gender(members)
+      members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
+      members = members.to_year(year_of_birth_to) if year_of_birth_to.present?
+
+      if gender.present?
+        case gender.upcase
+        when "M"
+          members = members.male
+        when "V"
+          members = members.female
+        end
+      end
+
+      members
+    end
 end

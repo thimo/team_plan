@@ -8,40 +8,13 @@ class AgeGroupsController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    @open_team_evaluations = TeamEvaluation.open_at_team.by_age_group(@age_group).asc
-    @finished_team_evaluations = TeamEvaluation.finished.desc_finished.by_age_group(@age_group)
     @teams = human_sort(policy_scope(@age_group.teams), :name)
-
-    if policy(@age_group).show_available_members?
-      available_members = @age_group.active_members - @age_group.assigned_active_members
-      @available_members = Kaminari.paginate_array(available_members).page(params[:member_page]).per(10)
-    end
-
-    todos = policy_scope(@age_group.todos).unfinished.asc.includes(:todoable)
-    @todos_active = todos.active.to_a
-    @todos_defered = todos.defered.to_a
-    todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id))
-                              .unfinished.asc.includes(:todoable)
-    @todos_active += todos.active
-    @todos_defered += todos.defered
-    todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member)
-                              .by_age_group(@age_group).map(&:id)).unfinished.asc.includes(:todoable)
-    @todos_active += todos.active
-    @todos_defered += todos.defered
-
+    set_evaluations
+    set_members
+    set_todos
     @injureds = policy_scope(Member).by_age_group(@age_group).injured.asc
-    @schedule_simple = true
-    matches = @age_group.matches.not_played.in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day).distinct
-    @not_played_matches = matches.group_by { |match| match.started_at.to_date }.sort_by { |date, _matches| date }
-    matches = @age_group.matches.played.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).distinct
-    @played_matches = matches.group_by { |match| match.started_at.to_date }.sort_by { |date, _matches| date }
-
-    if policy(@age_group).show_play_bans?
-      members = Member.by_age_group(@age_group)
-      play_bans = PlayBan.by_member(members).order_started_on
-      @play_bans = play_bans.active
-      @play_bans_future = play_bans.start_in_future
-    end
+    set_matches
+    set_play_bans
   end
 
   def new; end
@@ -100,5 +73,53 @@ class AgeGroupsController < ApplicationController
       else
         add_breadcrumb @age_group.name.to_s, @age_group
       end
+    end
+
+    def set_evaluations
+      return unless policy(@age_group).show_evaluations?
+
+      @open_team_evaluations = TeamEvaluation.open_at_team.by_age_group(@age_group).asc
+      @finished_team_evaluations = TeamEvaluation.finished.desc_finished.by_age_group(@age_group)
+    end
+
+    def set_members
+      return unless policy(@age_group).show_available_members?
+
+      available_players = @age_group.active_players - @age_group.assigned_active_players
+      @available_players = Kaminari.paginate_array(available_players).page(params[:member_page]).per(10)
+
+
+      available_non_players = @age_group.active_non_players - @age_group.assigned_active_non_players
+      @available_non_players = Kaminari.paginate_array(available_non_players).page(params[:member_page]).per(10)
+    end
+
+    def set_todos
+      todos = policy_scope(@age_group.todos).unfinished.asc.includes(:todoable)
+      @todos_active = todos.active.to_a
+      @todos_defered = todos.defered.to_a
+      todos = policy_scope(Todo).where(todoable_type: Team.name, todoable_id: @age_group.teams.map(&:id))
+                                .unfinished.asc.includes(:todoable)
+      @todos_active += todos.active
+      @todos_defered += todos.defered
+      todos = policy_scope(Todo).where(todoable_type: Member.name, todoable_id: policy_scope(Member)
+                                .by_age_group(@age_group).map(&:id)).unfinished.asc.includes(:todoable)
+      @todos_active += todos.active
+      @todos_defered += todos.defered
+    end
+
+    def set_matches
+      matches = @age_group.matches.not_played.in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day).distinct
+      @not_played_matches = matches.group_by { |match| match.started_at.to_date }.sort_by { |date, _matches| date }
+      matches = @age_group.matches.played.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day).distinct
+      @played_matches = matches.group_by { |match| match.started_at.to_date }.sort_by { |date, _matches| date }
+    end
+
+    def set_play_bans
+      return unless policy(@age_group).show_play_bans?
+
+      members = Member.by_age_group(@age_group)
+      play_bans = PlayBan.by_member(members).order_started_on
+      @play_bans = play_bans.active
+      @play_bans_future = play_bans.start_in_future
     end
 end

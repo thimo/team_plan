@@ -2,7 +2,7 @@
 
 .card
   .card-header
-    | #{@roles.count} Rollen
+    | #{@roles.size} Rollen
 
     .card-header-actions
       - if policy(Role).create?

@@ -91,8 +91,15 @@
   .col-xl-6
     = render "age_groups/member_groups"
 
-    - if policy(@age_group).show_available_members? && @available_members.present?
-      = render "members/list", members: @available_members, title: "Wachtlijst"
+    - if policy(@age_group).show_available_members?
+      - if @available_players.present?
+        = render "members/list", members: @available_players,
+                                 title: "Wachtlijst speelgerechtigd",
+                                 subtitle: "Deze leden kun je in een team indelen."
+      - if @available_non_players.present?
+        = render "members/list", members: @available_non_players,
+                                 title: "Niet-speelgerechtigd",
+                                 subtitle: "Deze leden zijn (nog) niet speelgerechtigd. Hier vallen ook vrijwilligers onder."
 
     - if policy(@age_group).show_evaluations?
       = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties", hide_status: true, show_last_modified: true, show_progress: true, show_bulk_create: true

@@ -12,20 +12,21 @@ class MemberAllocationsController < ApplicationController
     @season = @age_group.season
     @previous_season = @season.previous
 
-    active_members = @age_group.active_members
-    assigned_members = @age_group.assigned_active_members
-    @available_members = active_members - assigned_members
+    active_players = @age_group.active_players
+    assigned_players = @age_group.assigned_active_players
+    @available_players = active_players - assigned_players
 
-    @teams_for_filter = human_sort(Team.for_members(@available_members).as_player
+    @teams_for_filter = human_sort(Team.for_members(@available_players).as_player
                                        .for_season(@season.previous).distinct, :name)
                         .map { |team| [team.name, team.id] }
 
-    filtered_members = active_members
-    filtered_members = filtered_members.by_season(Season.active.last).by_field_position(field_positions) \
-      if field_positions.present?
-    filtered_members = filtered_members.by_team(session[:filter_team]) if session[:filter_team].present?
+    filtered_players = active_players
+    if field_positions.present?
+      filtered_players = filtered_players.by_season(Season.active.last).by_field_position(field_positions)
+    end
+    filtered_players = filtered_players.by_team(session[:filter_team]) if session[:filter_team].present?
 
-    @filtered_available_members = (filtered_members - assigned_members)
+    @filtered_available_players = (filtered_players - assigned_players)
                                   .group_by { |member| member.teams_for_season(@previous_season).as_player.first }
                                   .sort_by { |team, _members| team.present? ? team.name : "ZZZ" }
 

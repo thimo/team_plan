@@ -11,7 +11,6 @@ class Member < ApplicationRecord
   STATUS_DEFINITIEF = "definitief"
   STATUS_AF_TE_MELDEN = "af te melden"
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = "overschrijving spelactiviteit"
-  LOCAL_TEAMS_WELKOM_BIJ_ESA = "aWelkom bij ESA"
 
   EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on
                       gender role address zipcode city phone email email_2 member_since previous_team].freeze
@@ -42,16 +41,20 @@ class Member < ApplicationRecord
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :to_year,   ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }
   scope :from_year, ->(year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year.to_date) }
-  scope :sportlink_active, -> { where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today)) }
+  scope :sportlink_active, -> {
+    where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today))
+  }
   scope :sportlink_active_for_season, ->(season) {
-    where(deregistered_at: nil)
-      .or(where("deregistered_at > ?", season.started_on))
+    where(deregistered_at: nil).or(where("deregistered_at > ?", season.started_on))
   }
   scope :sportlink_inactive, -> { where.not(deregistered_at: nil).where("deregistered_at <= ?", Time.zone.today) }
   scope :sportlink_player, -> {
-    where("sport_category <> ''")
-      .or(where(local_teams: LOCAL_TEAMS_WELKOM_BIJ_ESA))
-      .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
+    where.not(sport_category: nil)
+         .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
+  }
+  scope :sportlink_non_player, -> {
+    where(sport_category: nil)
+      .where.not(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
   }
   scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }

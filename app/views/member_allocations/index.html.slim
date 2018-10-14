@@ -8,9 +8,9 @@
     .card
       .card-header
         | Beschikbare leden
-        - if @available_members.size > 0
+        - if @available_players.size > 0
           .badge.badge-secondary.badge-one-number.ml-3
-            = "#{@available_members.size}"
+            = "#{@available_players.size}"
 
         .lighter.float-right
           = year_of_birth_range(@age_group)
@@ -42,7 +42,7 @@
       .card-body.p-0.table-responsive
         table.table.table-sm
           tbody
-            - @filtered_available_members.each do |team, members|
+            - @filtered_available_players.each do |team, members|
               tr
                 th.w-1
                   - if team.present? && policy(TeamMember.new(team: team)).create?
