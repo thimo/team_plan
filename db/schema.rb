@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_192231) do
+ActiveRecord::Schema.define(version: 2018_10_17_150831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -32,7 +32,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.date "ended_on"
     t.integer "players_per_team"
     t.integer "minutes_per_half"
+    t.bigint "tenant_id"
     t.index ["season_id"], name: "index_age_groups_on_season_id"
+    t.index ["tenant_id"], name: "index_age_groups_on_tenant_id"
   end
 
   create_table "club_data_logs", force: :cascade do |t|
@@ -41,6 +43,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_club_data_logs_on_tenant_id"
   end
 
   create_table "club_data_team_competitions", force: :cascade do |t|
@@ -48,8 +52,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.bigint "club_data_team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["club_data_team_id", "competition_id"], name: "team_competition", unique: true
     t.index ["competition_id", "club_data_team_id"], name: "competition_team", unique: true
+    t.index ["tenant_id"], name: "index_club_data_team_competitions_on_tenant_id"
   end
 
   create_table "club_data_teams", force: :cascade do |t|
@@ -66,8 +72,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
     t.bigint "season_id"
+    t.bigint "tenant_id"
     t.index ["season_id", "teamcode"], name: "index_club_data_teams_on_season_id_and_teamcode", unique: true
     t.index ["season_id"], name: "index_club_data_teams_on_season_id"
+    t.index ["tenant_id"], name: "index_club_data_teams_on_tenant_id"
   end
 
   create_table "comments", id: :serial, force: :cascade do |t|
@@ -79,7 +87,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "private", default: false
+    t.bigint "tenant_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["tenant_id"], name: "index_comments_on_tenant_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -96,7 +106,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.json "ranking"
     t.text "remark"
     t.boolean "user_modified", default: false
+    t.bigint "tenant_id"
     t.index ["poulecode"], name: "index_competitions_on_poulecode", unique: true
+    t.index ["tenant_id"], name: "index_competitions_on_tenant_id"
   end
 
   create_table "email_logs", force: :cascade do |t|
@@ -108,6 +120,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_email_logs_on_tenant_id"
     t.index ["user_id"], name: "index_email_logs_on_user_id"
   end
 
@@ -117,7 +131,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.integer "favorable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["favorable_type", "favorable_id"], name: "index_favorites_on_favorable_type_and_favorable_id"
+    t.index ["tenant_id"], name: "index_favorites_on_tenant_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -130,8 +146,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.boolean "blank", default: false
     t.bigint "line_parent_id"
     t.bigint "axis_parent_id"
+    t.bigint "tenant_id"
     t.index ["axis_parent_id"], name: "index_field_positions_on_axis_parent_id"
     t.index ["line_parent_id"], name: "index_field_positions_on_line_parent_id"
+    t.index ["tenant_id"], name: "index_field_positions_on_tenant_id"
   end
 
   create_table "field_positions_team_members", id: false, force: :cascade do |t|
@@ -148,10 +166,12 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "updated_at", null: false
     t.string "memberable_type"
     t.bigint "memberable_id"
+    t.bigint "tenant_id"
     t.index ["group_id", "member_id", "memberable_type", "memberable_id"], name: "index_group_members_unique", unique: true
     t.index ["group_id"], name: "index_group_members_on_group_id"
     t.index ["member_id"], name: "index_group_members_on_member_id"
     t.index ["memberable_type", "memberable_id"], name: "index_group_members_on_memberable_type_and_memberable_id"
+    t.index ["tenant_id"], name: "index_group_members_on_tenant_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -159,6 +179,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "memberable_via_type"
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_groups_on_tenant_id"
   end
 
   create_table "groups_roles", id: false, force: :cascade do |t|
@@ -178,7 +200,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["member_id"], name: "index_injuries_on_member_id"
+    t.index ["tenant_id"], name: "index_injuries_on_tenant_id"
     t.index ["user_id"], name: "index_injuries_on_user_id"
   end
 
@@ -189,7 +213,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["logable_type", "logable_id"], name: "index_logs_on_logable_type_and_logable_id"
+    t.index ["tenant_id"], name: "index_logs_on_tenant_id"
     t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
@@ -222,8 +248,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.string "afgelast_status"
     t.bigint "created_by_id"
     t.integer "edit_level", default: 0
+    t.bigint "tenant_id"
     t.index ["competition_id"], name: "index_matches_on_competition_id"
     t.index ["created_by_id"], name: "index_matches_on_created_by_id"
+    t.index ["tenant_id"], name: "index_matches_on_tenant_id"
     t.index ["wedstrijdcode"], name: "index_matches_on_wedstrijdcode", unique: true
   end
 
@@ -283,7 +311,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.string "full_name"
     t.string "photo"
     t.datetime "missed_import_on"
+    t.bigint "tenant_id"
     t.index ["association_number"], name: "index_members_on_association_number"
+    t.index ["tenant_id"], name: "index_members_on_tenant_id"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
@@ -303,8 +333,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.integer "visibility", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["member_id"], name: "index_notes_on_member_id"
     t.index ["team_id"], name: "index_notes_on_team_id"
+    t.index ["tenant_id"], name: "index_notes_on_tenant_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -316,8 +348,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.date "ended_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["member_id"], name: "index_org_position_members_on_member_id"
     t.index ["org_position_id"], name: "index_org_position_members_on_org_position_id"
+    t.index ["tenant_id"], name: "index_org_position_members_on_tenant_id"
   end
 
   create_table "org_positions", force: :cascade do |t|
@@ -329,7 +363,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.string "ancestry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["ancestry"], name: "index_org_positions_on_ancestry"
+    t.index ["tenant_id"], name: "index_org_positions_on_tenant_id"
   end
 
   create_table "play_bans", force: :cascade do |t|
@@ -340,7 +376,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
     t.index ["member_id"], name: "index_play_bans_on_member_id"
+    t.index ["tenant_id"], name: "index_play_bans_on_tenant_id"
   end
 
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
@@ -360,8 +398,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "updated_at", null: false
     t.text "remark"
     t.bigint "team_member_id"
+    t.bigint "tenant_id"
     t.index ["team_evaluation_id"], name: "index_player_evaluations_on_team_evaluation_id"
     t.index ["team_member_id"], name: "index_player_evaluations_on_team_member_id"
+    t.index ["tenant_id"], name: "index_player_evaluations_on_tenant_id"
   end
 
   create_table "presences", force: :cascade do |t|
@@ -375,9 +415,11 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "team_id"
+    t.bigint "tenant_id"
     t.index ["member_id"], name: "index_presences_on_member_id"
     t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
     t.index ["team_id"], name: "index_presences_on_team_id"
+    t.index ["tenant_id"], name: "index_presences_on_tenant_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -388,8 +430,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.text "body"
+    t.bigint "tenant_id"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+    t.index ["tenant_id"], name: "index_roles_on_tenant_id"
   end
 
   create_table "seasons", id: :serial, force: :cascade do |t|
@@ -399,6 +443,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.integer "status", default: 0
     t.date "started_on"
     t.date "ended_on"
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_seasons_on_tenant_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -408,6 +454,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.string "thing_type", limit: 30
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_settings_on_tenant_id"
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
@@ -417,6 +465,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.boolean "match", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_soccer_fields_on_tenant_id"
   end
 
   create_table "team_evaluations", id: :serial, force: :cascade do |t|
@@ -428,9 +478,11 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.bigint "invited_by_id"
     t.bigint "finished_by_id"
     t.boolean "private", default: false
+    t.bigint "tenant_id"
     t.index ["finished_by_id"], name: "index_team_evaluations_on_finished_by_id"
     t.index ["invited_by_id"], name: "index_team_evaluations_on_invited_by_id"
     t.index ["team_id"], name: "index_team_evaluations_on_team_id"
+    t.index ["tenant_id"], name: "index_team_evaluations_on_tenant_id"
   end
 
   create_table "team_members", id: :serial, force: :cascade do |t|
@@ -443,9 +495,11 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.integer "status", default: 0
     t.date "started_on"
     t.date "ended_on"
+    t.bigint "tenant_id"
     t.index ["member_id", "team_id", "role"], name: "index_team_members_on_member_id_and_team_id_and_role", unique: true
     t.index ["member_id"], name: "index_team_members_on_member_id"
     t.index ["team_id"], name: "index_team_members_on_team_id"
+    t.index ["tenant_id"], name: "index_team_members_on_tenant_id"
   end
 
   create_table "team_members_training_schedules", id: false, force: :cascade do |t|
@@ -469,9 +523,19 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.integer "minutes_per_half"
     t.bigint "club_data_team_id"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }
+    t.bigint "tenant_id"
     t.index ["age_group_id"], name: "index_teams_on_age_group_id"
     t.index ["club_data_team_id"], name: "index_teams_on_club_data_team_id"
+    t.index ["tenant_id"], name: "index_teams_on_tenant_id"
     t.index ["uuid"], name: "index_teams_on_uuid"
+  end
+
+  create_table "tenants", force: :cascade do |t|
+    t.string "name"
+    t.string "subdomain"
+    t.string "domain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "todos", force: :cascade do |t|
@@ -485,6 +549,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "updated_at", null: false
     t.date "started_on"
     t.date "ended_on"
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_todos_on_tenant_id"
     t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable_type_and_todoable_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
@@ -501,8 +567,10 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.boolean "cios", default: false
     t.boolean "active", default: true
     t.integer "present_minutes", default: 0
+    t.bigint "tenant_id"
     t.index ["soccer_field_id"], name: "index_training_schedules_on_soccer_field_id"
     t.index ["team_id"], name: "index_training_schedules_on_team_id"
+    t.index ["tenant_id"], name: "index_training_schedules_on_tenant_id"
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -516,7 +584,9 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "team_id"
+    t.bigint "tenant_id"
     t.index ["team_id"], name: "index_trainings_on_team_id"
+    t.index ["tenant_id"], name: "index_trainings_on_tenant_id"
     t.index ["training_schedule_id"], name: "index_trainings_on_training_schedule_id"
   end
 
@@ -529,6 +599,8 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.boolean "include_member_comments", default: false
     t.string "active_comments_tab"
     t.string "active_team_tab"
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_user_settings_on_tenant_id"
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
@@ -555,9 +627,11 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
     t.string "unconfirmed_email"
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }
     t.integer "status", default: 1
+    t.bigint "tenant_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tenant_id"], name: "index_users_on_tenant_id"
     t.index ["uuid"], name: "index_users_on_uuid"
   end
 
@@ -589,41 +663,74 @@ ActiveRecord::Schema.define(version: 2018_09_28_192231) do
   end
 
   add_foreign_key "age_groups", "seasons"
+  add_foreign_key "age_groups", "tenants"
+  add_foreign_key "club_data_logs", "tenants"
+  add_foreign_key "club_data_team_competitions", "tenants"
   add_foreign_key "club_data_teams", "seasons"
+  add_foreign_key "club_data_teams", "tenants"
+  add_foreign_key "comments", "tenants"
   add_foreign_key "comments", "users"
+  add_foreign_key "competitions", "tenants"
+  add_foreign_key "email_logs", "tenants"
   add_foreign_key "email_logs", "users"
+  add_foreign_key "favorites", "tenants"
   add_foreign_key "favorites", "users"
   add_foreign_key "field_positions", "field_positions", column: "axis_parent_id"
   add_foreign_key "field_positions", "field_positions", column: "line_parent_id"
+  add_foreign_key "field_positions", "tenants"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "members"
+  add_foreign_key "group_members", "tenants"
+  add_foreign_key "groups", "tenants"
   add_foreign_key "injuries", "members"
+  add_foreign_key "injuries", "tenants"
   add_foreign_key "injuries", "users"
+  add_foreign_key "logs", "tenants"
   add_foreign_key "logs", "users"
   add_foreign_key "matches", "competitions"
+  add_foreign_key "matches", "tenants"
   add_foreign_key "matches", "users", column: "created_by_id"
+  add_foreign_key "members", "tenants"
   add_foreign_key "members", "users"
   add_foreign_key "notes", "members"
   add_foreign_key "notes", "teams"
+  add_foreign_key "notes", "tenants"
   add_foreign_key "notes", "users"
   add_foreign_key "org_position_members", "members"
   add_foreign_key "org_position_members", "org_positions"
+  add_foreign_key "org_position_members", "tenants"
+  add_foreign_key "org_positions", "tenants"
   add_foreign_key "play_bans", "members"
+  add_foreign_key "play_bans", "tenants"
   add_foreign_key "player_evaluations", "team_evaluations"
   add_foreign_key "player_evaluations", "team_members"
+  add_foreign_key "player_evaluations", "tenants"
   add_foreign_key "presences", "members"
   add_foreign_key "presences", "teams"
+  add_foreign_key "presences", "tenants"
+  add_foreign_key "roles", "tenants"
+  add_foreign_key "seasons", "tenants"
+  add_foreign_key "settings", "tenants"
+  add_foreign_key "soccer_fields", "tenants"
   add_foreign_key "team_evaluations", "teams"
+  add_foreign_key "team_evaluations", "tenants"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
   add_foreign_key "team_evaluations", "users", column: "invited_by_id"
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
+  add_foreign_key "team_members", "tenants"
   add_foreign_key "teams", "age_groups"
   add_foreign_key "teams", "club_data_teams"
+  add_foreign_key "teams", "tenants"
+  add_foreign_key "todos", "tenants"
   add_foreign_key "todos", "users"
   add_foreign_key "training_schedules", "soccer_fields"
   add_foreign_key "training_schedules", "teams"
+  add_foreign_key "training_schedules", "tenants"
   add_foreign_key "trainings", "teams"
+  add_foreign_key "trainings", "tenants"
   add_foreign_key "trainings", "training_schedules"
+  add_foreign_key "user_settings", "tenants"
   add_foreign_key "user_settings", "users"
+  add_foreign_key "users", "tenants"
 end

@@ -8,6 +8,6 @@ class CreateTenants < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    Tenant.create(name: "My first tenant" )
+    Tenant.create(name: "My first tenant")
   end
 end

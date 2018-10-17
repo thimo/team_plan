@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Injury < ApplicationRecord
+  multi_tenant :tenant
   belongs_to :user
   belongs_to :member
   has_many :comments, as: :commentable, dependent: :destroy

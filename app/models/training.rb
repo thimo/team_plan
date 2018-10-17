@@ -4,6 +4,7 @@ class Training < ApplicationRecord
   include Activatable
   include Presentable
 
+  multi_tenant :tenant
   belongs_to :team
   belongs_to :training_schedule, optional: true
   has_paper_trail

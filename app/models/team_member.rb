@@ -7,6 +7,7 @@ class TeamMember < ApplicationRecord
 
   before_create :inherit_fields
 
+  multi_tenant :tenant
   belongs_to :team, touch: true
   belongs_to :member, touch: true
   has_many :player_evaluations, dependent: :destroy

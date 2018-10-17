@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  set_current_tenant_through_filter
   include Pundit
   include ApplicationHelper
   protect_from_forgery with: :exception
   impersonates :user
 
+  before_action :set_tenant
   before_action :set_locale
   before_action :default_breadcrumb
   before_action :set_paper_trail_whodunnit
@@ -18,6 +20,12 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_auth_token
 
   private
+
+    def set_tenant
+      # TODO: Implement fetching the right tenant
+      tenant = Tenant.first
+      set_current_tenant(tenant)
+    end
 
     def invalid_auth_token
       flash_message(:danger, "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer.")
