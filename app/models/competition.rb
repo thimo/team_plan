@@ -11,7 +11,7 @@ class Competition < ApplicationRecord
   has_paper_trail
 
   validates :competitienaam, presence: true
-  validates :poulecode, uniqueness: true
+  validates :poulecode, uniqueness: { scope: :tenant }
 
   scope :asc,     -> { order(:created_at) }
   scope :desc,    -> { order(created_at: :desc) }

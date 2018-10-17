@@ -10,7 +10,7 @@ class Match < ApplicationRecord
   has_paper_trail
 
   validates :wedstrijdcode, :wedstrijddatum, :thuisteam, :uitteam, presence: true
-  validates :wedstrijdcode, uniqueness: true
+  validates :wedstrijdcode, uniqueness: { scope: :tenant }
 
   attr_accessor :opponent, :is_home_match
 

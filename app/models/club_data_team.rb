@@ -10,7 +10,7 @@ class ClubDataTeam < ApplicationRecord
   has_many :competitions, through: :club_data_team_competitions
 
   validates :teamcode, :teamnaam, presence: true
-  validates :teamcode, uniqueness: { scope: :season }
+  validates :teamcode, uniqueness: { scope: [:tenant, :season] }
 
   scope :asc, -> { order(:id) }
 
