@@ -22,8 +22,10 @@ class ApplicationController < ActionController::Base
   private
 
     def set_tenant
-      # TODO: Implement fetching the right tenant
-      tenant = Tenant.first
+      tenant = Tenant.find_by(domain: request.domain.downcase)
+      tenant ||= Tenant.find_by(subdomain: request.subdomains.last.downcase) if request.subdomains.any?
+      tenant ||= 1 if Rails.env.development?
+      raise "Tenant not found" if tenant.blank?
       set_current_tenant(tenant)
     end
 
