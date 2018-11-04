@@ -33,7 +33,7 @@ class MatchesController < ApplicationController
   def edit; end
 
   def update
-    if @match.update(match_params.merge(user_modified: true))
+    if @match.update(permitted_attributes(@match).merge(user_modified: true))
       flash_message(:success, "Wedstrijd is aangepast.")
       redirect_to params[:return_url].presence || @match
     else
