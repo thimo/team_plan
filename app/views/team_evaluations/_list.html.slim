@@ -17,6 +17,8 @@
       - if show_bulk_create && @age_group.present? && policy(TeamEvaluation.new(team: @teams.first)).create?
         = link_to new_age_group_team_evaluation_bulk_update_path(@age_group), title: "Teamevaluaties aanmaken en versturen", class: "card-header-action"
           i.fa-copy[class=fa_class]
+          span.d-down-none.pl-1
+            | Aanmaken
 
   - if team_evaluations.size > 0
     .card-body.p-0
