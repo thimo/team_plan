@@ -12,12 +12,11 @@ class AgeGroupPolicy < ApplicationPolicy
   def create?
     return false if @record.season.archived?
 
-    # TODO: add role to create age groups
-    @user.admin?
+    @user.role?(Role::AGE_GROUP_CREATE)
   end
 
   def update?
-    create?
+    @user.role?(Role::AGE_GROUP_UPDATE, @record)
   end
 
   def destroy?
@@ -27,9 +26,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_favorite?
-    return false if @record.draft?
-
-    @user.admin? || @user.club_staff?
+    !@record.draft?
   end
 
   def show_evaluations?
