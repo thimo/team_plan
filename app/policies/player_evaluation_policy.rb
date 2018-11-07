@@ -33,8 +33,9 @@ class PlayerEvaluationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      # TODO: This will probably not work for coordinators
-      if user.admin? || @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record)
+      # Coordinators get a scope with all player evaluations. Display will be
+      # limited via MemberPolicy.show_evaluations?
+      if user.admin? || user.indirect_role?(Role::MEMBER_SHOW_EVALUATIONS)
         scope.all.finished
       else
         scope.public_or_as_team_staff(user).finished
