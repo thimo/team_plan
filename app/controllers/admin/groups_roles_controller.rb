@@ -9,5 +9,27 @@ module Admin
       authorize(Group)
       authorize(Role)
     end
+
+    def create
+      group = Group.find(params[:group_id])
+      role = Role.find(params[:role_id])
+      authorize(group)
+      authorize(role)
+
+      group.roles << role
+
+      redirect_to admin_groups_roles_path
+    end
+
+    def destroy
+      group = Group.find(params[:group_id])
+      role = Role.find(params[:role_id])
+      authorize(group)
+      authorize(role)
+
+      group.roles.delete(role)
+
+      redirect_to admin_groups_roles_path
+    end
   end
 end
