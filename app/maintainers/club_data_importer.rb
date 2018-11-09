@@ -2,7 +2,7 @@
 
 module ClubDataImporter
   def self.teams_and_competitions
-    return if Season.active_season_for_today.nil?
+    return if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
 
     team_count = { total: 0, created: 0, updated: 0 }
     competition_count = { total: 0, created: 0, updated: 0 }
@@ -62,7 +62,7 @@ module ClubDataImporter
   end
 
   def self.club_results
-    return if Season.active_season_for_today.nil?
+    return if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
 
     count = { total: 0, updated: 0 }
 
@@ -73,7 +73,7 @@ module ClubDataImporter
       count[:total] += 1
       match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])
       next if match.nil?
-      
+
       match.set_uitslag(data["uitslag"])
       if match.changed?
         match.save
@@ -95,7 +95,7 @@ module ClubDataImporter
   end
 
   def self.poule_standings
-    return if Season.active_season_for_today.nil?
+    return if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
 
     count = { total: 0, updated: 0 }
 
@@ -126,7 +126,7 @@ module ClubDataImporter
   end
 
   def self.poule_matches
-    return if Season.active_season_for_today.nil?
+    return if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
 
     count = { total: 0, created: 0, updated: 0, deleted: 0 }
 
@@ -182,7 +182,7 @@ module ClubDataImporter
   end
 
   def self.poule_results
-    return if Season.active_season_for_today.nil?
+    return if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
 
     count = { total: 0, created: 0, updated: 0 }
 
@@ -216,7 +216,7 @@ module ClubDataImporter
   end
 
   def self.team_photos
-    return if Season.active_season_for_today.nil?
+    return if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
 
     count = { total: 0, updated: 0 }
 
@@ -272,7 +272,7 @@ module ClubDataImporter
   end
 
   def self.afgelastingen
-    return if Season.active_season_for_today.nil?
+    return if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
 
     count = { total: 0, created: 0, deleted: 0 }
 
