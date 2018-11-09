@@ -1,0 +1,5 @@
+= t('.greeting', recipient: @resource.name, default: "Welcome #{@resource.name}!")
+
+= t('.instruction', default: 'You can confirm your account email through the link below:')
+
+= confirmation_url(@resource, confirmation_token: @token, locale: I18n.locale)
