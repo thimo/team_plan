@@ -382,6 +382,9 @@ nl:
       aantal_jaar_lid: member_for_years
       opmerking_indeling: remark_division
       bijzonderheden: specifics
+      vrij_veld_1: free_entry_1
+      vrij_veld_2: free_entry_2
+      vrij_veld_3: free_entry_3
       vrij_veld_4: free_entry_4
       vrij_veld_5: free_entry_5
       vrij_veld_6: free_entry_6
