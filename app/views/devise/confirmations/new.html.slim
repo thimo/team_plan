@@ -5,11 +5,12 @@
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_field :email,
-    prepend: tag.i(class: [fa_class, 'fa-at']),
-    autofocus: true,
-    class: "form-control",
-    placeholder: User.human_attribute_name(:email),
-    hide_label: true
+                 prepend: tag.i(class: [fa_class, 'fa-at']),
+                 autofocus: true,
+                 class: "form-control",
+                 placeholder: User.human_attribute_name(:email),
+                 hide_label: true,
+                 value: params[:email]
 
   .row
     .col-6

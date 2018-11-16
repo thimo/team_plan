@@ -22,6 +22,18 @@
   }
 }
 
+.alert-warning {
+  &.alert-fill {
+    background-color: $orange;
+    border-color: $orange;
+    color: white;
+
+    .alert-btns .btn:hover {
+      color: $orange !important;
+    }
+  }
+}
+
 .alert-fill {
   a {
     color: white;
