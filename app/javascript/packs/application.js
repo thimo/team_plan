@@ -11,6 +11,7 @@ import 'bootstrap-datepicker'
 import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min'
 import 'chart.js'
 import 'trix'
+import 'sticky-table-headers'
 
 import Turbolinks from "turbolinks"
 Turbolinks.start()
