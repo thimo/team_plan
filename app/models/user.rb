@@ -231,6 +231,10 @@ class User < ApplicationRecord
     indirect_role_names.include?(role.to_s)
   end
 
+  def show_evaluations?
+    admin? || role?(Role::MEMBER_SHOW_EVALUATIONS) || indirect_role?(Role::MEMBER_SHOW_EVALUATIONS)
+  end
+
   private
 
     def team_id_for(record, as_team_staf = false)

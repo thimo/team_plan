@@ -14,7 +14,7 @@ class Member < ApplicationRecord
 
   EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on
                       gender role address zipcode city phone email email_2 member_since previous_team].freeze
-  EXPORT_COLUMNS_ADVANCED = %w[field_positions prefered_foot advise_next_season].freeze
+  EXPORT_COLUMNS_EVALUATION = %w[field_positions prefered_foot advise_next_season].freeze
   DEFAULT_COLUMNS = %w[team association_number name born_on role address zipcode city phone email email_2].freeze
   EMAIL_ADDRESSES = %w[email email_2 email_parent email_parent_2].freeze
 
@@ -253,7 +253,7 @@ class Member < ApplicationRecord
   end
 
   def self.export_columns(user)
-    Member::EXPORT_COLUMNS + (user.admin? || user.club_staff? ? Member::EXPORT_COLUMNS_ADVANCED : [])
+    Member::EXPORT_COLUMNS + (user.show_evaluations? ? Member::EXPORT_COLUMNS_EVALUATION : [])
   end
 
   def emails
