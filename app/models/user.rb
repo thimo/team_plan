@@ -186,8 +186,14 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    "Met dit account is het helaas niet mogelijk om in te loggen. Ga alsjeblieft zelf na of het e-mailadres dat \
-    je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van #{Setting['club.name_short']}."
+    if !confirmed?
+      "Je e-mailadres is nog niet bevestigd. Klik op de link \
+      \"#{I18n.t("devise.shared.links.didn_t_receive_confirmation_instructions")}\" hieronder om een nieuwe \
+      bevestiging aan te vragen."
+    else
+      "Met dit account is het helaas niet mogelijk om in te loggen. Ga alsjeblieft zelf na of het e-mailadres dat \
+      je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van #{Setting['club.name_short']}."
+    end
   end
 
   def toggle_include_member_comments
@@ -229,6 +235,10 @@ class User < ApplicationRecord
 
   def indirect_role?(role)
     indirect_role_names.include?(role.to_s)
+  end
+
+  def show_evaluations?
+    admin? || role?(Role::MEMBER_SHOW_EVALUATIONS) || indirect_role?(Role::MEMBER_SHOW_EVALUATIONS)
   end
 
   private
