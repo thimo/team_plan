@@ -1,41 +1,57 @@
-.alert-notice {
-  &.alert-fill {
-    background-color: $green;
-    border-color: $green;
-    color: white;
+.alert {
+  &.alert-success, &.alert-notice {
+    background-color: $success;
+    border-color: $success;
+    color: $white;
 
     .alert-btns .btn:hover {
-      color: $green !important;
+      color: $success !important;
     }
   }
-}
 
-.alert-danger {
-  &.alert-fill {
-    background-color: $red;
-    border-color: $red;
-    color: white;
+  &.alert-info {
+    background-color: $primary;
+    border-color: $primary;
+    color: $white;
 
     .alert-btns .btn:hover {
-      color: $red !important;
+      color: $primary !important;
     }
   }
-}
 
-.alert-fill {
-  a {
-    color: white;
+  &.alert-danger {
+    background-color: $danger;
+    border-color: $danger;
+    color: $white;
+
+    .alert-btns .btn:hover {
+      color: $danger !important;
+    }
+  }
+
+  &.alert-warning {
+    background-color: $warning;
+    border-color: $warning;
+    color: darken($warning, 35%);
+
+    .alert-btns .btn:hover {
+      color: $warning !important;
+    }
+  }
+
+  a, a:hover {
+    color: $white;
     font-weight: bold;
   }
-}
 
-// Icons voor alerts
-.fa-notice:before,
-.fa-success:before {
-  content: "\f00c";
-}
+  // Icons voor alerts
+  .fa-notice:before,
+  .fa-success:before {
+    content: "\f00c";
+  }
 
-.fa-alert:before,
-.fa-danger:before {
-  content: "\f00d";
+  .fa-alert:before,
+  .fa-danger:before {
+    content: "\f00d";
+  }
 }

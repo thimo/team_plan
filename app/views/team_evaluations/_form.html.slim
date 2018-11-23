@@ -16,7 +16,7 @@
         = " - #{@team_evaluation.status}"
 
     .card-body.p-0
-      table.table.table-xxs
+      table.table.table-xxs data={ controller: "table-sticky-header" }
         thead
           tr
             th

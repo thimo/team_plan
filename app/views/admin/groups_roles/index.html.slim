@@ -1,22 +1,27 @@
 - provide(:title, "Rollen matrix")
 
-.card
+.card[data-scroll-position="groups_roles_index"]
   .card-body.p-0
-    table.table.table-sm
+    table.table.table-sm style="width: auto;" data={ controller: 'table-sticky-header' }
       thead
-        tr style="height: 160px;"
+        tr style="height: 10rem;"
           th
           - @groups.each do |group|
             th.rotate
               div.w-1
                 span = "#{group.name} (#{group.roles.size})"
-          th
+          th style="width: 8rem;"
 
       tbody.table-bordered
         - @roles.each do |role|
           tr
             td = role.name
             - @groups.each do |group|
-              - has_role = group.roles.include?(role)
-              td class=("bg-color-success" if has_role)
+              td.p-0.text-center
+                - if group.roles.include?(role)
+                  = link_to admin_groups_roles_path(group_id: group, role_id: role), method: :delete
+                    i.fa-check.bg-color-success.color-white.p-3[class=fa_class]
+                - else
+                  = link_to admin_groups_roles_path(group_id: group, role_id: role), method: :post
+                    i.fa-times.color-gray-400.p-3[class=fa_class]
             td

@@ -5,11 +5,13 @@
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_field :email,
-    prepend: tag.i(class: [fa_class, 'fa-at']),
-    autofocus: true,
-    class: "form-control",
-    placeholder: User.human_attribute_name(:email),
-    hide_label: true
+                 prepend: tag.i(class: [fa_class, 'fa-at']),
+                 autofocus: true,
+                 class: "form-control",
+                 placeholder: User.human_attribute_name(:email),
+                 hide_label: true,
+                 value: params[:email],
+                 help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Setting["club.name_short"]}."
 
   .row
     .col-6

@@ -8,7 +8,7 @@ html lang="nl"
     .app.devise.flex-row.align-items-center
       .container
         .row.justify-content-center
-          .col-md-8.col-lg-6.col-xl-5
+          .col-md-8.col-lg-7.col-xl-6
             .header
               - if Setting["club.logo_url"].present?
                 img.club-logo src="#{Setting["club.logo_url"]}" alt=Setting["club.name"]
@@ -20,7 +20,10 @@ html lang="nl"
                   - [messages].flatten.each do |message|
                     - if message.present?
                       div
-                        .alert.alert-fill[role="alert" class="alert-#{message_type.sub('alert', 'warning')}"]
+                        .alert.alert-dismissible.invisible.fade[data={ controller: "alert-fade-in" } role="alert" class="alert-#{message_type.sub('alert', 'danger')}"]
+                          button.close[type="button" data-dismiss="alert" aria-label="Close"]
+                            span[aria-hidden="true"]
+                              i.fa-times class=fa_class
                           | #{message}
               div
                 = yield(:flash)
@@ -35,9 +38,11 @@ html lang="nl"
                 = yield
 
             - if content_for?(:form_help)
-              .card.text-white.bg-primary
+              .card.bg-primary
                 .card-body.text-center
                   div
                     = yield(:form_help)
 
-            = render 'devise/shared/links'
+            = render "devise/shared/login_email_warning"
+
+        = render 'devise/shared/links'

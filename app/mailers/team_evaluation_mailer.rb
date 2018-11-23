@@ -6,6 +6,6 @@ class TeamEvaluationMailer < ApplicationMailer
     @team_evaluation = team_evaluation
     @names = @users.collect(&:name).join(", ")
     emails = @users.collect(&:email_with_name).join(", ")
-    mail to: emails, subject: "Invullen teamevaluatie #{@team_evaluation.team.name}"
+    mail(from: default_from, to: emails, subject: "Invullen teamevaluatie #{@team_evaluation.team.name}")
   end
 end

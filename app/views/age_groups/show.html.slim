@@ -18,6 +18,8 @@
   - if policy(Todo).create? && policy(@age_group).show_todos?
     = link_to new_age_group_todo_path(@age_group), title: "Todo toevoegen", class: "btn"
       i.fa-check-square[class=fa_class]
+      span.d-down-none.pl-1
+        | Todo
   = render "shared/favorite", parent: @age_group, styleClass: "btn"
 
 .row

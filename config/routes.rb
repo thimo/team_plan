@@ -147,7 +147,11 @@ Rails.application.routes.draw do
       resources :competitions
       resources :groups
       resources :roles
-      resources :groups_roles
+      resources :groups_roles do
+        collection do
+          delete :destroy
+        end
+      end
       resources :matches
       resources :play_bans
       resources :play_bans_import, only: [:new, :create]

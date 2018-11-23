@@ -8,6 +8,8 @@
       - if defined?(team) && policy(TrainingSchedule.new(team: team)).create?
         = link_to new_team_training_schedule_path(team), title: "Trainingsdag toevoegen", class: "card-header-action"
           i.fa-plus-square[class=fa_class]
+          span.d-down-none.pl-1
+            | Toevoegen
 
   .card-body.p-0
     - if training_schedules.size > 0
