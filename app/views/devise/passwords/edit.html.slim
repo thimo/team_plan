@@ -4,7 +4,7 @@
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.hidden_field :reset_password_token
-  = f.text_field :password,
+  = f.password_field :password,
     autofocus: true,
     class: 'form-control',
     placeholder: User.human_attribute_name(:password),
@@ -15,5 +15,3 @@
     hide_label: true
 
   = f.submit t('.change_my_password', default: 'Change my password'), class: 'btn btn-primary'
-
-  = render 'devise/shared/links'
