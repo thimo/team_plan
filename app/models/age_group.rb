@@ -2,7 +2,7 @@
 
 class AgeGroup < ApplicationRecord
   include Statussable
-  
+
   acts_as_tenant :tenant
   belongs_to :season
   has_many :teams, dependent: :destroy
