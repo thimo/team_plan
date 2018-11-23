@@ -3,7 +3,7 @@
 class Match < ApplicationRecord
   include Presentable
 
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :competition
   belongs_to :created_by, class_name: "User", required: false
   has_and_belongs_to_many :teams

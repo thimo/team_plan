@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   impersonates :user
 
-  before_action :set_tenant
   before_action :set_locale
   before_action :default_breadcrumb
   before_action :set_paper_trail_whodunnit
@@ -20,14 +19,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_auth_token
 
   private
-
-    def set_tenant
-      tenant = Tenant.find_by(domain: request.domain.downcase)
-      tenant ||= Tenant.find_by(subdomain: request.subdomains.last.downcase) if request.subdomains.any?
-      tenant ||= 1 if Rails.env.development?
-      raise "Tenant not found" if tenant.blank?
-      set_current_tenant(tenant)
-    end
 
     def invalid_auth_token
       flash_message(:danger, "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer.")

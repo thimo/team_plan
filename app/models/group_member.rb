@@ -2,7 +2,7 @@
 
 # Links members to groups
 class GroupMember < ApplicationRecord
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :group
   belongs_to :member
   belongs_to :memberable, polymorphic: true, optional: true

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PlayBan < ApplicationRecord
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :member
   has_many :comments, as: :commentable, dependent: :destroy
 

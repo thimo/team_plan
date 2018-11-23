@@ -6,9 +6,10 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :registerable, :confirmable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  # Removed :validatable for compatability with acts_as_tenant
+  devise :registerable, :confirmable, :database_authenticatable, :recoverable, :rememberable, :trackable
 
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   has_many :favorites, dependent: :destroy
   has_many :email_logs, dependent: :destroy
   has_many :logs, dependent: :destroy
@@ -30,8 +31,9 @@ class User < ApplicationRecord
 
   has_paper_trail
 
-  # Add conditional validation on first_name and last_name, not executed for devise
-  validates :email, presence: true
+  validates :email, presence: true, format: Devise.email_regexp
+  validates_uniqueness_to_tenant :email
+  validates :password, presence: true, length: { in: 6..30 }, if: :password_required?
 
   enum role: { member: 0, club_staff: 2, admin: 1 }
 
@@ -313,5 +315,10 @@ class User < ApplicationRecord
       age_group_id = age_group_id_for(record)
       group = Group.for_member(members).for_memberable("AgeGroup", age_group_id)
       Role.by_group(group)
+    end
+
+    # Copied from validatable module
+    def password_required?
+      !persisted? || !password.nil? || !password_confirmation.nil?
     end
 end

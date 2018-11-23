@@ -3,7 +3,7 @@
 class Competition < ApplicationRecord
   include Activatable
 
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   has_many :club_data_team_competitions, dependent: :destroy
   has_many :club_data_teams, through: :club_data_team_competitions
   has_many :teams, through: :club_data_teams

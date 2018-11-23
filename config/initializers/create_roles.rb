@@ -1,3 +1,7 @@
 # frozen_string_literal: true
 
-Role.create_all
+Tenant.find_each do |tenant|
+  ActsAsTenant.with_tenant(tenant) do
+    Role.create_all
+  end
+end

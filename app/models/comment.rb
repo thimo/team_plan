@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :user
   belongs_to :commentable, polymorphic: true, touch: true
   has_paper_trail

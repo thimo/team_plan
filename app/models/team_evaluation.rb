@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeamEvaluation < ApplicationRecord
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :team, required: true
   belongs_to :invited_by, class_name: "User", required: false
   belongs_to :finished_by, class_name: "User", required: false

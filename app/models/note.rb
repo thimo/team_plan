@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Note < ApplicationRecord
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :user
   belongs_to :team
   belongs_to :member, optional: true

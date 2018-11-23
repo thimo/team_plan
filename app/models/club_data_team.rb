@@ -3,7 +3,7 @@
 class ClubDataTeam < ApplicationRecord
   include Activatable
 
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :season
   has_many :teams, dependent: :nullify
   has_many :club_data_team_competitions, dependent: :nullify

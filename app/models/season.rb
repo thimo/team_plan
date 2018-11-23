@@ -3,7 +3,7 @@
 class Season < ApplicationRecord
   include Statussable
 
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   has_many :age_groups, dependent: :destroy
   has_many :teams, through: :age_groups
   has_many :club_data_teams, dependent: :nullify

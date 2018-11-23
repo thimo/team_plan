@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby "2.5.1"
 
-gem "activerecord-multi-tenant"
+gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
 # TODO: jquery-rails is included to prevent the following blocking error on deploy, thrown from axlsx_rails:
 # "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved

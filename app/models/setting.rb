@@ -2,7 +2,8 @@
 
 # RailsSettings Model
 class Setting < RailsSettings::Base
-  multi_tenant :tenant
+  cache_prefix { ActsAsTenant.current_tenant }
+  acts_as_tenant :tenant
   source Rails.root.join("config", "app.yml")
   namespace Rails.env
 end

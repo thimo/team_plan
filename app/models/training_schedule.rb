@@ -6,7 +6,7 @@ class TrainingSchedule < ApplicationRecord
 
   after_save :update_trainings
 
-  multi_tenant :tenant
+  acts_as_tenant :tenant
   belongs_to :team
   belongs_to :soccer_field
   has_many :trainings, dependent: :destroy
