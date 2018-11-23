@@ -8,18 +8,18 @@
     class: 'form-control',
     placeholder: User.human_attribute_name(:email),
     hide_label: true
-  = f.text_field :password,
+  = f.password_field :password,
     class: 'form-control',
     placeholder: t('.new_password'),
     hide_label: true,
     autocomplete: "off"
-  = f.text_field :password_confirmation,
+  = f.password_field :password_confirmation,
     class: 'form-control',
     placeholder: User.human_attribute_name(:password_confirmation),
     hide_label: true,
     autocomplete: "off",
     hint: t('.leave_blank_if_you_don_t_want_to_change_it', default: "Leave blank if you don't want to change it")
-  = f.text_field :current_password,
+  = f.password_field :current_password,
     class: 'form-control',
     placeholder: t('.current_password'),
     hide_label: true,
