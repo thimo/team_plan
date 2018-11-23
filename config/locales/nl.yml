@@ -71,7 +71,7 @@ nl:
         last_name: Achternaam
         name: Volledige naam
         full_name: Achternaam, voornaam
-        email: E-mail
+        email: E-mailadres
         born_on: Geboortedatum
         gender: Geslacht
         phone: Telefoonnummer
@@ -175,7 +175,7 @@ nl:
         name: Naam
         role: Rol
         current_sign_in_at: Laatste login
-        email: E-mail
+        email: E-mailadres
         members: Leden
       version_update:
         released_at: Datum

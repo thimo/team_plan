@@ -9,7 +9,9 @@
     autofocus: true,
     class: 'form-control',
     placeholder: User.human_attribute_name(:email),
-    hide_label: true
+    hide_label: true,
+    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Setting["club.name_short"]}."
+
   .row
     .col-6
       = f.submit t('.send_me_reset_password_instructions', default: 'Send me reset password instructions'),
