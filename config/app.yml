@@ -15,7 +15,7 @@ defaults: &defaults
   club.city: Arnhem
   club.phone:
   club.relatiecode:
-  club.logo_url: 
+  club.logo_url:
   clubdata.urls.competities: https://data.sportlink.com/teams?teamsoort=bond&spelsoort=ve&gebruiklokaleteamgegevens=NEE
   clubdata.urls.poulestand: https://data.sportlink.com/poulestand?gebruiklokaleteamgegevens=NEE
   clubdata.urls.poule-programma: https://data.sportlink.com/poule-programma?eigenwedstrijden=NEE&gebruiklokaleteamgegevens=NEE&aantaldagen=365&weekoffset=-2
@@ -26,6 +26,7 @@ defaults: &defaults
   clubdata.urls.afgelastingen: https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1
   clubdata.urls.club_logos: http://bin617.website-voetbal.nl/sites/voetbal.nl/files/knvblogos/
   clubdata.client_id:
+  fontawesome.version: v5.5.0
   fontawesome.integrity:
   google.maps.base_url: https://www.google.com/maps/embed/v1/
   google.maps.api-key:
