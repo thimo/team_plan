@@ -198,7 +198,7 @@ class Member < ApplicationRecord
     CSV.foreach(
       file.path,
       headers: true,
-      header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}", raise: true) }
+      header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}") }
     ) do |row|
       row_hash = row.to_hash
       association_number = row_hash["association_number"]
