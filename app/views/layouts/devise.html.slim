@@ -10,9 +10,9 @@ html lang="nl"
         .row.justify-content-center
           .col-md-8.col-lg-7.col-xl-6
             .header
-              - if Setting["club.logo_url"].present?
-                img.club-logo src="#{Setting["club.logo_url"]}" alt=Setting["club.name"]
-              img.app-logo src="#{asset_path 'logo/teamplan.svg'}" alt=Setting["application.name"]
+              - if current_tenant.settings["club.logo_url"].present?
+                img.club-logo src="#{current_tenant.settings["club.logo_url"]}" alt=current_tenant.settings["club.name"]
+              img.app-logo src="#{asset_path 'logo/teamplan.svg'}" alt=current_tenant.settings["application.name"]
 
             .text-center
               - if flash.present?

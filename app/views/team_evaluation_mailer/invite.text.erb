@@ -1,10 +1,10 @@
 Hallo <%= @names %>,
 
 We hebben een evaluatie klaargezet voor <%= @team_evaluation.team.name %> en vragen je in te loggen en deze in te
-vullen. Als de evaluatie volledig is ingevuld vragen we je deze terug te sturen naar <%= Setting['club.name_short'] %>
+vullen. Als de evaluatie volledig is ingevuld vragen we je deze terug te sturen naar <%= current_tenant.settings['club.name_short'] %>
 door op de knop "Evaluatie afronden" te klikken.
 
 <%= edit_team_evaluation_url(@team_evaluation)  %>
 
-Als het goed is heb je eerder al een gegevens ontvangen van <%= Setting['club.name_short'] %> om mee in te loggen.
-Zo niet, stuur een mail naar <%= Setting['application.email'] %>.
+Als het goed is heb je eerder al een gegevens ontvangen van <%= current_tenant.settings['club.name_short'] %> om mee in te loggen.
+Zo niet, stuur een mail naar <%= current_tenant.settings['application.email'] %>.

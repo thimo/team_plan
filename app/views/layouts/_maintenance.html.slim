@@ -1,5 +1,5 @@
-- if Setting["application.maintenance"] == "true"
+- if current_tenant.settings["application.maintenance"] == "true"
   .alert.alert-warning.text-center
-    | Op dit moment wordt onderhoud gepleegd aan #{Setting["application.name"]}. Mail  
-    =<> mail_to Setting["application.email"], Setting["application.contact_name"], class: "alert-link"
+    | Op dit moment wordt onderhoud gepleegd aan #{current_tenant.settings["application.name"]}. Mail  
+    =<> mail_to current_tenant.settings["application.email"], current_tenant.settings["application.contact_name"], class: "alert-link"
     | als je merkt dat iets niet goed werkt.

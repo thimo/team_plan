@@ -10,7 +10,7 @@
     class: 'form-control',
     placeholder: User.human_attribute_name(:email),
     hide_label: true,
-    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Setting["club.name_short"]}."
+    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{current_tenant.settings["club.name_short"]}."
 
   .row
     .col-6

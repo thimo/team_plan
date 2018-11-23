@@ -4,7 +4,7 @@ module ClubDataImporter
   def self.teams_and_competitions
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
+        next if Season.active_season_for_today.nil? || ActsAsTenant.current_tenant.settings["clubdata.client_id"].blank?
 
         teams_and_competitions_for_tenant
       end
@@ -14,7 +14,7 @@ module ClubDataImporter
   def self.club_results
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
+        next if Season.active_season_for_today.nil? || ActsAsTenant.current_tenant.settings["clubdata.client_id"].blank?
 
         club_results_for_tenant
       end
@@ -24,7 +24,7 @@ module ClubDataImporter
   def self.poules
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
+        next if Season.active_season_for_today.nil? || ActsAsTenant.current_tenant.settings["clubdata.client_id"].blank?
 
         poule_standings_for_tenant
         poule_matches_for_tenant
@@ -36,7 +36,7 @@ module ClubDataImporter
   def self.team_photos
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
+        next if Season.active_season_for_today.nil? || ActsAsTenant.current_tenant.settings["clubdata.client_id"].blank?
 
         team_photos_for_tenant
       end
@@ -46,7 +46,7 @@ module ClubDataImporter
   def self.afgelastingen
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Setting["clubdata.client_id"].blank?
+        next if Season.active_season_for_today.nil? || ActsAsTenant.current_tenant.settings["clubdata.client_id"].blank?
 
         afgelastingen_for_tenant
       end
@@ -63,7 +63,7 @@ module ClubDataImporter
       team_count = { total: 0, created: 0, updated: 0 }
       competition_count = { total: 0, created: 0, updated: 0 }
 
-      url = "#{Setting['clubdata.urls.competities']}&client_id=#{Setting['clubdata.client_id']}"
+      url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.competities']}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         team_count[:total] += 1
@@ -125,7 +125,7 @@ module ClubDataImporter
       count = { total: 0, updated: 0 }
 
       # Regular import of all club matches
-      url = "#{Setting['clubdata.urls.uitslagen']}&client_id=#{Setting['clubdata.client_id']}"
+      url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.uitslagen']}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         count[:total] += 1
@@ -153,8 +153,8 @@ module ClubDataImporter
 
       Season.active_season_for_today.competitions.active.each do |competition|
         # Fetch ranking
-        url = "#{Setting['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}" \
-              "&client_id=#{Setting['clubdata.client_id']}"
+        url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}" \
+              "&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
         json = JSON.parse(RestClient.get(url))
         if json.present?
           count[:total] += 1
@@ -184,8 +184,8 @@ module ClubDataImporter
         imported_wedstrijdnummers = []
 
         # Fetch upcoming matches
-        url = "#{Setting['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}" \
-              "&client_id=#{Setting['clubdata.client_id']}"
+        url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.poule-programma']}&poulecode=#{competition.poulecode}" \
+              "&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
         json = JSON.parse(RestClient.get(url))
         json.each do |data|
           count[:total] += 1
@@ -235,8 +235,8 @@ module ClubDataImporter
       count = { total: 0, created: 0, updated: 0 }
 
       Season.active_season_for_today.competitions.active.each do |competition|
-        url = "#{Setting['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}" \
-              "&client_id=#{Setting['clubdata.client_id']}"
+        url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}" \
+              "&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
         json = JSON.parse(RestClient.get(url))
         json.each do |data|
           count[:total] += 1
@@ -267,7 +267,7 @@ module ClubDataImporter
       count = { total: 0, created: 0, deleted: 0 }
 
       # Regular import of all club matches
-      url = "#{Setting['clubdata.urls.afgelastingen']}&client_id=#{Setting['clubdata.client_id']}"
+      url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.afgelastingen']}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       cancelled_matches = []
       json.each do |data|
@@ -306,8 +306,8 @@ module ClubDataImporter
       count = { total: 0, updated: 0 }
 
       Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
-        url = "#{Setting['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}" \
-              "&client_id=#{Setting['clubdata.client_id']}"
+        url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.team-indeling']}&teamcode=#{club_data_team.teamcode}" \
+              "&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
         json = JSON.parse(RestClient.get(url))
         json.each do |data|
           next if data["foto"].blank?
@@ -336,8 +336,8 @@ module ClubDataImporter
     def add_address(match)
       return if match.adres.present?
 
-      url = "#{Setting['clubdata.urls.wedstrijd-accommodatie']}?wedstrijdcode=#{match.wedstrijdcode}" \
-            "&client_id=#{Setting['clubdata.client_id']}"
+      url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.wedstrijd-accommodatie']}?wedstrijdcode=#{match.wedstrijdcode}" \
+            "&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       if json["wedstrijd"].present?
         wedstrijd = json["wedstrijd"]

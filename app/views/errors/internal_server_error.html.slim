@@ -5,7 +5,7 @@ p
   | Er is iets fout gegaan op de server bij het verwerken van je aanvraag of opdracht.
 p
   | We willen het probleem graag oplossen. Je kunt ons hierbij helpen door een beschrijving van het probeem te geven via een
-  a<[href="mailto:#{Setting['application.email']}?subject=500"]
+  a<[href="mailto:#{current_tenant.settings['application.email']}?subject=500"]
     | mailtje aan de beheerder
   | .
 p

@@ -2,8 +2,8 @@
 
 Met vriendelijke groet,
 
-<%= Setting['application.contact_name'] %>
+<%= current_tenant.settings['application.contact_name'] %>
 
-<%= Setting['club.name'] %>
-<%= Setting['club.address'] %>
-<%= "#{Setting['club.zip']}  #{Setting['club.city']}" %>
+<%= current_tenant.settings['club.name'] %>
+<%= current_tenant.settings['club.address'] %>
+<%= "#{current_tenant.settings['club.zip']}  #{current_tenant.settings['club.city']}" %>

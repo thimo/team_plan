@@ -66,6 +66,6 @@ class Team < ApplicationRecord
   end
 
   def name_with_club
-    "#{Setting['club.name_short']} #{name}"
+    "#{ActsAsTenant.current_tenant.settings['club.name_short']} #{name}"
   end
 end

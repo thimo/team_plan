@@ -10,7 +10,7 @@
     class: 'form-control',
     placeholder: User.human_attribute_name(:email),
     hide_label: true,
-    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Setting["club.name_short"]}."
+    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{current_tenant.settings["club.name_short"]}."
 
   = f.password_field :password,
     prepend: tag.i(class: [fa_class, 'fa-lock-alt']),
@@ -34,7 +34,7 @@
   h3
     | Geen toegang?
   p
-    | Heb je nog geen toegang tot #{Setting["application.name"]}, maar ben je wel lid van #{Setting["club.name_short"]}?
+    | Heb je nog geen toegang tot #{current_tenant.settings["application.name"]}, maar ben je wel lid van #{current_tenant.settings["club.name_short"]}?
       Meld je dan nu aan!
 
   = link_to "Login aanmaken",
