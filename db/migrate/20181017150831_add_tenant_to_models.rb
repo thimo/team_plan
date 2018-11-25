@@ -8,6 +8,5 @@ class AddTenantToModels < ActiveRecord::Migration[5.2]
       add_reference table, :tenant, foreign_key: true
       table.singularize.classify.constantize.update_all(tenant_id: Tenant.first.id)
     end
-
   end
 end
