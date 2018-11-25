@@ -41,6 +41,6 @@ class ApplicationController < ActionController::Base
     end
 
     def back_url
-      request.referer
+      request.referer || root_path
     end
 end
