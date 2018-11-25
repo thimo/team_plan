@@ -5,8 +5,7 @@ default: &default
 
 development:
   <<: *default
-  # database: teamplan_defrog_nl
-  database: teamplan_defrog_nl_multi_tenant
+  database: teamplan_defrog_nl
 
 test:
   <<: *default
