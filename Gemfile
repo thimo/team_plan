@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby "2.5.1"
 
+gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
 # TODO: jquery-rails is included to prevent the following blocking error on deploy, thrown from axlsx_rails:
 # "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved
@@ -38,17 +39,16 @@ gem "devise",                     "~> 4.4.3"
 gem "enum_help",                  "~> 0.0.17"
 gem "figaro",                     "~> 1.1.1"
 gem "net-ssh",                    "~> 4.1.0"
-# gem "devise-bootstrap-views", git: "https://github.com/hisea/devise-bootstrap-views.git", :branch => "bootstrap4"
 gem "rails-settings-cached"
 
 gem "awesome_print", require: "awesome_print"
 gem "paper_trail"
 gem "pundit", "~> 1.1.0"
-gem "redcarpet", "~> 3.4.0" # Markdown parser
+gem "redcarpet", "~> 3.4.0"
 gem "rubyzip"
 
-# gem "axlsx",                      "~> 2.1.0.pre"
 gem "ancestry"
+# gem "axlsx",                      "~> 2.1.0.pre"
 gem "axlsx", git: "https://github.com/randym/axlsx.git", ref: "c8ac844"
 gem "axlsx_rails"
 gem "bootsnap", require: false
@@ -58,7 +58,6 @@ gem "pretender"
 gem "redis", "~> 4.0"
 gem "simple-password-gen"
 gem "simple_calendar", "~> 2.0"
-# gem "trix", git: "https://github.com/bcoia/trix.git" # Fix for "wrong number of arguments" - https://github.com/maclover7/trix/issues/54
 gem "trix-rails", require: "trix"
 
 group :development, :test do

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Todo < ApplicationRecord
+  acts_as_tenant :tenant
   belongs_to :user
   belongs_to :todoable, polymorphic: true, optional: true
   has_paper_trail

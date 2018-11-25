@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EmailLog < ApplicationRecord
-  validates :to, :from, :subject, :body, presence: true
+  acts_as_tenant :tenant
   belongs_to :user
+
+  validates :to, :from, :subject, :body, presence: true
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Presence < ApplicationRecord
+  acts_as_tenant :tenant
   belongs_to :member
   belongs_to :presentable, polymorphic: true, touch: true
   belongs_to :team

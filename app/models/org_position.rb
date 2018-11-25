@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class OrgPosition < ApplicationRecord
+  acts_as_tenant :tenant
   has_many :org_position_members
   has_ancestry
 

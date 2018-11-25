@@ -5,6 +5,7 @@ class PlayerEvaluation < ApplicationRecord
   RATING_OPTIONS = [["zeer goed", "9"], %w[goed 8], %w[voldoende 6], %w[matig 5], %w[onvoldoende 4]].freeze
   ADVISE_NEXT_SEASON_OPTIONS = %w[hoger zelfde lager].freeze
 
+  acts_as_tenant :tenant
   belongs_to :team_evaluation, touch: true
   belongs_to :team_member, touch: true
   has_paper_trail

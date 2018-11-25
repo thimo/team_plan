@@ -18,6 +18,7 @@ class Member < ApplicationRecord
   DEFAULT_COLUMNS = %w[team association_number name born_on role address zipcode city phone email email_2].freeze
   EMAIL_ADDRESSES = %w[email email_2 email_parent email_parent_2].freeze
 
+  acts_as_tenant :tenant
   has_many :team_members, dependent: :destroy
   has_many :team_members_as_player, -> { where(role: TeamMember.roles[:player]) },
            class_name: "TeamMember", inverse_of: :member
@@ -197,7 +198,7 @@ class Member < ApplicationRecord
     CSV.foreach(
       file.path,
       headers: true,
-      header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}", raise: true) }
+      header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}") }
     ) do |row|
       row_hash = row.to_hash
       association_number = row_hash["association_number"]

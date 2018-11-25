@@ -8,8 +8,12 @@
   }
 }
 
-.badge-secondary, .badge-warning, .badge-success {
+.badge-secondary, .badge-success {
   color: white;
-  // Slightly heavier font for low-contrast colors
+  font-weight: 500;
+}
+
+.badge-warning {
+  color: $gray-800;
   font-weight: 500;
 }

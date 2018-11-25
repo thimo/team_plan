@@ -7,6 +7,7 @@ class TeamMember < ApplicationRecord
 
   before_create :inherit_fields
 
+  acts_as_tenant :tenant
   belongs_to :team, touch: true
   belongs_to :member, touch: true
   has_many :player_evaluations, dependent: :destroy
@@ -21,7 +22,7 @@ class TeamMember < ApplicationRecord
   enum initial_status: { initial_active: 1, initial_draft: 0 }
 
   validates :team_id, :member_id, :role, presence: true
-  validates :role, uniqueness: { scope: [:team, :member] }
+  validates :role, uniqueness: { scope: [:tenant, :team, :member] }
 
   delegate :email, to: :member
   delegate :name, to: :member

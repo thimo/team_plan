@@ -6,7 +6,7 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      @settings = Setting.get_all
+      @settings = current_tenant.settings.get_all
       skip_policy_scope
       authorize Setting
     end
@@ -26,7 +26,8 @@ module Admin
     private
 
       def set_setting
-        @setting = Setting.find_by(var: params[:id]) || Setting.new(var: params[:id], value: Setting[params[:id]])
+        @setting = Setting.find_by(thing: current_tenant, var: params[:id]) ||
+                   Setting.new(thing: current_tenant, var: params[:id], value: current_tenant.settings[params[:id]])
         authorize Setting
       end
 

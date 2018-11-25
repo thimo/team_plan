@@ -4,6 +4,7 @@ class Training < ApplicationRecord
   include Activatable
   include Presentable
 
+  acts_as_tenant :tenant
   belongs_to :team
   belongs_to :training_schedule, optional: true
   has_paper_trail
@@ -39,7 +40,7 @@ class Training < ApplicationRecord
   end
 
   def title
-    "Training #{Setting['club.name_short']} #{team.name}"
+    "Training #{ActsAsTenant.current_tenant.settings['club.name_short']} #{team.name}"
   end
 
   def description
@@ -47,6 +48,6 @@ class Training < ApplicationRecord
   end
 
   def location
-    "#{Setting['club.sportscenter']}\\n#{Setting['club.address']}\\n#{Setting['club.zip']}  #{Setting['club.city']}"
+    "#{ActsAsTenant.current_tenant.settings['club.sportscenter']}\\n#{ActsAsTenant.current_tenant.settings['club.address']}\\n#{ActsAsTenant.current_tenant.settings['club.zip']}  #{ActsAsTenant.current_tenant.settings['club.city']}"
   end
 end

@@ -12,11 +12,11 @@ html
       | Met vriendelijke groet,
 
     p
-      = Setting['application.contact_name']
+      = current_tenant.settings['application.contact_name']
     p
       strong
-        = Setting['club.name']
+        = current_tenant.settings['club.name']
       br
-      = Setting['club.address']
+      = current_tenant.settings['club.address']
       br
-      | #{Setting['club.zip']} #{Setting['club.city']}
+      | #{current_tenant.settings['club.zip']} #{current_tenant.settings['club.city']}
