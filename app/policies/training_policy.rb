@@ -5,10 +5,6 @@ class TrainingPolicy < ApplicationPolicy
     create? || @user.team_member_for?(@record)
   end
 
-  def new?
-    create?
-  end
-
   def create?
     return false if @record.team.archived?
 

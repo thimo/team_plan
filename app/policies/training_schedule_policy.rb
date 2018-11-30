@@ -2,7 +2,7 @@
 
 class TrainingSchedulePolicy < ApplicationPolicy
   def show?
-    true
+    create? || @user.team_member_for?(@record.team)
   end
 
   def create?
