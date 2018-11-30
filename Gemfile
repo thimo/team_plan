@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.5.1"
+ruby "2.5.3"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
@@ -74,6 +74,7 @@ group :development, :test do
   gem "capistrano-bundler", require: false
   gem "capistrano-rails",   require: false
   gem "capistrano-rvm",     require: false
+  gem "capistrano3-nginx",  require: false
   gem "capistrano3-puma",   require: false
 end
 
