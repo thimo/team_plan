@@ -77,6 +77,6 @@ module ApplicationHelper
   end
 
   def fa_class
-    @fa_class ||= ActsAsTenant.current_tenant.settings["fontawesome.integrity"].present? ? "far" : "fa"
+    @fa_class ||= ActsAsTenant.current_tenant&.settings&.fetch("fontawesome.integrity")&.present? ? "far" : "fa"
   end
 end
