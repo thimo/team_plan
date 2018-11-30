@@ -35,7 +35,7 @@ class User < ApplicationRecord
   validates_uniqueness_to_tenant :email
   validates :password, presence: true, length: { in: 6..30 }, if: :password_required?
 
-  enum role: { member: 0, club_staff: 2, admin: 1 }
+  enum role: { member: 0, admin: 1 }
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :role, ->(role) { where(role: role) }
@@ -108,13 +108,6 @@ class User < ApplicationRecord
     team_id = team_id_for(record, true)
     members.by_team(team_id).team_staff.size.positive?
   end
-
-  # def club_staff_for?(record)
-  #   age_group_id = age_group_id_for(record)
-  #   # Look up age_group_members as intersection between user's members and age_groups
-  #   members.joins(:group_members)
-  #          .where(group_members: { memberable_type: "AgeGroup", memberable_id: age_group_id }).size.positive?
-  # end
 
   def favorite_teams
     @favorite_teams ||= Team.joins(:favorites)

@@ -282,13 +282,11 @@ nl:
     user:
       role:
         admin: Administrator
-        club_staff: Club staf
         team_staff: Teamleiding
         member: Lid
     version_update:
       for_role:
         admin: Administrator
-        club_staff: Club staf
         member: Lid
 
   views:

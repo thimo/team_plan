@@ -25,8 +25,6 @@ class VersionUpdatePolicy < ApplicationPolicy
     def resolve
       if @user.role?(Role::BEHEER_APPLICATIE)
         scope.all
-      elsif user.club_staff?
-        scope.member.or(scope.club_staff)
       else
         scope.member
       end

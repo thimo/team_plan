@@ -22,7 +22,6 @@ class MatchPolicy < ApplicationPolicy
     # Don't allow edits for KNVB imported matches
     return false if @record.knvb?
 
-    # Admin/club_staff can edit all matches, team staff only those created by themselves
     @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN) ||
       (@record.team_staff? && @user.team_staff_for?(@record))
   end
