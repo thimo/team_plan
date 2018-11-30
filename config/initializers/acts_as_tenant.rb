@@ -5,6 +5,6 @@ ActsAsTenant.configure do |config|
 
   Rails.application.config.middleware.insert_before(Warden::Manager, TenantOnRequest,
                                                     proc { |request|
-                                                      Tenant.from_request(request)
+                                                      # Tenant.from_request(request)
                                                     })
 end
