@@ -3,7 +3,8 @@
 server "penny.defrog.nl", user: "thimo", roles: %w[web app db], primary: true
 
 set :repo_url,        "git@github.com:thimo/team_plan.git"
-# set :application,     "team_plan"
+set :branch,          :master
+set :application,     "teamplan.defrog.nl"
 set :user,            "thimo"
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
