@@ -11,7 +11,6 @@ class Tenant < ApplicationRecord
 
     tenant = Tenant.find_by(domain: domain.downcase)
     tenant ||= Tenant.find_by(subdomain: subdomains.last.downcase) if subdomains.any?
-    tenant ||= Tenant.first
     tenant
   end
 end
