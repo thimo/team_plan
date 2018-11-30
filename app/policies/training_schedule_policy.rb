@@ -8,8 +8,7 @@ class TrainingSchedulePolicy < ApplicationPolicy
   def create?
     return false if @record.team.archived?
 
-    @user.admin? ||
-      @user.role?(Role::TRAINING_SCHEDULE_CREATE, @record.team) ||
+    @user.role?(Role::TRAINING_SCHEDULE_CREATE, @record.team) ||
       @user.team_staff_for?(@record.team)
   end
 

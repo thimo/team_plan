@@ -12,8 +12,7 @@ class TrainingPolicy < ApplicationPolicy
   def create?
     return false if @record.team.archived?
 
-    @user.admin? ||
-      @user.role?(Role::TRAINING_CREATE, @record) ||
+    @user.role?(Role::TRAINING_CREATE, @record) ||
       @user.team_staff_for?(@record)
   end
 
