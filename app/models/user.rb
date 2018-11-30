@@ -178,7 +178,7 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super && members.any?
+    super && (members.any? || admin?)
   end
 
   def inactive_message
@@ -217,8 +217,12 @@ class User < ApplicationRecord
   # updated because of Devise's :confirmable (see `after_confirmation` above)
   def update_members
     self.members = Member.by_email(email).sportlink_active
-    activate if members.any?
-    deactivate if members.none?
+
+    if members.any? || admin?
+      activate
+    else
+      deactivate
+    end
   end
 
   def any_beheer_role?
