@@ -6,7 +6,7 @@ head
   meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
   meta name="author" content="#{Tenant.setting('club.name')} #{Tenant.setting('application.name')}"
   meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-  link rel="shortcut icon" href="#{current_tenant.settings["application.favicon_url"]}"
+  link rel="shortcut icon" href="#{Tenant.setting("application.favicon_url")}"
   link[rel="stylesheet"
     href="https://#{Tenant.setting("fontawesome.integrity").present? ? "pro" : "use"}.fontawesome.com/releases/#{Tenant.setting("fontawesome.version")}/css/all.css"
     integrity="#{Tenant.setting("fontawesome.integrity")}"

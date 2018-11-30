@@ -12,7 +12,7 @@ html
       | Met vriendelijke groet,
 
     p
-      = current_tenant.settings['application.contact_name']
+      = Tenant.setting('application.contact_name')
     p
       strong
         = Tenant.setting('club.name')

@@ -1,5 +1,5 @@
 - if Tenant.setting("application.maintenance") == "true"
   .alert.alert-warning.text-center
     | Op dit moment wordt onderhoud gepleegd aan #{Tenant.setting("application.name")}. Mail  
-    =<> mail_to Tenant.setting("application.email"), current_tenant.settings["application.contact_name"], class: "alert-link"
+    =<> mail_to Tenant.setting("application.email"), Tenant.setting("application.contact_name"), class: "alert-link"
     | als je merkt dat iets niet goed werkt.

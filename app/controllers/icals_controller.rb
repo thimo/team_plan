@@ -23,7 +23,7 @@ class IcalsController < ApplicationController
         tzid = "Europe/Amsterdam"
         tz = TZInfo::Timezone.get(tzid)
 
-        cal.append_custom_property("X-WR-CALNAME", "#{current_tenant.settings['club.name_short']} #{team.name}")
+        cal.append_custom_property("X-WR-CALNAME", "#{Tenant.setting('club.name_short')} #{team.name}")
         schedules.each do |schedule|
           timezone = tz.ical_timezone(schedule.started_at)
           cal.add_timezone timezone

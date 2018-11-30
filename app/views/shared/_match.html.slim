@@ -24,7 +24,7 @@
       .match-teams
         .match-hometeam.nowrap.text-right
           - if (relatiecode = match.thuisteamclubrelatiecode).present?
-            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{current_tenant.settings['clubdata.urls.club_logos']}#{relatiecode}.png"}
+            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
           - if (thuisteam = team_for(match.wedstrijddatum, match.thuisteamid)).present?
             - if team
               = link_to [match, team: thuisteam]
@@ -38,7 +38,7 @@
           = " - "
         .match-awayteam.nowrap.text-left
           - if (relatiecode = match.uitteamclubrelatiecode).present?
-            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{current_tenant.settings['clubdata.urls.club_logos']}#{relatiecode}.png"}
+            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
           - if (uitteam = team_for(match.wedstrijddatum, match.uitteamid)).present?
             - if team
               = link_to [match, team: uitteam]

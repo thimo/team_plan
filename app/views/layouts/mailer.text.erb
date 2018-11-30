@@ -2,7 +2,7 @@
 
 Met vriendelijke groet,
 
-<%= current_tenant.settings['application.contact_name'] %>
+<%= Tenant.setting('application.contact_name') %>
 
 <%= Tenant.setting('club.name') %>
 <%= Tenant.setting('club.address') %>

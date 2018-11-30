@@ -7,6 +7,6 @@
           | Ongeldig e-mailadres?
 
       p
-        | Je kunt alleen inloggen met een e-mailadres waarmee je bekend bent in de ledenadministratie van #{current_tenant.settings["club.name_short"]}.
+        | Je kunt alleen inloggen met een e-mailadres waarmee je bekend bent in de ledenadministratie van #{Tenant.setting("club.name_short")}.
       div
         | Weet je niet zeker welke dat is of lukt het inloggen niet? Vraag het juiste e-mailadres dan op bij je coördinator of de ledenadministratie.

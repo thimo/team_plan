@@ -40,7 +40,7 @@ class Training < ApplicationRecord
   end
 
   def title
-    "Training #{ActsAsTenant.current_tenant.settings['club.name_short']} #{team.name}"
+    "Training #{Tenant.setting('club.name_short')} #{team.name}"
   end
 
   def description

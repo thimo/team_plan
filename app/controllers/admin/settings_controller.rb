@@ -27,7 +27,7 @@ module Admin
 
       def set_setting
         @setting = Setting.find_by(thing: current_tenant, var: params[:id]) ||
-                   Setting.new(thing: current_tenant, var: params[:id], value: current_tenant.settings[params[:id]])
+                   Setting.new(thing: current_tenant, var: params[:id], value: Tenant.setting(params[:id]))
         authorize Setting
       end
 

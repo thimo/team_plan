@@ -2,9 +2,9 @@ header.app-header.navbar
   button.navbar-toggler.sidebar-toggler.d-lg-none.mr-auto[type="button" data-toggle="sidebar-show"]
     span.navbar-toggler-icon
   a.navbar-brand href="/" title="#{Tenant.setting('club.name')} #{Tenant.setting('application.name')}"
-    - if current_tenant.settings["club.logo_url"].present?
-      img.navbar-brand-full src="#{current_tenant.settings["club.logo_url"]}"
-      img.navbar-brand-minimized src="#{current_tenant.settings["club.logo_url"]}"
+    - if Tenant.setting("club.logo_url").present?
+      img.navbar-brand-full src="#{Tenant.setting("club.logo_url")}"
+      img.navbar-brand-minimized src="#{Tenant.setting("club.logo_url")}"
     h1.navbar-brand-full
       img src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application.name")
 

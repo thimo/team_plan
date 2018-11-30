@@ -188,7 +188,7 @@ class User < ApplicationRecord
       bevestiging aan te vragen."
     else
       "Met dit account is het helaas niet mogelijk om in te loggen. Ga alsjeblieft zelf na of het e-mailadres dat \
-      je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van #{ActsAsTenant.current_tenant.settings['club.name_short']}."
+      je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van #{Tenant.setting('club.name_short')}."
     end
   end
 

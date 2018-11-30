@@ -2,10 +2,10 @@
 
 module GoogleMapsHelper
   def google_maps_url(object:, type:, user: nil, zoom: 12)
-    base_url = "#{ActsAsTenant.current_tenant.settings['google.maps.base_url']}#{type}"
+    base_url = "#{Tenant.setting('google.maps.base_url')}#{type}"
 
     params = {
-      key: ActsAsTenant.current_tenant.settings["google.maps.api-key"]
+      key: Tenant.setting("google.maps.api-key")
     }
     case type
     when "place"

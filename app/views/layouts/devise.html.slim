@@ -10,8 +10,8 @@ html lang="nl"
         .row.justify-content-center
           .col-md-8.col-lg-7.col-xl-6
             .header
-              - if current_tenant.settings["club.logo_url"].present?
-                img.club-logo src="#{current_tenant.settings["club.logo_url"]}" alt=Tenant.setting("club.name")
+              - if Tenant.setting("club.logo_url").present?
+                img.club-logo src="#{Tenant.setting("club.logo_url")}" alt=Tenant.setting("club.name")
               img.app-logo src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application.name")
 
             .text-center

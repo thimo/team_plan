@@ -11,7 +11,7 @@
                  placeholder: User.human_attribute_name(:email),
                  hide_label: true,
                  value: params[:email],
-                 help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{current_tenant.settings["club.name_short"]}."
+                 help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Tenant.setting("club.name_short")}."
 
   .row
     .col-6
