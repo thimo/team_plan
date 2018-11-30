@@ -5,7 +5,7 @@ html
       = full_title(yield(:title))
     meta[charset="utf-8"]
     meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
-    meta name="author" content="#{current_tenant.settings['club.name']} #{current_tenant.settings['application.name']}"
+    meta name="author" content="#{Tenant.setting('club.name')} #{Tenant.setting('application.name')}"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     link rel="shortcut icon" href="#{current_tenant.settings["application.favicon_url"]}"
 

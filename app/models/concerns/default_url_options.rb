@@ -17,7 +17,7 @@ module DefaultUrlOptions
   private
 
     def host
-      ActsAsTenant.current_tenant.settings["application.hostname"]
+      Tenant.setting("application.hostname")
     end
 
     def protocol

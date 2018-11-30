@@ -9,6 +9,6 @@ class ApplicationMailer < ActionMailer::Base
   private
 
     def default_from
-      "\"#{ActsAsTenant.current_tenant.settings['club.name_short']} #{ActsAsTenant.current_tenant.settings['application.name']}\" <#{ActsAsTenant.current_tenant.settings['application.email']}>"
+      "\"#{ActsAsTenant.current_tenant.settings['club.name_short']} #{Tenant.setting('application.name')}\" <#{Tenant.setting('application.email')}>"
     end
 end

@@ -9,8 +9,8 @@ html lang="nl"
           .col-md-8.col-lg-6.col-xl-5
             .header
               - if current_tenant.settings["club.logo_url"].present?
-                img.club-logo src="#{current_tenant.settings["club.logo_url"]}" alt=current_tenant.settings["club.name"]
-              img.app-logo src="#{asset_path 'logo/teamplan.svg'}" alt=current_tenant.settings["application.name"]
+                img.club-logo src="#{current_tenant.settings["club.logo_url"]}" alt=Tenant.setting("club.name")
+              img.app-logo src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application.name")
 
             .card.p-3
               .card-body

@@ -13,6 +13,6 @@ div[data-controller='google-maps']
         class: "google-maps-iframe-link nav-link",
         data: { target: 'google-maps.link', action: 'google-maps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'directions', user: current_user) }
     li
-      = link_to "Route vanuit #{current_tenant.settings['club.name']}", nil,
+      = link_to "Route vanuit #{Tenant.setting('club.name')}", nil,
         class: "google-maps-iframe-link nav-link",
         data: { target: 'google-maps.link', action: 'google-maps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'directions') }

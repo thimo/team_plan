@@ -54,7 +54,7 @@ class DownloadTeamMembersController < ApplicationController
 
     @export_columns = current_user.export_columns
 
-    filename = "#{current_tenant.settings['club.name']}_#{@season.name}"
+    filename = "#{Tenant.setting('club.name')}_#{@season.name}"
     filename += "_#{@age_group.name}" if @age_group.present?
     filename += "_#{@team.name}" if @team.present?
     filename += "_#{Time.zone.now}.xlsx"

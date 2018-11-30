@@ -1,5 +1,5 @@
 - provide(:title, t('.sign_up', default: 'Sign up'))
-- provide(:subtitle, "Maak een login aan om toegang te krijgen tot #{current_tenant.settings['application.name']}")
+- provide(:subtitle, "Maak een login aan om toegang te krijgen tot #{Tenant.setting('application.name')}")
 
 - content_for :flash
   - if resource.errors.details[:email].any? { |error| error[:error] == :taken }

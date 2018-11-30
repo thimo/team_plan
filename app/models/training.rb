@@ -48,6 +48,6 @@ class Training < ApplicationRecord
   end
 
   def location
-    "#{ActsAsTenant.current_tenant.settings['club.sportscenter']}\\n#{ActsAsTenant.current_tenant.settings['club.address']}\\n#{ActsAsTenant.current_tenant.settings['club.zip']}  #{ActsAsTenant.current_tenant.settings['club.city']}"
+    "#{Tenant.setting('club.sportscenter')}\\n#{Tenant.setting('club.address')}\\n#{Tenant.setting('club.zip')}  #{Tenant.setting('club.city')}"
   end
 end

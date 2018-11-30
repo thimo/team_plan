@@ -4,12 +4,12 @@ head
   meta charset="utf-8"
   meta http-equiv="X-UA-Compatible" content="IE=edge"
   meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
-  meta name="author" content="#{current_tenant.settings['club.name']} #{current_tenant.settings['application.name']}"
+  meta name="author" content="#{Tenant.setting('club.name')} #{Tenant.setting('application.name')}"
   meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
   link rel="shortcut icon" href="#{current_tenant.settings["application.favicon_url"]}"
   link[rel="stylesheet"
-    href="https://#{current_tenant.settings["fontawesome.integrity"].present? ? "pro" : "use"}.fontawesome.com/releases/#{current_tenant.settings["fontawesome.version"]}/css/all.css"
-    integrity="#{current_tenant.settings["fontawesome.integrity"]}"
+    href="https://#{Tenant.setting("fontawesome.integrity").present? ? "pro" : "use"}.fontawesome.com/releases/#{Tenant.setting("fontawesome.version")}/css/all.css"
+    integrity="#{Tenant.setting("fontawesome.integrity")}"
     crossorigin="anonymous"]
 
   = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'

@@ -63,7 +63,7 @@ module ClubDataImporter
       team_count = { total: 0, created: 0, updated: 0 }
       competition_count = { total: 0, created: 0, updated: 0 }
 
-      url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.competities']}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
+      url = "#{Tenant.setting('clubdata.urls.competities')}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         team_count[:total] += 1
@@ -125,7 +125,7 @@ module ClubDataImporter
       count = { total: 0, updated: 0 }
 
       # Regular import of all club matches
-      url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.uitslagen']}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
+      url = "#{Tenant.setting('clubdata.urls.uitslagen')}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         count[:total] += 1
@@ -153,7 +153,7 @@ module ClubDataImporter
 
       Season.active_season_for_today.competitions.active.each do |competition|
         # Fetch ranking
-        url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.poulestand']}&poulecode=#{competition.poulecode}" \
+        url = "#{Tenant.setting('clubdata.urls.poulestand')}&poulecode=#{competition.poulecode}" \
               "&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
         json = JSON.parse(RestClient.get(url))
         if json.present?
@@ -235,7 +235,7 @@ module ClubDataImporter
       count = { total: 0, created: 0, updated: 0 }
 
       Season.active_season_for_today.competitions.active.each do |competition|
-        url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.pouleuitslagen']}&poulecode=#{competition.poulecode}" \
+        url = "#{Tenant.setting('clubdata.urls.pouleuitslagen')}&poulecode=#{competition.poulecode}" \
               "&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
         json = JSON.parse(RestClient.get(url))
         json.each do |data|
@@ -267,7 +267,7 @@ module ClubDataImporter
       count = { total: 0, created: 0, deleted: 0 }
 
       # Regular import of all club matches
-      url = "#{ActsAsTenant.current_tenant.settings['clubdata.urls.afgelastingen']}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
+      url = "#{Tenant.setting('clubdata.urls.afgelastingen')}&client_id=#{ActsAsTenant.current_tenant.settings['clubdata.client_id']}"
       json = JSON.parse(RestClient.get(url))
       cancelled_matches = []
       json.each do |data|

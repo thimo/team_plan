@@ -13,4 +13,8 @@ class Tenant < ApplicationRecord
     tenant ||= Tenant.find_by(subdomain: subdomains.last.downcase) if subdomains.any?
     tenant
   end
+
+  def self.setting(name)
+    ActsAsTenant.current_tenant&.settings&.send(name)
+  end
 end

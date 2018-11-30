@@ -34,7 +34,7 @@
   h3
     | Geen toegang?
   p
-    | Heb je nog geen toegang tot #{current_tenant.settings["application.name"]}, maar ben je wel lid van #{current_tenant.settings["club.name_short"]}?
+    | Heb je nog geen toegang tot #{Tenant.setting("application.name")}, maar ben je wel lid van #{current_tenant.settings["club.name_short"]}?
       Meld je dan nu aan!
 
   = link_to "Login aanmaken",

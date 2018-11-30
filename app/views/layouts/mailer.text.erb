@@ -4,6 +4,6 @@ Met vriendelijke groet,
 
 <%= current_tenant.settings['application.contact_name'] %>
 
-<%= current_tenant.settings['club.name'] %>
-<%= current_tenant.settings['club.address'] %>
-<%= "#{current_tenant.settings['club.zip']}  #{current_tenant.settings['club.city']}" %>
+<%= Tenant.setting('club.name') %>
+<%= Tenant.setting('club.address') %>
+<%= "#{Tenant.setting('club.zip')}  #{Tenant.setting('club.city')}" %>

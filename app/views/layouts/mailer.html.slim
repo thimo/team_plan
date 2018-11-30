@@ -15,8 +15,8 @@ html
       = current_tenant.settings['application.contact_name']
     p
       strong
-        = current_tenant.settings['club.name']
+        = Tenant.setting('club.name')
       br
-      = current_tenant.settings['club.address']
+      = Tenant.setting('club.address')
       br
-      | #{current_tenant.settings['club.zip']} #{current_tenant.settings['club.city']}
+      | #{Tenant.setting('club.zip')} #{Tenant.setting('club.city')}

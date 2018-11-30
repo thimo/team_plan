@@ -17,7 +17,7 @@ module GoogleMapsHelper
         member = user.members.sportlink_active.first
         params[:origin] = "#{member.address},#{member.zipcode} #{member.city}" if member.present?
       else
-        params[:origin] = "#{ActsAsTenant.current_tenant.settings['club.sportscenter']},#{ActsAsTenant.current_tenant.settings['club.address']},#{ActsAsTenant.current_tenant.settings['club.zip']} #{ActsAsTenant.current_tenant.settings['club.city']}"
+        params[:origin] = "#{Tenant.setting('club.sportscenter')},#{Tenant.setting('club.address')},#{Tenant.setting('club.zip')} #{Tenant.setting('club.city')}"
       end
     end
 
