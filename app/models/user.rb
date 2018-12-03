@@ -184,11 +184,12 @@ class User < ApplicationRecord
   def inactive_message
     if !confirmed?
       "Je e-mailadres is nog niet bevestigd. Klik op de link \
-      \"#{I18n.t("devise.shared.links.didn_t_receive_confirmation_instructions")}\" hieronder om een nieuwe \
+      \"#{I18n.t('devise.shared.links.didn_t_receive_confirmation_instructions')}\" hieronder om een nieuwe \
       bevestiging aan te vragen."
     else
       "Met dit account is het helaas niet mogelijk om in te loggen. Ga alsjeblieft zelf na of het e-mailadres dat \
-      je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van #{Tenant.setting('club.name_short')}."
+      je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van \
+      #{Tenant.setting('club.name_short')}."
     end
   end
 
@@ -226,15 +227,15 @@ class User < ApplicationRecord
   end
 
   def any_beheer_role?
-    direct_role_names.any? { |role| role.start_with?("beheer_") }
+    admin? || direct_role_names.any? { |role| role.start_with?("beheer_") }
   end
 
   def role?(role, record = nil)
-    direct_role_names.include?(role.to_s) || indirect_role_names_for(record).include?(role.to_s)
+    admin? || direct_role_names.include?(role.to_s) || indirect_role_names_for(record).include?(role.to_s)
   end
 
   def indirect_role?(role)
-    indirect_role_names.include?(role.to_s)
+    admin? || indirect_role_names.include?(role.to_s)
   end
 
   def show_evaluations?
