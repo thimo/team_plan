@@ -2,12 +2,12 @@ li.nav-item
   = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
     i.fa-home.nav-icon[class=fa_class]
     | Home
-- if policy(:org).show?
+- if false && policy(:org).show?
   li.nav-item
     = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
       i.fa-sitemap.nav-icon[class=fa_class]
       | Organisatie
-- if policy(:intranet).show?
+- if false && policy(:intranet).show?
   li.nav-item
     = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
       i.fa-folder-open.nav-icon[class=fa_class]
