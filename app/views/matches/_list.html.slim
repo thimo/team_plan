@@ -10,12 +10,11 @@
     == title
     .card-header-actions
       - if allow_create && (policy(Match).create? || (team.present? && policy(team).create_match?))
-        - if team.present?
-          = link_to new_team_match_path(team), title: "Een wedstrijd toevoegen", class: "card-header-action"
-            i.fa-plus-square[class=fa_class]
-        - else
-          = link_to new_match_path(return_url: request.original_fullpath), title: "Een wedstrijd toevoegen", class: "card-header-action"
-            i.fa-plus-square[class=fa_class]
+        - url = team.present? ? new_team_match_path(team) : new_match_path(return_url: request.original_fullpath)
+        = link_to url, title: "Een oefenwedstrijd of toernooi toevoegen", class: "card-header-action"
+          i.fa-plus-square[class=fa_class]
+          span.d-down-none.pl-1
+            | Oefenwedstrijd
 
   - if matches.any?
     .card-body.p-0
