@@ -10,10 +10,7 @@ class MatchesController < ApplicationController
   before_action :add_breadcrumbs, only: [:show, :new, :edit]
 
   def show
-    if policy(@match).show_presences? && @team.present?
-      @presences = @match.find_or_create_presences(@team)&.asc
-      @players = @presences&.present
-    end
+    set_presences_and_players
   end
 
   def new; end
@@ -105,5 +102,15 @@ class MatchesController < ApplicationController
         @match.thuisteam   = @match.opponent
         @match.uitteam     = @team.name_with_club
       end
+    end
+
+    def set_presences_and_players
+      return unless policy(@match).show_presences?
+
+      team = (@match.teams & current_user.teams_as_staff).first
+      return if team.blank?
+
+      @presences = @match.find_or_create_presences(team)&.asc
+      @players = @presences&.present
     end
 end
