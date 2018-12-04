@@ -22,26 +22,35 @@
           = match.competition.competitiesoort
 
       .match-teams
-        .match-hometeam.nowrap.text-right
-          - if (relatiecode = match.thuisteamclubrelatiecode).present?
-            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
-          - if team_for(match.wedstrijddatum, match.thuisteamid).present? || \
-                 match.thuisteam.include?(Tenant.setting('club.name_short'))
+        - if match.toernooi?
+          .match-hometeam.nowrap.text-right
+            | Toernooi #{match.thuisteam}
+          .match-separator.text-center.lighter
+            = " · "
+          .match-awayteam.nowrap.text-left
             = link_to match
+              | #{match.teams.map(&:name_with_club).join(", ")}
+        - else
+          .match-hometeam.nowrap.text-right
+            - if (relatiecode = match.thuisteamclubrelatiecode).present?
+              = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
+            - if team_for(match.wedstrijddatum, match.thuisteamid).present? || \
+                   match.thuisteam.include?(Tenant.setting('club.name_short'))
+              = link_to match
+                = match.thuisteam
+            - else
               = match.thuisteam
-          - else
-            = match.thuisteam
-        .match-separator.text-center.lighter
-          = " - "
-        .match-awayteam.nowrap.text-left
-          - if (relatiecode = match.uitteamclubrelatiecode).present?
-            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
-          - if team_for(match.wedstrijddatum, match.uitteamid).present? || \
-                 match.uitteam.include?(Tenant.setting('club.name_short'))
-            = link_to match
+          .match-separator.text-center.lighter
+            = " - "
+          .match-awayteam.nowrap.text-left
+            - if (relatiecode = match.uitteamclubrelatiecode).present?
+              = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
+            - if team_for(match.wedstrijddatum, match.uitteamid).present? || \
+                   match.uitteam.include?(Tenant.setting('club.name_short'))
+              = link_to match
+                = match.uitteam
+            - else
               = match.uitteam
-          - else
-            = match.uitteam
 
       - if match.uitslag
         .match-teams.strong

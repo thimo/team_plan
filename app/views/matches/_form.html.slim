@@ -3,6 +3,8 @@
 
   = hidden_field_tag :return_url, params[:return_url]
 
+  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name, custom: true
+
   - if policy(@match).set_team?
     .form-group.row
       label class=f.label_col
@@ -17,16 +19,20 @@
         = @team.name_with_club
 
   - if @team.present? || @match.new_record?
-    = f.form_group :is_home_match, hide_label: true, class: "radio"
+    = f.form_group :is_home_match, hide_label: true,
+                                   class: "radio", 
+                                   help: "Selecteer hier altijd \"Uit\" als het gaat om een toernooi"
       = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
       = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true
-    = f.text_field :opponent
+    = f.text_field :opponent, placeholder: "Naam van het team of het toernooi"
+  - else
+    = f.text_field :thuisteam
+    = f.text_field :uitteam
 
   div data-controller="clickable-append"
     = f.text_field :wedstrijddatum, date_picker_options
   = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
 
-  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name, custom: true
   = f.text_area :remark
 
   .row

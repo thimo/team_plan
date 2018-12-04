@@ -20,7 +20,7 @@ class MatchesController < ApplicationController
 
     if @match.save
       @match.teams << @team if @match.teams.find_by(id: @team).blank?
-      flash_message(:success, "De wedstrijd is toegevoegd.")
+      flash_message(:success, "#{@match.type_name.capitalize} is toegevoegd.")
       redirect_to params[:return_url].presence || @team
     else
       render :new
@@ -31,7 +31,7 @@ class MatchesController < ApplicationController
 
   def update
     if @match.update(permitted_attributes(@match).merge(user_modified: true))
-      flash_message(:success, "De wedstrijd is aangepast.")
+      flash_message(:success, "#{@match.type_name.capitalize} is aangepast.")
       redirect_to params[:return_url].presence || @match
     else
       render "edit"
@@ -40,11 +40,11 @@ class MatchesController < ApplicationController
 
   def destroy
     if @match.team_staff? && current_user.team_staff_for?(@match)
-      redirect_to @match.teams.first, notice: "De wedstrijd is verwijderd."
+      redirect_to @match.teams.first, notice: "#{@match.type_name.capitalize} is verwijderd."
       @match.destroy
     else
       @match.update(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
-      redirect_to @match, notice: "De wedstrijd is afgelast."
+      redirect_to @match, notice: "#{@match.type_name.capitalize} is afgelast."
     end
   end
 

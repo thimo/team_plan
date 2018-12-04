@@ -110,6 +110,14 @@ class Match < ApplicationRecord
     !active?
   end
 
+  def toernooi?
+    competition.competitiesoort == "toernooi"
+  end
+
+  def type_name
+    toernooi? ? "toernooi" : "wedstrijd"
+  end
+
   def self.new_custom_wedstrijdcode
     # Custom competitions have a wedstrijdcode < 0
     [order(:wedstrijdcode).first.wedstrijdcode, 0].min - 1

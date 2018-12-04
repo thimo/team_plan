@@ -9,14 +9,14 @@
 
 - if @match.afgelast?
   div.alert.alert-danger
-    h1 De wedstrijd is afgelast
+    h1 #{@match.type_name.capitalize} is afgelast
     = @match.afgelast_status
 
 section
   ul.nav.nav-tabs[role="tablist"]
     li.nav-item
       a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
-        | Wedstrijd
+        = @match.type_name.capitalize
     - if @presences.present? && policy(@presences.first).update?
       li.nav-item
         a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
