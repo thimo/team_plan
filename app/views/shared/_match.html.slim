@@ -25,13 +25,10 @@
         .match-hometeam.nowrap.text-right
           - if (relatiecode = match.thuisteamclubrelatiecode).present?
             = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
-          - if (thuisteam = team_for(match.wedstrijddatum, match.thuisteamid)).present?
-            - if team
-              = link_to [match, team: thuisteam]
-                = match.thuisteam
-            - else
-              = link_to thuisteam
-                = match.thuisteam
+          - if team_for(match.wedstrijddatum, match.thuisteamid).present? || \
+                 match.thuisteam.include?(Tenant.setting('club.name_short'))
+            = link_to match
+              = match.thuisteam
           - else
             = match.thuisteam
         .match-separator.text-center.lighter
@@ -39,13 +36,10 @@
         .match-awayteam.nowrap.text-left
           - if (relatiecode = match.uitteamclubrelatiecode).present?
             = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata.urls.club_logos')}#{relatiecode}.png"}
-          - if (uitteam = team_for(match.wedstrijddatum, match.uitteamid)).present?
-            - if team
-              = link_to [match, team: uitteam]
-                = match.uitteam
-            - else
-              = link_to uitteam
-                = match.uitteam
+          - if team_for(match.wedstrijddatum, match.uitteamid).present? || \
+                 match.uitteam.include?(Tenant.setting('club.name_short'))
+            = link_to match
+              = match.uitteam
           - else
             = match.uitteam
 
@@ -61,7 +55,7 @@
 
     - if include_presences
       td.py-1.pl-0.w-1.nowrap.align-middle.strong.text-center
-        = render 'presences/presence_label', parent: match, team: team
+        = render "presences/presence_label", parent: match, team: team
 
   - if include_presences
-    = render 'presences/presences_row', parent: match, team: team
+    = render "presences/presences_row", parent: match, team: team
