@@ -31,9 +31,13 @@ class TeamMember < ApplicationRecord
 
   scope :staff, -> { where.not(role: TeamMember.roles[:player]).includes(:member) }
   scope :trainers, -> {
-    where(role: [TeamMember.roles[:trainer],
-                 TeamMember.roles[:assistent_trainer],
-                 TeamMember.roles[:keeper_trainer]])
+    where(role: [
+            TeamMember.roles[:head_coach],
+            TeamMember.roles[:coach],
+            TeamMember.roles[:trainer],
+            TeamMember.roles[:assistent_trainer],
+            TeamMember.roles[:keeper_trainer]
+          ])
   }
   scope :asc, -> { includes(:member).order("members.last_name ASC, members.first_name ASC").includes(:team) }
   scope :includes_parents, -> { includes(:team).includes(team: :age_group).includes(team: { age_group: :season }) }
