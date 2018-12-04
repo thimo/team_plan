@@ -6,7 +6,7 @@ module SchedulesHelper
   def schedule_title(object, no_html: false)
     case [object.class]
     when [Match]
-      "#{object.thuisteam} - #{object.uitteam}".html_safe
+      object.title
     when [Training]
       (I18n.t object.model_name.singular).to_s
     end
