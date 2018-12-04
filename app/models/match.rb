@@ -54,7 +54,9 @@ class Match < ApplicationRecord
   end
 
   def title
-    wedstrijd
+    return wedstrijd if wedstrijd.present?
+    return "Toernooi #{thuisteam}" if toernooi?
+    "#{thuisteam} - #{uitteam}"
   end
 
   def description
