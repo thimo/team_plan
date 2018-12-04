@@ -39,8 +39,13 @@ class MatchesController < ApplicationController
   end
 
   def destroy
-    @match.update(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
-    redirect_to @match, notice: "De wedstrijd is afgelast."
+    if @match.team_staff? && current_user.team_staff_for?(@match)
+      redirect_to @match.teams.first, notice: "De wedstrijd is verwijderd."
+      @match.destroy
+    else
+      @match.update(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
+      redirect_to @match, notice: "De wedstrijd is afgelast."
+    end
   end
 
   private

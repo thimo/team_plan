@@ -37,7 +37,13 @@
           = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-light'
         div
           - if policy(@match).destroy?
-            = link_to "Afgelasten", match_path(@match),
-                                    method: :delete,
-                                    data: { confirm: 'Wedstrijd wordt afgelast. Doorgaan?' },
-                                    class: 'btn btn-danger'
+            - if @match.team_staff? && current_user.team_staff_for?(@match)
+              = link_to "Verwijderen", match_path(@match),
+                                       method: :delete,
+                                       data: { confirm: 'De wedstrijd wordt verwijderd. Doorgaan?' },
+                                       class: 'btn btn-danger'
+            - else
+              = link_to "Afgelasten", match_path(@match),
+                                      method: :delete,
+                                      data: { confirm: 'De wedstrijd wordt afgelast. Doorgaan?' },
+                                      class: 'btn btn-danger'
