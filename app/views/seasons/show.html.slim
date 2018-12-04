@@ -3,7 +3,7 @@
 - content_for :action_buttons
   - if policy(@season).update?
     = link_to edit_season_path(@season), title: "Seizoen aanpassen", class: "btn"
-      i.fa-pencil[class=fa_class]
+      i.fa-pencil-alt[class=fa_class]
       span.d-down-none.pl-1
         | Aanpassen
   - if policy(@season).destroy?

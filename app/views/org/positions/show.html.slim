@@ -3,7 +3,7 @@
 - content_for :action_buttons
   - if policy(@org_position).update?
     = link_to edit_org_position_path(@org_position), title: "Positie aanpassen", class: "btn"
-      i.fa-pencil[class=fa_class]
+      i.fa-pencil-alt[class=fa_class]
   - if policy(@org_position).destroy?
     = link_to org_position_path(@org_position),  method: :delete, data: { confirm: 'Positie wordt verwijderd. Doorgaan?' }, title: "Positie verwijderen", class: "btn"
       i.fa-trash-alt[class=fa_class]

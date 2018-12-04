@@ -50,7 +50,7 @@
                 td.w-1.nowrap.text-right
                   - if policy(team_member).edit?
                     = link_to edit_team_member_path(team_member), title: "Aanpassen"
-                      i.fa-pencil.m-1.ml-2[class=fa_class]
+                      i.fa-pencil-alt.m-1.ml-2[class=fa_class]
 
                   - if policy(team_member).destroy?
                     = link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"

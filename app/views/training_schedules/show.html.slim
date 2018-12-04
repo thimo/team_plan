@@ -3,7 +3,7 @@
 - content_for :action_buttons
     - if policy(@training_schedule).update?
       = link_to edit_training_schedule_path(@training_schedule), class: "btn", title: "Aanpassen"
-        i.fa-pencil[class=fa_class]
+        i.fa-pencil-alt[class=fa_class]
 
 section
   ul.nav.nav-tabs[role="tablist"]

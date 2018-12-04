@@ -10,7 +10,7 @@
         | Evaluatie
   - if policy(@team).update?
     = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn" do
-      i.fa-pencil[class=fa_class]
+      i.fa-pencil-alt[class=fa_class]
       span.d-down-none.pl-1
         | Aanpassen
   - if policy(@team).destroy?

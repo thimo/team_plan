@@ -9,7 +9,7 @@
         | Spelersindeling
   - if policy(@age_group).update?
     = link_to edit_age_group_path(@age_group), title: "Leeftijdsgroep aanpassen", class: "btn"
-      i.fa-pencil[class=fa_class]
+      i.fa-pencil-alt[class=fa_class]
       span.d-down-none.pl-1
         | Aanpassen
   - if policy(@age_group).destroy?

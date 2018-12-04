@@ -9,7 +9,7 @@
         = todo.body
       div
         = link_to edit_todo_path(todo, return: request.path), title: "Aanpassen", class: "pl-2"
-          i.fa-pencil.lighter[class=fa_class]
+          i.fa-pencil-alt.lighter[class=fa_class]
 
     div.light
       = link_to todo.todoable.name, todo.todoable, class: 'pr-2' if todo.todoable.present?
