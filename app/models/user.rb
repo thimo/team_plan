@@ -82,16 +82,11 @@ class User < ApplicationRecord
   end
 
   def teams_as_staff
-    Team.for_members(members)
-        .where.not(team_members: { role: TeamMember.roles[:player] })
-        .distinct.asc
+    Team.for_members(members).as_not_player.distinct.asc
   end
 
   def teams_as_staff_in_season(season)
-    Team.for_members(members)
-        .where.not(team_members: { role: TeamMember.roles[:player] }).joins(age_group: :season)
-        .where(age_groups: { season: season })
-        .distinct.asc
+    Team.for_members(members).as_not_player.for_season(season).distinct.asc
   end
 
   # NOTE: can't rename this to `member?` because of conflict with enum role
