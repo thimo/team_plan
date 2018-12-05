@@ -62,15 +62,19 @@ class Member < ApplicationRecord
   scope :gender, ->(gender) { where(gender: gender) }
   scope :by_team, ->(team) { joins(:team_members).where(team_members: { team: team, ended_on: nil }) }
   scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
+  scope :player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
 
   scope :query, ->(query) {
                   where("email ILIKE ? OR email_2 ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",
                         "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
                 }
   scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
-  scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: { age_group_id: age_group }) }
-  scope :player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
+  scope :by_age_group_as_player, ->(age_group) {
+    includes(team_members: :team).where(teams: { age_group_id: age_group },
+                                        team_members: { role: TeamMember.roles[:player] })
+  }
+  scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
                               includes(team_members: :field_positions)

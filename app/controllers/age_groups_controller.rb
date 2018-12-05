@@ -12,7 +12,7 @@ class AgeGroupsController < ApplicationController
     set_evaluations
     set_members
     set_todos
-    @injureds = policy_scope(Member).by_age_group(@age_group).injured.asc
+    @injureds = policy_scope(Member).by_age_group_as_player(@age_group).player.injured.asc
     set_matches
     set_play_bans
   end
