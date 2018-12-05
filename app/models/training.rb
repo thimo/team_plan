@@ -40,7 +40,11 @@ class Training < ApplicationRecord
   end
 
   def title
-    "Training #{Tenant.setting('club.name_short')} #{team.name}"
+    "#{schedule_title} #{Tenant.setting('club.name_short')} #{team.name}"
+  end
+
+  def schedule_title
+    "Training"
   end
 
   def description

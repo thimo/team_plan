@@ -1,4 +1,4 @@
-- provide(:title, schedule_title(@match, no_html: true))
+- provide(:title, @match.title)
 
 - content_for :action_buttons
   - if policy(@match).update?

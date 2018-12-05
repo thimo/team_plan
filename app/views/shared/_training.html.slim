@@ -11,7 +11,7 @@ tr.clickable
   td.align-middle
     = link_to training
       b
-        = schedule_title training
+        = training.schedule_title
       - if ts&.soccer_field
         = " · #{ts.soccer_field.name + (ts.whole? ? '' : ", #{ts.field_part_i18n}")}"
     - if ts.present? && TrainingSchedule.present_minutes[ts.present_minutes] > 0

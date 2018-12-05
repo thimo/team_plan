@@ -71,7 +71,7 @@ class TrainingsController < ApplicationController
       if @training.new_record?
         add_breadcrumb "Nieuw"
       else
-        add_breadcrumb schedule_title(@training), @training
+        add_breadcrumb @training.schedule_title, @training
       end
     end
 end

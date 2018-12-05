@@ -1,4 +1,5 @@
-- provide(:title, schedule_title(@match, no_html: true))
+- provide(:title, @match.title)
+- provide(:subtitle, @match.competition.competitiesoort) unless @match.toernooi?
 
 - content_for :action_buttons
   - if policy(@match).update?
@@ -30,23 +31,49 @@ section
 
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
-      .card.float-right
-        .card-body
-          span.strong #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
-          span.pl-2 #{l @match.started_at, format: :time_short}
-          div.mt-2
-            div.strong
-              = @match.accommodatie
-            div
-              = @match.plaats
-            - if @match.created_by
-              div
-                | Aangemaakt door #{@match.created_by.name}
+      .row
+        label.col-4
+          = @match.type_name.capitalize
+        .col-8
+          .mb-1
+            .strong
+              = @match.title
+              = " (#{@match.uitslag})" if @match.uitslag.present?
+            .small.light
+              = @match.competition.competitienaam
 
-      div
-        | #{schedule_title(@match, no_html: true)}
-        = " (#{@match.uitslag})" if @match.uitslag.present?
+      .row
+        label.col-4
+          | Aanvang
+        .col-8
+          span
+            | #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
+          span.pl-2
+            | #{l @match.started_at, format: :time_short}
+
+      - if @match.accommodatie.present? || @match.plaats.present?
+        .row
+          label.col-4
+            | Locatie
+          .col-8
+            .mt-2
+              .strong
+                = @match.accommodatie
+              div
+                = @match.adres
+              div
+                - if @match.postcode.present?
+                  = "#{@match.postcode}  "
+                = @match.plaats
+
+      - if @match.created_by
+        .row
+          .lighter.offset-4.col-8
+            | Aangemaakt door #{@match.created_by.name}
+
       - if @players.present?
+        h4 Spelers
+
         table.table
           - @players.each do |player|
             tr

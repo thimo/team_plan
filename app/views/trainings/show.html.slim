@@ -1,4 +1,4 @@
-- provide(:title, schedule_title(@training))
+- provide(:title, @training.title)
 
 - content_for :action_buttons
   - if policy(@training).update?

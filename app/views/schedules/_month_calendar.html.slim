@@ -7,4 +7,4 @@
       .event
         span.pr-1.time
           = l meeting.started_at, format: :time_short
-        = link_to schedule_title(meeting), meeting
+        = link_to meeting.schedule_title, meeting

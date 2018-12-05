@@ -59,6 +59,11 @@ class Match < ApplicationRecord
     "#{thuisteam} - #{uitteam}"
   end
 
+  def schedule_title
+    return "Toernooi" if toernooi?
+    title
+  end
+
   def description
     nil
   end

@@ -92,7 +92,7 @@ class MatchesController < ApplicationController
       if @match.new_record?
         add_breadcrumb "Nieuw"
       else
-        add_breadcrumb schedule_title(@match), @match
+        add_breadcrumb @match.title, @match
       end
     end
 
