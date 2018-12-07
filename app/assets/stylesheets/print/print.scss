@@ -1,19 +1,24 @@
 .card-header,
-.section-header,
 .side-menu,
+.sidebar,
 .site-header,
-[data-is-bullet-footer],
-.profiler-results {
+.breadcrumb,
+.app-footer {
   display: none;
 }
 
 .container-fluid,
-.page-content {
+.page-content,
+.main .container-fluid {
   padding: 0;
+}
+
+.header-fixed .app-body,
+.main {
+  margin: 0 !important;
 }
 
 @page {
   max-height: 100%;
   max-width: 100%;
-  size: A4 landscape;
 }
