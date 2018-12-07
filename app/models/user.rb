@@ -173,11 +173,14 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super && (members.any? || admin?)
+    super && (members.any? || admin?) && tenant.active?
   end
 
   def inactive_message
-    if !confirmed?
+    if tenant.draft? || tenant.archived?
+      "#{Tenant.setting('application.name')} is op dit moment niet geactiveerd voor \
+      #{Tenant.setting('club.name_short')}. Probeer het later nog een keer of neem contact op met de beheerder."
+    elsif !confirmed?
       "Je e-mailadres is nog niet bevestigd. Klik op de link \
       \"#{I18n.t('devise.shared.links.didn_t_receive_confirmation_instructions')}\" hieronder om een nieuwe \
       bevestiging aan te vragen."
