@@ -7,7 +7,8 @@
         .card
           .card-header
             | Trainingen
-          .card-body data={ controller: "presence-chart" } data-presence-chart-data=@training_presences_data.to_json
+          .card-body data={ controller: "presence-chart",
+                            "presence-chart-data": @training_presences_data.to_json }
             canvas.presenceChart data={ target: "presence-chart.canvas" }
 
           = render 'presence_table', team: @team, presentable_class: Training
@@ -16,7 +17,8 @@
         .card
           .card-header
             | Wedstrijden
-          .card-body data={ controller: "presence-chart" } data-presence-chart-data=@match_presences_data.to_json
+          .card-body data={ controller: "presence-chart",
+                            "presence-chart-data": @match_presences_data.to_json }
             canvas.presenceChart data={ target: "presence-chart.canvas" }
 
           = render 'presence_table', team: @team, presentable_class: Match
