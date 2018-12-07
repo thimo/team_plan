@@ -40,7 +40,7 @@ module TeamsHelper
     }
 
     ids = @team.trainings.active.in_past.pluck(:id)
-    @team.team_members.active.player.asc.each do |team_member|
+    @team.team_members.active_or_archived.player.asc.each do |team_member|
       @training_presences_data[:labels] << team_member.name
 
       presences = team_member.member.presences.for_training(ids)
@@ -85,7 +85,7 @@ module TeamsHelper
     }
 
     ids = @team.matches.active.in_past.pluck(:id)
-    @team.team_members.active.player.asc.each do |team_member|
+    @team.team_members.active_or_archived.player.asc.each do |team_member|
       @match_presences_data[:labels] << team_member.name
 
       presences = team_member.member.presences.for_match(ids)
