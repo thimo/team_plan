@@ -26,7 +26,6 @@
       thead
         tr
           th = User.human_attribute_name(:name)
-          th = User.human_attribute_name(:role)
           th = User.human_attribute_name(:members)
           th.d-down-none = User.human_attribute_name(:current_sign_in_at)
           th
@@ -40,8 +39,6 @@
                 => user.email
                 - if user.unconfirmed_email.present?
                   |  (wijziging naar #{user.unconfirmed_email} nog niet bevestigd)
-            td
-              = user.role_i18n
             td
               - user.members.asc.each do |member|
                 div
