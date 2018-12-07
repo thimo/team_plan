@@ -7,7 +7,7 @@ div data={ controller: 'google-maps' }
       = link_to 'Sportcomplex', nil,
         class: "google-maps-iframe-link nav-link active",
         data: { target: 'google-maps.link', action: 'google-maps#activateIframe', google_maps_url: google_maps_url(object: match, type: 'place') }
-    - if current_user.members.sportlink_active.first.present?
+    - if current_user.members.active.first.present?
       li
         = link_to "Route vanuit huis", nil,
         class: "google-maps-iframe-link nav-link",

@@ -16,15 +16,15 @@
   hr
 
   = bootstrap_form_with url: team_team_member_bulk_updates_path(@team, from: params[:from]), method: :post, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f|
-    = f.collection_select :players, @members.sportlink_active.sportlink_player.asc, :id, :name_and_born_on, { label: "Spelers" },
+    = f.collection_select :players, @members.active.sportlink_player.asc, :id, :name_and_born_on, { label: "Spelers" },
       multiple: true,
       data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer spelers' }
 
-    = f.collection_select :coaches, @members.sportlink_active.asc, :id, :name_and_born_on, { label: "Coaches" },
+    = f.collection_select :coaches, @members.active.asc, :id, :name_and_born_on, { label: "Coaches" },
       multiple: true,
       data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer coaches' }
 
-    = f.collection_select :trainers, @members.sportlink_active.asc, :id, :name_and_born_on, { label: "Trainers" },
+    = f.collection_select :trainers, @members.active.asc, :id, :name_and_born_on, { label: "Trainers" },
       multiple: true,
       data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer trainers' }
 

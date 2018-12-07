@@ -36,8 +36,9 @@ class DashboardsController < ApplicationController
 
     @version_updates = policy_scope(VersionUpdate).desc.page(params[:version_page]).per(3)
     @todos = policy_scope(Todo).includes(:todoable).asc.unfinished
-    @new_members = policy_scope(Member).recent_members(30).page(params[:member_page]).per(6) \
-      if policy(Member).show_new_members?
+    if policy(Member).show_new_members?
+      @new_members = policy_scope(Member).recent_members(30).page(params[:member_page]).per(6)
+    end
 
     skip_authorization
   end

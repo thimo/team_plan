@@ -10,7 +10,7 @@ class SearchController < ApplicationController
       return redirect_to back_url, alert: "Geen zoekterm opgegeven"
     end
 
-    @members = Member.sportlink_active.asc.search_by_name(@query)
+    @members = Member.active.asc.search_by_name(@query)
     authorize Member
   end
 

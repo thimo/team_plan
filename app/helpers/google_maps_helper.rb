@@ -14,7 +14,7 @@ module GoogleMapsHelper
     when "directions"
       params[:destination] = object.google_maps_address
       if user.present?
-        member = user.members.sportlink_active.first
+        member = user.members.active.first
         params[:origin] = "#{member.address},#{member.zipcode} #{member.city}" if member.present?
       else
         params[:origin] = "#{Tenant.setting('club.sportscenter')},#{Tenant.setting('club.address')},#{Tenant.setting('club.zip')} #{Tenant.setting('club.city')}"

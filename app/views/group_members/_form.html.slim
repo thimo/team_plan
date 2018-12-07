@@ -2,7 +2,7 @@
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.hidden_field :group_id
-  = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on,
+  = f.collection_select :member_id, Member.active.asc, :id, :name_and_born_on,
     { include_blank: true, label: @group_member.group.name },
     { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer lid' } }
 

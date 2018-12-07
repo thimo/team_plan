@@ -7,7 +7,7 @@
       .col-md-9.form-control-plaintext
         = @team_member.member.name
   - else
-    = f.collection_select :member_id, Member.sportlink_active.asc, :id, :name_and_born_on,
+    = f.collection_select :member_id, Member.active.asc, :id, :name_and_born_on,
       { include_blank: true },
       { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer lid' } }
 

@@ -215,7 +215,7 @@ class User < ApplicationRecord
   # Run on `after_save` because on `before_save` the email may be changed, but not yet
   # updated because of Devise's :confirmable (see `after_confirmation` above)
   def update_members
-    self.members = Member.by_email(email).sportlink_active
+    self.members = Member.by_email(email).active
 
     if members.any? || admin?
       activate

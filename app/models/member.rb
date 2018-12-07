@@ -42,13 +42,18 @@ class Member < ApplicationRecord
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :to_year,   ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }
   scope :from_year, ->(year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year.to_date) }
-  scope :sportlink_active, -> {
+  scope :active, -> {
     where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today))
   }
-  scope :sportlink_active_for_season, ->(season) {
+  scope :active_for_season, ->(season) {
     where(deregistered_at: nil).or(where("deregistered_at > ?", season.started_on))
   }
-  scope :sportlink_inactive, -> { where.not(deregistered_at: nil).where("deregistered_at <= ?", Time.zone.today) }
+  scope :inactive, -> { where.not(deregistered_at: nil).where("deregistered_at <= ?", Time.zone.today) }
+  scope :recent_members, ->(days_ago) {
+                           where("registered_at >= ?", days_ago.days.ago.beginning_of_day)
+                             .order(registered_at: :desc, created_at: :desc)
+                         }
+
   scope :sportlink_player, -> {
     where.not(sport_category: nil)
          .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
@@ -57,6 +62,7 @@ class Member < ApplicationRecord
     where(sport_category: nil)
       .where.not(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
   }
+
   scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :gender, ->(gender) { where(gender: gender) }
@@ -84,11 +90,8 @@ class Member < ApplicationRecord
     where(EMAIL_ADDRESSES.map { |mail| "lower(#{mail}) = ?" }.join(" OR "),
           *([email.downcase] * EMAIL_ADDRESSES.size))
   }
-  scope :recent_members, ->(days_ago) {
-                           where("registered_at >= ?", days_ago.days.ago.beginning_of_day)
-                             .order(registered_at: :desc, created_at: :desc)
-                         }
   scope :injured, -> { where(injured: true) }
+
   scope :with_active_play_ban, -> {
     joins(:play_bans).where("play_bans.started_on <= ? AND (play_bans.ended_on >= ? OR play_bans.ended_on IS null)",
                             Time.zone.today, Time.zone.today)
@@ -112,12 +115,12 @@ class Member < ApplicationRecord
     "#{name} (#{I18n.l(born_on, format: :long)})"
   end
 
-  def sportlink_active?
+  def active?
     deregistered_at.nil? || deregistered_at > Time.zone.today
   end
 
-  def sportlink_inactive?
-    !sportlink_active?
+  def inactive?
+    !active?
   end
 
   def favorite?(user)
@@ -240,7 +243,7 @@ class Member < ApplicationRecord
     # from the Sportlink export. It would prob. be better to handle this in the import
     result = { deregistered: [] }
 
-    Member.sportlink_active.each do |member|
+    Member.active.each do |member|
       if imported_member_ids.include? member.id
         # Member was imported, make sure `missed_import_on` is cleared
         member.update(missed_import_on: nil) if member.missed_import_on.present?
@@ -276,7 +279,7 @@ class Member < ApplicationRecord
         EMAIL_ADDRESSES.each do |mail|
           add_to_user(send(mail))
         end
-      elsif sportlink_inactive?
+      elsif inactive?
         EMAIL_ADDRESSES.each do |mail|
           remove_from_user(send("#{mail}_was")) if send("#{mail}_changed?")
           remove_from_user(send(mail))
