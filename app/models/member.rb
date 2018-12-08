@@ -123,6 +123,10 @@ class Member < ApplicationRecord
     !active?
   end
 
+  def archived?
+    inactive?
+  end
+
   def favorite?(user)
     favorites.where(user: user).size.positive?
   end
