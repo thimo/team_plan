@@ -7,6 +7,19 @@
 
 .dashboard
   .row
+    - @member_stats.each do |stat|
+      .col-1.mb-2
+        div.text-center
+          .strong
+            = stat[:title]
+          div
+            = stat[:total]
+          div.color-green
+            = stat[:activated]
+          div.color-red
+            = stat[:deactivated]
+
+  .row
     .col-sm-6
       / TODO toon trainingen, wedstrijden en uitslagen voor alle favorieten/eigen teams
       / - @active_teams.each do |team|

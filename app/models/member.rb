@@ -4,7 +4,6 @@
 class Member < ApplicationRecord
   include Filterable
   include PgSearch
-  include Activatable
 
   mount_uploader :photo, PhotoUploader
 
@@ -53,6 +52,23 @@ class Member < ApplicationRecord
                            where("registered_at >= ?", days_ago.days.ago.beginning_of_day)
                              .order(registered_at: :desc, created_at: :desc)
                          }
+
+  scope :active_for_month, ->(date) {
+    active_before_end_of_month(date).inactive_after_beginning_of_month(date)
+  }
+  scope :active_before_end_of_month, ->(date) {
+    where("registered_at <= ?", date.end_of_month)
+  }
+  scope :inactive_after_beginning_of_month, ->(date) {
+    where(deregistered_at: nil)
+      .or(where("deregistered_at > ?", date.beginning_of_month))
+  }
+  scope :activated_for_month, ->(date) {
+    where("registered_at <= ? AND registered_at >= ?", date.end_of_month, date.beginning_of_month)
+  }
+  scope :deactivated_for_month, ->(date) {
+    where("deregistered_at <= ? AND deregistered_at >= ?", date.end_of_month, date.beginning_of_month)
+  }
 
   scope :sportlink_player, -> {
     where.not(sport_category: nil)
