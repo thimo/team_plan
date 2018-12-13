@@ -54,20 +54,20 @@ class Member < ApplicationRecord
                          }
 
   scope :active_for_month, ->(date) {
-    active_before_end_of_month(date).inactive_after_beginning_of_month(date)
+    active_before_end_of_month(date).inactive_after_end_of_month(date)
   }
   scope :active_before_end_of_month, ->(date) {
-    where("registered_at <= ?", date.end_of_month)
+    where("registered_at <= ?", date.end_of_month.to_date)
   }
-  scope :inactive_after_beginning_of_month, ->(date) {
+  scope :inactive_after_end_of_month, ->(date) {
     where(deregistered_at: nil)
-      .or(where("deregistered_at > ?", date.beginning_of_month))
+      .or(where("deregistered_at > ?", date.end_of_month.to_date))
   }
   scope :activated_for_month, ->(date) {
-    where("registered_at <= ? AND registered_at >= ?", date.end_of_month, date.beginning_of_month)
+    where("registered_at <= ? AND registered_at >= ?", date.end_of_month.to_date, date.beginning_of_month.to_date)
   }
   scope :deactivated_for_month, ->(date) {
-    where("deregistered_at <= ? AND deregistered_at >= ?", date.end_of_month, date.beginning_of_month)
+    where("deregistered_at <= ? AND deregistered_at >= ?", date.end_of_month.to_date, date.beginning_of_month.to_date)
   }
 
   scope :sportlink_player, -> {

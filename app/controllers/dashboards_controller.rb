@@ -40,16 +40,6 @@ class DashboardsController < ApplicationController
       @new_members = policy_scope(Member).recent_members(30).page(params[:member_page]).per(6)
     end
 
-    @member_stats = (0..23).reverse_each.map do |number|
-      date = number.months.ago
-      {
-        title: I18n.l(date, format: :date_long_without_day),
-        total: Member.active_for_month(date).size,
-        activated: Member.activated_for_month(date).size,
-        deactivated: Member.deactivated_for_month(date).size
-      }
-    end
-
     skip_authorization
   end
 

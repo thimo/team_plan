@@ -7,17 +7,13 @@
 
 .dashboard
   .row
-    - @member_stats.each do |stat|
-      .col-1.mb-2
-        div.text-center
-          .strong
-            = stat[:title]
-          div
-            = stat[:total]
-          div.color-green
-            = stat[:activated]
-          div.color-red
-            = stat[:deactivated]
+    .col-12
+      .card
+        - data = dashboard_members_graph_data
+        .card-body.membersChartParent [data={ controller: "chart-members",
+                          "chart-members-data": data.to_json }
+                          style="height: 300px;"]
+          canvas.membersChart data={ target: "chart-members.canvas" }
 
   .row
     .col-sm-6
