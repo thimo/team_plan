@@ -9,28 +9,28 @@ module TeamsHelper
       labels: [],
       datasets: [
         {
-          label: "Training, op tijd",
+          label: "Op tijd aanwezig",
           stack: "Training",
           backgroundColor: "rgba(70, 195, 95, .7)",
           borderColor: "rgba(70, 195, 95, 1)",
           data: []
         },
         {
-          label: "Training, iets te laat",
+          label: "Iets te laat",
           stack: "Training",
           backgroundColor: "rgba(255, 218, 78, .7)",
           borderColor: "rgba(255, 218, 78, 1)",
           data: []
         },
         {
-          label: "Training, veel te laat",
+          label: "Veel te laat",
           stack: "Training",
           backgroundColor: "rgba(242, 152, 36, .7)",
           borderColor: "rgba(242, 152, 36, 1)",
           data: []
         },
         {
-          label: "Training, niet afgemeld",
+          label: "Niet afgemeld",
           stack: "Training",
           backgroundColor: "rgba(250, 66, 74, .7)",
           borderColor: "rgba(250, 66, 74, 1)",
@@ -54,28 +54,28 @@ module TeamsHelper
       labels: [],
       datasets: [
         {
-          label: "Wedstrijd, op tijd",
+          label: "Op tijd aanwezig",
           stack: "Wedstrijd",
           backgroundColor: "rgba(70, 195, 95, .7)",
           borderColor: "rgba(70, 195, 95, 1)",
           data: []
         },
         {
-          label: "Wedstrijd, iets te laat",
+          label: "Iets te laat",
           stack: "Wedstrijd",
           backgroundColor: "rgba(255, 218, 78, .7)",
           borderColor: "rgba(255, 218, 78, 1)",
           data: []
         },
         {
-          label: "Wedstrijd, veel te laat",
+          label: "Veel te laat",
           stack: "Wedstrijd",
           backgroundColor: "rgba(242, 152, 36, .7)",
           borderColor: "rgba(242, 152, 36, 1)",
           data: []
         },
         {
-          label: "Wedstrijd, niet afgemeld",
+          label: "Niet afgemeld",
           stack: "Wedstrijd",
           backgroundColor: "rgba(250, 66, 74, .7)",
           borderColor: "rgba(250, 66, 74, 1)",

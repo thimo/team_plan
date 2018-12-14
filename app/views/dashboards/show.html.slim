@@ -6,6 +6,9 @@
         i.fa-check-square[class=fa_class]
 
 .dashboard
+  - if current_user.role?(Role::DASHBOARD_CEO_CHARTS)
+    = render "ceo_charts"
+
   .row
     .col-sm-6
       / TODO toon trainingen, wedstrijden en uitslagen voor alle favorieten/eigen teams

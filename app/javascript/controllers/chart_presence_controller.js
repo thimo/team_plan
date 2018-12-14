@@ -20,6 +20,7 @@ export default class extends Controller {
       data: JSON.parse(this.data.get("data")),
 
       options: {
+        responsive: true,
         maintainAspectRatio: false,
         scales: {
           xAxes: [{
@@ -33,9 +34,12 @@ export default class extends Controller {
           yAxes: [{
             beginAtZero: true,
             ticks: {
-              stepSize: 1,
-              min: 0,
-            },
+              callback: function(value, index, values) {
+                if (Math.floor(value) === value) {
+                  return value;
+                }
+              }
+            }
           }]
         },
       }

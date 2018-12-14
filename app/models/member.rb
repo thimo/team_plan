@@ -4,7 +4,6 @@
 class Member < ApplicationRecord
   include Filterable
   include PgSearch
-  include Activatable
 
   mount_uploader :photo, PhotoUploader
 
@@ -54,6 +53,23 @@ class Member < ApplicationRecord
                              .order(registered_at: :desc, created_at: :desc)
                          }
 
+  scope :active_for_month, ->(date) {
+    active_before_end_of_month(date).inactive_after_end_of_month(date)
+  }
+  scope :active_before_end_of_month, ->(date) {
+    where("registered_at <= ?", date.end_of_month.to_date)
+  }
+  scope :inactive_after_end_of_month, ->(date) {
+    where(deregistered_at: nil)
+      .or(where("deregistered_at > ?", date.end_of_month.to_date))
+  }
+  scope :activated_for_month, ->(date) {
+    where("registered_at <= ? AND registered_at >= ?", date.end_of_month.to_date, date.beginning_of_month.to_date)
+  }
+  scope :deactivated_for_month, ->(date) {
+    where("deregistered_at <= ? AND deregistered_at >= ?", date.end_of_month.to_date, date.beginning_of_month.to_date)
+  }
+
   scope :sportlink_player, -> {
     where.not(sport_category: nil)
          .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
@@ -66,20 +82,23 @@ class Member < ApplicationRecord
   scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :gender, ->(gender) { where(gender: gender) }
-  scope :by_team, ->(team) { joins(:team_members).where(team_members: { team: team, ended_on: nil }) }
-  scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
   scope :player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
+  scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
+  scope :injured, -> { where(injured: true) }
 
-  scope :query, ->(query) {
-                  where("email ILIKE ? OR email_2 ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",
-                        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
-                }
   scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
+  scope :by_season_as_player, ->(season) {
+    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season },
+                                                       team_members: { role: TeamMember.roles[:player],
+                                                                       ended_on: nil,
+                                                                       status: 1 })
+  }
   scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: { age_group_id: age_group }) }
   scope :by_age_group_as_player, ->(age_group) {
     includes(team_members: :team).where(teams: { age_group_id: age_group },
                                         team_members: { role: TeamMember.roles[:player] })
   }
+  scope :by_team, ->(team) { joins(:team_members).where(team_members: { team: team, ended_on: nil }) }
   scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
@@ -90,7 +109,6 @@ class Member < ApplicationRecord
     where(EMAIL_ADDRESSES.map { |mail| "lower(#{mail}) = ?" }.join(" OR "),
           *([email.downcase] * EMAIL_ADDRESSES.size))
   }
-  scope :injured, -> { where(injured: true) }
 
   scope :with_active_play_ban, -> {
     joins(:play_bans).where("play_bans.started_on <= ? AND (play_bans.ended_on >= ? OR play_bans.ended_on IS null)",
@@ -98,6 +116,12 @@ class Member < ApplicationRecord
   }
   scope :with_future_play_ban, -> { joins(:play_bans).where("play_bans.started_on > ?", Time.zone.today) }
 
+  scope :local_teams, ->(local_team) { where("local_teams like ?", "%#{local_team}%") }
+
+  scope :query, ->(query) {
+                  where("email ILIKE ? OR email_2 ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",
+                        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+                }
   pg_search_scope :search_by_name,
                   against: [:first_name, :middle_name, :last_name, :email, :email2, :phone, :phone2],
                   using: {

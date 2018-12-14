@@ -1,0 +1,78 @@
+.row
+  .col-12.col-md-9.col-xl-10
+    .card
+      - data = active_members_graph_data
+      .card-body.pb-0.membersChartParent [data={ controller: "chart-members",
+                        "chart-members-data": data.to_json,
+                        "chart-members-title": "Actieve leden" }
+                        style="height: 200px;"]
+        canvas.membersChart data={ target: "chart-members.canvas" }
+
+      - data = member_diff_graph_data
+      .card-body.pt-0.membersChartParent [data={ controller: "chart-members",
+                        "chart-members-data": data.to_json,
+                        "chart-members-title": "Aan- en afmeldingen" }
+                        style="height: 200px;"]
+        canvas.membersChart data={ target: "chart-members.canvas" }
+
+  .col-12.col-md-3.col-xl-2
+    .row
+      .col-6.col-md-12
+        .card.text-white.bg-primary.mb-2
+          .card-body.py-2
+            .d-flex.justify-content-between.align-items-center
+              span.text-value
+                = Member.active.size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2
+                | Leden
+
+      .col-6.col-md-12
+        .card.text-white.bg-success.mb-2
+          .card-body.py-2
+            .d-flex.justify-content-between.align-items-center
+              .text-value
+                = Season.active_season_for_today.age_groups.active.size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2.text-right
+                | Groepen
+
+            .d-flex.justify-content-between.align-items-center
+              .text-value
+                = Season.active_season_for_today.teams.active.size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2
+                | Teams
+
+            .d-flex.justify-content-between.align-items-center
+              .text-value
+                = Member.by_season_as_player(Season.active_season_for_today).size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2
+                | Spelers
+
+      .col-6.col-md-12
+        .card.text-white.bg-warning.mb-2
+          .card-body.py-2
+            .d-flex.justify-content-between.align-items-center
+              .text-value
+                = Member.active.sportlink_player.size - Member.by_season_as_player(Season.active_season_for_today).size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2.text-right
+                | Wachtlijst
+
+            .d-flex.justify-content-between.align-items-center
+              .text-value
+                = Member.local_teams("aWelkom bij ESA").size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2.text-right
+                | Welkom bij ESA
+
+      .col-6.col-md-12
+        .card.text-white.bg-danger.mb-2
+          .card-body.py-2
+            .d-flex.justify-content-between.align-items-center
+              .text-value
+                = Member.injured.size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2
+                | Blessures
+
+            .d-flex.justify-content-between.align-items-center
+              .text-value
+                = Member.with_active_play_ban.size
+              small.text-muted.text-uppercase.font-weight-bold.pl-2
+                | Speelverboden
