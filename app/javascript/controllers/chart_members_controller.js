@@ -22,16 +22,24 @@ export default class extends Controller {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        tooltips: {
+            mode: 'index',
+            position: 'nearest',
+        },
+        legend: {
+          display: false,
+        },
         scales: {
           xAxes: [{
+            // display: this.data.get("xaxeslegend") != "false"
           }],
           yAxes: [{
             beginAtZero: true,
-          }]
+          }],
         },
         title: {
-            display: true,
-            text: 'Actieve leden'
+            display: this.data.get("title") !== null,
+            text: this.data.get("title")
         },
       }
     });

@@ -6,14 +6,8 @@
         i.fa-check-square[class=fa_class]
 
 .dashboard
-  .row
-    .col-12
-      .card
-        - data = dashboard_members_graph_data
-        .card-body.membersChartParent [data={ controller: "chart-members",
-                          "chart-members-data": data.to_json }
-                          style="height: 300px;"]
-          canvas.membersChart data={ target: "chart-members.canvas" }
+  - if current_user.role?(Role::DASHBOARD_CEO_CHARTS)
+    = render "ceo_charts"
 
   .row
     .col-sm-6

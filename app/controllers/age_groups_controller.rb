@@ -88,7 +88,6 @@ class AgeGroupsController < ApplicationController
       available_players = @age_group.active_players - @age_group.assigned_active_players
       @available_players = Kaminari.paginate_array(available_players).page(params[:member_page]).per(10)
 
-
       available_non_players = @age_group.active_non_players - @age_group.assigned_active_non_players
       @available_non_players = Kaminari.paginate_array(available_non_players).page(params[:member_page]).per(10)
     end
