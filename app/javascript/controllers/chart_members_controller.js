@@ -41,6 +41,9 @@ export default class extends Controller {
             display: this.data.get("title") !== null,
             text: this.data.get("title")
         },
+        animation: {
+          duration: 0
+        },
       }
     });
   }

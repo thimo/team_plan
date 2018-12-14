@@ -42,6 +42,9 @@ export default class extends Controller {
             }
           }]
         },
+        animation: {
+          duration: 0
+        },
       }
     });
   }
