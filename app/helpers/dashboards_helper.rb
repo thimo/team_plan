@@ -4,7 +4,6 @@ module DashboardsHelper
   def dashboard_members_graph_data
     member_stats = (0..23).reverse_each.map do |number|
       date = number.months.ago
-      debugger
       {
         title: I18n.l(date, format: :date_long_without_day),
         total: Member.active_for_month(date).size,
