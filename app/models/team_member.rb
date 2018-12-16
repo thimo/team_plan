@@ -86,10 +86,10 @@ class TeamMember < ApplicationRecord
       save
 
       # Place team member in archive
-      member.logs << Log.new(body: "Gearchiveerd vanuit #{team.name}.", user: user)
+      member.logs << Log.new(body: "Gearchiveerd vanuit #{team.name_with_club}.", user: user)
     else
       # Log first...
-      member.logs << Log.new(body: "Verwijderd uit #{team.name}.", user: user)
+      member.logs << Log.new(body: "Verwijderd uit #{team.name_with_club}.", user: user)
       destroy
     end
   end

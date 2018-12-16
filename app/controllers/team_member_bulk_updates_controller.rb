@@ -52,7 +52,7 @@ class TeamMemberBulkUpdatesController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb @team.age_group.season.name, @team.age_group.season
       add_breadcrumb @team.age_group.name, @team.age_group
-      add_breadcrumb @team.name, @team
+      add_breadcrumb @team.name_with_club, @team
       add_breadcrumb "Nieuw"
     end
 end

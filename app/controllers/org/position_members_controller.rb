@@ -96,7 +96,7 @@ module Org
       def add_breadcrumbs
         add_breadcrumb @position_member.team.age_group.season.name, @position_member.team.age_group.season
         add_breadcrumb @position_member.team.age_group.name, @position_member.team.age_group
-        add_breadcrumb @position_member.team.name, @position_member.team
+        add_breadcrumb @position_member.team.name_with_club, @position_member.team
         if @position_member.new_record?
           add_breadcrumb "Nieuw"
         else

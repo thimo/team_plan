@@ -67,7 +67,7 @@ class TrainingsController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb @training.team.name, @training.team
+      add_breadcrumb @training.team.name_with_club, @training.team
       if @training.new_record?
         add_breadcrumb "Nieuw"
       else

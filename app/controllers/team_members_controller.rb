@@ -132,7 +132,7 @@ class TeamMembersController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb @team_member.team.age_group.season.name, @team_member.team.age_group.season
       add_breadcrumb @team_member.team.age_group.name, @team_member.team.age_group
-      add_breadcrumb @team_member.team.name, @team_member.team
+      add_breadcrumb @team_member.team.name_with_club, @team_member.team
       if @team_member.new_record?
         add_breadcrumb "Nieuw"
       else

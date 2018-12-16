@@ -38,4 +38,4 @@
               = club_data_team.season.name
             td
               - club_data_team.teams.each do |team|
-                = link_to "#{Tenant.setting('club.name_short')} #{team.name}", team
+                = link_to team.name_with_club, team

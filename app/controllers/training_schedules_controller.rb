@@ -73,7 +73,7 @@ class TrainingSchedulesController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb @training_schedule.team.age_group.season.name, @training_schedule.team.age_group.season
       add_breadcrumb @training_schedule.team.age_group.name, @training_schedule.team.age_group
-      add_breadcrumb @training_schedule.team.name, @training_schedule.team
+      add_breadcrumb @training_schedule.team.name_with_club, @training_schedule.team
       if @training_schedule.new_record?
         add_breadcrumb "Nieuw"
       else
