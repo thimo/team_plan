@@ -73,6 +73,13 @@ group :development, :test do
   gem "capistrano-rvm",     require: false
   gem "capistrano3-nginx",  require: false
   gem "capistrano3-puma",   require: false
+
+  gem "brakeman"
+  gem "bundler-audit"
+  gem "fasterer"
+  gem "rails_best_practices"
+  gem "reek"
+  gem "rubocop"
 end
 
 group :development do

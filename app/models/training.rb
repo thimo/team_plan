@@ -16,8 +16,14 @@ class Training < ApplicationRecord
   scope :not_modified, -> { where(user_modified: false) }
   scope :from_now,     -> { where("started_at > ?", Time.zone.now) }
   scope :in_past,      -> { where("started_at < ?", Time.zone.now) }
-  scope :this_week,    ->(date) { where("started_at > ?", date.beginning_of_week).where("started_at < ?", date.end_of_week) }
-  scope :in_period,    ->(start_date, end_date) { where("started_at > ?", start_date).where("started_at < ?", end_date) }
+  scope :this_week,    ->(date) {
+                         where("started_at > ?", date.beginning_of_week)
+                           .where("started_at < ?", date.end_of_week)
+                       }
+  scope :in_period,    ->(start_date, end_date) {
+                         where("started_at > ?", start_date)
+                           .where("started_at < ?", end_date)
+                       }
   scope :asc,          -> { order(started_at: :asc) }
   scope :desc,         -> { order(started_at: :desc) }
   scope :with_program, -> { where.not(body: nil).where.not(body: "") }
@@ -52,6 +58,7 @@ class Training < ApplicationRecord
   end
 
   def location
-    "#{Tenant.setting('club.sportscenter')}\\n#{Tenant.setting('club.address')}\\n#{Tenant.setting('club.zip')}  #{Tenant.setting('club.city')}"
+    "#{Tenant.setting('club.sportscenter')}\\n#{Tenant.setting('club.address')}\\n#{Tenant.setting('club.zip')} \
+     #{Tenant.setting('club.city')}"
   end
 end

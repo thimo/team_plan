@@ -31,8 +31,7 @@ class TeamEvaluation < ApplicationRecord
   end
 
   def finish_evaluation(user)
-    update_attribute(:finished_by, user)
-    update_attribute(:finished_at, Time.zone.now)
+    update(finished_by: user, finished_at: Time.zone.now)
   end
 
   def send_invites(user)
@@ -44,8 +43,7 @@ class TeamEvaluation < ApplicationRecord
 
     if users.any?
       TeamEvaluationMailer.invite(users, self).deliver_now
-      update_attribute(:invited_by, user)
-      update_attribute(:invited_at, Time.zone.now)
+      update(invited_by: user, invited_at: Time.zone.now)
     end
 
     users.size

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class PlayerEvaluation < ApplicationRecord
-  RATING_FIELDS = %w[behaviour technique handlingspeed insight passes speed locomotion physical endurance duel_strength].freeze
+  RATING_FIELDS = %w[behaviour technique handlingspeed insight passes speed locomotion physical endurance
+                     duel_strength].freeze
   RATING_OPTIONS = [["zeer goed", "9"], %w[goed 8], %w[voldoende 6], %w[matig 5], %w[onvoldoende 4]].freeze
   ADVISE_NEXT_SEASON_OPTIONS = %w[hoger zelfde lager].freeze
 
@@ -22,9 +23,16 @@ class PlayerEvaluation < ApplicationRecord
   default_scope -> { joins(team_member: :member).order("members.last_name ASC, members.first_name ASC") }
   scope :finished, -> { joins(:team_evaluation).where.not(team_evaluations: { finished_at: nil }) }
   scope :finished_desc, -> { finished.joins(:team_evaluation).order("team_evaluations.finished_at DESC") }
-  scope :includes_member, -> { includes(:team_member).includes(team_member: :member).includes(team_member: :field_positions) }
+  scope :includes_member, -> {
+                            includes(:team_member)
+                              .includes(team_member: :member)
+                              .includes(team_member: :field_positions)
+                          }
   scope :for_team, ->(team) { includes(team_member: :team).where(team_members: { team: team }) }
-  scope :for_season, ->(season) { includes(team_member: { team: :age_group }).where(age_groups: { season_id: season.id }) }
+  scope :for_season, ->(season) {
+                       includes(team_member: { team: :age_group })
+                         .where(age_groups: { season_id: season.id })
+                     }
   scope :not_private, -> { joins(:team_evaluation).where(team_evaluations: { private: false }) }
   scope :public_or_as_team_staff, ->(user) {
     joins(:team_evaluation)
