@@ -148,6 +148,13 @@ GEM
       countries (~> 2.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.4)
+    debase (0.2.2)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.4)
+    debride (1.8.1)
+      path_expander (~> 1.0)
+      ruby_parser (~> 3.6)
+      sexp_processor (~> 4.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.4.3)
@@ -288,6 +295,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.3.0)
       ast (~> 2.4.0)
+    path_expander (1.0.3)
     pg (0.21.0)
     pg_search (2.1.2)
       activerecord (>= 4.2)
@@ -507,6 +515,8 @@ DEPENDENCIES
   carrierwave (~> 1.1.0)
   carrierwave-imageoptimizer
   country_select
+  debase
+  debride
   devise (~> 4.4.3)
   enum_help (~> 0.0.17)
   exception_notification
