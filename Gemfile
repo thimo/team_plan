@@ -93,6 +93,7 @@ group :development do
   gem "web-console"
 
   gem "brakeman"
+  gem "debase"
   gem "bundler-audit"
   gem "debride"
   gem "fasterer"
