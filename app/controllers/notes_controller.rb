@@ -62,7 +62,7 @@ class NotesController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb @note.team.age_group.season.name, @note.team.age_group.season
       add_breadcrumb @note.team.age_group.name, @note.team.age_group
-      add_breadcrumb @note.team.name, @note.team
+      add_breadcrumb @note.team.name_with_club, @note.team
       if @note.new_record?
         add_breadcrumb "Nieuw"
       else

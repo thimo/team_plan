@@ -64,7 +64,12 @@ GEM
       activerecord (>= 3.2.0)
     ansi (1.5.0)
     arel (9.0.0)
+    ast (2.4.0)
     awesome_print (1.8.0)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     axlsx_rails (0.5.2)
       actionpack (>= 3.1)
       axlsx (>= 2.0.1)
@@ -72,22 +77,25 @@ GEM
     bindex (0.5.0)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
-    bootstrap4-kaminari-views (1.0.0)
+    bootstrap4-kaminari-views (1.0.1)
       kaminari (>= 0.13)
       rails (>= 3.1)
     bootstrap_form (4.0.0)
       rails (>= 5.0)
+    brakeman (4.3.1)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
+    bundler-audit (0.6.0)
+      bundler (~> 1.2)
+      thor (~> 0.18)
     byebug (10.0.2)
     capistrano (3.11.0)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (1.4.0)
+    capistrano-bundler (1.5.0)
       capistrano (~> 3.1)
-      sshkit (~> 1.2)
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -121,17 +129,32 @@ GEM
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
+    code_analyzer (0.4.8)
+      sexp_processor
+    codeclimate-engine-rb (0.4.1)
+      virtus (~> 1.0)
     coderay (1.1.2)
-    concurrent-ruby (1.1.3)
-    countries (2.1.4)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    colorize (0.8.1)
+    concurrent-ruby (1.1.4)
+    countries (3.0.0)
       i18n_data (~> 0.8.0)
-      money (~> 6.9)
       sixarm_ruby_unaccent (~> 1.1)
       unicode_utils (~> 1.4)
-    country_select (3.1.1)
-      countries (~> 2.0)
+    country_select (4.0.0)
+      countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.4)
+    debase (0.2.2)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.4)
+    debride (1.8.1)
+      path_expander (~> 1.0)
+      ruby_parser (~> 3.6)
+      sexp_processor (~> 4.5)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -145,7 +168,9 @@ GEM
       http_parser.rb (~> 0.6.0)
     enum_help (0.0.17)
       activesupport (>= 3.0.0)
-    erubi (1.7.1)
+    equalizer (0.0.11)
+    erubi (1.8.0)
+    erubis (2.7.0)
     eventmachine (1.2.7)
     exception_notification (4.3.0)
       actionmailer (>= 4.0, < 6)
@@ -158,6 +183,9 @@ GEM
       railties (>= 3.0.0)
     faker (1.9.1)
       i18n (>= 0.7)
+    fasterer (0.4.1)
+      colorize (~> 0.7)
+      ruby_parser (~> 3.11.0)
     ffi (1.9.25)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -186,11 +214,13 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
-    i18n (1.1.1)
+    i18n (1.5.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     icalendar (2.4.1)
+    ice_nine (0.11.2)
     image_optimizer (1.8.0)
+    jaro_winkler (1.5.2)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -211,9 +241,10 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    kwalify (0.7.2)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letter_opener (1.6.0)
+    letter_opener (1.7.0)
       launchy (~> 2.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -230,19 +261,17 @@ GEM
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
-    mimemagic (0.3.2)
+    mimemagic (0.3.3)
     mini_magick (4.7.2)
     mini_mime (1.0.1)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.4.0)
     minitest (5.11.3)
     minitest-reporters (1.3.5)
       ansi
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    money (6.13.1)
-      i18n (>= 0.6.4, <= 2)
-    msgpack (1.2.4)
+    msgpack (1.2.6)
     multi_json (1.13.1)
     nenv (0.3.0)
     net-scp (1.2.1)
@@ -250,8 +279,8 @@ GEM
     net-ssh (4.1.0)
     netrc (0.11.0)
     nio4r (2.3.1)
-    nokogiri (1.8.5)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.10.0)
+      mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -259,16 +288,22 @@ GEM
     paper_trail (10.1.0)
       activerecord (>= 4.2, < 6.0)
       request_store (~> 1.1)
+    parallel (1.12.1)
+    parser (2.5.3.0)
+      ast (~> 2.4.0)
+    path_expander (1.0.3)
     pg (0.21.0)
-    pg_search (2.1.2)
+    pg_search (2.1.3)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
       arel (>= 6)
+    powerpack (0.1.2)
     pretender (0.3.3)
       actionpack (>= 4.2)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.0)
     pundit (1.1.0)
@@ -311,6 +346,14 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_best_practices (1.19.4)
+      activesupport
+      code_analyzer (>= 0.4.8)
+      erubis
+      i18n
+      json
+      require_all (~> 2.0)
+      ruby-progressbar
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (5.2.2)
@@ -319,15 +362,23 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
+    rainbow (3.0.0)
     rake (12.3.2)
     rb-fsevent (0.10.3)
-    rb-inotify (0.9.10)
-      ffi (>= 0.5.0, < 2)
+    rb-inotify (0.10.0)
+      ffi (~> 1.0)
     redcarpet (3.4.0)
-    redis (4.0.3)
+    redis (4.1.0)
+    reek (5.3.0)
+      codeclimate-engine-rb (~> 0.4.0)
+      kwalify (~> 0.7.0)
+      parser (>= 2.5.0.0, < 2.6, != 2.5.1.1)
+      psych (~> 3.1.0)
+      rainbow (>= 2.0, < 4.0)
     regexp_parser (1.3.0)
     request_store (1.4.1)
       rack (>= 1.4)
+    require_all (2.0.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -335,13 +386,25 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rubocop (0.62.0)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.5, != 2.5.1.1)
+      powerpack (~> 0.1)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.4.0)
+    ruby-debug-ide (0.6.1)
+      rake (>= 0.8.1)
     ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.0)
+    ruby_parser (3.11.0)
+      sexp_processor (~> 4.9)
     rubyzip (1.2.2)
     sassc (2.0.0)
       ffi (~> 1.9.6)
       rake
-    sassc-rails (2.0.0)
+    sassc-rails (2.1.0)
       railties (>= 4.0.0)
       sassc (>= 2.0)
       sprockets (> 3.0)
@@ -350,6 +413,7 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    sexp_processor (4.11.0)
     shellany (0.0.1)
     simple-password-gen (0.1.5)
     simple_calendar (2.3.0)
@@ -396,7 +460,13 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
+    unicode-display_width (1.4.1)
     unicode_utils (1.4.0)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -428,7 +498,9 @@ DEPENDENCIES
   bootsnap
   bootstrap4-kaminari-views
   bootstrap_form (~> 4.0.0)
+  brakeman
   breadcrumbs_on_rails (~> 3.0.1)
+  bundler-audit
   byebug
   capistrano
   capistrano-bundler
@@ -441,11 +513,14 @@ DEPENDENCIES
   carrierwave (~> 1.1.0)
   carrierwave-imageoptimizer
   country_select
+  debase
+  debride
   devise (~> 4.4.3)
   enum_help (~> 0.0.17)
   exception_notification
   factory_bot_rails
   faker
+  fasterer
   figaro (~> 1.1.1)
   guard
   guard-livereload
@@ -468,15 +543,19 @@ DEPENDENCIES
   puma (~> 3.0)
   pundit (~> 1.1.0)
   rack-livereload
-  rails (~> 5.2.0)
+  rails (= 5.2.2)
   rails-erd
   rails-i18n
   rails-settings-cached
   rails_12factor
+  rails_best_practices
   rb-fsevent
   redcarpet (~> 3.4.0)
   redis (~> 4.0)
+  reek
   rest-client
+  rubocop
+  ruby-debug-ide
   rubyzip
   sassc-rails
   selenium-webdriver
@@ -498,4 +577,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   1.17.1
+   2.0.1

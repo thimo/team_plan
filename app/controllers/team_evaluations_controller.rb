@@ -75,7 +75,7 @@ class TeamEvaluationsController < ApplicationController
       age_group = @team_evaluation.team.age_group
       add_breadcrumb age_group.name, @team_evaluation.team.age_group if age_group.present?
 
-      add_breadcrumb @team_evaluation.team.name, @team_evaluation.team
+      add_breadcrumb @team_evaluation.team.name_with_club, @team_evaluation.team
       if @team_evaluation.new_record?
         add_breadcrumb "Nieuw"
       else

@@ -11,7 +11,7 @@ gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
-gem "rails", "~> 5.2.0"
+gem "rails", "5.2.2"
 gem "sassc-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
@@ -91,6 +91,16 @@ group :development do
   gem "rb-fsevent"
   gem "terminal-notifier-guard"
   gem "web-console"
+
+  gem "brakeman"
+  gem "bundler-audit"
+  gem "debase"
+  gem "debride"
+  gem "fasterer"
+  gem "rails_best_practices"
+  gem "reek"
+  gem "rubocop"
+  gem "ruby-debug-ide"
 end
 
 group :test do

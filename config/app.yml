@@ -16,6 +16,7 @@ defaults: &defaults
   club.phone:
   club.relatiecode:
   club.logo_url:
+  club.member_administration.email:
   clubdata.urls.competities: https://data.sportlink.com/teams?teamsoort=bond&spelsoort=ve&gebruiklokaleteamgegevens=NEE
   clubdata.urls.poulestand: https://data.sportlink.com/poulestand?gebruiklokaleteamgegevens=NEE
   clubdata.urls.poule-programma: https://data.sportlink.com/poule-programma?eigenwedstrijden=NEE&gebruiklokaleteamgegevens=NEE&aantaldagen=365&weekoffset=-2

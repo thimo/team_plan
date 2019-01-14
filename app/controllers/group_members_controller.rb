@@ -48,7 +48,7 @@ class GroupMembersController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb @group_member.memberable.name, @group_member.memberable
       # add_breadcrumb @group_member.team.age_group.name, @group_member.team.age_group
-      # add_breadcrumb @group_member.team.name, @group_member.team
+      # add_breadcrumb @group_member.team.name_with_club, @group_member.team
       if @group_member.new_record?
         add_breadcrumb "Nieuw"
       end

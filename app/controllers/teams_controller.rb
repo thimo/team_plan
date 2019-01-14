@@ -115,7 +115,7 @@ class TeamsController < ApplicationController
       if @team.new_record?
         add_breadcrumb "Nieuw"
       else
-        add_breadcrumb @team.name, @team
+        add_breadcrumb @team.name_with_club, @team
       end
     end
 
