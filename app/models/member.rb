@@ -263,6 +263,8 @@ class Member < ApplicationRecord
       result[:member_ids] << member.id
     end
 
+    Tenant.set_setting("last_import.members", Time.zone.now)
+
     result
   end
 

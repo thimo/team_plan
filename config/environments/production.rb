@@ -75,10 +75,10 @@ Rails.application.configure do
   config.action_mailer.asset_host = "https://" + host
 
   ActionMailer::Base.smtp_settings = {
-    domain:               ENV["SMTP_DOMAIN"],
+    domain: ENV["SMTP_DOMAIN"],
     enable_starttls_auto: true,
-    address:              ENV["SMTP_ADDRESS"],
-    port:                 ENV["SMTP_PORT"]
+    address: ENV["SMTP_ADDRESS"],
+    port: ENV["SMTP_PORT"]
   }
   ActionMailer::Base.smtp_settings[:authentication] = ENV["SMTP_AUTH"] unless ENV["SMTP_AUTH"].nil?
   ActionMailer::Base.smtp_settings[:user_name] = ENV["SMTP_USER_NAME"] unless ENV["SMTP_USER_NAME"].nil?

@@ -15,6 +15,10 @@ class Tenant < ApplicationRecord
   end
 
   def self.setting(name)
-    ActsAsTenant.current_tenant&.settings&.send(name)
+    Setting.for_current_tenant(var: name).value
+  end
+
+  def self.set_setting(name, value)
+    Setting.for_current_tenant(var: name).update(value: value)
   end
 end
