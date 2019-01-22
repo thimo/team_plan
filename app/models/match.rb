@@ -73,11 +73,11 @@ class Match < ApplicationRecord
   end
 
   def location
-    full_address.join("\\n")
+    full_address.compact.join("\\n")
   end
 
   def google_maps_address
-    full_address.join(",")
+    full_address.compact.join(",")
   end
 
   def team_name
