@@ -9,8 +9,6 @@ class Training < ApplicationRecord
   belongs_to :training_schedule, optional: true
   has_paper_trail
 
-  attr_accessor :start_time, :end_time
-
   validates :started_at, :ended_at, :team_id, presence: true
 
   scope :not_modified, -> { where(user_modified: false) }
