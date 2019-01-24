@@ -132,7 +132,7 @@ module ClubDataImporter
         match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])
         next if match.nil?
 
-        match.set_uitslag(data["uitslag"])
+        match.set_uitslag(data["uitslag"]) if data["uitslag"].present?
         if match.changed?
           match.save
           count[:updated] += 1
