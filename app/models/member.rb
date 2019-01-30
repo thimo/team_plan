@@ -230,6 +230,8 @@ class Member < ApplicationRecord
   def self.import(file)
     result = { counters: { imported: 0, changed: 0 }, created: [], activated: [], member_ids: [] }
 
+    check_header_translations(file)
+
     CSV.foreach(
       file.path,
       headers: true,
@@ -292,6 +294,19 @@ class Member < ApplicationRecord
 
   def self.export_columns(user)
     Member::EXPORT_COLUMNS + (user.show_evaluations? ? Member::EXPORT_COLUMNS_EVALUATION : [])
+  end
+
+  # Early notification of changed Sportlink export headers
+  def self.check_header_translations(file)
+    first_line = File.open(file.path) { |f| f.readline }
+    header = first_line.strip.split(",").compact
+    missing = header.select { |h| I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}", default: nil).blank? }
+    return if missing.none?
+
+    ActionMailer::Base.mail(from: Tenant.setting("application.email"),
+                            to: Tenant.setting("application.sysadmin.email"),
+                            subject: "Missing member import headers (#{ActsAsTenant.current_tenant.name})",
+                            body: missing).deliver
   end
 
   def emails

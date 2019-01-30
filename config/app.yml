@@ -6,6 +6,7 @@ defaults: &defaults
   application.contact_name: Thimo Jansen
   application.maintenance: false
   application.favicon_url: /favicon.ico
+  application.sysadmin.email: thimo@teamplanpro.nl
   club.name: Defrog
   club.name_short: Defrog
   club.website: https://teamplan.defrog.nl/
