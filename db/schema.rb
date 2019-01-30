@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_23_192059) do
+ActiveRecord::Schema.define(version: 2019_01_30_190627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2018_11_23_192059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "tenant_id"
-    t.index ["club_data_team_id", "competition_id"], name: "team_competition", unique: true
-    t.index ["competition_id", "club_data_team_id"], name: "competition_team", unique: true
+    t.index ["tenant_id", "club_data_team_id", "competition_id"], name: "team_competition", unique: true
+    t.index ["tenant_id", "competition_id", "club_data_team_id"], name: "competition_team", unique: true
     t.index ["tenant_id"], name: "index_club_data_team_competitions_on_tenant_id"
   end
 
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 2018_11_23_192059) do
     t.boolean "active", default: true
     t.bigint "season_id"
     t.bigint "tenant_id"
-    t.index ["season_id", "teamcode"], name: "index_club_data_teams_on_season_id_and_teamcode", unique: true
     t.index ["season_id"], name: "index_club_data_teams_on_season_id"
+    t.index ["tenant_id", "season_id", "teamcode"], name: "index_club_data_teams_on_season_id_and_teamcode", unique: true
     t.index ["tenant_id"], name: "index_club_data_teams_on_tenant_id"
   end
 
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2018_11_23_192059) do
     t.text "remark"
     t.boolean "user_modified", default: false
     t.bigint "tenant_id"
-    t.index ["poulecode"], name: "index_competitions_on_poulecode", unique: true
+    t.index ["tenant_id", "poulecode"], name: "index_competitions_on_poulecode", unique: true
     t.index ["tenant_id"], name: "index_competitions_on_tenant_id"
   end
 
@@ -251,8 +251,8 @@ ActiveRecord::Schema.define(version: 2018_11_23_192059) do
     t.bigint "tenant_id"
     t.index ["competition_id"], name: "index_matches_on_competition_id"
     t.index ["created_by_id"], name: "index_matches_on_created_by_id"
+    t.index ["tenant_id", "wedstrijdcode"], name: "index_matches_on_wedstrijdcode", unique: true
     t.index ["tenant_id"], name: "index_matches_on_tenant_id"
-    t.index ["wedstrijdcode"], name: "index_matches_on_wedstrijdcode", unique: true
   end
 
   create_table "matches_teams", id: false, force: :cascade do |t|
@@ -628,8 +628,8 @@ ActiveRecord::Schema.define(version: 2018_11_23_192059) do
     t.integer "status", default: 1
     t.bigint "tenant_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tenant_id", "email"], name: "index_users_on_tenant_id_and_email", unique: true
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
     t.index ["uuid"], name: "index_users_on_uuid"
   end

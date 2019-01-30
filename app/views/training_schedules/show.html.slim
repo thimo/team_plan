@@ -51,7 +51,7 @@ section
 
     - if @presences.present? && policy(@presences.first).update?
       #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
-        p
+        .alert.alert-primary
           | Geef hier de standaard aanwezigheid op voor de training van deze dag.
             Misschien weet je al dat de keeper niet mee doet omdat er
             keeperstraining is. Dan kun je hier de aanwezigheid uitzetten en

@@ -9,7 +9,11 @@ development:
 
 test:
   <<: *default
-  database: team_plan_test
+  database: teamplan_test
+
+demo:
+  <<: *default
+  database: teamplan_demo
 
 production:
   <<: *default
