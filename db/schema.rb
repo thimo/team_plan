@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_23_192059) do
+ActiveRecord::Schema.define(version: 2019_01_30_185811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -628,8 +628,8 @@ ActiveRecord::Schema.define(version: 2018_11_23_192059) do
     t.integer "status", default: 1
     t.bigint "tenant_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tenant_id", "email"], name: "index_users_on_tenant_id_and_email", unique: true
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
     t.index ["uuid"], name: "index_users_on_uuid"
   end
