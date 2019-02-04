@@ -53,11 +53,13 @@ class SeasonsController < ApplicationController
   private
 
     def create_season
-      start_year = Time.zone.today.year + (Time.zone.today.month >= 7 ? 1 : 0)
-      started_on = Time.zone.local(start_year, 7, 1)
-      ended_on = Time.zone.local(start_year + 1, 6, 30)
       @season = if action_name == "new"
-                  Season.new(started_on: started_on, ended_on: ended_on)
+                  start_year = Time.zone.today.year + (Time.zone.today.month >= 7 ? 1 : 0)
+                  started_on = Time.zone.local(start_year, 7, 1)
+                  ended_on = Time.zone.local(start_year + 1, 6, 30)
+                  name = "#{start_year} / #{ended_on.year}"
+
+                  Season.new(started_on: started_on, ended_on: ended_on, name:  name)
                 else
                   Season.new(permitted_attributes(Season.new))
                 end

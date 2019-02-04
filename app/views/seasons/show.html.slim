@@ -25,4 +25,5 @@
     .card-body
       p
         i Geen leeftijdsgroepen gevonden
-      = link_to "Overnemen van #{Season.active.first.name}", [:inherit_age_groups, @season], class: "btn", method: :post
+      .mt-3
+        = link_to "Leeftijdsgroepen overnemen van seizoen #{Season.active.first.name}", [:inherit_age_groups, @season], class: "btn btn-primary", method: :post
