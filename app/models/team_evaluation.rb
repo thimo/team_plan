@@ -42,7 +42,7 @@ class TeamEvaluation < ApplicationRecord
     end
 
     if users.any?
-      TeamEvaluationMailer.invite(users, self).deliver_now
+      TeamEvaluationMailer.invite(users, self).deliver_later
       update(invited_by: user, invited_at: Time.zone.now)
     end
 
