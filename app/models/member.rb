@@ -306,7 +306,7 @@ class Member < ApplicationRecord
     ActionMailer::Base.mail(from: Tenant.setting("application.email"),
                             to: Tenant.setting("application.sysadmin.email"),
                             subject: "Missing member import headers (#{ActsAsTenant.current_tenant.name})",
-                            body: missing).deliver
+                            body: missing.join("\n")).deliver
   end
 
   def emails
