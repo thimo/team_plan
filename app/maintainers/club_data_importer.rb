@@ -163,7 +163,7 @@ module ClubDataImporter
         end
 
       rescue StandardError => e
-        log_error(:poule_standings, url, e)
+        log_error(:poule_standings_import, url, e)
       end
 
       ClubDataLog.create level: :info,
@@ -213,7 +213,7 @@ module ClubDataImporter
         end
 
       rescue StandardError => e
-        log_error(:poule_matches, url, e)
+        log_error(:poule_matches_import, url, e)
       end
 
       ClubDataLog.create level: :info,
@@ -244,7 +244,7 @@ module ClubDataImporter
           end
         end
       rescue StandardError => e
-        log_error(:poule_results, url, e)
+        log_error(:poule_results_import, url, e)
       end
 
       ClubDataLog.create level: :info,
