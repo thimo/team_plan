@@ -19,7 +19,9 @@
               .small.light
                 = l(log.created_at, format: :long)
             td
-              = log.body
+              - log.body.split("\n").each do |line|
+                div style="min-height: 1rem;"
+                  = line
 
 .d-flex.flex-row-reverse
   = paginate @logs, theme: 'twitter-bootstrap-4'

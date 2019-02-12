@@ -130,11 +130,11 @@ class User < ApplicationRecord
   end
 
   def send_new_account(password)
-    UserMailer.new_account_notification(self, password).deliver_now
+    UserMailer.new_account_notification(self, password).deliver_later
   end
 
   def send_password_reset(password)
-    UserMailer.password_reset(self, password).deliver_now
+    UserMailer.password_reset(self, password).deliver_later
   end
 
   def prefill(member)

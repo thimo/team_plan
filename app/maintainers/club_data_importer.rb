@@ -116,9 +116,7 @@ module ClubDataImporter
                                   (#{competition_count[:created]} created, \
                                    #{competition_count[:updated]} updated)"
     rescue StandardError => e
-      ClubDataLog.create level: :error,
-                         source: :teams_and_competitions_import,
-                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+      log_error(:teams_and_competitions_import, url, e)
     end
 
     def club_results_for_tenant
@@ -132,7 +130,7 @@ module ClubDataImporter
         match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])
         next if match.nil?
 
-        match.set_uitslag(data["uitslag"]) if data["uitslag"].present?
+        match.set_uitslag(data["uitslag"])
         if match.changed?
           match.save
           count[:updated] += 1
@@ -143,9 +141,7 @@ module ClubDataImporter
                          source: :club_results_import,
                          body: "#{count[:total]} imported (#{count[:updated]} updated)"
     rescue StandardError => e
-      ClubDataLog.create level: :error,
-                         source: :club_results_import,
-                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+      log_error(:club_results_import, url, e)
     end
 
     def poule_standings_for_tenant
@@ -167,9 +163,7 @@ module ClubDataImporter
         end
 
       rescue StandardError => e
-        ClubDataLog.create level: :error,
-                           source: :poule_standings,
-                           body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+        log_error(:poule_standings, url, e)
       end
 
       ClubDataLog.create level: :info,
@@ -219,9 +213,7 @@ module ClubDataImporter
         end
 
       rescue StandardError => e
-        ClubDataLog.create level: :error,
-                           source: :poule_matches,
-                           body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+        log_error(:poule_matches, url, e)
       end
 
       ClubDataLog.create level: :info,
@@ -252,9 +244,7 @@ module ClubDataImporter
           end
         end
       rescue StandardError => e
-        ClubDataLog.create level: :error,
-                           source: :poule_results,
-                           body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+        log_error(:poule_results, url, e)
       end
 
       ClubDataLog.create level: :info,
@@ -297,9 +287,7 @@ module ClubDataImporter
                          body: "#{count[:total]} imported (#{count[:created]} created, \
                                                            #{count[:deleted]} deleted)"
     rescue StandardError => e
-      ClubDataLog.create level: :error,
-                         source: :teams_and_competitions_import,
-                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+      log_error(:teams_and_competitions_import, url, e)
     end
 
     def team_photos_for_tenant
@@ -323,9 +311,7 @@ module ClubDataImporter
           end
         end
       rescue StandardError => e
-        ClubDataLog.create level: :error,
-                           source: :team_photos_import,
-                           body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+        log_error(:team_photos_import, url, e)
       end
 
       ClubDataLog.create level: :info,
@@ -351,9 +337,7 @@ module ClubDataImporter
         match.save if match.changed?
       end
     rescue StandardError => e
-      ClubDataLog.create level: :error,
-                         source: :add_address,
-                         body: "Error opening/parsing #{url}\n\n#{e.backtrace.join("\n")}"
+      log_error(:add_address, url, e)
     end
 
     def add_team_to_match(match, teamcode)
@@ -373,6 +357,13 @@ module ClubDataImporter
       end
       match.competition = competition
       match
+    end
+
+    def log_error(source, url, error)
+      body = "Error opening/parsing #{url}\n\n#{error.message}\n#{error.backtrace.join("\n")}"
+      ClubDataLog.create level: :error,
+                         source: source,
+                         body: body
     end
   end
 end

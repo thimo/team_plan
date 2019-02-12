@@ -395,6 +395,10 @@ nl:
       zichtbaarheid: visibility
       naam_ouder/verzorger_1: name_parent
       naam_ouder/verzorger_2: name_parent_2
+      privacyverklaring_bond_geaccepteerd: privacy_statement_association_accepted
+      privacyverklaring_bond_aangeboden_op: privacy_statement_association_offered_on
+      privacyverklaring_vereniging_geaccepteerd: privacy_statement_club_accepted
+      privacyverklaring_vereniging_aangeboden_op: privacy_statement_offered_on
 
   invites_sent:
     one: er is 1 uitnodiging verstuurd

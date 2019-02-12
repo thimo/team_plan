@@ -85,7 +85,7 @@ class Match < ApplicationRecord
   end
 
   def set_uitslag(data_uitslag)
-    data_uitslag = nil if data_uitslag.strip == "-"
+    data_uitslag = nil if data_uitslag&.strip == "-"
     self.uitslag = data_uitslag
     self.uitslag_at = Time.zone.now if uitslag_changed?
   end
