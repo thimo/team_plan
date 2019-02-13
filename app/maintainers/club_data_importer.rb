@@ -100,6 +100,10 @@ module ClubDataImporter
                                     "voor '#{club_data_team.teamnaam}'"
           competition.save
           competition_count[:created] += 1
+
+          update_poule_standing(competition)
+          update_poule_matches(competition)
+          update_poule_results(competition)
         elsif competition.changed?
           competition.save
           competition_count[:updated] += 1
@@ -152,22 +156,7 @@ module ClubDataImporter
       count = { total: 0, updated: 0 }
 
       Season.active_season_for_today.competitions.active.each do |competition|
-        # Fetch ranking
-        url = "#{Tenant.setting('clubdata.urls.poulestand')}&poulecode=#{competition.poulecode}" \
-              "&client_id=#{Tenant.setting('clubdata.client_id')}"
-        json = JSON.parse(RestClient.get(url))
-        if json.present?
-          count[:total] += 1
-
-          competition.ranking = json
-          if competition.changed?
-            count[:updated] += 1
-            competition.save
-          end
-        end
-
-      rescue StandardError => error
-        log_error(:poule_standings_import, generic_error_body(url, error))
+        update_poule_standing(competition, count)
       end
 
       ClubDataLog.create level: :info,
@@ -175,49 +164,30 @@ module ClubDataImporter
                          body: "#{count[:total]} imported (#{count[:updated]} updated)"
     end
 
+    def update_poule_standing(competition, count = nil)
+      # Fetch ranking
+      url = "#{Tenant.setting('clubdata.urls.poulestand')}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Tenant.setting('clubdata.client_id')}"
+      json = JSON.parse(RestClient.get(url))
+      if json.present?
+        count[:total] += 1 if count.present?
+
+        competition.ranking = json
+        if competition.changed?
+          count[:updated] += 1 if count.present?
+          competition.save
+        end
+      end
+
+    rescue StandardError => error
+      log_error(:poule_standings_import, generic_error_body(url, error))
+    end
+
     def poule_matches_for_tenant
       count = { total: 0, created: 0, updated: 0, deleted: 0 }
 
       Season.active_season_for_today.competitions.active.each do |competition|
-        imported_wedstrijdnummers = []
-
-        # Fetch upcoming matches
-        url = "#{Tenant.setting('clubdata.urls.poule-programma')}&poulecode=#{competition.poulecode}" \
-              "&client_id=#{Tenant.setting('clubdata.client_id')}"
-        json = JSON.parse(RestClient.get(url))
-        json.each do |data|
-          count[:total] += 1
-
-          match = update_match(data, competition)
-
-          if match.new_record?
-            count[:created] += 1
-            match.save
-          elsif match.changed?
-            count[:updated] += 1
-            match.save
-          end
-
-          if match.eigenteam?
-            add_team_to_match(match, match.thuisteamid)
-            add_team_to_match(match, match.uitteamid)
-
-            add_address(match) if match.adres.blank?
-          end
-
-          imported_wedstrijdnummers << match.wedstrijdnummer
-        end
-
-        # Cleanup matches that were not included in the import
-        competition.matches.not_played.from_now.each do |match|
-          unless imported_wedstrijdnummers.include? match.wedstrijdnummer
-            count[:deleted] += 1
-            match.delete
-          end
-        end
-
-      rescue StandardError => error
-        log_error(:poule_matches_import, generic_error_body(url, error))
+        update_poule_matches(competition, count)
       end
 
       ClubDataLog.create level: :info,
@@ -227,34 +197,79 @@ module ClubDataImporter
                                                            #{count[:deleted]} deleted)"
     end
 
+    def update_poule_matches(competition, count = nil)
+      imported_wedstrijdnummers = []
+
+      # Fetch upcoming matches
+      url = "#{Tenant.setting('clubdata.urls.poule-programma')}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Tenant.setting('clubdata.client_id')}"
+      json = JSON.parse(RestClient.get(url))
+      json.each do |data|
+        count[:total] += 1 if count.present?
+
+        match = update_match(data, competition)
+
+        if match.new_record?
+          count[:created] += 1 if count.present?
+          match.save
+        elsif match.changed?
+          count[:updated] += 1 if count.present?
+          match.save
+        end
+
+        if match.eigenteam?
+          add_team_to_match(match, match.thuisteamid)
+          add_team_to_match(match, match.uitteamid)
+
+          add_address(match) if match.adres.blank?
+        end
+
+        imported_wedstrijdnummers << match.wedstrijdnummer
+      end
+
+      # Cleanup matches that were not included in the import
+      competition.matches.not_played.from_now.each do |match|
+        unless imported_wedstrijdnummers.include? match.wedstrijdnummer
+          count[:deleted] += 1 if count.present?
+          match.delete
+        end
+      end
+    rescue StandardError => error
+      log_error(:poule_matches_import, generic_error_body(url, error))
+    end
+
     def poule_results_for_tenant
       count = { total: 0, created: 0, updated: 0 }
 
       Season.active_season_for_today.competitions.active.each do |competition|
-        url = "#{Tenant.setting('clubdata.urls.pouleuitslagen')}&poulecode=#{competition.poulecode}" \
-              "&client_id=#{Tenant.setting('clubdata.client_id')}"
-        json = JSON.parse(RestClient.get(url))
-        json.each do |data|
-          count[:total] += 1
-          match = update_match(data, competition)
-          match.set_uitslag(data["uitslag"])
-
-          if match.new_record?
-            count[:created] += 1
-            match.save
-          elsif match.changed?
-            count[:updated] += 1
-            match.save
-          end
-        end
-      rescue StandardError => error
-        log_error(:poule_results_import, generic_error_body(url, error))
+        update_poule_results(competition, count)
       end
 
       ClubDataLog.create level: :info,
                          source: :poule_results_import,
                          body: "#{count[:total]} imported (#{count[:created]} created, \
                                                            #{count[:updated]} updated)"
+    end
+
+    def update_poule_results(competition, count = nil)
+      url = "#{Tenant.setting('clubdata.urls.pouleuitslagen')}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Tenant.setting('clubdata.client_id')}"
+      json = JSON.parse(RestClient.get(url))
+      json.each do |data|
+        count[:total] += 1 if count.present?
+        match = update_match(data, competition)
+        match.set_uitslag(data["uitslag"])
+
+        if match.new_record?
+          count[:created] += 1 if count.present?
+          match.save
+        elsif match.changed?
+          count[:updated] += 1 if count.present?
+          match.save
+        end
+      end
+    rescue StandardError => error
+      log_error(:poule_results_import, generic_error_body(url, error))
     end
 
     def afgelastingen_for_tenant
