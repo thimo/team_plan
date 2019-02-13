@@ -178,7 +178,8 @@ module ClubDataImporter
           competition.save
         end
       end
-
+    rescue RestClient::BadRequest => error
+      handle_bad_request(:poule_results_import, competition, error)
     rescue StandardError => error
       log_error(:poule_standings_import, generic_error_body(url, error))
     end
@@ -234,6 +235,8 @@ module ClubDataImporter
           match.delete
         end
       end
+    rescue RestClient::BadRequest => error
+      handle_bad_request(:poule_results_import, competition, error)
     rescue StandardError => error
       log_error(:poule_matches_import, generic_error_body(url, error))
     end
@@ -268,6 +271,8 @@ module ClubDataImporter
           match.save
         end
       end
+    rescue RestClient::BadRequest => error
+      handle_bad_request(:poule_results_import, competition, error)
     rescue StandardError => error
       log_error(:poule_results_import, generic_error_body(url, error))
     end
@@ -386,6 +391,16 @@ module ClubDataImporter
 
     def generic_error_body(url, error)
       "Error opening/parsing #{url}\n\n#{error.inspect}\n#{error.backtrace.join("\n")}"
+    end
+
+    def handle_bad_request(source, competition, error)
+      if JSON.parse(error.response.body).dig("error", "code") == 4001 # Ongeldige poulecode
+        competition.deactivate
+        message = "Competition #{competition.poulecode} has been disabled after a '400' response from the server"
+        log_error(source, message)
+      else
+        log_error(source, generic_error_body(url, error))
+      end
     end
   end
 end
