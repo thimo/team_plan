@@ -1,5 +1,7 @@
 header.app-header.navbar
-  button.navbar-toggler.sidebar-toggler.d-lg-none.mr-auto[type="button" data-toggle="sidebar-show"]
+  button.navbar-toggler.sidebar-toggler.d-lg-none.mr-auto[type="button" data={ controller: "toggle-sidebar",
+                                                                               action: "toggle-sidebar#toggle",
+                                                                               "toggle-sidebar-class": "sidebar-show" }]
     span.navbar-toggler-icon
   a.navbar-brand href="/" title="#{Tenant.setting('club.name')} #{Tenant.setting('application.name')}"
     - if Tenant.setting("club.logo_url").present?
@@ -8,7 +10,9 @@ header.app-header.navbar
     h1.navbar-brand-full
       img src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application.name")
 
-  button.navbar-toggler.sidebar-toggler.d-md-down-none[type="button" data-toggle="sidebar-lg-show"]
+  button.navbar-toggler.sidebar-toggler.d-md-down-none[type="button" data={ controller: "toggle-sidebar",
+                                                                            action: "toggle-sidebar#toggle",
+                                                                            "toggle-sidebar-class": "sidebar-lg-show" }]
     span.navbar-toggler-icon
 
   ul.d-md-down-none.nav.navbar-nav
