@@ -115,8 +115,12 @@ module ClubDataImporter
                                 #{competition_count[:total]} competitions imported \
                                   (#{competition_count[:created]} created, \
                                    #{competition_count[:updated]} updated)"
-    rescue StandardError => e
-      log_error(:teams_and_competitions_import, url, e)
+    # rescue RestClient::Unauthorized, RestClient::Forbidden => error # TODO: catch proper error class (400)
+    #   competition.deactivate
+    #   message = "Competition #{competition.poulecode} has been disabled after a '400' response from the server"
+    #   log_error(:teams_and_competitions_import, message)
+    rescue StandardError => error
+      log_error(:teams_and_competitions_import, generic_error_body(url, error))
     end
 
     def club_results_for_tenant
@@ -140,8 +144,8 @@ module ClubDataImporter
       ClubDataLog.create level: :info,
                          source: :club_results_import,
                          body: "#{count[:total]} imported (#{count[:updated]} updated)"
-    rescue StandardError => e
-      log_error(:club_results_import, url, e)
+    rescue StandardError => error
+      log_error(:club_results_import, generic_error_body(url, error))
     end
 
     def poule_standings_for_tenant
@@ -162,8 +166,8 @@ module ClubDataImporter
           end
         end
 
-      rescue StandardError => e
-        log_error(:poule_standings_import, url, e)
+      rescue StandardError => error
+        log_error(:poule_standings_import, generic_error_body(url, error))
       end
 
       ClubDataLog.create level: :info,
@@ -212,8 +216,8 @@ module ClubDataImporter
           end
         end
 
-      rescue StandardError => e
-        log_error(:poule_matches_import, url, e)
+      rescue StandardError => error
+        log_error(:poule_matches_import, generic_error_body(url, error))
       end
 
       ClubDataLog.create level: :info,
@@ -243,8 +247,8 @@ module ClubDataImporter
             match.save
           end
         end
-      rescue StandardError => e
-        log_error(:poule_results_import, url, e)
+      rescue StandardError => error
+        log_error(:poule_results_import, generic_error_body(url, error))
       end
 
       ClubDataLog.create level: :info,
@@ -286,8 +290,8 @@ module ClubDataImporter
                          source: :afgelastingen_import,
                          body: "#{count[:total]} imported (#{count[:created]} created, \
                                                            #{count[:deleted]} deleted)"
-    rescue StandardError => e
-      log_error(:teams_and_competitions_import, url, e)
+    rescue StandardError => error
+      log_error(:teams_and_competitions_import, generic_error_body(url, error))
     end
 
     def team_photos_for_tenant
@@ -310,8 +314,8 @@ module ClubDataImporter
             member.save
           end
         end
-      rescue StandardError => e
-        log_error(:team_photos_import, url, e)
+      rescue StandardError => error
+        log_error(:team_photos_import, generic_error_body(url, error))
       end
 
       ClubDataLog.create level: :info,
@@ -336,8 +340,8 @@ module ClubDataImporter
         match.write_attribute("route", wedstrijd["route"])
         match.save if match.changed?
       end
-    rescue StandardError => e
-      log_error(:add_address, url, e)
+    rescue StandardError => error
+      log_error(:add_address, generic_error_body(url, error))
     end
 
     def add_team_to_match(match, teamcode)
@@ -359,11 +363,14 @@ module ClubDataImporter
       match
     end
 
-    def log_error(source, url, error)
-      body = "Error opening/parsing #{url}\n\n#{error.message}\n#{error.backtrace.join("\n")}"
+    def log_error(source, body)
       ClubDataLog.create level: :error,
                          source: source,
                          body: body
+    end
+
+    def generic_error_body(url, error)
+      "Error opening/parsing #{url}\n\n#{error.inspect}\n#{error.backtrace.join("\n")}"
     end
   end
 end
