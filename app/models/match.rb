@@ -5,7 +5,7 @@ class Match < ApplicationRecord
 
   acts_as_tenant :tenant
   belongs_to :competition
-  belongs_to :created_by, class_name: "User", required: false
+  belongs_to :created_by, class_name: "User", optional: true
   has_and_belongs_to_many :teams
   has_paper_trail
 
@@ -56,11 +56,13 @@ class Match < ApplicationRecord
   def title
     return wedstrijd if wedstrijd.present?
     return "Toernooi #{thuisteam}" if toernooi?
+
     "#{thuisteam} - #{uitteam}"
   end
 
   def schedule_title
     return "Toernooi" if toernooi?
+
     title
   end
 
