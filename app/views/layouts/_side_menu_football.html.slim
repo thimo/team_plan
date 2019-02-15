@@ -10,10 +10,11 @@ li.nav-item
   = link_to results_dashboards_path, class: "nav-link #{'active' if current_page?(results_dashboards_path)}"
     i.fa-fw.fa-trophy.nav-icon[class=fa_class]
     | Uitslagen
-li.nav-item
-  = link_to cancellations_dashboards_path, class: "nav-link #{'active' if current_page?(cancellations_dashboards_path)}"
-    i.fa-fw.fa-ban.nav-icon.color-red[class=fa_class]
-    | Afgelastingen
+- if (size = policy_scope(Match).from_today.own.afgelast.size).positive?
+  li.nav-item
+    = link_to cancellations_dashboards_path, class: "nav-link #{'active' if current_page?(cancellations_dashboards_path)}"
+      i.fa-fw.fa-ban.nav-icon.color-red[class=fa_class]
+      | Afgelastingen (#{size})
 - if (season = policy_scope(Season).active.last).present?
   li.nav-item
     = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
