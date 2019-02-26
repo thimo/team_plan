@@ -46,6 +46,7 @@ document.addEventListener("turbolinks:load", () => {
 document.addEventListener("turbolinks:before-cache", () => {
   $('.no-touch [title]').tooltip('dispose');
   $('.select2-hidden-accessible').select2('destroy');
+  $('body').removeClass('sidebar-show');
 })
 
 document.addEventListener("turbolinks:before-render", (event) => {
