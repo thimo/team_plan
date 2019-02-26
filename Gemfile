@@ -15,7 +15,7 @@ gem "rails", "5.2.2"
 gem "sassc-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
-gem "webpacker"
+gem "webpacker", ">= 4.0.x"
 gem "webpacker-react"
 
 gem "carrierwave", "~> 1.1.0"
