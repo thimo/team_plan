@@ -3,7 +3,7 @@ window.autosize = autosize
 import LazyLoad from 'vanilla-lazyload'
 
 document.addEventListener("turbolinks:load", () => {
-  $('.sidebar').sidebar();
+  // $('.sidebar').sidebar();
   // $('.aside-menu')['aside-menu']();
 
   // Auto-size all textarea's
