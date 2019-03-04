@@ -62,7 +62,15 @@ class TeamMembersController < ApplicationController
         @team_member.status = @team.status
       end
 
-      if @team_member.save
+      archived_member = @team.team_members.ended.where(member: @team_member.member,
+                                                                   role: @team_member.role).first
+      if archived_member.present?
+        # Re-activate archived team member
+        archived_member.update(ended_on: nil, status: @team_member.status)
+
+        flash_message(:success, "#{archived_member.member.name} is geactiveerd voor #{@team_member.team.name}.")
+        redirect_to @team
+      elsif @team_member.save
         redirect_to @team
       else
         render :new

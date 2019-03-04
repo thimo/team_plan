@@ -60,5 +60,5 @@
                     div
                       = team_member.status_to_badge.html_safe
                       - if policy(team_member).activate?
-                        = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} op actief gezet. Doorgaan?" }, title: "Activeren"
+                        = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} wordt op actief gezet. Doorgaan?" }, title: "Activeren"
                           i.fa-check.m-1.ml-2[class=fa_class]
