@@ -2,11 +2,11 @@
 
 class GroupPolicy < ApplicationPolicy
   def index?
-    @user.role?(Role::BEHEER_VERENIGING) || @user.role?(Role::BEHEER_APPLICATIE)
+    @user.role?(Role::BEHEER_GROUPS)
   end
 
   def create?
-    @user.role?(Role::BEHEER_APPLICATIE)
+    @user.role?(Role::BEHEER_GROUPS)
   end
 
   def show?
@@ -18,7 +18,7 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.role?(Role::BEHEER_APPLICATIE) && @record.persisted?
+    @user.role?(Role::BEHEER_GROUPS) && @record.persisted?
   end
 
   def modify_members?
@@ -26,7 +26,7 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def modify_roles?
-    @user.role?(Role::BEHEER_APPLICATIE)
+    @user.role?(Role::BEHEER_ROLES)
   end
 
   def set_memberable_via_type?
@@ -43,7 +43,8 @@ class GroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.all if @user.role?(Role::BEHEER_APPLICATIE)
+      return scope.all if @user.role?(Role::BEHEER_GROUPS)
+
       scope.none
     end
   end

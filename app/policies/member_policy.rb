@@ -2,7 +2,7 @@
 
 class MemberPolicy < ApplicationPolicy
   def index?
-    @user.role?(Role::BEHEER_VERENIGING)
+    @user.role?(Role::BEHEER_MEMBERS)
   end
 
   def create?

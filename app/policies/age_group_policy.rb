@@ -84,7 +84,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def modify_members?
-    @user.role?(Role::BEHEER_VERENIGING) &&
+    @user.role?(Role::BEHEER_GROUPS) &&
       @record.persisted? && !@record.archived?
   end
 

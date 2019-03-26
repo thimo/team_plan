@@ -2,7 +2,7 @@
 
 class EmailLogPolicy < ApplicationPolicy
   def index?
-    @user.role?(Role::BEHEER_APPLICATIE)
+    @user.role?(Role::BEHEER_EMAIL_LOG)
   end
 
   def create?
@@ -23,7 +23,8 @@ class EmailLogPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.all if @user.role?(Role::BEHEER_APPLICATIE)
+      return scope.all if @user.role?(Role::BEHEER_EMAIL_LOG)
+
       scope.none
     end
   end
