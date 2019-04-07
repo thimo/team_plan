@@ -2,7 +2,7 @@
 
 class SettingPolicy < ApplicationPolicy
   def index?
-    @user.role?(Role::BEHEER_APPLICATIE)
+    @user.role?(Role::BEHEER_SETTINGS)
   end
 
   def create?
@@ -23,7 +23,8 @@ class SettingPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.all if @user.role?(Role::BEHEER_APPLICATIE)
+      return scope.all if @user.role?(Role::BEHEER_SETTINGS)
+
       scope.none
     end
   end

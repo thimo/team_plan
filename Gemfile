@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.5.3"
+ruby "2.5.4"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
@@ -11,7 +11,7 @@ gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.0"
-gem "rails", "5.2.2"
+gem "rails", "5.2.2.1"
 gem "sassc-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"

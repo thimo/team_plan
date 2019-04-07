@@ -4,11 +4,11 @@ class GroupMemberPolicy < ApplicationPolicy
   def create?
     return false if @record&.memberable&.archived?
 
-    @user.role?(Role::BEHEER_VERENIGING)
+    @user.role?(Role::BEHEER_GROUPS)
   end
 
   def destroy?
-    @user.role?(Role::BEHEER_VERENIGING)
+    @user.role?(Role::BEHEER_GROUPS)
   end
 
   class Scope < Scope

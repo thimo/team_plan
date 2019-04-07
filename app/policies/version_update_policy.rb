@@ -2,7 +2,7 @@
 
 class VersionUpdatePolicy < ApplicationPolicy
   def index?
-    @user.role?(Role::BEHEER_APPLICATIE)
+    @user.role?(Role::BEHEER_VERSION_UPDATES)
   end
 
   def create?
@@ -23,7 +23,7 @@ class VersionUpdatePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.role?(Role::BEHEER_APPLICATIE)
+      if @user.role?(Role::BEHEER_VERSION_UPDATES)
         scope.all
       else
         scope.member
