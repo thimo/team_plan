@@ -2,9 +2,9 @@
 
 class TeamEvaluation < ApplicationRecord
   acts_as_tenant :tenant
-  belongs_to :team, required: true
-  belongs_to :invited_by, class_name: "User", required: false
-  belongs_to :finished_by, class_name: "User", required: false
+  belongs_to :team, optional: false
+  belongs_to :invited_by, class_name: "User", optional: true
+  belongs_to :finished_by, class_name: "User", optional: true
   has_many :player_evaluations, dependent: :destroy
   has_paper_trail
 

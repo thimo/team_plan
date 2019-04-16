@@ -100,6 +100,7 @@ group :development do
   gem "rails_best_practices"
   gem "reek"
   gem "rubocop"
+  gem "rubocop-performance"
   gem "ruby-debug-ide"
 end
 
