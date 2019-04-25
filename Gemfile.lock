@@ -155,7 +155,7 @@ GEM
       sexp_processor (~> 4.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.4.3)
+    devise (4.6.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -515,7 +515,7 @@ DEPENDENCIES
   country_select
   debase
   debride
-  devise (~> 4.4.3)
+  devise (~> 4.6)
   enum_help (~> 0.0.17)
   exception_notification
   factory_bot_rails
