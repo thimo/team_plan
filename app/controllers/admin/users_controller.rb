@@ -39,7 +39,7 @@ module Admin
 
     def update
       @user.skip_reconfirmation!
-      if @user.update(user_params)
+      if @user.update(permitted_attributes(@user))
         redirect_to admin_users_path, notice: "Gebruiker is aangepast."
       else
         render "edit"
@@ -73,7 +73,7 @@ module Admin
         @user = if action_name == "new"
                   User.new
                 else
-                  User.new(user_params)
+                  User.new(permitted_attributes(User.new))
                 end
         authorize @user
       end
@@ -81,10 +81,6 @@ module Admin
       def set_user
         @user = User.find(params[:id])
         authorize @user
-      end
-
-      def user_params
-        params.require(:user).permit(:first_name, :middle_name, :last_name, :email, :role)
       end
 
       def add_breadcrumbs

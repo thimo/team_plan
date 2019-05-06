@@ -37,6 +37,16 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def set_role?
+    @user.admin?
+  end
+
+  def permitted_attributes
+    attributes = [:first_name, :middle_name, :last_name, :email]
+    attributes << :role if set_role?
+    attributes
+  end
+
   class Scope < Scope
     def resolve
       return scope.all if @user.role?(Role::BEHEER_USERS)

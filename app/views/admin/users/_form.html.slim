@@ -6,7 +6,8 @@
   = f.text_field :middle_name
   = f.text_field :last_name
   = f.text_field :email, help: (@user.unconfirmed_email.present? ? "Wijziging naar #{@user.unconfirmed_email} nog niet bevestigd" : '')
-  = f.collection_radio_buttons :role, User.roles_i18n, :first, :second
+  - if policy(@user).set_role?
+    = f.collection_radio_buttons :role, User.roles_i18n, :first, :second
 
   .row
     .col-sm-9.offset-sm-3
