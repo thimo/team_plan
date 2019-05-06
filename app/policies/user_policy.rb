@@ -6,19 +6,19 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    index?
+    @user.role?(Role::USER_CREATE)
   end
 
   def show?
-    index?
+    @user.role?(Role::USER_SHOW)
   end
 
   def update?
-    index?
+    create?
   end
 
   def destroy?
-    index? && @record.persisted?
+    create? && @record.persisted?
   end
 
   def update_settings?
@@ -26,11 +26,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def resend_password?
-    @record.persisted? && @user.admin?
+    @record.persisted? && create?
   end
 
   def impersonate?
-    @user.admin?
+    @user.role?(Role::USER_IMPERSONATE)
   end
 
   def stop_impersonating?
