@@ -51,7 +51,7 @@
 
                 th[colspan="2"]
                   = team.name if team.present?
-                  = "Nieuwe spelers" if team.nil?
-              = render partial: 'member_allocations/available_member', collection: members, cached: true
+                  = "Zonder actief team" if team.nil?
+              = render partial: 'member_allocations/available_member', collection: members
 
 = render 'team_dialog', age_group: @age_group, teams: @teams

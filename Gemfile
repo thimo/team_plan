@@ -32,7 +32,7 @@ gem "rails-i18n"
 gem "bootstrap_form",             "~> 4.0.0"
 gem "breadcrumbs_on_rails",       "~> 3.0.1"
 gem "country_select"
-gem "devise",                     "~> 4.4.3"
+gem "devise",                     "~> 4.6"
 gem "enum_help",                  "~> 0.0.17"
 gem "figaro",                     "~> 1.1.1"
 gem "net-ssh",                    "~> 4.1.0"
@@ -100,6 +100,7 @@ group :development do
   gem "rails_best_practices"
   gem "reek"
   gem "rubocop"
+  gem "rubocop-performance"
   gem "ruby-debug-ide"
 end
 
