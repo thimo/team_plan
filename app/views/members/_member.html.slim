@@ -19,7 +19,7 @@
   - if member.local_teams.present?
     .light.small
       = "#{member.local_teams}"
-  - unless member.status_definitief?
+  - unless member.status_definitief? || member.status_af_te_melden?
     .light.small
       = member.status.capitalize
   - if member.deregistered_at.present?
