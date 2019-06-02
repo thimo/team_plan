@@ -236,6 +236,7 @@ class Member < ApplicationRecord
       file.path,
       headers: true,
       header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}") },
+      encoding: "iso-8859-1:utf-8",
       liberal_parsing: true
     ) do |row|
       row_hash = row.to_hash
