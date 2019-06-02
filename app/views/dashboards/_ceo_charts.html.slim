@@ -19,7 +19,8 @@
         - data = comments_graph_data
         .card-body.pt-0.membersChartParent [data={ controller: "chart-members",
                           "chart-members-data": data.to_json,
-                          "chart-members-title": "Opmerkingen" }
+                          "chart-members-title": "Opmerkingen",
+                          "chart-members-stacked": "true" }
                           style="height: 200px;"]
           canvas.membersChart data={ target: "chart-members.canvas" }
 
