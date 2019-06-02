@@ -1,4 +1,5 @@
 - provide(:title, "Importeer leden")
+- current_encoding = Tenant.setting("sportlink.members.encoding")
 
 .card.card-body
   p
@@ -19,7 +20,7 @@
                         control_col: "col-sm-9" do |f|
     div.my-1
       = f.file_field :file
-    - current_encoding = Tenant.setting("sportlink.members.encoding")
+
     = f.form_group :encoding, label: { text: "Encoding" },
                               help: "Onder Windows exporteert Sportlink in ISO 8859-1. Controleer de juiste encoding door na de import op zoek te gaan naar speciale karakters (é, ë, ø) in namen van leden." do
       = f.radio_button :encoding, "utf-8", label: "UTF-8 (voor macOS)", checked: current_encoding != "iso-8859-1"
