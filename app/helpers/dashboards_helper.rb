@@ -49,4 +49,29 @@ module DashboardsHelper
       }
     end
   end
+
+  def comments_graph_data
+    {
+      labels: comment_stats.map { |stat| stat[:title] },
+      datasets: [
+        {
+          label: "Opmerkingen",
+          backgroundColor: "rgba(245, 156, 26, .7)",
+          borderColor: "rgba(245, 156, 26, 1)",
+          fill: false,
+          data: comment_stats.map { |stat| stat[:total] }
+        }
+      ]
+    }
+  end
+
+  def comment_stats
+    @comment_stats ||= (0..23).reverse_each.map do |number|
+      date = number.months.ago
+      {
+        title: I18n.l(date, format: :date_long_without_day),
+        total: Comment.created_for_month(date).size
+      }
+    end
+  end
 end
