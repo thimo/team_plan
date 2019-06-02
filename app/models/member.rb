@@ -227,7 +227,7 @@ class Member < ApplicationRecord
     full_address.join(",")
   end
 
-  def self.import(file)
+  def self.import(file, encoding="utf-8")
     result = { counters: { imported: 0, changed: 0 }, created: [], activated: [], member_ids: [] }
 
     check_header_translations(file)
@@ -236,7 +236,7 @@ class Member < ApplicationRecord
       file.path,
       headers: true,
       header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}") },
-      encoding: "iso-8859-1:utf-8",
+      encoding: encoding,
       liberal_parsing: true
     ) do |row|
       row_hash = row.to_hash

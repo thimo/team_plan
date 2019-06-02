@@ -19,7 +19,9 @@ module Admin
         return render :new
       end
 
-      @import_result = Member.import(params[:file])
+      encoding = params[:encoding] || "utf-8"
+      Tenant.set_setting("sportlink.members.encoding", encoding)
+      @import_result = Member.import(params[:file], encoding)
 
       # After an import with at least one member, cleanup members that were last imported 7 days ago
       cleanup_after_import if @import_result[:counters][:imported].positive?
