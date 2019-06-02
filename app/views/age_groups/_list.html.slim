@@ -43,8 +43,18 @@
                   = "#{size}"
               - if policy(age_group).show_member_count?
                 div
-                  - assigned_players_size = age_group.assigned_active_players.size
-                  - waiting_players_size = age_group.active_players.size - assigned_players_size
-                  - title = "#{assigned_players_size} leden ingedeeld, #{waiting_players_size} op de wachtlijst"
+                  - active_players_size = age_group.team_members.player.active.size
+                  - draft_players_size = age_group.team_members.player.draft.size
+                  - waiting_players_size = age_group.active_players.size - age_group.assigned_active_players.size
+                  - title = "#{active_players_size} spelers ingedeeld, #{draft_players_size} in concept, #{waiting_players_size} op de wachtlijst/speelgerechtigd"
                   .badge.badge-light.badge-one-number> title=title
-                    = "#{assigned_players_size} / #{waiting_players_size}"
+                    span
+                      = active_players_size
+                    span.color-gray-500
+                      =<> "/"
+                    span.text-warning
+                      = draft_players_size
+                    span.color-gray-500
+                      =<> "/"
+                    span.color-green
+                      = waiting_players_size
