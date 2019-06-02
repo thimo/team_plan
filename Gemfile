@@ -36,7 +36,7 @@ gem "devise",                     "~> 4.6"
 gem "enum_help",                  "~> 0.0.17"
 gem "figaro",                     "~> 1.1.1"
 gem "net-ssh",                    "~> 4.1.0"
-gem "rails-settings-cached"
+gem "rails-settings-cached",      "~> 0.7.2"
 
 gem "awesome_print", require: "awesome_print"
 gem "paper_trail"
@@ -101,6 +101,7 @@ group :development do
   gem "reek"
   gem "rubocop"
   gem "rubocop-performance"
+  gem "rubocop-rails"
   gem "ruby-debug-ide"
 end
 
