@@ -6,7 +6,8 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    @record.archived? || @record.active? ||
+      @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
   end
 
   def create?
