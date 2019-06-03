@@ -34,6 +34,7 @@ export default class extends Controller {
             // display: this.data.get("xaxeslegend") != "false"
           }],
           yAxes: [{
+            stacked: this.data.get("stacked") == "true",
             beginAtZero: true,
           }],
         },

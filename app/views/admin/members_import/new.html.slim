@@ -1,11 +1,30 @@
 - provide(:title, "Importeer leden")
+- current_encoding = Tenant.setting("sportlink.members.encoding")
 
 .card.card-body
   p
-    | Selecteer een CSV bestand. De waarden moeten zijn gescheiden met komma's, de eerste regel bevat de namen van de kolommen
+    | Selecteer een CSV bestand zoals geëxporteerd vanuit Sportlink. De waarden moeten zijn gescheiden met komma's, de eerste regel bevat de namen van de kolommen.
 
-  = bootstrap_form_with url: admin_members_import_index_path, multipart: true, method: :post do
+  p
+    | Lees de
+    =<> link_to "/pdf/ESA_TeamPlan_Handleiding_update_ledenbestand.pdf", target: "_blank" do
+      i.fa-book.mr-1[class=fa_class]
+      | handleiding
+    | voor meer informatie.
+
+  = bootstrap_form_with url: admin_members_import_index_path,
+                        multipart: true,
+                        method: :post,
+                        layout: :horizontal,
+                        label_col: "col-sm-3",
+                        control_col: "col-sm-9" do |f|
     div.my-1
-      = file_field_tag :file
+      = f.file_field :file
+
+    = f.form_group :encoding, label: { text: "Encoding" },
+                              help: "Onder Windows exporteert Sportlink in ISO 8859-1. Controleer de juiste encoding door na de import op zoek te gaan naar speciale karakters (é, ë, ø) in namen van leden." do
+      = f.radio_button :encoding, "utf-8", label: "UTF-8 (voor macOS)", checked: current_encoding != "iso-8859-1"
+      = f.radio_button :encoding, "iso-8859-1", label: "ISO 8859-1 (beste keuze voor Windows)", checked: current_encoding == "iso-8859-1"
+
     div.mt-4
       = submit_tag "Importeren", class: "btn btn-primary"
