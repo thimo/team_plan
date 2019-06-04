@@ -37,13 +37,14 @@ header.app-header.navbar
           = link_to edit_registration_path(current_user), class: "dropdown-item"
             i.fa-user.font-icon[class=fa_class]
             | Aanpassen
-          = link_to destroy_user_session_path,  method: :delete, class: "dropdown-item"
-            i.fa-sign-out.font-icon[class=fa_class]
-            | Uitloggen
           - if current_user != true_user
             = link_to stop_impersonating_users_path, method: :post, class: "dropdown-item"
               i.fa-sign-in.font-icon[class=fa_class]
               | Terug naar admin
+          - else
+            = link_to destroy_user_session_path,  method: :delete, class: "dropdown-item"
+              i.fa-sign-out.font-icon[class=fa_class]
+              | Uitloggen
           .dropdown-header.text-center
             strong
               | Overig
