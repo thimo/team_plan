@@ -5,3 +5,13 @@
     }
   }
 }
+
+.nav-tabs {
+  border-bottom: 0;
+}
+
+.nav-tabs-scroll {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}

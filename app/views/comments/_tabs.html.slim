@@ -3,7 +3,7 @@
 - allow_create = policy(Comment.new(commentable: parent)).create?
 
 section
-  ul.nav.nav-tabs[role="tablist"]
+  ul.nav.nav-tabs.nav-tabs-scroll[role="tablist"]
     - comment_types_for(parent).each do |comment_type, comment_type_id|
       - is_active = comment_type == active_tab
       li.nav-item
