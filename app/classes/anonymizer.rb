@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Anonymizer
+  CLUB_NAME = "FC Demo"
+
   def self.convert_for_demo
     raise "This method may only be run in the demo environment" if Rails.env != "demo"
 
@@ -34,10 +36,8 @@ class Anonymizer
           Tenant.set_setting("application.favicon_url",
                              "https://s3.eu-central-1.amazonaws.com/teamplan/demo/favicon.ico")
           Tenant.set_setting("application.email", "thimo@teamplanpro.nl")
-          club_name = "FC Demo"
-          Tenant.set_setting("club.name", club_name)
-          old_club_name = Tenant.setting("club.name_short")
-          Tenant.set_setting("club.name_short", club_name)
+          Tenant.set_setting("club.name", CLUB_NAME)
+          Tenant.set_setting("club.name_short", CLUB_NAME)
           Tenant.set_setting("club.website", "https://www.teamplanpro.nl/")
           Tenant.set_setting("club.sportscenter", "Sportcentrum Demorijk")
           street = Faker::Address.street_name
@@ -50,27 +50,31 @@ class Anonymizer
       end
 
       def update_matches(old_club_name)
-        Match.all.each do |match|
-          match.thuisteam = match.thuisteam.sub(/^#{old_club_name} /, "#{club_name} ")
-          match.uitteam = match.uitteam.sub(/^#{old_club_name} /, "#{club_name} ")
-          if match.wedstrijd.present?
-            match.wedstrijd = match.wedstrijd.sub(/^#{old_club_name} /, "#{club_name} ")
-            match.wedstrijd = match.wedstrijd.sub(/- #{old_club_name} /, "- #{club_name} ")
-          end
+        ActsAsTenant.with_tenant(demo_tenant) do
+          Match.all.each do |match|
+            match.thuisteam = match.thuisteam.sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
+            match.uitteam = match.uitteam.sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
+            if match.wedstrijd.present?
+              match.wedstrijd = match.wedstrijd.sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
+              match.wedstrijd = match.wedstrijd.sub(/- #{old_club_name} /, "- #{CLUB_NAME} ")
+            end
 
-          match.save if match.changed?
+            match.save if match.changed?
+          end
         end
       end
 
       def update_competitions(old_club_name)
-        Competition.all.each do |competition|
-          next if competition.ranking.blank? || !competition.ranking.is_a?(Array)
+        ActsAsTenant.with_tenant(demo_tenant) do
+          Competition.all.each do |competition|
+            next if competition.ranking.blank? || !competition.ranking.is_a?(Array)
 
-          competition.ranking.each do |ranking|
-            ranking["teamnaam"] = ranking["teamnaam"].sub(/^#{old_club_name} /, "#{club_name} ")
+            competition.ranking.each do |ranking|
+              ranking["teamnaam"] = ranking["teamnaam"].sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
+            end
+
+            competition.save if competition.changed?
           end
-
-          competition.save if competition.changed?
         end
       end
 
