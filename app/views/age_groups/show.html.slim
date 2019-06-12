@@ -23,7 +23,7 @@
   = render "shared/favorite", parent: @age_group, styleClass: "btn"
 
 .row
-  .col-xl-6
+  .col-lg-6
     .card
       .card-header
         | Teams
@@ -90,7 +90,7 @@
                   | #{l date, format: :weekday} #{l date, format: :date_long}
               = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
-  .col-xl-6
+  .col-lg-6
     = render "age_groups/member_groups"
 
     - if policy(@age_group).show_available_members?
