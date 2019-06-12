@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class Anonymizer
-  CLUB_NAME = "FC Demo"
+  OLD_CLUB_NAME = "ESA"
+  NEW_CLUB_NAME = "FC Demo"
 
   def self.convert_for_demo
     raise "This method may only be run in the demo environment" if Rails.env != "demo"
 
     convert_demo_tenant
-    old_club_name = Tenant.setting("club.name_short")
     update_settings
-    update_matches(old_club_name)
-    update_competitions(old_club_name)
+    update_matches
+    update_competitions
     convert_members
   end
 
@@ -36,8 +36,8 @@ class Anonymizer
           Tenant.set_setting("application.favicon_url",
                              "https://s3.eu-central-1.amazonaws.com/teamplan/demo/favicon.ico")
           Tenant.set_setting("application.email", "thimo@teamplanpro.nl")
-          Tenant.set_setting("club.name", CLUB_NAME)
-          Tenant.set_setting("club.name_short", CLUB_NAME)
+          Tenant.set_setting("club.name", NEW_CLUB_NAME)
+          Tenant.set_setting("club.name_short", NEW_CLUB_NAME)
           Tenant.set_setting("club.website", "https://www.teamplanpro.nl/")
           Tenant.set_setting("club.sportscenter", "Sportcentrum Demorijk")
           street = Faker::Address.street_name
@@ -49,14 +49,14 @@ class Anonymizer
         end
       end
 
-      def update_matches(old_club_name)
+      def update_matches
         ActsAsTenant.with_tenant(demo_tenant) do
           Match.all.each do |match|
-            match.thuisteam = match.thuisteam.sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
-            match.uitteam = match.uitteam.sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
+            match.thuisteam = match.thuisteam.sub(/^#{OLD_CLUB_NAME} /, "#{NEW_CLUB_NAME} ")
+            match.uitteam = match.uitteam.sub(/^#{OLD_CLUB_NAME} /, "#{NEW_CLUB_NAME} ")
             if match.wedstrijd.present?
-              match.wedstrijd = match.wedstrijd.sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
-              match.wedstrijd = match.wedstrijd.sub(/- #{old_club_name} /, "- #{CLUB_NAME} ")
+              match.wedstrijd = match.wedstrijd.sub(/^#{OLD_CLUB_NAME} /, "#{NEW_CLUB_NAME} ")
+              match.wedstrijd = match.wedstrijd.sub(/- #{OLD_CLUB_NAME} /, "- #{NEW_CLUB_NAME} ")
             end
 
             match.save if match.changed?
@@ -64,13 +64,13 @@ class Anonymizer
         end
       end
 
-      def update_competitions(old_club_name)
+      def update_competitions
         ActsAsTenant.with_tenant(demo_tenant) do
           Competition.all.each do |competition|
             next if competition.ranking.blank? || !competition.ranking.is_a?(Array)
 
             competition.ranking.each do |ranking|
-              ranking["teamnaam"] = ranking["teamnaam"].sub(/^#{old_club_name} /, "#{CLUB_NAME} ")
+              ranking["teamnaam"] = ranking["teamnaam"].sub(/^#{OLD_CLUB_NAME} /, "#{NEW_CLUB_NAME} ")
             end
 
             competition.save if competition.changed?
