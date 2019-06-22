@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     end
 
     def track_action
-      ahoy.track request.fullpath, ahoy_request_params
+      ahoy.track(request.fullpath, ahoy_request_params) if current_tenant.present?
     end
 
     def ahoy_request_params
