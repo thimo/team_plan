@@ -116,3 +116,5 @@
 
     - if policy(@age_group).show_todos? && (@todos_active.present? || @todos_defered.present?)
       = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_age_group_todo_path(@age_group)
+
+= render "shared/versions", parent: @age_group

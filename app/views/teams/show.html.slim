@@ -59,3 +59,5 @@ section
     = render "teams/tab_calendar"     if @active_tab == 'calendar'
     = render "teams/tab_dossier"      if @active_tab == 'dossier' && policy(@team).show_dossier?
     = render "teams/tab_statistics"   if @active_tab == 'statistics' && policy(@team).show_statistics?
+
+= render "shared/versions", parent: @team

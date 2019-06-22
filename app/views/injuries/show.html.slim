@@ -30,3 +30,5 @@
   .col-xl-6
     - if policy(@injury).show_comments?
       = render "comments/tabs", parent: @injury
+
+= render "shared/versions", parent: @injury

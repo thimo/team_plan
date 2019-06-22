@@ -1,0 +1,17 @@
+- if current_user.admin?
+  table.table.align-top.mt-3
+    thead
+      tr
+        th
+          | Gebruiker
+        th
+    tbody
+      - parent.versions.reverse_each do |version|
+        tr
+          td
+            = User.find(version.whodunnit).name if version.whodunnit?
+            div.small
+              = "#{l(version.created_at, format: :date_time_short)}, #{version.event}"
+          td.small
+            pre
+              = JSON.pretty_generate(version.changeset) if version.changeset.present?

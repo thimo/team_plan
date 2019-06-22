@@ -20,3 +20,5 @@
   .card-body
     .comment-row-item.no-photo
       = @note.body.html_safe
+
+= render "shared/versions", parent: @note
