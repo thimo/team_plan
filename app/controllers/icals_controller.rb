@@ -2,13 +2,15 @@
 
 class IcalsController < ApplicationController
   require "icalendar/tzinfo"
+  skip_before_action :track_ahoy_visit
+  skip_after_action :track_ahoy_action
 
   def show
     skip_authorization
 
     team = Team.active.find_by(uuid: params[:id])
     return render plain: "" if team.nil?
-    # user = User.active.find_by(uuid: params[:check])
+
     user = User.find_by(uuid: params[:check])
     return render plain: "" if user.nil?
 
@@ -41,18 +43,4 @@ class IcalsController < ApplicationController
       end
     end
   end
-
-  # # app/models/ical.rb
-  # class Ical < Icalendar::Calendar
-  #   def initialize(events)
-  #     super()
-  #     events.each do |myevent|
-  #       event = Icalendar::Event.new
-  #       event.dtstart = myevent.event_date
-  #       event.summary = myevent.name
-  #       add_event(event)
-  #     end
-  #     publish
-  #   end
-  # end
 end

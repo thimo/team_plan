@@ -10,9 +10,10 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :default_breadcrumb
   before_action :set_paper_trail_whodunnit
+
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
-  after_action :track_action
+  after_action :track_ahoy_action
 
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied
@@ -45,7 +46,7 @@ class ApplicationController < ActionController::Base
       request.referer || root_path
     end
 
-    def track_action
+    def track_ahoy_action
       ahoy.track(request.fullpath, ahoy_request_params) if current_tenant.present?
     end
 
