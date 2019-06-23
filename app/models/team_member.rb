@@ -79,7 +79,7 @@ class TeamMember < ApplicationRecord
   end
 
   def deactivate(user: nil)
-    if active?
+    if save_for_archive?
       # TODO: send notification to member administration
       self.status = TeamMember.statuses[:archived]
       self.ended_on = Time.zone.today
@@ -109,5 +109,14 @@ class TeamMember < ApplicationRecord
       team_member.field_positions.each do |field_position|
         field_positions << field_position
       end
+    end
+
+    def save_for_archive?
+      # Only keep a team member as 'archived' if its and all parent's statusses are active and the season has started
+      active? &&
+        team.active? &&
+        team.age_group.active? &&
+        team.age_group.season.active? &&
+        team.age_group.season.started_on.beginning_of_day.past?
     end
 end
