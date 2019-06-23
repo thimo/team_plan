@@ -4,7 +4,7 @@
       .card-header
         = group.name
         .card-header-actions
-          - if policy(@age_group).modify_members?
+          - if policy(@age_group).modify_members? & @age_group.group_members.blank?
             = link_to new_age_group_group_member_path(@age_group, group_id: group), title: "#{group.name} toevoegen", class: "card-header-action"
               i.fa-plus-square[class=fa_class]
 
@@ -27,4 +27,4 @@
                         i.fa-trash-alt[class=fa_class]
         - else
           .p-3
-            i Geen #{group.name.downcase} gevonden
+            i Er is nog geen #{group.name.downcase} geselecteerd
