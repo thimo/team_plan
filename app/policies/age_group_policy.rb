@@ -67,7 +67,7 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def set_status?
-    return false if @record.new_record? || @record.season.archived?
+    return false if @record.new_record? || !@record.season.active?
 
     @user.admin?
   end
