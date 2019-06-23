@@ -102,4 +102,8 @@ module TeamsHelper
     teams_array.unshift(["", ""]) if include_blank
     options_for_select(teams_array, default)
   end
+
+  def team_name_help(team)
+    "Let op: dit team is gekoppeld aan het KNVB team \"#{team.club_data_team.teamnaam}\"" if team.club_data_team.present?
+  end
 end
