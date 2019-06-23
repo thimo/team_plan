@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   impersonates :user
 
-  before_action :set_locale
+  # before_action :set_locale
   before_action :default_breadcrumb
   before_action :set_paper_trail_whodunnit
 
@@ -32,9 +32,9 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
 
-    def set_locale
-      I18n.locale = params[:locale] if params[:locale].present?
-    end
+    # def set_locale
+    #   I18n.locale = params[:locale] if params[:locale].present?
+    # end
 
     def default_breadcrumb
       return if devise_controller? || self.class == DashboardsController
