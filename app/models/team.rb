@@ -3,7 +3,7 @@
 class Team < ApplicationRecord
   include Statussable
 
-  DIVISION_OPTIONS = %w[1e\ divisie 2e\ divisie 3e\ divisie 4e\ divisie Hoofdklasse 1e\ klasse 2e\ klasse 
+  DIVISION_OPTIONS = %w[1e\ divisie 2e\ divisie 3e\ divisie 4e\ divisie Hoofdklasse 1e\ klasse 2e\ klasse
                         3e\ klasse 4e\ klasse 5e\ klasse 6e\ klasse].freeze
 
   acts_as_tenant :tenant
@@ -39,6 +39,10 @@ class Team < ApplicationRecord
   scope :active_or_archived, -> { where(status: [Team.statuses[:archived], Team.statuses[:active]]) }
   scope :by_teamcode, ->(teamcode) { joins(:club_data_team).where(club_data_teams: { teamcode: teamcode }) }
   scope :by_status, ->(status) { where(status: status) }
+
+  def name=(value)
+    self[:name] = value.upcase
+  end
 
   def favorite?(user)
     !favorites.where(user: user).empty?
