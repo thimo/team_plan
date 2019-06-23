@@ -96,7 +96,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def set_status?
-    return false if @record.new_record? || @record.age_group.archived?
+    return false if @record.new_record? || !@record.age_group.active?
 
     @user.admin? || @user.role?(Role::TEAM_SET_STATUS, @record)
   end
