@@ -15,16 +15,21 @@ li.nav-item
     = link_to cancellations_dashboards_path, class: "nav-link #{'active' if current_page?(cancellations_dashboards_path)}"
       i.fa-fw.fa-ban.nav-icon.color-red[class=fa_class]
       | Afgelastingen (#{size})
-- if (season = policy_scope(Season).active.last).present?
-  li.nav-item
-    = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
-      i.fa-fw.fa-users.nav-icon[class=fa_class]
-      | Teams
-- if (season = policy_scope(Season).draft.last).present?
-  li.nav-item
-    = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
-      i.fa-fw.fa-calendar-alt.nav-icon[class=fa_class]
-      | #{season.name}
+- if (seasons = policy_scope(Season).active).size.positive?
+  - seasons.each_with_index do |season, index|
+    li.nav-item
+      = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
+        i.fa-fw.fa-users.nav-icon[class=fa_class]
+        - if index.zero?
+          | Teams
+        - else
+          | #{season.name}
+- if (seasons = policy_scope(Season).draft).size.positive?
+  - seasons.each do |season|
+    li.nav-item
+      = link_to season, class: "nav-link #{'active' if current_page?(season_path(season))}"
+        i.fa-fw.fa-calendar-alt.nav-icon[class=fa_class]
+        | #{season.name}
 - if policy(Season).index?
   li.nav-item
     = link_to seasons_path, class: "nav-link #{'active' if current_page?(seasons_path)}"
