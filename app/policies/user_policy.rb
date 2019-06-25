@@ -14,11 +14,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    @user.role?(Role::USER_EDIT)
   end
 
   def destroy?
-    create? && @record.persisted?
+    update? && @record.persisted?
   end
 
   def update_settings?
@@ -26,7 +26,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def resend_password?
-    @record.persisted? && create?
+    @record.persisted? && update?
   end
 
   def impersonate?
