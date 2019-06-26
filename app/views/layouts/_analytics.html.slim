@@ -1,0 +1,19 @@
+- if true || Rails.env.production? && tracking_id = Tenant.setting('google.analytics.tracking-id').present?
+  script async=true src="https://www.googletagmanager.com/gtag/js?id=#{tracking_id}"
+  script
+    | window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      user_id = '#{current_user&.uuid}';
+      if (!!user_id) {
+        gtag('set', {'user_id': user_id})
+      }
+      gtag('config', '#{tracking_id}');
+
+      document.addEventListener('turbolinks:load', event => {
+        if (typeof gtag === 'function') {
+          gtag('config', '#{tracking_id}', {
+            'page_location': event.data.url
+          });
+        }
+      });
