@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
 
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
-  after_action :track_ahoy_action
 
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied
@@ -44,22 +43,5 @@ class ApplicationController < ActionController::Base
 
     def back_url
       request.referer || root_path
-    end
-
-    def track_ahoy_action
-      ahoy.track(request.fullpath, ahoy_request_params) if current_tenant.present?
-    end
-
-    def ahoy_request_params
-      {
-        original_url: request.original_url,
-        path: request.path,
-        fullpath: request.fullpath,
-        method: request.method,
-        query_parameters: request.query_parameters,
-        request_parameters: request.request_parameters
-      }
-        .merge(request.path_parameters)
-        .delete_if { |k, v| v.empty? }
     end
 end

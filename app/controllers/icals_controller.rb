@@ -2,8 +2,6 @@
 
 class IcalsController < ApplicationController
   require "icalendar/tzinfo"
-  skip_before_action :track_ahoy_visit
-  skip_after_action :track_ahoy_action
 
   def show
     skip_authorization
