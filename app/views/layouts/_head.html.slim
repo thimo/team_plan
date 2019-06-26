@@ -18,3 +18,21 @@ head
 
   / Use 'defer' here as with 'async' 'turbolinks:load' is not called
   = javascript_pack_tag 'application', defer: true
+
+  - if Rails.env.production? && tracking_id = Tenant.setting('google.analytics.tracking-id').present?
+    script async=true src="https://www.googletagmanager.com/gtag/js?id=#{tracking_id}"
+    script
+      | console.log("init gtag")
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '#{tracking_id}');
+
+        document.addEventListener('turbolinks:load', event => {
+          console.log("call gtag")
+          if (typeof gtag === 'function') {
+            gtag('config', '#{tracking_id}', {
+              'page_location': event.data.url
+            });
+          }
+        });

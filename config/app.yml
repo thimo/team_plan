@@ -32,6 +32,7 @@ defaults: &defaults
   fontawesome.integrity:
   google.maps.base_url: https://www.google.com/maps/embed/v1/
   google.maps.api-key:
+  google.analytics.tracking-id:
   sportlink.members.encoding: utf-8
 
 development:
