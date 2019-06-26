@@ -69,7 +69,7 @@ class AgeGroupPolicy < ApplicationPolicy
   def set_status?
     return false if @record.new_record? || !@record.season.active?
 
-    @user.admin?
+    @user.admin? || @user.role?(Role::AGE_GROUP_SET_STATUS, @record)
   end
 
   def team_actions?

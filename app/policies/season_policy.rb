@@ -30,7 +30,7 @@ class SeasonPolicy < ApplicationPolicy
   def set_status?
     return false if @record.new_record?
 
-    @user.admin?
+    @user.admin? || @user.role?(Role::SEAON_SET_STATUS, @record)
   end
 
   def team_actions?
