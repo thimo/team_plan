@@ -4,7 +4,7 @@
       .card-header
         = group.name
         .card-header-actions
-          - if policy(@age_group).modify_members? & @age_group.group_members.blank?
+          - if policy(@age_group).add_members?
             = link_to new_age_group_group_member_path(@age_group, group_id: group), title: "#{group.name} toevoegen", class: "card-header-action"
               i.fa-plus-square[class=fa_class]
 

@@ -89,6 +89,11 @@ class AgeGroupPolicy < ApplicationPolicy
       @record.persisted? && !@record.archived?
   end
 
+  def add_members?
+    # Only admin can add more than 1 group member per AgeGroup
+    modify_members? && (@record.group_members.blank? || @user.admin?)
+  end
+
   def permitted_attributes
     attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half]
     attributes << :status if set_status?
