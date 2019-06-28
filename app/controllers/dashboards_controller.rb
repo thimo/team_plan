@@ -65,6 +65,6 @@ class DashboardsController < ApplicationController
   private
 
     def set_season
-      @season = policy_scope(Season).active.last
+      @season = policy_scope(Season).active.first
     end
 end
