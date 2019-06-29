@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_180337) do
+ActiveRecord::Schema.define(version: 2019_06_29_183634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -566,6 +566,7 @@ ActiveRecord::Schema.define(version: 2019_06_29_180337) do
     t.string "sportlink_members_encoding", default: "utf-8"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_import_members"
     t.index ["tenant_id"], name: "index_tenant_settings_on_tenant_id"
   end
 
