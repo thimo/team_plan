@@ -4,6 +4,13 @@ class Tenant < ApplicationRecord
   include RailsSettings::Extend
   include Statussable
 
+  has_one :tenant_setting, dependent: :destroy
+
+  def settings
+    # Auto-create tenant_setting
+    tenant_setting || create_tenant_setting
+  end
+
   def self.from_request(request)
     host_parts = request.host.split(".")
     domain = host_parts.last(2).join(".")
