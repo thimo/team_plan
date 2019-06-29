@@ -11,6 +11,7 @@
           table.table.table-striped.align-top
             tbody
               - parent.versions.reverse_each do |version|
+                - next if version.event == "update" && version.changeset.blank?
                 tr
                   td
                     = User.find(version.whodunnit).name if version.whodunnit?
