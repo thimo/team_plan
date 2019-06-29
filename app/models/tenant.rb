@@ -6,10 +6,11 @@ class Tenant < ApplicationRecord
 
   has_one :tenant_setting, dependent: :destroy
 
-  def settings
-    # Auto-create tenant_setting
-    tenant_setting || create_tenant_setting
-  end
+  # TODO: Enable after cached settings have been removed
+  # def settings
+  #   # Auto-create tenant_setting
+  #   tenant_setting || create_tenant_setting
+  # end
 
   def self.from_request(request)
     host_parts = request.host.split(".")
