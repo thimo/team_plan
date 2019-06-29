@@ -1,15 +1,26 @@
 - if current_user.admin?
+  / TODO: Cleanup JS to separate method or Stimulus controller
   section.mt-3
     .card
-      .card-body.p-0
-        table.table.table-striped.align-top
-          tbody
-            - parent.versions.reverse_each do |version|
-              tr
-                td
-                  = User.find(version.whodunnit).name if version.whodunnit?
-                  div.small
-                    = "#{l(version.created_at, format: :date_time_short)}, #{version.event}"
-                td.small
-                  pre
-                    = JSON.pretty_generate(version.changeset) if version.changeset.present?
+      - if cookies[:expand_versions] == "true"
+        .card-header
+          a href="#" onclick="document.cookie = 'expand_versions=false'; document.location.reload(); return false;"
+            i.fa.fa-chevron-down.mr-2
+            | Versies
+        .card-body.p-0
+          table.table.table-striped.align-top
+            tbody
+              - parent.versions.reverse_each do |version|
+                tr
+                  td
+                    = User.find(version.whodunnit).name if version.whodunnit?
+                    div.small
+                      = "#{l(version.created_at, format: :date_time_short)}, #{version.event}"
+                  td.small
+                    pre
+                      = JSON.pretty_generate(version.changeset) if version.changeset.present?
+      - else
+        .card-header
+          a href="#" onclick="document.cookie = 'expand_versions=true'; document.location.reload(); return false;"
+            i.fa.fa-chevron-right.mr-2
+            | Versies
