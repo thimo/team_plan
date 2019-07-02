@@ -130,8 +130,6 @@ Rails.application.routes.draw do
       resources :members_import, only: [:new, :create]
       resources :email_logs, only: [:index, :show]
       resources :version_updates
-      resources :settings,
-                constraints: { id: /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
       namespace :knvb do
         resources :dashboards
         resources :club_data_teams

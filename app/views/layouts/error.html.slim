@@ -8,9 +8,9 @@ html lang="nl"
         .row.justify-content-center
           .col-md-8.col-lg-6.col-xl-5
             .header
-              - if Tenant.setting("club.logo_url").present?
-                img.club-logo src="#{Tenant.setting("club.logo_url")}" alt=Tenant.setting("club.name")
-              img.app-logo src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application.name")
+              - if Tenant.setting("club_logo_url").present?
+                img.club-logo src="#{Tenant.setting("club_logo_url")}" alt=Tenant.setting("club_name")
+              img.app-logo src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application_name")
 
             .card.p-3
               .card-body

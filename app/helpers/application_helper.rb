@@ -3,7 +3,7 @@
 module ApplicationHelper
   # Returns the full title on a per-page basis.
   def full_title(page_title = "")
-    base_title = "#{Tenant.setting('application.name')} · #{Tenant.setting('club.name')}"
+    base_title = "#{Tenant.setting('application_name')} · #{Tenant.setting('club_name')}"
     if page_title.empty?
       base_title
     else
@@ -77,6 +77,6 @@ module ApplicationHelper
   end
 
   def fa_class
-    @fa_class ||= Tenant.setting("fontawesome.integrity").present? ? "far" : "fa"
+    @fa_class ||= Tenant.setting("fontawesome_integrity").present? ? "far" : "fa"
   end
 end

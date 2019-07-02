@@ -135,10 +135,10 @@
 - if current_user.has_member?(member)
   .alert.alert-info.mb-4
     | Kloppen je gegevens niet of wil je bijvoorbeeld een e-mailadres toevoegen?
-    - if (email = Tenant.setting("club.member_administration.email")).present?
+    - if (email = Tenant.setting("club_member_administration_email")).present?
       |  Stuur dan een mailtje naar <a href="mailto:#{email}">#{email}</a>.
     - else
-      |  Neem dan contact op met de ledenadministratie van #{Tenant.setting("club.name_short")}.
+      |  Neem dan contact op met de ledenadministratie van #{Tenant.setting("club_name_short")}.
 
 .card
   .card-header
