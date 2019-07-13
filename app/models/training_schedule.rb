@@ -22,10 +22,13 @@ class TrainingSchedule < ApplicationRecord
   scope :asc, -> { order(:day) }
 
   def update_trainings
-    # Don't create trainings if training schedule was archived or if season has no end date
-    return if !active? || team.age_group.season.ended_on.nil?
+    # Don't create trainings if training schedule was archived or has no end date
+    return if !active? || started_on.nil? || ended_on.nil?
 
-    if trainings.any?
+    # Remove future trainings of start/end date changed
+    trainings.from_now.destroy_all if saved_change_to_started_on? || saved_change_to_ended_on?
+
+    if trainings.from_now.any?
       # Update existing trainings
       trainings.from_now.each do |training|
         if saved_change_to_day?
@@ -44,7 +47,7 @@ class TrainingSchedule < ApplicationRecord
     else
       # Create new trainings
       training_day = next_training_day
-      while training_day <= team.age_group.season.ended_on
+      while training_day <= ended_on
         started_at = training_day.change(hour: start_time.hour, min: start_time.min)
         ended_at = training_day.change(hour: end_time.hour, min: end_time.min)
 
@@ -79,8 +82,10 @@ class TrainingSchedule < ApplicationRecord
     end
 
     def next_training_day
-      training_day = Time.zone.now.beginning_of_week + day_number.days
-      training_day += 7.days if training_day.end_of_day <= Time.zone.today.end_of_day
-      training_day
+      next_wday([started_on.beginning_of_day, Time.zone.now].max, day_number)
+    end
+
+    def next_wday(date, wday)
+      wday >= date.wday ? date + (wday - date.wday) : date.next_week.next_day(wday)
     end
 end

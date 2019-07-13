@@ -28,14 +28,17 @@ section
           | Tijd
         .col-9
           = "Van #{l @training_schedule.start_time, format: :time_short} tot #{l @training_schedule.end_time, format: :time_short} uur"
+      .row
         .col-3
           | Aanwezig
         .col-9
           = @training_schedule.present_minutes_i18n
+      .row
         .col-3
           | Veld
         .col-9
           = "#{@training_schedule.soccer_field.name} #{@training_schedule.field_part_i18n}"
+      .row
         .col-3
           | Trainer
         .col-9
@@ -45,8 +48,15 @@ section
           - if @training_schedule.cios
             div
               | CIOS
+      .row
         .col-3
         .col-9
+      hr
+        .row
+          .col-3
+            | Inplannen trainingen
+          .col-9
+            | Van #{l @training_schedule.started_on, format: :date_long} t/m #{l @training_schedule.ended_on, format: :date_long}.
 
 
     - if @presences.present? && policy(@presences.first).update?

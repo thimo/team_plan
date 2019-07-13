@@ -56,18 +56,20 @@ class TrainingSchedulesController < ApplicationController
                              TrainingSchedule.new(training_schedule_params)
                            end
       @training_schedule.team = @team
+      check_and_set_dates @training_schedule
 
       authorize @training_schedule
     end
 
     def set_training_schedule
       @training_schedule = TrainingSchedule.find(params[:id])
+      check_and_set_dates @training_schedule
       authorize @training_schedule
     end
 
     def training_schedule_params
       params.require(:training_schedule).permit(:day, :present_minutes, :start_time, :end_time, :soccer_field_id,
-                                                :field_part, :cios, team_member_ids: [])
+                                                :field_part, :cios, :started_on, :ended_on, team_member_ids: [])
     end
 
     def add_breadcrumbs
@@ -79,5 +81,10 @@ class TrainingSchedulesController < ApplicationController
       else
         add_breadcrumb @training_schedule.day_i18n, @training_schedule
       end
+    end
+
+    def check_and_set_dates(training_schedule)
+      training_schedule.started_on ||= training_schedule.team.age_group.season.started_on
+      training_schedule.ended_on ||= training_schedule.team.age_group.season.ended_on
     end
 end

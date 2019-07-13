@@ -162,6 +162,8 @@ nl:
         field_part: Deel van het veld
         team_member_ids: Trainer
         cios: CIOS
+        started_on: Vanaf
+        ended_on: Tot en met
       training:
         started_at: Datum
         start_time: Aanvang
