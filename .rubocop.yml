@@ -1,11 +1,12 @@
-require: rubocop-performance
-require: rubocop-rails
+require:
+  - rubocop-performance
+  - rubocop-rails
 
 Rails:
   Enabled: true
 
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
 
 Style/Documentation:
 
