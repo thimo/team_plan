@@ -5,7 +5,7 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      @members = policy_scope(Member).asc.filter(params.slice(:query))
+      @members = policy_scope(Member).asc.filter_results(params.slice(:query))
       @members = params[:inactive] ? @members.inactive : @members.active
       @members = @members.page(params[:page]).per(50)
       authorize @members
