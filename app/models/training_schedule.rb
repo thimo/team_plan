@@ -48,7 +48,7 @@ class TrainingSchedule < ApplicationRecord
         started_at = training_day.change(hour: start_time.hour, min: start_time.min)
         ended_at = training_day.change(hour: end_time.hour, min: end_time.min)
 
-        unless has_training_this_week?(started_at)
+        unless training_this_week?(started_at)
           Training.create(
             training_schedule: self,
             team: team,
@@ -66,9 +66,15 @@ class TrainingSchedule < ApplicationRecord
     TrainingSchedule.days[day]
   end
 
+  def deactivate
+    super
+
+    trainings.from_now.destroy_all
+  end
+
   private
 
-    def has_training_this_week?(started_at)
+    def training_this_week?(started_at)
       trainings.this_week(started_at).present?
     end
 
