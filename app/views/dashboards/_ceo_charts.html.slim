@@ -35,7 +35,7 @@
                 small.text-muted.text-uppercase.font-weight-bold.pl-2
                   | Leden
 
-        - (season = Season.active_season_for_today).present?
+        - if (season = Season.active_season_for_today).present?
           .col-6.col-md-12
             .card.text-white.bg-success.mb-2
               .card-body.py-2
