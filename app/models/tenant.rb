@@ -21,12 +21,21 @@ class Tenant < ApplicationRecord
   end
 
   def self.setting(name)
-    name.gsub!(/[-\.]/, "_")
-    ActsAsTenant.current_tenant.tenant_setting.send(name)
+    ActsAsTenant.current_tenant.tenant_setting.send(clean_up(name))
   end
 
   def self.set_setting(name, value)
-    name.gsub!(/[-\.]/, "_")
-    ActsAsTenant.current_tenant.tenant_setting.update(name => value)
+    ActsAsTenant.current_tenant.tenant_setting.update(clean_up(name) => value)
+  end
+
+  ##
+  # Private class methods, should be called with tenant context
+  #
+  class << self
+    private
+
+      def clean_up(name)
+        name.gsub(/[-\.]/, "_")
+      end
   end
 end
