@@ -17,8 +17,8 @@ class ClubDataTeam < ApplicationRecord
   def link_to_team
     return if teams.for_active_season.present?
 
-    teamname_without_club = teamnaam.gsub(Tenant.setting("club.name"), "")
-                                    .gsub(Tenant.setting("club.name_short"), "")
+    teamname_without_club = teamnaam.gsub(Tenant.setting("club_name"), "")
+                                    .gsub(Tenant.setting("club_name_short"), "")
                                     .strip
 
     team = Team.for_active_season.active.find_by(name: [teamnaam, teamname_without_club])
@@ -31,9 +31,6 @@ class ClubDataTeam < ApplicationRecord
       team = Team.for_active_season.active.find_by(name: teamname_without_club.gsub!(/[GM]$/, ""))
     end
 
-    if team&.no_club_data_link?
-      team.club_data_team = self
-      team.save
-    end
+    team.update(club_data_team: self) if team&.no_club_data_link?
   end
 end

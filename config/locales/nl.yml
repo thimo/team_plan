@@ -148,6 +148,41 @@ nl:
         prefered_foot: Links-/rechtsbenig
         status: Status
         initial_status: Activeren
+      tenant_setting:
+        application_name: Naam
+        application_hostname: Domeinnaam
+        application_email: Contact e-mail
+        application_contact_name: Contactnaam
+        application_maintenance: Toon melding dat applicatie in onderhoud is
+        application_favicon_url: Favicon URL
+        application_sysadmin_email: Systeembeheerder e-mail
+        club_name: Naam, volledig
+        club_name_short: Naam, afgekort
+        club_website: Website
+        club_sportscenter: Sportcentrum
+        club_address: Adres
+        club_zip: Postcode
+        club_city: Stad
+        club_phone: Telefoon
+        club_relatiecode: Relatiecode (KNVB)
+        club_logo_url: Logo URL
+        club_member_administration_email: Ledenadministratie e-mail
+        clubdata_urls_competities: URL competities
+        clubdata_urls_poulestand: URL stand poule
+        clubdata_urls_poule_programma: URL programma poule
+        clubdata_urls_pouleuitslagen: URL uitslagen poule
+        clubdata_urls_uitslagen: URL uitslagen
+        clubdata_urls_team_indeling: URL teamindeling
+        clubdata_urls_wedstrijd_accommodatie: URL wedstrijdaccomodatie
+        clubdata_urls_afgelastingen: URL afgelastingen
+        clubdata_urls_club_logos: URL club logo's
+        clubdata_client_id: Client ID
+        fontawesome_version: FontAwesome versie
+        fontawesome_integrity: FontAwesome integrity
+        google_maps_base_url: Google Maps basis URL
+        google_maps_api_key: Google Maps API key
+        google_analytics_tracking_id: Google Analytics Tracking ID
+        sportlink_members_encoding: Sportlink export encoding
       todo:
         body: Todo
         started_on: Actief vanaf

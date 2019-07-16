@@ -12,11 +12,11 @@ html
       | Met vriendelijke groet,
 
     p
-      = Tenant.setting('application.contact_name')
+      = Tenant.setting('application_contact_name')
     p
       strong
-        = Tenant.setting('club.name')
+        = Tenant.setting('club_name')
       br
-      = Tenant.setting('club.address')
+      = Tenant.setting('club_address')
       br
-      | #{Tenant.setting('club.zip')} #{Tenant.setting('club.city')}
+      | #{Tenant.setting('club_zip')} #{Tenant.setting('club_city')}

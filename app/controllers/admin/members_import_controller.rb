@@ -20,7 +20,7 @@ module Admin
       end
 
       encoding = params[:encoding] || "utf-8"
-      Tenant.set_setting("sportlink.members.encoding", encoding)
+      Tenant.set_setting("sportlink_members_encoding", encoding)
       @import_result = Member.import(params[:file], encoding)
 
       # After an import with at least one member, cleanup members that were last imported 7 days ago

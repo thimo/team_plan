@@ -267,7 +267,7 @@ class Member < ApplicationRecord
       result[:member_ids] << member.id
     end
 
-    Tenant.set_setting("last_import.members", Time.zone.now)
+    Tenant.set_setting("last_import_members", Time.zone.now)
 
     result
   end
@@ -305,8 +305,8 @@ class Member < ApplicationRecord
     missing = header.select { |h| I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}", default: nil).blank? }
     return if missing.none?
 
-    ActionMailer::Base.mail(from: Tenant.setting("application.email"),
-                            to: Tenant.setting("application.sysadmin.email"),
+    ActionMailer::Base.mail(from: Tenant.setting("application_email"),
+                            to: Tenant.setting("application_sysadmin_email"),
                             subject: "Missing member import headers (#{ActsAsTenant.current_tenant.name})",
                             body: missing.join("\n")).deliver
   end

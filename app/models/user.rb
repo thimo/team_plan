@@ -180,8 +180,8 @@ class User < ApplicationRecord
 
   def inactive_message
     if tenant.draft? || tenant.archived?
-      "#{Tenant.setting('application.name')} is op dit moment niet geactiveerd voor \
-      #{Tenant.setting('club.name_short')}. Probeer het later nog een keer of neem contact op met de beheerder."
+      "#{Tenant.setting('application_name')} is op dit moment niet geactiveerd voor \
+      #{Tenant.setting('club_name_short')}. Probeer het later nog een keer of neem contact op met de beheerder."
     elsif !confirmed?
       "Je e-mailadres is nog niet bevestigd. Klik op de link \
       \"#{I18n.t('devise.shared.links.didn_t_receive_confirmation_instructions')}\" hieronder om een nieuwe \
@@ -189,7 +189,7 @@ class User < ApplicationRecord
     else
       "Met dit account is het helaas niet mogelijk om in te loggen. Ga alsjeblieft zelf na of het e-mailadres dat \
       je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van \
-      #{Tenant.setting('club.name_short')}."
+      #{Tenant.setting('club_name_short')}."
     end
   end
 
