@@ -8,12 +8,12 @@ module Org
 
     def index
       authorize :org
-      redirect_to org_positions_path
+      redirect_to org_members_path
     end
 
     def show
       authorize :org
-      redirect_to org_positions_path
+      redirect_to org_members_path
     end
 
     private

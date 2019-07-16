@@ -19,6 +19,7 @@ class Role < ApplicationRecord
                         MEMBER_SHOW_FULL_BORN_ON MEMBER_SHOW_SPORTLINK_STATUS MEMBER_SHOW_CONDUCT
                         MEMBER_CREATE_EVALUATIONS].freeze
   NOTE_ROLES       = %w[NOTE_SHOW NOTE_CREATE].freeze
+  ORG_ROLES        = %w[ORG_SHOW ORG_MEMBERS_SHOW].freeze
   PLAY_BAN_ROLES   = %w[PLAY_BAN_SHOW].freeze
   SEASON_ROLES     = %w[SEASON_INDEX SEASON_TEAM_ACTIONS SEAON_SET_STATUS].freeze
   STATUS_ROLES     = %w[STATUS_DRAFT].freeze
@@ -32,7 +33,7 @@ class Role < ApplicationRecord
 
   ROLES = BEHEER + DASHBOARD_ROLES + TEAM_ROLES + MEMBER_ROLES + AGE_GROUP_ROLES + SEASON_ROLES + COMMENT_ROLES +
           STATUS_ROLES + TEAM_MEMB_ROLES + PLAY_BAN_ROLES + INJURY_ROLES + TRAINING_ROLES + TRA_SCHED_ROLES +
-          NOTE_ROLES + USER_ROLES
+          NOTE_ROLES + USER_ROLES + ORG_ROLES
   ROLES.each do |role|
     const_set(role.upcase, role.downcase.to_sym)
   end

@@ -1,31 +1,18 @@
 # frozen_string_literal: true
 
 class OrgPolicy < ApplicationPolicy
-  # TODO: change to correct access level
-
   def index?
-    @user.admin?
-  end
-
-  def create?
-    @user.admin?
+    @user.role?(Role::ORG_SHOW)
   end
 
   def show?
-    @user.admin?
-  end
-
-  def update?
-    @user.admin?
-  end
-
-  def destroy?
-    @user.admin? && @record.persisted?
+    index?
   end
 
   class Scope < Scope
     def resolve
       return scope if @user.admin?
+
       scope.none
     end
   end
