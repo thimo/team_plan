@@ -78,9 +78,9 @@ li.nav-title
     = link_to admin_groups_roles_path, class: "nav-link #{'active' if controller.class == Admin::GroupsRolesController}" do
       i.fa-fw.fa-users.nav-icon[class=fa_class]
       | Matrix
-- if policy(:setting).index?
+- if policy(:tenant_setting).update?
   li.nav-item
-    = link_to admin_settings_path, class: "nav-link #{'active' if controller.class == Admin::SettingsController}" do
+    = link_to [:edit, :admin, TenantSetting.first], class: "nav-link #{'active' if controller.class == Admin::TenantSettingsController}" do
       i.fa-fw.fa-sliders-h.nav-icon[class=fa_class]
       | Instellingen
 - if policy(:email_log).index?

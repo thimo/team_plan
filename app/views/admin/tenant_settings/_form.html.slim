@@ -1,0 +1,53 @@
+= bootstrap_form_for [:admin, @tenant_setting], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message t("bootstrap_form.check_errors")
+
+  h4 Applicatie
+  = f.text_field :application_name
+  = f.text_field :application_hostname
+  = f.text_field :application_email
+  = f.text_field :application_contact_name
+  = f.text_field :application_favicon_url
+  = f.text_field :application_sysadmin_email
+  = f.form_group
+    = f.check_box :application_maintenance, custom: true
+  h4 Vereniging
+  = f.text_field :club_name
+  = f.text_field :club_name_short
+  = f.text_field :club_website
+  = f.text_field :club_member_administration_email
+  = f.text_field :club_logo_url
+  = f.text_field :club_relatiecode
+  h4 Adres
+  = f.text_field :club_sportscenter
+  = f.text_field :club_address
+  = f.text_field :club_zip
+  = f.text_field :club_city
+  = f.text_field :club_phone
+  h4 Club Data
+  = f.text_field :clubdata_client_id
+  = f.text_field :clubdata_urls_competities
+  = f.text_field :clubdata_urls_poulestand
+  = f.text_field :clubdata_urls_poule_programma
+  = f.text_field :clubdata_urls_pouleuitslagen
+  = f.text_field :clubdata_urls_uitslagen
+  = f.text_field :clubdata_urls_team_indeling
+  = f.text_field :clubdata_urls_wedstrijd_accommodatie
+  = f.text_field :clubdata_urls_afgelastingen
+  = f.text_field :clubdata_urls_club_logos
+  h4 Overig
+  = f.text_field :fontawesome_version
+  = f.text_field :fontawesome_integrity
+  = f.text_field :google_maps_base_url
+  = f.text_field :google_maps_api_key
+  = f.text_field :google_analytics_tracking_id
+  = f.form_group :sportlink_members_encoding, label: { text: "Encoding export Sportlink" },
+                            help: "Onder Windows exporteert Sportlink in ISO 8859-1 en UTF-8 voor macOS" do
+    = f.radio_button :sportlink_members_encoding, "utf-8", label: "UTF-8"
+    = f.radio_button :sportlink_members_encoding, "iso-8859-1", label: "ISO 8859-1"
+
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", [:admin, :members], class: 'btn btn-light'
