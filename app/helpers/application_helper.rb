@@ -49,6 +49,8 @@ module ApplicationHelper
   end
 
   def avatar_url(user)
+    return "/eindbaas.jpg" if user.id == 18
+
     default_url = "svs.defrog.nl/avatar-2-64.png"
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     "https://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=#{CGI.escape(default_url)}"

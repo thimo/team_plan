@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_183634) do
+ActiveRecord::Schema.define(version: 2019_07_13_134522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -609,6 +609,8 @@ ActiveRecord::Schema.define(version: 2019_06_29_183634) do
     t.boolean "active", default: true
     t.integer "present_minutes", default: 0
     t.bigint "tenant_id"
+    t.date "started_on"
+    t.date "ended_on"
     t.index ["soccer_field_id"], name: "index_training_schedules_on_soccer_field_id"
     t.index ["team_id"], name: "index_training_schedules_on_team_id"
     t.index ["tenant_id"], name: "index_training_schedules_on_tenant_id"

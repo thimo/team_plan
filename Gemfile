@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.5.4"
+ruby "2.6.3"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"

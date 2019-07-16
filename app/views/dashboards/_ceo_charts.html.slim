@@ -35,26 +35,27 @@
                 small.text-muted.text-uppercase.font-weight-bold.pl-2
                   | Leden
 
-        .col-6.col-md-12
-          .card.text-white.bg-success.mb-2
-            .card-body.py-2
-              .d-flex.justify-content-between.align-items-center
-                .text-value
-                  = Season.active_season_for_today.age_groups.active.size
-                small.text-muted.text-uppercase.font-weight-bold.pl-2.text-right
-                  | Groepen
+        - if (season = Season.active_season_for_today).present?
+          .col-6.col-md-12
+            .card.text-white.bg-success.mb-2
+              .card-body.py-2
+                .d-flex.justify-content-between.align-items-center
+                  .text-value
+                    = season.age_groups.active.size
+                  small.text-muted.text-uppercase.font-weight-bold.pl-2.text-right
+                    | Groepen
 
-              .d-flex.justify-content-between.align-items-center
-                .text-value
-                  = Season.active_season_for_today.teams.active.size
-                small.text-muted.text-uppercase.font-weight-bold.pl-2
-                  | Teams
+                .d-flex.justify-content-between.align-items-center
+                  .text-value
+                    = season.teams.active.size
+                  small.text-muted.text-uppercase.font-weight-bold.pl-2
+                    | Teams
 
-              .d-flex.justify-content-between.align-items-center
-                .text-value
-                  = Member.by_season_as_player(Season.active_season_for_today).size
-                small.text-muted.text-uppercase.font-weight-bold.pl-2
-                  | Spelers
+                .d-flex.justify-content-between.align-items-center
+                  .text-value
+                    = Member.by_season_as_player(season).size
+                  small.text-muted.text-uppercase.font-weight-bold.pl-2
+                    | Spelers
 
         .col-6.col-md-12
           .card.text-white.bg-warning.mb-2

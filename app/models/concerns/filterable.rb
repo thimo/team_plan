@@ -2,7 +2,7 @@
 
 # Call scopes directly from your URL params:
 #
-#     @products = Product.filter(params.slice(:status, :location, :starts_with))
+#     @products = Product.filter_results(params.slice(:status, :location, :starts_with))
 module Filterable
   extend ActiveSupport::Concern
 
@@ -11,7 +11,7 @@ module Filterable
     # with their associated values. Most useful for calling named scopes from
     # URL params. Make sure you don't pass stuff directly from the web without
     # whitelisting only the params you care about first!
-    def filter(filtering_params)
+    def filter_results(filtering_params)
       results = where(nil) # create an anonymous scope
       filtering_params.each do |key, value|
         results = results.public_send(key, value) if value.present?

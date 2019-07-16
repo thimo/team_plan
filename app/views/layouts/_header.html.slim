@@ -29,7 +29,7 @@ header.app-header.navbar
     - if user_signed_in?
       li.nav-item.dropdown
         a.nav-link.nav-link[data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"]
-          = image_tag avatar_url(current_user), alt: current_user.email, title: current_user.email, class: "img-avatar"
+          = image_tag avatar_url(current_user), alt: current_user.email, title: current_user.email, class: "img-avatar #{'rounded-0' if current_user.id == 18}"
         .dropdown-menu.dropdown-menu-right
           .dropdown-header.text-center
             strong

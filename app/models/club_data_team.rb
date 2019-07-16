@@ -17,16 +17,20 @@ class ClubDataTeam < ApplicationRecord
   def link_to_team
     return if teams.for_active_season.present?
 
-    stripped_teamname = teamnaam.gsub(Tenant.setting("club_name"), "").gsub(Tenant.setting("club_name_short"), "").strip
+    teamname_without_club = teamnaam.gsub(Tenant.setting("club_name"), "")
+                                    .gsub(Tenant.setting("club_name_short"), "")
+                                    .strip
 
-    team = Team.for_active_season.active.find_by(name: [teamnaam, stripped_teamname])
-    team ||= Team.for_active_season.active.find_by("teams.name like (?) OR teams.name like (?)",
-                                                   "#{teamnaam}%",
-                                                   "#{stripped_teamname}%")
+    team = Team.for_active_season.active.find_by(name: [teamnaam, teamname_without_club])
+    # team ||= Team.for_active_season.active.find_by("teams.name like (?) OR teams.name like (?)",
+    #                                                "#{teamnaam}%",
+    #                                                "#{teamname_without_club}%")
 
-    if team&.no_club_data_link?
-      team.club_data_team = self
-      team.save
+    # Find with stripped G or M at end of teamname
+    if team.nil? && teamname_without_club =~ /JO[0-9]+-[0-9]+[GM]$/
+      team = Team.for_active_season.active.find_by(name: teamname_without_club.gsub!(/[GM]$/, ""))
     end
+
+    team.update(club_data_team: self) if team&.no_club_data_link?
   end
 end

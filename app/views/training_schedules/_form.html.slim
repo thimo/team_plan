@@ -21,6 +21,15 @@
   = f.form_group
     = f.check_box :cios, custom: true
 
+  hr
+
+  h4
+    | Inplannen trainingen
+  div data-controller="clickable-append"
+    = f.text_field :started_on, date_picker_options(help: 'Trainingen worden ingepland vanaf deze datum ...')
+  div data-controller="clickable-append"
+    = f.text_field :ended_on, date_picker_options(help: '... tot en met deze datum')
+
   .row
     .col-sm-9.offset-sm-3
       .d-flex.justify-content-between
