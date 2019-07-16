@@ -88,12 +88,6 @@ nl:
         member: Teamgenoot
         member_id: Teamgenoot
         visibility: Zichtbaar voor
-      org_position:
-        name: Naam
-        remark: Opmerking
-        position_type: Soort positie
-        started_on: Begindatum
-        ended_on: Einddatum
       play_ban:
         member: Speler
         member_id: Speler
@@ -246,11 +240,6 @@ nl:
         self: Zelf
         staff: Teamleiding
         member: Teamgenoot
-    org_position:
-      position_type:
-        role: Functie
-        committee: Comissie
-        working_group: Werkgroep
     presence:
       on_time:
         on_time: Op tijd

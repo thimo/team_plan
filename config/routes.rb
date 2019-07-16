@@ -109,7 +109,6 @@ Rails.application.routes.draw do
 
     get "org" => "org/base#show"
     namespace :org do
-      resources :positions
     end
 
     get "intranet" => "intranet/base#show"
