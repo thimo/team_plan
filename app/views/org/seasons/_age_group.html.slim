@@ -1,0 +1,27 @@
+- if age_groups.size > 0
+  .col-sm-6
+    h4
+      = title
+    - age_groups.each do |age_group|
+      .card
+        .card-header
+          = age_group[:age_group].name
+        .card-body.py-0
+          - age_group[:teams].each do |team|
+            .row.py-2.border-bottom
+              .col-3.text-nowrap
+                = link_to team[:team].name_with_club, team[:team]
+              .col-9
+                - if team[:staff].any?
+                  table.w-100
+                    - team[:staff].each do |staff|
+                      tr
+                        td.w-50
+                          = staff[:member].name
+                        td.lighter
+                          - staff[:roles].each do |role|
+                            div
+                              = role
+                - else
+                  i.fa.fa-exclamation-triangle.color-red.pr-1
+                  i Geen teamleiding gevonden
