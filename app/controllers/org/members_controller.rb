@@ -15,7 +15,7 @@ module Org
     private
 
       def add_breadcrumbs
-        add_breadcrumb "Vrijwilligers"
+        add_breadcrumb "Actieve leden"
       end
   end
 end
