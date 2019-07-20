@@ -13,7 +13,9 @@ class GroupMemberPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      false
+      return scope.all if @user.role?(Role::BEHEER_GROUPS)
+
+      scope.active
     end
   end
 end
