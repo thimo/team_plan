@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_164017) do
+ActiveRecord::Schema.define(version: 2019_07_20_204557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -167,6 +167,9 @@ ActiveRecord::Schema.define(version: 2019_07_16_164017) do
     t.string "memberable_type"
     t.bigint "memberable_id"
     t.bigint "tenant_id"
+    t.integer "status", default: 1
+    t.date "started_on"
+    t.date "ended_on"
     t.index ["group_id", "member_id", "memberable_type", "memberable_id"], name: "index_group_members_unique", unique: true
     t.index ["group_id"], name: "index_group_members_on_group_id"
     t.index ["member_id"], name: "index_group_members_on_member_id"
@@ -180,6 +183,9 @@ ActiveRecord::Schema.define(version: 2019_07_16_164017) do
     t.datetime "updated_at", null: false
     t.string "memberable_via_type"
     t.bigint "tenant_id"
+    t.integer "status", default: 1
+    t.date "started_on"
+    t.date "ended_on"
     t.index ["tenant_id"], name: "index_groups_on_tenant_id"
   end
 
