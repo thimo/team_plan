@@ -1,8 +1,8 @@
-/ - provide(:title, "Actieve leden")
+- provide(:title, "Actieve leden")
 
 .row
   .col-sm-6
-    h4
+    h4.mb-4
       = "Teamleiding #{@season.name}"
 
     - @team_members_per_role.each do |role, tms|
@@ -22,7 +22,7 @@
                     = tms.map { |tm| tm.team.name_with_club }.join(", ")
 
   .col-sm-6
-    h4
+    h4.mb-4
       | Overige rollen
 
     - @groups.each do |group|
