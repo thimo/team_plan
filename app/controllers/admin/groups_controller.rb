@@ -17,7 +17,7 @@ module Admin
 
     def create
       if @group.save
-        redirect_to admin_groups_path, notice: "Groep is toegevoegd."
+        redirect_to [:edit, :admin, @group], notice: "Groep is toegevoegd."
       else
         render :new
       end
