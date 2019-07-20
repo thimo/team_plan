@@ -17,7 +17,7 @@
                     - team[:staff].each do |staff|
                       tr
                         td.w-50
-                          = link_to staff[:member].name, staff[:member]
+                          = render "members/member", member: staff[:member]
                         td.lighter
                           = staff[:roles].join(", ").capitalize
                 - else
