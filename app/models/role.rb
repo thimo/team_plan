@@ -44,8 +44,12 @@ class Role < ApplicationRecord
   scope :asc, -> { order(name: :asc) }
 
   def self.create_all
-    ROLES.each do |role|
-      Role.find_or_create_by(name: role.downcase)
+    Tenant.active.find_each do |tenant|
+      ActsAsTenant.with_tenant(tenant) do
+        ROLES.each do |role|
+          Role.find_or_create_by(name: role.downcase)
+        end
+      end
     end
   end
 end
