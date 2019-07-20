@@ -10,10 +10,17 @@
 
 .member_photo {
   width: 200px;
-  float: right;
-  border-radius: $border-radius;
+
+  img {
+    border-radius: $border-radius;
+    width: 200px;
+  }
 
   @include media-breakpoint-down(xs) {
     width: 100px;
+
+    img {
+      width: 100px;
+    }
   }
 }

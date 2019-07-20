@@ -16,12 +16,13 @@
         => l member.born_on, format: :date_long_without_day
     = "(#{member.gender})"
 - if policy(member).show_sportlink_status?
-  - if member.local_teams.present?
-    .light.small
-      = "#{member.local_teams}"
-  - unless member.status_definitief? || member.status_af_te_melden?
-    .light.small
-      = member.status.capitalize
+  - if member.active?
+    - if member.local_teams.present?
+      .light.small
+        = "#{member.local_teams}"
+    - unless member.status_definitief? || member.status_af_te_melden?
+      .light.small
+        = member.status.capitalize
   - if member.deregistered_at.present?
     .light.small
       | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}

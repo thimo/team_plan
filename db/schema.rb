@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_13_134522) do
+ActiveRecord::Schema.define(version: 2019_07_16_164017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -338,34 +338,6 @@ ActiveRecord::Schema.define(version: 2019_07_13_134522) do
     t.index ["team_id"], name: "index_notes_on_team_id"
     t.index ["tenant_id"], name: "index_notes_on_tenant_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
-  end
-
-  create_table "org_position_members", force: :cascade do |t|
-    t.bigint "org_position_id"
-    t.bigint "member_id"
-    t.string "name"
-    t.date "started_on"
-    t.date "ended_on"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "tenant_id"
-    t.index ["member_id"], name: "index_org_position_members_on_member_id"
-    t.index ["org_position_id"], name: "index_org_position_members_on_org_position_id"
-    t.index ["tenant_id"], name: "index_org_position_members_on_tenant_id"
-  end
-
-  create_table "org_positions", force: :cascade do |t|
-    t.string "name"
-    t.text "remark"
-    t.integer "position_type", default: 0
-    t.date "started_on"
-    t.date "ended_on"
-    t.string "ancestry"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "tenant_id"
-    t.index ["ancestry"], name: "index_org_positions_on_ancestry"
-    t.index ["tenant_id"], name: "index_org_positions_on_tenant_id"
   end
 
   create_table "play_bans", force: :cascade do |t|
@@ -740,10 +712,6 @@ ActiveRecord::Schema.define(version: 2019_07_13_134522) do
   add_foreign_key "notes", "teams"
   add_foreign_key "notes", "tenants"
   add_foreign_key "notes", "users"
-  add_foreign_key "org_position_members", "members"
-  add_foreign_key "org_position_members", "org_positions"
-  add_foreign_key "org_position_members", "tenants"
-  add_foreign_key "org_positions", "tenants"
   add_foreign_key "play_bans", "members"
   add_foreign_key "play_bans", "tenants"
   add_foreign_key "player_evaluations", "team_evaluations"

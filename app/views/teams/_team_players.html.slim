@@ -27,7 +27,7 @@
                   td.strong.small.lighter[colspan="100"]
                     = year
               tr
-                td.w-1
+                td.w-1.text-center.pr-0
                   = render 'members/photo', member: team_member.member
                 td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
                   = render team_member.member
