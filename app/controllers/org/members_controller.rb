@@ -5,10 +5,12 @@ module Org
     before_action :add_breadcrumbs
 
     def index
-      skip_policy_scope
-      # TODO: Get
-      # - active season for age_groups, teams, team_members
-      # - all groups
+      @season = policy_scope(Season.active_season_for_today)
+      team_members = policy_scope(TeamMember.for_season(Season.last).active.staff)
+      @team_members_per_role = team_members.group_by(&:role_i18n)
+                                           .sort_by { |role, _tms| role }
+
+      @groups = policy_scope(Group).asc
     end
 
     private

@@ -14,6 +14,7 @@ class Group < ApplicationRecord
   scope :for_memberable, ->(type, id) {
     joins(:group_members).where(group_members: { memberable_type: type, memberable_id: id })
   }
+  scope :via_type, -> { where.not(memberable_via_type: [nil, ""]) }
 
   MEMBERABLE_VIA_TYPES = %w[AgeGroup].freeze
 end

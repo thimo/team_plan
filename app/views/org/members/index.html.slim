@@ -1,0 +1,39 @@
+- provide(:title, "Vrijwilligers")
+
+.row
+  .col-sm-6
+    h4
+      = "Teamleiding #{@season.name}"
+
+    - @team_members_per_role.each do |role, tms|
+      .card
+        .card-header
+          = "#{role} (#{tms.count})"
+        .card-body.p-0
+          table.table.tr-links
+            - tms.group_by(&:member).each do |member, tms|
+              tr
+                td.w-1.text-center
+                  = render 'members/photo', member: member
+                td
+                  = render "members/member", member: member
+                  div.small
+                    = tms.map { |tm| tm.team.name_with_club }.join(", ")
+
+  .col-sm-6
+    h4
+      | Overig
+
+    - @groups.each do |group|
+      .card
+        .card-header
+          = "#{group.name} (#{group.members.distinct.size})"
+        .card-body.p-0
+          table.table.tr-links
+            - group.members.distinct.asc.each do |member|
+              / = render "members/member", member: member
+              tr
+                td.w-1.text-center
+                  = render 'members/photo', member: member
+                td
+                  = render "members/member", member: member
