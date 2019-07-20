@@ -16,6 +16,8 @@
                   table.table.table-sm.tr-links.w-100
                     - team[:staff].each do |staff|
                       tr
+                        td.w-1.text-center.px-0
+                          = render 'members/photo', member: staff[:member]
                         td.w-50
                           = render "members/member", member: staff[:member]
                         td.lighter
