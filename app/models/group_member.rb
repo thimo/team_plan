@@ -2,6 +2,8 @@
 
 # Links members to groups
 class GroupMember < ApplicationRecord
+  include Statussable
+
   acts_as_tenant :tenant
   belongs_to :group
   belongs_to :member

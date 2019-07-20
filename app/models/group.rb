@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Group < ApplicationRecord
+  include Statussable
+
   acts_as_tenant :tenant
   has_many :group_members, dependent: :destroy
   has_many :members, through: :group_members
