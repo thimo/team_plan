@@ -1,4 +1,15 @@
 li.nav-item.d-md-down-none
-  = link_to org_positions_path, class: "nav-link #{'active' if current_page?(org_positions_path)}" do
+  = link_to org_members_path, class: "nav-link #{'active' if current_page?(org_members_path)}" do
     i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
     | Organisatie
+
+- seasons = policy_scope(Season).all.desc
+- if seasons.size.positive?
+  li.nav-title
+    | Teamleiding
+
+  - seasons.each do |season|
+    li.nav-item.d-md-down-none
+      = link_to [:org, season], class: "nav-link #{'active' if current_page?([:org, season])}" do
+        i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
+        = season.name

@@ -2,9 +2,9 @@ li.nav-item
   = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
     i.fa-home.nav-icon[class=fa_class]
     | Home
-- if false && policy(:org).show?
+- if policy(:org).show?
   li.nav-item
-    = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if [Org].include? controller.class.parent}"
+    = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if controller.class.parent == Org}"
       i.fa-sitemap.nav-icon[class=fa_class]
       | Organisatie
 - if false && policy(:intranet).show?

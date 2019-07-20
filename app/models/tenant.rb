@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 class Tenant < ApplicationRecord
-  include RailsSettings::Extend
   include Statussable
 
   has_one :tenant_setting, dependent: :destroy
 
-  # TODO: Enable after cached settings have been removed
-  # def settings
-  #   # Auto-create tenant_setting
-  #   tenant_setting || create_tenant_setting
-  # end
+  def settings
+    # Auto-create tenant_setting
+    tenant_setting || create_tenant_setting
+  end
 
   def self.from_request(request)
     host_parts = request.host.split(".")
@@ -23,10 +21,21 @@ class Tenant < ApplicationRecord
   end
 
   def self.setting(name)
-    Setting.for_current_tenant(var: name).value
+    ActsAsTenant.current_tenant.tenant_setting.send(clean_up(name))
   end
 
   def self.set_setting(name, value)
-    Setting.for_current_tenant(var: name).update(value: value)
+    ActsAsTenant.current_tenant.tenant_setting.update(clean_up(name) => value)
+  end
+
+  ##
+  # Private class methods, should be called with tenant context
+  #
+  class << self
+    private
+
+      def clean_up(name)
+        name.gsub(/[-\.]/, "_")
+      end
   end
 end

@@ -23,7 +23,6 @@ class Member < ApplicationRecord
            class_name: "TeamMember", inverse_of: :member
   has_many :teams, through: :team_members
   has_many :teams_as_player, through: :team_members_as_player, class_name: "Team", source: :team
-  has_many :org_position_members, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
@@ -267,7 +266,7 @@ class Member < ApplicationRecord
       result[:member_ids] << member.id
     end
 
-    Tenant.set_setting("last_import.members", Time.zone.now)
+    Tenant.set_setting("last_import_members", Time.zone.now)
 
     result
   end
@@ -305,8 +304,8 @@ class Member < ApplicationRecord
     missing = header.select { |h| I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}", default: nil).blank? }
     return if missing.none?
 
-    ActionMailer::Base.mail(from: Tenant.setting("application.email"),
-                            to: Tenant.setting("application.sysadmin.email"),
+    ActionMailer::Base.mail(from: Tenant.setting("application_email"),
+                            to: Tenant.setting("application_sysadmin_email"),
                             subject: "Missing member import headers (#{ActsAsTenant.current_tenant.name})",
                             body: missing.join("\n")).deliver
   end

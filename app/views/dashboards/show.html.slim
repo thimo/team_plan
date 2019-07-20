@@ -58,7 +58,7 @@
       - if @new_members.present?
         = render "members/list", members: @new_members,
                                  title: "Nieuwe leden",
-                                 subtitle: (date = Tenant.setting("last_import.members")).present? ? \
+                                 subtitle: (date = Tenant.setting("last_import_members")).present? ? \
                                              "Laatste import: #{l(date, format: :date_long)}" : \
                                              nil
 

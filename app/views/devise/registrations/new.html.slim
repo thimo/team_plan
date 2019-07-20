@@ -1,5 +1,5 @@
 - provide(:title, t('.sign_up', default: 'Sign up'))
-- provide(:subtitle, "Maak een login aan om toegang te krijgen tot #{Tenant.setting('application.name')}")
+- provide(:subtitle, "Maak een login aan om toegang te krijgen tot #{Tenant.setting('application_name')}")
 
 - content_for :flash
   - if resource.errors.details[:email].any? { |error| error[:error] == :taken }
@@ -15,7 +15,7 @@
     class: 'form-control',
     placeholder: User.human_attribute_name(:email),
     hide_label: true,
-    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Tenant.setting("club.name_short")}."
+    help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Tenant.setting("club_name_short")}."
   = f.password_field :password,
     prepend: tag.i(class: [fa_class, 'fa-lock-alt']),
     class: 'form-control',

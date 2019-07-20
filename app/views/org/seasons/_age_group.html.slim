@@ -1,0 +1,28 @@
+- if age_groups.size > 0
+  .col-sm-6
+    h4
+      = title
+    - age_groups.each do |age_group|
+      .card
+        .card-header
+          = age_group[:age_group].name
+        .card-body.py-0
+          - age_group[:teams].each do |team|
+            .row.border-bottom
+              .col-3.text-nowrap.py-2
+                = link_to team[:team].name_with_club, team[:team]
+              .col-9.px-0
+                - if team[:staff].any?
+                  table.table.table-sm.tr-links.w-100
+                    - team[:staff].each do |staff|
+                      tr
+                        td.w-1.text-center.px-0
+                          = render 'members/photo', member: staff[:member]
+                        td.w-50
+                          = render "members/member", member: staff[:member]
+                        td.lighter
+                          = staff[:roles].join(", ").capitalize
+                - else
+                  .p-2
+                    i.fa.fa-exclamation-triangle.color-red.pr-1
+                    i Geen teamleiding gevonden

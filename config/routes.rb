@@ -109,7 +109,8 @@ Rails.application.routes.draw do
 
     get "org" => "org/base#show"
     namespace :org do
-      resources :positions
+      resources :members, only: [:index]
+      resources :seasons, only: [:show]
     end
 
     get "intranet" => "intranet/base#show"
@@ -130,8 +131,6 @@ Rails.application.routes.draw do
       resources :members_import, only: [:new, :create]
       resources :email_logs, only: [:index, :show]
       resources :version_updates
-      resources :settings,
-                constraints: { id: /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
       namespace :knvb do
         resources :dashboards
         resources :club_data_teams
@@ -155,6 +154,7 @@ Rails.application.routes.draw do
       resources :matches
       resources :play_bans
       resources :play_bans_import, only: [:new, :create]
+      resources :tenant_settings, only: [:edit, :update]
     end
   end
 

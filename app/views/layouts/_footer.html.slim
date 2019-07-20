@@ -1,7 +1,7 @@
 footer.app-footer
   div
-    = link_to Tenant.setting("club.website")
-      = "#{Tenant.setting('club.name')}"
+    = link_to Tenant.setting("club_website")
+      = "#{Tenant.setting('club_name')}"
     span.lighter.d-down-none.pl-3
       = " © #{Time.zone.now.year} "
       | Thimo Jansen

@@ -5,9 +5,9 @@ html
       = full_title(yield(:title))
     meta[charset="utf-8"]
     meta name="description" content="#{full_title(yield(:title) || yield(:page_title))}"
-    meta name="author" content="#{Tenant.setting('club.name')} #{Tenant.setting('application.name')}"
+    meta name="author" content="#{Tenant.setting('club_name')} #{Tenant.setting('application_name')}"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    link rel="shortcut icon" href="#{Tenant.setting("application.favicon_url")}"
+    link rel="shortcut icon" href="#{Tenant.setting("application_favicon_url")}"
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    'print/print', media: 'print', 'data-turbolinks-track': 'reload'

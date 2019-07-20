@@ -15,7 +15,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = proc {
-    "\"#{Setting['club.name_short']} #{Setting['application.name']}\" <#{Setting['application.email']}>"
+    "\"#{Setting['club_name_short']} #{Setting['application_name']}\" <#{Setting['application_email']}>"
   }
 
   # Configure the class responsible to send e-mails.

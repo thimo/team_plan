@@ -4,7 +4,7 @@ module ClubDataImporter
   def self.teams_and_competitions
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Tenant.setting("clubdata.client_id").blank?
+        next if skip_update?
 
         teams_and_competitions_for_tenant
       end
@@ -14,7 +14,7 @@ module ClubDataImporter
   def self.club_results
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Tenant.setting("clubdata.client_id").blank?
+        next if skip_update?
 
         club_results_for_tenant
       end
@@ -24,7 +24,7 @@ module ClubDataImporter
   def self.poules
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Tenant.setting("clubdata.client_id").blank?
+        next if skip_update?
 
         poule_standings_for_tenant
         poule_matches_for_tenant
@@ -36,7 +36,7 @@ module ClubDataImporter
   def self.team_photos
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Tenant.setting("clubdata.client_id").blank?
+        next if skip_update?
 
         team_photos_for_tenant
       end
@@ -46,7 +46,7 @@ module ClubDataImporter
   def self.afgelastingen
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
-        next if Season.active_season_for_today.nil? || Tenant.setting("clubdata.client_id").blank?
+        next if skip_update?
 
         afgelastingen_for_tenant
       end
@@ -63,7 +63,7 @@ module ClubDataImporter
       team_count = { total: 0, created: 0, updated: 0 }
       competition_count = { total: 0, created: 0, updated: 0 }
 
-      url = "#{Tenant.setting('clubdata.urls.competities')}&client_id=#{Tenant.setting('clubdata.client_id')}"
+      url = "#{Tenant.setting('clubdata_urls_competities')}&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         team_count[:total] += 1
@@ -131,7 +131,7 @@ module ClubDataImporter
       count = { total: 0, updated: 0 }
 
       # Regular import of all club matches
-      url = "#{Tenant.setting('clubdata.urls.uitslagen')}&client_id=#{Tenant.setting('clubdata.client_id')}"
+      url = "#{Tenant.setting('clubdata_urls_uitslagen')}&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         count[:total] += 1
@@ -166,8 +166,8 @@ module ClubDataImporter
 
     def update_poule_standing(competition, count = nil)
       # Fetch ranking
-      url = "#{Tenant.setting('clubdata.urls.poulestand')}&poulecode=#{competition.poulecode}" \
-            "&client_id=#{Tenant.setting('clubdata.client_id')}"
+      url = "#{Tenant.setting('clubdata_urls_poulestand')}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       if json.present?
         count[:total] += 1 if count.present?
@@ -202,8 +202,8 @@ module ClubDataImporter
       imported_wedstrijdnummers = []
 
       # Fetch upcoming matches
-      url = "#{Tenant.setting('clubdata.urls.poule-programma')}&poulecode=#{competition.poulecode}" \
-            "&client_id=#{Tenant.setting('clubdata.client_id')}"
+      url = "#{Tenant.setting('clubdata_urls_poule_programma')}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         count[:total] += 1 if count.present?
@@ -255,8 +255,8 @@ module ClubDataImporter
     end
 
     def update_poule_results(competition, count = nil)
-      url = "#{Tenant.setting('clubdata.urls.pouleuitslagen')}&poulecode=#{competition.poulecode}" \
-            "&client_id=#{Tenant.setting('clubdata.client_id')}"
+      url = "#{Tenant.setting('clubdata_urls_pouleuitslagen')}&poulecode=#{competition.poulecode}" \
+            "&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
         count[:total] += 1 if count.present?
@@ -281,7 +281,7 @@ module ClubDataImporter
       count = { total: 0, created: 0, deleted: 0 }
 
       # Regular import of all club matches
-      url = "#{Tenant.setting('clubdata.urls.afgelastingen')}&client_id=#{Tenant.setting('clubdata.client_id')}"
+      url = "#{Tenant.setting('clubdata_urls_afgelastingen')}&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       cancelled_matches = []
       json.each do |data|
@@ -318,8 +318,8 @@ module ClubDataImporter
       count = { total: 0, updated: 0 }
 
       Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
-        url = "#{Tenant.setting('clubdata.urls.team-indeling')}&teamcode=#{club_data_team.teamcode}" \
-              "&client_id=#{Tenant.setting('clubdata.client_id')}"
+        url = "#{Tenant.setting('clubdata_urls_team_indeling')}&teamcode=#{club_data_team.teamcode}" \
+              "&client_id=#{Tenant.setting('clubdata_client_id')}"
         json = JSON.parse(RestClient.get(url))
         json.each do |data|
           next if data["foto"].blank?
@@ -346,8 +346,8 @@ module ClubDataImporter
     def add_address(match)
       return if match.adres.present?
 
-      url = "#{Tenant.setting('clubdata.urls.wedstrijd-accommodatie')}?wedstrijdcode=#{match.wedstrijdcode}" \
-            "&client_id=#{Tenant.setting('clubdata.client_id')}"
+      url = "#{Tenant.setting('clubdata_urls_wedstrijd_accommodatie')}?wedstrijdcode=#{match.wedstrijdcode}" \
+            "&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       if json["wedstrijd"].present?
         wedstrijd = json["wedstrijd"]
@@ -401,6 +401,10 @@ module ClubDataImporter
       else
         log_error(source, generic_error_body(url, error))
       end
+    end
+
+    def skip_update?
+      Season.active_season_for_today.nil? || Tenant.setting("clubdata_client_id").blank?
     end
   end
 end

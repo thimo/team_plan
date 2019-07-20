@@ -1,0 +1,12 @@
+- provide(:title, "Teamleiding #{@season.name}")
+
+- if @age_groups_male.any? || @age_groups_female.any?
+  .row
+    = render "age_group", age_groups: @age_groups_male, title: "Mannen"
+    = render "age_group", age_groups: @age_groups_female, title: "Vrouwen"
+
+- else
+  .card
+    .card-body
+      p
+        i Geen leeftijdsgroepen gevonden

@@ -1,9 +1,21 @@
+- is_current_member = current_user.has_member?(member)
+
 .card
   .card-header
     | Contactgegevens
 
   .card-body
-    = image_tag @member.photo_url, class: "member_photo pl-2 pb-2" if @member.photo.present?
+    - if @member.photo.present?
+      .float-right.ml-2.mb-2.member_photo
+        = image_tag @member.photo_url
+        - if is_current_member
+          .small.lighter.pt-2
+            | Deze foto vervangen? Dat kan via de Voetbal.nl app
+    - else
+      - if is_current_member
+        .float-right.ml-2.mb-2.member_photo
+          .small.lighter.pt-2
+            | Hier een (pas)foto plaatsen? Dat kan via de Voetbal.nl app
 
     .strong
       => member.name
@@ -132,13 +144,13 @@
             = render "shared/icons/play_ban"
           | Er is een actief speelverbod gevonden.
 
-- if current_user.has_member?(member)
-  .alert.alert-info.mb-4
-    | Kloppen je gegevens niet of wil je bijvoorbeeld een e-mailadres toevoegen?
-    - if (email = Tenant.setting("club.member_administration.email")).present?
-      |  Stuur dan een mailtje naar <a href="mailto:#{email}">#{email}</a>.
-    - else
-      |  Neem dan contact op met de ledenadministratie van #{Tenant.setting("club.name_short")}.
+      - if is_current_member
+        .alert.alert-info.m-0.mt-3
+          | Kloppen je gegevens niet of wil je bijvoorbeeld een e-mailadres toevoegen?
+          - if (email = Tenant.setting("club_member_administration_email")).present?
+            |  Stuur dan een mailtje naar <a href="mailto:#{email}">#{email}</a>.
+          - else
+            |  Neem dan contact op met de ledenadministratie van #{Tenant.setting("club_name_short")}.
 
 .card
   .card-header
@@ -152,7 +164,7 @@
               - if team_index == 0
                 strong #{season.name}
             td
-              = link_to team.name, team
+              = link_to team.name_with_club, team
             td.light
               = "#{team.division}" if team.division.present?
 

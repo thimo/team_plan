@@ -31,21 +31,21 @@ class Anonymizer
 
       def update_settings
         ActsAsTenant.with_tenant(demo_tenant) do
-          Tenant.set_setting("application.hostname", "localhost:3001")
-          Tenant.set_setting("application.email", "thimo@teamplanpro.nl")
-          Tenant.set_setting("application.favicon_url",
+          Tenant.set_setting("application_hostname", "localhost:3001")
+          Tenant.set_setting("application_email", "thimo@teamplanpro.nl")
+          Tenant.set_setting("application_favicon_url",
                              "https://s3.eu-central-1.amazonaws.com/teamplan/demo/favicon.ico")
-          Tenant.set_setting("application.email", "thimo@teamplanpro.nl")
-          Tenant.set_setting("club.name", NEW_CLUB_NAME)
-          Tenant.set_setting("club.name_short", NEW_CLUB_NAME)
-          Tenant.set_setting("club.website", "https://www.teamplanpro.nl/")
-          Tenant.set_setting("club.sportscenter", "Sportcentrum Demorijk")
+          Tenant.set_setting("application_email", "thimo@teamplanpro.nl")
+          Tenant.set_setting("club_name", NEW_CLUB_NAME)
+          Tenant.set_setting("club_name_short", NEW_CLUB_NAME)
+          Tenant.set_setting("club_website", "https://www.teamplanpro.nl/")
+          Tenant.set_setting("club_sportscenter", "Sportcentrum Demorijk")
           street = Faker::Address.street_name
           house_number = Faker::Address.building_number
-          Tenant.set_setting("club.address", "#{street} #{house_number}")
-          Tenant.set_setting("club.zip", Faker::Address.zip)
-          Tenant.set_setting("club.city", Faker::Address.city)
-          Tenant.set_setting("club.logo_url", "https://s3.eu-central-1.amazonaws.com/teamplan/demo/FC+Demo+logo.svg")
+          Tenant.set_setting("club_address", "#{street} #{house_number}")
+          Tenant.set_setting("club_zip", Faker::Address.zip)
+          Tenant.set_setting("club_city", Faker::Address.city)
+          Tenant.set_setting("club_logo_url", "https://s3.eu-central-1.amazonaws.com/teamplan/demo/FC+Demo+logo.svg")
         end
       end
 

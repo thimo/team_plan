@@ -3,12 +3,12 @@ header.app-header.navbar
                                                                                action: "toggle-sidebar#toggle",
                                                                                "toggle-sidebar-class": "sidebar-show" }]
     span.navbar-toggler-icon
-  a.navbar-brand href="/" title="#{Tenant.setting('club.name')} #{Tenant.setting('application.name')}"
-    - if Tenant.setting("club.logo_url").present?
-      img.navbar-brand-full src="#{Tenant.setting("club.logo_url")}"
-      img.navbar-brand-minimized src="#{Tenant.setting("club.logo_url")}"
+  a.navbar-brand href="/" title="#{Tenant.setting('club_name')} #{Tenant.setting('application_name')}"
+    - if Tenant.setting("club_logo_url").present?
+      img.navbar-brand-full src="#{Tenant.setting("club_logo_url")}"
+      img.navbar-brand-minimized src="#{Tenant.setting("club_logo_url")}"
     h1.navbar-brand-full
-      img src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application.name")
+      img src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application_name")
 
   button.navbar-toggler.sidebar-toggler.d-md-down-none[type="button" data={ controller: "toggle-sidebar",
                                                                             action: "toggle-sidebar#toggle",
