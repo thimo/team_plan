@@ -17,9 +17,8 @@
                   = render 'members/photo', member: member
                 td
                   = render "members/member", member: member
-                td
-                  div.small
-                    = tms.map { |tm| tm.team.name_with_club }.join(", ")
+                td.lighter
+                  = tms.map { |tm| tm.team.name_with_club }.join(", ")
 
   .col-sm-6
     h4.mb-4
