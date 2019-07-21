@@ -17,9 +17,9 @@ class User < ApplicationRecord
   has_many :injuries, dependent: :destroy
   has_one :user_setting, dependent: :destroy
   has_and_belongs_to_many :members
-  has_many :group_members, through: :members
+  has_many :group_members, -> { active }, through: :members
   has_many :all_groups, through: :group_members, source: :group
-  has_many :direct_groups, -> { where(group_members: { memberable_type: nil, memberable_id: nil }) },
+  has_many :direct_groups, -> { where(group_members: { memberable_type: nil, memberable_id: nil }).active },
            through: :group_members,
            source: :group
   has_many :direct_roles, through: :direct_groups, source: :roles
