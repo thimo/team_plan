@@ -2,23 +2,23 @@
 
 class GroupPolicy < ApplicationPolicy
   def index?
-    @user.role?(Role::BEHEER_GROUPS)
-  end
-
-  def create?
-    @user.role?(Role::BEHEER_GROUPS)
+    @user.role?(Role::BEHEER_GROUPS) || @user.role?(Role::GROUP_SHOW)
   end
 
   def show?
     index?
   end
 
+  def create?
+    @user.role?(Role::BEHEER_GROUPS) || @user.role?(Role::GROUP_CREATE)
+  end
+
   def update?
-    index?
+    create?
   end
 
   def destroy?
-    @user.role?(Role::BEHEER_GROUPS) && @record.persisted?
+    create? && @record.persisted?
   end
 
   def modify_members?

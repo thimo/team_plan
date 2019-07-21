@@ -2,13 +2,22 @@
 
 class GroupMemberPolicy < ApplicationPolicy
   def create?
-    return false if @record&.memberable&.archived?
+    return false if @record&.memberable&.archived? || @record&.group&.archived?
 
-    @user.role?(Role::BEHEER_GROUPS)
+    @user.role?(Role::BEHEER_GROUPS) || @user.role?(Role::GROUP_MEMB_CREATE)
+  end
+
+  def update?
+    create?
   end
 
   def destroy?
-    @user.role?(Role::BEHEER_GROUPS)
+    create?
+  end
+
+  def permitted_attributes
+    attributes = [:description]
+    attributes
   end
 
   class Scope < Scope
