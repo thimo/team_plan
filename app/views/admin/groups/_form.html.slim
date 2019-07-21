@@ -7,7 +7,7 @@
     = f.select :memberable_via_type, [["Via deze group", ""]] + Group::MEMBERABLE_VIA_TYPES
 
   - if policy(@group).modify_members?
-    = f.collection_select :member_ids, Member.active.all, :id, :name,
+    = f.collection_select :member_ids, Member.active.asc, :id, :name,
       { },
       { data: { controller: 'select2', placeholder: "Selecteer leden" },
         multiple: "multiple" }
