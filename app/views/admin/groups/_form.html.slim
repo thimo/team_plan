@@ -20,20 +20,6 @@
           div
             = member.name
 
-  - if policy(@group).modify_roles?
-    = f.collection_select :role_ids, Role.all, :id, :name,
-      { },
-      { data: { controller: 'select2', placeholder: "Selecteer rollen" },
-        multiple: "multiple" }
-  - else
-    .form-group.row
-      label class=f.label_col
-        | Rollen
-      div class=f.control_col
-        - @group.roles.each do |role|
-          div
-            = role.name
-
   .row
     .col-sm-9.offset-sm-3
       .d-flex.justify-content-between

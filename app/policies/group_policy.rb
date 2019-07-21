@@ -25,10 +25,6 @@ class GroupPolicy < ApplicationPolicy
     @record.persisted? && @record.memberable_via_type.blank?
   end
 
-  def modify_roles?
-    @user.role?(Role::BEHEER_ROLES)
-  end
-
   def set_memberable_via_type?
     create? && @record.new_record?
   end
@@ -36,7 +32,6 @@ class GroupPolicy < ApplicationPolicy
   def permitted_attributes
     attributes = [:name]
     attributes << { member_ids: [] } if modify_members?
-    attributes << { role_ids: [] } if modify_roles?
     attributes << :memberable_via_type if set_memberable_via_type?
     attributes
   end
