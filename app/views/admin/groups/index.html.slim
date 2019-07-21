@@ -15,23 +15,29 @@
         tr
           th = Group.human_attribute_name(:name)
           th = Group.human_attribute_name(:members)
-          th = Group.human_attribute_name(:roles)
 
       tbody
         - @groups.each do |group|
-          tr.align-top
-            td
+          tr
+            td.align-top
               = link_to group.name, [:edit, :admin, group]
-            td
-              - group.members.distinct.asc.each do |member|
-                div
-                  = link_to member.name, member
-            td
-              - group.roles.asc.each do |role|
-                div
-                  - if role.body.present?
-                    = role.body
-                    span.small.lighter.pl-1
-                      = role.name
-                  - else
-                    = role.name
+            td.p-0
+              table.table.table-sm
+                - group.group_members.active.group_by(&:member).sort_by { |member, _gms| member.last_name }.each do |member, group_members|
+                  tr
+                    td.w-1.text-center.px-0
+                      = render "members/photo", member: member
+                    td
+                      = render "members/member", member: member
+                    td.text-right.w-1.text-nowrap
+                      - if group.memberable_via_type.blank?
+                        - group_members.each do |group_member|
+                          div
+                            = group_member.description
+                            - if policy(group_member).edit?
+                              => link_to edit_admin_group_member_path(group_member), title: "Aanpassen"
+                                i.fa-pencil-alt.m-1.ml-2[class=fa_class]
+
+                            - if policy(group_member).destroy?
+                              => link_to admin_group_member_path(group_member),  method: :delete, data: { confirm: "#{group_member.member.name} wordt verwijderd uit de groep. Doorgaan?" }, title: "Verwijderen uit groep"
+                                i.fa-times.m-1[class=fa_class]

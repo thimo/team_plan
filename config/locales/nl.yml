@@ -50,6 +50,7 @@ nl:
       group_member:
         member: Lid
         member_id: Lid
+        description: Rol
       match:
         wedstrijddatum: Datum
         wedstrijdtijd: Aanvangstijd

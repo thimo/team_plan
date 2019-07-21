@@ -7,7 +7,7 @@ module Admin
     before_action :add_breadcrumbs
 
     def index
-      @groups = policy_scope(Group).asc
+      @groups = policy_scope(Group).active.asc
       authorize @groups
     end
 
@@ -34,8 +34,8 @@ module Admin
     end
 
     def destroy
+      @group.deactivate(user: current_user)
       redirect_to admin_groups_path, notice: "Groep is verwijderd."
-      @group.destroy
     end
 
     private

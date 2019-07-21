@@ -145,6 +145,7 @@ Rails.application.routes.draw do
       resources :soccer_fields
       resources :competitions
       resources :groups
+      resources :group_members
       resources :roles
       resources :groups_roles do
         collection do
