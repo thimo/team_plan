@@ -27,12 +27,27 @@
     - @groups.each do |group|
       .card
         .card-header
+          / TODO: get through active team_members, but needs fix for groups like "Coordinator"
           = "#{group.name} (#{group.members.distinct.size})"
         .card-body.p-0
           table.table.table-sm.tr-links
-            - group.members.distinct.asc.each do |member|
-              tr
-                td.w-1.text-center.pr-0
-                  = render 'members/photo', member: member
-                td
-                  = render "members/member", member: member
+            - if group.memberable_via_type.blank?
+              - group.group_members.active.sort_by { |gm| gm.member.last_name }.each do |group_member|
+                - member = group_member.member
+                tr
+                  td.w-1.text-center.pr-0
+                    = render 'members/photo', member: member
+                  td
+                    = render "members/member", member: member
+                    - if group_member.description.present?
+                      .light
+                        = group_member.description
+            - else
+              - group.group_members.active.group_by(&:member).sort_by { |member, _gms| member.last_name }.each do |member, gms|
+                tr
+                  td.w-1.text-center.pr-0
+                    = render "members/photo", member: member
+                  td
+                    = render "members/member", member: member
+                    .light
+                      = human_sort(gms.map { |gm| gm.memberable }, :name).map(&:name).uniq.join(", ")
