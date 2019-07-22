@@ -1,4 +1,4 @@
-li.nav-item.d-md-down-none
+li.nav-item
   = link_to org_members_path, class: "nav-link #{'active' if current_page?(org_members_path)}" do
     i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
     | Actieve leden
@@ -9,7 +9,7 @@ li.nav-item.d-md-down-none
     | Teamleiding
 
   - seasons.each do |season|
-    li.nav-item.d-md-down-none
+    li.nav-item
       = link_to [:org, season], class: "nav-link #{'active' if current_page?([:org, season])}" do
         i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
         = season.name
