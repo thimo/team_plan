@@ -34,7 +34,7 @@ module Admin
     end
 
     def destroy
-      @group.deactivate(user: current_user)
+      @group.deactivate
       redirect_to admin_groups_path, notice: "Groep is verwijderd."
     end
 

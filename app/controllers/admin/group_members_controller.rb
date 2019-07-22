@@ -27,7 +27,7 @@ module Admin
     end
 
     def destroy
-      @group_member.deactivate(user: current_user)
+      @group_member.deactivate
       redirect_to admin_groups_path, notice: "Groupslid is verwijderd."
     end
 
