@@ -11,8 +11,11 @@ class TenantOnRequest
   def call(env)
     request = Rack::Request.new(env)
     tenant = @processor.call(request)
-    raise "Tenant not set for #{request.host}" if tenant.nil?
 
-    ActsAsTenant.with_tenant(tenant) { @app.call(env) }
+    if tenant
+      ActsAsTenant.with_tenant(tenant) { @app.call(env) }
+    else
+      @app.call(env)
+    end
   end
 end
