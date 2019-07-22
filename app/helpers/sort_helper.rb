@@ -5,7 +5,7 @@ module SortHelper
   def human_sort(objects = [], attribute = "")
     return [] if attribute.blank? || objects.blank?
 
-    objects = objects.sort_by do |obj|
+    objects.sort_by do |obj|
       obj.send(attribute).to_s.split(/(\d+)/).map do |e|
         [e.to_i, e]
       end

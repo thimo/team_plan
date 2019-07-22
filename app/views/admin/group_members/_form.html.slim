@@ -1,0 +1,21 @@
+= bootstrap_form_for [:admin, @group, @group_member], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message t("bootstrap_form.check_errors")
+
+  - if @group_member.persisted?
+    .form-group.row
+      = f.label :member, class: "col-md-3 col-form-label"
+      .col-md-9.form-control-plaintext
+        = @group_member.member.name
+  - else
+    = f.collection_select :member_id, Member.active.asc, :id, :name_and_born_on,
+      { include_blank: true },
+      { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer lid' } }
+
+  = f.text_field :description, help: "Optioneel: Vul hier de rol in die het lid vervult binnen deze groep"
+
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", admin_groups_path, class: 'btn btn-light'

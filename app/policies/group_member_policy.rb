@@ -17,6 +17,7 @@ class GroupMemberPolicy < ApplicationPolicy
 
   def permitted_attributes
     attributes = [:description]
+    attributes << :member_id if @record.new_record?
     attributes
   end
 

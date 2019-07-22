@@ -144,8 +144,9 @@ Rails.application.routes.draw do
       end
       resources :soccer_fields
       resources :competitions
-      resources :groups
-      resources :group_members
+      resources :groups, shallow: true do
+        resources :group_members
+      end
       resources :roles
       resources :groups_roles do
         collection do
