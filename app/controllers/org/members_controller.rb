@@ -5,7 +5,7 @@ module Org
     before_action :add_breadcrumbs
 
     def index
-      @season = policy_scope(Season.active_season_for_today)
+      @season = Season.active_season_for_today
       team_members = policy_scope(TeamMember.for_season(Season.last)).active.staff
       @team_members_per_role = team_members.group_by(&:role_i18n)
                                            .sort_by { |role, _tms| role }
