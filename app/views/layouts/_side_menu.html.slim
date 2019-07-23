@@ -1,10 +1,10 @@
 .sidebar
   nav.sidebar-nav
     ul.nav
-      = render 'layouts/side_menu_football' if [Object].include? controller.class.parent
-      = render 'layouts/side_menu_org'      if [Org].include? controller.class.parent
-      = render 'layouts/side_menu_intranet' if [Intranet].include? controller.class.parent
-      = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.parent
+      = render 'layouts/side_menu_football' if [Object].include? controller.class.module_parent
+      = render 'layouts/side_menu_org'      if [Org].include? controller.class.module_parent
+      = render 'layouts/side_menu_intranet' if [Intranet].include? controller.class.module_parent
+      = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.module_parent
 
       .d-lg-none.my-5
         = render "layouts/main_nav"
