@@ -42,7 +42,7 @@ section
               remote: true,
               method: :post do
               .custom-control.custom-checkbox.light
-                input.custom-control-input[type="checkbox" checked=current_user.settings.include_member_comments]
+                input.custom-control-input[type="checkbox" checked=current_user.setting(:include_member_comments)]
                 label.custom-control-label
                   | Inclusief teamleden (seizoen #{parent.season.name})
 

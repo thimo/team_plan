@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_103301) do
+ActiveRecord::Schema.define(version: 2019_07_23_105838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -602,7 +602,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_103301) do
     t.index ["training_schedule_id"], name: "index_trainings_on_training_schedule_id"
   end
 
-  create_table "user_settings", force: :cascade do |t|
+  create_table "user_old_settings", force: :cascade do |t|
     t.bigint "user_id"
     t.string "email_separator", default: ";"
     t.datetime "created_at", null: false
@@ -612,7 +612,19 @@ ActiveRecord::Schema.define(version: 2019_07_23_103301) do
     t.string "active_comments_tab"
     t.string "active_team_tab"
     t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_user_old_settings_on_tenant_id"
+    t.index ["user_id"], name: "index_user_old_settings_on_user_id"
+  end
+
+  create_table "user_settings", force: :cascade do |t|
+    t.bigint "tenant_id"
+    t.bigint "user_id"
+    t.string "name"
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_user_settings_on_tenant_id"
+    t.index ["user_id", "name"], name: "index_user_settings_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
@@ -739,6 +751,8 @@ ActiveRecord::Schema.define(version: 2019_07_23_103301) do
   add_foreign_key "trainings", "teams"
   add_foreign_key "trainings", "tenants"
   add_foreign_key "trainings", "training_schedules"
+  add_foreign_key "user_old_settings", "tenants"
+  add_foreign_key "user_old_settings", "users"
   add_foreign_key "user_settings", "tenants"
   add_foreign_key "user_settings", "users"
   add_foreign_key "users", "tenants"

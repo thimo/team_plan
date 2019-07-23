@@ -21,7 +21,7 @@ class TeamActionsController < ApplicationController
   def create
     case params[:type]
     when "email"
-      current_user.settings.update(email_separator: params[:email_separator])
+      current_user.set_setting(:email_separator, params[:email_separator])
 
       # @teams = policy_scope(Team).where(id: params[:team_ids])
       email_addresses = []
@@ -32,7 +32,7 @@ class TeamActionsController < ApplicationController
       end
 
       # Collect email addresses
-      emails = email_addresses.uniq.join(current_user.settings.email_separator)
+      emails = email_addresses.uniq.join(current_user.setting(:email_separator))
       @redirect = case params[:to_field]
                   when "cc"
                     "mailto:?cc=#{emails}"
@@ -42,8 +42,7 @@ class TeamActionsController < ApplicationController
                     "mailto:#{emails}"
                   end
     when "download_team_members"
-      current_user.settings.export_columns = params[:columns]
-      current_user.settings.save
+      current_user.set_setting(:export_columns, params[:columns])
 
       @redirect = if @age_group.present?
                     age_group_download_team_members_path(@age_group, format: "xlsx", team_ids: params[:team_ids],

@@ -120,8 +120,8 @@ class TeamsController < ApplicationController
     end
 
     def set_active_tab
-      @active_tab = params[:tab].presence || current_user.settings.active_team_tab || "team"
+      @active_tab = params[:tab].presence || current_user.setting(:active_team_tab).presence || "team"
       @active_tab = "team" unless policy(@team).try("show_#{@active_tab}?")
-      current_user.settings.update(active_team_tab: @active_tab)
+      current_user.set_setting(:active_team_tab, @active_tab)
     end
 end

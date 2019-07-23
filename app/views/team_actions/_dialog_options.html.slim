@@ -21,12 +21,12 @@ div[class="#{column_class}"]
     = f.radio_button :email_separator, ";",
       label:   "Outlook",
       id:      "email_separator_semicolon",
-      checked: current_user.settings.email_separator == ';',
+      checked: current_user.setting(:email_separator) == ';',
       custom: true
     = f.radio_button :email_separator, ",",
       label:   "Apple Mail, Gmail",
       id:      "email_separator_comma",
-      checked: current_user.settings.email_separator == ',',
+      checked: current_user.setting(:email_separator) == ',',
       custom: true
 
     .strong

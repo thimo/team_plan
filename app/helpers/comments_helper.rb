@@ -2,7 +2,7 @@
 
 module CommentsHelper
   def comment_types_for(parent)
-    comment_types = if parent.class == Team && current_user.settings.include_member_comments
+    comment_types = if parent.class == Team && current_user.setting(:include_member_comments)
                       Member.comment_types
                     else
                       parent.class.comment_types
@@ -30,6 +30,6 @@ module CommentsHelper
   private
 
     def include_member_comments?(parent)
-      parent.is_a?(Team) && current_user.settings.include_member_comments
+      parent.is_a?(Team) && current_user.setting(:include_member_comments)
     end
 end

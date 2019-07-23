@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :logs, dependent: :destroy
   has_many :todos, dependent: :destroy
   has_many :injuries, dependent: :destroy
-  has_one :user_setting, dependent: :destroy
+  has_many :user_settings, dependent: :destroy
   has_and_belongs_to_many :members
   has_many :group_members, -> { active }, through: :members
   has_many :all_groups, through: :group_members, source: :group
@@ -161,13 +161,17 @@ class User < ApplicationRecord
     user
   end
 
-  def settings
-    # Auto-create user_setting
-    user_setting || create_user_setting
+  def setting(name)
+    settings[name].presence || UserSetting.default_for(name)
+  end
+
+  def set_setting(name, value)
+    @settings = nil
+    user_settings.find_or_initialize_by(name: name).update(value: value)
   end
 
   def export_columns
-    @export_columns ||= (columns = settings.export_columns).present? ? columns : Member::DEFAULT_COLUMNS
+    @export_columns ||= setting(:export_columns)
   end
 
   def remember_me
@@ -194,12 +198,11 @@ class User < ApplicationRecord
   end
 
   def toggle_include_member_comments
-    include_member_comments = settings.include_member_comments
-    settings.update(include_member_comments: !include_member_comments)
+    set_setting(:include_member_comments, !setting(:include_member_comments))
   end
 
   def active_comments_tab=(tab)
-    settings.update(active_comments_tab: tab) if tab.present?
+    set_setting(:active_comments_tab, tab) if tab.present?
   end
 
   def self.deactivate_for_inactive_members
@@ -318,5 +321,11 @@ class User < ApplicationRecord
     # Copied from validatable module
     def password_required?
       !persisted? || !password.nil? || !password_confirmation.nil?
+    end
+
+    def settings
+      @settings ||= user_settings.each_with_object({}.with_indifferent_access) do |setting, hash|
+        hash[setting.name] = setting.value
+      end
     end
 end
