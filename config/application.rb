@@ -1,4 +1,5 @@
 require_relative 'boot'
+
 require 'csv'
 require 'rails/all'
 
@@ -43,5 +44,8 @@ module TeamPlan
     console do
       ActiveRecord::Base.connection
     end
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
   end
 end
