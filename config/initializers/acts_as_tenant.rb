@@ -3,7 +3,9 @@
 ActsAsTenant.configure do |config|
   config.require_tenant = defined?(Rails::Server) || defined?(Rails::Console)
 
-  Rails.application.config.middleware.insert_before(Warden::Manager, TenantOnRequest,
+  # Used to be inserted before Warden::Manager, but that means on 404/500/etc. errors
+  # TenantOnRequest is not yet called
+  Rails.application.config.middleware.insert_before(Rack::Runtime, TenantOnRequest,
                                                     proc { |request|
                                                       Tenant.from_request(request)
                                                     })
