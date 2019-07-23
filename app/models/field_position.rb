@@ -14,7 +14,6 @@ class FieldPosition < ApplicationRecord
 
   def self.options_for_select
     all.collect do |pos|
-      # name = "#{'- ' if pos.indent_in_select}#{pos.name}"
       name = pos.name.to_s
       # Hide blank field positions for now
       if pos.present?

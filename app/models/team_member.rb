@@ -56,7 +56,7 @@ class TeamMember < ApplicationRecord
   scope :for_season, ->(season) { joins(team: :age_group).where(age_groups: { season_id: season }) }
 
   def self.players_by_year(team_members_scope)
-    # used to include includes(:member).includes(:team).includes(:field_positions).
+    # used to include includes(:member).includes(:team).includes(:field_positions)
     team_members = team_members_scope.player.asc.group_by { |team_member| team_member.member.born_on.year }
     team_members.sort_by { |year, _team_members| year }.reverse
   end
@@ -73,6 +73,7 @@ class TeamMember < ApplicationRecord
     when [TeamEvaluation]
       # For finished team evaluations, compare end date of TeamMember to the finish date of TeamEvaluation
       return record.finished_at > ended_on if record.finished?
+
       true
     when [Team]
       true
@@ -107,6 +108,7 @@ class TeamMember < ApplicationRecord
       self.prefered_foot = team_member.prefered_foot if prefered_foot.nil?
 
       return if field_positions.present?
+
       team_member.field_positions.each do |field_position|
         field_positions << field_position
       end

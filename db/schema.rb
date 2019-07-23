@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_141249) do
+ActiveRecord::Schema.define(version: 2019_07_23_150507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_141249) do
     t.boolean "indent_in_select", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "blank", default: false
+    t.boolean "is_blank", default: false
     t.bigint "line_parent_id"
     t.bigint "axis_parent_id"
     t.bigint "tenant_id"
