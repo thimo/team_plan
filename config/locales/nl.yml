@@ -177,7 +177,6 @@ nl:
         google_maps_base_url: Google Maps basis URL
         google_maps_api_key: Google Maps API key
         google_analytics_tracking_id: Google Analytics Tracking ID
-        sportlink_members_encoding: Sportlink export encoding
       todo:
         body: Todo
         started_on: Actief vanaf

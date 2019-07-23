@@ -40,10 +40,6 @@
   = f.text_field :google_maps_base_url
   = f.text_field :google_maps_api_key
   = f.text_field :google_analytics_tracking_id
-  = f.form_group :sportlink_members_encoding, label: { text: "Encoding export Sportlink" },
-                            help: "Onder Windows exporteert Sportlink in ISO 8859-1 en UTF-8 voor macOS" do
-    = f.radio_button :sportlink_members_encoding, "utf-8", label: "UTF-8"
-    = f.radio_button :sportlink_members_encoding, "iso-8859-1", label: "ISO 8859-1"
 
   .row
     .col-sm-9.offset-sm-3

@@ -14,6 +14,8 @@ class UserSetting < ApplicationRecord
       ";"
     when :include_member_comments
       false
+    when :sportlink_members_encoding
+      "utf-8"
     end
   end
 end

@@ -41,8 +41,7 @@ class TenantSettingPolicy < ApplicationPolicy
       :fontawesome_integrity,
       :google_maps_base_url,
       :google_maps_api_key,
-      :google_analytics_tracking_id,
-      :sportlink_members_encoding
+      :google_analytics_tracking_id
     ]
     attributes
   end

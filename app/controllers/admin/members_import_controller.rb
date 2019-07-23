@@ -11,6 +11,9 @@ module Admin
     def create
       authorize(Member)
 
+      encoding = params[:encoding] || "utf-8"
+      current_user.set_setting("sportlink_members_encoding", encoding)
+
       if params[:file].nil?
         flash.now[:danger] = "Selecteer eerst een bestand."
         return render :new
@@ -19,8 +22,6 @@ module Admin
         return render :new
       end
 
-      encoding = params[:encoding] || "utf-8"
-      Tenant.set_setting("sportlink_members_encoding", encoding)
       @import_result = Member.import(params[:file], encoding)
 
       # After an import with at least one member, cleanup members that were last imported 7 days ago
