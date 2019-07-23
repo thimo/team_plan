@@ -1,19 +1,19 @@
 li.nav-item
-  = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.parent}"
+  = link_to dashboard_path, title: "Voetbal", class: "nav-link #{'active' if [Object].include? controller.class.module_parent}"
     i.fa-home.nav-icon[class=fa_class]
     | Home
 - if policy(:org).show?
   li.nav-item
-    = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if controller.class.parent == Org}"
+    = link_to org_path, title: "Organisatie", class: "nav-link #{'active' if controller.class.module_parent == Org}"
       i.fa-sitemap.nav-icon[class=fa_class]
       | Organisatie
 - if false && policy(:intranet).show?
   li.nav-item
-    = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.parent == Intranet}"
+    = link_to intranet_path, title: "Intranet", class: "nav-link #{'active' if controller.class.module_parent == Intranet}"
       i.fa-folder-open.nav-icon[class=fa_class]
       | Intranet
 - if current_user.any_beheer_role?
   li.nav-item
-    = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.parent}"
+    = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.module_parent}"
       i.fa-cog.nav-icon[class=fa_class]
       | Beheer
