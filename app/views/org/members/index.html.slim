@@ -16,7 +16,7 @@
                 td.w-1.text-center.pr-0
                   = render 'members/photo', member: member
                 td
-                  = render "members/member", member: member
+                  = render "members/member", member: member, born_on_class: "float-right"
                   .light
                     = tms.map { |tm| tm.team.name_with_club }.join(", ")
 
@@ -38,7 +38,7 @@
                   td.w-1.text-center.pr-0
                     = render 'members/photo', member: member
                   td
-                    = render "members/member", member: member
+                    = render "members/member", member: member, born_on_class: "float-right"
                     - if group_member.description.present?
                       .light
                         = group_member.description
@@ -48,6 +48,6 @@
                   td.w-1.text-center.pr-0
                     = render "members/photo", member: member
                   td
-                    = render "members/member", member: member
+                    = render "members/member", member: member, born_on_class: "float-right"
                     .light
                       = human_sort(gms.map { |gm| gm.memberable }, :name).map(&:name).uniq.join(", ")

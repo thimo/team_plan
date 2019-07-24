@@ -19,7 +19,7 @@
                         td.w-1.text-center.px-0
                           = render 'members/photo', member: staff[:member]
                         td
-                          = render "members/member", member: staff[:member]
+                          = render "members/member", member: staff[:member], born_on_class: "float-right"
                           .light
                             = staff[:roles].join(", ").capitalize
                 - else

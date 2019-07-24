@@ -1,3 +1,5 @@
+- born_on_class ||= ""
+
 - if policy(member).show_private_data?
   = link_to member.name, member, target: target ||= ''
   - if member.injured?
@@ -8,7 +10,7 @@
   = member.name
 
 - if policy(member).show_private_data?
-  .lighter.small
+  .lighter.small class="#{born_on_class}"
     - if member.born_on.present?
       - if policy(member).show_full_born_on?
         => l member.born_on, format: :date_long
