@@ -69,7 +69,7 @@ class AgeGroup < ApplicationRecord
   end
 
   def status_children
-    teams
+    (teams.to_a + group_members.to_a).compact
   end
 
   private
