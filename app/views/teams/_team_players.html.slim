@@ -30,22 +30,23 @@
                 td.w-1.text-center.pr-0
                   = render 'members/photo', member: team_member.member
                 td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
-                  = render team_member.member
-                td.small
+                  div
+                    = render team_member.member, born_on_class: "float-right"
+
+                  - if policy(@team).show_previous_team?
+                    .small.d-down-none.float-right.text-right.nowrap.mt-1
+                      - if (previous_teams = team_member.member.teams_for_season(@previous_season).as_player.distinct).present?
+                        - previous_teams.each do |previous_team|
+                          div
+                            = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
+                          .lighter
+                            = "#{previous_team.division}"
+
                   - team_member.field_positions.each do |field_position|
                     div
                       = field_position.name
-                  .lighter
+                  .lighter.small
                     = team_member.prefered_foot
-
-                - if policy(@team).show_previous_team?
-                  td.small.d-down-none
-                    - if (previous_teams = team_member.member.teams_for_season(@previous_season).as_player.distinct).present?
-                      - previous_teams.each do |previous_team|
-                        div.nowrap
-                          = link_to previous_team.name, previous_team, target: '_blank', class: 'strong', title: 'Vorige team'
-                        div.lighter.nowrap
-                          = "#{previous_team.division}"
 
                 td.w-1.nowrap.text-right
                   - if policy(team_member).edit?
