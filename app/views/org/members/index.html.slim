@@ -1,53 +1,42 @@
 - provide(:title, "Actieve leden")
 
 .row
-  .col-sm-6
-    h4.mb-4
-      = "Teamleiding #{@season.name}"
+  .col-sm-4
+    ul.list-group.mb-4
+      li.list-group-item.strong
+        = "Teamleiding #{@season.name}"
+      - @roles.each do |role|
+        = link_to [:org, :members, expand: role[:value]], class: "list-group-item list-group-item-action #{'active' if params[:expand] == role[:value]}"
+          = role[:label]
+          .badge.badge-secondary.badge-pill.float-right
+            = role[:count]
 
-    - @team_members_per_role.each do |role, tms|
+    ul.list-group.mb-4
+      li.list-group-item.strong
+        | Overige rollen
+      - @groups.each do |group|
+        = link_to [:org, :members, expand: group.id], class: "list-group-item list-group-item-action #{'active' if params[:expand] == group.id.to_s}"
+          = group.name
+          .badge.badge-secondary.badge-pill.float-right
+            = group.members.distinct.size
+
+  - if @members_title.present?
+    .col-sm-8
       .card
         .card-header
-          = "#{role} (#{tms.count})"
+          = @members_title
         .card-body.p-0
-          table.table.table-sm.tr-links
-            - tms.group_by(&:member).sort_by { |member, _tms| member.last_name }.each do |member, tms|
-              tr
-                td.w-1.text-center.pr-0
-                  = render 'members/photo', member: member
-                td
-                  = render "members/member", member: member, born_on_class: "float-right"
-                  .light
-                    = tms.map { |tm| tm.team.name_with_club }.join(", ")
-
-  .col-sm-6
-    h4.mb-4
-      | Overige rollen
-
-    - @groups.each do |group|
-      .card
-        .card-header
-          / TODO: get through active team_members, but needs fix for groups like "Coordinator"
-          = "#{group.name} (#{group.members.distinct.size})"
-        .card-body.p-0
-          table.table.table-sm.tr-links
-            - if group.memberable_via_type.blank?
-              - group.group_members.active.sort_by { |gm| gm.member.last_name }.each do |group_member|
-                - member = group_member.member
+          - if @group_members.any?
+            table.table.table-sm.tr-links
+              - @group_members.each do |group_member|
                 tr
                   td.w-1.text-center.pr-0
-                    = render 'members/photo', member: member
+                    = render 'members/photo', member: group_member[:member]
                   td
-                    = render "members/member", member: member, born_on_class: "float-right"
-                    - if group_member.description.present?
+                    = render "members/member", member: group_member[:member], born_on_class: "float-right"
+                    - if group_member[:description].present?
                       .light
-                        = group_member.description
-            - else
-              - group.group_members.active.group_by(&:member).sort_by { |member, _gms| member.last_name }.each do |member, gms|
-                tr
-                  td.w-1.text-center.pr-0
-                    = render "members/photo", member: member
-                  td
-                    = render "members/member", member: member, born_on_class: "float-right"
-                    .light
-                      = human_sort(gms.map { |gm| gm.memberable }, :name).map(&:name).uniq.join(", ")
+                        = group_member[:description]
+          - else
+            .p-3
+              i Geen leden gevonden

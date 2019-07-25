@@ -1,7 +1,7 @@
 .card
   .card-header
     | Spelers
-    .badge.badge-secondary.badge-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
+    .badge.badge-pill.badge-secondary.badge-one-number.ml-3 = policy_scope(@team.team_members).active_for_team(@team).player.size
     .card-header-actions
       - if policy(@team).bulk_email?
         a.card-header-action[href="mailto:#{@team.team_members.active_for_team(@team).map(&:email).uniq.join(current_user.setting(:email_separator))}", title="Stuur een e-mail aan alle teamgenoten"]

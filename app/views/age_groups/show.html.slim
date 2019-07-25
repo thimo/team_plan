@@ -57,7 +57,7 @@
                   - if policy(team).show_status?
                     => team.status_to_badge.html_safe
                   - if policy_scope(team.team_members).size > 0
-                    .badge.badge-secondary.badge-two-numbers>
+                    .badge.badge-pill.badge-secondary.badge-two-numbers>
                       = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).active_for_team(team).staff.pluck(:member_id).uniq.size}"
 
     - if @not_played_matches.any?

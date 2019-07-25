@@ -17,3 +17,10 @@
   color: $gray-800;
   font-weight: 500;
 }
+
+.list-group-item.active {
+  .badge-primary {
+    color: $gray-800;
+    background-color: $white;
+  }
+}

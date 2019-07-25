@@ -23,5 +23,5 @@
                 td.text-right
                   => season.status_to_badge.html_safe
                   - if (size = policy_scope(season.age_groups).size) > 0
-                    .badge.badge-secondary.badge-one-number>
+                    .badge.badge-pill.badge-secondary.badge-one-number>
                       = "#{size}"
