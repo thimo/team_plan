@@ -2,27 +2,23 @@
 
 .row
   .col-sm-4
-    h4.mb-4
-      = "Teamleiding #{@season.name}"
-
     ul.list-group.mb-4
+      li.list-group-item.strong
+        = "Teamleiding #{@season.name}"
       - @roles.each do |role|
         = link_to [:org, :members, expand: role[:value]], class: "list-group-item list-group-item-action #{'active' if params[:expand] == role[:value]}"
-          .d-flex.justify-content-between.align-items-center
-            = role[:label]
-            span.badge.badge-primary.badge-pill
-              = role[:count]
-
-    h4.mb-4
-      | Overige rollen
+          = role[:label]
+          .badge.badge-secondary.badge-pill.float-right
+            = role[:count]
 
     ul.list-group.mb-4
+      li.list-group-item.strong
+        | Overige rollen
       - @groups.each do |group|
         = link_to [:org, :members, expand: group.id], class: "list-group-item list-group-item-action #{'active' if params[:expand] == group.id.to_s}"
-          .d-flex.justify-content-between.align-items-center
-            = group.name
-            span.badge.badge-primary.badge-pill
-              = group.members.distinct.size
+          = group.name
+          .badge.badge-secondary.badge-pill.float-right
+            = group.members.distinct.size
 
   - if @members_title.present?
     .col-sm-8

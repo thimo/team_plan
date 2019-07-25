@@ -38,7 +38,7 @@
               - if policy(age_group).show_status?
                 => age_group.status_to_badge.html_safe
               - if (size = policy_scope(age_group.teams).by_status([:active, age_group.status]).size) > 0
-                .badge.badge-secondary.badge-one-number>
+                .badge.badge-pill.badge-secondary.badge-one-number>
                   = "#{size}"
               - if policy(age_group).show_member_count?
                 div
