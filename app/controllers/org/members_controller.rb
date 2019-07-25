@@ -11,7 +11,10 @@ module Org
       @roles = roles_hash
       @groups = policy_scope(Group).asc
 
+      params[:expand] ||= current_user.setting(:org_members_expand)
       return if params[:expand].blank?
+
+      current_user.set_setting(:org_members_expand, params[:expand])
 
       if (group = @groups.find_by(id: params[:expand])).present?
         @members_title = group.name
@@ -24,9 +27,7 @@ module Org
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Actieve leden"
-      end
+      def add_breadcrumbs; end
 
       def team_staff_members
         policy_scope(TeamMember.for_season(Season.last)).active.staff
@@ -62,7 +63,7 @@ module Org
                    description: human_sort(gms.map(&:memberable), :name).map(&:name).uniq.join(", ")
                  }
                end
-        end        
+        end
       end
 
       def team_staff_hash(role)
