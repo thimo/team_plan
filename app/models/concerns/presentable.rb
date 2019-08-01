@@ -18,11 +18,11 @@ module Presentable
         presence = presences.create(member: team_member.member, team: team)
 
         if team_member.member.injured?
-          presence.update(present: false, remark: "Blessure (#{team_member.member.injuries.active.last.title})")
+          presence.update(is_present: false, remark: "Blessure (#{team_member.member.injuries.active.last.title})")
         elsif respond_to? :training_schedule
           if (inherit_from = training_schedule&.presences&.find_by(member: team_member.member)).present?
             # Inherit fields from training schedule
-            %w[present on_time signed_off remark].each do |field|
+            %w[is_present on_time signed_off remark].each do |field|
               presence.write_attribute(field, inherit_from.send(field))
             end
             presence.save!
@@ -50,15 +50,10 @@ module Presentable
   def present_size_for_label(team)
     if presences.team(team).any?
       presences.team(team).present.size
-    elsif is_a?(Training) && training_schedule&.presences.any?
-      training_schedule&.presences.present.size
+    elsif is_a?(Training) && training_schedule&.presences&.any?
+      training_schedule&.presences&.present&.size
     else
       team.team_members.player.active.size
     end
   end
-
-  private
-
-    module ClassMethods
-    end
 end

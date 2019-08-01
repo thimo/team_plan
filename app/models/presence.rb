@@ -7,8 +7,8 @@ class Presence < ApplicationRecord
   belongs_to :team
 
   scope :asc, -> { includes(:member).order("members.last_name ASC, members.first_name ASC") }
-  scope :present, -> { where(present: true) }
-  scope :not_present, -> { where(present: false) }
+  scope :present, -> { where(is_present: true) }
+  scope :not_present, -> { where(_ispresent: false) }
   scope :team, ->(team) { where(team: team) }
   scope :for_training, ->(ids) { where(presentable_type: Training.name).where(presentable_id: ids) }
   scope :for_match, ->(ids) { where(presentable_type: Match.name).where(presentable_id: ids) }

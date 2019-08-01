@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_150507) do
+ActiveRecord::Schema.define(version: 2019_08_01_122232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -387,7 +387,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_150507) do
     t.string "presentable_type"
     t.bigint "presentable_id"
     t.bigint "member_id"
-    t.boolean "present", default: true
+    t.boolean "is_present", default: true
     t.integer "on_time", default: 0
     t.integer "signed_off", default: 0
     t.text "remark"
