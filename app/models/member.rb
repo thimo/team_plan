@@ -3,7 +3,7 @@
 # Imported members from Sportlink
 class Member < ApplicationRecord
   include Filterable
-  include PgSearch
+  include PgSearch::Model
 
   mount_uploader :photo, PhotoUploader
 
