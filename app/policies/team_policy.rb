@@ -89,6 +89,12 @@ class TeamPolicy < ApplicationPolicy
     @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
   end
 
+  def show_alert?
+    return false if @record.archived?
+
+    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+  end
+
   def show_previous_team?
     return false if @record.archived?
 

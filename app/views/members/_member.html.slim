@@ -1,4 +1,5 @@
 - born_on_class ||= ""
+- show_alert ||= false
 
 - if policy(member).show_private_data?
   = link_to member.name, member, target: target ||= ''
@@ -26,5 +27,14 @@
       .light.small
         = member.status.capitalize
   - if member.deregistered_at.present?
-    .light.small
-      | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
+    - if show_alert && member.inactive?
+      .alert.alert-danger.mb-0.mt-1
+        i.fa.fa-exclamation-triangle.fa-lg.pr-2
+        | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
+    - else
+      .light.small
+        | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
+  - if show_alert && member.sportlink_non_player?
+    .alert.alert-danger.mb-0.mt-1
+      i.fa.fa-exclamation-triangle.fa-lg.pr-2
+      | De speler is niet speelgerechtigd

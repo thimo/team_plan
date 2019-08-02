@@ -73,4 +73,9 @@ class Team < ApplicationRecord
   def name_with_club
     "#{Tenant.setting('club_name_short')} #{name}"
   end
+
+  def inactive_players?
+    Member.by_team_as_active_player(self).inactive.any? ||
+      Member.by_team_as_active_player(self).sportlink_non_player.any?
+  end
 end

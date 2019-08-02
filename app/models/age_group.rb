@@ -72,6 +72,11 @@ class AgeGroup < ApplicationRecord
     (teams.to_a + group_members.to_a).compact
   end
 
+  def inactive_players?
+    Member.by_age_group_as_active_player(self).inactive.any? ||
+      Member.by_age_group_as_active_player(self).sportlink_non_player.any?
+  end
+
   private
 
     def filter_for_birth_date_and_gender(members)
