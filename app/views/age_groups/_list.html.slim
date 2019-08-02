@@ -36,10 +36,11 @@
                   = "2 x #{age_group.minutes_per_half} min"
             td.text-right
               - if policy(age_group).show_status?
-                => age_group.status_to_badge.html_safe
+              => age_group.status_to_badge.html_safe
               - if (size = policy_scope(age_group.teams).by_status([:active, age_group.status]).size) > 0
                 .badge.badge-pill.badge-secondary.badge-one-number>
                   = "#{size}"
+
               - if policy(age_group).show_member_count?
                 div
                   - active_players_size = age_group.team_members.player.active.size
@@ -57,3 +58,5 @@
                       =<> "/"
                     span.color-green
                       = waiting_players_size
+                  - if age_group.inactive_players?
+                    i.fa.fa-exclamation-triangle.color-red.fa-lg title="Eén of meerdere teams bevatten mogelijk een fout in de indeling"
