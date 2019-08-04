@@ -17,7 +17,7 @@ module Org
 
       current_user.set_setting(key, params[:expand])
 
-      age_group = policy_scope(AgeGroup.find_by(id: params[:expand]))
+      age_group = policy_scope(AgeGroup).find_by(id: params[:expand])
       @teams = teams_for(age_group)
     end
 
