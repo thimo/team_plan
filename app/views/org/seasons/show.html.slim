@@ -11,7 +11,7 @@
         - @teams.each do |team|
           .card
             .card-header
-              = team[:title]
+              = link_to team[:title], team[:team]
             .card-body.p-0
               - if team[:staff].any?
                 table.table.table-sm.tr-links.w-100
