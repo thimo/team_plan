@@ -15,7 +15,7 @@ class TrainingSchedule < ApplicationRecord
 
   validates :day, :start_time, :end_time, :soccer_field_id, :field_part, presence: true
 
-  enum day: { monday: 0, tuesday: 1, wednesday: 2, thursday: 3, friday: 4, saturday: 5, sunday: 6 }
+  enum day: { monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 0 }
   enum field_part: { whole: 0, part_ab: 5, part_a: 1, part_b: 2, part_cd: 6, part_c: 3, part_d: 4 }
   enum present_minutes: { min_0: 0, min_5: 5, min_10: 10, min_15: 15, min_30: 30, min_45: 45, min_60: 60 }
 
