@@ -85,7 +85,8 @@ class TrainingSchedule < ApplicationRecord
       next_wday([started_on.beginning_of_day, Time.zone.now].max, day_number)
     end
 
-    def next_wday(date, wday)
-      wday >= date.wday ? date + (wday - date.wday) : date.next_week.next_day(wday)
+    def next_wday(from_date, wday)
+      skip_week_in_days = wday >= from_date.wday ? 0 : 7
+      from_date + (skip_week_in_days - from_date.wday + wday).days
     end
 end
