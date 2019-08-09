@@ -84,7 +84,7 @@ class TrainingSchedulesController < ApplicationController
     end
 
     def check_and_set_dates(training_schedule)
-      training_schedule.started_on ||= training_schedule.team.age_group.season.started_on
+      training_schedule.started_on ||= [training_schedule.team.age_group.season.started_on, Time.zone.today].max
       training_schedule.ended_on ||= training_schedule.team.age_group.season.ended_on
     end
 end
