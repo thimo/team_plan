@@ -51,3 +51,5 @@ section
       #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
         - @presences.each do |presence|
           = render presence
+
+= render "shared/versions", parent: @training

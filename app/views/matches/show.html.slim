@@ -93,3 +93,5 @@ section
     - if @match.adres.present?
       #tab-address.tab-pane.fade[role="tabpanel" aria-expanded="false"]
         = render "location_and_direction", match: @match
+
+= render "shared/versions", parent: @match
