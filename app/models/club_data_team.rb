@@ -22,9 +22,6 @@ class ClubDataTeam < ApplicationRecord
                                     .strip
 
     team = Team.for_active_season.active.find_by(name: [teamnaam, teamname_without_club])
-    # team ||= Team.for_active_season.active.find_by("teams.name like (?) OR teams.name like (?)",
-    #                                                "#{teamnaam}%",
-    #                                                "#{teamname_without_club}%")
 
     # Find with stripped G or M at end of teamname
     if team.nil? && teamname_without_club =~ /JO[0-9]+-[0-9]+[GM]$/

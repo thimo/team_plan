@@ -3,6 +3,8 @@
 class Competition < ApplicationRecord
   include Activatable
 
+  COMPETITIESOORT_REGULIER = "regulier"
+
   acts_as_tenant :tenant
   has_many :club_data_team_competitions, dependent: :destroy
   has_many :club_data_teams, through: :club_data_team_competitions
@@ -15,8 +17,8 @@ class Competition < ApplicationRecord
 
   scope :asc,     -> { order(:created_at) }
   scope :desc,    -> { order(created_at: :desc) }
-  scope :regular, -> { where(competitiesoort: "regulier") }
-  scope :other,   -> { where.not(competitiesoort: "regulier") }
+  scope :regular, -> { where(competitiesoort: COMPETITIESOORT_REGULIER) }
+  scope :other,   -> { where.not(competitiesoort: COMPETITIESOORT_REGULIER) }
   scope :knvb,    -> { where("poulecode > 0") }
   scope :custom,  -> { where("poulecode < 0") }
 
@@ -27,5 +29,9 @@ class Competition < ApplicationRecord
 
   def name
     competitienaam
+  end
+
+  def regular?
+    competitiesoort == COMPETITIESOORT_REGULIER
   end
 end

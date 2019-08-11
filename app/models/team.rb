@@ -78,4 +78,16 @@ class Team < ApplicationRecord
     Member.by_team_as_active_player(self).inactive.any? ||
       Member.by_team_as_active_player(self).sportlink_non_player.any?
   end
+
+  def check_and_set_division(club_data_division)
+    update(division: club_data_division) if DIVISION_OPTIONS.include?(club_data_division)
+  end
+
+  def self.check_division
+    Team.active.each do |team|
+      if (competition = team.competitions.regular.last).present?
+        team.check_and_set_division(competition.klasse)
+      end
+    end
+  end
 end
