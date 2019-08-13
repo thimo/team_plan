@@ -1,4 +1,4 @@
-= month_calendar attribute: :started_at, events: events do |date, meetings|
+= month_calendar attribute: :started_at, events: (events || []) do |date, meetings|
   .text-right
     .lighter
       = I18n.l date, format: :date_day
