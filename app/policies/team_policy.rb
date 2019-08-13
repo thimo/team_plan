@@ -86,13 +86,13 @@ class TeamPolicy < ApplicationPolicy
   def show_status?
     return false if @record.status == @record.age_group.status
 
-    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+    @user.admin? || @user.role?(Role::STATUS_DRAFT, @record)
   end
 
   def show_alert?
     return false if @record.archived?
 
-    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+    @user.admin? || @user.role?(Role::TEAM_MEMBER_ALERT, @record)
   end
 
   def show_previous_team?

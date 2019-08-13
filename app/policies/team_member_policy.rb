@@ -43,13 +43,13 @@ class TeamMemberPolicy < ApplicationPolicy
   def show_status?
     return false if @record.status == @record.team.status
 
-    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+    @user.admin? || @user.role?(Role::STATUS_DRAFT, @record)
   end
 
   def show_alert?
     return false if @record.archived?
 
-    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+    @user.admin? || @user.role?(Role::TEAM_MEMBER_ALERT, @record)
   end
 
   def set_status?
