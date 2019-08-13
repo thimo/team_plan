@@ -10,6 +10,8 @@
           tr
             th = Member.human_attribute_name(:name)
             th = Member.human_attribute_name(:email)
+            - if policy(User).update?
+              th = Member.human_attribute_name(:users)
         tbody
           - @members.each do |member|
             tr
@@ -17,6 +19,10 @@
                 = render member
               td
                 = member.email
+              - if policy(User).update?
+                td
+                  - member.users.each do |user|
+                    div = link_to user.name, [:edit, :admin, user]
     - else
       .p-3
         i Geen leden gevonden
