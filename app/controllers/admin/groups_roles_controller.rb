@@ -2,6 +2,8 @@
 
 module Admin
   class GroupsRolesController < Admin::BaseController
+    before_action :add_breadcrumbs
+
     def index
       @groups = policy_scope(Group).sort_by { |group| -1 * group.roles.size }
       @roles = policy_scope(Role).asc
@@ -31,5 +33,11 @@ module Admin
 
       redirect_to admin_groups_roles_path
     end
+
+    private
+
+      def add_breadcrumbs
+        add_breadcrumb "Rollenmatrix", admin_groups_roles_path
+      end
   end
 end
