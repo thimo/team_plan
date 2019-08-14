@@ -92,14 +92,23 @@ class Member < ApplicationRecord
                                                                        ended_on: nil,
                                                                        status: 1 })
   }
-  scope :by_age_group, ->(age_group) { includes(team_members: :team).where(teams: { age_group_id: age_group }) }
-  scope :by_age_group_as_active_player, ->(age_group) {
-    includes(team_members: :team).where(teams: { age_group_id: age_group },
-                                        team_members: { role: TeamMember.roles[:player], ended_on: nil, status: 1 })
+  scope :by_age_group, ->(age_group) {
+    includes(team_members: :team).where(teams: { age_group_id: age_group })
   }
-  scope :by_team, ->(team) { joins(:team_members).where(team_members: { team: team, ended_on: nil }) }
+  scope :by_age_group_as_active, ->(age_group) {
+    by_age_group(age_group).where(team_members: { ended_on: nil, status: 1 })
+  }
+  scope :by_age_group_as_active_player, ->(age_group) {
+    by_age_group_as_active(age_group).player
+  }
+  scope :by_team, ->(team) {
+    joins(:team_members).where(team_members: { team: team, ended_on: nil })
+  }
+  scope :by_team_as_active, ->(team) {
+    by_team(team).where(team_members: { status: 1 })
+  }
   scope :by_team_as_active_player, ->(team) {
-    joins(:team_members).where(team_members: { team: team, role: TeamMember.roles[:player], ended_on: nil, status: 1 })
+    by_team_as_active(team).player
   }
   scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }

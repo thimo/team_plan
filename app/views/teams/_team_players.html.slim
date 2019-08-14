@@ -31,7 +31,7 @@
                   = render 'members/photo', member: team_member.member
                 td[class="#{'line-through' if team_member.inactive_for?(@team)}"]
                   div
-                    = render team_member.member, born_on_class: "float-right", show_alert: policy(team_member).show_alert?
+                    = render team_member.member, born_on_class: "float-right", team_member: team_member
 
                   - if policy(@team).show_previous_team?
                     .small.d-down-none.float-right.text-right.nowrap.mt-1
