@@ -77,6 +77,9 @@ class Member < ApplicationRecord
     where(sport_category: nil)
       .where.not(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
   }
+  scope :status_overschrijving, -> {
+    where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
+  }
 
   scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
@@ -92,6 +95,7 @@ class Member < ApplicationRecord
                                                                        ended_on: nil,
                                                                        status: 1 })
   }
+
   scope :by_age_group, ->(age_group) {
     includes(team_members: :team).where(teams: { age_group_id: age_group })
   }
@@ -101,6 +105,10 @@ class Member < ApplicationRecord
   scope :by_age_group_as_active_player, ->(age_group) {
     by_age_group_as_active(age_group).player
   }
+  scope :by_age_group_as_active_player_in_active_team, ->(age_group) {
+    by_age_group_as_active_player(age_group).where(teams: { status: :active })
+  }
+
   scope :by_team, ->(team) {
     joins(:team_members).where(team_members: { team: team, ended_on: nil })
   }
@@ -110,6 +118,7 @@ class Member < ApplicationRecord
   scope :by_team_as_active_player, ->(team) {
     by_team_as_active(team).player
   }
+
   scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
@@ -159,11 +168,15 @@ class Member < ApplicationRecord
   end
 
   def sportlink_player?
-    sport_category.present? || status == STATUS_OVERSCHRIJVING_SPELACTIVITEIT
+    sport_category.present?
   end
 
   def sportlink_non_player?
     !sportlink_player?
+  end
+
+  def status_overschrijving?
+    status == STATUS_OVERSCHRIJVING_SPELACTIVITEIT
   end
 
   def archived?
@@ -244,14 +257,6 @@ class Member < ApplicationRecord
 
   def google_maps_address
     full_address.join(",")
-  end
-
-  def alert_title
-    if inactive?
-      "De speler is geen actief lid"
-    elsif sportlink_non_player?
-      "De speler is niet speelgerechtigd"
-    end
   end
 
   def self.import(file, encoding="utf-8")
