@@ -43,7 +43,7 @@ module TeamsHelper
     @team.team_members.active_or_archived.player.asc.each do |team_member|
       @training_presences_data[:labels] << team_member.name
 
-      presences = team_member.member.presences.for_training(ids)
+      presences = team_member.member.presences.own_player.for_training(ids)
       @training_presences_data[:datasets][0][:data] << presences.present.on_time.size
       @training_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
       @training_presences_data[:datasets][2][:data] << presences.present.much_too_late.size
@@ -88,7 +88,7 @@ module TeamsHelper
     @team.team_members.active_or_archived.player.asc.each do |team_member|
       @match_presences_data[:labels] << team_member.name
 
-      presences = team_member.member.presences.for_match(ids)
+      presences = team_member.member.presences.own_player.for_match(ids)
       @match_presences_data[:datasets][0][:data] << presences.present.on_time.size
       @match_presences_data[:datasets][1][:data] << presences.present.a_bit_too_late.size
       @match_presences_data[:datasets][2][:data] << presences.present.much_too_late.size

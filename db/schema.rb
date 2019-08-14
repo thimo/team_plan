@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_102112) do
+ActiveRecord::Schema.define(version: 2019_08_14_195847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -395,6 +395,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_102112) do
     t.datetime "updated_at", null: false
     t.bigint "team_id"
     t.bigint "tenant_id"
+    t.boolean "own_player", default: true
     t.index ["member_id"], name: "index_presences_on_member_id"
     t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
     t.index ["team_id"], name: "index_presences_on_team_id"
