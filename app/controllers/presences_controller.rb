@@ -32,6 +32,6 @@ class PresencesController < ApplicationController
     end
 
     def presence_params
-      params.require(:presence).permit(:present, :on_time, :signed_off, :remark)
+      params.require(:presence).permit(:is_present, :on_time, :signed_off, :remark)
     end
 end
