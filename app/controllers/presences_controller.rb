@@ -10,10 +10,8 @@ class PresencesController < ApplicationController
   end
 
   def update
-    if @presence.update(presence_params)
-      @presence.set_presentable_user_modified
-      @present_count = @presence.presentable.presences.present.size
-    end
+    @presence.update(presence_params)
+    @present_count = @presence.presentable.presences.present.size
   end
 
   private
@@ -32,6 +30,6 @@ class PresencesController < ApplicationController
     end
 
     def presence_params
-      params.require(:presence).permit(:present, :on_time, :signed_off, :remark)
+      params.require(:presence).permit(:is_present, :on_time, :signed_off, :remark)
     end
 end

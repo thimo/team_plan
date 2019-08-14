@@ -4,7 +4,7 @@ tr
   td.w-1.text-center.pr-0
     = render 'members/photo', member: member
   td
-    = render member, born_on_class: "float-right"
+    = render member, born_on_class: "float-right", team_member: team_members.first
     - team_members.each do |team_member|
       div
         = team_member.role_i18n

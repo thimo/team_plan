@@ -13,7 +13,7 @@
             label_class: "#{'light line-through' unless presence.present?}",
             custom: true
       div.extra_fields[class="#{compact ? 'col-12' : 'col-md-2'}"]
-        - if presence.present?
+        - if presence.is_present?
           = f.collection_select :on_time, Presence.on_times_i18n, :first, :second,
             { hide_label: true },
             { class: " #{color_for_on_time(presence.send(:on_time))}", wrapper: { class: 'mb-1' } }

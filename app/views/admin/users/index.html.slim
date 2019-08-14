@@ -47,7 +47,7 @@
                   = link_to member.name, member
             td.d-down-none
               = I18n.l user.current_sign_in_at, format: :long if user.current_sign_in_at.present?
-            - if policy(User).impersonate?
+            - if policy(user).impersonate?
               td.text-right
                 - if current_user != user
                   = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"

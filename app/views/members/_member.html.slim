@@ -1,5 +1,6 @@
 - born_on_class ||= ""
-- show_alert ||= false
+- team_member ||= nil
+- show_alert = team_member.present? && policy(team_member).show_alert?
 
 - if policy(member).show_private_data?
   = link_to member.name, member, target: target ||= ''
@@ -30,7 +31,7 @@
     .light.small
       | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
 
-- if show_alert && member.sportlink_non_player?
+- if show_alert && team_member.player? && member.sportlink_non_player?
   .alert.alert-danger.mb-0.mt-1
     i.fa.fa-exclamation-triangle.fa-lg.pr-2
     | De speler is niet speelgerechtigd

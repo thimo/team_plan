@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   # Globally rescue Authorization Errors in controller.
   # Returning 403 Forbidden if permission is denied
   rescue_from Pundit::NotAuthorizedError, with: :permission_denied
+  rescue_from ActionController::InvalidCrossOriginRequest, with: :permission_denied
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_auth_token
 
   private
