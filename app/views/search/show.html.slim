@@ -22,7 +22,12 @@
               - if policy(User).update?
                 td
                   - member.users.each do |user|
-                    div = link_to user.name, [:edit, :admin, user]
+                    div
+                      - if policy(user).impersonate? && current_user != user
+                        .float-right
+                          = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
+                            i.fa-sign-in.m-1.ml-2[class=fa_class]
+                      = link_to user.name, [:edit, :admin, user]
     - else
       .p-3
         i Geen leden gevonden
