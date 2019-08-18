@@ -3,13 +3,12 @@
  * listed below.
  */
 
-@import 'theme/coreui';
-@import 'select2/src/scss/core';
-@import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3';
-@import 'trix';
-@import 'simple_calendar';
-@import 'rails_bootstrap_forms';
-@import './admin/*';
-@import './org/*';
+@import "theme/coreui";
+@import "select2/src/scss/core";
+@import "bootstrap-datepicker/dist/css/bootstrap-datepicker3";
+@import "simple_calendar";
+@import "rails_bootstrap_forms";
+@import "./admin/*";
+@import "./org/*";
 // @import './intranet/*';
-@import './*';
+@import "./*";

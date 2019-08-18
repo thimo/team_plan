@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Represents a team with players and staff
 class Team < ApplicationRecord
   include Statussable
 

@@ -14,8 +14,8 @@ head
 
   = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   = stylesheet_link_tag 'print/print', media: 'print', 'data-turbolinks-track': 'reload'
-  = csrf_meta_tags
-
-  / Use 'defer' here as with 'async' 'turbolinks:load' is not called
+  = stylesheet_pack_tag 'application'
   = javascript_pack_tag 'application', defer: true
+
   = render "layouts/analytics"
+  = csrf_meta_tags

@@ -2,5 +2,6 @@
   label.col-md-3.col-form-label.text[for="#{f.object.class.name.downcase}_#{field.to_s}"]
     = f.label field, class: 'required'
   .col-md-9
-    = f.trix_editor field, class: 'form-control'
+    = f.hidden_field field, id: "x"
+    trix-editor.form-control input="x"
     = errors_for(f.object, field)
