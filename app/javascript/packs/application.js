@@ -11,8 +11,10 @@ import "bootstrap-datepicker";
 import "bootstrap-datepicker/dist/locales/bootstrap-datepicker.nl.min";
 import "chart.js";
 import "trix";
-import "trix/dist/trix.css";
 import "sticky-table-headers";
+
+import "trix/dist/trix.css";
+import "bootstrap-datepicker/dist/css/bootstrap-datepicker3";
 
 import Turbolinks from "turbolinks";
 Turbolinks.start();

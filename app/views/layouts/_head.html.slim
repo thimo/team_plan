@@ -13,8 +13,8 @@ head
     crossorigin="anonymous"]
 
   = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-  = stylesheet_link_tag 'print/print', media: 'print', 'data-turbolinks-track': 'reload'
   = stylesheet_pack_tag 'application'
+  = stylesheet_link_tag 'print/print', media: 'print', 'data-turbolinks-track': 'reload'
   = javascript_pack_tag 'application', defer: true
 
   = render "layouts/analytics"
