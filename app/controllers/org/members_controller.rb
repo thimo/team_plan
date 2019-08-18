@@ -27,7 +27,9 @@ module Org
 
     private
 
-      def add_breadcrumbs; end
+      def add_breadcrumbs
+        add_breadcrumb "Actieve leden"
+      end
 
       def team_staff_members
         policy_scope(TeamMember.for_season(Season.last)).active.staff

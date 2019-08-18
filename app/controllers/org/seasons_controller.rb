@@ -28,7 +28,9 @@ module Org
         authorize @season
       end
 
-      def add_breadcrumbs; end
+      def add_breadcrumbs
+        add_breadcrumb "Teamleiding #{@season.name}"
+      end
 
       def age_groups_for(season, gender)
         policy_scope(season.age_groups).send(gender).asc.map do |age_group|
