@@ -36,12 +36,12 @@
     - if member.status_overschrijving?
       .alert.alert-danger.mb-0.mt-1
         i.fa.fa-exclamation-triangle.fa-lg.pr-2
-        | De speler is niet speelgerechtigd, het overschrijvingverzoek is nog niet goedgekeurd
+        | #{member.name} is niet speelgerechtigd, het overschrijvingverzoek is nog niet goedgekeurd
     - elsif member.sportlink_non_player?
       .alert.alert-danger.mb-0.mt-1
         i.fa.fa-exclamation-triangle.fa-lg.pr-2
-        | De speler is niet speelgerechtigd
+        | #{member.name} is niet speelgerechtigd
   - if member.inactive?
     .alert.alert-danger.mb-0.mt-1
       i.fa.fa-exclamation-triangle.fa-lg.pr-2
-      | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
+      | #{member.name} is geen actief lid meer sinds #{I18n.l member.deregistered_at, format: :long}
