@@ -79,6 +79,6 @@ module ApplicationHelper
   end
 
   def fa_class
-    @fa_class ||= Tenant.setting("fontawesome_integrity").present? ? "far" : "fa"
+    @fa_class ||= Tenant.setting("fontawesome_integrity").present? ? "fad" : "fa"
   end
 end
