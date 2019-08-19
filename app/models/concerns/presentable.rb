@@ -9,7 +9,7 @@ module Presentable
   end
 
   def find_or_create_presences(team = nil)
-    team ||= self.team
+    team ||= self.respond_to?(:teams) ? teams.first : team
 
     return Presence.none if team.archived?
 
