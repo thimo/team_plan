@@ -54,10 +54,10 @@ section
 
   .tab-content
     .tab-pane.active.show
-      = render "teams/tab_team"         if @active_tab == 'team'
-      = render "teams/tab_schedule"     if @active_tab == 'schedule'
-      = render "teams/tab_competitions" if @active_tab == 'competitions'
-      = render "teams/tab_calendar"     if @active_tab == 'calendar'
+      = render "teams/tab_team"         if @active_tab == 'team' && policy(@team).show_team?
+      = render "teams/tab_schedule"     if @active_tab == 'schedule' && policy(@team).show_schedule?
+      = render "teams/tab_competitions" if @active_tab == 'competitions' && policy(@team).show_competitions?
+      = render "teams/tab_calendar"     if @active_tab == 'calendar' && policy(@team).show_calendar?
       = render "teams/tab_dossier"      if @active_tab == 'dossier' && policy(@team).show_dossier?
       = render "teams/tab_statistics"   if @active_tab == 'statistics' && policy(@team).show_statistics?
 

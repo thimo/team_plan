@@ -32,18 +32,26 @@ class MatchPolicy < ApplicationPolicy
     update?
   end
 
+  def set_team?
+    @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN)
+  end
+
   def update_presences?
     return false if @record.afgelast?
 
     @user.team_staff_for?(@record)
   end
 
+  def show_match?
+    true
+  end
+
   def show_presences?
     update_presences?
   end
 
-  def set_team?
-    @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN)
+  def show_address?
+    true
   end
 
   def permitted_attributes

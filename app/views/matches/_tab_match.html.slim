@@ -1,0 +1,53 @@
+.row
+  label.col-4
+    = @match.type_name.capitalize
+  .col-8
+    .mb-1
+      .strong
+        = @match.title
+        = " (#{@match.uitslag})" if @match.uitslag.present?
+      .small.light
+        = @match.competition.competitienaam
+
+.row
+  label.col-4
+    | Aanvang
+  .col-8
+    span
+      | #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
+    span.pl-2
+      | #{l @match.started_at, format: :time_short}
+
+- if @match.accommodatie.present? || @match.plaats.present?
+  .row
+    label.col-4
+      | Locatie
+    .col-8
+      .mt-2
+        .strong
+          = @match.accommodatie
+        div
+          = @match.adres
+        div
+          - if @match.postcode.present?
+            = "#{@match.postcode}  "
+          = @match.plaats
+
+- if @match.created_by
+  .row
+    .lighter.offset-4.col-8
+      | Aangemaakt door #{@match.created_by.name}
+
+- if @players.present?
+  h4 Spelers
+
+  table.table
+    - @players.each do |player|
+      tr
+        td
+          = render player.member
+
+- if @match.remark.present?
+  hr
+  strong Opmerkingen
+  = markdown(@match.remark).html_safe

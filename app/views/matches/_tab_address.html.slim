@@ -1,0 +1,18 @@
+div data={ controller: 'google-maps' }
+  iframe#google-maps[frameborder="0" style="width: 100%; height: 600px; border:0"
+    src="#{google_maps_url(object: @match, type: 'place')}" allowfullscreen data-target="google-maps.iframe"]
+
+  ul.nav.nav-pills.mt-2
+    li
+      = link_to 'Sportcomplex', nil,
+        class: "google-maps-iframe-link nav-link active",
+        data: { target: 'google-maps.link', action: 'google-maps#activateIframe', google_maps_url: google_maps_url(object: @match, type: 'place') }
+    - if current_user.members.active.first.present?
+      li
+        = link_to "Route vanuit huis", nil,
+        class: "google-maps-iframe-link nav-link",
+        data: { target: 'google-maps.link', action: 'google-maps#activateIframe', google_maps_url: google_maps_url(object: @match, type: 'directions', user: current_user) }
+    li
+      = link_to "Route vanuit #{Tenant.setting('club_name')}", nil,
+        class: "google-maps-iframe-link nav-link",
+        data: { target: 'google-maps.link', action: 'google-maps#activateIframe', google_maps_url: google_maps_url(object: @match, type: 'directions') }

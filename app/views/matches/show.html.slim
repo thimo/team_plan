@@ -16,85 +16,23 @@
 section
   ul.nav.nav-tabs[role="tablist"]
     li.nav-item
-      a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
+      a.nav-link[href="?tab=match" class="#{'active' if @active_tab == 'match'}"]
         = @match.type_name.capitalize
     - if @presences.present? && policy(@presences.first).update?
       li.nav-item
-        a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
+        a.nav-link[href="?tab=presences" class="#{'active' if @active_tab == 'presences'}"]
           | Aanwezig
           span.ml-1.badge.badge-pill.badge-success[id="#{@match.model_name.singular}-#{@match.id}-presence-count"]
             = @presences.present.size
     - if @match.adres.present?
       li.nav-item
-        a.nav-link[href="#tab-address" role="tab" data-toggle="tab" aria-expanded="false"]
+        a.nav-link[href="?tab=address" class="#{'active' if @active_tab == 'address'}"]
           | Adres en route
 
   .tab-content
-    #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
-      .row
-        label.col-4
-          = @match.type_name.capitalize
-        .col-8
-          .mb-1
-            .strong
-              = @match.title
-              = " (#{@match.uitslag})" if @match.uitslag.present?
-            .small.light
-              = @match.competition.competitienaam
-
-      .row
-        label.col-4
-          | Aanvang
-        .col-8
-          span
-            | #{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}
-          span.pl-2
-            | #{l @match.started_at, format: :time_short}
-
-      - if @match.accommodatie.present? || @match.plaats.present?
-        .row
-          label.col-4
-            | Locatie
-          .col-8
-            .mt-2
-              .strong
-                = @match.accommodatie
-              div
-                = @match.adres
-              div
-                - if @match.postcode.present?
-                  = "#{@match.postcode}  "
-                = @match.plaats
-
-      - if @match.created_by
-        .row
-          .lighter.offset-4.col-8
-            | Aangemaakt door #{@match.created_by.name}
-
-      - if @players.present?
-        h4 Spelers
-
-        table.table
-          - @players.each do |player|
-            tr
-              td
-                = render player.member
-
-      - if @match.remark.present?
-        hr
-        strong Opmerkingen
-        = markdown(@match.remark).html_safe
-
-    - if @presences.present? && policy(@presences.first).update?
-      #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
-        .text-right.mb-3
-          = link_to "Speler toevoegen", new_match_presence_path(@team), class: "btn btn-primary"
-
-        - @presences.each do |presence|
-          = render presence
-
-    - if @match.adres.present?
-      #tab-address.tab-pane.fade[role="tabpanel" aria-expanded="false"]
-        = render "location_and_direction", match: @match
+    .tab-pane.active.show
+      = render "tab_match" if @active_tab == 'match' && policy(@match).show_match?
+      = render "tab_presences" if @active_tab == 'presences' && policy(@match).show_presences? && @presences.present? && policy(@presences.first).update?
+      = render "tab_address" if @active_tab == 'address' && policy(@match).show_address? && @match.adres.present?
 
 = render "shared/versions", parent: @match
