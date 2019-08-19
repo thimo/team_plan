@@ -4,6 +4,7 @@
 - @presences.own_player.each do |presence|
   = render presence
 
-hr
-- @presences.not_own_player.each do |presence|
-  = render presence
+- if (presences_now_own = @presences.not_own_player).any?
+  hr
+  - presences_now_own.each do |presence|
+    = render presence
