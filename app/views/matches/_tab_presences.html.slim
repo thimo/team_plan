@@ -1,5 +1,9 @@
 .text-right.mb-3
-  = link_to "Speler toevoegen", new_match_presence_path(@team), class: "btn btn-primary"
+  = link_to "Speler toevoegen", new_match_presence_path(@match, team: @team), class: "btn btn-primary"
 
-- @presences.each do |presence|
+- @presences.own_player.each do |presence|
+  = render presence
+
+hr
+- @presences.not_own_player.each do |presence|
   = render presence

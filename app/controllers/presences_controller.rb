@@ -35,8 +35,9 @@ class PresencesController < ApplicationController
                   else
                     Presence.new(permitted_attributes(Presence.new))
                   end
-      @presence.presentable = @presentable
-      # @presence.group ||= Group.find(params[:group_id])
+      @presence.presentable ||= @presentable
+      @presence.team ||= Team.find(params[:team]) if params[:team].present?
+      @presence.own_player = (@presence.team_id == @presence.member.active_team.id) if @presence.member.present?
       authorize @presence
     end
 
@@ -52,11 +53,6 @@ class PresencesController < ApplicationController
       @presence = Presence.find(params[:id])
       authorize @presence
     end
-
-    # def presence_params
-    #   # Add member if new record
-    #   params.require(:presence).permit(:is_present, :on_time, :signed_off, :remark)
-    # end
 
     def load_presentable
       resource, id = request.path.split("/")[1, 2]

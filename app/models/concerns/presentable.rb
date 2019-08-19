@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Extends a model to allow setting presence to members
 module Presentable
   extend ActiveSupport::Concern
 
@@ -10,7 +11,7 @@ module Presentable
   def find_or_create_presences(team = nil)
     team ||= self.team
 
-    return if team.archived?
+    return Presence.none if team.archived?
 
     if presences.team(team).empty?
       # Add presences for all local teams (can be two local teams per match)

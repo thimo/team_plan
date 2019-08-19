@@ -14,7 +14,7 @@ class PresencePolicy < ApplicationPolicy
 
   def permitted_attributes
     attributes = [:is_present, :on_time, :signed_off, :remark]
-    attributes << :member_id if @record.new_record?
+    attributes += [:member_id, :team_id] if @record.new_record?
     attributes
   end
 
