@@ -1,16 +1,15 @@
-.tab-pane.active.show
-  .row
-    .col-md-6.mb-4
-      - if policy(@team).show_comments?
-        #comments-tabs
-          = render "comments/tabs", parent: @team
+.row
+  .col-md-6.mb-4
+    - if policy(@team).show_comments?
+      #comments-tabs
+        = render "comments/tabs", parent: @team
 
-    .col-md-6
-      - if policy(@team).show_todos?
-        = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
+  .col-md-6
+    - if policy(@team).show_todos?
+      = render "todos/list", todos_active: @todos_active, todos_defered: @todos_defered, new_path: new_team_todo_path(@team)
 
-      - if policy(@team).show_evaluations? && @team_evaluations.present?
-        = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
+    - if policy(@team).show_evaluations? && @team_evaluations.present?
+      = render "team_evaluations/list", team: @team, team_evaluations: @team_evaluations, hide_team: true
 
-      - if policy(@team).show_notes?
-        = render "notes/list", team: @team, notes: @notes
+    - if policy(@team).show_notes?
+      = render "notes/list", team: @team, notes: @notes

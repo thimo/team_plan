@@ -53,11 +53,12 @@ section
           span.pl-2.d-sm-down-none Statistieken
 
   .tab-content
-    = render "teams/tab_team"         if @active_tab == 'team'
-    = render "teams/tab_schedule"     if @active_tab == 'schedule'
-    = render "teams/tab_competitions" if @active_tab == 'competitions'
-    = render "teams/tab_calendar"     if @active_tab == 'calendar'
-    = render "teams/tab_dossier"      if @active_tab == 'dossier' && policy(@team).show_dossier?
-    = render "teams/tab_statistics"   if @active_tab == 'statistics' && policy(@team).show_statistics?
+    .tab-pane.active.show
+      = render "teams/tab_team"         if @active_tab == 'team'
+      = render "teams/tab_schedule"     if @active_tab == 'schedule'
+      = render "teams/tab_competitions" if @active_tab == 'competitions'
+      = render "teams/tab_calendar"     if @active_tab == 'calendar'
+      = render "teams/tab_dossier"      if @active_tab == 'dossier' && policy(@team).show_dossier?
+      = render "teams/tab_statistics"   if @active_tab == 'statistics' && policy(@team).show_statistics?
 
 = render "shared/versions", parent: @team
