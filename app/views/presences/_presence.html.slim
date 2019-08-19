@@ -6,7 +6,7 @@
       = hidden_field_tag :compact, compact
       div[class="#{compact ? 'col-12' : 'col-md-4'}"]
         - label = "#{presence.member.name} #{'<i class="fa fa-medkit p-1 pl-2 red"></i>' if presence.member.injured?}".html_safe
-        - label += " (#{presence.member.active_team.name})" if !presence.own_player && presence.member.active_team.present?
+        - label += " <span class=\"lighter\">(#{presence.member.active_team.name})</span>".html_safe if !presence.own_player && presence.member.active_team.present?
         .checkbox-toggle[class="#{'m-0' if compact}"]
           = f.check_box :is_present,
             id: "presence_present_#{presence.id}",
