@@ -1,0 +1,19 @@
+= bootstrap_form_for [@presence.presentable, @presence], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message t("bootstrap_form.check_errors")
+  - if @presence.new_record?
+    = f.hidden_field :team_id, value: @presence.team_id
+
+  - if @presence.persisted?
+    .form-group.row
+      = f.label :name, class: "col-md-3 col-form-label"
+      .col-md-9.form-control-plaintext
+        = @presence.member.name
+  - else
+    = f.collection_select :member_id, Member.active.sportlink_player.asc, :id, :name_and_born_on,
+      { include_blank: true },
+      { data: { controller: 'select2-with-words-filter', placeholder: 'Selecteer lid' } }
+
+  .row
+    .col-sm-9.offset-sm-3
+      = f.submit "Opslaan", class: 'btn btn-primary'
+      = link_to "Annuleren", @presence.presentable, class: 'btn btn-light'

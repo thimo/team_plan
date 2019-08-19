@@ -110,6 +110,8 @@ nl:
         endurance: Uithoudingsvermogen
         duel_strength: Duelkracht
       presence:
+        member: Speler
+        member_id: Speler
         remark: Opmerking
       role:
         name: Naam
@@ -326,9 +328,9 @@ nl:
     import:
       relatienr: association_number # oud
       relatiecode: association_number # nieuw
-      soort_persoon: person_type        # Bondslid, Verenigingslid - oud
-      lidsoort: person_type             # Bondslid, Verenigingslid - nieuw
-      volledige_naam_(1): full_name     # "Lastname, Initials"
+      soort_persoon: person_type # Bondslid, Verenigingslid - oud
+      lidsoort: person_type # Bondslid, Verenigingslid - nieuw
+      volledige_naam_(1): full_name # "Lastname, Initials"
       voorletters: initials # oud
       voorletter(s): initials # nieuw
       roepnaam: first_name
@@ -348,8 +350,8 @@ nl:
       2e_e-mail: email_2
       vog-nummer: conduct_number
       bondssporten: sport_category
-      status: status                    # definitief, af te melden
-      volledige_naam_(2): full_name_2   # "Initials Lastname"
+      status: status # definitief, af te melden
+      volledige_naam_(2): full_name_2 # "Initials Lastname"
       laatste_wijz: last_change_at
       laatste_wijziging: last_change_at
       privacyniveau: privacy_level
@@ -398,7 +400,7 @@ nl:
       externe_code: external_number
       wijzig?: wijzig
       remarks10id: remarks10id
-      rowstatus: rowstatus              # insync, removed
+      rowstatus: rowstatus # insync, removed
       bijnaam: nickname
       overlijdensdatum: date_of_death
       leeftijd: age

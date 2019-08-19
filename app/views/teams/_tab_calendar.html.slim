@@ -1,24 +1,23 @@
-.tab-pane.active.show
-  #month_calendar.mb-3
-    = render "schedules/month_calendar", events: @schedules
+#month_calendar.mb-3
+  = render "schedules/month_calendar", events: @schedules
 
-  .alert.alert-info.mb-0
-    h5 Abonneren op deze kalender?
+.alert.alert-info.mb-0
+  h5 Abonneren op deze kalender?
 
-    p
-      | Kopieer onderstaande link en volg
-        <a href="https://maak-agenda.nl/up-to-date" target="_blank">de instructies op Maakagenda.nl</a>:
+  p
+    | Kopieer onderstaande link en volg
+      <a href="https://maak-agenda.nl/up-to-date" target="_blank">de instructies op Maakagenda.nl</a>:
 
-    p
-      .input-group.mb-3 data={ "controller": "copy" }
-        = text_field_tag :calendar_url, ical_url(@team.uuid, format: :ics, check: current_user.uuid),
-          onfocus: "this.select()",
-          class: "form-control",
-          data: { target: "copy.input" }
-        .input-group-append
-          = button_tag class: "btn btn-primary", data: { action: "copy#copyToBuffer", target: "copy.button" }
-            | Kopiëren
+  p
+    .input-group.mb-3 data={ "controller": "copy" }
+      = text_field_tag :calendar_url, ical_url(@team.uuid, format: :ics, check: current_user.uuid),
+        onfocus: "this.select()",
+        class: "form-control",
+        data: { target: "copy.input" }
+      .input-group-append
+        = button_tag class: "btn btn-primary", data: { action: "copy#copyToBuffer", target: "copy.button" }
+          | Kopiëren
 
-    p
-      | Tip: Je kunt deze link ook in een WhatsApp groep delen. Andere teamleden of -ouders hoeven dan alleen maar op de
-        link te klikken om deze aan de agenda op hun telefoon toe te voegen.
+  p
+    | Tip: Je kunt deze link ook in een WhatsApp groep delen. Andere teamleden of -ouders hoeven dan alleen maar op de
+      link te klikken om deze aan de agenda op hun telefoon toe te voegen.

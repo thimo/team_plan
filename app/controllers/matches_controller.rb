@@ -10,7 +10,13 @@ class MatchesController < ApplicationController
   before_action :add_breadcrumbs, only: [:show, :new, :edit]
 
   def show
-    set_presences_and_players
+    set_active_tab
+
+    case @active_tab
+    when "match", "presences"
+      set_presences_and_players
+    when "address"
+    end
   end
 
   def new; end
@@ -115,7 +121,13 @@ class MatchesController < ApplicationController
       team = (@match.teams & current_user.teams_as_staff).first
       return if team.blank?
 
-      @presences = @match.find_or_create_presences(team)&.asc
-      @players = @presences&.present
+      @presences = @match.find_or_create_presences(team).asc
+      @players = @presences.present
+    end
+
+    def set_active_tab
+      @active_tab = params[:tab].presence || current_user.setting(:active_match_tab).presence || "match"
+      @active_tab = "match" unless policy(@match).try("show_#{@active_tab}?")
+      current_user.set_setting(:active_match_tab, @active_tab)
     end
 end

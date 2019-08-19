@@ -1,26 +1,25 @@
-.tab-pane.active.show
-  - if policy(@team).show_presence_chart?
-    h4 Aanwezigheid
+- if policy(@team).show_presence_chart?
+  h4 Aanwezigheid
 
-    .row
-      .col-lg-6
-        .card
-          .card-header
-            | Trainingen
-          .card-body.presenceChartParent [data={ controller: "chart-presence",
-                            "chart-presence-data": @training_presences_data.to_json }
-                            style="max-width: #{50 * @training_presences_data[:labels].size}px; height: 400px;"]
-            canvas.presenceChart data={ target: "chart-presence.canvas" }
+  .row
+    .col-lg-6
+      .card
+        .card-header
+          | Trainingen
+        .card-body.presenceChartParent [data={ controller: "chart-presence",
+                          "chart-presence-data": @training_presences_data.to_json }
+                          style="max-width: #{50 * @training_presences_data[:labels].size}px; height: 400px;"]
+          canvas.presenceChart data={ target: "chart-presence.canvas" }
 
-          = render 'presence_table', team: @team, presentable_class: Training
+        = render 'presence_table', team: @team, presentable_class: Training
 
-      .col-lg-6
-        .card
-          .card-header
-            | Wedstrijden
-          .card-body.presenceChartParent [data={ controller: "chart-presence",
-                            "chart-presence-data": @match_presences_data.to_json }
-                            style="max-width: #{50 * @match_presences_data[:labels].size}px; height: 400px;"]
-            canvas.presenceChart data={ target: "chart-presence.canvas" }
+    .col-lg-6
+      .card
+        .card-header
+          | Wedstrijden
+        .card-body.presenceChartParent [data={ controller: "chart-presence",
+                          "chart-presence-data": @match_presences_data.to_json }
+                          style="max-width: #{50 * @match_presences_data[:labels].size}px; height: 400px;"]
+          canvas.presenceChart data={ target: "chart-presence.canvas" }
 
-          = render 'presence_table', team: @team, presentable_class: Match
+        = render 'presence_table', team: @team, presentable_class: Match
