@@ -101,6 +101,7 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rails"
   gem "ruby-debug-ide"
+  gem "solargraph"
 end
 
 group :test do
