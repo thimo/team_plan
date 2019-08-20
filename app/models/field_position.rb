@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Player positions on the soccer field
 class FieldPosition < ApplicationRecord
   has_and_belongs_to_many :team_members
 
@@ -9,6 +10,8 @@ class FieldPosition < ApplicationRecord
   has_many :line_children, foreign_key: :line_parent_id, class_name: "FieldPosition", dependent: :destroy
   has_many :axis_children, foreign_key: :axis_parent_id, class_name: "FieldPosition", dependent: :destroy
   has_paper_trail
+
+  enum position_type: { goalkeeper: 0, defender: 1, midfielder: 2, forward: 3 }
 
   default_scope { order(position: :asc) }
 

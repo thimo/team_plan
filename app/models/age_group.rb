@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# AgeGroups have teams in certain age ranges
 class AgeGroup < ApplicationRecord
   include Statussable
 

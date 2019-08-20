@@ -26,6 +26,7 @@ class IntranetPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       return scope if @user.admin?
+
       scope.none
     end
   end

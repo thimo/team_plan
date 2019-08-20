@@ -20,8 +20,8 @@
               td.p-0.text-center
                 - if group.roles.include?(role)
                   = link_to admin_groups_roles_path(group_id: group, role_id: role), method: :delete
-                    i.fa-check.bg-color-success.color-white.p-3[class=fa_class]
+                    i.fa.fa-check.bg-color-success.color-white.p-3
                 - else
                   = link_to admin_groups_roles_path(group_id: group, role_id: role), method: :post
-                    i.fa-times.color-gray-400.p-3[class=fa_class]
+                    i.fa.fa-times.color-gray-400.p-3
             td
