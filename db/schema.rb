@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_195847) do
+ActiveRecord::Schema.define(version: 2019_08_20_125446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_195847) do
     t.bigint "line_parent_id"
     t.bigint "axis_parent_id"
     t.bigint "tenant_id"
+    t.integer "position_type"
     t.index ["axis_parent_id"], name: "index_field_positions_on_axis_parent_id"
     t.index ["line_parent_id"], name: "index_field_positions_on_line_parent_id"
     t.index ["tenant_id"], name: "index_field_positions_on_tenant_id"

@@ -106,6 +106,7 @@ Rails.application.routes.draw do
       end
     end
     resources :group_members, only: [:new, :create, :destroy]
+    resources :keepers
 
     get "org" => "org/base#show"
     namespace :org do

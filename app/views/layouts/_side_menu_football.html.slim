@@ -24,6 +24,11 @@ li.nav-item
           | Teams
         - else
           | #{season.name}
+- if policy(:keeper).index? && Season.active_season_for_today.present?
+  li.nav-item
+    = link_to keepers_path, class: "nav-link #{'active' if current_page?(keepers_path)}"
+      i.fa-fw.fa-sign-language.nav-icon[class=fa_class]
+      | Keepers
 - if (seasons = policy_scope(Season).draft).size.positive?
   - seasons.each do |season|
     li.nav-item
