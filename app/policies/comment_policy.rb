@@ -10,19 +10,19 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def show_technique?
-    @user.admin? || @user.role?(Role::COMMENT_TECHNIQUE, @record)
+    @user.role?(Role::COMMENT_TECHNIQUE, @record)
   end
 
   def show_behaviour?
-    @user.admin? || @user.role?(Role::COMMENT_BEHAVIOUR, @record)
+    @user.role?(Role::COMMENT_BEHAVIOUR, @record)
   end
 
   def show_classification?
-    @user.admin? || @user.role?(Role::COMMENT_CLASSIFICATION, @record)
+    @user.role?(Role::COMMENT_CLASSIFICATION, @record)
   end
 
   def show_membership?
-    @user.admin? || @user.role?(Role::COMMENT_MEMBERSHIP, @record)
+    @user.role?(Role::COMMENT_MEMBERSHIP, @record)
   end
 
   def create?

@@ -31,19 +31,19 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_evaluations?
-    @user.admin? || @user.role?(Role::AGE_GROUP_SHOW_EVALUATIONS, @record)
+    @user.role?(Role::AGE_GROUP_SHOW_EVALUATIONS, @record)
   end
 
   def show_play_bans?
     return false if @record.archived?
 
-    @user.admin? || @user.role?(Role::PLAY_BAN_SHOW, @record)
+    @user.role?(Role::PLAY_BAN_SHOW, @record)
   end
 
   def show_todos?
     return false if @record.archived?
 
-    @user.admin? || @user.role?(Role::AGE_GROUP_SHOW_TODOS, @record)
+    @user.role?(Role::AGE_GROUP_SHOW_TODOS, @record)
   end
 
   def show_injureds?
@@ -57,23 +57,23 @@ class AgeGroupPolicy < ApplicationPolicy
   def show_status?
     return false if @record.status == @record.season.status
 
-    @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+    @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
   end
 
   def show_member_count?
     return false if @record.season.archived?
 
-    @user.admin? || @user.role?(Role::AGE_GROUP_SHOW_MEMBER_COUNT, @record)
+    @user.role?(Role::AGE_GROUP_SHOW_MEMBER_COUNT, @record)
   end
 
   def set_status?
     return false if @record.new_record? || !@record.season.active?
 
-    @user.admin? || @user.role?(Role::AGE_GROUP_SET_STATUS, @record)
+    @user.role?(Role::AGE_GROUP_SET_STATUS, @record)
   end
 
   def team_actions?
-    @user.admin? || @user.role?(Role::AGE_GROUP_TEAM_ACTIONS, @record)
+    @user.role?(Role::AGE_GROUP_TEAM_ACTIONS, @record)
   end
 
   def download_team_members?
@@ -102,7 +102,7 @@ class AgeGroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+      if @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
         scope
       else
         scope.active_or_archived

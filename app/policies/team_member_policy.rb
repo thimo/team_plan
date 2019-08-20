@@ -12,7 +12,7 @@ class TeamMemberPolicy < ApplicationPolicy
   def create?
     return false if @record&.team&.archived?
 
-    @user.admin? || @user.role?(Role::TEAM_MEMBER_CREATE, @record)
+    @user.role?(Role::TEAM_MEMBER_CREATE, @record)
   end
 
   def update?
@@ -22,14 +22,14 @@ class TeamMemberPolicy < ApplicationPolicy
   end
 
   def set_role?
-    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_ROLE, @record)
+    @user.role?(Role::TEAM_MEMBER_SET_ROLE, @record)
   end
 
   def destroy?
     return false if @record.team.archived?
     return true if @record.active? && @user.admin?
 
-    (@record.draft? || @record.active?) && (@user.admin? || @user.role?(Role::TEAM_MEMBER_DESTROY, @record))
+    (@record.draft? || @record.active?) && @user.role?(Role::TEAM_MEMBER_DESTROY, @record)
   end
 
   def activate?
@@ -37,31 +37,31 @@ class TeamMemberPolicy < ApplicationPolicy
     return false unless @record.team.active?
     return false if @record.active?
 
-    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
+    @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
   end
 
   def show_status?
     return false if @record.status == @record.team.status
 
-    @user.admin? || @user.role?(Role::STATUS_DRAFT, @record)
+    @user.role?(Role::STATUS_DRAFT, @record)
   end
 
   def show_alert?
     return false if @record.archived?
 
-    @user.admin? || @user.role?(Role::TEAM_MEMBER_ALERT, @record)
+    @user.role?(Role::TEAM_MEMBER_ALERT, @record)
   end
 
   def set_status?
     return false if @record.new_record? || @record.team.archived?
 
-    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
+    @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
   end
 
   def set_initial_status?
     return false if @record.persisted? || @record.team.nil? || @record.team.draft? || @record.team.archived?
 
-    @user.admin? || @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
+    @user.role?(Role::TEAM_MEMBER_SET_STATUS, @record)
   end
 
   def permitted_attributes
@@ -74,7 +74,7 @@ class TeamMemberPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+      if @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
         scope
       else
         scope.active_or_archived

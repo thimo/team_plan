@@ -2,7 +2,7 @@
 
 class SeasonPolicy < ApplicationPolicy
   def index?
-    @user.admin? || @user.role?(Role::SEASON_INDEX) || @user.indirect_role?(Role::SEASON_INDEX)
+    @user.role?(Role::SEASON_INDEX) || @user.indirect_role?(Role::SEASON_INDEX)
   end
 
   def show?
@@ -30,11 +30,11 @@ class SeasonPolicy < ApplicationPolicy
   def set_status?
     return false if @record.new_record?
 
-    @user.admin? || @user.role?(Role::SEAON_SET_STATUS, @record)
+    @user.role?(Role::SEAON_SET_STATUS, @record)
   end
 
   def team_actions?
-    @user.admin? || @user.role?(Role::SEASON_TEAM_ACTIONS, @record)
+    @user.role?(Role::SEASON_TEAM_ACTIONS, @record)
   end
 
   def download_team_members?
@@ -61,7 +61,7 @@ class SeasonPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.admin? || @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
+      if @user.role?(Role::STATUS_DRAFT) || @user.indirect_role?(Role::STATUS_DRAFT)
         scope
       else
         scope.active_or_archived

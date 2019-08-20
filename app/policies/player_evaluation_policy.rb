@@ -16,7 +16,7 @@ class PlayerEvaluationPolicy < ApplicationPolicy
   def create?
     return false unless @record.team_evaluation.active?
 
-    @user.admin? || @user.role?(Role::MEMBER_CREATE_EVALUATIONS, @record)
+    @user.role?(Role::MEMBER_CREATE_EVALUATIONS, @record)
   end
 
   def update?
@@ -28,14 +28,14 @@ class PlayerEvaluationPolicy < ApplicationPolicy
   def destroy?
     return false if @record.team_evaluation.finished_at.blank?
 
-    @user.admin? || @user.role?(Role::MEMBER_CREATE_EVALUATIONS, @record)
+    @user.role?(Role::MEMBER_CREATE_EVALUATIONS, @record)
   end
 
   class Scope < Scope
     def resolve
       # Coordinators get a scope with all player evaluations. Display will be
       # limited via MemberPolicy.show_evaluations?
-      if user.admin? || user.role?(Role::MEMBER_SHOW_EVALUATIONS) || user.indirect_role?(Role::MEMBER_SHOW_EVALUATIONS)
+      if user.role?(Role::MEMBER_SHOW_EVALUATIONS) || user.indirect_role?(Role::MEMBER_SHOW_EVALUATIONS)
         scope.all.finished
       else
         scope.public_or_as_team_staff(user).finished

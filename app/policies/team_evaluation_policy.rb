@@ -14,7 +14,7 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def create?
     return false if @record.team.nil? || !@record.team.active?
 
-    @user.admin? || @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
+    @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
   end
 
   def update?
@@ -26,13 +26,13 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def destroy?
     return false if @record.new_record? || @record.finished_at.present?
 
-    @user.admin? || @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
+    @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
   end
 
   def send_invite?
     return false if @record.invited_at.present?
 
-    @user.admin? || @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
+    @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
   end
 
   def finish_evaluation?
@@ -44,13 +44,13 @@ class TeamEvaluationPolicy < ApplicationPolicy
   def re_open?
     return false if @record.archived? || @record.new_record? || @record.finished_at.nil?
 
-    @user.admin? || @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
+    @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
   end
 
   class Scope < Scope
     def resolve
       # TODO: This will probably not work for coordinators
-      if user.admin? || @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
+      if @user.role?(Role::TEAM_CREATE_EVALUATIONS, @record)
         scope.all
       else
         scope.invited

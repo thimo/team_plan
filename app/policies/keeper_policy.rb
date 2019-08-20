@@ -2,7 +2,7 @@
 
 class KeeperPolicy < ApplicationPolicy
   def index?
-    true || @user.admin? || @user.role?(Role::KEEPER_SHOW)
+    @user.role?(Role::KEEPER_SHOW)
   end
 
   class Scope < Scope
