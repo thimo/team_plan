@@ -56,4 +56,12 @@ class Role < ApplicationRecord
       end
     end
   end
+
+  def self.create_all_for_active_tenants
+    Tenant.active.find_each do |tenant|
+      ActsAsTenant.with_tenant(tenant) do
+        create_all
+      end
+    end
+  end
 end
