@@ -314,8 +314,10 @@ class User < ApplicationRecord
 
     def indirect_roles_for(record)
       age_group_id = age_group_id_for(record)
-      group = Group.for_member(members).for_memberable("AgeGroup", age_group_id)
-      Role.by_group(group)
+      team_id = team_id_for(record)
+      groups = (Group.for_member(members).for_memberable("AgeGroup", age_group_id) +
+                 Group.for_member(members).for_memberable("Team", team_id)).compact
+      Role.by_group(groups)
     end
 
     # Copied from validatable module

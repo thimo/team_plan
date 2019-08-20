@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# User roles, handed out through groups
 class Role < ApplicationRecord
   acts_as_tenant :tenant
   has_and_belongs_to_many :users, join_table: :users_roles
