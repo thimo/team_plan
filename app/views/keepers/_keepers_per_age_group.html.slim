@@ -1,0 +1,28 @@
+.col-6
+  h4.mb-3
+    = title
+
+  - age_groups.each do |age_group|
+    .card
+      .card-header
+        = link_to age_group
+          = age_group.name
+
+      .card-body.p-0
+        table.table.table-sm.tr-links.w-100
+          - human_sort(policy_scope(age_group.teams), :name).each do |team|
+            - if (keepers = team.team_members.goalkeeper).any?
+              - keepers.each do |keeper|
+                tr
+                  td.w-1.text-center.pr-0
+                    = render 'members/photo', member: keeper.member
+                  td
+                    = render "members/member", member: keeper.member, born_on_class: "float-right"
+                    .light
+                      = team.name_with_club
+            - else
+              tr
+                td.w-1
+                td colspan="100"
+                  del.light
+                    = team.name_with_club
