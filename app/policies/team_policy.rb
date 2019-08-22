@@ -47,6 +47,15 @@ class TeamPolicy < ApplicationPolicy
     club_or_team_staff? || @user.role?(Role::TEAM_SHOW_STATISTICS, @record)
   end
 
+  def modify_members?
+    @user.role?(Role::BEHEER_GROUPS) &&
+      @record.persisted? && !@record.archived?
+  end
+
+  def add_members?
+    modify_members?
+  end
+
   # Sections
 
   def show_comments?

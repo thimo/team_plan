@@ -26,7 +26,7 @@ class AgeGroup < ApplicationRecord
   scope :draft_or_active, -> { where(status: [AgeGroup.statuses[:draft], AgeGroup.statuses[:active]]) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
   scope :by_team, ->(team) { joins(:teams).where(teams: { id: team }).distinct }
-  scope :for_members, ->(members) {
+  scope :for_group_members, ->(members) {
     joins(:group_members).where(group_members: { memberable_type: "AgeGroup", member: members })
   }
   scope :for_active_season, -> { joins(:season).where(seasons: { status: Season.statuses[:active] }) }
@@ -77,6 +77,10 @@ class AgeGroup < ApplicationRecord
     Member.by_age_group_as_active(self).inactive.any? ||
       Member.by_age_group_as_active_player(self).sportlink_non_player.any? ||
       Member.by_age_group_as_active_player_in_active_team(self).status_overschrijving.any?
+  end
+
+  def always_show_group_members?
+    true
   end
 
   private

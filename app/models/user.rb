@@ -77,8 +77,12 @@ class User < ApplicationRecord
     Team.for_members(members).active.for_active_season.distinct
   end
 
+  def active_teams_as_group_member
+    Team.for_group_members(members).active.for_active_season.distinct
+  end
+
   def active_age_groups
-    AgeGroup.for_members(members).active.for_active_season.distinct
+    AgeGroup.for_group_members(members).active.for_active_season.distinct
   end
 
   def teams_as_staff
