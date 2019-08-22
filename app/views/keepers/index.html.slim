@@ -1,7 +1,8 @@
 - provide(:title, "Keepers - seizoen #{@season.name}")
 
 .row
-  - if @keepers_male.present? && @keepers_male.any?
-    = render "keepers_per_gender", keepers: @keepers_male, title: "Mannen"
-  - if @keepers_female.present? && @keepers_female.any?
-    = render "keepers_per_gender", keepers: @keepers_female, title: "Vrouwen"
+  - if @age_groups_male.size > 0
+    = render "keepers_per_age_group", age_groups: @age_groups_male, title: "Mannen"
+
+  - if @age_groups_female.size > 0
+    = render "keepers_per_age_group", age_groups: @age_groups_female, title: "Vrouwen"
