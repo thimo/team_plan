@@ -1,0 +1,36 @@
+- if (groups = Group.by_model(parent.model_name.name).asc).any?
+  - groups.each do |group|
+    - group_members = parent.group_members.by_group(group)
+    / Show card if
+    / - there are members
+    / - the user can add members
+    / - the parent has "always show group members"
+    - if parent.always_show_group_members? || group_members.any? || policy(parent).add_members?
+      .card
+        .card-header
+          = group.name
+          .card-header-actions
+            - if policy(parent).add_members?
+              = link_to [:new, parent, :group_member, group_id: group], title: "#{group.name} toevoegen", class: "card-header-action"
+                i.fa-plus-square[class=fa_class]
+
+        .card-body.p-0
+          - if group_members.any?
+            table.table.table-sm.tr-links
+              tbody
+                - group_members.each do |group_member|
+                  tr
+                    td
+                      = group_member.member.name
+                      .small
+                        - email = group_member.member.email_2.presence || group_member.member.email
+                        = mail_to email
+                          i.fa-envelope.mr-1[class=fa_class]
+                          = email
+                    - if policy(group_member).destroy?
+                      td.w-1
+                        = link_to group_member_path(group_member), method: :delete, data: { confirm: "#{group_member.member.name} wordt verwijderd. Doorgaan?" }, title: "#{group_member.member.name} verwijderen"
+                          i.fa-trash-alt[class=fa_class]
+          - else
+            .p-3
+              i Er is nog geen #{group.name.downcase} geselecteerd

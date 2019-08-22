@@ -17,3 +17,5 @@
           table.table.table-sm.tr-links
             - @old_members.each do |member, team_members|
               = render 'member', member: member, team_members: team_members
+
+    = render "member_groups/list", parent: @team

@@ -94,7 +94,7 @@
               = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
   .col-lg-6
-    = render "age_groups/member_groups"
+    = render "member_groups/list", parent: @age_group
 
     - if policy(@age_group).show_available_members?
       - if @available_players.present?
