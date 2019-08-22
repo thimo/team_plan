@@ -41,33 +41,27 @@ li.nav-item
       i.fa-fw.fa-calendar-alt.nav-icon[class=fa_class]
       | Seizoenen
 
-- teams = current_user.active_teams
-- age_groups = current_user.active_age_groups
+- teams = (current_user.active_teams.asc + current_user.active_age_groups.asc + current_user.active_teams_as_group_member).uniq.compact
 - if teams.size > 0 || age_groups.size > 0
   li.nav-title
     | Mijn teams
-  - teams.asc.each do |team|
+  - teams.each do |team|
     li.nav-item
-      = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+      = link_to team, class: "nav-link #{'active' if current_page?(url_for(team))}"
         i.fa-fw.fa-futbol.nav-icon.color-green[class=fa_class]
         = team.name
-  - age_groups.asc.each do |age_group|
-    li.nav-item
-      = link_to age_group, class: "nav-link #{'active' if current_page?(age_group_path(age_group))}"
-        i.fa-fw.fa-futbol.nav-icon.color-green[class=fa_class]
-        = age_group.name
 
 - if current_user.favorite_teams.any? || current_user.favorite_age_groups.any?
   li.nav-title
     | Favorieten
   - human_sort(current_user.favorite_teams, :name).each do |team|
     li.nav-item
-       = link_to team, class: "nav-link #{'active' if current_page?(team_path(team))}"
+       = link_to team, class: "nav-link #{'active' if current_page?(url_for(team))}"
         i.fa-fw.fa-star.nav-icon.color-yellow[class=fa_class]
         = team.name
 
   - human_sort(current_user.favorite_age_groups, :name).each do |age_group|
     li.nav-item
-      = link_to age_group, class: "nav-link #{'active' if current_page?(age_group_path(age_group))}"
+      = link_to age_group, class: "nav-link #{'active' if current_page?(url_for(age_group))}"
         i.fa-fw.fa-star.nav-icon.color-yellow[class=fa_class]
         = age_group.name
