@@ -24,6 +24,7 @@ class Team < ApplicationRecord
   has_many :trainings, dependent: :destroy
   has_many :competitions, through: :club_data_team
   has_many :presences, dependent: :destroy
+  has_many :group_members, as: :memberable, dependent: :destroy
   has_and_belongs_to_many :matches
   has_paper_trail
 
@@ -33,6 +34,9 @@ class Team < ApplicationRecord
 
   scope :asc, -> { order(:name) }
   scope :for_members, ->(members) { joins(:team_members).where(team_members: { member_id: members, ended_on: nil }) }
+  scope :for_group_members, ->(members) {
+    joins(:group_members).where(group_members: { memberable_type: "Team", member: members })
+  }
   scope :as_player, -> { joins(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
   scope :as_not_player, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
   scope :for_season, ->(season) { joins(:age_group).where(age_groups: { season_id: season }) }
@@ -83,6 +87,10 @@ class Team < ApplicationRecord
 
   def check_and_set_division(club_data_division)
     update(division: club_data_division) if DIVISION_OPTIONS.include?(club_data_division)
+  end
+
+  def always_show_group_members?
+    false
   end
 
   def self.check_division

@@ -77,8 +77,12 @@ class User < ApplicationRecord
     Team.for_members(members).active.for_active_season.distinct
   end
 
+  def active_teams_as_group_member
+    Team.for_group_members(members).active.for_active_season.distinct
+  end
+
   def active_age_groups
-    AgeGroup.for_members(members).active.for_active_season.distinct
+    AgeGroup.for_group_members(members).active.for_active_season.distinct
   end
 
   def teams_as_staff
@@ -314,8 +318,10 @@ class User < ApplicationRecord
 
     def indirect_roles_for(record)
       age_group_id = age_group_id_for(record)
-      group = Group.for_member(members).for_memberable("AgeGroup", age_group_id)
-      Role.by_group(group)
+      team_id = team_id_for(record)
+      groups = (Group.for_member(members).for_memberable("AgeGroup", age_group_id) +
+                 Group.for_member(members).for_memberable("Team", team_id)).compact
+      Role.by_group(groups)
     end
 
     # Copied from validatable module

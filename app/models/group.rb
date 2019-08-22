@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# User groups give users roles
 class Group < ApplicationRecord
   include Statussable
 
@@ -18,5 +19,5 @@ class Group < ApplicationRecord
   }
   scope :via_type, -> { where.not(memberable_via_type: [nil, ""]) }
 
-  MEMBERABLE_VIA_TYPES = %w[AgeGroup].freeze
+  MEMBERABLE_VIA_TYPES = %w[AgeGroup Team].freeze
 end

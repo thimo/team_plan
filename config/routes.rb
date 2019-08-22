@@ -62,6 +62,7 @@ Rails.application.routes.draw do
             resources :presences
           end
           resources :schedules
+          resources :group_members, only: [:new, :create]
         end
         resources :group_members, only: [:new, :create]
       end

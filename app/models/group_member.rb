@@ -9,5 +9,7 @@ class GroupMember < ApplicationRecord
   belongs_to :member
   belongs_to :memberable, polymorphic: true, optional: true
 
+  scope :by_group, ->(group) { where(group: group) }
+
   validates :member, uniqueness: { scope: [:tenant, :group, :memberable_type, :memberable_id] }
 end

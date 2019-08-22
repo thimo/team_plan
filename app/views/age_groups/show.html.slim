@@ -2,7 +2,7 @@
 - provide(:subtitle, "#{year_of_birth_range(@age_group)}")
 
 - content_for :action_buttons
-  - if policy(TeamMember.new(team: @age_group.teams.first)).create?
+  - if policy(Team.new(age_group: @age_group)).create?
     = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn"
       i.fa-table[class=fa_class]
       span.d-down-none.pl-1
@@ -94,7 +94,7 @@
               = render partial: 'shared/match', collection: human_sort(matches, :team_name), cached: true
 
   .col-lg-6
-    = render "age_groups/member_groups"
+    = render "member_groups/list", parent: @age_group
 
     - if policy(@age_group).show_available_members?
       - if @available_players.present?
