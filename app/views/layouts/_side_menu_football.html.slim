@@ -42,7 +42,7 @@ li.nav-item
       | Seizoenen
 
 - teams = (current_user.active_teams.asc + current_user.active_age_groups.asc + current_user.active_teams_as_group_member).uniq.compact
-- if teams.size > 0 || age_groups.size > 0
+- if teams.size > 0
   li.nav-title
     | Mijn teams
   - teams.each do |team|
