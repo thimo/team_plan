@@ -11,7 +11,7 @@
       .card-body.p-0
         table.table.table-sm.tr-links.w-100
           - human_sort(policy_scope(age_group.teams), :name).each do |team|
-            - if (keepers = team.team_members.goalkeeper).any?
+            - if (keepers = team.team_members.goalkeeper.active).any?
               - keepers.each do |keeper|
                 tr
                   td.w-1.text-center.pr-0
