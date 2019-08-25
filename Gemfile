@@ -18,6 +18,7 @@ gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker", ">= 4.0.x"
 gem "webpacker-react"
+gem "appsignal"
 
 gem "carrierwave", "~> 1.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
@@ -26,16 +27,15 @@ gem "mini_magick", "~> 4.7.0"
 gem "rest-client"
 gem "slim-rails"
 
-gem "bootstrap4-kaminari-views"
-gem "kaminari"
-
 gem "bootstrap_form",             "~> 4.0.0"
+gem "bootstrap4-kaminari-views"
 gem "breadcrumbs_on_rails",       "~> 3.0.1"
 gem "country_select"
 # gem "devise",                     "~> 4.6" - disabled because current release (4.6.2) does not allow Rails 6.0
 gem "devise", git: "https://github.com/plataformatec/devise"
 gem "enum_help",                  "~> 0.0.17"
 gem "figaro",                     "~> 1.1.1"
+gem "kaminari"
 gem "net-ssh",                    "~> 4.1.0"
 
 gem "awesome_print", require: "awesome_print"
