@@ -1,5 +1,3 @@
-- trainers = @training_schedule.team.team_members.trainers.active.asc
-
 - if @training_schedule.inactive?
   .alert.alert-warning
     | Deze training is niet meer actief
@@ -17,7 +15,7 @@
     { class: 'width-md-50' }
   = f.collection_select :field_part, TrainingSchedule.field_parts_i18n, :first, :second, { prompt: "-- Selecteer het deel van het veld" },
     { class: 'width-md-50' }
-  = f.collection_check_boxes :team_member_ids, trainers, :id, :name, custom: true
+  = f.collection_check_boxes :team_member_ids, @training_schedule.team.trainers, :id, :name_with_role, custom: true
   = f.form_group
     = f.check_box :cios, custom: true
 

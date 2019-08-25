@@ -15,7 +15,7 @@ class TeamMember < ApplicationRecord
   has_and_belongs_to_many :training_schedules
   has_paper_trail
 
-  attr_accessor :initial_status
+  attr_writer :initial_status
 
   enum role: { player: 0, head_coach: 5, coach: 1, trainer: 2, assistant_trainer: 7, keeper_trainer: 9, team_parent: 3,
                manager: 4, leader: 10, physio: 6, referee: 11, assistant_referee: 8 }
@@ -99,6 +99,10 @@ class TeamMember < ApplicationRecord
 
   def initial_status
     @initial_status || :initial_active
+  end
+
+  def name_with_role
+    "#{name} (#{TeamMember.roles_i18n[role]})"
   end
 
   private

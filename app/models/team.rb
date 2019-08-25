@@ -93,6 +93,10 @@ class Team < ApplicationRecord
     false
   end
 
+  def trainers
+    team_members.trainers.active.asc
+  end
+
   def self.check_division
     Team.active.each do |team|
       if (competition = team.competitions.regular.last).present?
