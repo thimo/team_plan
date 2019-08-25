@@ -1,7 +1,7 @@
 - if (groups = Group.by_model(parent.model_name.name).asc).any?
   - groups.each do |group|
     - group_members = parent.group_members.by_group(group)
-    / Show card if
+    / Show card if either:
     / - there are members
     / - the user can add members
     / - the parent has "always show group members"
@@ -20,6 +20,8 @@
               tbody
                 - group_members.each do |group_member|
                   tr
+                    td.w-1.text-center.pr-0
+                      = render 'members/photo', member: group_member.member
                     td
                       = group_member.member.name
                       .small
