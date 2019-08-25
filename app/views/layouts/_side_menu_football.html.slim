@@ -65,8 +65,3 @@ li.nav-item
       = link_to age_group, class: "nav-link #{'active' if current_page?(url_for(age_group))}"
         i.fa-fw.fa-star.nav-icon.color-yellow[class=fa_class]
         = age_group.name
-
-  li.nav-item.mt-3
-    = mail_to "helpdesk@defrog.nl", class: "nav-link"
-      i.fa.fa-fw.fa-question.nav-icon.color-blue
-      | Helpdesk
