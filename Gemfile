@@ -62,7 +62,7 @@ group :development, :test do
   # gem "pry-byebug"
   gem "factory_bot_rails"
   gem "guard"
-  # gem "scout_apm" # Disable to improve loading without internet connction
+  gem "scout_apm" # Disable to improve loading without internet connction
 
   gem "capistrano",         require: false
   gem "capistrano-bundler", require: false
