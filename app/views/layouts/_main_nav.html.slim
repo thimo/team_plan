@@ -17,3 +17,8 @@ li.nav-item
     = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.module_parent}"
       i.fa-cog.nav-icon[class=fa_class]
       | Beheer
+
+  li.nav-item
+    = link_to support_path, class: "nav-link"
+      i.fa.fa-fw.fa-question.nav-icon
+      | Helpdesk
