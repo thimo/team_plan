@@ -10,7 +10,8 @@ default: &defaults # Your push api key, it is possible to set this dynamically u
   # Errors that should not be recorded by AppSignal
   # For more information see our docs:
   # https://docs.appsignal.com/ruby/configuration/ignore-errors.html
-  # ignore_errors:
+  ignore_errors:
+    - ActionController::InvalidCrossOriginRequest
   #   - Exception
   #   - NoMemoryError
   #   - ScriptError
