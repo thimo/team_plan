@@ -1,15 +1,4 @@
 GIT
-  remote: https://github.com/plataformatec/devise
-  revision: 12fc5b76d89cf6e9c47289416fb24bf1a85f03da
-  specs:
-    devise (4.6.2)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
-      responders
-      warden (~> 1.2.3)
-
-GIT
   remote: https://github.com/randym/axlsx.git
   revision: c8ac844572b25fda358cc01d2104720c4c42f450
   ref: c8ac844
@@ -180,6 +169,12 @@ GEM
       sexp_processor (~> 4.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    devise (4.7.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     em-websocket (0.5.1)
@@ -548,7 +543,7 @@ DEPENDENCIES
   country_select
   debase
   debride
-  devise!
+  devise (~> 4.7)
   enum_help (~> 0.0.17)
   exception_notification
   factory_bot_rails
