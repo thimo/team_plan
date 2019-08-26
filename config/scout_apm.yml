@@ -1,0 +1,20 @@
+common: &defaults
+  name: <%= "YOUR_APP_NAME (#{Rails.env})" %>
+  key: YOUR_KEY
+  log_level: info
+  monitor: false
+
+production:
+  <<: *defaults
+
+development:
+  <<: *defaults
+  monitor: false
+  dev_trace: true
+
+test:
+  <<: *defaults
+  monitor: false
+
+staging:
+  <<: *defaults
