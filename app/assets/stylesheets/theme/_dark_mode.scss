@@ -16,6 +16,12 @@
     border-color: $gray-900;
   }
 
+  .navbar-brand h1.navbar-brand-full img,
+  .devise .app-logo,
+  .app-header .navbar-toggler-icon {
+    filter: invert(1);
+  }
+
   .sidebar {
     background: $black;
 
