@@ -1,6 +1,6 @@
 .card {
-  border-top: solid 4px $primary;
-  border-bottom-width: 2px;
+  border: 0;
+  background: none;
 
   &.bg-warning {
     color: darken($warning, 35%);
@@ -8,20 +8,30 @@
 }
 
 .card-header {
+  background: none;
+  border: 0;
   font-weight: 600;
+  padding: 0.5rem 0.25rem 0.5rem 0.5rem;
 }
 
 .card-header-action {
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
+}
+
+.card-body {
+  border-top: solid 3px $primary;
+  background: $white;
 }
 
 .card-footer {
-  padding: .5rem $card-spacer-x;
+  padding: 0.5rem $card-spacer-x;
+  background: none;
 }
 
 @include media-breakpoint-down(sm) {
-  .card-header, .card-body {
-    padding: .75rem;
+  .card-header,
+  .card-body {
+    padding: 0.75rem;
   }
 
   .card {
@@ -31,6 +41,6 @@
 
 @include media-breakpoint-down(xs) {
   .card {
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
   }
 }

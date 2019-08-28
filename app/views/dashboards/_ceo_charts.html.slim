@@ -2,33 +2,34 @@
   .row
     .col-12.col-md-9.col-xl-10
       .card
-        - data = active_members_graph_data
-        .card-body.pb-0.membersChartParent [data={ controller: "chart-members",
-                          "chart-members-data": data.to_json,
-                          "chart-members-title": "Actieve leden" }
-                          style="height: 200px;"]
-          canvas.membersChart data={ target: "chart-members.canvas" }
+        .card-body
+          - data = active_members_graph_data
+          .membersChartParent [data={ controller: "chart-members",
+                            "chart-members-data": data.to_json,
+                            "chart-members-title": "Actieve leden" }
+                            style="height: 200px;"]
+            canvas.membersChart data={ target: "chart-members.canvas" }
 
-        - data = member_diff_graph_data
-        .card-body.pt-0.membersChartParent [data={ controller: "chart-members",
-                          "chart-members-data": data.to_json,
-                          "chart-members-title": "Aan- en afmeldingen" }
-                          style="height: 200px;"]
-          canvas.membersChart data={ target: "chart-members.canvas" }
+          - data = member_diff_graph_data
+          .membersChartParent [data={ controller: "chart-members",
+                            "chart-members-data": data.to_json,
+                            "chart-members-title": "Aan- en afmeldingen" }
+                            style="height: 200px;"]
+            canvas.membersChart data={ target: "chart-members.canvas" }
 
-        - data = comments_graph_data
-        .card-body.pt-0.membersChartParent [data={ controller: "chart-members",
-                          "chart-members-data": data.to_json,
-                          "chart-members-title": "Opmerkingen toegevoegd",
-                          "chart-members-stacked": "true" }
-                          style="height: 200px;"]
-          canvas.membersChart data={ target: "chart-members.canvas" }
+          - data = comments_graph_data
+          .membersChartParent [data={ controller: "chart-members",
+                            "chart-members-data": data.to_json,
+                            "chart-members-title": "Opmerkingen toegevoegd",
+                            "chart-members-stacked": "true" }
+                            style="height: 200px;"]
+            canvas.membersChart data={ target: "chart-members.canvas" }
 
     .col-12.col-md-3.col-xl-2
       .row
         .col-6.col-md-12
-          .card.text-white.bg-primary.mb-2
-            .card-body.py-2
+          .card.mb-2
+            .card-body.text-white.bg-primary.py-2.border-top-0
               .d-flex.justify-content-between.align-items-center
                 span.text-value
                   = Member.active.size
@@ -37,8 +38,8 @@
 
         - if (season = Season.active_season_for_today).present?
           .col-6.col-md-12
-            .card.text-white.bg-success.mb-2
-              .card-body.py-2
+            .card.mb-2
+              .card-body.text-white.bg-success.py-2.border-top-0
                 .d-flex.justify-content-between.align-items-center
                   .text-value
                     = season.age_groups.active.size
@@ -58,8 +59,8 @@
                     | Spelers
 
         .col-6.col-md-12
-          .card.text-white.bg-warning.mb-2
-            .card-body.py-2
+          .card.mb-2
+            .card-body.text-white.bg-warning.py-2.border-top-0
               .d-flex.justify-content-between.align-items-center
                 .text-value
                   = Member.active.sportlink_player.size - Member.by_season_as_player(Season.active_season_for_today).size
@@ -73,8 +74,8 @@
                   | Welkom bij ESA
 
         .col-6.col-md-12
-          .card.text-white.bg-danger.mb-2
-            .card-body.py-2
+          .card.mb-2
+            .card-body.text-white.bg-danger.py-2.border-top-0
               .d-flex.justify-content-between.align-items-center
                 .text-value
                   = Member.injured.size

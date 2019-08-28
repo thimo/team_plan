@@ -9,7 +9,7 @@
       = markdown(version_update.body).html_safe
 
 - unless version_updates.last_page?
-  .card-footer#version_updates_list
+  .card-footer#version_updates_list style="margin: 0 -1rem -1rem -1rem;"
     .text-right
       = link_to dashboard_path(version_page: version_updates.next_page), remote: true
         | Meer

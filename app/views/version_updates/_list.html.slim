@@ -8,8 +8,8 @@
         = link_to new_admin_version_update_path, title: "Versie toevoegen", class: "card-header-action"
           i.fa-file[class=fa_class]
 
-  - if version_updates.present?
-    = render 'version_updates/list_body', version_updates: version_updates
-  - else
-    .card-body
+  .card-body
+    - if version_updates.present?
+      = render 'version_updates/list_body', version_updates: version_updates
+    - else
       i Geen versies gevonden
