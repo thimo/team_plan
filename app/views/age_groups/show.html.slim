@@ -54,14 +54,13 @@
                 td
                   = team.division
                 td.text-right
+                  - if policy(team).show_alert? && team.inactive_players?
+                    i.fa.fa-exclamation-triangle.color-red.mr-1 title="Het team bevat mogelijk een fout in de indeling"
                   - if policy(team).show_status?
                     => team.status_to_badge.html_safe
                   - if policy_scope(team.team_members).size > 0
                     .badge.badge-pill.badge-secondary.badge-two-numbers>
                       = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).active_for_team(team).staff.pluck(:member_id).uniq.size}"
-                  - if policy(team).show_alert? && team.inactive_players?
-                    i.fa.fa-exclamation-triangle.color-red title="Het team bevat mogelijk een fout in de indeling"
-
 
     - if @not_played_matches.any?
       .card.schedule-list

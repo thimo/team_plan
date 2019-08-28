@@ -35,6 +35,8 @@
                 .light.small
                   = "2 x #{age_group.minutes_per_half} min"
             td.text-right
+              - if policy(age_group).show_member_count? && age_group.inactive_players?
+                i.fa.fa-exclamation-triangle.color-red.mr-1 title="Eén of meerdere teams bevatten mogelijk een fout in de indeling"
               - if policy(age_group).show_status?
                 => age_group.status_to_badge.html_safe
               - if (size = policy_scope(age_group.teams).by_status([:active, age_group.status]).size) > 0
@@ -58,5 +60,3 @@
                       =<> "/"
                     span.color-green
                       = waiting_players_size
-                  - if age_group.inactive_players?
-                    i.fa.fa-exclamation-triangle.color-red title="Eén of meerdere teams bevatten mogelijk een fout in de indeling"
