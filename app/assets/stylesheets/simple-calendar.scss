@@ -4,7 +4,7 @@
     padding: 2px 5px;
 
     hr {
-      margin: .5em 0;
+      margin: 0.5em 0;
     }
 
     .event {
@@ -23,19 +23,30 @@
     }
   }
 
-  .wday-0 {}
-  .wday-1 {}
-  .wday-2 {}
-  .wday-3 {}
-  .wday-4 {}
-  .wday-5 {}
-  .wday-6 {}
+  .wday-0 {
+  }
+  .wday-1 {
+  }
+  .wday-2 {
+  }
+  .wday-3 {
+  }
+  .wday-4 {
+  }
+  .wday-5 {
+  }
+  .wday-6 {
+  }
 
-  .today {}
-  .past {}
-  .future {}
+  .today {
+  }
+  .past {
+  }
+  .future {
+  }
 
-  .start-date {}
+  .start-date {
+  }
 
   .prev-month {
     background: #f6f8fa;
@@ -45,9 +56,11 @@
     background: #f6f8fa;
   }
 
-  .current-month {}
+  .current-month {
+  }
 
-  .has-events {}
+  .has-events {
+  }
 
   .calendar-heading {
     text-align: center;
@@ -62,7 +75,33 @@
       text-align: center;
       text-transform: uppercase;
       background: white;
-      font-size: .8rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    table,
+    td {
+      border-color: $gray-900;
+    }
+
+    thead th {
+      background: $black;
+    }
+
+    .prev-month,
+    .next-month {
+      background: $gray-950;
+    }
+
+    .today {
+      background: #797956;
+    }
+
+    .day {
+      .event {
+        background: #719aaf;
+      }
     }
   }
 }
