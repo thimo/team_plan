@@ -30,6 +30,24 @@
     }
   }
 
+  .modal-header,
+  .modal-footer {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .modal-content {
+    background-color: $black;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .close {
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
   .navbar-nav .nav-link {
     color: $gray-300;
   }
@@ -63,6 +81,10 @@
   .card-header {
     background-color: $gray-950;
     border-color: $gray-900;
+  }
+
+  .card-header-action:hover {
+    color: $gray-300;
   }
 
   .card-footer {
@@ -159,6 +181,16 @@
       color: $white;
       background-color: $gray-900;
     }
+  }
+
+  .btn-primary {
+    background-color: darken($primary, 5);
+    border-color: darken($primary, 5);
+  }
+
+  .btn-secondary {
+    background-color: darken($secondary, 20);
+    border-color: darken($secondary, 20);
   }
 
   .input-group-text {
