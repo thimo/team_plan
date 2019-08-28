@@ -31,7 +31,7 @@
                     - presence_count += 1
                   - else
                     - title = [presences[presentable.id].signed_off_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa-times.color-red[title="#{title}" class=fa_class]
+                    i.fa.fa-times.color-red[title="#{title}"]
                 - else
                   i.fa-minus.color-gray[class=fa_class]
             td.w-1.text-right.light

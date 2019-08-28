@@ -23,7 +23,7 @@ html lang="nl"
                         .alert.alert-dismissible.invisible.fade[data={ controller: "alert-fade-in" } role="alert" class="alert-#{message_type.sub('alert', 'danger')}"]
                           button.close[type="button" data-dismiss="alert" aria-label="Close"]
                             span[aria-hidden="true"]
-                              i.fa-times class=fa_class
+                              i.fa.fa-times
                           | #{message}
               div
                 = yield(:flash)
