@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_125446) do
+ActiveRecord::Schema.define(version: 2019_08_29_080916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -529,8 +529,6 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
     t.string "clubdata_urls_afgelastingen", default: "https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1"
     t.string "clubdata_urls_club_logos", default: "http://bin617.website-voetbal.nl/sites/voetbal.nl/files/knvblogos/"
     t.string "clubdata_client_id"
-    t.string "fontawesome_version", default: "v5.5.0"
-    t.string "fontawesome_integrity"
     t.string "google_maps_base_url", default: "https://www.google.com/maps/embed/v1/"
     t.string "google_maps_api_key"
     t.string "google_analytics_tracking_id"
@@ -538,6 +536,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "last_import_members"
+    t.string "fontawesome_kit_nr"
     t.index ["tenant_id"], name: "index_tenant_settings_on_tenant_id"
   end
 

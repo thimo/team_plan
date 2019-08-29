@@ -174,8 +174,7 @@ nl:
         clubdata_urls_afgelastingen: URL afgelastingen
         clubdata_urls_club_logos: URL club logo's
         clubdata_client_id: Client ID
-        fontawesome_version: FontAwesome versie
-        fontawesome_integrity: FontAwesome integrity
+        fontawesome_kit_nr: FontAwesome Kit nummer
         google_maps_base_url: Google Maps basis URL
         google_maps_api_key: Google Maps API key
         google_analytics_tracking_id: Google Analytics Tracking ID
