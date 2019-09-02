@@ -28,7 +28,7 @@ html lang="nl"
               div
                 = yield(:flash)
 
-            .card.p-3
+            .card.my-4
               .card-body
                 h1.mb-0
                   = yield(:title)
@@ -38,8 +38,8 @@ html lang="nl"
                 = yield
 
             - if content_for?(:form_help)
-              .card.bg-primary
-                .card-body.text-center
+              .card
+                .card-body.bg-primary.text-center
                   div
                     = yield(:form_help)
 
