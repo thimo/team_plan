@@ -9,7 +9,6 @@ Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
 
 Style/Documentation:
-
   Include:
     - app/models/**/*
     - lib/**/*
@@ -34,3 +33,6 @@ Metrics/ClassLength:
 
 Rails/HasAndBelongsToMany:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never

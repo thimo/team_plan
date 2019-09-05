@@ -9,6 +9,7 @@ header.app-header.navbar
       img.navbar-brand-minimized src="#{Tenant.setting("club_logo_url")}"
     h1.navbar-brand-full
       img src="#{asset_path 'logo/teamplan.svg'}" alt=Tenant.setting("application_name")
+      / = inline_svg(File.open("#{Rails.root}/app/assets/images/logo/teamplan.svg"))
 
   button.navbar-toggler.sidebar-toggler.d-md-down-none[type="button" data={ controller: "toggle-sidebar",
                                                                             action: "toggle-sidebar#toggle",

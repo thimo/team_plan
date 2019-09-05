@@ -235,6 +235,9 @@ GEM
     icalendar (2.4.1)
     ice_nine (0.11.2)
     image_optimizer (1.8.0)
+    inline_svg (1.5.2)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     jaro_winkler (1.5.3)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
@@ -556,6 +559,7 @@ DEPENDENCIES
   guard-livereload
   guard-minitest
   icalendar (~> 2.4.1)
+  inline_svg
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

@@ -2,13 +2,14 @@
   text-decoration: none !important;
 
   img.navbar-brand-full {
-    margin: 0 .375rem;
+    margin: 0 0.375rem;
     max-height: 2rem;
     max-width: 2rem;
   }
 
   h1.navbar-brand-full {
-    img {
+    img,
+    svg {
       max-height: 1.5rem;
       max-width: 8rem;
     }
@@ -20,7 +21,7 @@
   }
 
   h1 {
-    margin: 0 .375rem;
+    margin: 0 0.375rem;
     font-size: 20px;
     font-weight: 300;
     color: $dark;
@@ -38,7 +39,7 @@
 
   input[type="text"] {
     width: 4rem;
-    padding: .15rem 0 0 .75rem;
+    padding: 0.15rem 0 0 0.75rem;
     border: none;
     background: none;
     font-size: 0.875rem;
@@ -74,11 +75,11 @@
   }
 
   .nav-icon {
-    padding-right: .3rem;
+    padding-right: 0.3rem;
     color: $gray-500;
   }
 
   .nav-link.active .nav-icon {
-      color: $blue;
+    color: $blue;
   }
 }

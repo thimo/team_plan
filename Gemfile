@@ -34,6 +34,7 @@ gem "country_select"
 gem "devise",                     "~> 4.7"
 gem "enum_help",                  "~> 0.0.17"
 gem "figaro",                     "~> 1.1.1"
+gem "inline_svg"
 gem "kaminari"
 gem "net-ssh",                    "~> 4.1.0"
 
