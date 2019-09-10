@@ -1,3 +1,5 @@
+// TODO: Cleanup after example from new Rails project
+
 import { Application } from "stimulus";
 import { definitionsFromContext } from "stimulus/webpack-helpers";
 
