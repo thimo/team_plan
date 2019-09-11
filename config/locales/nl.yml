@@ -429,6 +429,7 @@ nl:
       privacyverklaring_bond_aangeboden_op: privacy_statement_association_offered_on
       privacyverklaring_vereniging_geaccepteerd: privacy_statement_club_accepted
       privacyverklaring_vereniging_aangeboden_op: privacy_statement_offered_on
+      gekozen_opties_avg-formulier: selected_options_gdpr_form
 
   invites_sent:
     one: er is 1 uitnodiging verstuurd
