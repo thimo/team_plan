@@ -279,7 +279,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0331)
     mimemagic (0.3.3)
-    mini_magick (4.7.2)
+    mini_magick (4.9.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
@@ -566,7 +566,7 @@ DEPENDENCIES
   launchy
   letter_opener
   listen (~> 3.0.5)
-  mini_magick (~> 4.7.0)
+  mini_magick
   minitest
   minitest-reporters
   net-ssh (~> 4.1.0)

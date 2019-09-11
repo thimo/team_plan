@@ -18,7 +18,7 @@
     "file-loader": "^1.1.6",
     "jquery": "^3.1.1",
     "jquery-ujs": "^1.2.2",
-    "js-yaml": "^3.9.0",
+    "js-yaml": "^3.13.1",
     "node-sass": "^4.5.3",
     "nonblockjs": "^1.0.8",
     "perfect-scrollbar": "^1.4.0",
