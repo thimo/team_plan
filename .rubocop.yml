@@ -33,6 +33,3 @@ Metrics/ClassLength:
 
 Rails/HasAndBelongsToMany:
   Enabled: false
-
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: never
