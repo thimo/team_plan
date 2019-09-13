@@ -4,67 +4,66 @@
 - team ||= nil
 - highlight_own_teams ||= false
 
-- cache [match, compact, disable_line_through, include_presences, team, highlight_own_teams]
-  tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through} #{'strong table-success' if highlight_own_teams && match.eigenteam?}"]
-    / 'max-width' is a bit of a hack to force table to fit within parent div on smaller screens
-    td[style="max-width: 200px;" colspan="2"]
-      .match-row-header.small
-        .match-datetime.light
-          - if compact
-            span.pr-1
-              = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
-            span.pr-1
-              = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
-          - else
-            span.pr-1
-              | #{I18n.l match.started_at, format: :time_short}
-        .match-type.text-right.lighter
-          = match.competition.competitiesoort
-
-      .match-teams
-        - if match.toernooi?
-          .match-hometeam.nowrap.text-right
-            | Toernooi #{match.thuisteam}
-          .match-separator.text-center.lighter
-            = " · "
-          .match-awayteam.nowrap.text-left
-            = link_to match
-              | #{match.teams.map(&:name_with_club).join(", ")}
+tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through} #{'strong table-success' if highlight_own_teams && match.eigenteam?}"]
+  / 'max-width' is a bit of a hack to force table to fit within parent div on smaller screens
+  td[style="max-width: 200px;" colspan="2"]
+    .match-row-header.small
+      .match-datetime.light
+        - if compact
+          span.pr-1
+            = "#{I18n.l match.started_at, format: :weekday} #{I18n.l match.started_at, format: :date_short}"
+          span.pr-1
+            = "#{I18n.l match.started_at, format: :time_short}" unless match.uitslag
         - else
-          .match-hometeam.nowrap.text-right
-            - if (relatiecode = match.thuisteamclubrelatiecode).present?
-              = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata_urls_club_logos')}#{relatiecode}.png"}
-            - if team_for(match.wedstrijddatum, match.thuisteamid).present? || \
-                   match.thuisteam.include?(Tenant.setting('club_name_short'))
-              = link_to match
-                = match.thuisteam
-            - else
+          span.pr-1
+            | #{I18n.l match.started_at, format: :time_short}
+      .match-type.text-right.lighter
+        = match.competition.competitiesoort
+
+    .match-teams
+      - if match.toernooi?
+        .match-hometeam.nowrap.text-right
+          | Toernooi #{match.thuisteam}
+        .match-separator.text-center.lighter
+          = " · "
+        .match-awayteam.nowrap.text-left
+          = link_to match
+            | #{match.teams.map(&:name_with_club).join(", ")}
+      - else
+        .match-hometeam.nowrap.text-right
+          - if (relatiecode = match.thuisteamclubrelatiecode).present?
+            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata_urls_club_logos')}#{relatiecode}.png"}
+          - if team_for(match.wedstrijddatum, match.thuisteamid).present? || \
+                 match.thuisteam.include?(Tenant.setting('club_name_short'))
+            = link_to match
               = match.thuisteam
-          .match-separator.text-center.lighter
-            = " - "
-          .match-awayteam.nowrap.text-left
-            - if (relatiecode = match.uitteamclubrelatiecode).present?
-              = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata_urls_club_logos')}#{relatiecode}.png"}
-            - if team_for(match.wedstrijddatum, match.uitteamid).present? || \
-                   match.uitteam.include?(Tenant.setting('club_name_short'))
-              = link_to match
-                = match.uitteam
-            - else
+          - else
+            = match.thuisteam
+        .match-separator.text-center.lighter
+          = " - "
+        .match-awayteam.nowrap.text-left
+          - if (relatiecode = match.uitteamclubrelatiecode).present?
+            = image_tag "", class: 'clublogo d-none d-sm-inline-block', data: { src: "#{Tenant.setting('clubdata_urls_club_logos')}#{relatiecode}.png"}
+          - if team_for(match.wedstrijddatum, match.uitteamid).present? || \
+                 match.uitteam.include?(Tenant.setting('club_name_short'))
+            = link_to match
               = match.uitteam
+          - else
+            = match.uitteam
 
-      - if match.uitslag
-        .match-teams.strong
-          - uitslag = match.uitslag.split
-          .match-hometeam.nowrap.text-right
-            = uitslag.first
-          .match-separator.text-center.lighter
-            = " - "
-          .match-awayteam.nowrap.text-left
-            = uitslag.last
-
-    - if include_presences
-      td.py-1.pl-0.w-1.nowrap.align-middle.strong.text-center
-        = render "presences/presence_label", parent: match, team: team
+    - if match.uitslag
+      .match-teams.strong
+        - uitslag = match.uitslag.split
+        .match-hometeam.nowrap.text-right
+          = uitslag.first
+        .match-separator.text-center.lighter
+          = " - "
+        .match-awayteam.nowrap.text-left
+          = uitslag.last
 
   - if include_presences
-    = render "presences/presences_row", parent: match, team: team
+    td.py-1.pl-0.w-1.nowrap.align-middle.strong.text-center
+      = render "presences/presence_label", parent: match, team: team
+
+- if include_presences
+  = render "presences/presences_row", parent: match, team: team
