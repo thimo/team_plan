@@ -85,8 +85,10 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def modify_members?
-    @user.role?(Role::BEHEER_GROUPS) &&
-      @record.persisted? && !@record.archived?
+    return false if @record.new_record? || @record.archived?
+
+    # Don't allow coordinators to create members with a second parameter to the `role?` call
+    @user.role?(Role::BEHEER_GROUPS) || @user.role?(Role::GROUP_MEMB_CREATE)
   end
 
   def add_members?
