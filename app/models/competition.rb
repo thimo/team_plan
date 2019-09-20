@@ -34,4 +34,9 @@ class Competition < ApplicationRecord
   def regular?
     competitiesoort == COMPETITIESOORT_REGULIER
   end
+
+  def deactivate
+    super
+    matches.from_now.destroy_all
+  end
 end
