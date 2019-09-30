@@ -12,18 +12,18 @@
     class: 'form-control',
     placeholder: t('.new_password'),
     hide_label: true,
-    autocomplete: "off"
+    autocomplete: "off",
+    help: t('.leave_blank_if_you_don_t_want_to_change_it', default: "Leave blank if you don't want to change it")
   = f.password_field :password_confirmation,
     class: 'form-control',
     placeholder: User.human_attribute_name(:password_confirmation),
     hide_label: true,
-    autocomplete: "off",
-    hint: t('.leave_blank_if_you_don_t_want_to_change_it', default: "Leave blank if you don't want to change it")
+    autocomplete: "off"
   = f.password_field :current_password,
     class: 'form-control',
     placeholder: t('.current_password'),
     hide_label: true,
     autocomplete: "off",
-    hint: t('.we_need_your_current_password_to_confirm_your_changes', default: 'We need your current password to confirm your changes')
+    help: t('.we_need_your_current_password_to_confirm_your_changes', default: 'We need your current password to confirm your changes')
 
   = f.submit t('.update', default: 'Update'), class: 'btn btn-primary'
