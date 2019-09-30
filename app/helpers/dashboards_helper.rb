@@ -39,7 +39,7 @@ module DashboardsHelper
   end
 
   def member_stats
-    @member_stats ||= (0..23).reverse_each.map do |number|
+    @member_stats ||= (0..35).reverse_each.map do |number|
       date = number.months.ago
       {
         title: I18n.l(date, format: :date_long_without_day),
@@ -89,7 +89,7 @@ module DashboardsHelper
   end
 
   def comment_stats
-    @comment_stats ||= (0..23).reverse_each.map do |number|
+    @comment_stats ||= (0..35).reverse_each.map do |number|
       date = number.months.ago
       {
         title: I18n.l(date, format: :date_long_without_day),
