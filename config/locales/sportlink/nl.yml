@@ -1,0 +1,108 @@
+nl:
+  member:
+    import:
+      relatienr: association_number # oud
+      relatiecode: association_number # nieuw
+      soort_persoon: person_type # Bondslid, Verenigingslid - oud
+      lidsoort: person_type # Bondslid, Verenigingslid - nieuw
+      volledige_naam_(1): full_name # "Lastname, Initials"
+      voorletters: initials # oud
+      voorletter(s): initials # nieuw
+      roepnaam: first_name
+      tussenvoegsels: middle_name # oud
+      tussenvoegsel(s): middle_name # nieuw
+      achternaam: last_name
+      geslacht: gender
+      geb_datum: born_on # oud
+      geboortedatum: born_on # nieuw
+      volledig_adres: address
+      postcode: zipcode
+      woonplaats: city # oud
+      plaats: city # nieuw
+      mobiel: phone
+      2e_mobiel: phone_2
+      e-mail: email
+      2e_e-mail: email_2
+      vog-nummer: conduct_number
+      bondssporten: sport_category
+      status: status # definitief, af te melden
+      volledige_naam_(2): full_name_2 # "Initials Lastname"
+      laatste_wijz: last_change_at
+      laatste_wijziging: last_change_at
+      privacyniveau: privacy_level
+      straat: street # oud
+      straatnaam: street # nieuw
+      huisnr: house_number # oud
+      huisnummer: house_number # nieuw
+      huisnr_toev: house_number_addition # oud
+      toevoeging: house_number_addition # nieuw
+      land: country
+      telefoon: phone_home
+      telefoon_ouder/verzorger_1: phone_parent
+      telefoon_ouder/verzorger_2: phone_parent_2
+      e-mail_ouder/verzorger_1: email_parent
+      e-mail_ouder/verzorger_2: email_parent_2
+      registratiedatum: registered_at
+      afmelddatum: deregistered_at
+      lid_sinds: member_since
+      leeftijdscat: age_category # oud
+      leeftijdscategorie: age_category # nieuw
+      lokale_teams: local_teams
+      verenigingssporten: club_sports
+      bondssporten_(elders): association_sports
+
+      # removed from database
+      geboorteplaats: place_of_birth
+      geboorteland: country_of_birth
+      nationaliteit: nationality
+      2e_nationaliteit: nationality_2
+      legitimatietype: id_type
+      legitimatienr: id_number # oud
+      legitimatienummer: id_number # nieuw
+      contact_via_ouder(s)/verzorger(s): contact_via_parent # oud
+      contact_via_ouder/verzorger: contact_via_parent # nieuw
+      bankrek_type: bank_account_type # oud
+      rekeningtype: bank_account_type # nieuw
+      bankrek_nr: bank_account_number # oud
+      bankrekeningnummer: bank_account_number # nieuw
+      bic: bank_bic
+      machtiging?: bank_authorization
+      contrib_cat: contribution_category # oud
+      contributiecategorie: contribution_category # nieuw
+
+      # not implemented yet
+      interne_code: internal_number
+      externe_code: external_number
+      wijzig?: wijzig
+      remarks10id: remarks10id
+      rowstatus: rowstatus # insync, removed
+      bijnaam: nickname
+      overlijdensdatum: date_of_death
+      leeftijd: age
+      heeft_foto?: has_photo
+      datum_pasfoto: date_photo
+      bedrijfsnaam: company_name
+      fax: fax
+      aantal_jaar_lid: member_for_years
+      opmerking_indeling: remark_division
+      bijzonderheden: specifics
+      vrij_veld_1: free_entry_1
+      vrij_veld_2: free_entry_2
+      vrij_veld_3: free_entry_3
+      vrij_veld_4: free_entry_4
+      vrij_veld_5: free_entry_5
+      vrij_veld_6: free_entry_6
+      vrij_datumveld_1: free_date_1
+      vog-datum: vog_date
+      vrij_datumveld_2: free_date_2
+      vrije_dropdown_1: free_dropdown_1
+      vrije_dropdown_2: free_dropdown_2
+      bondsteams: association_teams
+      zichtbaarheid: visibility
+      naam_ouder/verzorger_1: name_parent
+      naam_ouder/verzorger_2: name_parent_2
+      privacyverklaring_bond_geaccepteerd: privacy_statement_association_accepted
+      privacyverklaring_bond_aangeboden_op: privacy_statement_association_offered_on
+      privacyverklaring_vereniging_geaccepteerd: privacy_statement_club_accepted
+      privacyverklaring_vereniging_aangeboden_op: privacy_statement_offered_on
+      gekozen_opties_avg-formulier: selected_options_gdpr_form

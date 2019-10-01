@@ -1,16 +1,4 @@
 nl:
-  activerecord:
-    attributes:
-      user:
-        current_password: Huidig wachtwoord
-        email: Email
-        password: Wachtwoord
-        password_confirmation: Bevestig wachtwoord
-        remember_me: Ingelogd blijven
-        reset_password_token:
-        unlock_token:
-    models:
-      user: Gebruiker
   devise:
     confirmations:
       confirmed: Je gegevens zijn bevestigd, je kunt er nu mee inloggen.

@@ -1,7 +1,9 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'csv'
-require 'rails/all'
+require_relative "boot"
+
+require "csv"
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -16,6 +18,7 @@ module TeamPlan
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.yml")]
 
     config.autoload_paths += %W[#{config.root}/lib]
 
