@@ -1,4 +1,4 @@
 <% if params[:member_page] %>
 $('#members_list tbody').append("<%= j render("members/list_rows", members: @available_players) %>")
-$('#members_list_footer').replaceWith("<%= j render("members/list_footer", members: @available_players) %>")
+$('#members_list_footer').html("<%= j render("members/list_footer", members: @available_players) %>")
 <% end %>
