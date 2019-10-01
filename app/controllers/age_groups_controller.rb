@@ -85,7 +85,7 @@ class AgeGroupsController < ApplicationController
     def set_members
       return unless policy(@age_group).show_available_members?
 
-      available_players = @age_group.active_players - @age_group.assigned_active_players
+      available_players = @age_group.active_players.order_registered_at - @age_group.assigned_active_players
       @available_players = Kaminari.paginate_array(available_players).page(params[:member_page]).per(10)
 
       available_non_players = @age_group.active_non_players - @age_group.assigned_active_non_players

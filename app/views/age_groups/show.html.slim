@@ -98,7 +98,7 @@
     - if policy(@age_group).show_available_members?
       - if @available_players.present?
         = render "members/list", members: @available_players,
-                                 title: "Wachtlijst speelgerechtigd",
+                                 title: "Speelgerechtigde spelers",
                                  subtitle: "Deze leden kun je in een team indelen."
       - if @available_non_players.present?
         = render "members/list", members: @available_non_players,

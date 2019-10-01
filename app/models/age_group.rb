@@ -48,7 +48,7 @@ class AgeGroup < ApplicationRecord
   end
 
   def active_players
-    members = Member.active.active_for_season(season).sportlink_player.asc
+    members = Member.active.active_for_season(season).sportlink_player
     filter_for_birth_date_and_gender(members)
   end
 
@@ -57,7 +57,8 @@ class AgeGroup < ApplicationRecord
   end
 
   def active_non_players
-    return AgeGroup.none if year_of_birth_from.blank?
+    # To prevent a huge list of volunteers being shown
+    return Member.none if year_of_birth_from.blank?
 
     members = Member.active.active_for_season(season).sportlink_non_player.asc
     filter_for_birth_date_and_gender(members)

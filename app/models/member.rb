@@ -38,6 +38,7 @@ class Member < ApplicationRecord
   validates :last_name, :born_on, :gender, :association_number, presence: true
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
+  scope :order_registered_at, -> { order(registered_at: :asc) }
   scope :to_year,   ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }
   scope :from_year, ->(year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year.to_date) }
   scope :active, -> {
