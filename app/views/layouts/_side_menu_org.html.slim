@@ -18,5 +18,10 @@ li.nav-title
   | Overig
 li.nav-item
   = link_to org_local_teams_path, class: "nav-link #{'active' if current_page?(org_local_teams_path)}" do
-    i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
+    i.fa-fw.fa-users.nav-icon[class=fa_class]
     | Lokale teams
+- if policy(Comment).index?
+  li.nav-item
+    = link_to org_comments_path, class: "nav-link #{'active' if current_page?(org_comments_path)}" do
+      i.fa-fw.fa-comments.nav-icon[class=fa_class]
+      | Opmerkingen

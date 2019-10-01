@@ -114,6 +114,7 @@ Rails.application.routes.draw do
       resources :members, only: [:index]
       resources :seasons, only: [:show]
       resources :local_teams, only: [:index]
+      resources :comments, only: [:index]
     end
 
     get "intranet" => "intranet/base#show"

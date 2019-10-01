@@ -2,6 +2,14 @@ require:
   - rubocop-performance
   - rubocop-rails
 
+AllCops:
+  TargetRubyVersion: 2.6.4
+  Exclude:
+    - 'app/views/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+
 Rails:
   Enabled: true
 
@@ -21,6 +29,9 @@ Style/StringLiterals:
 
 Style/SymbolArray:
   EnforcedStyle: brackets
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
 
 Metrics/LineLength:
   Max: 120

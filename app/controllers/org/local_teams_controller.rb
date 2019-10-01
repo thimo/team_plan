@@ -22,7 +22,7 @@ module Org
     private
 
       def add_breadcrumbs
-        add_breadcrumb "Locale teams"
+        add_breadcrumb "Lokale teams"
       end
 
       # def team_staff_members

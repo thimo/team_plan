@@ -1,0 +1,12 @@
+- provide(:title, "Opmerkingen")
+
+.row
+  .col-sm-6
+    .card
+      .card-body
+        - @comments.each do |comment|
+          = render "comments/comment", comment: comment, parent: nil, precise_date: true, show_comment_type: true
+          hr
+
+.d-flex.flex-row-reverse
+  = paginate @comments, theme: 'twitter-bootstrap-4'
