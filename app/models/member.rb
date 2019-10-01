@@ -137,6 +137,7 @@ class Member < ApplicationRecord
   scope :with_future_play_ban, -> { joins(:play_bans).where("play_bans.started_on > ?", Time.zone.today) }
 
   scope :local_teams, ->(local_team) { where("local_teams like ?", "%#{local_team}%") }
+  scope :with_local_teams, -> { where.not(local_teams: ["", nil]) }
 
   scope :query, ->(query) {
                   where("email ILIKE ? OR email_2 ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",

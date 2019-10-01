@@ -13,3 +13,10 @@ li.nav-item
       = link_to [:org, season], class: "nav-link #{'active' if current_page?([:org, season])}" do
         i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
         = season.name
+
+li.nav-title
+  | Overig
+li.nav-item
+  = link_to org_local_teams_path, class: "nav-link #{'active' if current_page?(org_local_teams_path)}" do
+    i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
+    | Lokale teams
