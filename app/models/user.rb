@@ -104,7 +104,7 @@ class User < ApplicationRecord
   end
 
   def team_staff_for?(record)
-    team_id = team_id_for(record, true)
+    team_id = team_id_for(record, false)
     members.by_team(team_id).team_staff.size.positive?
   end
 
