@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative "boot"
 
 require "csv"
@@ -29,6 +27,9 @@ module TeamPlan
 
     config.generators do |g|
       g.javascript_engine :js
+
+      g.javascripts = false
+      g.stylesheets = false
     end
 
     config.time_zone = "Amsterdam"
@@ -41,8 +42,6 @@ module TeamPlan
 
     # Enable to prevent loading all helpers all the time
     # config.action_controller.include_all_helpers = false
-    config.generators.javascripts = false
-    config.generators.stylesheets = false
 
     console do
       ActiveRecord::Base.connection
