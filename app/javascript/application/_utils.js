@@ -12,6 +12,7 @@ document.addEventListener("turbolinks:load", () => {
   const scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition && !!localStorage.getItem(scrollPosition)) {
     $(window).scrollTop(localStorage.getItem(scrollPosition));
+    localStorage.removeItem(scrollPosition);
   }
 });
 
