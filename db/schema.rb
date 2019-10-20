@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_20_191520) do
+ActiveRecord::Schema.define(version: 2019_10_20_192117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -364,16 +364,16 @@ ActiveRecord::Schema.define(version: 2019_10_20_191520) do
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_evaluation_id"
     t.string "advise_next_season"
-    t.string "behaviour"
-    t.string "technique"
-    t.string "handlingspeed"
-    t.string "insight"
-    t.string "passes"
-    t.string "speed"
-    t.string "locomotion"
-    t.string "physical"
-    t.string "endurance"
-    t.string "duel_strength"
+    t.string "field_1"
+    t.string "field_2"
+    t.string "field_3"
+    t.string "field_4"
+    t.string "field_5"
+    t.string "field_6"
+    t.string "field_7"
+    t.string "field_8"
+    t.string "field_9"
+    t.string "field_10"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "remark"
