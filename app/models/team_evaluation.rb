@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# Evaluates the players in a team
 class TeamEvaluation < ApplicationRecord
   acts_as_tenant :tenant
   belongs_to :team, optional: false

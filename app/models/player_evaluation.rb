@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# Evaluates a single player
 class PlayerEvaluation < ApplicationRecord
   RATING_FIELDS = %w[behaviour technique handlingspeed insight passes speed locomotion physical endurance
                      duel_strength].freeze
