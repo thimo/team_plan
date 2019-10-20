@@ -8,6 +8,8 @@ module Org
     before_action :add_breadcrumbs
 
     def show
+      authorize :org, :show_seasons?
+
       @age_groups_male = age_groups_for(@season, :male)
       @age_groups_female = age_groups_for(@season, :female)
 

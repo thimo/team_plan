@@ -7,6 +7,8 @@ module Org
     before_action :add_breadcrumbs
 
     def index
+      authorize :org, :show_local_teams?
+
       @season = Season.active_season_for_today
       @teams = teams_hash
 

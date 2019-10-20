@@ -5,6 +5,8 @@ module Org
     before_action :add_breadcrumbs
 
     def index
+      authorize :org, :show_comments?
+
       @comments = policy_scope(Comment).desc.page(params[:page]).per(50)
       authorize @comments
     end
