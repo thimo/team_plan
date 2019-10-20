@@ -81,16 +81,6 @@ nl:
       player_evaluation:
         advise_next_season: Advies niveau
         remark: Opmerking
-        behaviour: Gedrag
-        technique: Techniek
-        handlingspeed: Handelingssnelheid
-        insight: Inzicht/Overzicht
-        passes: Passen/Trappen
-        speed: Snelheid
-        locomotion: Motoriek
-        physical: Fysiek
-        endurance: Uithoudingsvermogen
-        duel_strength: Duelkracht
       presence:
         member: Speler
         member_id: Speler

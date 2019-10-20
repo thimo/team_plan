@@ -3,16 +3,16 @@
 th
   div
     / span = TeamMember.human_attribute_name(:field_positions)
-    
+
 - if show_prefered_foot
   th.rotate
     div
       span = TeamMember.human_attribute_name(:prefered_foot)
 
-- PlayerEvaluation::RATING_FIELDS.each do |field_name|
+- team_evaluation.config["fields"].each do |field|
   th.rotate
     div
-      span = PlayerEvaluation.human_attribute_name(field_name)
+      span = field["label"]
 
 th
   div

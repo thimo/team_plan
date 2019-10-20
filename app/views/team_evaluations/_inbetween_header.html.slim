@@ -2,15 +2,16 @@
 
 tr
   td
-  td 
+  td
   - if show_prefered_foot
-    td 
-      .evaluation-rating.small.lighter
-        = TeamMember.human_attribute_name(:prefered_foot)
-  - PlayerEvaluation::RATING_FIELDS.each do |field_name|
     td
       .evaluation-rating.small.lighter
-        = PlayerEvaluation.human_attribute_name(field_name)
-  td 
+        = TeamMember.human_attribute_name(:prefered_foot)
+  - team_evaluation.config["fields"].each do |field|
+    th
+      .evaluation-rating.small.lighter
+        span = field["label"]
+
+  td
     .evaluation-rating.small.lighter
       = PlayerEvaluation.human_attribute_name(:advise_next_season)

@@ -5,9 +5,10 @@
   .card-body.table-responsive.p-0
     - if player_evaluations.finished_desc.size > 0
       table.table.table-sm
+        / TODO: Create headers depending on evaluation
         thead
           th
-          = render "player_evaluations/th_columns"
+          = render "player_evaluations/th_columns", team_evaluation: player_evaluations.first.team_evaluation
         tbody
           - player_evaluations.finished_desc.each do |evaluation|
             tr
