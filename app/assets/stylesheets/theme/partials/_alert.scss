@@ -1,5 +1,6 @@
 .alert {
-  &.alert-success, &.alert-notice {
+  &.alert-notice,
+  &.alert-success {
     background-color: $success;
     border-color: $success;
     color: $white;
@@ -39,7 +40,8 @@
     }
   }
 
-  a, a:hover {
+  a,
+  a:hover {
     color: $white;
     font-weight: bold;
   }
@@ -47,11 +49,11 @@
   // Icons voor alerts
   .fa-notice:before,
   .fa-success:before {
-    content: "\f00c";
+    content: '\f00c';
   }
 
   .fa-alert:before,
   .fa-danger:before {
-    content: "\f00d";
+    content: '\f00d';
   }
 }

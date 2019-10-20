@@ -40,3 +40,7 @@
           - else
             .p-3
               i Geen leden gevonden
+
+      .alert.alert-info.d-flex.align-items-center
+        i.fa.fa-question-circle.fa-2x.pr-3
+        | Klopt iets niet of mis je iemand? Stuur dan een mailtje naar #{link_to Tenant.setting("application_contact_name"), "mailto:#{Tenant.setting("application_email")}"}.
