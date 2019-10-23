@@ -1,4 +1,5 @@
 - provide(:title, "Trainingsdag")
+- show_presences = policy(@training_schedule).show_presences? && @presences.present? && policy(@presences.first).update?
 
 - content_for :action_buttons
     - if policy(@training_schedule).update?
@@ -10,7 +11,7 @@ section
     li.nav-item
       a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
         | Training
-    - if @presences.present? && policy(@presences.first).update?
+    - if show_presences
       li.nav-item
         a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
           | Aanwezig
@@ -59,7 +60,7 @@ section
             | Van #{l @training_schedule.started_on, format: :date_long} t/m #{l @training_schedule.ended_on, format: :date_long}.
 
 
-    - if @presences.present? && policy(@presences.first).update?
+    - if show_presences
       #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
         .alert.alert-primary
           | Geef hier de standaard aanwezigheid op voor de training van deze dag.
