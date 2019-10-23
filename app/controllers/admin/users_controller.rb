@@ -2,8 +2,8 @@
 
 module Admin
   class UsersController < Admin::BaseController
-    before_action :create_user, only: [:new, :create]
-    before_action :set_user, only: [:show, :edit, :update, :resend_password, :destroy, :impersonate]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:show, :edit, :update, :resend_password, :destroy, :impersonate]
     before_action :add_breadcrumbs
 
     def index
@@ -69,7 +69,7 @@ module Admin
 
     private
 
-      def create_user
+      def create_resource
         @user = if action_name == "new"
                   User.new
                 else
@@ -78,7 +78,7 @@ module Admin
         authorize @user
       end
 
-      def set_user
+      def set_resource
         @user = User.find(params[:id])
         authorize @user
       end

@@ -28,4 +28,16 @@ class TeamEvaluationConfig < ApplicationRecord
       }
     }
   }.freeze
+
+  validates :name, presence: true
+
+  scope :asc, -> { order(:name) }
+
+  def config_raw
+    JSON.pretty_generate(config)
+  end
+
+  def config_raw=(value)
+    self.config = JSON(value)
+  end
 end

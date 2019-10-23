@@ -2,8 +2,8 @@
 
 module Admin
   class CompetitionsController < Admin::BaseController
-    before_action :create_competition, only: [:new, :create]
-    before_action :set_competition, only: [:edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -38,7 +38,7 @@ module Admin
 
     private
 
-      def create_competition
+      def create_resource
         @competition = if action_name == "new"
                          Competition.new
                        else
@@ -47,7 +47,7 @@ module Admin
         authorize @competition
       end
 
-      def set_competition
+      def set_resource
         @competition = Competition.find(params[:id])
         authorize @competition
       end

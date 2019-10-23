@@ -1,0 +1,18 @@
+= bootstrap_form_for [:admin, @team_evaluation_config], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+  = f.alert_message t("bootstrap_form.check_errors")
+
+  = f.text_field :name, autofocus: true
+  = f.text_area :config_raw
+  = f.collection_radio_buttons :status, TeamEvaluationConfig.statuses_i18n, :first, :second
+
+  .row
+    .col-sm-9.offset-sm-3
+      .d-flex.justify-content-between
+        div
+          = f.submit "Opslaan", class: 'btn btn-primary'
+          = link_to "Annuleren", [:admin, :team_evaluation_configs], class: 'btn btn-light'
+        div
+          - if policy(@team_evaluation_config).destroy?
+            = link_to "Verwijderen", admin_team_evaluation_config_path(@team_evaluation_config),
+                                     method: :delete, data: { confirm: 'Teamevaluatie wordt verwijderd. Doorgaan?' },
+                                     class: 'btn btn-danger'

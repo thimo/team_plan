@@ -2,8 +2,8 @@
 
 module Admin
   class PlayBansController < Admin::BaseController
-    before_action :create_play_ban, only: [:new, :create]
-    before_action :set_play_ban, only: [:show, :edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:show, :edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -42,14 +42,14 @@ module Admin
 
     private
 
-      def create_play_ban
+      def create_resource
         @play_ban = PlayBan.new(started_on: Time.zone.today)
         @play_ban.play_ban_type = PlayBan.play_ban_types[:contribution] if current_user.role?(Role::BEHEER_CONTRIBUTIE_SPEELVERBODEN)
         @play_ban.update(permitted_attributes(@play_ban)) if action_name == "create"
         authorize @play_ban
       end
 
-      def set_play_ban
+      def set_resource
         @play_ban = PlayBan.find(params[:id])
         authorize @play_ban
       end

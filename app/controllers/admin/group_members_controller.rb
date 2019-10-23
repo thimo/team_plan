@@ -2,8 +2,8 @@
 
 module Admin
   class GroupMembersController < Admin::BaseController
-    before_action :create_group_member, only: [:new, :create]
-    before_action :set_group_member, only: [:edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def new; end
@@ -33,7 +33,7 @@ module Admin
 
     private
 
-      def create_group_member
+      def create_resource
         @group = Group.find(params[:group_id])
 
         @group_member = GroupMember.new
@@ -43,7 +43,7 @@ module Admin
         authorize @group_member
       end
 
-      def set_group_member
+      def set_resource
         @group_member = GroupMember.find(params[:id])
         authorize @group_member
       end

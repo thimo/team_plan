@@ -1,0 +1,23 @@
+- provide(:title, "Teamevaluaties")
+
+.card
+  .card-header
+    | Teamevaluaties
+    .card-header-actions
+      - if policy(TeamEvaluationConfig).create?
+        = link_to new_admin_team_evaluation_config_path, title: "Toevoegen", class: "card-header-action"
+          i.fa-file[class=fa_class]
+
+  .card-body.p-0.table-responsive
+    table.table.table-sm.tr-links
+      thead
+        tr
+          th = TeamEvaluationConfig.human_attribute_name(:name)
+          th = TeamEvaluationConfig.human_attribute_name(:status)
+      tbody
+        - @team_evaluation_configs.each do |team_evaluation_config|
+          tr
+            td
+              = link_to team_evaluation_config.name, edit_admin_team_evaluation_config_path(team_evaluation_config)
+            td
+              = team_evaluation_config.status_i18n

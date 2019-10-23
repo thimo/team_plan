@@ -161,6 +161,7 @@ Rails.application.routes.draw do
       resources :play_bans
       resources :play_bans_import, only: [:new, :create]
       resources :tenant_settings, only: [:edit, :update]
+      resources :team_evaluation_configs
     end
   end
 

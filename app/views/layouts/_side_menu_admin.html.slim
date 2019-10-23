@@ -35,6 +35,11 @@ li.nav-title
     = link_to admin_play_bans_path, class: "nav-link #{'active' if controller.class == Admin::PlayBansController}" do
       i.fa-fw.fa-ban.nav-icon[class=fa_class]
       | Speelverboden
+- if policy(:team_evaluation_config).index?
+  li.nav-item
+    = link_to admin_team_evaluation_configs_path, class: "nav-link #{'active' if controller.class == Admin::TeamEvaluationConfigsController}" do
+      i.fa-fw.fa-list-ol.nav-icon[class=fa_class]
+      | Teamevaluaties
 
 - if policy(:club_data_dashboard).index?
   li.nav-title
