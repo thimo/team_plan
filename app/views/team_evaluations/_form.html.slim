@@ -1,4 +1,7 @@
 = form_for [@team, @team_evaluation], { wrapper: :horizontal_form } do |f|
+  - if @team_evaluation.new_record?
+    = f.hidden_field :config_json
+
   .card
     .card-header
       | Teamevaluatie #{@team_evaluation.team.name}
@@ -24,14 +27,14 @@
                 span
                   | Speler
 
-            = render "player_evaluations/th_columns", show_prefered_foot: true
+            = render "player_evaluations/th_columns", show_prefered_foot: true, team_evaluation: @team_evaluation
 
         tbody
           = f.fields_for :player_evaluations do |pe|
             = pe.hidden_field :id
             = pe.hidden_field :team_member_id
 
-            = render "inbetween_header", show_prefered_foot: true if pe.index > 0 && pe.index % 4 == 0
+            = render "inbetween_header", show_prefered_foot: true, team_evaluation: @team_evaluation if pe.index > 0 && pe.index % 4 == 0
 
             tr
               td.member-name[class="#{'line-through' if pe.object.team_member.inactive_for?(@team_evaluation)}" rowspan="2"]
@@ -53,10 +56,11 @@
                   { class: "form-control #{'form-control-error' if pe.object.errors[:prefered_foot].present?}",
                     title: TeamMember.human_attribute_name(:prefered_foot) }
 
-              - PlayerEvaluation::RATING_FIELDS.each do |field_name|
+              - (config = @team_evaluation.config)["fields"].each_with_index do |field, index|
                 td.evaluation-rating
-                  = pe.select field_name.to_s,
-                    PlayerEvaluation::RATING_OPTIONS,
+                  - field_name = "field_#{index + 1}"
+                  = pe.select field_name,
+                    config.dig("answers", field["answers"]).to_a.reverse.map(&:reverse),
                     { include_blank: true },
                     { class: "form-control evaluation-rating #{'form-control-error' if pe.object.errors[field_name.to_sym].present?}",
                       title: PlayerEvaluation.human_attribute_name(field_name) }

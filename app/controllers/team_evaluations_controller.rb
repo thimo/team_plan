@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class TeamEvaluationsController < ApplicationController
-  before_action :create_team_evaluation, only: [:new, :create]
-  before_action :set_team_evaluation, only: [:show, :edit, :update, :destroy, :re_open]
+  before_action :create_resource, only: [:new, :create]
+  before_action :set_resource, only: [:show, :edit, :update, :destroy, :re_open]
   before_action :add_breadcrumbs
 
   def show; end
@@ -51,11 +51,11 @@ class TeamEvaluationsController < ApplicationController
 
   private
 
-    def create_team_evaluation
+    def create_resource
       @team = Team.find(params[:team_id])
 
       @team_evaluation = if action_name == "new"
-                           @team.team_evaluations.new(private: false)
+                           @team.team_evaluations.new(private: false, config: first_config)
                          else
                            TeamEvaluation.new(team_evaluation_params.merge(private: false))
                          end
@@ -63,7 +63,7 @@ class TeamEvaluationsController < ApplicationController
       authorize @team_evaluation
     end
 
-    def set_team_evaluation
+    def set_resource
       @team_evaluation = TeamEvaluation.find(params[:id])
       authorize @team_evaluation
     end
@@ -85,9 +85,10 @@ class TeamEvaluationsController < ApplicationController
 
     def team_evaluation_params
       params.require(:team_evaluation)
-            .permit(player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season,
-                                                    :behaviour, :technique, :handlingspeed, :insight, :passes,
-                                                    :speed, :locomotion, :physical, :endurance, :duel_strength,
+            .permit(:config_json,
+                    player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season,
+                                                    :field_1, :field_2, :field_3, :field_4, :field_5,
+                                                    :field_6, :field_7, :field_8, :field_9, :field_10,
                                                     :remark, team_member_attributes: [:id, field_position_ids: []]])
     end
 
@@ -135,5 +136,10 @@ class TeamEvaluationsController < ApplicationController
       end
 
       # remove archived
+    end
+
+    def first_config
+      # Return first team evaluation config if there's only one
+      policy_scope(TeamEvaluationConfig).first.config if policy_scope(TeamEvaluationConfig).active.size == 1
     end
 end

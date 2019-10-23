@@ -33,11 +33,11 @@ class TeamEvaluationConfig < ApplicationRecord
 
   scope :asc, -> { order(:name) }
 
-  def config_raw
+  def config_json
     JSON.pretty_generate(config)
   end
 
-  def config_raw=(value)
+  def config_json=(value)
     self.config = JSON(value)
   end
 end

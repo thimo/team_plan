@@ -22,7 +22,7 @@ module Admin
     def edit; end
 
     def update
-      if @team_evaluation_config.update(team_evaluation_config_params)
+      if @team_evaluation_config.update(permitted_attributes(@team_evaluation_config))
         redirect_to admin_team_evaluation_configs_path, notice: "Teamevaluatie is aangepast."
       else
         render "edit"

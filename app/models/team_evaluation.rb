@@ -90,4 +90,12 @@ class TeamEvaluation < ApplicationRecord
   def last_modified
     [updated_at, player_evaluations.maximum(:updated_at)].max
   end
+
+  def config_json
+    config.to_json
+  end
+
+  def config_json=(value)
+    self.config = JSON(value)
+  end
 end

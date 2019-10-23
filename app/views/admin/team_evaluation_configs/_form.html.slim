@@ -2,7 +2,7 @@
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_field :name, autofocus: true
-  = f.text_area :config_raw
+  = f.text_area :config_json
   = f.collection_radio_buttons :status, TeamEvaluationConfig.statuses_i18n, :first, :second
 
   .row
