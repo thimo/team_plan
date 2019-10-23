@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MatchPolicy < ApplicationPolicy
   def index?
     @user.role?(Role::BEHEER_KNVB_CLUB_DATA) || @user.role?(Role::BEHEER_OEFENWEDSTRIJDEN)
@@ -42,12 +40,12 @@ class MatchPolicy < ApplicationPolicy
     @user.team_staff_for?(@record)
   end
 
-  def show_match?
-    true
-  end
-
   def show_presences?
     update_presences?
+  end
+
+  def show_match?
+    true
   end
 
   def show_address?
