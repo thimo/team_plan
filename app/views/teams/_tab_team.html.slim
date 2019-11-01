@@ -3,8 +3,7 @@
     = render 'team_players'
 
   .col-lg-6
-    - if @staff.size > 0
-      = render 'team_staff'
+    = render 'team_staff'
 
     - if policy(@team).show_play_bans? && (@play_bans.present? || @play_bans_future.present?)
       = render "play_bans/card"

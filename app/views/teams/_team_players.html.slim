@@ -19,7 +19,7 @@
   .card-body.table-responsive.p-0
     table.table.table-sm.tr-links
       tbody
-        - if @players.size > 0
+        - if @players.any?
           - @players.each do |year, team_members|
             - team_members.each_with_index do |team_member, index|
               - if index == 0
