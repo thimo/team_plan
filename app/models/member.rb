@@ -230,10 +230,6 @@ class Member < ApplicationRecord
     status == STATUS_AF_TE_MELDEN
   end
 
-  def self.comment_types
-    Comment.comment_types
-  end
-
   def user
     # TODO: When in the future a member can belong to multiple users by coupling to multiple emailaddresses,
     # than this (and other functionality using this) needs to change
@@ -259,6 +255,10 @@ class Member < ApplicationRecord
 
   def google_maps_address
     full_address.join(",")
+  end
+
+  def self.comment_types
+    Comment.comment_types
   end
 
   def self.import(file, encoding="utf-8")

@@ -150,21 +150,6 @@ class User < ApplicationRecord
     self.email = member.email
   end
 
-  def self.find_or_create_and_invite(member)
-    user = User.where(email: member.email).first_or_initialize(
-      password: (generated_password = User.password),
-      first_name: member.first_name, middle_name: member.middle_name, last_name: member.last_name
-    )
-
-    if user.new_record?
-      user.skip_confirmation!
-      user.save
-      user.send_new_account(generated_password)
-    end
-
-    user
-  end
-
   def setting(name)
     settings[name].presence || UserSetting.default_for(name)
   end
@@ -209,14 +194,6 @@ class User < ApplicationRecord
     set_setting(:active_comments_tab, tab) if tab.present?
   end
 
-  def self.deactivate_for_inactive_members
-    User.active.each(&:update_members)
-  end
-
-  def self.activate_for_active_members
-    User.archived.each(&:update_members)
-  end
-
   def after_confirmation
     update_members
   end
@@ -247,6 +224,29 @@ class User < ApplicationRecord
 
   def show_evaluations?
     admin? || role?(Role::MEMBER_SHOW_EVALUATIONS) || indirect_role?(Role::MEMBER_SHOW_EVALUATIONS)
+  end
+
+  def self.find_or_create_and_invite(member)
+    user = User.where(email: member.email).first_or_initialize(
+      password: (generated_password = User.password),
+      first_name: member.first_name, middle_name: member.middle_name, last_name: member.last_name
+    )
+
+    if user.new_record?
+      user.skip_confirmation!
+      user.save
+      user.send_new_account(generated_password)
+    end
+
+    user
+  end
+
+  def self.deactivate_for_inactive_members
+    User.active.each(&:update_members)
+  end
+
+  def self.activate_for_active_members
+    User.archived.each(&:update_members)
   end
 
   private
