@@ -20,7 +20,7 @@ class TeamEvaluationConfigPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:name, :config_raw, :status]
+    [:name, :config_json, :status]
   end
 
   class Scope < Scope

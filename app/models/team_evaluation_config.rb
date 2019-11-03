@@ -33,14 +33,28 @@ class TeamEvaluationConfig < ApplicationRecord
   }.freeze
 
   validates :name, presence: true
+  validate :valid_config_json?
 
   scope :asc, -> { order(:name) }
 
   def config_json
-    JSON.pretty_generate(config)
+    @config_json ||= JSON.pretty_generate(config)
   end
 
   def config_json=(value)
-    self.config = JSON(value)
+    @config_json = value
+    self.config = JSON(value) if valid_json?(value)
   end
+
+  private
+
+    def valid_config_json?
+      errors.add(:config_json, "is geen geldige JSON") unless valid_json?(config_json)
+    end
+
+    def valid_json?(value)
+      JSON.parse(value).present?
+    rescue JSON::ParserError
+      false
+    end
 end

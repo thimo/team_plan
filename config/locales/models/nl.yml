@@ -120,6 +120,7 @@ nl:
       team_evaluation_config:
         name: Naam
         config: JSON configuratie
+        config_json: JSON configuratie
       tenant_setting:
         application_name: Naam
         application_hostname: Domeinnaam
