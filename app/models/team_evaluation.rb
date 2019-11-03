@@ -78,13 +78,13 @@ class TeamEvaluation < ApplicationRecord
     filled_fields = 0
 
     player_evaluations.each do |player_evaluation|
-      PlayerEvaluation::RATING_FIELDS.each do |rating_field|
-        filled_fields += 1 if player_evaluation[rating_field].present?
+      config["fields"].each_with_index do |_rating_field, index|
+        filled_fields += 1 if player_evaluation["field_#{index}"].present?
       end
       filled_fields += 1 if player_evaluation.advise_next_season.present?
     end
 
-    total_field_count = player_evaluations.size * (PlayerEvaluation::RATING_FIELDS.size + 1)
+    total_field_count = player_evaluations.size * (config["fields"].size + 1)
 
     @calculated_progress = (100 * filled_fields) / total_field_count
   end
