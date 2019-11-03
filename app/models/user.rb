@@ -77,6 +77,10 @@ class User < ApplicationRecord
     Team.for_members(members).active.for_active_season.distinct
   end
 
+  def active_teams_as_staff
+    Team.for_members(members).active.as_not_player.for_active_season.distinct
+  end
+
   def active_teams_as_group_member
     Team.for_group_members(members).active.for_active_season.distinct
   end
@@ -86,11 +90,16 @@ class User < ApplicationRecord
   end
 
   def teams_as_staff
-    Team.for_members(members).as_not_player.distinct.asc
+    Team.for_members(members).as_not_player.distinct
   end
 
   def teams_as_staff_in_season(season)
-    Team.for_members(members).as_not_player.for_season(season).distinct.asc
+    Team.for_members(members).as_not_player.for_season(season).distinct
+  end
+
+  def members_as_active_staff
+    team_ids = active_teams_as_staff.pluck(:id)
+    Member.by_team(team_ids)
   end
 
   # NOTE: can't rename this to `member?` because of conflict with enum role

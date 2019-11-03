@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Evaluates a single player
 class PlayerEvaluation < ApplicationRecord
   ADVISE_NEXT_SEASON_OPTIONS = %w[hoger zelfde lager].freeze
@@ -31,9 +33,13 @@ class PlayerEvaluation < ApplicationRecord
                      }
   scope :not_private, -> { joins(:team_evaluation).where(team_evaluations: { private: false }) }
   scope :public_or_as_team_staff, ->(user) {
-    joins(:team_evaluation)
-      .where("(team_evaluations.private = false and team_members.member_id IN (?)) OR team_evaluations.team_id IN (?)",
-             user.member_ids, user.teams_as_staff.map(&:id))
+    joins(:team_evaluation, team_member: :member)
+      .where("(team_evaluations.private = false and team_members.member_id IN (?)) OR " \
+             "team_evaluations.team_id IN (?) OR " \
+             "team_members.member_id IN (?)",
+             user.member_ids,
+             user.teams_as_staff.pluck(:id),
+             user.members_as_active_staff.pluck(:id))
   }
 
   delegate :draft?, to: :team_evaluation

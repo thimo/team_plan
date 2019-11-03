@@ -32,7 +32,7 @@ class DashboardsController < ApplicationController
     @played_matches = matches.played.in_period(1.week.ago.end_of_day, 0.hours.ago).desc.limit(10)
                              .group_by(&:wedstrijddatum_date)
 
-    team_ids = current_user.teams_as_staff_in_season(@season).collect(&:id).uniq
+    team_ids = current_user.teams_as_staff_in_season(@season).pluck(:id).uniq
     @open_team_evaluations = policy_scope(TeamEvaluation).desc.where(team_id: team_ids)
 
     @version_updates = policy_scope(VersionUpdate).desc.page(params[:version_page]).per(3)
