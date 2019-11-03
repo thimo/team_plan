@@ -9,9 +9,9 @@ class PlayerEvaluation < ApplicationRecord
   belongs_to :team_member, touch: true
   has_paper_trail
 
-  validates :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance,
-            :duel_strength, :advise_next_season, :prefered_foot,
+  validates :advise_next_season, :prefered_foot,
             presence: true, if: -> { team_evaluation.enable_validation? && team_member.active? }
+  validate :fields_filled, if: -> { team_evaluation.enable_validation? && team_member.active? }
   # Make sure linked team member has field positions filled in
   validate :team_member_has_field_positions, if: -> { team_evaluation.enable_validation? && team_member.active? }
 
@@ -73,5 +73,12 @@ class PlayerEvaluation < ApplicationRecord
 
     def team_member_has_field_positions
       errors.add("field_positions", "Team member heeft geen field position") if team_member.field_positions.blank?
+    end
+
+    def fields_filled
+      team_evaluation.config["fields"].each_with_index do |_field, index|
+        field_name = "field_#{index + 1}"
+        errors.add(field_name.to_sym, :blank) if attributes[field_name].blank?
+      end
     end
 end

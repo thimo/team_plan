@@ -7,13 +7,12 @@
     }
   }
 
-  div {
-    &.form-control-error {
-      background-color: #fff6f6;
-      border: solid 1px $red;
-      border-radius: $border-radius;
-      color: $red !important;
-    }
+  div.form-control-error .select2-selection,
+  select.form-control-error {
+    background-color: #fff6f6;
+    border: solid 1px $red;
+    border-radius: $border-radius;
+    color: $red !important;
   }
 
   th {

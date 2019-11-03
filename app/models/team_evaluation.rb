@@ -78,8 +78,8 @@ class TeamEvaluation < ApplicationRecord
     filled_fields = 0
 
     player_evaluations.each do |player_evaluation|
-      config["fields"].each_with_index do |_rating_field, index|
-        filled_fields += 1 if player_evaluation["field_#{index}"].present?
+      config["fields"].each_with_index do |_field, index|
+        filled_fields += 1 if player_evaluation["field_#{index + 1}"].present?
       end
       filled_fields += 1 if player_evaluation.advise_next_season.present?
     end

@@ -16,7 +16,8 @@
   }
 }
 
-.side-menu-list, .side-menu {
+.side-menu,
+.side-menu-list {
   a:hover {
     text-decoration: none;
   }
@@ -66,7 +67,7 @@ abbr[title] {
 }
 
 label.required:after {
-  content:" *";
+  content: ' *';
 }
 
 .form-inline {
@@ -127,7 +128,7 @@ trix-toolbar {
   }
 
   li + li:before {
-    content: "•";
+    content: '•';
   }
 }
 
