@@ -1,27 +1,28 @@
 # frozen_string_literal: true
 
 class TeamEvaluationsController < ApplicationController
-  before_action :create_resource, only: [:new, :create]
+  # before_action :create_resource, only: [:new, :create]
   before_action :set_resource, only: [:show, :edit, :update, :destroy, :re_open]
   before_action :add_breadcrumbs
 
   def show; end
 
-  def new
-    # Create team evaluation
-    @team_evaluation.team.team_members.active.player.asc.each do |player|
-      @team_evaluation.player_evaluations.build(team_member: player)
-    end
-  end
+  # Directly creating a team evaluation has been disabled for now
+  # def new
+  #   # Create team evaluation
+  #   @team_evaluation.team.team_members.active.player.asc.each do |player|
+  #     @team_evaluation.player_evaluations.build(team_member: player)
+  #   end
+  # end
 
-  def create
-    if @team_evaluation.save
-      post_save_actions
-    else
-      flash.now[:error] = "Controleer alsjeblieft de velden hieronder"
-      render :new
-    end
-  end
+  # def create
+  #   if @team_evaluation.save
+  #     post_save_actions
+  #   else
+  #     flash.now[:error] = "Controleer alsjeblieft de velden hieronder"
+  #     render :new
+  #   end
+  # end
 
   def edit
     update_team_members
@@ -51,17 +52,17 @@ class TeamEvaluationsController < ApplicationController
 
   private
 
-    def create_resource
-      @team = Team.find(params[:team_id])
-
-      @team_evaluation = if action_name == "new"
-                           @team.team_evaluations.new(private: false, config: first_config)
-                         else
-                           TeamEvaluation.new(team_evaluation_params.merge(private: false))
-                         end
-      @team_evaluation.team = @team
-      authorize @team_evaluation
-    end
+    # def create_resource
+    #   @team = Team.find(params[:team_id])
+    #
+    #   @team_evaluation = if action_name == "new"
+    #                        @team.team_evaluations.new(private: false, config: first_config)
+    #                      else
+    #                        TeamEvaluation.new(team_evaluation_params.merge(private: false))
+    #                      end
+    #   @team_evaluation.team = @team
+    #   authorize @team_evaluation
+    # end
 
     def set_resource
       @team_evaluation = TeamEvaluation.find(params[:id])

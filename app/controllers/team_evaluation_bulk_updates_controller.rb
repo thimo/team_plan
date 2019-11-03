@@ -8,16 +8,18 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
 
   def new
     @teams = human_sort(policy_scope(@age_group.teams.active), :name)
+    team_evaluation_configs
   end
 
   def create
     team_ids = params[:team_ids]
+    config = (team_evaluation_configs.find_by(id: params[:team_evaluation_config_id]) || team_evaluation_configs.first).config
     count = 0
     mail_count = 0
 
     team_ids.each do |id|
       team = Team.find(id)
-      team_evaluation = team.team_evaluations.new
+      team_evaluation = team.team_evaluations.new(config: config)
       authorize team_evaluation
 
       team_evaluation.team.team_members.active.player.asc.each do |player|
@@ -52,5 +54,9 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
       add_breadcrumb @age_group.season.name, @age_group.season
       add_breadcrumb @age_group.name, @age_group
       add_breadcrumb "Nieuw"
+    end
+
+    def team_evaluation_configs
+      @team_evaluation_configs ||= TeamEvaluationConfig.active
     end
 end
