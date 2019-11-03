@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 # Defines the configuration for a TeamEvaluation
 # - name
 # - status
 # - fields
 class TeamEvaluationConfig < ApplicationRecord
+  acts_as_tenant :tenant
   include Statussable
 
   DEFAULT_CONFIG = {

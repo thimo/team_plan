@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_193359) do
+ActiveRecord::Schema.define(version: 2019_11_03_143230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -444,6 +444,8 @@ ActiveRecord::Schema.define(version: 2019_10_23_193359) do
     t.jsonb "config"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_team_evaluation_configs_on_tenant_id"
   end
 
   create_table "team_evaluations", id: :serial, force: :cascade do |t|
@@ -728,6 +730,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_193359) do
   add_foreign_key "roles", "tenants"
   add_foreign_key "seasons", "tenants"
   add_foreign_key "soccer_fields", "tenants"
+  add_foreign_key "team_evaluation_configs", "tenants"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "tenants"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"
