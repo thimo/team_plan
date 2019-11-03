@@ -30,9 +30,6 @@ Style/StringLiterals:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: never
-
 Metrics/LineLength:
   Max: 120
 
