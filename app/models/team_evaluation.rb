@@ -36,18 +36,19 @@ class TeamEvaluation < ApplicationRecord
   end
 
   def send_invites(user)
-    users = Member.by_team(team).team_staff.distinct.map do |member|
-      # Check account
-      User.find_or_create_and_invite(member)
-    end
+    members = Member.by_team(team).team_staff.distinct
 
-    if users.any?
+    if members.any?
+      members.each do |member|
+        # Check account
+        User.find_or_create_and_invite(member)
+      end
       # Don't use `deliver_later`, does not seem to work correctly yet
-      TeamEvaluationMailer.invite(users, self).deliver_now
+      TeamEvaluationMailer.invite(members, self).deliver_now
       update(invited_by: user, invited_at: Time.zone.now)
     end
 
-    users.size
+    members.size
   end
 
   def finished?

@@ -161,6 +161,10 @@ class Member < ApplicationRecord
     "#{name} (#{I18n.l(born_on, format: :long)})"
   end
 
+  def email_with_name
+    %("#{name}" <#{email}>)
+  end
+
   def active?
     deregistered_at.nil? || deregistered_at > Time.zone.today
   end
