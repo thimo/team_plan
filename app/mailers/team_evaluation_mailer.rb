@@ -11,7 +11,7 @@ class TeamEvaluationMailer < ApplicationMailer
     if (members = team_evaluation.team.age_group.members).any?
       @salutation_names = members.map(&:name).sort.join(", ")
       @cc = members.map do |member|
-        %("#{member.name}" <#{member.email_with_preference_for_second_address}>)
+        %("#{member.name}" <#{member.preferred_email}>)
       end
     end
 

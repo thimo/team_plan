@@ -165,7 +165,7 @@ class Member < ApplicationRecord
     %("#{name}" <#{email}>)
   end
 
-  def email_with_preference_for_second_address
+  def preferred_email
     email_2.presence || email
   end
 
