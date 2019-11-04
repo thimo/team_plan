@@ -6,7 +6,6 @@
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
-
 //
 // Color system
 //
@@ -162,7 +161,7 @@
 // Settings for the `<body>` element.
 
 // $body-bg:                   $white !default;
-$body-bg:                   #f2f7fb;
+$body-bg: #f2f7fb;
 // $body-color:                $gray-900 !default;
 
 // Links
@@ -170,7 +169,7 @@ $body-bg:                   #f2f7fb;
 // Style anchor elements.
 
 // $link-color:                theme-color("primary") !default;
-$link-color:                #0082c6;
+$link-color: #0082c6;
 // $link-decoration:           none !default;
 // $link-hover-color:          darken($link-color, 15%) !default;
 // $link-hover-decoration:     underline !default;
@@ -179,8 +178,7 @@ $link-color:                #0082c6;
 //
 // Style p element.
 
-$paragraph-margin-bottom:   .5rem;
-
+$paragraph-margin-bottom: .5rem;
 
 // Grid breakpoints
 //
@@ -197,7 +195,6 @@ $paragraph-margin-bottom:   .5rem;
 //
 // @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 // @include _assert-starts-at-zero($grid-breakpoints);
-
 
 // Grid containers
 //
@@ -230,10 +227,10 @@ $paragraph-margin-bottom:   .5rem;
 // $border-width:                1px !default;
 // $border-color:                $gray-300 !default;
 //
-// $border-radius:               .25rem !default;
-// $border-radius-lg:            .3rem !default;
-// $border-radius-sm:            .2rem !default;
-//
+// $border-radius: .25rem !default;
+// $border-radius-lg: .3rem !default;
+// $border-radius-sm: .2rem !default;
+
 // $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
 // $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
 // $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
@@ -320,14 +317,13 @@ $paragraph-margin-bottom:   .5rem;
 //
 // $hr-margin-y:                 $spacer !default;
 
-
 // Tables
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
 
 // $table-cell-padding:          .75rem !default;
 // $table-cell-padding-sm:       .3rem !default;
-$table-cell-padding-sm:       .5rem .75rem;
+$table-cell-padding-sm: .5rem .75rem;
 //
 // $table-bg:                    transparent !default;
 // $table-accent-bg:             rgba($black, .05) !default;
@@ -336,7 +332,7 @@ $table-cell-padding-sm:       .5rem .75rem;
 //
 // $table-border-width:          $border-width !default;
 // $table-border-color:          $gray-300 !default;
-$table-border-color:          $gray-200;
+$table-border-color: $gray-200;
 //
 // $table-head-bg:               $gray-200 !default;
 // $table-head-color:            $gray-700 !default;
@@ -719,12 +715,12 @@ $table-border-color:          $gray-200;
 //
 // $card-spacer-y:                     .75rem !default;
 // $card-spacer-x:                     1.25rem !default;
-$card-spacer-x:                     1rem;
+$card-spacer-x: 1rem;
 // $card-border-width:                 $border-width !default;
 // $card-border-radius:                $border-radius !default;
 // $card-border-color:                 rgba($black, .125) !default;
 // $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width}) !default;
-$card-cap-bg:                       rgba($black, .025);
+$card-cap-bg: rgba($black, .025);
 // $card-bg:                           $white !default;
 //
 // $card-img-overlay-padding:          1.25rem !default;
@@ -779,22 +775,20 @@ $card-cap-bg:                       rgba($black, .025);
 //
 // $popover-arrow-outer-color:         fade-in($popover-border-color, .05) !default;
 
-
 // Badges
 
 // $badge-font-size:                   75% !default;
-$badge-font-size:                   80%;
+$badge-font-size: 80%;
 // $badge-font-weight:                 $font-weight-bold !default;
-$badge-font-weight:                 $font-weight-normal;
-$badge-padding-y:                   .2rem;
-$badge-padding-x:                   .3rem;
+$badge-font-weight: $font-weight-normal;
+$badge-padding-y: .2rem;
+$badge-padding-x: .3rem;
 // $badge-border-radius:               $border-radius !default;
 
 // $badge-pill-padding-x:              .6em !default;
 // // Use a higher than normal value to ensure completely rounded edges when
 // // customizing padding or font-size on labels.
 // $badge-pill-border-radius:          10rem !default;
-
 
 // Modals
 
@@ -896,25 +890,23 @@ $badge-padding-x:                   .3rem;
 // $figure-caption-font-size:          90% !default;
 // $figure-caption-color:              $gray-600 !default;
 
-
 // Breadcrumbs
 
 // $breadcrumb-padding-y:              .75rem !default;
-$breadcrumb-padding-y:              0;
+$breadcrumb-padding-y: 0;
 // $breadcrumb-padding-x:              1rem !default;
 // $breadcrumb-item-padding:           .5rem !default;
 
 // $breadcrumb-margin-bottom:          1rem !default;
-$breadcrumb-margin-bottom:          -1rem;
+$breadcrumb-margin-bottom: -1rem;
 
 // $breadcrumb-bg:                     $gray-200 !default;
-$breadcrumb-bg:                     none;
+$breadcrumb-bg: none;
 // $breadcrumb-divider-color:          $gray-600 !default;
 // $breadcrumb-active-color:           $gray-600 !default;
 // $breadcrumb-divider:                quote("/") !default;
 
 // $breadcrumb-border-radius:          $border-radius !default;
-
 
 // Carousel
 

@@ -1,10 +1,5 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- */
-
-@import "theme/coreui";
-@import "simple_calendar";
-@import "rails_bootstrap_forms";
-@import "./admin/*";
-@import "./*";
+@import 'theme/coreui';
+@import 'simple_calendar';
+@import 'rails_bootstrap_forms';
+@import './admin/*';
+@import './*';
