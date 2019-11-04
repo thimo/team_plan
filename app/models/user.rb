@@ -304,7 +304,9 @@ class User < ApplicationRecord
                                     when [Team]
                                       record.age_group_id # Included here to make sure it works for new Team objects
                                     else
-                                      AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+                                      ids = AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+                                      ids = record.suggested_age_groups.pluck(:id) if ids.blank? && record.is_a?(Member)
+                                      ids
                                     end
     end
 

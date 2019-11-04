@@ -265,6 +265,28 @@ class Member < ApplicationRecord
     full_address.join(",")
   end
 
+  def suggested_age_groups
+    return AgeGroup.none if sportlink_non_player? || inactive?
+
+    year_of_birth = born_on.year
+    age_groups = AgeGroup.for_active_season.where("year_of_birth_from <= ?", year_of_birth)
+                         .or(AgeGroup.for_active_season.where(year_of_birth_from: [nil, ""]))
+    age_groups = age_groups.where("year_of_birth_to >= ?", year_of_birth)
+                           .or(age_groups.where(year_of_birth_to: [nil, ""]))
+    age_groups = age_groups.where(gender: "m").or(age_groups.where(gender: [nil, "all", ""])) if male?
+    age_groups = age_groups.where(gender: "v").or(age_groups.where(gender: [nil, "all", ""])) if female?
+
+    age_groups
+  end
+
+  def male?
+    gender == "M"
+  end
+
+  def female?
+    gender == "V"
+  end
+
   def self.comment_types
     Comment.comment_types
   end
