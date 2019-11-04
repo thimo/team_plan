@@ -3,7 +3,7 @@
 - provide(:hint, "#{@team.remark}") if @team.remark.present?
 
 - content_for :action_buttons
-  / Remove (temporatily?) as this does not support selecting the team evaluation config
+  / Disabled (temporatily?) as this does not support selecting the team evaluation config
   / - if policy(TeamEvaluation.new(team: @team)).create?
   /   = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn"
   /     i.fa-list-ol[class=fa_class]

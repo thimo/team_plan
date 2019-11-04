@@ -165,6 +165,10 @@ class Member < ApplicationRecord
     %("#{name}" <#{email}>)
   end
 
+  def email_with_preference_for_second_address
+    email_2.presence || email
+  end
+
   def active?
     deregistered_at.nil? || deregistered_at > Time.zone.today
   end

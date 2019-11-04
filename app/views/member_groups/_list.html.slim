@@ -25,7 +25,7 @@
                     td
                       = group_member.member.name
                       .small
-                        - email = group_member.member.email_2.presence || group_member.member.email
+                        - email = group_member.member.email_with_preference_for_second_address
                         = mail_to email
                           i.fa-envelope.mr-1[class=fa_class]
                           = email

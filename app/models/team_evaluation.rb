@@ -44,7 +44,7 @@ class TeamEvaluation < ApplicationRecord
         User.find_or_create_and_invite(member)
       end
       # Don't use `deliver_later`, does not seem to work correctly yet
-      TeamEvaluationMailer.invite(members, self).deliver_now
+      TeamEvaluationMailer.invite(Current.user, members, self).deliver_now
       update(invited_by: user, invited_at: Time.zone.now)
     end
 

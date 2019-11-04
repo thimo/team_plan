@@ -46,7 +46,7 @@ Rails.application.routes.draw do
           resources :notes, only: [:show, :new, :create, :edit, :update, :destroy]
           resources :favorites, only: [:create, :destroy]
           resources :team_member_bulk_updates, only: [:new, :create]
-          resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]
+          resources :team_evaluations, only: [:edit, :update, :destroy]
           resources :download_team_members, only: [:index]
           resources :todos, only: [:new, :create]
           resources :training_schedules do
