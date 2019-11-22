@@ -35,7 +35,7 @@ class TeamMember < ApplicationRecord
             TeamMember.roles[:head_coach],
             TeamMember.roles[:coach],
             TeamMember.roles[:trainer],
-            TeamMember.roles[:assistent_trainer],
+            TeamMember.roles[:assistant_trainer],
             TeamMember.roles[:keeper_trainer]
           ])
   }

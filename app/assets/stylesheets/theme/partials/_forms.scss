@@ -1,5 +1,7 @@
 // Force white text on these button colors
-.btn-secondary, .btn-warning {
+
+.btn-secondary,
+.btn-warning {
   color: white;
   font-weight: 400;
 }
@@ -10,13 +12,13 @@
 
 // Overwrite bootstrap_form
 .rails-bootstrap-forms-error-summary {
-  margin-top: inherit;
   margin-bottom: 0;
+  margin-top: inherit;
 }
 
 .form-check {
-  margin-top: .25rem;
   margin-bottom: .25rem;
+  margin-top: .25rem;
 }
 
 .custom-control-label {
@@ -37,8 +39,9 @@
 .form-control {
   transition: none;
 
-  &:hover, &:focus {
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:focus,
+  &:hover {
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   }
 }
 
