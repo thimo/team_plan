@@ -2,7 +2,7 @@
 
 # Evaluates a single player
 class PlayerEvaluation < ApplicationRecord
-  ADVISE_NEXT_SEASON_OPTIONS = %w[hoger zelfde lager].freeze
+  ADVISE_NEXT_SEASON_OPTIONS = %w[moet\ hoger kan\ hoger zelfde lager].freeze
 
   acts_as_tenant :tenant
   belongs_to :team_evaluation, touch: true
@@ -52,11 +52,11 @@ class PlayerEvaluation < ApplicationRecord
 
   def advise_to_icon_class
     case advise_next_season
-    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[0]
+    when "hoger", "kan hoger", "moet hoger"
       "fa-arrow-circle-up"
-    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[1]
+    when "zelfde"
       "fa-arrow-circle-right"
-    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[2]
+    when "lager"
       "fa-arrow-circle-down"
     end
   end

@@ -22,11 +22,11 @@
 
     - if @team_evaluation_configs.size.zero?
       .alert.alert-danger
-        | Teamevaluatie kan niet worden aangemaakt omdat er geen actieve evaluatie configuratie is gevonden.
+        | Teamevaluatie kan niet worden aangemaakt omdat er geen actieve evaluatie configuraties zijn gevonden.
     - elsif @team_evaluation_configs.size > 1
       .form-group
         label[for="team_evaluation_config_id"]
-          | Teamevaluatie configuratie
+          | Type teamevaluatie
         div
           - @team_evaluation_configs.each_with_index do |config, index|
             = f.radio_button :team_evaluation_config_id, config.id,
