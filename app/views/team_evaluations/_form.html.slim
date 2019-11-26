@@ -19,15 +19,8 @@
         = " - #{@team_evaluation.status}"
 
     .card-body.p-0
-      table.table.table-xxs.table-responsive data={ controller: "table-sticky-header" }
-        thead
-          tr
-            th
-              div
-                span
-                  | Speler
-
-            = render "player_evaluations/th_columns", show_prefered_foot: true, team_evaluation: @team_evaluation
+      table.table.table-xxs.table-responsive.table-evaluation data={ controller: "table-sticky-header" }
+        = render "player_evaluations/thead", show_prefered_foot: true, team_evaluation: @team_evaluation
 
         tbody
           = f.fields_for :player_evaluations do |pe|
@@ -41,8 +34,7 @@
                 - member = pe.object.team_member.member
                 = render member, target: "_blank"
 
-              td.field-positions[rowspan="2"]
-                div[class="#{'form-control-error' if pe.object.errors[:field_positions].present?}"]
+                div[class="pt-1 #{'form-control-error' if pe.object.errors[:field_positions].present?}"]
                   = pe.fields_for :team_member, pe.object.team_member do |tm|
                     = tm.select :field_position_ids,
                       options_for_select(FieldPosition.options_for_select, tm.object.field_positions.map(&:id)),
@@ -73,7 +65,7 @@
                     title: PlayerEvaluation.human_attribute_name(:advise_next_season)}
 
             tr
-              td.b-t-0[colspan="12" style="padding-left: 2px;"]
+              td.b-t-0[colspan="10" style="padding-left: 2px;"]
                 = pe.text_area :remark,
                   class: "form-control",
                   placeholder: PlayerEvaluation.human_attribute_name(:remark),

@@ -1,0 +1,34 @@
+- show_prefered_foot ||= false
+- insert_empty_column ||= false
+- has_field_description = team_evaluation.config["fields"].any? { |field| field["description"].present? }
+
+thead
+  tr
+    th class=('pb-1 border-bottom-0' if has_field_description)
+
+    - if insert_empty_column
+      th class=('pb-1 border-bottom-0' if has_field_description)
+
+    - if show_prefered_foot
+      th class=('pb-1 border-bottom-0' if has_field_description)
+        = TeamMember.human_attribute_name(:prefered_foot)
+
+    - team_evaluation.config["fields"].each do |field|
+      th class=('pb-1 border-bottom-0' if has_field_description)
+        = field["label"]
+
+    th class=('pb-1 border-bottom-0' if has_field_description)
+      = PlayerEvaluation.human_attribute_name(:advise_next_season)
+
+  - if has_field_description
+    tr
+      th.border-top-0.pt-1
+      - if insert_empty_column
+        th.border-top-0.pt-1
+      - if show_prefered_foot
+        th.border-top-0.pt-1
+      - team_evaluation.config["fields"].each do |field|
+        th.border-top-0.pt-1.small.font-weight-normal
+          = field["description"]
+
+      th.border-top-0.pt-1

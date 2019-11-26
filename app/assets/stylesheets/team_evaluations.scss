@@ -15,17 +15,8 @@
     color: $red !important;
   }
 
-  th {
-    &.rotate {
-      height: 140px;
-    }
-  }
-
   td {
-    &.field-positions {
-      max-width: 220px;
-      min-width: 160px;
-    }
+    vertical-align: top;
 
     &.member-name,
     &.remark {
@@ -33,25 +24,30 @@
     }
 
     &.prefered-foot {
-      width: 100px;
+      width: 8%;
     }
 
     &.advise-next-season {
-      width: 60px;
+      width: 8%;
     }
 
     &.evaluation-rating {
-      width: 60px;
+      width: 8%;
+    }
+  }
+
+  thead {
+    td,
+    th {
+      vertical-align: top;
     }
   }
 
   div.evaluation-rating {
+    min-width: 80px;
     overflow: hidden;
-    padding-left: 0;
-    padding-right: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 60px;
   }
 
   .select2-container--bootstrap {
@@ -61,8 +57,8 @@
       }
 
       .select2-selection__choice__remove {
-        border-top-left-radius: $border-radius;
         border-bottom-left-radius: $border-radius;
+        border-top-left-radius: $border-radius;
       }
     }
   }

@@ -6,9 +6,7 @@
     - if player_evaluations.finished_desc.size > 0
       table.table.table-sm
         / TODO: Create headers depending on evaluation
-        thead
-          th
-          = render "player_evaluations/th_columns", team_evaluation: player_evaluations.first.team_evaluation
+        = render "player_evaluations/thead", team_evaluation: player_evaluations.first.team_evaluation, insert_empty_column: true
         tbody
           - player_evaluations.finished_desc.each do |evaluation|
             tr
