@@ -3,7 +3,7 @@ require:
   - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 2.6.4
+  TargetRubyVersion: 2.6.5
   Exclude:
     - 'app/views/**/*'
     - 'db/**/*'
