@@ -5,10 +5,12 @@
   .card-body.table-responsive.p-0
     - if player_evaluations.finished_desc.size > 0
       table.table.table-sm
-        / TODO: Create headers depending on evaluation
-        = render "player_evaluations/thead", team_evaluation: player_evaluations.first.team_evaluation, insert_empty_column: true
         tbody
+          - last_header = []
           - player_evaluations.finished_desc.each do |evaluation|
+            - if last_header != (current_header = evaluation.team_evaluation.config["fields"].map { |field| field["label"] })
+              = render "player_evaluations/thead", team_evaluation: evaluation.team_evaluation, insert_empty_column: true
+              - last_header = current_header
             tr
               td.nowrap[rowspan="2"]
                 = link_to evaluation.team_evaluation.team.name, evaluation.team_evaluation.team
