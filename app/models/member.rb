@@ -89,9 +89,11 @@ class Member < ApplicationRecord
   scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
   scope :injured, -> { where(injured: true) }
 
-  scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
+  scope :by_season, ->(season) {
+    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season, training_only: false })
+  }
   scope :by_season_as_player, ->(season) {
-    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season },
+    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season, training_only: false },
                                                        team_members: { role: TeamMember.roles[:player],
                                                                        ended_on: nil,
                                                                        status: 1 })
@@ -120,7 +122,7 @@ class Member < ApplicationRecord
     by_team_as_active(team).player
   }
 
-  scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
+  # scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
                               includes(team_members: :field_positions)

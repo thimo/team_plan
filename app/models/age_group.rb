@@ -105,7 +105,9 @@ class AgeGroup < ApplicationRecord
     end
 
     def before_update_actions
-      self.players_per_team = nil if training_only
-      self.minutes_per_half = nil if training_only
+      return unless training_only
+
+      self.players_per_team = nil
+      self.minutes_per_half = nil
     end
 end

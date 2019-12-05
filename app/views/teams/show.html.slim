@@ -34,10 +34,11 @@ section
       a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
         i.fa-list[class=fa_class]
         span.pl-2.d-down-none Programma
-    li.nav-item
-      a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
-        i.fa-futbol[class=fa_class]
-        span.pl-2.d-down-none Competities
+    - if policy(@team).show_competitions?
+      li.nav-item
+        a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
+          i.fa-futbol[class=fa_class]
+          span.pl-2.d-down-none Competities
     li.nav-item
       a.nav-link[href="?tab=calendar" class="#{'active' if @active_tab == 'calendar'}"]
         i.fa-calendar-alt[class=fa_class]

@@ -32,7 +32,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_competitions?
-    true
+    !record.age_group.training_only
   end
 
   def show_team?
