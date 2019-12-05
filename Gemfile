@@ -10,7 +10,7 @@ gem "jbuilder", "~> 2.5"
 # "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved
 gem "jquery-rails"
 gem "pg", "~> 0.18"
-gem "puma", "~> 3.0"
+gem "puma", "~> 4.0"
 gem "rails", "6.0"
 gem "rails-i18n"
 gem "sassc-rails"
@@ -63,13 +63,6 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "guard"
   gem "scout_apm" # Disable to improve loading without internet connction
-
-  gem "capistrano",         require: false
-  gem "capistrano-bundler", require: false
-  gem "capistrano-rails",   require: false
-  gem "capistrano-rvm",     require: false
-  gem "capistrano3-nginx",  require: false
-  gem "capistrano3-puma",   require: false
 end
 
 group :development do
