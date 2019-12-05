@@ -27,7 +27,7 @@
                 - if presences.has_key? presentable.id
                   - if presences[presentable.id].is_present
                     - title = [presences[presentable.id].on_time_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa-check.color-green[title="#{title}" class=fa_class]
+                    i.fa.fa-check.color-green[title="#{title}"]
                     - presence_count += 1
                   - else
                     - title = [presences[presentable.id].signed_off_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
