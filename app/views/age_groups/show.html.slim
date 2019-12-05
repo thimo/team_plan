@@ -2,7 +2,7 @@
 - provide(:subtitle, "#{year_of_birth_range(@age_group)}")
 
 - content_for :action_buttons
-  - if policy(Team.new(age_group: @age_group)).create?
+  - if policy(Team.new(age_group: @age_group)).create? && !@age_group.training_only
     = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn"
       i.fa-table[class=fa_class]
       span.d-down-none.pl-1

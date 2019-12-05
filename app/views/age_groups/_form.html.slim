@@ -8,6 +8,9 @@
   = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF
   = f.collection_radio_buttons :gender, AgeGroup::GENDER, :second, :first
 
+  = f.form_group class: 'checkbox-toggle'
+    = f.check_box :training_only, custom: true
+
   - if policy(@age_group).set_status?
     = f.collection_radio_buttons :status, AgeGroup.statuses_i18n, :first, :second
 

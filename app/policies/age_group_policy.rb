@@ -47,11 +47,15 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_injureds?
-    show_todos?
+    return false if @record.archived?
+
+    @user.role?(Role::AGE_GROUP_SHOW_INJUREDS, @record)
   end
 
   def show_available_members?
-    show_todos?
+    return false if @record.archived?
+
+    @user.role?(Role::AGE_GROUP_AVAILABLE_MEMBERS, @record) && !record.training_only
   end
 
   def show_status?
@@ -97,7 +101,8 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half]
+    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half,
+                  :training_only]
     attributes << :status if set_status?
     attributes
   end

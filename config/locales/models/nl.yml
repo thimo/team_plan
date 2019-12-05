@@ -9,6 +9,7 @@ nl:
         status: Status
         players_per_team: Wedstrijdspelers per team
         minutes_per_half: Minuten per helft
+        training_only: Alleen voor trainingen
       club_data_team:
         season: Seizoen
       comment:
