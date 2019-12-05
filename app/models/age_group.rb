@@ -35,6 +35,8 @@ class AgeGroup < ApplicationRecord
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45].freeze
   GENDER = [%w[Man m], %w[Vrouw v], %w[Alle all]].freeze
 
+  before_update :before_update_actions
+
   def not_member?(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
   end
@@ -100,5 +102,10 @@ class AgeGroup < ApplicationRecord
       end
 
       members
+    end
+
+    def before_update_actions
+      self.players_per_team = nil if training_only
+      self.minutes_per_half = nil if training_only
     end
 end

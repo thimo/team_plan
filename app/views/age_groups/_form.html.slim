@@ -1,22 +1,26 @@
-= bootstrap_form_for [@season, @age_group], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
-  = f.alert_message t("bootstrap_form.check_errors")
+div data={ controller: "form", 'scroll-position': "age_group_form" }
+  = bootstrap_form_for [@season, @age_group], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", html: { data: { target: "form.form" } } do |f|
+    = f.alert_message t("bootstrap_form.check_errors")
+    = hidden_field_tag :refresh_only
 
-  = f.text_field :name, autofocus: true
-  = f.text_field :year_of_birth_from, html5: true
-  = f.text_field :year_of_birth_to, html5: true
-  = f.select :players_per_team, AgeGroup::PLAYER_COUNT
-  = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF
-  = f.collection_radio_buttons :gender, AgeGroup::GENDER, :second, :first
+    = f.text_field :name, autofocus: true
+    = f.text_field :year_of_birth_from, html5: true
+    = f.text_field :year_of_birth_to, html5: true
+    = f.collection_radio_buttons :gender, AgeGroup::GENDER, :second, :first
 
-  = f.form_group class: 'checkbox-toggle'
-    = f.check_box :training_only, custom: true
+    = f.form_group class: 'checkbox-toggle'
+      = f.check_box :training_only, custom: true, data: { action: "form#refresh" }
 
-  - if policy(@age_group).set_status?
-    = f.collection_radio_buttons :status, AgeGroup.statuses_i18n, :first, :second
+    - unless f.object.training_only
+      = f.select :players_per_team, AgeGroup::PLAYER_COUNT
+      = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF
 
-  .row
-    .col-sm-9.offset-sm-3
-      .d-flex.justify-content-between
-        div
-          = f.submit "Opslaan", class: 'btn btn-primary'
-          = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-light'
+    - if policy(@age_group).set_status?
+      = f.collection_radio_buttons :status, AgeGroup.statuses_i18n, :first, :second
+
+    .row
+      .col-sm-9.offset-sm-3
+        .d-flex.justify-content-between
+          div
+            = f.submit "Opslaan", class: 'btn btn-primary', data: { target: 'form.submit' }
+            = link_to "Annuleren", @age_group.new_record? ? @season : @age_group, class: 'btn btn-light'

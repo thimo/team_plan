@@ -20,7 +20,7 @@ class AgeGroupsController < ApplicationController
   def new; end
 
   def create
-    if @age_group.save
+    if params[:refresh_only].blank? &&  @age_group.save
       redirect_to @age_group, notice: "Leeftijdsgroep is toegevoegd."
     else
       render :new
@@ -32,7 +32,9 @@ class AgeGroupsController < ApplicationController
   def update
     old_status = @age_group.status
 
-    if @age_group.update(permitted_attributes(@age_group))
+    @age_group.attributes = permitted_attributes(@age_group)
+
+    if params[:refresh_only].blank? && @age_group.save
       @age_group.transmit_status(@age_group.status, old_status)
 
       redirect_to @age_group, notice: "Leeftijdsgroep is aangepast."
