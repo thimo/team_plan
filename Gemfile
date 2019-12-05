@@ -10,7 +10,7 @@ gem "jbuilder", "~> 2.5"
 # "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved
 gem "jquery-rails"
 gem "pg", "~> 0.18"
-gem "puma", "~> 3.0"
+gem "puma", "~> 4.3"
 gem "rails", "6.0"
 gem "rails-i18n"
 gem "sassc-rails"
