@@ -3,9 +3,7 @@
 
 .card
   .card-header
-    - if compact_header
-      | Stand
-    - else
+    - unless compact_header
       = link_to competition_path(competition)
         = "#{competition.competitiesoort.humanize} - #{competition.klasse}"
       span.lighter.pl-2
@@ -15,6 +13,7 @@
 
   .card-body.p-0
     - if competition.ranking
+      - compact_class = 'd-none d-sm-table-cell'
       table.table.table-sm.tr-links
         thead
           tr
@@ -23,18 +22,18 @@
             th.text-center[title="Gespeeld"]
               | G
             - unless compact
-              th.text-center[title="Gewonnen"]
+              th.d-none.text-center[title="Gewonnen" class=compact_class]
                 | W
-              th.text-center[title="Gelijk"]
+              th.d-none.text-center[title="Gelijk" class=compact_class]
                 | GL
-              th.text-center[title="Verloren"]
+              th.d-none.text-center[title="Verloren" class=compact_class]
                 | V
             th.text-center[title="Punten"]
               | P
             - unless compact
-              th.text-center[title="Doelpunten voor"]
+              th.d-none.text-center[title="Doelpunten voor" class=compact_class]
                 | DPV
-              th.text-center[title="Doelpunten tegen"]
+              th.d-none.text-center[title="Doelpunten tegen" class=compact_class]
                 | DPT
             th.text-center[title="Doelsaldo"]
               | DS
@@ -48,18 +47,18 @@
                 td.text-center
                   = line['gespeeldewedstrijden']
                 - unless compact
-                  td.text-center
+                  td.text-center class=compact_class
                     = line['gewonnen']
-                  td.text-center
+                  td.text-center class=compact_class
                     = line['gelijk']
-                  td.text-center
+                  td.text-center class=compact_class
                     = line['verloren']
                 td.text-center
                   = line['punten']
                 - unless compact
-                  td.text-center
+                  td.text-center class=compact_class
                     = line['doelpuntenvoor']
-                  td.text-center
+                  td.text-center class=compact_class
                     = line['doelpuntentegen']
                 td.text-center
                   = line['doelsaldo']
