@@ -1,12 +1,17 @@
 - title ||= 'Leden'
-- subtitle ||= ''
+- subtitle ||= nil
+- age_group ||= nil
 
 .card
   .card-header
     = title
-    - if subtitle
+    - if subtitle.present?
       small.pl-2.light
         = subtitle
+    .card-header-actions
+      - if age_group.present? && policy(age_group).bulk_email?
+        a.card-header-action[href="mailto:#{Current.user.email}?bcc=#{members.pluck(:email).compact.uniq.join(current_user.setting(:email_separator))}", title="Stuur een e-mail aan al deze leden"]
+          i.fa-envelope[class=fa_class]
 
   .card-body.p-0
     - if members.any?

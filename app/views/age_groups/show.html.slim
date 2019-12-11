@@ -99,11 +99,13 @@
       - if @available_players.present?
         = render "members/list", members: @available_players,
                                  title: "Speelgerechtigde spelers",
-                                 subtitle: "Deze leden kun je in een team indelen."
+                                 subtitle: "Deze leden kun je in een team indelen.",
+                                 age_group: @age_group
       - if @available_non_players.present?
         = render "members/list", members: @available_non_players,
                                  title: "Niet-speelgerechtigd",
-                                 subtitle: "Deze leden zijn (nog) niet speelgerechtigd. Hier vallen ook vrijwilligers onder."
+                                 subtitle: "Deze leden zijn (nog) niet speelgerechtigd. Hier vallen ook vrijwilligers onder.",
+                                 age_group: @age_group
 
     - if policy(@age_group).show_evaluations?
       = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties", hide_status: true, show_last_modified: true, show_progress: true, show_bulk_create: true
