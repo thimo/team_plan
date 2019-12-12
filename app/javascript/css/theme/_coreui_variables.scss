@@ -1,4 +1,4 @@
-@import '@coreui/coreui/scss/variables';
+@import '~@coreui/coreui/scss/variables';
 
 // // CoreUI Variables
 //
@@ -17,7 +17,7 @@
 //     color:                            $border-color
 //   )
 // )  !default;
-$navbar-brand-width:                  200px;
+$navbar-brand-width: 200px;
 // $navbar-brand-bg:                     transparent !default;
 // $navbar-brand-border:                 0 !default;
 //
@@ -112,11 +112,7 @@ $navbar-brand-width:                  200px;
 
 // Breadcrumb
 $breadcrumb-borders: (
-  bottom: (
-    size:                             0,
-    style:                            solid,
-    color:                            $border-color
-  )
+  bottom: (size: 0, style: solid, color: $border-color)
 );
 
 // // Aside

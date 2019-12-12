@@ -2,8 +2,8 @@
   margin: 10px auto;
 
   .message_headers {
-    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     border-bottom: 1px solid #dedede;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     margin-bottom: 10px;
     overflow: auto;
     padding-bottom: 20px;
@@ -15,11 +15,11 @@
     }
 
     dt {
-      width: 130px;
-      margin: 0;
-      float: left;
-      text-align: right;
       color: #7f7f7f;
+      float: left;
+      margin: 0;
+      text-align: right;
+      width: 130px;
     }
 
     dd {
@@ -37,10 +37,10 @@
   }
 
   pre#message_body {
+    background-color: #fcfcfc;
+    border: 1px solid #eee;
     padding: 4px;
     white-space: pre-wrap;
-    border: 1px solid #eee;
-    background-color: #fcfcfc;
   }
 
   iframe {

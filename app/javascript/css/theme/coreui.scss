@@ -1,8 +1,9 @@
 @import 'coreui_colors';
 @import 'coreui_variables';
 @import 'bootstrap-variables';
-@import '@coreui/coreui/scss/coreui';
+@import '~@coreui/coreui/scss/coreui';
 
 @import './partials/*';
-
 @import 'dark_mode';
+
+//

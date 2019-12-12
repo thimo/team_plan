@@ -1,0 +1,157 @@
+// https://github.com/excid3/simple_calendar/blob/master/app/assets/stylesheets/simple_calendar.scss
+
+.simple-calendar {
+  table {
+    -webkit-border-horizontal-spacing: 0;
+    -webkit-border-vertical-spacing: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  tr {
+    border-collapse: collapse;
+  }
+
+  th {
+    border-bottom: 2px solid #ddd;
+    border-collapse: collapse;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-top: 0 none rgb(51, 51, 51);
+    box-sizing: border-box;
+    padding: 6px;
+    text-align: left;
+  }
+
+  td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    vertical-align: top;
+    width: 14%;
+  }
+
+  .day {
+    height: 80px;
+  }
+
+  .wday-0 {}
+
+  .wday-1 {}
+
+  .wday-2 {}
+
+  .wday-3 {}
+
+  .wday-4 {}
+
+  .wday-5 {}
+
+  .wday-6 {}
+
+  .today {
+    background: #FFFFC0;
+  }
+
+  .past {}
+
+  .future {}
+
+  .start-date {}
+
+  .prev-month {
+    background: #DDD;
+  }
+
+  .next-month {
+    background: #DDD;
+  }
+
+  .current-month {}
+
+  .has-events {}
+}
+
+// Custom overwrites
+
+.simple-calendar {
+  .day {
+    padding: 2px 5px;
+    vertical-align: top;
+
+    hr {
+      margin: .5em 0;
+    }
+
+    .event {
+      background: #b0e4fe;
+      border-radius: 4px;
+      margin-bottom: 3px;
+      padding: 3px 5px;
+
+      a {
+        color: black;
+      }
+
+      .time {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .prev-month {
+    background: #f6f8fa;
+  }
+
+  .next-month {
+    background: #f6f8fa;
+  }
+
+  .calendar-heading {
+    text-align: center;
+
+    .calendar-title {
+      padding: 1rem 2rem;
+    }
+  }
+
+  thead {
+    th {
+      background: white;
+      font-size: .8rem;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    table,
+    td {
+      border-color: $gray-900;
+    }
+
+    thead {
+      th {
+        background: $black;
+      }
+    }
+
+    .next-month,
+    .prev-month {
+      background: $gray-950;
+    }
+
+    .today {
+      background: #797956;
+    }
+
+    .day {
+      .event {
+        background: #719aaf;
+      }
+    }
+  }
+}

@@ -16,7 +16,7 @@ module TeamPlan
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
-    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.yml")]
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
 
     config.autoload_paths += %W[#{config.root}/lib]
 
@@ -30,11 +30,12 @@ module TeamPlan
 
       g.javascripts = false
       g.stylesheets = false
+      g.helper = false
     end
 
     config.time_zone = "Amsterdam"
 
-    config.assets.paths << Rails.root.join("vendor", "assets", "images")
+    config.assets.paths << Rails.root.join("vendor/assets/images")
     # A bit dirty, but needed to get @coreui's 'node_modules/*' links working
     config.assets.paths << Rails.root
 
