@@ -1,17 +1,20 @@
 .presence-form {
   .btn-group {
-    width: 100%;
     margin-bottom: .5rem;
+    width: 100%;
   }
-  label.btn {
-    flex: 1;
-    padding: .5rem;
+
+  label {
+    &.btn {
+      flex: 1;
+      padding: .5rem;
+    }
   }
 
   .checkbox-toggle.m-0 {
     .form-check {
-      margin-top: .25rem;
       margin-bottom: .25rem;
+      margin-top: .25rem;
     }
   }
 }
@@ -20,17 +23,17 @@
   border: solid 1px #d8e2e7;
   border-radius: 6px;
   float: right;
-  padding: 10px 16px;
   max-width: 300px;
+  padding: 10px 16px;
 }
 
-table.presences {
+.presences {
   th {
     &.rotate {
-      height: 70px;
+      height: 140px;
 
       div {
-        width: 15px;
+        width: 20px;
       }
     }
   }

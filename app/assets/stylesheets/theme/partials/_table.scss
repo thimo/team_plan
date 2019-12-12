@@ -54,10 +54,12 @@ tbody {
   }
 }
 
-table.align-top {
-  td,
-  th {
-    vertical-align: top;
+table {
+  &.align-top {
+    td,
+    th {
+      vertical-align: top;
+    }
   }
 }
 
@@ -107,7 +109,7 @@ th {
 
 tr.b-t-0 {
   td {
-    border-top: none;
+    border-top: 0;
   }
 }
 
