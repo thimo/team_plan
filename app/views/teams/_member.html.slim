@@ -21,7 +21,7 @@ tr
 
         - if policy(team_member).destroy?
           => link_to team_member_path(team_member),  method: :delete, data: { confirm: "#{team_member.member.name} wordt verwijderd uit het team. Doorgaan?" }, title: "Verwijderen uit team"
-            i.fa-times.m-1[class=fa_class]
+            i.fa.fa-times.m-1
 
         - if policy(team_member).show_status?
           div
@@ -29,4 +29,4 @@ tr
               = team_member.status_to_badge.html_safe
             - if policy(team_member).activate?
               = link_to activate_team_member_path(team_member),  method: :post, data: { confirm: "#{team_member.member.name} wordt op actief gezet. Doorgaan?" }, title: "Activeren"
-                i.fa-check.m-1.ml-2[class=fa_class]
+                i.fa.fa-check.m-1.ml-2

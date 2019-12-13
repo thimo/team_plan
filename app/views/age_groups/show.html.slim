@@ -2,7 +2,7 @@
 - provide(:subtitle, "#{year_of_birth_range(@age_group)}")
 
 - content_for :action_buttons
-  - if policy(Team.new(age_group: @age_group)).create?
+  - if policy(Team.new(age_group: @age_group)).create? && !@age_group.training_only
     = link_to age_group_member_allocations_path(@age_group), title: "Spelersindeling", class: "btn"
       i.fa-table[class=fa_class]
       span.d-down-none.pl-1
@@ -54,14 +54,13 @@
                 td
                   = team.division
                 td.text-right
+                  - if policy(team).show_alert? && team.inactive_players?
+                    i.fa.fa-exclamation-triangle.color-red.mr-1 title="Het team bevat mogelijk een fout in de indeling"
                   - if policy(team).show_status?
                     => team.status_to_badge.html_safe
                   - if policy_scope(team.team_members).size > 0
                     .badge.badge-pill.badge-secondary.badge-two-numbers>
                       = "#{policy_scope(team.team_members).active_for_team(team).player.size} / #{policy_scope(team.team_members).active_for_team(team).staff.pluck(:member_id).uniq.size}"
-                  - if policy(team).show_alert? && team.inactive_players?
-                    i.fa.fa-exclamation-triangle.color-red title="Het team bevat mogelijk een fout in de indeling"
-
 
     - if @not_played_matches.any?
       .card.schedule-list
@@ -99,12 +98,14 @@
     - if policy(@age_group).show_available_members?
       - if @available_players.present?
         = render "members/list", members: @available_players,
-                                 title: "Wachtlijst speelgerechtigd",
-                                 subtitle: "Deze leden kun je in een team indelen."
+                                 title: "Speelgerechtigde spelers",
+                                 subtitle: "Deze leden kun je in een team indelen.",
+                                 age_group: @age_group
       - if @available_non_players.present?
         = render "members/list", members: @available_non_players,
                                  title: "Niet-speelgerechtigd",
-                                 subtitle: "Deze leden zijn (nog) niet speelgerechtigd. Hier vallen ook vrijwilligers onder."
+                                 subtitle: "Deze leden zijn (nog) niet speelgerechtigd. Hier vallen ook vrijwilligers onder.",
+                                 age_group: @age_group
 
     - if policy(@age_group).show_evaluations?
       = render "team_evaluations/list", age_group: @age_group, team_evaluations: @open_team_evaluations, title: "Open teamevaluaties", hide_status: true, show_last_modified: true, show_progress: true, show_bulk_create: true

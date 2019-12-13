@@ -29,11 +29,13 @@ class TrainingSchedulePolicy < ApplicationPolicy
   end
 
   def update_presences?
-    create?
+    return false if @record.team.archived?
+
+    @user.team_staff_for?(@record.team)
   end
 
   def show_presences?
-    create?
+    update_presences?
   end
 
   class Scope < Scope

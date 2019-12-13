@@ -2,8 +2,8 @@
 
 module Admin
   class MatchesController < Admin::BaseController
-    before_action :create_match, only: [:new, :create]
-    before_action :set_match, only: [:show, :edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:show, :edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -42,7 +42,7 @@ module Admin
 
     private
 
-      def create_match
+      def create_resource
         @match = if action_name == "new"
                    Match.new
                  else
@@ -51,7 +51,7 @@ module Admin
         authorize @match
       end
 
-      def set_match
+      def set_resource
         @match = Match.find(params[:id])
         authorize @match
       end

@@ -1,12 +1,26 @@
-# frozen_string_literal: true
-
 class OrgPolicy < ApplicationPolicy
   def index?
-    @user.role?(Role::ORG_SHOW)
+    true
   end
 
   def show?
     index?
+  end
+
+  def show_members?
+    true
+  end
+
+  def show_seasons?
+    true
+  end
+
+  def show_local_teams?
+    @user.admin?
+  end
+
+  def show_comments?
+    @user.admin?
   end
 
   class Scope < Scope

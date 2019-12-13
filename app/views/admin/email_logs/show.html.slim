@@ -28,5 +28,5 @@
     | function resizeIframe(obj) {
     |   obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
     | }
-    
-  iframe[seamless="seamless" srcdoc="#{@email_log.body}" onload="resizeIframe(this)"]
+
+  iframe[seamless="seamless" srcdoc="#{@email_log.body}" onload="resizeIframe(this)" style="background-color: white;"]

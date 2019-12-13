@@ -49,12 +49,8 @@ module Presentable
   end
 
   def present_size_for_label(team)
-    if presences.team(team).any?
-      presences.team(team).present.size
-    elsif is_a?(Training) && training_schedule&.presences&.any?
-      training_schedule&.presences&.present&.size
-    else
-      team.team_members.player.active.size
-    end
+    return presences.team(team).present.size if presences.team(team).any?
+
+    -1
   end
 end

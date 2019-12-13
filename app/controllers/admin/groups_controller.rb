@@ -2,8 +2,8 @@
 
 module Admin
   class GroupsController < Admin::BaseController
-    before_action :create_group, only: [:new, :create]
-    before_action :set_group, only: [:show, :edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:show, :edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -40,13 +40,13 @@ module Admin
 
     private
 
-      def create_group
+      def create_resource
         @group = Group.new
         @group.update(permitted_attributes(@group)) if action_name == "create"
         authorize @group
       end
 
-      def set_group
+      def set_resource
         @group = Group.find(params[:id])
         authorize @group
       end

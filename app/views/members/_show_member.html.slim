@@ -145,12 +145,14 @@
           | Er is een actief speelverbod gevonden.
 
       - if is_current_member
-        .alert.alert-info.m-0.mt-3
-          | Kloppen je gegevens niet of wil je bijvoorbeeld een e-mailadres toevoegen?
-          - if (email = Tenant.setting("club_member_administration_email")).present?
-            |  Stuur dan een mailtje naar <a href="mailto:#{email}">#{email}</a>.
-          - else
-            |  Neem dan contact op met de ledenadministratie van #{Tenant.setting("club_name_short")}.
+        .alert.alert-info.m-0.mt-3.d-flex.align-items-center
+          i.fa.fa-question-circle.fa-2x.pr-3
+          div
+            | Kloppen je gegevens niet of wil je bijvoorbeeld een e-mailadres toevoegen?
+            - if (email = Tenant.setting("club_member_administration_email")).present?
+              |  Stuur dan een mailtje naar <a href="mailto:#{email}">#{email}</a>.
+            - else
+              |  Neem dan contact op met de ledenadministratie van #{Tenant.setting("club_name_short")}.
 
 .card
   .card-header

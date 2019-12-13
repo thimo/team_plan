@@ -1,0 +1,28 @@
+- provide(:title, "Lokale teams")
+
+.row
+  .col-sm-4
+    ul.list-group.mb-4
+      - @teams.each do |team|
+        = link_to [:org, :local_teams, expand: team[:value]], class: "list-group-item list-group-item-action #{'active' if params[:expand] == team[:value]}"
+          = team[:label]
+          .badge.badge-secondary.badge-pill.float-right
+            = team[:count]
+
+  - if @members_title.present?
+    .col-sm-8
+      .card
+        .card-header
+          = @members_title
+        .card-body.p-0
+          - if @team_members.any?
+            table.table.table-sm.tr-links
+              - @team_members.each do |member|
+                tr
+                  td.w-1.text-center.pr-0
+                    = render 'members/photo', member: member
+                  td
+                    = render "members/member", member: member, born_on_class: "float-right"
+          - else
+            .p-3
+              i Geen leden gevonden

@@ -1,0 +1,66 @@
+// Force white text on these button colors
+
+.btn-secondary,
+.btn-warning {
+  color: white;
+  font-weight: 400;
+}
+
+.btn + .btn {
+  margin-left: 4px;
+}
+
+// Overwrite bootstrap_form
+.rails-bootstrap-forms-error-summary {
+  margin-bottom: 0;
+  margin-top: inherit;
+}
+
+.form-check {
+  margin-bottom: .25rem;
+  margin-top: .25rem;
+}
+
+.custom-control-label {
+  &::before {
+    background-color: $gray-200;
+    border: solid 1px $gray-300;
+  }
+
+  &::after {
+    background-size: 75%;
+  }
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $blue;
+}
+
+.form-control {
+  transition: none;
+
+  &:focus,
+  &:hover {
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+}
+
+textarea {
+  min-height: 3.5rem;
+
+  &.form-control {
+    height: auto;
+  }
+}
+
+// Hack, needed because sass (currently) doesn't add vendor specific rules for appearance
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+trix-editor {
+  &.form-control {
+    height: auto;
+  }
+}

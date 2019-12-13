@@ -3,11 +3,12 @@
 - provide(:hint, "#{@team.remark}") if @team.remark.present?
 
 - content_for :action_buttons
-  - if policy(TeamEvaluation.new(team: @team)).create?
-    = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn"
-      i.fa-list-ol[class=fa_class]
-      span.d-down-none.pl-1
-        | Evaluatie
+  / Disabled (temporatily?) as this does not support selecting the team evaluation config
+  / - if policy(TeamEvaluation.new(team: @team)).create?
+  /   = link_to new_team_team_evaluation_path(@team), title: "Evaluatie toevoegen", class: "btn"
+  /     i.fa-list-ol[class=fa_class]
+  /     span.d-down-none.pl-1
+  /       | Evaluatie
   - if policy(@team).update?
     = link_to edit_team_path(@team), title: "Team aanpassen", class: "btn" do
       i.fa-pencil-alt[class=fa_class]
@@ -33,10 +34,11 @@ section
       a.nav-link[href="?tab=schedule" class="#{'active' if @active_tab == 'schedule'}"]
         i.fa-list[class=fa_class]
         span.pl-2.d-down-none Programma
-    li.nav-item
-      a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
-        i.fa-futbol[class=fa_class]
-        span.pl-2.d-down-none Competities
+    - if policy(@team).show_competitions?
+      li.nav-item
+        a.nav-link[href="?tab=competitions" class="#{'active' if @active_tab == 'competitions'}"]
+          i.fa-futbol[class=fa_class]
+          span.pl-2.d-down-none Competities
     li.nav-item
       a.nav-link[href="?tab=calendar" class="#{'active' if @active_tab == 'calendar'}"]
         i.fa-calendar-alt[class=fa_class]

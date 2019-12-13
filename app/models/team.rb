@@ -45,6 +45,8 @@ class Team < ApplicationRecord
   scope :by_teamcode, ->(teamcode) { joins(:club_data_team).where(club_data_teams: { teamcode: teamcode }) }
   scope :by_status, ->(status) { where(status: status) }
 
+  before_update :before_update_actions
+
   def name=(value)
     self[:name] = value.upcase
   end
@@ -104,4 +106,14 @@ class Team < ApplicationRecord
       end
     end
   end
+
+  private
+
+    def before_update_actions
+      return unless age_group.training_only
+
+      self.division = nil
+      self.players_per_team = nil
+      self.minutes_per_half = nil
+    end
 end

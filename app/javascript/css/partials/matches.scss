@@ -1,0 +1,55 @@
+.match-row {
+  .match-row-header {
+    display: flex;
+    justify-content: space-between;
+
+    .match-datetime,
+    .match-type {
+      flex-grow: 1;
+      flex-basis: 100px;
+    }
+  }
+  .match-teams {
+    display: flex;
+    justify-content: center;
+
+    .match-hometeam,
+    .match-awayteam {
+      flex-grow: 1;
+      flex-basis: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .clublogo {
+        height: 20px;
+        opacity: 0.6;
+      }
+    }
+
+    .match-hometeam {
+      .clublogo {
+        float: left;
+      }
+    }
+
+    .match-awayteam {
+      .clublogo {
+        float: right;
+      }
+    }
+
+    .match-separator {
+      flex-grow: 0;
+      flex-basis: 20px;
+    }
+  }
+}
+
+.match-row:hover {
+  .match-hometeam,
+  .match-awayteam {
+    .clublogo {
+      opacity: 1;
+    }
+  }
+}

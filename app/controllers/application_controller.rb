@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   # before_action :set_locale
   before_action :default_breadcrumb
   before_action :set_paper_trail_whodunnit
+  before_action :set_current
 
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
     def invalid_auth_token
-      flash_message(:danger, "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer.")
+      flash_message(:danger, "Je (mogelijk) hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer.")
       redirect_to back_url
     end
 
@@ -43,5 +44,17 @@ class ApplicationController < ActionController::Base
 
     def back_url
       request.referer || root_path
+    end
+
+    # Current is an object that is available even in models
+    def set_current
+      Current.user = current_user
+      Current.session = session
+
+      Current.request_id = request.uuid
+      Current.user_agent = request.user_agent
+      Current.ip_address = request.ip
+      Current.referer    = request.referer
+      Current.path       = request.fullpath
     end
 end

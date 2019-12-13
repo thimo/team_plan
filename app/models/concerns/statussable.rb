@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Concern to give a model status methods
 module Statussable
   extend ActiveSupport::Concern

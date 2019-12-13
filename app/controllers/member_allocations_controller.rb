@@ -13,8 +13,8 @@ class MemberAllocationsController < ApplicationController
     @season = @age_group.season
     @previous_season = @season.previous
 
-    active_players = @age_group.active_players
-    assigned_players = @age_group.assigned_active_players
+    active_players = @age_group.active_players.asc
+    assigned_players = @age_group.assigned_active_players.asc
     @available_players = active_players - assigned_players
 
     @teams_for_filter = human_sort(Team.for_members(@available_players).as_player

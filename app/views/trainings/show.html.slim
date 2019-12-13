@@ -1,4 +1,5 @@
 - provide(:title, @training.title)
+- show_presences = policy(@training).show_presences? && @presences.present? && policy(@presences.first).update?
 
 - content_for :action_buttons
   - if policy(@training).update?
@@ -10,7 +11,7 @@ section
     li.nav-item
       a.nav-link.active[href="#tab-program" role="tab" data-toggle="tab" aria-expanded="true"]
         | Programma
-    - if @presences.present? && policy(@presences.first).update?
+    - if show_presences
       li.nav-item
         a.nav-link[href="#tab-presence" role="tab" data-toggle="tab" aria-expanded="false"]
           | Aanwezig
@@ -47,7 +48,7 @@ section
         strong Opmerkingen
         = markdown(@training.remark).html_safe
 
-    - if @presences.present? && policy(@presences.first).update?
+    - if show_presences
       #tab-presence.tab-pane.fade[role="tabpanel" aria-expanded="false"]
         - @presences.each do |presence|
           = render presence

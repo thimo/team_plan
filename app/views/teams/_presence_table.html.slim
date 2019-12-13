@@ -1,47 +1,45 @@
-/ TODO move code to helper/controller
 - presentables = team.send(presentable_class.model_name.plural).in_past.active.left_outer_joins(:presences).where('presences.id IS NOT NULL').distinct.desc
 - if presentables&.any?
-  .card-body.table-responsive
+  .table-responsive
+    - members = team.team_members.player.asc.map(&:member)
     - ids = presentables.map(&:id)
     table.table.table-xxs.presences
       thead
         tr
           th.w-1
-          - presentables.each do |presentable|
-            th.rotate.w-1.small
+          - members.each do |member|
+            th.rotate.font-weight-normal.w-1
               div
-                = "#{l(presentable.started_at, format: :weekday)} #{l(presentable.started_at, format: :date_short)}"
+                = link_to member.name, member
+          th
+          th
+        tr
+          th
+          - members.each do |member|
+            th.text-center
+              = member.presences.send("for_#{presentable_class.model_name.singular}", ids).present.size
           th
           th
 
       tbody
-        - team.team_members.player.asc.each do |team_member|
-          - member = team_member.member
-          - presences = member.presences.send("for_#{presentable_class.model_name.singular}", ids).inject({}) { |r, presence| r.merge!({presence.presentable_id => presence})}
+        - presentables.each do |presentable|
           tr
-            - presence_count = 0
-            td.nowrap
-              = link_to member.name, member
-            - presentables.each do |presentable|
-              td
-                - if presences.has_key? presentable.id
-                  - if presences[presentable.id].is_present
-                    - title = [presences[presentable.id].on_time_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa-check.color-green[title="#{title}" class=fa_class]
-                    - presence_count += 1
-                  - else
-                    - title = [presences[presentable.id].signed_off_i18n, presences[presentable.id].remark].reject(&:blank?).join(' - ')
-                    i.fa-times.color-red[title="#{title}" class=fa_class]
-                - else
-                  i.fa-minus.color-gray[class=fa_class]
-            td.w-1.text-right.light
-              = presence_count
-            td
+            td.nowrap.small.text-right.pr-3
+              = "#{l(presentable.started_at, format: :weekday)} #{l(presentable.started_at, format: :date_short)}"
 
-      tfooter
-        tr
-          th
-          - presentables.each do |presentable|
-            th.text-right
+            - present_members = presentable.presences.group_by(&:member)
+            - members.each do |member|
+              td
+                - if present_members.has_key?(member)
+                    - if (presence = present_members[member].first).is_present
+                      - title = [presence.on_time_i18n, presence.remark].reject(&:blank?).join(' - ')
+                      i.fa.fa-check.fa-fw.color-green[title="#{title}"]
+                    - else
+                      - title = [presence.signed_off_i18n, presence.remark].reject(&:blank?).join(' - ')
+                      i.fa.fa-times.fa-fw.color-red[title="#{title}"]
+                - else
+                  i.fa-minus.fa-fw.color-gray[class=fa_class]
+
+            td.text-right.w-1.lighter.pl-3
               = presentable.presences.present.size
-          th
+            td

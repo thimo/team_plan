@@ -1,0 +1,303 @@
+nl:
+  activerecord:
+    attributes:
+      age_group:
+        name: Leeftijdsgroep
+        year_of_birth_from: Jaartal geboorte vanaf
+        year_of_birth_to: Jaartal geboorte t/m
+        gender: Geslacht
+        status: Status
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
+        training_only: Alleen voor trainingen
+      club_data_team:
+        season: Seizoen
+      comment:
+        body: Opmerking
+        private: Privé
+      competition:
+        competitienaam: Competitie
+        competitiesoort: Soort
+      injury:
+        title: Beschrijving
+        body: Omschrijving / behandeling
+        started_on: Begindatum
+        ended_on: Einddatum
+      group:
+        name: Naam
+        members: Leden
+        member_ids: Leden
+        roles: Rollen
+        role_ids: Rollen
+        memberable_via_type: Leden via
+      group_member:
+        member: Lid
+        member_id: Lid
+        description: Rol
+      match:
+        wedstrijddatum: Datum
+        wedstrijdtijd: Aanvangstijd
+        opponent: Tegenstander
+        location: Wedstrijdlocatie
+        started_at: Datum
+        start_time: Aanvang
+        body: Programma/strategie
+        remark: Opmerkingen
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
+        half_count: Aantal helften
+        competition_id: Soort
+        is_home_match: Thuis of uit?
+        team_ids: Team
+      member:
+        first_name: Voornaam
+        middle_name: Tussenvoegsels
+        last_name: Achternaam
+        name: Volledige naam
+        full_name: Achternaam, voornaam
+        email: E-mailadres
+        born_on: Geboortedatum
+        gender: Geslacht
+        phone: Telefoonnummer
+        zipcode: Postcode
+        address: Adres
+        city: Woonplaats
+        country: Land
+        association_number: KNVB nummer
+        member_since: Lid sinds
+        users: Gebruikers
+      note:
+        title: Titel
+        body: Tekst
+        member: Teamgenoot
+        member_id: Teamgenoot
+        visibility: Zichtbaar voor
+      play_ban:
+        member: Speler
+        member_id: Speler
+        started_on: Startdatum
+        ended_on: Einddatum
+        body: Beschrijving
+        play_ban_type: Soort speelverbod
+      player_evaluation:
+        advise_next_season: Advies niveau
+        remark: Opmerking
+      presence:
+        member: Speler
+        member_id: Speler
+        remark: Opmerking
+      role:
+        name: Naam
+        body: Beschrijving
+        groups: Groepen
+        group_ids: Groepen
+      season:
+        name: Seizoen
+        active: Actief
+        status: Status
+        started_on: Begindatum
+        ended_on: Einddatum
+      soccer_field:
+        name: Veldnaam
+        match: Wedstrijdveld
+        training: Trainingsveld
+      team:
+        name: Team
+        division: Klasse
+        status: Status
+        remark: Opmerking/aantekening
+        players_per_team: Wedstrijdspelers per team
+        minutes_per_half: Minuten per helft
+      team_member:
+        role: Rol
+        name: Naam
+        member: Teamgenoot
+        member_id: Teamgenoot
+        field_positions: Veldpositie
+        field_position_ids: Veldpositie
+        prefered_foot: Voorkeursbeen
+        status: Status
+        initial_status: Activeren
+      team_evaluation_config:
+        name: Naam
+        config: JSON configuratie
+        config_json: JSON configuratie
+      tenant_setting:
+        application_name: Naam
+        application_hostname: Domeinnaam
+        application_email: Contact e-mail
+        application_contact_name: Contactnaam
+        application_maintenance: Toon melding dat applicatie in onderhoud is
+        application_favicon_url: Favicon URL
+        application_sysadmin_email: Systeembeheerder e-mail
+        club_name: Naam, volledig
+        club_name_short: Naam, afgekort
+        club_website: Website
+        club_sportscenter: Sportcentrum
+        club_address: Adres
+        club_zip: Postcode
+        club_city: Stad
+        club_phone: Telefoon
+        club_relatiecode: Relatiecode (KNVB)
+        club_logo_url: Logo URL
+        club_member_administration_email: Ledenadministratie e-mail
+        clubdata_urls_competities: URL competities
+        clubdata_urls_poulestand: URL stand poule
+        clubdata_urls_poule_programma: URL programma poule
+        clubdata_urls_pouleuitslagen: URL uitslagen poule
+        clubdata_urls_uitslagen: URL uitslagen
+        clubdata_urls_team_indeling: URL teamindeling
+        clubdata_urls_wedstrijd_accommodatie: URL wedstrijdaccomodatie
+        clubdata_urls_afgelastingen: URL afgelastingen
+        clubdata_urls_club_logos: URL club logo's
+        clubdata_client_id: Client ID
+        fontawesome_kit_nr: FontAwesome Kit nummer
+        google_maps_base_url: Google Maps basis URL
+        google_maps_api_key: Google Maps API key
+        google_analytics_tracking_id: Google Analytics Tracking ID
+      todo:
+        body: Todo
+        started_on: Actief vanaf
+        ended_on: Einddatum
+      training_schedule:
+        day: Dag van de week
+        present_minutes: Aanwezig
+        start_time: Aanvang
+        end_time: Einde
+        soccer_field_id: Veld
+        soccer_field: Veld
+        field_part: Deel van het veld
+        team_member_ids: Trainer
+        cios: CIOS
+        started_on: Vanaf
+        ended_on: Tot en met
+      training:
+        started_at: Datum
+        start_time: Aanvang
+        end_time: Einde
+        body: Programma
+        remark: Opmerkingen
+      user:
+        current_password: Huidig wachtwoord
+        current_sign_in_at: Laatste login
+        email: E-mailadres
+        first_name: Voornaam
+        last_name: Achternaam
+        members: Leden
+        middle_name: Tussenvoegsels
+        name: Naam
+        password_confirmation: Bevestig wachtwoord
+        password: Wachtwoord
+        remember_me: Ingelogd blijven
+        reset_password_token:
+        role: Rol
+        unlock_token:
+      version_update:
+        released_at: Datum
+        name: Titel
+        body: Beschrijving
+        for_role: Toon aan
+    models:
+      user: Gebruiker
+
+  enums:
+    age_group:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
+    comment:
+      comment_type:
+        generic: Opmerkingen
+        technique: Voetbal
+        behaviour: Gedrag
+        classification: Indeling
+        membership: Lidmaatschap
+    match:
+      location:
+        location_home: Thuis
+        location_opponent: Uit
+    note:
+      visibility:
+        self: Zelf
+        staff: Teamleiding
+        member: Teamgenoot
+    presence:
+      on_time:
+        on_time: Op tijd
+        a_bit_too_late: Iets te laat
+        much_too_late: Veel te laat
+      signed_off:
+        signed_off_on_time: Op tijd afgemeld
+        signed_off_too_late: Te laat afgemeld
+        not_signed_off: Niet afgemeld
+    season:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
+    team:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
+    team_evaluation_config:
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
+    team_member:
+      initial_status:
+        initial_draft: Nee, als 'concept' toevoegen
+        initial_active: Ja, direct activeren
+      role:
+        player: Speler
+        head_coach: Hoofdcoach
+        coach: Coach
+        trainer: Trainer
+        assistant_trainer: Assistent trainer
+        keeper_trainer: Keeperstrainer
+        team_parent: Teamouder
+        manager: Teammanager
+        leader: Leider
+        physio: Fysiotherapeut
+        referee: Scheidsrechter
+        assistant_referee: Assistent scheidsrechter
+      status:
+        draft: Concept
+        active: Actief
+        archived: Archief
+    training_schedule:
+      day:
+        monday: Maandag
+        tuesday: Dinsdag
+        wednesday: Woensdag
+        thursday: Donderdag
+        friday: Vrijdag
+        saturday: Zaterdag
+        sunday: Zondag
+      field_part:
+        whole: Gehele veld
+        part_a: A
+        part_b: B
+        part_c: C
+        part_d: D
+        part_ab: A-B
+        part_cd: C-D
+      present_minutes:
+        min_0: Bij aanvangstijd
+        min_5: 5 min vooraf
+        min_10: 10 min vooraf
+        min_15: 15 min vooraf
+        min_30: 30 min vooraf
+        min_45: 45 min vooraf
+        min_60: 60 min vooraf
+    user:
+      role:
+        admin: Administrator
+        team_staff: Teamleiding
+        member: Lid
+    version_update:
+      for_role:
+        admin: Administrator
+        member: Lid

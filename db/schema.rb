@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_125446) do
+ActiveRecord::Schema.define(version: 2019_12_05_193014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
     t.integer "players_per_team"
     t.integer "minutes_per_half"
     t.bigint "tenant_id"
+    t.boolean "training_only", default: false
     t.index ["season_id"], name: "index_age_groups_on_season_id"
     t.index ["tenant_id"], name: "index_age_groups_on_tenant_id"
   end
@@ -364,16 +365,16 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
   create_table "player_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_evaluation_id"
     t.string "advise_next_season"
-    t.string "behaviour"
-    t.string "technique"
-    t.string "handlingspeed"
-    t.string "insight"
-    t.string "passes"
-    t.string "speed"
-    t.string "locomotion"
-    t.string "physical"
-    t.string "endurance"
-    t.string "duel_strength"
+    t.string "field_1"
+    t.string "field_2"
+    t.string "field_3"
+    t.string "field_4"
+    t.string "field_5"
+    t.string "field_6"
+    t.string "field_7"
+    t.string "field_8"
+    t.string "field_9"
+    t.string "field_10"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "remark"
@@ -438,6 +439,16 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
     t.index ["tenant_id"], name: "index_soccer_fields_on_tenant_id"
   end
 
+  create_table "team_evaluation_configs", force: :cascade do |t|
+    t.string "name"
+    t.integer "status", default: 0
+    t.jsonb "config"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "tenant_id"
+    t.index ["tenant_id"], name: "index_team_evaluation_configs_on_tenant_id"
+  end
+
   create_table "team_evaluations", id: :serial, force: :cascade do |t|
     t.integer "team_id"
     t.datetime "created_at", null: false
@@ -448,6 +459,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
     t.bigint "finished_by_id"
     t.boolean "private", default: false
     t.bigint "tenant_id"
+    t.jsonb "config"
     t.index ["finished_by_id"], name: "index_team_evaluations_on_finished_by_id"
     t.index ["invited_by_id"], name: "index_team_evaluations_on_invited_by_id"
     t.index ["team_id"], name: "index_team_evaluations_on_team_id"
@@ -529,8 +541,6 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
     t.string "clubdata_urls_afgelastingen", default: "https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1"
     t.string "clubdata_urls_club_logos", default: "http://bin617.website-voetbal.nl/sites/voetbal.nl/files/knvblogos/"
     t.string "clubdata_client_id"
-    t.string "fontawesome_version", default: "v5.5.0"
-    t.string "fontawesome_integrity"
     t.string "google_maps_base_url", default: "https://www.google.com/maps/embed/v1/"
     t.string "google_maps_api_key"
     t.string "google_analytics_tracking_id"
@@ -538,6 +548,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "last_import_members"
+    t.string "fontawesome_kit_nr"
     t.index ["tenant_id"], name: "index_tenant_settings_on_tenant_id"
   end
 
@@ -720,6 +731,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_125446) do
   add_foreign_key "roles", "tenants"
   add_foreign_key "seasons", "tenants"
   add_foreign_key "soccer_fields", "tenants"
+  add_foreign_key "team_evaluation_configs", "tenants"
   add_foreign_key "team_evaluations", "teams"
   add_foreign_key "team_evaluations", "tenants"
   add_foreign_key "team_evaluations", "users", column: "finished_by_id"

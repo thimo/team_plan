@@ -20,7 +20,7 @@ class AgeGroupsController < ApplicationController
   def new; end
 
   def create
-    if @age_group.save
+    if params[:refresh_only].blank? &&  @age_group.save
       redirect_to @age_group, notice: "Leeftijdsgroep is toegevoegd."
     else
       render :new
@@ -32,7 +32,9 @@ class AgeGroupsController < ApplicationController
   def update
     old_status = @age_group.status
 
-    if @age_group.update(permitted_attributes(@age_group))
+    @age_group.attributes = permitted_attributes(@age_group)
+
+    if params[:refresh_only].blank? && @age_group.save
       @age_group.transmit_status(@age_group.status, old_status)
 
       redirect_to @age_group, notice: "Leeftijdsgroep is aangepast."
@@ -85,7 +87,7 @@ class AgeGroupsController < ApplicationController
     def set_members
       return unless policy(@age_group).show_available_members?
 
-      available_players = @age_group.active_players - @age_group.assigned_active_players
+      available_players = @age_group.active_players.order_registered_at - @age_group.assigned_active_players
       @available_players = Kaminari.paginate_array(available_players).page(params[:member_page]).per(10)
 
       available_non_players = @age_group.active_non_players - @age_group.assigned_active_non_players

@@ -1,0 +1,50 @@
+.email-log {
+  margin: 10px auto;
+
+  .message_headers {
+    border-bottom: 1px solid #dedede;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 10px;
+    overflow: auto;
+    padding-bottom: 20px;
+
+    dl {
+      float: left;
+      line-height: 1.3em;
+      padding: 0;
+    }
+
+    dt {
+      color: #7f7f7f;
+      float: left;
+      margin: 0;
+      text-align: right;
+      width: 130px;
+    }
+
+    dd {
+      margin: 0 0 0 140px;
+    }
+
+    p.alternate {
+      float: right;
+      margin: 0;
+    }
+
+    p.alternate a {
+      color: #09c;
+    }
+  }
+
+  pre#message_body {
+    background-color: #fcfcfc;
+    border: 1px solid #eee;
+    padding: 4px;
+    white-space: pre-wrap;
+  }
+
+  iframe {
+    border: 0;
+    width: 100%;
+  }
+}

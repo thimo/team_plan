@@ -47,11 +47,15 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def show_injureds?
-    show_todos?
+    return false if @record.archived?
+
+    @user.role?(Role::AGE_GROUP_SHOW_INJUREDS, @record)
   end
 
   def show_available_members?
-    show_todos?
+    return false if @record.archived?
+
+    @user.role?(Role::AGE_GROUP_AVAILABLE_MEMBERS, @record) && !record.training_only
   end
 
   def show_status?
@@ -85,8 +89,10 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def modify_members?
-    @user.role?(Role::BEHEER_GROUPS) &&
-      @record.persisted? && !@record.archived?
+    return false if @record.new_record? || @record.archived?
+
+    # Don't allow coordinators to create members with a second parameter to the `role?` call
+    @user.role?(Role::BEHEER_GROUPS) || @user.role?(Role::GROUP_MEMB_CREATE)
   end
 
   def add_members?
@@ -95,7 +101,8 @@ class AgeGroupPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half]
+    attributes = [:name, :year_of_birth_from, :year_of_birth_to, :gender, :players_per_team, :minutes_per_half,
+                  :training_only]
     attributes << :status if set_status?
     attributes
   end

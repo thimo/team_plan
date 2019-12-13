@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TrainingPolicy < ApplicationPolicy
   def show?
     create? || @user.team_member_for?(@record)
@@ -23,11 +21,13 @@ class TrainingPolicy < ApplicationPolicy
   end
 
   def update_presences?
-    create?
+    return false if @record.team.archived?
+
+    @user.team_staff_for?(@record)
   end
 
   def show_presences?
-    create?
+    update_presences?
   end
 
   class Scope < Scope

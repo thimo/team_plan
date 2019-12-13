@@ -38,6 +38,7 @@ class Member < ApplicationRecord
   validates :last_name, :born_on, :gender, :association_number, presence: true
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
+  scope :order_registered_at, -> { order(registered_at: :asc) }
   scope :to_year,   ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }
   scope :from_year, ->(year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year.to_date) }
   scope :active, -> {
@@ -88,9 +89,11 @@ class Member < ApplicationRecord
   scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
   scope :injured, -> { where(injured: true) }
 
-  scope :by_season, ->(season) { includes(team_members: { team: :age_group }).where(age_groups: { season_id: season }) }
+  scope :by_season, ->(season) {
+    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season, training_only: false })
+  }
   scope :by_season_as_player, ->(season) {
-    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season },
+    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season, training_only: false },
                                                        team_members: { role: TeamMember.roles[:player],
                                                                        ended_on: nil,
                                                                        status: 1 })
@@ -119,7 +122,7 @@ class Member < ApplicationRecord
     by_team_as_active(team).player
   }
 
-  scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
+  # scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
   scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
   scope :by_field_position, ->(field_positions) {
                               includes(team_members: :field_positions)
@@ -137,6 +140,7 @@ class Member < ApplicationRecord
   scope :with_future_play_ban, -> { joins(:play_bans).where("play_bans.started_on > ?", Time.zone.today) }
 
   scope :local_teams, ->(local_team) { where("local_teams like ?", "%#{local_team}%") }
+  scope :with_local_teams, -> { where.not(local_teams: ["", nil]) }
 
   scope :query, ->(query) {
                   where("email ILIKE ? OR email_2 ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",
@@ -157,6 +161,14 @@ class Member < ApplicationRecord
 
   def name_and_born_on
     "#{name} (#{I18n.l(born_on, format: :long)})"
+  end
+
+  def email_with_name
+    %("#{name}" <#{email}>)
+  end
+
+  def preferred_email
+    email_2.presence || email
   end
 
   def active?
@@ -228,10 +240,6 @@ class Member < ApplicationRecord
     status == STATUS_AF_TE_MELDEN
   end
 
-  def self.comment_types
-    Comment.comment_types
-  end
-
   def user
     # TODO: When in the future a member can belong to multiple users by coupling to multiple emailaddresses,
     # than this (and other functionality using this) needs to change
@@ -257,6 +265,32 @@ class Member < ApplicationRecord
 
   def google_maps_address
     full_address.join(",")
+  end
+
+  def suggested_age_groups
+    return AgeGroup.none if sportlink_non_player? || inactive?
+
+    year_of_birth = born_on.year
+    age_groups = AgeGroup.for_active_season.where("year_of_birth_from <= ?", year_of_birth)
+                         .or(AgeGroup.for_active_season.where(year_of_birth_from: [nil, ""]))
+    age_groups = age_groups.where("year_of_birth_to >= ?", year_of_birth)
+                           .or(age_groups.where(year_of_birth_to: [nil, ""]))
+    age_groups = age_groups.where(gender: "m").or(age_groups.where(gender: [nil, "all", ""])) if male?
+    age_groups = age_groups.where(gender: "v").or(age_groups.where(gender: [nil, "all", ""])) if female?
+
+    age_groups
+  end
+
+  def male?
+    gender == "M"
+  end
+
+  def female?
+    gender == "V"
+  end
+
+  def self.comment_types
+    Comment.comment_types
   end
 
   def self.import(file, encoding="utf-8")

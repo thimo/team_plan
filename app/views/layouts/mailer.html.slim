@@ -12,7 +12,7 @@ html
       | Met vriendelijke groet,
 
     p
-      = Tenant.setting('application_contact_name')
+      = @salutation_names
     p
       strong
         = Tenant.setting('club_name')

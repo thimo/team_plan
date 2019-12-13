@@ -1,0 +1,65 @@
+.evaluation {
+  @each $color, $value in $theme-colors {
+    .select-#{$color} {
+      background-color: $value;
+      color: white;
+      font-weight: 400;
+    }
+  }
+
+  div.form-control-error .select2-selection,
+  select.form-control-error {
+    background-color: #fff6f6;
+    border: solid 1px $red;
+    border-radius: $border-radius;
+    color: $red !important;
+  }
+
+  td {
+    vertical-align: top;
+
+    &.member-name,
+    &.remark {
+      min-width: 160px;
+    }
+
+    &.prefered-foot {
+      width: 8%;
+    }
+
+    &.advise-next-season {
+      width: 8%;
+    }
+
+    &.evaluation-rating {
+      width: 8%;
+    }
+  }
+
+  thead {
+    td,
+    th {
+      vertical-align: top;
+    }
+  }
+
+  div.evaluation-rating {
+    min-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .select2-container--bootstrap {
+    .select2-selection--multiple {
+      .select2-selection__choice {
+        margin-bottom: 2px;
+      }
+
+      .select2-selection__choice__remove {
+        border-bottom-left-radius: $border-radius;
+        border-top-left-radius: $border-radius;
+      }
+    }
+  }
+}

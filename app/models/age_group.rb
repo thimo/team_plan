@@ -22,7 +22,7 @@ class AgeGroup < ApplicationRecord
 
   scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: [nil, "all", ""])) }
   scope :female, -> { where(gender: "v") }
-  scope :asc, -> { order(year_of_birth_to: :asc) }
+  scope :asc, -> { order(:training_only, year_of_birth_to: :asc) }
   scope :draft_or_active, -> { where(status: [AgeGroup.statuses[:draft], AgeGroup.statuses[:active]]) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
   scope :by_team, ->(team) { joins(:teams).where(teams: { id: team }).distinct }
@@ -34,6 +34,8 @@ class AgeGroup < ApplicationRecord
   PLAYER_COUNT = [4, 5, 6, 7, 8, 9, 11].freeze
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45].freeze
   GENDER = [%w[Man m], %w[Vrouw v], %w[Alle all]].freeze
+
+  before_update :before_update_actions
 
   def not_member?(member)
     TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
@@ -48,7 +50,7 @@ class AgeGroup < ApplicationRecord
   end
 
   def active_players
-    members = Member.active.active_for_season(season).sportlink_player.asc
+    members = Member.active.active_for_season(season).sportlink_player
     filter_for_birth_date_and_gender(members)
   end
 
@@ -57,7 +59,8 @@ class AgeGroup < ApplicationRecord
   end
 
   def active_non_players
-    return AgeGroup.none if year_of_birth_from.blank?
+    # To prevent a huge list of volunteers being shown
+    return Member.none if year_of_birth_from.blank?
 
     members = Member.active.active_for_season(season).sportlink_non_player.asc
     filter_for_birth_date_and_gender(members)
@@ -99,5 +102,12 @@ class AgeGroup < ApplicationRecord
       end
 
       members
+    end
+
+    def before_update_actions
+      return unless training_only
+
+      self.players_per_team = nil
+      self.minutes_per_half = nil
     end
 end

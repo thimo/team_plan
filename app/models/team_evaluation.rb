@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Evaluates the players in a team
 class TeamEvaluation < ApplicationRecord
   acts_as_tenant :tenant
   belongs_to :team, optional: false
@@ -35,18 +36,19 @@ class TeamEvaluation < ApplicationRecord
   end
 
   def send_invites(user)
-    users = Member.by_team(team).team_staff.distinct.map do |member|
-      # Check account
-      User.find_or_create_and_invite(member)
-    end
+    members = Member.by_team(team).team_staff.distinct
 
-    if users.any?
+    if members.any?
+      members.each do |member|
+        # Check account
+        User.find_or_create_and_invite(member)
+      end
       # Don't use `deliver_later`, does not seem to work correctly yet
-      TeamEvaluationMailer.invite(users, self).deliver_now
+      TeamEvaluationMailer.invite(Current.user, members, self).deliver_now
       update(invited_by: user, invited_at: Time.zone.now)
     end
 
-    users.size
+    members.size
   end
 
   def finished?
@@ -77,18 +79,26 @@ class TeamEvaluation < ApplicationRecord
     filled_fields = 0
 
     player_evaluations.each do |player_evaluation|
-      PlayerEvaluation::RATING_FIELDS.each do |rating_field|
-        filled_fields += 1 if player_evaluation[rating_field].present?
+      config["fields"].each_with_index do |_field, index|
+        filled_fields += 1 if player_evaluation["field_#{index + 1}"].present?
       end
       filled_fields += 1 if player_evaluation.advise_next_season.present?
     end
 
-    total_field_count = player_evaluations.size * (PlayerEvaluation::RATING_FIELDS.size + 1)
+    total_field_count = player_evaluations.size * (config["fields"].size + 1)
 
     @calculated_progress = (100 * filled_fields) / total_field_count
   end
 
   def last_modified
     [updated_at, player_evaluations.maximum(:updated_at)].max
+  end
+
+  def config_json
+    config.to_json
+  end
+
+  def config_json=(value)
+    self.config = JSON(value)
   end
 end

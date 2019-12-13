@@ -1,16 +1,17 @@
 - show_prefered_foot ||= false
+- insert_empty_column ||= false
+
 
 tr
   td
-  td 
-  - if show_prefered_foot
-    td 
-      .evaluation-rating.small.lighter
-        = TeamMember.human_attribute_name(:prefered_foot)
-  - PlayerEvaluation::RATING_FIELDS.each do |field_name|
+  - if insert_empty_column
     td
-      .evaluation-rating.small.lighter
-        = PlayerEvaluation.human_attribute_name(field_name)
-  td 
-    .evaluation-rating.small.lighter
-      = PlayerEvaluation.human_attribute_name(:advise_next_season)
+  - if show_prefered_foot
+    td.small.lighter
+      = TeamMember.human_attribute_name(:prefered_foot)
+  - team_evaluation.config["fields"].each do |field|
+    td.small.lighter
+      = field["label"]
+
+  td.small.lighter
+    = PlayerEvaluation.human_attribute_name(:advise_next_season)

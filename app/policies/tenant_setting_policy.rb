@@ -37,8 +37,7 @@ class TenantSettingPolicy < ApplicationPolicy
       :clubdata_urls_afgelastingen,
       :clubdata_urls_club_logos,
       :clubdata_client_id,
-      :fontawesome_version,
-      :fontawesome_integrity,
+      :fontawesome_kit_nr,
       :google_maps_base_url,
       :google_maps_api_key,
       :google_analytics_tracking_id

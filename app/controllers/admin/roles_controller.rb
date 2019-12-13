@@ -2,8 +2,8 @@
 
 module Admin
   class RolesController < Admin::BaseController
-    before_action :create_role, only: [:new, :create]
-    before_action :set_role, only: [:show, :edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:show, :edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -40,13 +40,13 @@ module Admin
 
     private
 
-      def create_role
+      def create_resource
         @role = Role.new
         @role.update(permitted_attributes(@role)) if action_name == "create"
         authorize @role
       end
 
-      def set_role
+      def set_resource
         @role = Role.find(params[:id])
         authorize @role
       end

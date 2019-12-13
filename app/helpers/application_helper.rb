@@ -11,32 +11,6 @@ module ApplicationHelper
     end
   end
 
-  def pnotify_type(message_type)
-    case message_type
-    when "success", "notice"
-      "success"
-    when "alert", "warning"
-      "notice"
-    when "danger", "error"
-      "error"
-    else
-      "info"
-    end
-  end
-
-  def pnotify_duration(message_type)
-    case message_type
-    when "success", "notice"
-      4000
-    when "alert", "warning"
-      8000
-    when "danger", "error"
-      8000
-    else
-      4000
-    end
-  end
-
   def errors_for(model, attribute)
     html_builder = ->(error_message) {
       "<div class='form-text text-muted'>#{model.class.human_attribute_name(attribute)} #{error_message}</div>"
@@ -79,6 +53,6 @@ module ApplicationHelper
   end
 
   def fa_class
-    @fa_class ||= Tenant.setting("fontawesome_integrity").present? ? "fad" : "fa"
+    @fa_class ||= Tenant.setting("fontawesome_kit_nr").present? ? "fad" : "fa"
   end
 end

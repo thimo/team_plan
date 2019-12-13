@@ -1,0 +1,160 @@
+.table {
+  margin-bottom: 0;
+
+  > caption + thead > tr:first-child > {
+    td,
+    th {
+      border-top: 0;
+    }
+  }
+
+  > colgroup + thead > tr:first-child > {
+    td,
+    th {
+      border-top: 0;
+    }
+  }
+
+  > thead:first-child > tr:first-child > {
+    td,
+    th {
+      border-top: 0;
+    }
+  }
+
+  > tbody:first-child > tr:first-child > {
+    td,
+    th {
+      border-top: 0;
+    }
+  }
+
+  td,
+  th {
+    vertical-align: middle;
+  }
+
+  thead {
+    background-color: rgba($black, .025);
+
+    th {
+      border-bottom-width: 1px;
+      border-color: $gray-300;
+    }
+  }
+}
+
+tbody {
+  tr.clickable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f6f8fa;
+    }
+  }
+}
+
+table {
+  &.align-top {
+    td,
+    th {
+      vertical-align: top;
+    }
+  }
+}
+
+.table-xxs {
+  td {
+    height: 1.5rem;
+    padding: 2px;
+
+    &:first-child {
+      padding-left: 1rem;
+    }
+
+    &:last-child {
+      padding-right: 1rem;
+    }
+  }
+
+  th {
+    padding-left: 2px;
+    padding-right: 2px;
+
+    &:first-child {
+      padding-left: 1rem;
+    }
+
+    &:last-child {
+      padding-right: 1rem;
+    }
+  }
+}
+
+th {
+  &.rotate {
+    white-space: nowrap;
+
+    > div {
+      transform: translate(0, 0) rotate(-45deg);
+      width: 30px;
+
+      > span {
+        // border-bottom: 1px solid #ccc;
+        // padding: 5px 10px;
+      }
+    }
+  }
+}
+
+tr.b-t-0 {
+  td {
+    border-top: 0;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .card-body > table {
+    td,
+    th {
+      &:first-child {
+        padding-left: 1rem;
+      }
+
+      &:last-child {
+        padding-right: 1rem;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .table-sm td,
+  .table-sm th {
+    padding: .4rem .5rem;
+  }
+
+  .card-body > table {
+    td,
+    th {
+      &:first-child {
+        padding-left: .75rem;
+      }
+
+      &:last-child {
+        padding-right: .75rem;
+      }
+    }
+  }
+}
+
+tr.align-top {
+  td,
+  th {
+    vertical-align: top !important;
+  }
+}
+
+.table-sticky-header thead {
+  background-color: #f9f9f9;
+}

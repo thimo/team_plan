@@ -6,7 +6,7 @@
   hr
 
   = bootstrap_form_with url: age_group_team_evaluation_bulk_updates_path(@age_group), method: :post do |f|
-    .mb-3
+    .form-group
       .custom-control.custom-checkbox
         input.custom-control-input.team-select-toggle#team_ids[type="checkbox" checked]
         label.custom-control-label.strong[for="team_ids"]
@@ -20,4 +20,19 @@
           custom: true },
           team.id, nil
 
-    = f.submit "Aanmaken en versturen", class: "btn btn-primary"
+    - if @team_evaluation_configs.size.zero?
+      .alert.alert-danger
+        | Teamevaluatie kan niet worden aangemaakt omdat er geen actieve evaluatie configuraties zijn gevonden.
+    - elsif @team_evaluation_configs.size > 1
+      .form-group
+        label[for="team_evaluation_config_id"]
+          | Type teamevaluatie
+        div
+          - @team_evaluation_configs.each_with_index do |config, index|
+            = f.radio_button :team_evaluation_config_id, config.id,
+              label:   config.name,
+              id:      "team_evaluation_config_id_#{config.id}",
+              checked: index.zero?,
+              custom: true
+
+    = f.submit "Aanmaken en versturen", class: "btn btn-primary", disabled: @team_evaluation_configs.size.zero?

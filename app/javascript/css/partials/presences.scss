@@ -1,0 +1,40 @@
+.presence-form {
+  .btn-group {
+    margin-bottom: .5rem;
+    width: 100%;
+  }
+
+  label {
+    &.btn {
+      flex: 1;
+      padding: .5rem;
+    }
+  }
+
+  .checkbox-toggle.m-0 {
+    .form-check {
+      margin-bottom: .25rem;
+      margin-top: .25rem;
+    }
+  }
+}
+
+.presences-dropdown {
+  border: solid 1px #d8e2e7;
+  border-radius: 6px;
+  float: right;
+  max-width: 300px;
+  padding: 10px 16px;
+}
+
+.presences {
+  th {
+    &.rotate {
+      height: 140px;
+
+      div {
+        width: 20px;
+      }
+    }
+  }
+}

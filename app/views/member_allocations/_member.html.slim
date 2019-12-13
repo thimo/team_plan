@@ -11,8 +11,10 @@ td.light.small
         - if (evaluation = member.evaluation_for_team(previous_team)).present?
           span.ml-1[title="Evaluatie #{I18n.l evaluation.team_evaluation.finished_at, format: :date_long}, advies: #{evaluation.advise_next_season}"]
             i.fa[class="#{evaluation.advise_to_icon_class}"]
+            - if evaluation.advise_next_season == "moet hoger"
+              i.fa[class="#{evaluation.advise_to_icon_class}"]
           - if evaluation.remark.present?
-            i.fa-info-circle.blue.ml-1[title="#{evaluation.remark}" class=fa_class]
+            i.fa.fa-info-circle.blue.ml-1[title="#{evaluation.remark}"]
 
   - if (active_team_member = member.active_team_member).present?
     - if (field_positions = active_team_member.field_positions).present?

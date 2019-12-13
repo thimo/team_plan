@@ -18,7 +18,7 @@
         div
           - if policy(team_member).update?
             a [href="" data-toggle="modal" data-target="#teamMemberNew" data-team-member-id="#{team_member.id}" data-member-id="#{member.id}" data-member-name="#{member.name}" title="Verplaatsen naar team"]
-              i.fa-bars.m-1[class=fa_class]
+              i.fa.fa-bars.m-1
           - if policy(team_member).destroy?
             = link_to member_allocation_path(team_member), remote: true, method: :delete, data: { confirm: 'Speler wordt verwijderd uit het team. Doorgaan?' }, title: "Verwijderen uit team"
-              i.fa-times.m-1[class=fa_class]
+              i.fa.fa-times.m-1

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Org
   class MembersController < Org::BaseController
     include SortHelper
@@ -7,6 +5,8 @@ module Org
     before_action :add_breadcrumbs
 
     def index
+      authorize :org, :show_members?
+
       @season = Season.active_season_for_today
       @roles = roles_hash
       @groups = policy_scope(Group).asc

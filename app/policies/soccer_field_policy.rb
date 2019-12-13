@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SoccerFieldPolicy < ApplicationPolicy
   def index?
     @user.role?(Role::BEHEER_SOCCER_FIELDS)
@@ -23,8 +21,7 @@ class SoccerFieldPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope if @user.role?(Role::BEHEER_SOCCER_FIELDS)
-      scope.none
+      scope.all
     end
   end
 end

@@ -4,7 +4,7 @@ class GroupMemberPolicy < ApplicationPolicy
   def create?
     return false if @record&.memberable&.archived? || @record&.group&.archived?
 
-    @user.role?(Role::BEHEER_GROUPS) || @user.role?(Role::GROUP_MEMB_CREATE)
+    @user.role?(Role::BEHEER_GROUPS, @record.memberable) || @user.role?(Role::GROUP_MEMB_CREATE, @record.memberable)
   end
 
   def update?

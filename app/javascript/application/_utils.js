@@ -12,6 +12,7 @@ document.addEventListener("turbolinks:load", () => {
   const scrollPosition = $("[data-scroll-position]").data("scrollPosition")
   if (!!scrollPosition && !!localStorage.getItem(scrollPosition)) {
     $(window).scrollTop(localStorage.getItem(scrollPosition));
+    localStorage.removeItem(scrollPosition);
   }
 });
 
@@ -22,3 +23,13 @@ document.addEventListener("turbolinks:unload", () => {
     localStorage.setItem(scrollPosition, $(window).scrollTop())
   }
 })
+
+const storeScrollPosition = () => {
+  // Store scroll position for pages with data-scroll-position
+  const scrollPosition = $("[data-scroll-position]").data("scrollPosition")
+  if (!!scrollPosition) {
+    localStorage.setItem(scrollPosition, $(window).scrollTop())
+  }
+}
+
+window.storeScrollPosition = storeScrollPosition

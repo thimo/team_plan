@@ -46,7 +46,7 @@ Rails.application.routes.draw do
           resources :notes, only: [:show, :new, :create, :edit, :update, :destroy]
           resources :favorites, only: [:create, :destroy]
           resources :team_member_bulk_updates, only: [:new, :create]
-          resources :team_evaluations, only: [:new, :create, :edit, :update, :destroy]
+          resources :team_evaluations, only: [:edit, :update, :destroy]
           resources :download_team_members, only: [:index]
           resources :todos, only: [:new, :create]
           resources :training_schedules do
@@ -113,6 +113,8 @@ Rails.application.routes.draw do
     namespace :org do
       resources :members, only: [:index]
       resources :seasons, only: [:show]
+      resources :local_teams, only: [:index]
+      resources :comments, only: [:index]
     end
 
     get "intranet" => "intranet/base#show"
@@ -159,6 +161,7 @@ Rails.application.routes.draw do
       resources :play_bans
       resources :play_bans_import, only: [:new, :create]
       resources :tenant_settings, only: [:edit, :update]
+      resources :team_evaluation_configs
     end
   end
 

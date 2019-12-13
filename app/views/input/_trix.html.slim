@@ -1,7 +1,7 @@
 .row.form-group class="#{'has-error' if error?(f.object, field)}"
   label.col-md-3.col-form-label.text[for="#{f.object.class.name.downcase}_#{field.to_s}"]
-    = f.label field, class: 'required'
+    = f.label field
   .col-md-9
-    = f.hidden_field field, id: "x"
-    trix-editor.form-control input="x"
+    = f.hidden_field field, id: field
+    trix-editor.form-control input=field
     = errors_for(f.object, field)

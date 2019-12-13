@@ -32,7 +32,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show_competitions?
-    true
+    !record.age_group.training_only
   end
 
   def show_team?
@@ -48,8 +48,9 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def modify_members?
-    @user.role?(Role::BEHEER_GROUPS) &&
-      @record.persisted? && !@record.archived?
+    return false if @record.new_record? || @record.archived?
+
+    @user.role?(Role::BEHEER_GROUPS, @record) || @user.role?(Role::GROUP_MEMB_CREATE, @record)
   end
 
   def add_members?

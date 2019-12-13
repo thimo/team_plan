@@ -2,8 +2,8 @@
 
 module Admin
   class VersionUpdatesController < Admin::BaseController
-    before_action :create_version_update, only: [:new, :create]
-    before_action :set_version_update, only: [:edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -38,7 +38,7 @@ module Admin
 
     private
 
-      def create_version_update
+      def create_resource
         @version_update = if action_name == "new"
                             VersionUpdate.new(released_at: Time.zone.today)
                           else
@@ -47,7 +47,7 @@ module Admin
         authorize @version_update
       end
 
-      def set_version_update
+      def set_resource
         @version_update = VersionUpdate.find(params[:id])
         authorize @version_update
       end

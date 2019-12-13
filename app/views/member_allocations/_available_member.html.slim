@@ -3,6 +3,6 @@
     td.w-1
       - if policy(TeamMember.new(team: @age_group.teams.first)).create?
         a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{available_member.id}" data-member-name="#{available_member.name}" title="Toevoegen aan team"]
-          i.fa-chevron-left.m-1[class=fa_class]
+          i.fa.fa-chevron-left.m-1
 
     = render "member", member: available_member

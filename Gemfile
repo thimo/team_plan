@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "2.6.3"
+ruby "2.6.5"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
@@ -10,32 +10,32 @@ gem "jbuilder", "~> 2.5"
 # "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved
 gem "jquery-rails"
 gem "pg", "~> 0.18"
-gem "puma", "~> 3.0"
-gem "rails", "6.0"
+gem "puma", "~> 4.0"
+gem "rails", "6.0.1"
 gem "rails-i18n"
 gem "sassc-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker", ">= 4.0.x"
 gem "webpacker-react"
-gem "appsignal"
 
 gem "carrierwave", "~> 1.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
 gem "faker"
-gem "mini_magick", "~> 4.7.0"
+gem "mini_magick"
 gem "rest-client"
 gem "slim-rails"
 
-gem "bootstrap_form",             "~> 4.0.0"
 gem "bootstrap4-kaminari-views"
-gem "breadcrumbs_on_rails",       "~> 3.0.1"
+gem "bootstrap_form", "~> 4.0.0"
+gem "breadcrumbs_on_rails", "~> 3.0.1"
 gem "country_select"
-gem "devise",                     "~> 4.7"
-gem "enum_help",                  "~> 0.0.17"
-gem "figaro",                     "~> 1.1.1"
+gem "devise", "~> 4.7"
+gem "enum_help", "~> 0.0.17"
+gem "figaro", "~> 1.1.1"
+gem "inline_svg"
 gem "kaminari"
-gem "net-ssh",                    "~> 4.1.0"
+gem "net-ssh", "~> 4.1.0"
 
 gem "awesome_print", require: "awesome_print"
 gem "paper_trail"
@@ -63,13 +63,6 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "guard"
   gem "scout_apm" # Disable to improve loading without internet connction
-
-  gem "capistrano",         require: false
-  gem "capistrano-bundler", require: false
-  gem "capistrano-rails",   require: false
-  gem "capistrano-rvm",     require: false
-  gem "capistrano3-nginx",  require: false
-  gem "capistrano3-puma",   require: false
 end
 
 group :development do

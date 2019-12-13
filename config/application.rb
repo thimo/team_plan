@@ -1,7 +1,7 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'csv'
-require 'rails/all'
+require "csv"
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -16,6 +16,7 @@ module TeamPlan
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
 
     config.autoload_paths += %W[#{config.root}/lib]
 
@@ -26,11 +27,15 @@ module TeamPlan
 
     config.generators do |g|
       g.javascript_engine :js
+
+      g.javascripts = false
+      g.stylesheets = false
+      g.helper = false
     end
 
     config.time_zone = "Amsterdam"
 
-    config.assets.paths << Rails.root.join("vendor", "assets", "images")
+    config.assets.paths << Rails.root.join("vendor/assets/images")
     # A bit dirty, but needed to get @coreui's 'node_modules/*' links working
     config.assets.paths << Rails.root
 
@@ -38,8 +43,6 @@ module TeamPlan
 
     # Enable to prevent loading all helpers all the time
     # config.action_controller.include_all_helpers = false
-    config.generators.javascripts = false
-    config.generators.stylesheets = false
 
     console do
       ActiveRecord::Base.connection

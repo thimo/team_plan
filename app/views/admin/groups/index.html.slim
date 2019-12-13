@@ -45,7 +45,7 @@
 
                         - if policy(group_member).destroy?
                           => link_to admin_group_member_path(group_member),  method: :delete, data: { confirm: "#{group_member.member.name} wordt verwijderd uit de groep. Doorgaan?" }, title: "Verwijderen uit groep"
-                            i.fa-times.m-1[class=fa_class]
+                            i.fa.fa-times.m-1
 
                 - else
                   - group.group_members.active.group_by(&:member).sort_by { |member, _gms| member.last_name }.each do |member, gms|

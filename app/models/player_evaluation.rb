@@ -1,19 +1,17 @@
 # frozen_string_literal: true
 
+# Evaluates a single player
 class PlayerEvaluation < ApplicationRecord
-  RATING_FIELDS = %w[behaviour technique handlingspeed insight passes speed locomotion physical endurance
-                     duel_strength].freeze
-  RATING_OPTIONS = [["zeer goed", "9"], %w[goed 8], %w[voldoende 6], %w[matig 5], %w[onvoldoende 4]].freeze
-  ADVISE_NEXT_SEASON_OPTIONS = %w[hoger zelfde lager].freeze
+  ADVISE_NEXT_SEASON_OPTIONS = %w[moet\ hoger kan\ hoger zelfde lager].freeze
 
   acts_as_tenant :tenant
   belongs_to :team_evaluation, touch: true
   belongs_to :team_member, touch: true
   has_paper_trail
 
-  validates :behaviour, :technique, :handlingspeed, :insight, :passes, :speed, :locomotion, :physical, :endurance,
-            :duel_strength, :advise_next_season, :prefered_foot,
+  validates :advise_next_season, :prefered_foot,
             presence: true, if: -> { team_evaluation.enable_validation? && team_member.active? }
+  validate :fields_filled, if: -> { team_evaluation.enable_validation? && team_member.active? }
   # Make sure linked team member has field positions filled in
   validate :team_member_has_field_positions, if: -> { team_evaluation.enable_validation? && team_member.active? }
 
@@ -35,9 +33,13 @@ class PlayerEvaluation < ApplicationRecord
                      }
   scope :not_private, -> { joins(:team_evaluation).where(team_evaluations: { private: false }) }
   scope :public_or_as_team_staff, ->(user) {
-    joins(:team_evaluation)
-      .where("(team_evaluations.private = false and team_members.member_id IN (?)) OR team_evaluations.team_id IN (?)",
-             user.member_ids, user.teams_as_staff.map(&:id))
+    joins(:team_evaluation, team_member: :member)
+      .where("(team_evaluations.private = false and team_members.member_id IN (?)) OR " \
+             "team_evaluations.team_id IN (?) OR " \
+             "team_members.member_id IN (?)",
+             user.member_ids,
+             user.teams_as_staff.pluck(:id),
+             user.members_as_active_staff.pluck(:id))
   }
 
   delegate :draft?, to: :team_evaluation
@@ -50,11 +52,11 @@ class PlayerEvaluation < ApplicationRecord
 
   def advise_to_icon_class
     case advise_next_season
-    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[0]
+    when "hoger", "kan hoger", "moet hoger"
       "fa-arrow-circle-up"
-    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[1]
+    when "zelfde"
       "fa-arrow-circle-right"
-    when PlayerEvaluation::ADVISE_NEXT_SEASON_OPTIONS[2]
+    when "lager"
       "fa-arrow-circle-down"
     end
   end
@@ -71,5 +73,12 @@ class PlayerEvaluation < ApplicationRecord
 
     def team_member_has_field_positions
       errors.add("field_positions", "Team member heeft geen field position") if team_member.field_positions.blank?
+    end
+
+    def fields_filled
+      team_evaluation.config["fields"].each_with_index do |_field, index|
+        field_name = "field_#{index + 1}"
+        errors.add(field_name.to_sym, :blank) if attributes[field_name].blank?
+      end
     end
 end

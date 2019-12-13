@@ -47,7 +47,7 @@
                 th.w-1
                   - if team.present? && policy(TeamMember.new(team: team)).create?
                     a [href="" data-toggle="modal" data-target="#teamMemberNew" data-member-id="#{members.map(&:id).join(',')}" data-member-name="#{team.name}" title="Toevoegen aan team"]
-                      i.fa-chevron-left.m-1[class=fa_class]
+                      i.fa.fa-chevron-left.m-1
 
                 th[colspan="2"]
                   = team.name if team.present?

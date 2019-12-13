@@ -77,6 +77,10 @@ class User < ApplicationRecord
     Team.for_members(members).active.for_active_season.distinct
   end
 
+  def active_teams_as_staff
+    Team.for_members(members).active.as_not_player.for_active_season.distinct
+  end
+
   def active_teams_as_group_member
     Team.for_group_members(members).active.for_active_season.distinct
   end
@@ -86,11 +90,16 @@ class User < ApplicationRecord
   end
 
   def teams_as_staff
-    Team.for_members(members).as_not_player.distinct.asc
+    Team.for_members(members).as_not_player.distinct
   end
 
   def teams_as_staff_in_season(season)
-    Team.for_members(members).as_not_player.for_season(season).distinct.asc
+    Team.for_members(members).as_not_player.for_season(season).distinct
+  end
+
+  def members_as_active_staff
+    team_ids = active_teams_as_staff.pluck(:id)
+    Member.by_team(team_ids)
   end
 
   # NOTE: can't rename this to `member?` because of conflict with enum role
@@ -104,7 +113,7 @@ class User < ApplicationRecord
   end
 
   def team_staff_for?(record)
-    team_id = team_id_for(record, true)
+    team_id = team_id_for(record, false)
     members.by_team(team_id).team_staff.size.positive?
   end
 
@@ -148,21 +157,6 @@ class User < ApplicationRecord
     self.middle_name = member.middle_name
     self.last_name = member.last_name
     self.email = member.email
-  end
-
-  def self.find_or_create_and_invite(member)
-    user = User.where(email: member.email).first_or_initialize(
-      password: (generated_password = User.password),
-      first_name: member.first_name, middle_name: member.middle_name, last_name: member.last_name
-    )
-
-    if user.new_record?
-      user.skip_confirmation!
-      user.save
-      user.send_new_account(generated_password)
-    end
-
-    user
   end
 
   def setting(name)
@@ -209,14 +203,6 @@ class User < ApplicationRecord
     set_setting(:active_comments_tab, tab) if tab.present?
   end
 
-  def self.deactivate_for_inactive_members
-    User.active.each(&:update_members)
-  end
-
-  def self.activate_for_active_members
-    User.archived.each(&:update_members)
-  end
-
   def after_confirmation
     update_members
   end
@@ -247,6 +233,29 @@ class User < ApplicationRecord
 
   def show_evaluations?
     admin? || role?(Role::MEMBER_SHOW_EVALUATIONS) || indirect_role?(Role::MEMBER_SHOW_EVALUATIONS)
+  end
+
+  def self.find_or_create_and_invite(member)
+    user = User.where(email: member.email).first_or_initialize(
+      password: (generated_password = User.password),
+      first_name: member.first_name, middle_name: member.middle_name, last_name: member.last_name
+    )
+
+    if user.new_record?
+      user.skip_confirmation!
+      user.save
+      user.send_new_account(generated_password)
+    end
+
+    user
+  end
+
+  def self.deactivate_for_inactive_members
+    User.active.each(&:update_members)
+  end
+
+  def self.activate_for_active_members
+    User.archived.each(&:update_members)
   end
 
   private
@@ -295,7 +304,9 @@ class User < ApplicationRecord
                                     when [Team]
                                       record.age_group_id # Included here to make sure it works for new Team objects
                                     else
-                                      AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+                                      ids = AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+                                      ids = record.suggested_age_groups.pluck(:id) if ids.blank? && record.is_a?(Member)
+                                      ids
                                     end
     end
 

@@ -1,15 +1,31 @@
-li.nav-item
-  = link_to org_members_path, class: "nav-link #{'active' if current_page?(org_members_path)}" do
-    i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
-    | Actieve leden
+- if policy(:org).show_members?
+  li.nav-item
+    = link_to org_members_path, class: "nav-link #{'active' if current_page?(org_members_path)}" do
+      i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
+      | Actieve leden
 
-- seasons = policy_scope(Season).all.desc
-- if seasons.size.positive?
+- if policy(:org).show_seasons?
+  - seasons = policy_scope(Season).all.desc
+  - if seasons.size.positive?
+    li.nav-title
+      | Teamleiding
+
+    - seasons.each do |season|
+      li.nav-item
+        = link_to [:org, season], class: "nav-link #{'active' if current_page?([:org, season])}" do
+          i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
+          = season.name
+
+- if policy(:org).show_local_teams? || policy(:org).show_comments?
   li.nav-title
-    | Teamleiding
-
-  - seasons.each do |season|
+    | Overig
+  - if policy(:org).show_local_teams?
     li.nav-item
-      = link_to [:org, season], class: "nav-link #{'active' if current_page?([:org, season])}" do
-        i.fa-fw.fa-sitemap.nav-icon[class=fa_class]
-        = season.name
+      = link_to org_local_teams_path, class: "nav-link #{'active' if current_page?(org_local_teams_path)}" do
+        i.fa-fw.fa-users.nav-icon[class=fa_class]
+        | Lokale teams
+    - if policy(:org).show_comments? && policy(Comment).index?
+      li.nav-item
+        = link_to org_comments_path, class: "nav-link #{'active' if current_page?(org_comments_path)}" do
+          i.fa-fw.fa-comments.nav-icon[class=fa_class]
+          | Opmerkingen

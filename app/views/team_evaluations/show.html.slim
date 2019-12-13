@@ -24,17 +24,11 @@
 
     .card-body.p-0.table-responsive
       table.table.table-xxs data={ controller: "table-sticky-header" }
-        thead
-          tr
-            th
-              div
-                span
-                  | Speler
-            = render "player_evaluations/th_columns"
+        = render "player_evaluations/thead", team_evaluation: @team_evaluation, insert_empty_column: true
 
         tbody
           - @team_evaluation.player_evaluations.includes_member.each_with_index do |evaluation, index|
-            = render "inbetween_header" if index > 0 && index % 4 == 0
+            = render("inbetween_header", team_evaluation: @team_evaluation, insert_empty_column: true) if index > 0 && index % 4 == 0
 
             tr
               td.member-name[class="#{'line-through' if evaluation.team_member.inactive_for?(@team_evaluation)}", rowspan="2"]

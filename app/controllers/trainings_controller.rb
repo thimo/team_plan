@@ -63,7 +63,7 @@ class TrainingsController < ApplicationController
     end
 
     def training_params
-      params.require(:training).permit(:body, :remark, :team_id, :started_at, :ended_at, :start_time, :end_time)
+      params.require(:training).permit(:body, :team_id, :started_at, :ended_at, :start_time, :end_time)
     end
 
     def add_breadcrumbs

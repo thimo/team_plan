@@ -2,6 +2,14 @@ require:
   - rubocop-performance
   - rubocop-rails
 
+AllCops:
+  TargetRubyVersion: 2.6.5
+  Exclude:
+    - 'app/views/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+
 Rails:
   Enabled: true
 
@@ -9,7 +17,6 @@ Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
 
 Style/Documentation:
-
   Include:
     - app/models/**/*
     - lib/**/*

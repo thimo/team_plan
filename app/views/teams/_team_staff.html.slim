@@ -10,6 +10,10 @@
           i.fa-user[class=fa_class]
 
   .card-body.table-responsive.p-0
-    table.table.table-sm.tr-links
-      - @staff.each do |member, team_members|
-        = render 'member', member: member, team_members: team_members
+    - if @staff.any?
+      table.table.table-sm.tr-links
+        - @staff.each do |member, team_members|
+          = render 'member', member: member, team_members: team_members
+    - else
+      .p-3
+        i Er is nog geen teamleiding toegevoegd

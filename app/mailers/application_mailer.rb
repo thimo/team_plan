@@ -4,6 +4,8 @@ class ApplicationMailer < ActionMailer::Base
   include DefaultUrlOptions
   layout "mailer"
 
+  before_action { @salutation_names = Tenant.setting("application_contact_name") }
+
   ActionMailer::Base.register_observer(::MailLoggerObserver)
 
   private

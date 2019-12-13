@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 module Admin
   class SoccerFieldsController < Admin::BaseController
-    before_action :create_soccer_field, only: [:new, :create]
-    before_action :set_soccer_field, only: [:edit, :update, :destroy]
+    before_action :create_resource, only: [:new, :create]
+    before_action :set_resource, only: [:edit, :update, :destroy]
     before_action :add_breadcrumbs
 
     def index
@@ -38,7 +36,7 @@ module Admin
 
     private
 
-      def create_soccer_field
+      def create_resource
         @soccer_field = if action_name == "new"
                           SoccerField.new
                         else
@@ -47,7 +45,7 @@ module Admin
         authorize @soccer_field
       end
 
-      def set_soccer_field
+      def set_resource
         @soccer_field = SoccerField.find(params[:id])
         authorize @soccer_field
       end

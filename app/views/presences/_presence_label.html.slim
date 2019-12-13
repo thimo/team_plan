@@ -1,14 +1,15 @@
 - team ||= parent.team
 
-- if policy(parent).show_presences? && (present_size = parent.present_size_for_label(team)) > 0
+- if policy(parent).show_presences?
+  - present_size = parent.present_size_for_label(team)
   - if policy(parent).update_presences?
     a.presences-toggle.dropdown-toggle.badge.badge-pill.badge-secondary.p-2[
       tabindex="0"
       id="#{parent.model_name.singular}-#{parent.id}-presence-count"
       data-content-url="#{url_for [parent, :presences, team: team]}"
       data-target-id="presences-#{parent.model_name.singular}-#{parent.id}"]
-      = present_size
+      = present_size.negative? ? tag.i(class: "fa fa-question") : present_size
 
-  - else
+  - elsif present_size.positive?
     .badge.badge-pill.badge-secondary[title="Aanwezig"]
       = present_size

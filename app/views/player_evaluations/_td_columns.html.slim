@@ -5,9 +5,11 @@ td[rowspan="2"]
   .lighter.small
     = evaluation.team_member.prefered_foot
 
-- PlayerEvaluation::RATING_FIELDS.each do |field_name|
+- (config = evaluation.team_evaluation.config)["fields"].each_with_index do |field, index|
   td
-    .evaluation-rating.btn[data-evaluation-value="#{evaluation[field_name]}" title="#{PlayerEvaluation.human_attribute_name(field_name)}"]
-      = PlayerEvaluation.human_value_name_for_rating(evaluation[field_name])
+    - field_value = evaluation["field_#{index + 1}"]
+    .evaluation-rating.btn[data-evaluation-value=field_value title="#{field["label"]}"]
+      = config.dig("answers", field["answers"], field_value)
+
 td.advise-next-season
   = evaluation.advise_next_season

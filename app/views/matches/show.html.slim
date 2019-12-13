@@ -1,5 +1,6 @@
 - provide(:title, @match.title)
 - provide(:subtitle, @match.competition.competitiesoort) unless @match.toernooi?
+- show_presences = policy(@match).show_presences? && @presences.present? && policy(@presences.first).update?
 
 - content_for :action_buttons
   - if policy(@match).update?
@@ -18,7 +19,7 @@ section
     li.nav-item
       a.nav-link[href="?tab=match" class="#{'active' if @active_tab == 'match'}"]
         = @match.type_name.capitalize
-    - if @presences.present? && policy(@presences.first).update?
+    - if show_presences
       li.nav-item
         a.nav-link[href="?tab=presences" class="#{'active' if @active_tab == 'presences'}"]
           | Aanwezig
@@ -32,7 +33,7 @@ section
   .tab-content
     .tab-pane.active.show
       = render "tab_match" if @active_tab == 'match' && policy(@match).show_match?
-      = render "tab_presences" if @active_tab == 'presences' && policy(@match).show_presences? && @presences.present? && policy(@presences.first).update?
+      = render "tab_presences" if @active_tab == 'presences' && show_presences
       = render "tab_address" if @active_tab == 'address' && policy(@match).show_address? && @match.adres.present?
 
 = render "shared/versions", parent: @match

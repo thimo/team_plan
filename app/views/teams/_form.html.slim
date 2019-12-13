@@ -2,9 +2,10 @@
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_field :name, autofocus: true, help: team_name_help(@team)
-  = f.select :division, Team::DIVISION_OPTIONS, include_blank: "-- Selecteer de klasse"
-  = f.select :players_per_team, AgeGroup::PLAYER_COUNT, include_blank: "-- Selecteer het standaard aantal veldspelers", help: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.players_per_team})"
-  = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF, include_blank: "-- Selecteer het aantal speelminuten per wedstrijdhelft", help: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.minutes_per_half})"
+  - unless @team.age_group.training_only
+    = f.select :division, Team::DIVISION_OPTIONS, include_blank: "-- Selecteer de klasse"
+    = f.select :players_per_team, AgeGroup::PLAYER_COUNT, include_blank: "-- Selecteer het standaard aantal veldspelers", help: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.players_per_team})"
+    = f.select :minutes_per_half, AgeGroup::MINUTES_PER_HALF, include_blank: "-- Selecteer het aantal speelminuten per wedstrijdhelft", help: "Indien afwijkend van leeftijdsgroep (#{@team.age_group.minutes_per_half})"
   = f.text_area :remark
 
   - if policy(@team).set_status?

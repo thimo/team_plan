@@ -1,20 +1,29 @@
 - show_commentable_name = parent != comment.commentable
+- precise_date ||= false
+- show_comment_type ||= false
 
-- cache [comment, show_commentable_name]
-  div
-    .d-flex.w-100.justify-content-between
-      .strong
+div
+  .d-flex.w-100.justify-content-between
+    div
+      span.strong
         = comment.user.name
-      .small.light
+      - if show_comment_type
+        span.small.pl-3.light
+          = comment.comment_type_i18n
+    .small.light
+      - if precise_date
+        span
+          = l(comment.created_at, format: :long)
+      - else
         span[title="#{l comment.created_at, format: :long}"]
           = time_ago_in_words(comment.created_at)
           |  geleden
-        - if policy(comment).update?
-          = link_to edit_comment_path(comment), title: "Aanpassen", class: "pl-2"
-            i.fa-pencil-alt.lighter[class=fa_class]
+      - if policy(comment).update?
+        = link_to edit_comment_path(comment), title: "Aanpassen", class: "pl-2"
+          i.fa-pencil-alt.lighter[class=fa_class]
 
-    div
-      - if show_commentable_name
-        div.strong.float-left.pr-2
-          = link_to comment.commentable.name, comment.commentable
-      = markdown(comment.body).html_safe
+  div
+    - if show_commentable_name
+      div.strong.float-left.pr-2
+        = link_to comment.commentable.name, comment.commentable
+    = markdown(comment.body).html_safe
