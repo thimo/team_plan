@@ -1,0 +1,26 @@
+@media print {
+  .app-footer,
+  .breadcrumb,
+  .card-header,
+  .side-menu,
+  .sidebar,
+  .site-header {
+    display: none;
+  }
+
+  .container-fluid,
+  .main .container-fluid,
+  .page-content {
+    padding: 0;
+  }
+
+  .header-fixed .app-body,
+  .main {
+    margin: 0 !important;
+  }
+
+  @page {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
