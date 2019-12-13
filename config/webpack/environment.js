@@ -15,6 +15,8 @@ environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
   })
 )
 environment.plugins.prepend("CleanWebpackPlugin", new CleanWebpackPlugin());
+
+// Add less loader for bootstrap-datepicker
 environment.loaders.append('less', {
     test: /\.less$/,
     use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
