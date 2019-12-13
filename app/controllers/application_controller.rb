@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
     def invalid_auth_token
-      flash_message(:danger, "Je hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer.")
+      flash_message(:danger, "Je (mogelijk) hebt een verouderde versie van de pagina gebruikt, probeer het nog een keer.")
       redirect_to back_url
     end
 
