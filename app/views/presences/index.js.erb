@@ -1,10 +1,2 @@
-$("#presences-<%= @parent.model_name.singular %>-<%= @parent.id %>").html("<%= j render('index', presences: @presences, compact: true) %>")
-
-$('form[data-behavior="autosave"]').each((index, form) => {
-  autosaveForm(form)
-  autosize($('textarea'))
-  // Initially hide extra fields
-  $('.presences-dropdown .extra_fields').hide()
-})
-
+$("#presences-<%= @parent.model_name.singular %>-<%= @parent.id %>").html(html)
 $('#<%= @parent.model_name.singular %>-<%= @parent.id %>-presence-count').html("<%= @presences.present.count %>")

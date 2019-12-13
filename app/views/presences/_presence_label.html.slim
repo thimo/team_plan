@@ -3,12 +3,11 @@
 - if policy(parent).show_presences?
   - present_size = parent.present_size_for_label(team)
   - if policy(parent).update_presences?
-    a.presences-toggle.dropdown-toggle.badge.badge-pill.badge-secondary.p-2[
-      tabindex="0"
-      id="#{parent.model_name.singular}-#{parent.id}-presence-count"
-      data-content-url="#{url_for [parent, :presences, team: team]}"
-      data-target-id="presences-#{parent.model_name.singular}-#{parent.id}"]
-      = present_size.negative? ? tag.i(class: "fa fa-question") : present_size
+    .dropdown data={ controller: 'dynamic-dropdown', 'dynamic-dropdown-url': url_for([parent, :presences, team: team]) }
+      - id = "#{parent.model_name.singular}-#{parent.id}-presence-count"
+      button.btn.btn-sm.btn-secondary.dropdown-toggle[id=id type="button" data={ toggle: "dropdown", action: "dynamic-dropdown#loadContent", target: 'dynamic-dropdown.button' } aria-haspopup="true" aria-expanded="false"]
+        = present_size.negative? ? tag.i(class: "fa fa-question") : present_size
+      .dropdown-menu.dropdown-menu-right.p-2[aria-labelledby=id data={ target: 'dynamic-dropdown.dropdown' }]
 
   - elsif present_size.positive?
     .badge.badge-pill.badge-secondary[title="Aanwezig"]
