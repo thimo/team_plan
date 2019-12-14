@@ -64,6 +64,3 @@ tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through
   - if include_presences
     td.py-1.pl-0.w-1.nowrap.align-middle.strong.text-center
       = render "presences/presence_label", parent: match, team: team
-
-- if include_presences
-  = render "presences/presences_row", parent: match, team: team
