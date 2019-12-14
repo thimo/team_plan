@@ -19,12 +19,10 @@
   }
 }
 
-.presences-dropdown {
-  border: solid 1px #d8e2e7;
-  border-radius: 6px;
-  float: right;
-  max-width: 300px;
-  padding: 10px 16px;
+.presence-dropdown {
+  .dropdown-menu {
+    min-width: 15rem;
+  }
 }
 
 .presences {

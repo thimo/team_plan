@@ -5,7 +5,7 @@
   .presence-form[id="presence-#{presence.id}" data={ controller: "form", 'form-compact': compact }]
     = bootstrap_form_for presence, html: { class: 'row' }, data: { target: 'form.form' }, remote: true do |f|
       = hidden_field_tag :compact, compact, id: nil
-      div[class="#{compact ? 'col-12' : 'col-md-4'}"]
+      .d-flex.justify-content-between[class="#{compact ? 'col-12' : 'col-md-4'}"]
         - label = "#{presence.member.name} #{'<i class="fa fa-medkit p-1 pl-2 red"></i>' if presence.member.injured?}".html_safe
         - label += " <span class=\"lighter\">(#{presence.member.active_team.name})</span>".html_safe if !presence.own_player && presence.member.active_team.present?
         .checkbox-toggle[class="#{'m-0 mb-1' if compact}"]
@@ -15,6 +15,9 @@
             label_class: "#{'light line-through' unless presence.present?}",
             custom: true,
             data: { action: 'form#submit' }
+        - if hide_extra_fields
+          a data={ action: 'form#submit' }
+            i.fa.fa-caret-down.p-1.pl-2
       - unless hide_extra_fields
         .mb-1[class="#{compact ? 'col-12' : 'col-md-2'}"]
           - if presence.is_present?
