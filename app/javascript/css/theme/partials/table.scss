@@ -113,17 +113,15 @@ tr.b-t-0 {
   }
 }
 
-@include media-breakpoint-up(sm) {
-  .card-body > table {
-    td,
-    th {
-      &:first-child {
-        padding-left: 1rem;
-      }
+.card-body > table {
+  td,
+  th {
+    &:first-child {
+      padding-left: .5rem;
+    }
 
-      &:last-child {
-        padding-right: 1rem;
-      }
+    &:last-child {
+      padding-right: .5rem;
     }
   }
 }
@@ -132,19 +130,6 @@ tr.b-t-0 {
   .table-sm td,
   .table-sm th {
     padding: .4rem .5rem;
-  }
-
-  .card-body > table {
-    td,
-    th {
-      &:first-child {
-        padding-left: .75rem;
-      }
-
-      &:last-child {
-        padding-right: .75rem;
-      }
-    }
   }
 }
 

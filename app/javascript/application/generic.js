@@ -6,14 +6,10 @@ document.addEventListener("turbolinks:load", () => {
   // $('.sidebar').sidebar();
   // $('.aside-menu')['aside-menu']();
 
-  // Auto-size all textarea's
-  autosize($('textarea'));
+  // Update autosize when switching tabs
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    autosize.update($('textarea'))
+    autosize.update(document.querySelectorAll('textarea'))
   })
-  // After initial page load, textarea's no longer properly size. This 'fixes' it.
-  // Behaviour difference can be seen between Cmd-Shift-R and Cmd-R reloads
-  setTimeout(function() { autosize.update(document.querySelectorAll('textarea')); }, 50)
 
   // Initialize date pickers
   $('[data-provide="datepicker"]').datepicker();
@@ -30,7 +26,8 @@ document.addEventListener("turbolinks:load", () => {
     if (links.length > 0) {
       $(tr).on('click', function(event) {
         // Only execute if clicked on anything else in table row
-        if ($.inArray(event.target.tagName.toLowerCase(), ['a', 'i', 'button', 'input', 'path']) < 0) {
+        if ($.inArray(event.target.tagName.toLowerCase(), ['a', 'i', 'button', 'input', 'path']) < 0 &&
+              $(event.target).parents('.dropdown').length == 0 ) {
           document.location = links[0].href;
         }
       });

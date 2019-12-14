@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PresencesController < ApplicationController
+  respond_to :json
+  
   before_action :load_presentable, only: [:new, :create]
   before_action :create_presence, only: [:new, :create]
   before_action :set_parent, only: [:index]
@@ -9,7 +11,7 @@ class PresencesController < ApplicationController
 
   def index
     @team = Team.find(params[:team]) if params[:team]
-    @presences = policy_scope(@parent.find_or_create_presences(@team)).asc
+    @presences = policy_scope(@parent.find_or_create_presences(@team))
   end
 
   def new; end

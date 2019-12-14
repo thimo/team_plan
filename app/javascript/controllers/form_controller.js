@@ -14,6 +14,11 @@ export default class extends Controller {
     this.bindFields()
     this.addEventListeners()
     bsCustomFileInput.init()
+
+    autosize(this.element.querySelectorAll('textarea'));
+    // After initial page load, textarea's no longer properly size. This 'fixes' it.
+    // Behaviour difference can be seen between Cmd-Shift-R and Cmd-R reloads
+    setTimeout(() => { autosize.update(this.element.querySelectorAll('textarea')); }, 50)
   }
 
   disconnect() {

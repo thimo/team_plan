@@ -9,16 +9,16 @@
     color: $blue;
   }
 
-  .app-header,
-  .app-footer {
+  .app-footer,
+  .app-header {
     color: white;
     background: $black;
     border-color: $gray-900;
   }
 
-  .navbar-brand h1.navbar-brand-full img,
+  .app-header .navbar-toggler-icon,
   .devise .app-logo,
-  .app-header .navbar-toggler-icon {
+  .navbar-brand h1.navbar-brand-full img {
     filter: invert(1);
   }
 
@@ -30,8 +30,8 @@
     }
   }
 
-  .modal-header,
-  .modal-footer {
+  .modal-footer,
+  .modal-header {
     border-color: rgba(255, 255, 255, 0.2);
   }
 
@@ -52,36 +52,29 @@
     color: $gray-300;
   }
 
-  .navbar-nav .nav-link:hover,
-  .navbar-nav .nav-link:focus {
+  .navbar-nav .nav-link:focus,
+  .navbar-nav .nav-link:hover {
     color: $white;
   }
 
-  .navbar-nav .open > .nav-link,
-  .navbar-nav .open > .nav-link:hover,
-  .navbar-nav .open > .nav-link:focus,
   .navbar-nav .active > .nav-link,
-  .navbar-nav .active > .nav-link:hover,
   .navbar-nav .active > .nav-link:focus,
-  .navbar-nav .nav-link.open,
-  .navbar-nav .nav-link.open:hover,
-  .navbar-nav .nav-link.open:focus,
+  .navbar-nav .active > .nav-link:hover,
   .navbar-nav .nav-link.active,
+  .navbar-nav .nav-link.active:focus,
   .navbar-nav .nav-link.active:hover,
-  .navbar-nav .nav-link.active:focus {
+  .navbar-nav .nav-link.open,
+  .navbar-nav .nav-link.open:focus,
+  .navbar-nav .nav-link.open:hover,
+  .navbar-nav .open > .nav-link,
+  .navbar-nav .open > .nav-link:focus,
+  .navbar-nav .open > .nav-link:hover {
     color: $gray-200;
   }
 
-  .card {
-    // background-color: $black;
-    // border-color: $gray-800;
-    // border-top-color: $blue;
-  }
+  .card {}
 
-  .card-header {
-    // background-color: $gray-950;
-    // border-color: $gray-900;
-  }
+  .card-header {}
 
   .card-body {
     background-color: $black;
@@ -113,18 +106,25 @@
       }
     }
 
-    .nav-link:hover,
-    .nav-link:focus {
+    .nav-link:focus,
+    .nav-link:hover {
       border-color: $gray-800;
     }
+  }
+
+  .dropdown-menu {
+    // background-color: $black;
+    background-color: $gray-950;
+    border-color: $gray-800;
+    color: $white;
   }
 
   .table {
     color: $white;
   }
 
-  .table th,
   .table td,
+  .table th,
   .table thead th {
     border-color: $gray-900;
   }
@@ -139,8 +139,8 @@
   }
 
   .table-success,
-  .table-success > th,
-  .table-success > td {
+  .table-success > td,
+  .table-success > th {
     background-color: darken($green, 10%);
   }
 
@@ -152,13 +152,9 @@
     background-color: $black;
   }
 
-  .list-group-item-action:hover,
-  .list-group-item-action:focus {
+  .list-group-item-action:focus,
+  .list-group-item-action:hover {
     background-color: $gray-950;
-  }
-
-  .presences-dropdown {
-    border-color: $gray-700 !important;
   }
 
   .page-link {
