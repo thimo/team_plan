@@ -115,6 +115,7 @@ nl:
         member_id: Teamgenoot
         field_positions: Veldpositie
         field_position_ids: Veldpositie
+        field_positions_thickened: Veldpositie (ingedikt)
         prefered_foot: Voorkeursbeen
         status: Status
         initial_status: Activeren

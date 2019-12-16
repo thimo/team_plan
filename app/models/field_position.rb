@@ -15,6 +15,12 @@ class FieldPosition < ApplicationRecord
 
   default_scope { order(position: :asc) }
 
+  def top_line_parent
+    return self if line_parent.blank?
+
+    line_parent.top_line_parent
+  end
+
   def self.options_for_select
     all.collect do |pos|
       name = pos.name.to_s

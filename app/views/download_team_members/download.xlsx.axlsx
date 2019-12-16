@@ -23,6 +23,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
   columns << Member.human_attribute_name(:member_since) if @export_columns.include? "member_since"
   columns << I18n.t(:previous_team) if @export_columns.include? "previous_team"
   columns << TeamMember.human_attribute_name(:field_positions) if @export_columns.include? "field_positions"
+  columns << TeamMember.human_attribute_name(:field_positions_thickened) if @export_columns.include? "field_positions_thickened"
   columns << TeamMember.human_attribute_name(:prefered_foot) if @export_columns.include? "prefered_foot"
   columns << PlayerEvaluation.human_attribute_name(:advise_next_season) if @export_columns.include? "advise_next_season"
 
@@ -53,6 +54,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
         columns << team_member.member.teams_for_season(@previous_season).as_player.distinct.map(&:name).join(",")
       end
       columns << (team_member.field_positions.map(&:name) * ", ") if @export_columns.include? "field_positions"
+      columns << (team_member.field_positions.map(&:top_line_parent).uniq.map(&:name) * ", ") if @export_columns.include? "field_positions_thickened"
       columns << team_member.prefered_foot if @export_columns.include? "prefered_foot"
       columns << team_member.member.last_evaluation&.advise_next_season if @export_columns.include? "advise_next_season"
 
@@ -80,6 +82,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
       columns << member.member_since if @export_columns.include? "member_since"
       columns << "" if @export_columns.include? "previous_team" && @previous_season.present?
       columns << nil if @export_columns.include? "field_positions"
+      columns << nil if @export_columns.include? "field_positions_thickened"
       columns << nil if @export_columns.include? "prefered_foot"
       columns << nil if @export_columns.include? "advise_next_season"
 
