@@ -1,21 +1,22 @@
-= bootstrap_form_for [:admin, @version_update], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
-  = f.alert_message t("bootstrap_form.check_errors")
+div data={ controller: 'form' }
+  = bootstrap_form_for [:admin, @version_update], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", data: { target: 'form.form' } do |f|
+    = f.alert_message t("bootstrap_form.check_errors")
 
-  = f.text_field :name
-  = f.text_area :body, help: 'Gebruik <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="_new">Markdown</a> bij het opmaken van de tekst'.html_safe
-  div data-controller="clickable-append"
-    = f.text_field :released_at, date_picker_options
-  = f.collection_radio_buttons :for_role, VersionUpdate.for_roles_i18n, :first, :second
+    = f.text_field :name
+    = f.text_area :body, help: 'Gebruik <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="_new">Markdown</a> bij het opmaken van de tekst'.html_safe
+    div data-controller="clickable-append"
+      = f.text_field :released_at, date_picker_options
+    = f.collection_radio_buttons :for_role, VersionUpdate.for_roles_i18n, :first, :second
 
-  .row
-    .col-sm-9.offset-sm-3
-      .d-flex.justify-content-between
-        div
-          = f.submit "Opslaan", class: 'btn btn-primary'
-          = link_to "Annuleren", [:admin, :version_updates], class: 'btn btn-light'
-        div
-          - if policy(@version_update).destroy?
-            = link_to "Verwijderen", admin_version_update_path(@version_update),
-                                     method: :delete,
-                                     data: { confirm: 'Versie wordt verwijderd. Doorgaan?' },
-                                     class: 'btn btn-danger'
+    .row
+      .col-sm-9.offset-sm-3
+        .d-flex.justify-content-between
+          div
+            = f.submit "Opslaan", class: 'btn btn-primary'
+            = link_to "Annuleren", [:admin, :version_updates], class: 'btn btn-light'
+          div
+            - if policy(@version_update).destroy?
+              = link_to "Verwijderen", admin_version_update_path(@version_update),
+                                       method: :delete,
+                                       data: { confirm: 'Versie wordt verwijderd. Doorgaan?' },
+                                       class: 'btn btn-danger'
