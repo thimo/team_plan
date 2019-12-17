@@ -6,7 +6,7 @@
     .presence-dropdown.dropdown data={ controller: 'dynamic-dropdown', 'dynamic-dropdown-url': url_for([parent, :presences, team: team]) }
       - id = "#{parent.model_name.singular}-#{parent.id}-presence-count"
       button.btn.btn-sm.btn-secondary.dropdown-toggle[id=id type="button" data={ toggle: "dropdown", action: "dynamic-dropdown#loadContent", target: 'dynamic-dropdown.button' } aria-haspopup="true" aria-expanded="false"]
-        = present_size.negative? ? tag.i(class: "fa fa-question") : present_size
+        = present_size.negative? ? "?" : present_size
       .dropdown-menu.dropdown-menu-right.p-2[aria-labelledby=id data={ target: 'dynamic-dropdown.dropdown' }]
         .text-center
           i.fas.fa-spinner.fa-spin.fa-lg.lighter
