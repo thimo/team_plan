@@ -86,7 +86,7 @@ class TeamEvaluationsController < ApplicationController
 
     def team_evaluation_params
       params.require(:team_evaluation)
-            .permit(:config_json,
+            .permit(:config_json, :hide_remark_from_player,
                     player_evaluations_attributes: [:id, :team_member_id, :prefered_foot, :advise_next_season,
                                                     :field_1, :field_2, :field_3, :field_4, :field_5,
                                                     :field_6, :field_7, :field_8, :field_9, :field_10,

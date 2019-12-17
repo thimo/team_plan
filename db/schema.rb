@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_193014) do
+ActiveRecord::Schema.define(version: 2019_12_17_145730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -460,6 +460,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_193014) do
     t.boolean "private", default: false
     t.bigint "tenant_id"
     t.jsonb "config"
+    t.boolean "hide_remark_from_player", default: false
     t.index ["finished_by_id"], name: "index_team_evaluations_on_finished_by_id"
     t.index ["invited_by_id"], name: "index_team_evaluations_on_invited_by_id"
     t.index ["team_id"], name: "index_team_evaluations_on_team_id"

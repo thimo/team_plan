@@ -119,6 +119,8 @@ nl:
         prefered_foot: Voorkeursbeen
         status: Status
         initial_status: Activeren
+      team_evaluation:
+        hide_remark_from_player: Verberg opmerkingen voor spelers/ouders
       team_evaluation_config:
         name: Naam
         config: JSON configuratie

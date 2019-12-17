@@ -18,8 +18,9 @@
                   = l evaluation.team_evaluation.finished_at, format: :date_long
               = render "player_evaluations/td_columns", evaluation: evaluation
             tr
-              td.light.b-t-0[colspan="11"]
-                = evaluation.remark
+              - if policy(evaluation).show_remark?
+                td.light.b-t-0[colspan="11"]
+                  = evaluation.remark
 
     - else
       .p-3

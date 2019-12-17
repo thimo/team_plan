@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
 class PlayerEvaluationPolicy < ApplicationPolicy
-  def index?
-    @user.admin? ||
-      @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record) ||
-      @user.team_staff_for?(@record)
-  end
+  # Player Evaluation controller does not implement this action. Remove?
+  # def index?
+  #   @user.admin? ||
+  #     @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record) ||
+  #     @user.team_staff_for?(@record)
+  # end
 
-  def show?
-    @user.admin? ||
-      @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record) ||
-      @user.team_staff_for?(@record)
-  end
+  # Player Evaluation controller does not implement this action. Remove?
+  # def show?
+  #   @user.admin? ||
+  #     @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record) ||
+  #     @user.team_staff_for?(@record)
+  # end
 
   def create?
     return false unless @record.team_evaluation.active?
@@ -29,6 +31,13 @@ class PlayerEvaluationPolicy < ApplicationPolicy
     return false if @record.team_evaluation.finished_at.blank?
 
     @user.role?(Role::MEMBER_CREATE_EVALUATIONS, @record)
+  end
+
+  def show_remark?
+    !record.team_evaluation.hide_remark_from_player ||
+      @user.admin? ||
+      @user.role?(Role::MEMBER_SHOW_EVALUATIONS, @record) ||
+      @user.team_staff_for?(@record)
   end
 
   class Scope < Scope
