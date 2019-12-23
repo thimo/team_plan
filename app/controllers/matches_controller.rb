@@ -12,11 +12,7 @@ class MatchesController < ApplicationController
   def show
     set_active_tab
 
-    case @active_tab
-    when "match", "presences"
-      set_presences_and_players
-    when "address"
-    end
+    set_presences_and_players
   end
 
   def new; end
