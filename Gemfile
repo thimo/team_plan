@@ -43,10 +43,9 @@ gem "pundit", "~> 1.1.0"
 gem "redcarpet", "~> 3.4.0"
 gem "rubyzip"
 
-# gem "axlsx",                      "~> 2.1.0.pre"
-gem "axlsx", git: "https://github.com/randym/axlsx.git", ref: "c8ac844"
-gem "axlsx_rails"
 gem "bootsnap", require: false
+gem "caxlsx", "~> 3.0"
+gem "caxlsx_rails"
 gem "icalendar", "~> 2.4.1"
 gem "pg_search"
 gem "pretender"
@@ -58,8 +57,6 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
   gem "capybara-webkit"
-  # gem "pry-rails"
-  # gem "pry-byebug"
   gem "factory_bot_rails"
   gem "guard"
   gem "scout_apm" # Disable to improve loading without internet connction
@@ -76,8 +73,7 @@ group :development do
   # gem "bullet" # help to kill N+1 queries and unused eager loading
   # gem "rack-mini-profiler"
   gem "rack-livereload"
-  # Run `bundle exec erd`
-  gem "rails-erd", require: false
+  gem "rails-erd", require: false # Run `bundle exec erd`
   gem "rb-fsevent"
   gem "terminal-notifier-guard"
   gem "web-console"
