@@ -4,6 +4,10 @@ export default class extends Controller {
   static targets = [ 'icon', 'content' ]
 
   connect() {
+    if (!this.hasIconTarget) {
+      return;
+    }
+
     if (this.data.get('startCollapsed') == 'true') {
       this.collapse();
     } else {
