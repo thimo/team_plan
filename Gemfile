@@ -6,9 +6,6 @@ ruby "2.6.5"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
-# TODO: jquery-rails is included to prevent the following blocking error on deploy, thrown from axlsx_rails:
-# "Sprockets::FileNotFound: couldn't find file 'jquery_ujs' with type 'application/javascript'" has been solved
-gem "jquery-rails"
 gem "pg", "~> 0.18"
 gem "puma", "~> 4.0"
 gem "rails", "~> 6.0.1"
