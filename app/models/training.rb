@@ -53,7 +53,7 @@ class Training < ApplicationRecord
 
   def description
     [
-      "#{training_schedule.soccer_field.name} #{training_schedule.field_part_i18n}",
+      "#{training_schedule&.soccer_field&.name} #{training_schedule&.field_part_i18n}".strip,
       remark
     ].reject(&:blank?).join("\n\n")
   end
