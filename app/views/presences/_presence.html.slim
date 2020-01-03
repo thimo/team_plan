@@ -2,7 +2,12 @@
 - hide_extra_fields = compact && action_name == 'index'
 
 - if policy(presence).update?
-  .presence-form[id="presence-#{presence.id}" data={ controller: "form", 'form-compact': compact }]
+  .presence-form[id="presence-#{presence.id}"
+                 data={ controller: "form toggler",
+                        'toggler-expand-icon': 'fa-caret-down',
+                        'toggler-collapse-icon': 'fa-caret-up',
+                        'toggler-start-collapsed': hide_extra_fields.to_s,
+                        'form-compact': compact }]
     = bootstrap_form_for presence, html: { class: 'row' }, data: { target: 'form.form' }, remote: true do |f|
       = hidden_field_tag :compact, compact, id: nil
       .d-flex.justify-content-between[class="#{compact ? 'col-12' : 'col-md-4'}"]
@@ -15,32 +20,32 @@
             label_class: "#{'light line-through' unless presence.present?}",
             custom: true,
             data: { action: 'form#submit' }
-        - if hide_extra_fields
-          a data={ action: 'form#submit' }
-            i.fa.fa-caret-down.p-1.pl-2
-      - unless hide_extra_fields
-        .mb-1[class="#{compact ? 'col-12' : 'col-md-2'}"]
-          - if presence.is_present?
-            = f.collection_select_without_bootstrap :on_time, Presence.on_times_i18n, :first, :second,
-              {},
-              { class: "form-control #{color_for_on_time(presence.send(:on_time))}",
-                data: { action: 'form#submit' },
-                id: nil }
-            = f.hidden_field :signed_off, value: :signed_off_on_time, id: nil
-          - else
-            = f.collection_select_without_bootstrap :signed_off, Presence.signed_offs_i18n, :first, :second,
-              {},
-              { class: "form-control #{color_for_on_time(presence.send(:signed_off))}",
-                data: { action: 'form#submit' },
-                id: nil }
-            = f.hidden_field :on_time, value: :on_time, id: nil
+        - if compact
+          a data={ action: 'toggler#toggle' }
+            i.fa.p-1.pl-2 data={ target: 'toggler.icon' }
 
-        .mb-1[class="#{compact ? 'col-12' : 'col-md-6'}"]
-          = f.text_field_without_bootstrap :remark,
-            class: 'form-control',
-            placeholder: f.object.class.human_attribute_name(:remark),
-            id: nil,
-            data: { action: 'form#submit' }
+      .mb-1 class="#{compact ? 'col-12' : 'col-md-2'} #{hide_extra_fields ? 'd-none' : ''}" data={ target: 'toggler.content' }
+        - if presence.is_present?
+          = f.collection_select_without_bootstrap :on_time, Presence.on_times_i18n, :first, :second,
+            {},
+            { class: "form-control #{color_for_on_time(presence.send(:on_time))}",
+              data: { action: 'form#submit' },
+              id: nil }
+          = f.hidden_field :signed_off, value: :signed_off_on_time, id: nil
+        - else
+          = f.collection_select_without_bootstrap :signed_off, Presence.signed_offs_i18n, :first, :second,
+            {},
+            { class: "form-control #{color_for_on_time(presence.send(:signed_off))}",
+              data: { action: 'form#submit' },
+              id: nil }
+          = f.hidden_field :on_time, value: :on_time, id: nil
+
+      .mb-1 class="#{compact ? 'col-12' : 'col-md-6'} #{hide_extra_fields ? 'd-none' : ''}" data={ target: 'toggler.content' }
+        = f.text_field_without_bootstrap :remark,
+          class: 'form-control',
+          placeholder: f.object.class.human_attribute_name(:remark),
+          id: nil,
+          data: { action: 'form#submit' }
 
       .d-none
         = f.submit "Opslaan", data: { target: 'form.submit'}

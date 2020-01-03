@@ -21,7 +21,7 @@ class DownloadTeamMembersController < ApplicationController
                  policy_scope(@season.age_groups).female.asc.map do |age_group|
                    hashes_for teams_for(age_group)
                  end
-              end.flatten
+               end.flatten
 
       @previous_season = @season.previous
 
