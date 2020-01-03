@@ -2,7 +2,8 @@
                       layout: :horizontal,
                       local: true,
                       label_col: "col-sm-3",
-                      control_col: "col-sm-9" do |f|
+                      control_col: "col-sm-9",
+                      data: { controller: 'form', target: 'form.form' } do |f|
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_area :association_numbers, autofocus: true,

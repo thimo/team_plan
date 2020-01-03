@@ -1,4 +1,4 @@
-= bootstrap_form_for [@team, @match], { layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" } do |f|
+= bootstrap_form_for [@team, @match], { layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", data: { controller: 'form', target: 'form.form' } } do |f|
   = f.alert_message t("bootstrap_form.check_errors")
 
   = hidden_field_tag :return_url, params[:return_url]
@@ -20,7 +20,7 @@
 
   - if @team.present? || @match.new_record?
     = f.form_group :is_home_match, hide_label: true,
-                                   class: "radio", 
+                                   class: "radio",
                                    help: "Selecteer hier altijd \"Uit\" als het gaat om een toernooi"
       = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
       = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true

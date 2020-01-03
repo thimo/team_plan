@@ -1,4 +1,4 @@
-= bootstrap_form_for [@commentable, @comment], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+= bootstrap_form_for [@commentable, @comment], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", data: { controller: 'form', target: 'form.form' } do |f|
   = f.alert_message t("bootstrap_form.check_errors")
 
   = f.text_area :body, label: false, placeholder: "Opmerking", help: "Tip: beperk je opmerking tot feiten, vermijdt meningen en oordelen"

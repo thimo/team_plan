@@ -1,6 +1,6 @@
 - cancel_url = @todo.todoable.present? ? @todo.todoable : root_path
 
-= bootstrap_form_for [@todoable, @todo], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f|
+= bootstrap_form_for [@todoable, @todo], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", data: { controller: 'form', target: 'form.form' } do |f|
   = f.alert_message t("bootstrap_form.check_errors")
   = hidden_field_tag :return, params[:return]
 
