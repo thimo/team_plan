@@ -8,7 +8,7 @@
       i.fa-pencil-alt[class=fa_class]
 
 - if (ts = @training.training_schedule).present?
-  strong #{ts.soccer_field.name}#{ts.field_part_i18n}
+  strong #{ts.soccer_field.name}, #{ts.field_part_i18n}
   span.lighter , #{ts.present_minutes_i18n} aanwezig
   .mb-3
     span.lighter>
