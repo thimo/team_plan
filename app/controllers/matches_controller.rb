@@ -7,7 +7,7 @@ class MatchesController < ApplicationController
   before_action :create_match, only: [:new, :create]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
   before_action :set_team_for_show, only: [:show]
-  before_action :add_breadcrumbs, only: [:show, :new, :edit]
+  before_action :add_breadcrumbs
 
   def show
     set_active_tab
@@ -18,9 +18,12 @@ class MatchesController < ApplicationController
   def new; end
 
   def create
+    @match.attributes = permitted_attributes(@match).merge(user_modified: true)
+    @match.is_home_match = false if @match.toernooi?
+
     set_team_info if @team.present?
 
-    if @match.save
+    if params[:refresh_only].blank? && @match.save
       @match.teams << @team if @match.teams.find_by(id: @team).blank?
       flash_message(:success, "#{@match.type_name.capitalize} is toegevoegd.")
       redirect_to params[:return_url].presence || @team
@@ -32,7 +35,10 @@ class MatchesController < ApplicationController
   def edit; end
 
   def update
-    if @match.update(permitted_attributes(@match).merge(user_modified: true))
+    @match.attributes = permitted_attributes(@match).merge(user_modified: true)
+    @match.is_home_match = false if @match.toernooi?
+
+    if params[:refresh_only].blank? && @match.save
       flash_message(:success, "#{@match.type_name.capitalize} is aangepast.")
       redirect_to params[:return_url].presence || @match
     else
@@ -62,11 +68,7 @@ class MatchesController < ApplicationController
     end
 
     def create_match
-      @match = if action_name == "new"
-                 Match.new(match_defaults)
-               else
-                 Match.new(match_defaults.merge(permitted_attributes(Match)))
-               end
+      @match = Match.new(match_defaults)
       @match.teams << @team if @team.present?
       authorize @match
     end

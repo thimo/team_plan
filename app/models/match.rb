@@ -9,7 +9,9 @@ class Match < ApplicationRecord
   has_and_belongs_to_many :teams
   has_paper_trail
 
-  validates :wedstrijdcode, :wedstrijddatum, :thuisteam, :uitteam, presence: true
+  validates :wedstrijdcode, :wedstrijddatum, presence: true
+  validates :opponent, presence: true, if: -> { new_record? }
+  validates :thuisteam, :uitteam, presence: true, if: -> { !new_record? }
   validates :wedstrijdcode, uniqueness: { scope: :tenant }
 
   attr_accessor :opponent, :is_home_match
@@ -50,7 +52,11 @@ class Match < ApplicationRecord
   end
 
   def ended_at
-    wedstrijddatum + (2 * minutes_per_half) + pause_minutes
+    if toernooi? && ends_at.present?
+      ends_at
+    else
+      wedstrijddatum + (2 * minutes_per_half) + pause_minutes
+    end
   end
 
   def title
@@ -100,6 +106,14 @@ class Match < ApplicationRecord
 
   def wedstrijdtijd=(time)
     self.wedstrijddatum = wedstrijddatum.change(hour: time[4], min: time[5]) unless wedstrijddatum.nil?
+  end
+
+  def end_time
+    (ends_at.presence || (wedstrijddatum + 4.hours)).to_time
+  end
+
+  def end_time=(time)
+    self.ends_at = wedstrijddatum.change(hour: time[4], min: time[5]) unless wedstrijddatum.nil?
   end
 
   def self.new_match_datetime

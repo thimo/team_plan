@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_145730) do
+ActiveRecord::Schema.define(version: 2020_01_03_161730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 2019_12_17_145730) do
     t.bigint "created_by_id"
     t.integer "edit_level", default: 0
     t.bigint "tenant_id"
+    t.datetime "ends_at"
     t.index ["competition_id"], name: "index_matches_on_competition_id"
     t.index ["created_by_id"], name: "index_matches_on_created_by_id"
     t.index ["tenant_id", "wedstrijdcode"], name: "index_matches_on_wedstrijdcode", unique: true

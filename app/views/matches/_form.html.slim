@@ -1,9 +1,10 @@
 = bootstrap_form_for [@team, @match], { layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", data: { controller: 'form', target: 'form.form' } } do |f|
   = f.alert_message t("bootstrap_form.check_errors")
 
+  = hidden_field_tag :refresh_only
   = hidden_field_tag :return_url, params[:return_url]
 
-  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name, custom: true
+  = f.collection_radio_buttons :competition_id, Competition.custom.asc, :id, :name, custom: true, data: { action: 'form#refresh' }
 
   - if policy(@match).set_team?
     .form-group.row
@@ -19,19 +20,23 @@
         = @team.name_with_club
 
   - if @team.present? || @match.new_record?
-    = f.form_group :is_home_match, hide_label: true,
-                                   class: "radio",
-                                   help: "Selecteer hier altijd \"Uit\" als het gaat om een toernooi"
-      = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
-      = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true
-    = f.text_field :opponent, placeholder: "Naam van het team of het toernooi"
+    - unless @match.toernooi?
+      = f.form_group :is_home_match, hide_label: true,
+                                     class: "radio"
+        = f.radio_button :is_home_match, true, label: "Thuis", inline: true, checked: true, custom: true
+        = f.radio_button :is_home_match, false, label: "Uit", inline: true, custom: true
+    = f.text_field :opponent, placeholder: @match.toernooi? ? "Naam van het toernooi" : "Teamnaam van de tegenstander",
+                              label: @match.toernooi? ? "Naam toernooi" : Match.human_attribute_name(:opponent)
   - else
-    = f.text_field :thuisteam
-    = f.text_field :uitteam
+    = f.text_field :thuisteam, label: @match.toernooi? ? "Naam toernooi" : Match.human_attribute_name(:thuisteam)
+    - unless @match.toernooi?
+      = f.text_field :uitteam
 
   div data-controller="clickable-append"
     = f.text_field :wedstrijddatum, date_picker_options
   = f.time_select :wedstrijdtijd, as: :time, minute_step: 5
+  - if @match.toernooi?
+    = f.time_select :end_time, as: :time, minute_step: 5
 
   = f.text_area :remark
 
@@ -39,7 +44,7 @@
     .col-sm-9.offset-sm-3
       .d-flex.justify-content-between
         div
-          = f.submit "Opslaan", class: 'btn btn-primary'
+          = f.submit "Opslaan", class: 'btn btn-primary', data: { target: 'form.submit' }
           = link_to "Annuleren", @match.new_record? ? @team : @match, class: 'btn btn-light'
         div
           - if policy(@match).destroy?

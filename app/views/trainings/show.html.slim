@@ -7,6 +7,19 @@
     = link_to edit_training_path(@training), class: "btn", title: "Aanpassen"
       i.fa-pencil-alt[class=fa_class]
 
+- if (ts = @training.training_schedule).present?
+  strong #{ts.soccer_field.name}#{ts.field_part_i18n}
+  span.lighter , #{ts.present_minutes_i18n} aanwezig
+  .mb-3
+    span.lighter>
+      | Training door:
+    - if ts.team_members.any?
+      = ts.team_members.map(&:name).join(', ')
+    - elsif ts.cios?
+      = ts.class.human_attribute_name(:cios)
+    - else
+      | -
+
 section
   ul.nav.nav-tabs[role="tablist"]
     li.nav-item
@@ -20,14 +33,6 @@ section
             = @presences.present.size
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
-      - if (ts = @training.training_schedule).present?
-        | #{ts.soccer_field.name}#{ts.field_part_i18n}, #{ts.present_minutes_i18n} aanwezig
-        .mb-2
-          - if ts.team_members.any?
-              | Training door: #{ts.team_members.map(&:name).join(', ')}
-          - elsif ts.cios?
-            | Training door: #{ts.class.human_attribute_name(:cios)}
-
       - if @training.body.present?
         = @training.body.html_safe
       - else
