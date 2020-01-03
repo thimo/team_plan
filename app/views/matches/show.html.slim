@@ -1,5 +1,6 @@
 - provide(:title, @match.title)
-- provide(:subtitle, @match.competition.competitiesoort) unless @match.toernooi?
+- provide(:subtitle, t(@match.competition.competitiesoort)) unless @match.toernooi?
+- provide(:hint, "#{l @match.started_at, format: :weekday} #{l @match.started_at, format: :date_long}, #{starts_ends(@match)} uur")
 - show_presences = policy(@match).show_presences? && @presences.present? && policy(@presences.first).update?
 
 - content_for :action_buttons

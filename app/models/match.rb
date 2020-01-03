@@ -54,10 +54,11 @@ class Match < ApplicationRecord
   end
 
   def title
-    return wedstrijd if wedstrijd.present?
     return "Toernooi #{thuisteam}" if toernooi?
 
-    "#{thuisteam} - #{uitteam}"
+    title = "#{thuisteam} - #{uitteam}"
+    title += " (#{uitslag})" if uitslag.present?
+    title
   end
 
   def schedule_title

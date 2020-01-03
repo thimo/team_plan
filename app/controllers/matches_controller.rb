@@ -91,6 +91,9 @@ class MatchesController < ApplicationController
       [@team || @match.teams].flatten.each do |team|
         add_breadcrumb team.name_with_club, team
       end
+      if @match.knvb?
+        add_breadcrumb @match.competition.competitienaam, @match.competition
+      end
       if @match.new_record?
         add_breadcrumb "Nieuw"
       else

@@ -1,4 +1,5 @@
 - provide(:title, @training.title)
+- provide(:hint, "#{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}, #{starts_ends(@training)} uur")
 - show_presences = policy(@training).show_presences? && @presences.present? && policy(@presences.first).update?
 
 - content_for :action_buttons
@@ -19,24 +20,13 @@ section
             = @presences.present.size
   .tab-content
     #tab-program.tab-pane.fade.in.active.show.clearfix[role="tabpanel" aria-expanded="true"]
-      .card.float-right
-        .card-body
-          .strong #{l @training.started_at, format: :weekday} #{l @training.started_at, format: :date_long}
-          div #{starts_ends(@training)} uur
-          - if (ts = @training.training_schedule).present?
-            .light.small
-              | #{ts.present_minutes_i18n} aanwezig
-            hr.my-2
-            div
-              = ts.soccer_field.name
-              span.light.small.ml-2
-                = ts.field_part_i18n
-            - if ts.team_members.any? || ts.cios?
-              hr.my-2
-              - ts.team_members.each do |trainer|
-                div #{trainer.name}
-              div
-                = ts.class.human_attribute_name(:cios) if ts.cios?
+      - if (ts = @training.training_schedule).present?
+        | #{ts.soccer_field.name}#{ts.field_part_i18n}, #{ts.present_minutes_i18n} aanwezig
+        .mb-2
+          - if ts.team_members.any?
+              | Training door: #{ts.team_members.map(&:name).join(', ')}
+          - elsif ts.cios?
+            | Training door: #{ts.class.human_attribute_name(:cios)}
 
       - if @training.body.present?
         = @training.body.html_safe

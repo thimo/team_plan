@@ -35,6 +35,10 @@ class Competition < ApplicationRecord
     competitiesoort == COMPETITIESOORT_REGULIER
   end
 
+  def knvb?
+    poulecode.positive?
+  end
+
   def deactivate
     super
     matches.from_now.destroy_all

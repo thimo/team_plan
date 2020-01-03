@@ -21,6 +21,6 @@ class CompetitionsController < ApplicationController
       @competition.teams.each do |team|
         add_breadcrumb team.name_with_club, team
       end
-      add_breadcrumb "#{@competition.competitiesoort} - #{@competition.klasse}"
+      add_breadcrumb "#{t @competition.competitiesoort} - #{@competition.klasse}"
     end
 end

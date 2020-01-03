@@ -18,7 +18,7 @@ tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through
           span.pr-1
             | #{I18n.l match.started_at, format: :time_short}
       .match-type.text-right.lighter
-        = match.competition.competitiesoort
+        = t(match.competition.competitiesoort)
 
     .match-teams
       - if match.toernooi?

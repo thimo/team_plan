@@ -5,7 +5,7 @@
   .card-header
     - unless compact_header
       = link_to competition_path(competition)
-        = "#{competition.competitiesoort.humanize} - #{competition.klasse}"
+        = "#{t competition.competitiesoort} - #{competition.klasse}"
       span.lighter.pl-2
         = "#{competition.poule}"
       .light.small
