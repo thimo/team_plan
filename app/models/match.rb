@@ -67,7 +67,7 @@ class Match < ApplicationRecord
   end
 
   def description
-    nil
+    remark
   end
 
   def full_address

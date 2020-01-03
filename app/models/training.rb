@@ -52,7 +52,10 @@ class Training < ApplicationRecord
   end
 
   def description
-    "#{training_schedule.soccer_field.name} #{training_schedule.field_part_i18n}" if training_schedule&.soccer_field
+    [
+      "#{training_schedule.soccer_field.name} #{training_schedule.field_part_i18n}",
+      remark
+    ].reject(&:blank?).join("\n\n")
   end
 
   def location
