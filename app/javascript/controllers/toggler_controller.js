@@ -42,10 +42,10 @@ export default class extends Controller {
   }
 
   collapseIcon() {
-    this.data.get('collapseIcon')
+    return this.data.get('collapseIcon')
   }
 
   expandIcon() {
-    this.data.get('expandIcon')
+    return this.data.get('expandIcon')
   }
 }
