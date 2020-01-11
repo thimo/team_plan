@@ -399,6 +399,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_161730) do
     t.bigint "team_id"
     t.bigint "tenant_id"
     t.boolean "own_player", default: true
+    t.integer "minutes_played"
     t.index ["member_id"], name: "index_presences_on_member_id"
     t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
     t.index ["team_id"], name: "index_presences_on_team_id"
