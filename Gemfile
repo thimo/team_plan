@@ -36,7 +36,7 @@ gem "net-ssh", "~> 4.1.0"
 
 gem "awesome_print", require: "awesome_print"
 gem "paper_trail"
-gem "pundit", "~> 1.1.0"
+gem "pundit"
 gem "redcarpet", "~> 3.4.0"
 gem "rubyzip"
 
