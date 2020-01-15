@@ -1,8 +1,6 @@
 .breadcrumb {
-  .breadcrumb-item {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-  }
+  padding-bottom: .75rem;
+  padding-top: .75rem;
 
   .breadcrumb-menu {
     .btn {
@@ -13,10 +11,11 @@
 
 @include media-breakpoint-down(xs) {
   .breadcrumb {
-    padding: 0 .5rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
   }
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-  content: "›";
+  content: '›';
 }
