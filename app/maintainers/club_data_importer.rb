@@ -77,10 +77,10 @@ module ClubDataImporter
                              source: :teams_and_competitions_import,
                              body: "Team '#{club_data_team.teamnaam}' aangemaakt"
           team_count[:created] += 1
-          club_data_team.save
+          club_data_team.save!
         elsif club_data_team.changed?
           team_count[:updated] += 1
-          club_data_team.save
+          club_data_team.save!
         end
 
         club_data_team.link_to_team
@@ -98,14 +98,14 @@ module ClubDataImporter
                              source: :teams_and_competitions_import,
                              body: "Competitie '#{competition.competitiesoort} - #{competition.klasse}' aangemaakt " \
                                     "voor '#{club_data_team.teamnaam}'"
-          competition.save
+          competition.save!
           competition_count[:created] += 1
 
           update_poule_standing(competition)
           update_poule_matches(competition)
           update_poule_results(competition)
         elsif competition.changed?
-          competition.save
+          competition.save!
           competition_count[:updated] += 1
         end
         competition.club_data_teams << club_data_team unless competition.club_data_team_ids.include?(club_data_team.id)
@@ -140,7 +140,7 @@ module ClubDataImporter
 
         match.set_uitslag(data["uitslag"])
         if match.changed?
-          match.save
+          match.save!
           count[:updated] += 1
         end
       end
@@ -175,7 +175,7 @@ module ClubDataImporter
         competition.ranking = json
         if competition.changed?
           count[:updated] += 1 if count.present?
-          competition.save
+          competition.save!
         end
       end
     rescue RestClient::BadRequest => error
@@ -212,10 +212,10 @@ module ClubDataImporter
 
         if match.new_record?
           count[:created] += 1 if count.present?
-          match.save
+          match.save!
         elsif match.changed?
           count[:updated] += 1 if count.present?
-          match.save
+          match.save!
         end
 
         if match.eigenteam?
@@ -265,10 +265,10 @@ module ClubDataImporter
 
         if match.new_record?
           count[:created] += 1 if count.present?
-          match.save
+          match.save!
         elsif match.changed?
           count[:updated] += 1 if count.present?
-          match.save
+          match.save!
         end
       end
     rescue RestClient::BadRequest => error
@@ -290,7 +290,7 @@ module ClubDataImporter
         match.attributes = { afgelast: true, afgelast_status: data["status"] }
         if match.changed?
           count[:created] += 1
-          match.save
+          match.save!
         end
 
         cancelled_matches << data["wedstrijdcode"]
@@ -299,7 +299,7 @@ module ClubDataImporter
       Season.active_season_for_today.matches.afgelast.each do |match|
         next if cancelled_matches.include? match.wedstrijdcode
 
-        match.update(
+        match.update!(
           afgelast: false,
           afgelast_status: ""
         )
@@ -331,7 +331,7 @@ module ClubDataImporter
           member.photo_data = data["foto"]
           if member.changed?
             count[:updated] += 1
-            member.save
+            member.save!
           end
         end
       rescue StandardError => error
@@ -358,7 +358,7 @@ module ClubDataImporter
         end
         match.write_attribute("telefoonnummer", wedstrijd["telefoonnummer"])
         match.write_attribute("route", wedstrijd["route"])
-        match.save if match.changed?
+        match.save! if match.changed?
       end
     rescue StandardError => error
       log_error(:add_address, generic_error_body(url, error))
