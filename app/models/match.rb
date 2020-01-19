@@ -10,7 +10,7 @@ class Match < ApplicationRecord
   has_paper_trail
 
   validates :wedstrijdcode, :wedstrijddatum, presence: true
-  validates :opponent, presence: true, if: -> { new_record? }
+  validates :opponent, presence: true, if: -> { new_record? && !competition.knvb? }
   validates :thuisteam, :uitteam, presence: true, if: -> { !new_record? }
   validates :wedstrijdcode, uniqueness: { scope: :tenant }
 
