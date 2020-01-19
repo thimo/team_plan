@@ -66,7 +66,7 @@ class TeamMembersController < ApplicationController
                                                                    role: @team_member.role).first
       if archived_member.present?
         # Re-activate archived team member
-        archived_member.update(ended_on: nil, status: @team_member.status)
+        archived_member.update!(ended_on: nil, status: @team_member.status)
 
         flash_message(:success, "#{archived_member.member.name} is geactiveerd voor #{@team_member.team.name}.")
         redirect_to @team

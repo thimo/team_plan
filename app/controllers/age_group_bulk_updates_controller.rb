@@ -19,7 +19,7 @@ class AgeGroupBulkUpdatesController < ApplicationController
       age_group.year_of_birth_from = parts[1].to_i if parts[1].present?
       age_group.year_of_birth_to = parts[2].to_i if parts[2].present?
       age_group.gender = parts[3].strip.downcase if parts[3].present?
-      age_group.save
+      age_group.save!
 
       count += 1
     end

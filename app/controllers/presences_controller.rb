@@ -2,7 +2,7 @@
 
 class PresencesController < ApplicationController
   respond_to :json
-  
+
   before_action :load_presentable, only: [:new, :create]
   before_action :create_presence, only: [:new, :create]
   before_action :set_parent, only: [:index]
@@ -25,7 +25,7 @@ class PresencesController < ApplicationController
   end
 
   def update
-    @presence.update(permitted_attributes(@presence))
+    @presence.update!(permitted_attributes(@presence))
     @present_count = @presence.presentable.presences.present.size
   end
 

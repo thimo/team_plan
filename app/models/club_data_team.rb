@@ -28,6 +28,6 @@ class ClubDataTeam < ApplicationRecord
       team = Team.for_active_season.active.find_by(name: teamname_without_club.gsub!(/[GM]$/, ""))
     end
 
-    team.update(club_data_team: self) if team&.no_club_data_link?
+    team.update!(club_data_team: self) if team&.no_club_data_link?
   end
 end

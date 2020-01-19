@@ -165,7 +165,7 @@ class User < ApplicationRecord
 
   def set_setting(name, value)
     @settings = nil
-    user_settings.find_or_initialize_by(name: name).update(value: value)
+    user_settings.find_or_initialize_by(name: name).update!(value: value)
   end
 
   def export_columns
@@ -243,7 +243,7 @@ class User < ApplicationRecord
 
     if user.new_record?
       user.skip_confirmation!
-      user.save
+      user.save!
       user.send_new_account(generated_password)
     end
 

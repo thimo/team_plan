@@ -42,7 +42,7 @@ module Admin
 
       def create_resource
         @role = Role.new
-        @role.update(permitted_attributes(@role)) if action_name == "create"
+        @role.assign_attributes(permitted_attributes(@role)) if action_name == "create"
         authorize @role
       end
 

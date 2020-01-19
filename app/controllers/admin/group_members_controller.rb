@@ -37,7 +37,7 @@ module Admin
         @group = Group.find(params[:group_id])
 
         @group_member = GroupMember.new
-        @group_member.update(permitted_attributes(@group_member)) if action_name == "create"
+        @group_member.assign_attributes(permitted_attributes(@group_member)) if action_name == "create"
         @group_member.group = @group
 
         authorize @group_member

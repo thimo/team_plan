@@ -26,7 +26,7 @@ class TeamEvaluationBulkUpdatesController < ApplicationController
         team_evaluation.player_evaluations.build(team_member: player)
       end
 
-      team_evaluation.save
+      team_evaluation.save!
       count += 1
 
       mail_count += team_evaluation.send_invites(current_user)

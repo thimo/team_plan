@@ -45,7 +45,7 @@ class TodosController < ApplicationController
 
   def toggle
     @todo.finished = !@todo.finished
-    @todo.save
+    @todo.save!
   end
 
   private

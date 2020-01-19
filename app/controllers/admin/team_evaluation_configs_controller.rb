@@ -38,7 +38,7 @@ module Admin
 
       def create_resource
         @team_evaluation_config = TeamEvaluationConfig.new(config: TeamEvaluationConfig::DEFAULT_CONFIG)
-        @team_evaluation_config.update(permitted_attributes(@team_evaluation_config)) if action_name == "create"
+        @team_evaluation_config.assign_attributes(permitted_attributes(@team_evaluation_config)) if action_name == "create"
         authorize @team_evaluation_config
       end
 

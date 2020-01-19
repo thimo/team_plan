@@ -42,7 +42,7 @@ class TrainingSchedule < ApplicationRecord
         if saved_change_to_end_time?
           training.ended_at = training.ended_at.change(hour: end_time.hour, min: end_time.min)
         end
-        training.save
+        training.save!
       end
     else
       # Create new trainings

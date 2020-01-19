@@ -51,7 +51,7 @@ class MatchesController < ApplicationController
       redirect_to @match.teams.first, notice: "#{@match.type_name.capitalize} is verwijderd."
       @match.destroy
     else
-      @match.update(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
+      @match.update!(afgelast: true, afgelast_status: "Afgelast door #{current_user.name}")
       redirect_to @match, notice: "#{@match.type_name.capitalize} is afgelast."
     end
   end

@@ -22,7 +22,7 @@ class Anonymizer
       end
 
       def convert_demo_tenant
-        demo_tenant.update(
+        demo_tenant.update!(
           domain: "localhost",
           name: "Demo",
           subdomain: "demo"
@@ -59,7 +59,7 @@ class Anonymizer
               match.wedstrijd = match.wedstrijd.sub(/- #{OLD_CLUB_NAME} /, "- #{NEW_CLUB_NAME} ")
             end
 
-            match.save if match.changed?
+            match.save! if match.changed?
           end
         end
       end
@@ -73,7 +73,7 @@ class Anonymizer
               ranking["teamnaam"] = ranking["teamnaam"].sub(/^#{OLD_CLUB_NAME} /, "#{NEW_CLUB_NAME} ")
             end
 
-            competition.save if competition.changed?
+            competition.save! if competition.changed?
           end
         end
       end
@@ -112,7 +112,7 @@ class Anonymizer
             member.full_name_2 = "#{member.first_name} #{member.middle_name} #{member.last_name}"
             # - photo ??
 
-            member.save
+            member.save!
           end
         end
       end

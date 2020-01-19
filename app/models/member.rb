@@ -346,12 +346,12 @@ class Member < ApplicationRecord
     Member.active.each do |member|
       if imported_member_ids.include? member.id
         # Member was imported, make sure `missed_import_on` is cleared
-        member.update(missed_import_on: nil) if member.missed_import_on.present?
+        member.update!(missed_import_on: nil) if member.missed_import_on.present?
       else
         # Member was not in import. Set `missed_import_on` if nil
-        member.update(missed_import_on: Time.zone.now) if member.missed_import_on.nil?
+        member.update!(missed_import_on: Time.zone.now) if member.missed_import_on.nil?
         if member.missed_import_on < imported_before
-          member.update(deregistered_at: member.missed_import_on)
+          member.update!(deregistered_at: member.missed_import_on)
           result[:deregistered] << member
         end
       end

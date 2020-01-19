@@ -19,7 +19,7 @@ module Presentable
         presence = presences.create(member: team_member.member, team: team)
 
         if team_member.member.injured?
-          presence.update(is_present: false, remark: "Blessure (#{team_member.member.injuries.active.last.title})")
+          presence.update!(is_present: false, remark: "Blessure (#{team_member.member.injuries.active.last.title})")
         elsif respond_to? :training_schedule
           if (inherit_from = training_schedule&.presences&.find_by(member: team_member.member)).present?
             # Inherit fields from training schedule
