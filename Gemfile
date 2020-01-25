@@ -60,14 +60,13 @@ group :development, :test do
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem "bullet" # help to kill N+1 queries and unused eager loading
   gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
   gem "guard-minitest", require: false
   gem "letter_opener"
   gem "listen", "~> 3.0.5"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
-  # gem "bullet" # help to kill N+1 queries and unused eager loading
   # gem "rack-mini-profiler"
   gem "rack-livereload"
   gem "rails-erd", require: false # Run `bundle exec erd`

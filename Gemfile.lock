@@ -81,6 +81,9 @@ GEM
     brakeman (4.7.2)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.4)
+    bullet (6.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     bundler-audit (0.6.1)
       bundler (>= 1.2.0, < 3)
       thor (~> 0.18)
@@ -457,6 +460,7 @@ GEM
     unf_ext (0.0.7.6)
     unicode-display_width (1.6.0)
     unicode_utils (1.4.0)
+    uniform_notifier (1.13.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -494,6 +498,7 @@ DEPENDENCIES
   bootstrap_form (~> 4.0.0)
   brakeman
   breadcrumbs_on_rails (~> 3.0.1)
+  bullet
   bundler-audit
   byebug
   capybara
