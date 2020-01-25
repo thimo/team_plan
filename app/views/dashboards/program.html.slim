@@ -2,7 +2,7 @@
 
 .row
   .col-xl-6
-    = render "matches/list", matches: @not_played_matches, title: "De komende week"
+    = render "matches/list", matches: @not_played_matches, title: "Alle wedstrijden voor de komende week"
   - if @canceled_matches.any?
     .col-xl-6
       = render "matches/list", matches: @canceled_matches, title: "Afgelaste wedstrijden", disable_line_through: true
