@@ -104,15 +104,18 @@ class MatchesController < ApplicationController
     end
 
     def set_team_info
-      @match.thuisteamid = nil
-      @match.uitteamid   = nil
+      @match.thuisteamid = @match.uitteamid = nil
 
       if @match.is_home_match == "true"
         @match.thuisteam   = @team.name_with_club
         @match.uitteam     = @match.opponent
+        @match.thuisteamclubrelatiecode = Tenant.setting("club_relatiecode")
+        @match.uitteamclubrelatiecode   = nil
       else
         @match.thuisteam   = @match.opponent
         @match.uitteam     = @team.name_with_club
+        @match.thuisteamclubrelatiecode = nil
+        @match.uitteamclubrelatiecode = Tenant.setting("club_relatiecode")
       end
     end
 
