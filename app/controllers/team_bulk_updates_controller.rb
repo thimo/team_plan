@@ -16,7 +16,7 @@ class TeamBulkUpdatesController < ApplicationController
 
       team = @age_group.teams.build
       team.name = parts[0].strip
-      team.save
+      team.save!
 
       count += 1
     end

@@ -42,7 +42,7 @@ module Admin
 
       def create_resource
         @group = Group.new
-        @group.update(permitted_attributes(@group)) if action_name == "create"
+        @group.assign_attributes(permitted_attributes(@group)) if action_name == "create"
         authorize @group
       end
 

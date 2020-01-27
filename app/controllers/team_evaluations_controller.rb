@@ -45,7 +45,7 @@ class TeamEvaluationsController < ApplicationController
   end
 
   def re_open
-    @team_evaluation.update(finished_at: nil)
+    @team_evaluation.update!(finished_at: nil)
     flash_message(:success, "De teamevaluatie staat weer open voor wijzigingen.")
     redirect_to [:edit, @team_evaluation]
   end

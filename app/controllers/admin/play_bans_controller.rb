@@ -45,7 +45,7 @@ module Admin
       def create_resource
         @play_ban = PlayBan.new(started_on: Time.zone.today)
         @play_ban.play_ban_type = PlayBan.play_ban_types[:contribution] if current_user.role?(Role::BEHEER_CONTRIBUTIE_SPEELVERBODEN)
-        @play_ban.update(permitted_attributes(@play_ban)) if action_name == "create"
+        @play_ban.assign_attributes(permitted_attributes(@play_ban)) if action_name == "create"
         authorize @play_ban
       end
 

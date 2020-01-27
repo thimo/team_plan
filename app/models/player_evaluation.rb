@@ -47,7 +47,7 @@ class PlayerEvaluation < ApplicationRecord
   delegate :archived?, to: :team_evaluation
 
   def prefered_foot=(prefered_foot)
-    team_member.update(prefered_foot: prefered_foot) if team_member.prefered_foot != prefered_foot
+    team_member.update!(prefered_foot: prefered_foot) if team_member.prefered_foot != prefered_foot
   end
 
   def advise_to_icon_class

@@ -67,11 +67,11 @@ module Admin
       def process_existing_play_ban(play_ban)
         if create?
           current_date = play_ban.started_on
-          play_ban.update(started_on: @date) if @confirmed
+          play_ban.update!(started_on: @date) if @confirmed
           "Speelverbod gevonden, de startdatum wordt aangepast van <b>#{l(current_date, format: :date_long)}</b> naar <b>#{l(@date, format: :date_long)}</b>"
         elsif finish?
           current_date = play_ban.ended_on
-          play_ban.update(ended_on: @date) if @confirmed
+          play_ban.update!(ended_on: @date) if @confirmed
 
           if play_ban.ended_on.blank?
             "Speelverbod gevonden, de einddatum wordt ingesteld op <b>#{l(@date, format: :date_long)}</b>"

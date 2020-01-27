@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "tenant_on_request"
+
 ActsAsTenant.configure do |config|
   config.require_tenant = defined?(Rails::Server) || defined?(Rails::Console)
 

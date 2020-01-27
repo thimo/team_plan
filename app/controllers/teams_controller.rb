@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
     when "team"
       @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:field_positions).not_ended)
       @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
-      @old_members = policy_scope(@team.team_members).ended.group_by(&:member)
+      @old_members = policy_scope(@team.team_members).ended.includes(:member).group_by(&:member)
 
       todos = policy_scope(@team.todos).unfinished.includes(:todoable)
       @todos_active = todos.active.to_a
@@ -47,11 +47,12 @@ class TeamsController < ApplicationController
       team_presence_graphs
 
     when "schedule"
-      @not_played_matches = @team.matches.not_played.from_today.asc
-      @played_matches = @team.matches.played.desc
+      @not_played_matches = @team.matches.not_played.from_today.includes(:competition).asc
+      @played_matches = @team.matches.played.includes(:competition).desc
 
       @training_schedules = policy_scope(@team.training_schedules).active.includes(:soccer_field, :team_members).asc
-      @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 4.weeks.from_now.beginning_of_day).asc
+      @trainings = @team.trainings.in_period(0.days.ago.beginning_of_day, 4.weeks.from_now.beginning_of_day)
+                        .includes(:training_schedule, training_schedule: :soccer_field).asc
 
     when "calendar"
       date = params[:start_date].present? ? Time.zone.parse(params[:start_date]) : Time.zone.now

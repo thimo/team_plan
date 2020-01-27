@@ -23,12 +23,12 @@ class TeamMemberBulkUpdatesController < ApplicationController
                                                          role: TeamMember.roles[type]).first
         if archived_member.present?
           # Re-activate archived team member
-          archived_member.update(ended_on: nil, status: @team.status)
+          archived_member.update!(ended_on: nil, status: @team.status)
           count += 1
         else
           @team_member = @team.team_members.new(member: member, role: TeamMember.roles[type])
           @team_member.status = @team.status
-          count += 1 if @team_member.save
+          count += 1 if @team_member.save!
         end
       end
     end
