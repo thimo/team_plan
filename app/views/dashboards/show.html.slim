@@ -47,13 +47,13 @@
           todos_defered: @todos.defered
 
     .col-sm-6
-      - if @age_groups_male || @age_groups_female
-        - cache [@age_groups_male, @age_groups_female]
-          = render 'age_groups'
-
       - if @active_teams.present? || @favorite_teams.present? || @favorite_age_groups.present?
         - cache [current_user, @active_teams, @favorite_teams, @favorite_age_groups]
           = render 'favorites'
+
+      - if @age_groups_male || @age_groups_female
+        - cache [@age_groups_male, @age_groups_female]
+          = render 'age_groups'
 
       - if @new_members.present?
         = render "members/list", members: @new_members,
