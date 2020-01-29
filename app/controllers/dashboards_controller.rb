@@ -33,7 +33,7 @@ class DashboardsController < ApplicationController
                              .group_by(&:wedstrijddatum_date)
 
     team_ids = current_user.teams_as_staff_in_season(@season).pluck(:id).uniq
-    @open_team_evaluations = policy_scope(TeamEvaluation).desc.where(team_id: team_ids)
+    @open_team_evaluations = policy_scope(TeamEvaluation).open_at_team.desc.where(team_id: team_ids)
 
     @version_updates = policy_scope(VersionUpdate).desc.page(params[:version_page]).per(3)
     @todos = policy_scope(Todo).includes(:todoable).asc.unfinished
