@@ -68,6 +68,7 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   # gem "rack-mini-profiler"
+  gem "pry-rails"
   gem "rack-livereload"
   gem "rails-erd", require: false # Run `bundle exec erd`
   gem "rb-fsevent"
