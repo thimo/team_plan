@@ -40,7 +40,8 @@ class TenantSettingPolicy < ApplicationPolicy
       :fontawesome_kit_nr,
       :google_maps_base_url,
       :google_maps_api_key,
-      :google_analytics_tracking_id
+      :google_analytics_tracking_id,
+      :voetbalassist_referee_url
     ]
     attributes
   end

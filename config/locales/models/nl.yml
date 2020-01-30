@@ -159,6 +159,7 @@ nl:
         google_analytics_tracking_id: Google Analytics Tracking ID
         google_maps_api_key: Google Maps API key
         google_maps_base_url: Google Maps basis URL
+        voetbalassist_referee_url: Voetbalassist scheidsrechters URL
       todo:
         body: Todo
         ended_on: Einddatum
