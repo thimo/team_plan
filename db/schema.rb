@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_30_200633) do
+ActiveRecord::Schema.define(version: 2020_01_30_205014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -404,6 +404,18 @@ ActiveRecord::Schema.define(version: 2020_01_30_200633) do
     t.index ["presentable_type", "presentable_id"], name: "index_presences_on_presentable_type_and_presentable_id"
     t.index ["team_id"], name: "index_presences_on_team_id"
     t.index ["tenant_id"], name: "index_presences_on_tenant_id"
+  end
+
+  create_table "queue_classic_jobs", force: :cascade do |t|
+    t.text "q_name", null: false
+    t.text "method", null: false
+    t.jsonb "args", null: false
+    t.datetime "locked_at"
+    t.integer "locked_by"
+    t.datetime "created_at", default: -> { "now()" }
+    t.datetime "scheduled_at", default: -> { "now()" }
+    t.index ["q_name", "id"], name: "idx_qc_on_name_only_unlocked", where: "(locked_at IS NULL)"
+    t.index ["scheduled_at", "id"], name: "idx_qc_on_scheduled_at_only_unlocked", where: "(locked_at IS NULL)"
   end
 
   create_table "roles", force: :cascade do |t|
