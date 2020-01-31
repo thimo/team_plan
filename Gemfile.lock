@@ -277,7 +277,7 @@ GEM
     parser (2.7.0.2)
       ast (~> 2.4.0)
     path_expander (1.1.0)
-    pg (0.21.0)
+    pg (1.2.2)
     pg_search (2.3.2)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
@@ -536,7 +536,7 @@ DEPENDENCIES
   minitest-reporters
   net-ssh (~> 4.1.0)
   paper_trail
-  pg (~> 0.18)
+  pg (~> 1.0)
   pg_search
   pretender
   pry-rails

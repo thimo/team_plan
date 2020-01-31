@@ -6,7 +6,7 @@ ruby "2.6.5"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
-gem "pg", "~> 0.18"
+gem "pg", "~> 1.0"
 gem "puma", "~> 4.0"
 gem "queue_classic", "~> 4.0.0.pre.alpha1"
 gem "rails", "~> 6.0.1"
