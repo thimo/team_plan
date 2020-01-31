@@ -8,6 +8,7 @@ layout:
             - bundle exec guard
           -
             - ./bin/webpack-dev-server
+            - que
       -
         layout:
           -
