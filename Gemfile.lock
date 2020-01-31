@@ -294,8 +294,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
-    queue_classic (4.0.0.pre.alpha1)
-      pg (>= 0.17, < 2.0)
+    que (1.0.0.beta4)
     rack (2.1.2)
     rack-livereload (0.3.17)
       rack
@@ -542,7 +541,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 4.0)
   pundit
-  queue_classic (~> 4.0.0.pre.alpha1)
+  que (~> 1.0.0.beta4)
   rack-livereload
   rails (~> 6.0.1)
   rails-erd

@@ -49,7 +49,9 @@ module TeamPlan
     end
 
     config.active_record.schema_format = :sql
-    
+    config.active_job.queue_adapter = :que
+    config.action_mailer.deliver_later_queue_name = "default"
+
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.

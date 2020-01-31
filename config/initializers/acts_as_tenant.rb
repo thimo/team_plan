@@ -3,7 +3,7 @@
 require "tenant_on_request"
 
 ActsAsTenant.configure do |config|
-  config.require_tenant = defined?(Rails::Server) || defined?(Rails::Console)
+  config.require_tenant = !defined?(MiniTest)
 
   # Used to be inserted before Warden::Manager, but that means on 404/500/etc. errors
   # TenantOnRequest is not yet called
