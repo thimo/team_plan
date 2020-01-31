@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
+require "que/web"
+
 Rails.application.routes.draw do
   get "support", to: "static_pages#support"
   get "about", to: "static_pages#about"
 
   # Devise setup, with limit on creating new accounts
   devise_for :users
+
+  authenticate :user, ->(u) { u.admin? } do
+    mount Que::Web, at: "que"
+  end
 
   authenticate :user do
     root to: "dashboards#show"

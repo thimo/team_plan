@@ -17,6 +17,11 @@ li.nav-item
     = link_to admin_path, title: "Beheer", class: "nav-link #{'active' if [Admin, Admin::Knvb].include? controller.class.module_parent}"
       i.fa-cog.nav-icon[class=fa_class]
       | Beheer
+- if current_user.admin?
+  li.nav-item
+    = link_to "/que", title: "Que", class: "nav-link", target: "_blank"
+      i.fa-digging.nav-icon[class=fa_class]
+      | Que
 
   li.nav-item
     = link_to support_path, class: "nav-link"
