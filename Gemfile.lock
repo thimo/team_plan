@@ -301,8 +301,6 @@ GEM
       erubis
       que (~> 1.0.0.beta3)
       sinatra
-    queue_classic (4.0.0.pre.alpha1)
-      pg (>= 0.17, < 2.0)
     rack (2.1.2)
     rack-livereload (0.3.17)
       rack
@@ -559,7 +557,6 @@ DEPENDENCIES
   pundit
   que (~> 1.0.0.beta4)
   que-web
-  queue_classic (~> 4.0.0.pre.alpha1)
   rack-livereload
   rails (~> 6.0.1)
   rails-erd
