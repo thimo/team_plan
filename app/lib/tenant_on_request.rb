@@ -15,8 +15,8 @@ class TenantOnRequest
     if tenant
       ActsAsTenant.with_tenant(tenant) { @app.call(env) }
     else
-      # @app.call(env)
-      [302, { "Location" => "https://www.defrog.nl/", "Content-Type" => "text/html" }, ["Found"]]
+      @app.call(env)
+      # [302, { "Location" => "https://www.defrog.nl/", "Content-Type" => "text/html" }, ["Found"]]
     end
   end
 end
