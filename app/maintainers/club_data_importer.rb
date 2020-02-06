@@ -16,7 +16,7 @@ module ClubDataImporter
       ActsAsTenant.with_tenant(tenant) do
         next if skip_update?
 
-        club_results_for_tenant
+        ClubData::ResultsJob.perform_later(tenant_id: tenant.id)
       end
     end
   end
@@ -48,7 +48,7 @@ module ClubDataImporter
       ActsAsTenant.with_tenant(tenant) do
         next if skip_update?
 
-        afgelastingen_for_tenant
+        ClubData::CancelationsJob.perform_later(tenant_id: tenant.id)
       end
     end
   end
@@ -58,31 +58,6 @@ module ClubDataImporter
   #
   class << self
     private
-
-      def club_results_for_tenant
-        count = { total: 0, updated: 0 }
-
-        # Regular import of all club matches
-        url = "#{Tenant.setting('clubdata_urls_uitslagen')}&client_id=#{Tenant.setting('clubdata_client_id')}"
-        json = JSON.parse(RestClient.get(url))
-        json.each do |data|
-          count[:total] += 1
-          match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])
-          next if match.nil?
-
-          match.set_uitslag(data["uitslag"])
-          if match.changed?
-            match.save!
-            count[:updated] += 1
-          end
-        end
-
-        ClubDataLog.create level: :info,
-                           source: :club_results_import,
-                           body: "#{count[:total]} imported (#{count[:updated]} updated)"
-      rescue StandardError => e
-        log_error(:club_results_import, generic_error_body(url, e))
-      end
 
       def poule_standings_for_tenant
         count = { total: 0, updated: 0 }
@@ -207,43 +182,6 @@ module ClubDataImporter
         handle_bad_request(:poule_results_import, competition, e)
       rescue StandardError => e
         log_error(:poule_results_import, generic_error_body(url, e))
-      end
-
-      def afgelastingen_for_tenant
-        count = { total: 0, created: 0, deleted: 0 }
-
-        # Regular import of all club matches
-        url = "#{Tenant.setting('clubdata_urls_afgelastingen')}&client_id=#{Tenant.setting('clubdata_client_id')}"
-        json = JSON.parse(RestClient.get(url))
-        cancelled_matches = []
-        json.each do |data|
-          next if (match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])).blank?
-
-          match.attributes = { afgelast: true, afgelast_status: data["status"] }
-          if match.changed?
-            count[:created] += 1
-            match.save!
-          end
-
-          cancelled_matches << data["wedstrijdcode"]
-        end
-
-        Season.active_season_for_today.matches.afgelast.each do |match|
-          next if cancelled_matches.include? match.wedstrijdcode
-
-          match.update!(
-            afgelast: false,
-            afgelast_status: ""
-          )
-          count[:deleted] += 1
-        end
-
-        ClubDataLog.create level: :info,
-                           source: :afgelastingen_import,
-                           body: "#{count[:total]} imported (#{count[:created]} created, \
-                                                             #{count[:deleted]} deleted)"
-      rescue StandardError => e
-        log_error(:teams_and_competitions_import, generic_error_body(url, e))
       end
 
       def team_photos_for_tenant
