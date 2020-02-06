@@ -38,7 +38,9 @@ module ClubDataImporter
       ActsAsTenant.with_tenant(tenant) do
         next if skip_update?
 
-        team_photos_for_tenant
+        Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
+          ClubData::TeamPhotosJob.perform_later(tenant_id: tenant.id, club_data_team_id: club_data_team.id)
+        end
       end
     end
   end
@@ -182,36 +184,6 @@ module ClubDataImporter
         handle_bad_request(:poule_results_import, competition, e)
       rescue StandardError => e
         log_error(:poule_results_import, generic_error_body(url, e))
-      end
-
-      def team_photos_for_tenant
-        count = { total: 0, updated: 0 }
-
-        Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
-          url = "#{Tenant.setting('clubdata_urls_team_indeling')}&teamcode=#{club_data_team.teamcode}" \
-                "&client_id=#{Tenant.setting('clubdata_client_id')}"
-          json = JSON.parse(RestClient.get(url))
-          json.each do |data|
-            next if data["foto"].blank?
-
-            count[:total] += 1
-
-            member = Member.find_by(full_name: data["naam"])
-            next unless member
-
-            member.photo_data = data["foto"]
-            if member.changed?
-              count[:updated] += 1
-              member.save!
-            end
-          end
-        rescue StandardError => e
-          log_error(:team_photos_import, generic_error_body(url, e))
-        end
-
-        ClubDataLog.create level: :info,
-                           source: :team_photos_import,
-                           body: "#{count[:total]} imported (#{count[:updated]} updated)"
       end
 
       def add_address(match)
