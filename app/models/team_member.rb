@@ -55,6 +55,9 @@ class TeamMember < ApplicationRecord
   scope :ended, -> { where.not(ended_on: nil) }
   scope :for_season, ->(season) { joins(team: :age_group).where(age_groups: { season_id: season }) }
   scope :goalkeeper, -> { joins(:field_positions).where(field_positions: { id: FieldPosition.goalkeeper }) }
+  scope :for_active_season, -> {
+    joins(team: { age_group: :season }).where(seasons: { status: Season.statuses[:active] })
+  }
 
   def self.players_by_year(team_members_scope)
     # used to include includes(:member).includes(:team).includes(:field_positions)

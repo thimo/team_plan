@@ -13,7 +13,33 @@ module Presentable
 
     return Presence.none if team.archived?
 
-    if presences.team(team).empty?
+    create_presences(team) if presences.team(team).empty?
+
+    if is_a?(TrainingSchedule) || started_at > Time.zone.now
+      # Update presences: add new team members
+      team.team_members.player.active.asc.each do |team_member|
+        next if presences.where(member: team_member.member).present?
+
+        presences.create(member: team_member.member, team: team)
+      end
+
+      # Remove inactive team members
+      member_ids = team.team_members.archived.pluck(:member_id)
+      presences.where(member: member_ids, own_player: true).delete_all
+    end
+
+    presences.team(team)
+  end
+
+  def present_size_for_label(team)
+    return presences.team(team).present.size if presences.team(team).any?
+
+    -1
+  end
+
+  private
+
+    def create_presences(team)
       # Add presences for all local teams (can be two local teams per match)
       team.team_members.player.active.asc.each do |team_member|
         presence = presences.create(member: team_member.member, team: team)
@@ -31,26 +57,4 @@ module Presentable
         end
       end
     end
-
-    if is_a?(TrainingSchedule) || started_at > Time.zone.now
-      # Update presences: add new team members
-      team.team_members.player.active.asc.each do |team_member|
-        next if presences.where(member: team_member.member).present?
-
-        presences.create(member: team_member.member, team: team)
-      end
-
-      # Remove inactive team members
-      member_ids = team.team_members.archived.pluck(:member_id)
-      presences.where(member: member_ids).delete_all
-    end
-
-    presences.team(team)
-  end
-
-  def present_size_for_label(team)
-    return presences.team(team).present.size if presences.team(team).any?
-
-    -1
-  end
 end

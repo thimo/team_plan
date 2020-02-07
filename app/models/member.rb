@@ -18,11 +18,10 @@ class Member < ApplicationRecord
   EMAIL_ADDRESSES = %w[email email_2 email_parent email_parent_2].freeze
 
   acts_as_tenant :tenant
+
   has_many :team_members, dependent: :destroy
-  has_many :team_members_as_player, -> { where(role: TeamMember.roles[:player]) },
-           class_name: "TeamMember", inverse_of: :member
   has_many :teams, through: :team_members
-  has_many :teams_as_player, through: :team_members_as_player, class_name: "Team", source: :team
+
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :player_evaluations, through: :team_members
@@ -208,12 +207,12 @@ class Member < ApplicationRecord
   end
 
   def active_team
-    @active_team ||= teams_as_player.for_active_season.first || teams.for_active_season.first
+    @active_team ||= active_team_member.team
   end
 
   def active_team_member
-    @active_team_member ||= team_members.player.joins(team: { age_group: :season })
-                                        .find_by(seasons: { status: Season.statuses[:active] })
+    @active_team_member ||= team_members.for_active_season.active.player.first ||
+                            team_members.for_active_season.active.first
   end
 
   def evaluation_for_season(season)
