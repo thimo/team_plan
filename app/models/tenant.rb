@@ -11,7 +11,7 @@ class Tenant < ApplicationRecord
   def self.from_request(request)
     tenant = Tenant.find_by(domain: domain(request))
     tenant ||= Tenant.find_by(subdomain: subdomain(request))
-    tenant ||= Tenant.find_by(host: request.host)
+    # tenant ||= Tenant.find_by(host: request.host)
     tenant
   end
 
