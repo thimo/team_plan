@@ -1513,7 +1513,8 @@ CREATE TABLE public.tenants (
     domain character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    status integer DEFAULT 1
+    status integer DEFAULT 1,
+    host character varying
 );
 
 
@@ -3930,6 +3931,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200130205013'),
 ('20200130205014'),
 ('20200131180415'),
-('20200131195637');
+('20200131195637'),
+('20200207190510');
 
 
