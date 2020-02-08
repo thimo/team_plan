@@ -207,7 +207,7 @@ class Member < ApplicationRecord
   end
 
   def active_team
-    @active_team ||= active_team_member.team
+    @active_team ||= active_team_member&.team
   end
 
   def active_team_member
