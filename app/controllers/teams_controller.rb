@@ -14,7 +14,8 @@ class TeamsController < ApplicationController
 
     case @active_tab
     when "team"
-      @players = TeamMember.players_by_year(policy_scope(@team.team_members).includes(:field_positions).not_ended)
+      @players = TeamMember.players_by_year(policy_scope(@team.team_members)
+                           .includes([:field_positions, :field_positions_teammembers]).not_ended)
       @staff = TeamMember.staff_by_member(policy_scope(@team.team_members).not_ended)
       @old_members = policy_scope(@team.team_members).ended.includes(:member).group_by(&:member)
 
