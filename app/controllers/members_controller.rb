@@ -49,10 +49,7 @@ class MembersController < ApplicationController
 
     def add_breadcrumbs
       if @member
-        team = @member.active_team # default
-        team = @member.active_team_member.team if @member.active_team_member.present?
-
-        if team.present?
+        if (team = @member.active_team_member&.team).present?
           add_breadcrumb team.age_group.season.name, team.age_group.season
           add_breadcrumb team.age_group.name, team.age_group
           add_breadcrumb team.name_with_club, team
