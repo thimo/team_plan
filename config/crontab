@@ -1,17 +1,22 @@
 # Teams and competitions - every friday at 20:00
 0   20   * * 5   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.teams_and_competitions > /dev/null 2>&1
+
 # Own results, every 15 minutes on saturday - otherwise every hour
 5    *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
 */15 *   * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
+
 # Cancelations, every hour
 15   *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.afgelastingen > /dev/null 2>&1
+
 # Competitions, matches, standing, results - every hour on saturday, otherwise at 23:05,
 5   23   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1
 10  */1  * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1
+
 # Team member photos - every sunday at 22:15
 15  22   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.team_photos > /dev/null 2>&1
 
 # Database cleanup - every sunday at 0:10
 0   10   * * 7   root    dokku --rm run svs.defrog.nl rails r DatabaseCleanup.all > /dev/null 2>&1
+
 # Cleanup dokku containers - every sunday at 0:20
 0   20   * * 7   root    dokku cleanup > /dev/null 2>&1

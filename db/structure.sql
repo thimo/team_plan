@@ -1148,6 +1148,38 @@ CREATE UNLOGGED TABLE public.que_lockers (
 
 
 --
+-- Name: que_scheduler_audit; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.que_scheduler_audit (
+    scheduler_job_id bigint NOT NULL,
+    executed_at timestamp with time zone NOT NULL
+);
+
+
+--
+-- Name: TABLE que_scheduler_audit; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.que_scheduler_audit IS '4';
+
+
+--
+-- Name: que_scheduler_audit_enqueued; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.que_scheduler_audit_enqueued (
+    scheduler_job_id bigint NOT NULL,
+    job_class character varying(255) NOT NULL,
+    queue character varying(255),
+    priority integer,
+    args jsonb NOT NULL,
+    job_id bigint,
+    run_at timestamp with time zone
+);
+
+
+--
 -- Name: que_values; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2250,6 +2282,14 @@ ALTER TABLE ONLY public.que_lockers
 
 
 --
+-- Name: que_scheduler_audit que_scheduler_audit_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.que_scheduler_audit
+    ADD CONSTRAINT que_scheduler_audit_pkey PRIMARY KEY (scheduler_job_id);
+
+
+--
 -- Name: que_values que_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2814,6 +2854,13 @@ CREATE INDEX index_presences_on_tenant_id ON public.presences USING btree (tenan
 
 
 --
+-- Name: index_que_scheduler_audit_on_scheduler_job_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_que_scheduler_audit_on_scheduler_job_id ON public.que_scheduler_audit USING btree (scheduler_job_id);
+
+
+--
 -- Name: index_roles_on_name_and_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3133,6 +3180,27 @@ CREATE INDEX que_jobs_data_gin_idx ON public.que_jobs USING gin (data jsonb_path
 --
 
 CREATE INDEX que_poll_idx ON public.que_jobs USING btree (queue, priority, run_at, id) WHERE ((finished_at IS NULL) AND (expired_at IS NULL));
+
+
+--
+-- Name: que_scheduler_audit_enqueued_args; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX que_scheduler_audit_enqueued_args ON public.que_scheduler_audit_enqueued USING btree (args);
+
+
+--
+-- Name: que_scheduler_audit_enqueued_job_class; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX que_scheduler_audit_enqueued_job_class ON public.que_scheduler_audit_enqueued USING btree (job_class);
+
+
+--
+-- Name: que_scheduler_audit_enqueued_job_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX que_scheduler_audit_enqueued_job_id ON public.que_scheduler_audit_enqueued USING btree (job_id);
 
 
 --
@@ -3708,6 +3776,14 @@ ALTER TABLE ONLY public.play_bans
 
 
 --
+-- Name: que_scheduler_audit_enqueued que_scheduler_audit_enqueued_scheduler_job_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.que_scheduler_audit_enqueued
+    ADD CONSTRAINT que_scheduler_audit_enqueued_scheduler_job_id_fkey FOREIGN KEY (scheduler_job_id) REFERENCES public.que_scheduler_audit(scheduler_job_id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -3932,6 +4008,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200130205014'),
 ('20200131180415'),
 ('20200131195637'),
-('20200207190510');
+('20200207190510'),
+('20200208205958');
 
 

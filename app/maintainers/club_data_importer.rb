@@ -11,15 +11,15 @@ module ClubDataImporter
     end
   end
 
-  def self.club_results
-    Tenant.active.find_each do |tenant|
-      ActsAsTenant.with_tenant(tenant) do
-        next if skip_update?
-
-        ClubData::ResultsJob.perform_later(tenant_id: tenant.id)
-      end
-    end
-  end
+  # def self.club_results
+  #   Tenant.active.find_each do |tenant|
+  #     ActsAsTenant.with_tenant(tenant) do
+  #       next if skip_update?
+  #
+  #       ClubData::ResultsJob.perform_later(tenant_id: tenant.id)
+  #     end
+  #   end
+  # end
 
   def self.poules
     Tenant.active.find_each do |tenant|
