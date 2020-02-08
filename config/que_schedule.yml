@@ -6,11 +6,11 @@
 # */15 *   * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
 
 clubdata_results:
-  cron: "5 0 * * *"
+  cron: "5 * * * *"
   class: ClubData::QueueResults
 
 clubdata_results_saturday:
-  cron: "0 0 * * *"
+  cron: "*/15 * * * 6"
   class: ClubData::QueueResults
 
 # Cancelations, every hour
