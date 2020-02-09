@@ -13,18 +13,6 @@ module ClubDataImporter
     end
   end
 
-  def self.team_photos
-    Tenant.active.find_each do |tenant|
-      ActsAsTenant.with_tenant(tenant) do
-        next if skip_update?
-
-        Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
-          Clubdata::TeamPhotosJob.perform_later(tenant_id: tenant.id, club_data_team_id: club_data_team.id)
-        end
-      end
-    end
-  end
-
   ##
   # Private class methods, should be called with tenant context
   #

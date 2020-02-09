@@ -13,7 +13,7 @@
 10  */1  * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1
 
 # Team member photos - every sunday at 22:15
-15  22   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.team_photos > /dev/null 2>&1
+# 15  22   * * 7   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.team_photos > /dev/null 2>&1
 
 # Database cleanup - every sunday at 0:10
 0   10   * * 7   root    dokku --rm run svs.defrog.nl rails r DatabaseCleanup.all > /dev/null 2>&1
