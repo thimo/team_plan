@@ -1,5 +1,8 @@
-# Teams and competitions - every friday at 20:00
-# 0   20   * * 5   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.teams_and_competitions > /dev/null 2>&1
+# Teams and competitions - every day at 20:00
+# 0   20   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.teams_and_competitions > /dev/null 2>&1
+clubdata_teams_and_competitions:
+  cron: "0 20 * * *"
+  class: ClubdataScheduler::TeamsAndCompetitionsJob
 
 # Own results, every 15 minutes on saturday - otherwise every hour
 # 5    *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
@@ -7,18 +10,18 @@
 
 clubdata_results:
   cron: "5 * * * *"
-  class: Scheduler::ClubDataResultsJob
+  class: ClubdataScheduler::ResultsJob
 
 clubdata_results_saturday:
   cron: "*/15 * * * 6"
-  class: Scheduler::ClubDataResultsJob
+  class: ClubdataScheduler::ResultsJob
 
 # Cancelations, every hour
 # 15   *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.afgelastingen > /dev/null 2>&1
 
 clubdata_cancelations:
   cron: "15 * * * *"
-  class: Scheduler::ClubDataCancelationsJob
+  class: ClubdataScheduler::CancelationsJob
 
 # Competitions, matches, standing, results - every hour on saturday, otherwise at 23:05,
 # 5   23   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1

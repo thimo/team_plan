@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ClubData
+module ClubdataImporter
   class CancelationsJob < ApplicationJob
     queue_as :default
 

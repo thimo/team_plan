@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ClubData
+module ClubdataImporter
   class ResultsJob < ApplicationJob
     queue_as :default
 

@@ -1,16 +1,6 @@
 # frozen_string_literal: true
 
 module ClubDataImporter
-  def self.teams_and_competitions
-    Tenant.active.find_each do |tenant|
-      ActsAsTenant.with_tenant(tenant) do
-        next if skip_update?
-
-        ClubData::TeamsAndCompetitionsJob.perform_later(tenant_id: tenant.id)
-      end
-    end
-  end
-
   def self.poules
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
@@ -29,7 +19,7 @@ module ClubDataImporter
         next if skip_update?
 
         Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
-          ClubData::TeamPhotosJob.perform_later(tenant_id: tenant.id, club_data_team_id: club_data_team.id)
+          Clubdata::TeamPhotosJob.perform_later(tenant_id: tenant.id, club_data_team_id: club_data_team.id)
         end
       end
     end

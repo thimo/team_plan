@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ClubData::ResultsJobTest < ActiveJob::TestCase
+class Clubdata::ResultsJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end

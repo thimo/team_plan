@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ClubDataJob
+module ClubdataJob
   extend ActiveSupport::Concern
 
   included do
