@@ -1,14 +1,9 @@
 # Teams and competitions - every day at 20:00
-# 0   20   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.teams_and_competitions > /dev/null 2>&1
-
 clubdata_teams_and_competitions:
   cron: "0 20 * * *"
   class: ClubdataScheduler::TeamsAndCompetitionsJob
 
 # Own results, every 15 minutes on saturday - otherwise every hour
-# 5    *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
-# */15 *   * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
-
 clubdata_results:
   cron: "5 * * * *"
   class: ClubdataScheduler::ResultsJob
@@ -18,8 +13,6 @@ clubdata_results_saturday:
   class: ClubdataScheduler::ResultsJob
 
 # Cancelations, every hour
-# 15   *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.afgelastingen > /dev/null 2>&1
-
 clubdata_cancelations:
   cron: "15 * * * *"
   class: ClubdataScheduler::CancelationsJob
@@ -29,13 +22,14 @@ clubdata_cancelations:
 # 10  */1  * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1
 
 # Team member photos - every sunday at 22:15
-# 15  22   * * 7   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.team_photos > /dev/null 2>&1
-
 clubdata_team_photos:
   cron: "15 22 * * 7"
   class: ClubdataScheduler::TeamPhotosJob
 
 # Database cleanup - every sunday at 0:10
-# 0   10   * * 7   root    dokku --rm run svs.defrog.nl rails r DatabaseCleanup.all > /dev/null 2>&1
+database_cleanup:
+  cron: "0 10 * * 7"
+  class: DatabaseCleanupJob
+
 # Cleanup dokku containers - every sunday at 0:20
 # 0   20   * * 7   root    dokku cleanup > /dev/null 2>&1

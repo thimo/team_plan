@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
-module DatabaseCleanup
-  def self.all
+class DatabaseCleanupJob < Que::Job
+  def run
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
         PaperTrail::Version.where("created_at < ?", 6.months.ago).delete_all
