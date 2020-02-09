@@ -2,8 +2,8 @@
 0   20   * * 5   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.teams_and_competitions > /dev/null 2>&1
 
 # Own results, every 15 minutes on saturday - otherwise every hour
-5    *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
-*/15 *   * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
+# 5    *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
+# */15 *   * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.club_results > /dev/null 2>&1
 
 # Cancelations, every hour
 15   *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.afgelastingen > /dev/null 2>&1

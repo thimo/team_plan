@@ -7,11 +7,11 @@
 
 clubdata_results:
   cron: "5 * * * *"
-  class: ClubData::QueueResults
+  class: Scheduler::ClubData::ResultsJob
 
 clubdata_results_saturday:
   cron: "*/15 * * * 6"
-  class: ClubData::QueueResults
+  class: Scheduler::ClubData::ResultsJob
 
 # Cancelations, every hour
 # 15   *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.afgelastingen > /dev/null 2>&1
