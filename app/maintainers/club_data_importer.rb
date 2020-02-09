@@ -11,16 +11,6 @@ module ClubDataImporter
     end
   end
 
-  # def self.club_results
-  #   Tenant.active.find_each do |tenant|
-  #     ActsAsTenant.with_tenant(tenant) do
-  #       next if skip_update?
-  #
-  #       ClubData::ResultsJob.perform_later(tenant_id: tenant.id)
-  #     end
-  #   end
-  # end
-
   def self.poules
     Tenant.active.find_each do |tenant|
       ActsAsTenant.with_tenant(tenant) do
@@ -41,16 +31,6 @@ module ClubDataImporter
         Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
           ClubData::TeamPhotosJob.perform_later(tenant_id: tenant.id, club_data_team_id: club_data_team.id)
         end
-      end
-    end
-  end
-
-  def self.afgelastingen
-    Tenant.active.find_each do |tenant|
-      ActsAsTenant.with_tenant(tenant) do
-        next if skip_update?
-
-        ClubData::CancelationsJob.perform_later(tenant_id: tenant.id)
       end
     end
   end

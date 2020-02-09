@@ -7,14 +7,18 @@
 
 clubdata_results:
   cron: "5 * * * *"
-  class: Scheduler::ClubData::ResultsJob
+  class: Scheduler::ClubDataResultsJob
 
 clubdata_results_saturday:
   cron: "*/15 * * * 6"
-  class: Scheduler::ClubData::ResultsJob
+  class: Scheduler::ClubDataResultsJob
 
 # Cancelations, every hour
 # 15   *   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.afgelastingen > /dev/null 2>&1
+
+clubdata_cancelations:
+  cron: "15 * * * *"
+  class: Scheduler::ClubDataCancelationsJob
 
 # Competitions, matches, standing, results - every hour on saturday, otherwise at 23:05,
 # 5   23   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1
