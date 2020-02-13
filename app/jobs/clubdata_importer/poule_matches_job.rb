@@ -11,22 +11,13 @@ module ClubdataImporter
 
       imported_wedstrijdnummers = []
 
-      # TODO: Implement counters/logging
       url = "#{Tenant.setting('clubdata_urls_poule_programma')}&poulecode=#{competition.poulecode}" \
             "&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
-        # count[:total] += 1 if count.present?
 
         match = update_match(data, competition)
-
-        if match.new_record?
-          # count[:created] += 1 if count.present?
-          match.save!
-        elsif match.changed?
-          # count[:updated] += 1 if count.present?
-          match.save!
-        end
+        match.save! if match.new_record? || match.changed?
 
         if match.eigenteam?
           add_team_to_match(match, match.thuisteamid)
