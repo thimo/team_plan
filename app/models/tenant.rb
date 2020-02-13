@@ -2,10 +2,16 @@ class Tenant < ApplicationRecord
   include Statussable
 
   has_one :tenant_setting, dependent: :destroy
+  has_many :seasons, dependent: :destroy
 
   def settings
     # Auto-create tenant_setting
     tenant_setting || create_tenant_setting
+  end
+
+  def skip_update?
+    ActsAsTenant.current_tenant ||= self
+    !active? || Season.active_season_for_today.nil? || Tenant.setting("clubdata_client_id").blank?
   end
 
   def self.from_request(request)

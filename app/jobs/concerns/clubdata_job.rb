@@ -6,10 +6,6 @@ module ClubdataJob
   included do
     private
 
-      def skip_update?
-        Season.active_season_for_today.nil? || Tenant.setting("clubdata_client_id").blank?
-      end
-
       def handle_bad_request(source, competition, error)
         if JSON.parse(error.response.body).dig("error", "code") == 4001 # Ongeldige poulecode
           competition.deactivate

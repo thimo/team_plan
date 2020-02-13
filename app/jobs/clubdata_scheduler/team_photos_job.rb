@@ -6,9 +6,9 @@ module ClubdataScheduler
 
     def run
       Tenant.active.find_each do |tenant|
-        ActsAsTenant.with_tenant(tenant) do
-          next if skip_update?
+        next if tenant.skip_update?
 
+        ActsAsTenant.with_tenant(tenant) do
           Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
             ClubdataImporter::TeamPhotosJob.perform_later(tenant_id: tenant.id, club_data_team_id: club_data_team.id)
           end
