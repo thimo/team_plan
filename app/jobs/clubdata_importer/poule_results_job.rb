@@ -9,20 +9,16 @@ module ClubdataImporter
       ActsAsTenant.current_tenant = Tenant.find(tenant_id)
       competition = Competition.find(competition_id)
 
-      # TODO: Implement counters/logging
       url = "#{Tenant.setting('clubdata_urls_pouleuitslagen')}&poulecode=#{competition.poulecode}" \
             "&client_id=#{Tenant.setting('clubdata_client_id')}"
       json = JSON.parse(RestClient.get(url))
       json.each do |data|
-        # count[:total] += 1 if count.present?
         match = update_match(data, competition)
         match.set_uitslag(data["uitslag"])
 
         if match.new_record?
-          # count[:created] += 1 if count.present?
           match.save!
         elsif match.changed?
-          # count[:updated] += 1 if count.present?
           match.save!
         end
       end
