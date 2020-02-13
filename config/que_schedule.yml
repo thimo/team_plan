@@ -18,8 +18,13 @@ clubdata_cancelations:
   class: ClubdataScheduler::CancelationsJob
 
 # Competitions, matches, standing, results - every hour on saturday, otherwise at 23:05,
-# 5   23   * * *   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1
-# 10  */1  * * 6   root    dokku --rm run svs.defrog.nl rails r ClubDataImporter.poules > /dev/null 2>&1
+clubdata_poules:
+  cron: "5 23 * * *"
+  class: ClubdataScheduler::PoulesJob
+
+clubdata_poules_saturday:
+  cron: "10 * * * 6"
+  class: ClubdataScheduler::PoulesJob
 
 # Team member photos - every sunday at 22:15
 clubdata_team_photos:
