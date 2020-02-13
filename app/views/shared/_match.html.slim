@@ -50,8 +50,12 @@ tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through
               = match.uitteam
           - else
             = match.uitteam
+    - if match.referee.present?
+      .match-referee.small.text-center title="Scheidsrechter"
+        span.lighter> Scheidsrechter:
+        = match.referee
 
-    - if match.uitslag
+    - if match.uitslag.present?
       .match-teams.strong
         - uitslag = match.uitslag.split
         .match-hometeam.nowrap.text-right

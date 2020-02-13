@@ -43,8 +43,9 @@ class Match < ApplicationRecord
   end
 
   def minutes_per_half
-    team = teams.first
-    (team&.minutes_per_half || team&.age_group&.minutes_per_half || 45).minutes
+    return 45.minutes if (team = teams.first).blank?
+
+    (team.minutes_per_half || team.age_group.minutes_per_half).minutes
   end
 
   def pause_minutes
@@ -138,6 +139,10 @@ class Match < ApplicationRecord
 
   def type_name
     toernooi? ? "toernooi" : "wedstrijd"
+  end
+
+  def referee
+    website_referee
   end
 
   def self.new_custom_wedstrijdcode

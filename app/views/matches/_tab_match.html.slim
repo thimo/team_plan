@@ -13,6 +13,12 @@
         = "#{@match.postcode}  "
       = @match.plaats
 
+- if @match.referee.present?
+  .mb-2
+    span.lighter> Scheidsrechter:
+    = @match.referee
+
+
 - if @players.present?
   h4 Spelers
 
