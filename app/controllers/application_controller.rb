@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
 
       Current.request_id = request.uuid
       Current.user_agent = request.user_agent
-      Current.ip_address = request.ip
+      Current.ip_address = request.remote_ip
       Current.referer    = request.referer
       Current.path       = request.fullpath
     end
