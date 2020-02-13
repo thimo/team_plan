@@ -6,7 +6,7 @@
       = render 'layouts/side_menu_intranet' if [Intranet].include? controller.class.module_parent
       = render 'layouts/side_menu_admin'    if [Admin, Admin::Knvb].include? controller.class.module_parent
 
-      .d-lg-none.my-5
+      .d-lg-none.my-5.pb-5
         = render "layouts/main_nav"
 
   / button.sidebar-minimizer.brand-minimizer[type="button"]
