@@ -832,7 +832,8 @@ CREATE TABLE public.matches (
     created_by_id bigint,
     edit_level integer DEFAULT 0,
     tenant_id bigint,
-    ends_at timestamp without time zone
+    ends_at timestamp without time zone,
+    website_referee character varying
 );
 
 
@@ -4009,6 +4010,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200131180415'),
 ('20200131195637'),
 ('20200207190510'),
-('20200208205958');
+('20200208205958'),
+('20200213215429');
 
 

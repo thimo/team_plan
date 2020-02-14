@@ -36,5 +36,7 @@ database_cleanup:
   cron: "0 10 * * 7"
   class: DatabaseCleanupJob
 
-# Cleanup dokku containers - every sunday at 0:20
-# 0   20   * * 7   root    dokku cleanup > /dev/null 2>&1
+# Referees from the website, every hour
+website_referees:
+  cron: "30 * * * *"
+  class: ScheduleRefereeImportJob
