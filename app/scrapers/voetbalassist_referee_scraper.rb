@@ -16,7 +16,7 @@ class VoetbalassistRefereeScraper
       cells = row.css("td")
       referee = cells.slice(1).text
 
-      { wedstrijdnummer(cells.last) => referee }
+      [wedstrijdnummer(cells.last), referee.presence]
     end.compact
   end
 
