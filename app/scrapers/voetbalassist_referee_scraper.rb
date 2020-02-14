@@ -8,6 +8,8 @@ class VoetbalassistRefereeScraper
   delegate :scheme, to: :uri
 
   def run
+    return [] if url.blank?
+
     doc = Nokogiri::HTML(URI.open(url))
     programma_tabel_body = doc.at_css("#ProgrammaTabel tbody")
     programma_tabel_body.css("tr").map do |row|
