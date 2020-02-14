@@ -24,7 +24,7 @@ class Tenant < ApplicationRecord
   def self.setting(name)
     return if ActsAsTenant.current_tenant.nil?
 
-    ActsAsTenant.current_tenant.tenant_setting.send(clean_up(name))
+    ActsAsTenant.current_tenant.settings.send(clean_up(name))
   end
 
   def self.set_setting(name, value)
