@@ -16,7 +16,7 @@ module ClubdataScheduler
 
     def schedule_season_jobs
       Season.active_season_for_today.competitions.active.each do |competition|
-        schedule_competition_jobs(tenant_id, competition.id)
+        schedule_competition_jobs(competition.tenant_id, competition.id)
       end
     end
 
