@@ -32,7 +32,7 @@ class VoetbalassistRefereeScraper
 
     def wedstrijdnummer(cell)
       doc = Nokogiri::XML(URI.open(match_url(cell)))
-      Nokogiri::HTML(doc.root.text).css(".waarde").last.text
+      Nokogiri::HTML(doc.root.text).css(".waarde").slice(2)&.text
     end
 
     def match_url(cell)

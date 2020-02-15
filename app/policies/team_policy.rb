@@ -96,7 +96,7 @@ class TeamPolicy < ApplicationPolicy
   def show_status?
     return false if @record.status == @record.age_group.status
 
-    @user.role?(Role::STATUS_DRAFT, @record)
+    @user.role?(Role::STATUS_DRAFT, @record) || @user.indirect_role?(Role::STATUS_DRAFT)
   end
 
   def show_alert?
