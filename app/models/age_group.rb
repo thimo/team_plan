@@ -22,6 +22,7 @@ class AgeGroup < ApplicationRecord
 
   scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: [nil, "all", ""])) }
   scope :female, -> { where(gender: "v") }
+  scope :all_gender, -> { where(gender: [nil, "all", ""]) }
   scope :asc, -> { order(:training_only, year_of_birth_to: :asc) }
   scope :draft_or_active, -> { where(status: [AgeGroup.statuses[:draft], AgeGroup.statuses[:active]]) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }

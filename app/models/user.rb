@@ -258,6 +258,15 @@ class User < ApplicationRecord
     User.archived.each(&:update_members)
   end
 
+  def members?
+    members.any?
+  end
+
+  def remove_member(member)
+    members.delete(member)
+    deactivate if members.none?
+  end
+
   private
 
     def team_id_for(record, as_team_staf = false)

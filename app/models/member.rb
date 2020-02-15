@@ -286,8 +286,8 @@ class Member < ApplicationRecord
                          .or(AgeGroup.for_active_season.where(year_of_birth_from: [nil, ""]))
     age_groups = age_groups.where("year_of_birth_to >= ?", year_of_birth)
                            .or(age_groups.where(year_of_birth_to: [nil, ""]))
-    age_groups = age_groups.where(gender: "m").or(age_groups.where(gender: [nil, "all", ""])) if male?
-    age_groups = age_groups.where(gender: "v").or(age_groups.where(gender: [nil, "all", ""])) if female?
+    age_groups = age_groups.where(gender: "m").or(age_groups.all_gender) if male?
+    age_groups = age_groups.where(gender: "v").or(age_groups.all_gender) if female?
 
     age_groups
   end
@@ -316,31 +316,21 @@ class Member < ApplicationRecord
       encoding: encoding,
       liberal_parsing: true
     ) do |row|
-      row_hash = row.to_hash
-      association_number = row_hash["association_number"]
+      row_data = row.to_hash
+      association_number = row_data["association_number"]
       member = Member.find_or_initialize_by(association_number: association_number)
 
-      row_hash.each do |key, value|
-        if Member.column_names.include?(key)
-          if key.ends_with?("_at") || key.ends_with?("_since")
-            member.send("#{key}=", value.to_date)
-          else
-            member.send("#{key}=", value.presence)
-          end
-        end
-      end
+      member.update_from_import(row_data)
 
       result[:counters][:imported] += 1
-
-      result[:activated] << member if member.deregistered_at_was.present? && member.deregistered_at.nil?
+      result[:activated] << member if member.deregistered_at_was.present? && member.deregistered_at.blank?
 
       if member.new_record?
         result[:created] << member
-        member.save!
       elsif member.changed?
         result[:counters][:changed] += 1
-        member.save!
       end
+      member.save!
       result[:member_ids] << member.id
     end
 
@@ -349,22 +339,34 @@ class Member < ApplicationRecord
     result
   end
 
+  def update_from_import(row_data)
+    self.missed_import_on = nil
+    row_data.each do |key, value|
+      if Member.column_names.include?(key)
+        if key.ends_with?("_at") || key.ends_with?("_since")
+          send("#{key}=", value.to_date)
+        else
+          send("#{key}=", value.presence)
+        end
+      end
+    end
+  end
+
   def self.cleanup(imported_before, imported_member_ids)
     # `cleanup` works with `imported_at` because it can happen that members disappear from
     # from the Sportlink export. It would prob. be better to handle this in the import
     result = { deregistered: [] }
 
-    Member.active.each do |member|
-      if imported_member_ids.include? member.id
-        # Member was imported, make sure `missed_import_on` is cleared
-        member.update!(missed_import_on: nil) if member.missed_import_on.present?
-      else
-        # Member was not in import. Set `missed_import_on` if nil
-        member.update!(missed_import_on: Time.zone.now) if member.missed_import_on.nil?
-        if member.missed_import_on < imported_before
-          member.update!(deregistered_at: member.missed_import_on)
-          result[:deregistered] << member
-        end
+    Member.active.find_each do |member|
+      missed_import_on = member.missed_import_on
+      next if imported_member_ids.include?(member.id)
+
+      # Member was not in import. Set `missed_import_on` if nil
+      if missed_import_on.blank?
+        member.update!(missed_import_on: Time.zone.now)
+      elsif missed_import_on < imported_before
+        member.update!(deregistered_at: missed_import_on)
+        result[:deregistered] << member
       end
     end
 
@@ -377,9 +379,9 @@ class Member < ApplicationRecord
 
   # Early notification of changed Sportlink export headers
   def self.check_header_translations(file)
-    first_line = File.open(file.path) { |f| f.readline }
+    first_line = File.open(file.path, &:readline)
     header = first_line.strip.split(",").compact
-    missing = header.select { |h| I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}", default: nil).blank? }
+    missing = header.select { |name| I18n.t("member.import.#{name.downcase.tr(' ', '_ ')}", default: nil).blank? }
     return if missing.none?
 
     ActionMailer::Base.mail(from: Tenant.setting("application_email"),
@@ -389,7 +391,7 @@ class Member < ApplicationRecord
   end
 
   def emails
-    EMAIL_ADDRESSES.map { |mail| send(mail) }.compact.uniq
+    EMAIL_ADDRESSES.map { |field_name| send(field_name) }.compact.uniq
   end
 
   def play_ban?
@@ -399,40 +401,26 @@ class Member < ApplicationRecord
   private
 
     def update_users
-      if new_record?
-        EMAIL_ADDRESSES.each do |mail|
-          add_to_user(send(mail))
-        end
-      elsif inactive?
-        EMAIL_ADDRESSES.each do |mail|
-          remove_from_user(send("#{mail}_was")) if send("#{mail}_changed?")
-          remove_from_user(send(mail))
-        end
-      else
-        EMAIL_ADDRESSES.each do |mail|
-          if send("#{mail}_changed?")
-            remove_from_user(send("#{mail}_was"))
-            add_to_user(send(mail))
-          end
-        end
+      EMAIL_ADDRESSES.each do |field_name|
+        email = send(field_name)
+        email_was_changed = send("#{field_name}_changed?")
+
+        add_to_user(email) if new_record? || email_was_changed
+        remove_from_user(send("#{field_name}_was")) if email_was_changed
+        remove_from_user(email) if inactive?
       end
     end
 
     def add_to_user(email)
-      return if email.blank?
+      return if email.blank? || (user = User.by_email(email).first).blank?
 
-      if (user = User.by_email(email).first).present?
-        users << user
-        user.activate
-      end
+      users << user
+      user.activate
     end
 
     def remove_from_user(email)
-      return if email.blank?
+      return if email.blank? || (user = User.by_email(email).first).blank?
 
-      if (user = User.by_email(email).first).present?
-        user.members.delete(self)
-        user.deactivate if user.members.none?
-      end
+      user.remove_member(self)
     end
 end
