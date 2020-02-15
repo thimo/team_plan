@@ -10,8 +10,9 @@ class Tenant < ApplicationRecord
   end
 
   def skip_update?
-    ActsAsTenant.current_tenant ||= self
-    !active? || Season.active_season_for_today.blank? || Tenant.setting("clubdata_client_id").blank?
+    ActsAsTenant.with_tenant(self) do
+      !active? || Season.active_season_for_today.blank? || Tenant.setting("clubdata_client_id").blank?
+    end
   end
 
   def self.from_request(request)
