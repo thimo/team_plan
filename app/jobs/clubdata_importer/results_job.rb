@@ -4,7 +4,7 @@ module ClubdataImporter
   class ResultsJob < Que::Job
     self.priority = 50
 
-    def run(tenant_id: ActsAsTenant.current_tenant)
+    def run(tenant_id:)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
         count = { total: 0, updated: 0 }
 

@@ -2,7 +2,7 @@
 
 module ClubdataImporter
   class TeamsAndCompetitionsJob < Que::Job
-    def run(tenant_id: ActsAsTenant.current_tenant)
+    def run(tenant_id:)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
         team_count = { total: 0, created: 0, updated: 0 }
         competition_count = { total: 0, created: 0, updated: 0 }

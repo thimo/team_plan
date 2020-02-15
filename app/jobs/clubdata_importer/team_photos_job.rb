@@ -2,7 +2,7 @@
 
 module ClubdataImporter
   class TeamPhotosJob < Que::Job
-    def run(tenant_id: ActsAsTenant.current_tenant, club_data_team_id:)
+    def run(tenant_id:, club_data_team_id:)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
         club_data_team = ClubDataTeam.find(club_data_team_id)
 

@@ -2,7 +2,7 @@
 
 module ClubdataImporter
   class CancelationsJob < Que::Job
-    def run(tenant_id: ActsAsTenant.current_tenant)
+    def run(tenant_id:)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
         count = { total: 0, created: 0, deleted: 0 }
 
