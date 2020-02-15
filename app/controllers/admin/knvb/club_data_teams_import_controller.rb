@@ -5,7 +5,8 @@ module Admin
     class ClubDataTeamsImportController < Admin::BaseController
       def new
         authorize ClubDataTeam
-        ClubDataImporter.teams_and_competitions
+        ClubdataImporter::TeamsAndCompetitionsJob.enqueue(tenant_id: ActsAsTenant.current_tenant.id)
+        flash_message(:success, "Import is ingepland.")
         redirect_to admin_knvb_club_data_teams_path
       end
     end
