@@ -2,7 +2,7 @@
 
 module ClubdataImporter
   class TeamsAndCompetitionsJob < Que::Job
-    def run(tenant_id:)
+    def run(tenant_id: ActsAsTenant.current_tenant)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
         team_count = { total: 0, created: 0, updated: 0 }
         competition_count = { total: 0, created: 0, updated: 0 }
@@ -44,9 +44,9 @@ module ClubdataImporter
             competition.save!
             competition_count[:created] += 1
 
-            ClubdataImporter::PouleStandingJob.enqueue(tenant_id: tenant_id, competition_id: competition.id)
-            ClubdataImporter::PouleMatchesJob.enqueue(tenant_id: tenant_id, competition_id: competition.id)
-            ClubdataImporter::PouleResultsJob.enqueue(tenant_id: tenant_id, competition_id: competition.id)
+            ClubdataImporter::PouleStandingJob.enqueue(competition_id: competition.id)
+            ClubdataImporter::PouleMatchesJob.enqueue(competition_id: competition.id)
+            ClubdataImporter::PouleResultsJob.enqueue(competition_id: competition.id)
           elsif competition.changed?
             competition.save!
             competition_count[:updated] += 1

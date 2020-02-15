@@ -5,7 +5,7 @@ module ClubdataImporter
     include ClubdataJob
     self.priority = 200
 
-    def run(tenant_id:, competition_id:)
+    def run(tenant_id: ActsAsTenant.current_tenant, competition_id:)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
         competition = Competition.find(competition_id)
 
