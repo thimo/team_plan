@@ -9,13 +9,21 @@ module ClubdataScheduler
         next if tenant.skip_update?
 
         ActsAsTenant.with_tenant(tenant) do
-          Season.active_season_for_today.competitions.active.each do |competition|
-            ClubdataImporter::PouleStandingJob.enqueue(tenant_id: ActsAsTenant.current_tenant, competition_id: competition.id)
-            ClubdataImporter::PouleMatchesJob.enqueue(tenant_id: ActsAsTenant.current_tenant, competition_id: competition.id)
-            ClubdataImporter::PouleResultsJob.enqueue(tenant_id: ActsAsTenant.current_tenant, competition_id: competition.id)
-          end
+          schedule_season_jobs
         end
       end
+    end
+
+    def schedule_season_jobs
+      Season.active_season_for_today.competitions.active.each do |competition|
+        schedule_competition_jobs(tenant_id, competition.id)
+      end
+    end
+
+    def schedule_competition_jobs(tenant_id, competition_id)
+      ClubdataImporter::PouleStandingJob.enqueue(tenant_id: tenant_id, competition_id: competition_id)
+      ClubdataImporter::PouleMatchesJob.enqueue(tenant_id: tenant_id, competition_id: competition_id)
+      ClubdataImporter::PouleResultsJob.enqueue(tenant_id: tenant_id, competition_id: competition_id)
     end
   end
 end

@@ -10,7 +10,7 @@ module ClubdataScheduler
 
         ActsAsTenant.with_tenant(tenant) do
           Season.active_season_for_today.club_data_teams.active.each do |club_data_team|
-            ClubdataImporter::TeamPhotosJob.enqueue(tenant_id: ActsAsTenant.current_tenant, club_data_team_id: club_data_team.id)
+            ClubdataImporter::TeamPhotosJob.enqueue(tenant_id: tenant.id, club_data_team_id: club_data_team.id)
           end
         end
       end
