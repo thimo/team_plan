@@ -8,7 +8,7 @@ module ClubdataScheduler
       Tenant.active.find_each do |tenant|
         next if tenant.skip_update?
 
-        ClubdataImporter::TeamsAndCompetitionsJob.perform_later(tenant_id: tenant.id)
+        ClubdataImporter::TeamsAndCompetitionsJob.enqueue(tenant_id: tenant.id)
       end
     end
   end

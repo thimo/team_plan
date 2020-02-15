@@ -1,46 +1,41 @@
 # frozen_string_literal: true
 
 module ClubdataImporter
-  class CancelationsJob < ApplicationJob
-    queue_as :default
+  class CancelationsJob < Que::Job
+    def run(tenant_id:)
+      ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
+        count = { total: 0, created: 0, deleted: 0 }
 
-    def perform(tenant_id:)
-      ActsAsTenant.current_tenant = Tenant.find(tenant_id)
+        # Regular import of all club matches
+        cancelled_matches = []
+        JSON.parse(RestClient.get(url)).each do |data|
+          next if (match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])).blank?
 
-      count = { total: 0, created: 0, deleted: 0 }
+          match.attributes = { afgelast: true, afgelast_status: data["status"] }
+          if match.changed?
+            count[:created] += 1
+            match.save!
+          end
 
-      # Regular import of all club matches
-      url = "#{Tenant.setting('clubdata_urls_afgelastingen')}&client_id=#{Tenant.setting('clubdata_client_id')}"
-      json = JSON.parse(RestClient.get(url))
-      cancelled_matches = []
-      json.each do |data|
-        next if (match = Match.find_by(wedstrijdcode: data["wedstrijdcode"])).blank?
-
-        match.attributes = { afgelast: true, afgelast_status: data["status"] }
-        if match.changed?
-          count[:created] += 1
-          match.save!
+          cancelled_matches << data["wedstrijdcode"]
         end
 
-        cancelled_matches << data["wedstrijdcode"]
+        Season.active_season_for_today.matches.afgelast.each do |match|
+          next if cancelled_matches.include? match.wedstrijdcode
+
+          match.update!(afgelast: false, afgelast_status: "")
+          count[:deleted] += 1
+        end
+
+        ClubDataLog.create level: :info,
+                          source: :afgelastingen_import,
+                          body: "#{count[:total]} imported (#{count[:created]} created, \
+                                                            #{count[:deleted]} deleted)"
       end
+    end
 
-      Season.active_season_for_today.matches.afgelast.each do |match|
-        next if cancelled_matches.include? match.wedstrijdcode
-
-        match.update!(
-          afgelast: false,
-          afgelast_status: ""
-        )
-        count[:deleted] += 1
-      end
-
-      ClubDataLog.create level: :info,
-                         source: :afgelastingen_import,
-                         body: "#{count[:total]} imported (#{count[:created]} created, \
-                                                           #{count[:deleted]} deleted)"
-      # rescue StandardError => e
-      #   log_error(:teams_and_competitions_import, generic_error_body(url, e))
+    def url
+      "#{Tenant.setting('clubdata_urls_afgelastingen')}&client_id=#{Tenant.setting('clubdata_client_id')}"
     end
   end
 end
