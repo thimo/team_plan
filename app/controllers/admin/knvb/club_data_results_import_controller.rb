@@ -5,8 +5,8 @@ module Admin
     class ClubDataResultsImportController < Admin::BaseController
       def new
         authorize Match
-        ClubdataImporter::ResultsJob.enqueue(tenant_id: ActsAsTenant.current_tenant.id)
-        ClubdataImporter::CancelationsJob.enqueue(tenant_id: ActsAsTenant.current_tenant.id)
+        ClubdataScheduler::ResultsJob.enqueue
+        ClubdataScheduler::CancelationsJob.enqueue
         flash_message(:success, "Import is ingepland.")
         redirect_to admin_knvb_matches_path
       end
