@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "digest/md5"
+
 # Imported members from Sportlink
 class Member < ApplicationRecord
   include Filterable
@@ -254,8 +256,18 @@ class Member < ApplicationRecord
   end
 
   def photo_data=(data)
-    io = CarrierStringIO.new(Base64.decode64(data))
-    self.photo = io
+    return unless photo_changed?(data)
+
+    self.photo = CarrierStringIO.new(data)
+    self.photo_md5 = Member.checksum(data)
+  end
+
+  def self.checksum(data)
+    Digest::MD5.hexdigest(data)
+  end
+
+  def photo_changed?(new_data)
+    photo_md5 != Member.checksum(new_data)
   end
 
   def full_address
@@ -300,7 +312,7 @@ class Member < ApplicationRecord
     CSV.foreach(
       file.path,
       headers: true,
-      header_converters: ->(h) { I18n.t("member.import.#{h.downcase.tr(' ', '_ ')}") },
+      header_converters: ->(header) { I18n.t("member.import.#{header.downcase.tr(' ', '_ ')}") },
       encoding: encoding,
       liberal_parsing: true
     ) do |row|

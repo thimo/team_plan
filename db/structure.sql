@@ -920,7 +920,8 @@ CREATE TABLE public.members (
     full_name character varying,
     photo character varying,
     missed_import_on timestamp without time zone,
-    tenant_id bigint
+    tenant_id bigint,
+    photo_md5 character varying
 );
 
 
@@ -4011,6 +4012,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200131195637'),
 ('20200207190510'),
 ('20200208205958'),
-('20200213215429');
+('20200213215429'),
+('20200215170050');
 
 
