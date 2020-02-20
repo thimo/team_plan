@@ -35,6 +35,7 @@ class Match < ApplicationRecord
   scope :active,          -> { where(afgelast: false) }
   scope :for_team,        ->(team_ids) { includes(:teams).where(teams: { id: team_ids }) }
   scope :for_competition, ->(competition_ids) { where(competition_id: competition_ids) }
+  scope :with_referee,    -> { where.not(website_referee: nil) }
 
   before_validation :check_wedstrijdcode
 

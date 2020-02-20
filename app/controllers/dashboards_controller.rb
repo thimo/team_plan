@@ -46,15 +46,25 @@ class DashboardsController < ApplicationController
 
   def program
     authorize Match, :show?
-    matches = policy_scope(Match).own.not_played.asc.in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day)
+    matches = policy_scope(Match).own.not_played.asc
+                                 .in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day)
                                  .includes(:competition, :teams)
     @not_played_matches = matches.niet_afgelast.group_by(&:wedstrijddatum_date)
     @canceled_matches = matches.afgelast.group_by(&:wedstrijddatum_date)
   end
 
+  def referees
+    authorize Match, :show?
+    @matches = policy_scope(Match).own.with_referee.asc
+                                  .from_today
+                                  .with_referee
+                                  .includes(:competition, :teams)
+  end
+
   def results
     authorize Match, :show?
-    @played_matches = policy_scope(Match).own.played.desc.in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day)
+    @played_matches = policy_scope(Match).own.played.desc
+                                         .in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day)
                                          .includes(:competition).group_by(&:wedstrijddatum_date)
   end
 

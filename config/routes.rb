@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :dashboards do
       collection do
         get :program
+        get :referees
         get :results
         get :cancellations
       end
