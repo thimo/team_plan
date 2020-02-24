@@ -9,7 +9,7 @@ gem "jbuilder", "~> 2.5"
 gem "pg", "~> 1.0"
 gem "puma", "~> 4.0"
 # que_scheduler needs beta3, but it's migration only works on beta4
-gem "que", "~> 1.0.0.beta3"
+gem "que", "~> 1.0.0.beta4"
 # Use Github repo as latest release does not support que 1.0 beta
 gem "que-scheduler", git: "https://github.com/hlascelles/que-scheduler.git"
 gem "que-web"
