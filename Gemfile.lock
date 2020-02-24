@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/hlascelles/que-scheduler.git
-  revision: bdc6e1e0ef21c908ea60ae010d9c98049b65b6ea
+  revision: 6b17c86d8c2a01f5c696cee25bceac6dec0d6298
   specs:
-    que-scheduler (3.2.7)
+    que-scheduler (3.2.8)
       activesupport (>= 4.0)
       backports (~> 3.10)
       fugit (~> 1.1, >= 1.1.8)
@@ -80,7 +80,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     backport (1.1.2)
-    backports (3.16.0)
+    backports (3.16.1)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
@@ -136,7 +136,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     colorize (0.8.1)
-    concurrent-ruby (1.1.5)
+    concurrent-ruby (1.1.6)
     countries (3.0.0)
       i18n_data (~> 0.8.0)
       sixarm_ruby_unaccent (~> 1.1)
