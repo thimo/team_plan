@@ -48,7 +48,7 @@ gem "rubyzip"
 gem "bootsnap", require: false
 gem "caxlsx", "~> 3.0"
 gem "caxlsx_rails"
-gem "icalendar", "~> 2.4.1"
+gem "icalendar", "~> 2.6.1"
 gem "pg_search"
 gem "pretender"
 gem "redis", "~> 4.0"
