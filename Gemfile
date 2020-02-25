@@ -69,7 +69,7 @@ group :development do
   gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
   gem "guard-minitest", require: false
   gem "letter_opener"
-  gem "listen", "~> 3.0.5"
+  gem "listen", "~> 3.2.1"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   # gem "rack-mini-profiler"

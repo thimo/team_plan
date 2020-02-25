@@ -252,9 +252,9 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    listen (3.0.8)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
+    listen (3.2.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -566,7 +566,7 @@ DEPENDENCIES
   kaminari
   launchy
   letter_opener
-  listen (~> 3.0.5)
+  listen (~> 3.2.1)
   mini_magick
   minitest
   minitest-reporters
