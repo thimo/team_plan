@@ -88,8 +88,9 @@ GEM
     bootstrap4-kaminari-views (1.0.1)
       kaminari (>= 0.13)
       rails (>= 3.1)
-    bootstrap_form (4.0.0)
-      rails (>= 5.0)
+    bootstrap_form (4.3.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     brakeman (4.8.0)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.4)
@@ -535,7 +536,7 @@ DEPENDENCIES
   awesome_print
   bootsnap
   bootstrap4-kaminari-views
-  bootstrap_form (~> 4.0.0)
+  bootstrap_form (~> 4.3.0)
   brakeman
   breadcrumbs_on_rails (~> 3.0.1)
   bullet
