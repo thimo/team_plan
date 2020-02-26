@@ -92,7 +92,8 @@ GEM
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     brakeman (4.8.0)
-    breadcrumbs_on_rails (3.0.1)
+    breadcrumbs_on_rails (4.0.0)
+      rails (>= 5.0)
     builder (3.2.4)
     bullet (6.1.0)
       activesupport (>= 3.0.0)
@@ -538,7 +539,7 @@ DEPENDENCIES
   bootstrap4-kaminari-views
   bootstrap_form (~> 4.3.0)
   brakeman
-  breadcrumbs_on_rails (~> 3.0.1)
+  breadcrumbs_on_rails (~> 4.0.0)
   bullet
   bundler-audit
   byebug
