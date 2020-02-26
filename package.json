@@ -33,7 +33,7 @@
     "pnotify": "^4.0.0",
     "popper.js": "^1.11.1",
     "postcss-cssnext": "^3.1.0",
-    "postcss-loader": "^2.0.6",
+    "postcss-loader": "^3.0.0",
     "postcss-smart-import": "^0.7.5",
     "precss": "^3.1.0",
     "prop-types": "^15.6.0",
