@@ -25,7 +25,7 @@ environment.loaders.append('less', {
 
 // Add glob (`/**/*`) parser to sass/scss files
 const sassLoader = environment.loaders.get('sass').use.pop()
-sassLoader.options.importer = globImporter()
+sassLoader.options.sassOptions = { importer: globImporter() };
 environment.loaders.get('sass').use.push(sassLoader)
 
 const aliasConfig = {
@@ -36,4 +36,4 @@ const aliasConfig = {
   }
 }
 
-module.exports = merge(environment.toWebpackConfig(), aliasConfig)
+module.exports = merge(environment.toWebpackConfig(), aliasConfig);
