@@ -5,11 +5,9 @@ class CompetitionsController < ApplicationController
   before_action :add_breadcrumbs
 
   def show
-    @not_played_matches = policy_scope(@competition.matches).not_played.asc
-                                                            .group_by { |match| match.wedstrijddatum.to_date }
-
-    @played_matches = policy_scope(@competition.matches).played.desc
-                                                        .group_by { |match| match.wedstrijddatum.to_date }
+    matches = policy_scope(@competition.matches)
+    @not_played_matches = matches.not_played.asc.group_by(&:wedstrijddatum_date)
+    @played_matches = matches.played.desc.group_by(&:wedstrijddatum_date)
   end
 
   private
