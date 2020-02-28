@@ -1,4 +1,4 @@
-name: Rails Unit Tests
+name: Ruby on Rails Tests
 
 on: [push, pull_request]
 
@@ -36,5 +36,5 @@ jobs:
         gem install bundler
         bundle install --jobs 4 --retry 3
         bundle exec rails db:create
-        bundle exec rails db:migrate
+        bundle exec rails db:schema:load
         bundle exec rails test
