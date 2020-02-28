@@ -35,6 +35,7 @@ jobs:
         sudo apt-get install g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
         gem install bundler
         bundle install --jobs 4 --retry 3
+        yarn install
         bundle exec rails db:create
         bundle exec rails db:schema:load
         bundle exec rails test
