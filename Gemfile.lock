@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/hlascelles/que-scheduler.git
-  revision: 6b17c86d8c2a01f5c696cee25bceac6dec0d6298
+  revision: c8fcba3fae41675aca48f213518afa4673f33661
   specs:
     que-scheduler (3.2.8)
       activesupport (>= 4.0)
@@ -304,7 +304,7 @@ GEM
       activerecord (>= 4.2)
       request_store (~> 1.1)
     parallel (1.19.1)
-    parser (2.7.0.2)
+    parser (2.7.0.3)
       ast (~> 2.4.0)
     path_expander (1.1.0)
     pg (1.2.2)
@@ -320,7 +320,7 @@ GEM
       pry (>= 0.10.4)
     psych (3.1.0)
     public_suffix (4.0.3)
-    puma (4.3.2)
+    puma (4.3.3)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -370,7 +370,7 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_best_practices (1.19.5)
+    rails_best_practices (1.20.0)
       activesupport
       code_analyzer (>= 0.5.1)
       erubis
@@ -414,7 +414,7 @@ GEM
     reverse_markdown (1.4.0)
       nokogiri
     rexml (3.2.4)
-    rubocop (0.80.0)
+    rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
