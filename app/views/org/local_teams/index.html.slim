@@ -23,6 +23,13 @@
                     = render 'members/photo', member: member
                   td
                     = render "members/member", member: member, born_on_class: "float-right"
+                    - if (team_members = member.team_members.active.for_active_season).any?
+                      .mt-2
+                        - team_members.each do |team_member|
+                          div
+                            = team_member.team.name_with_club
+                            span.lighter.pl-2
+                              = team_member.role_i18n.downcase
           - else
             .p-3
               i Geen leden gevonden
