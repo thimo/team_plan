@@ -16,7 +16,8 @@ class OrgPolicy < ApplicationPolicy
   end
 
   def show_local_teams?
-    @user.admin?
+    @user.admin? ||
+      @user.role?(Role::ORG_LOCAL_TEAMS_SHOW)
   end
 
   def show_comments?
