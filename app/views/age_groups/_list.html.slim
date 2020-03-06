@@ -35,7 +35,7 @@
                 .light.small
                   = "2 x #{age_group.minutes_per_half} min"
             td.text-right
-              - if policy(age_group).show_member_count? && age_group.inactive_players?
+              - if policy(age_group).show_alert? && age_group.inactive_players?
                 i.fa.fa-exclamation-triangle.color-red.mr-1 title="Eén of meerdere teams bevatten mogelijk een fout in de indeling"
               - if policy(age_group).show_status?
                 => age_group.status_to_badge.html_safe
