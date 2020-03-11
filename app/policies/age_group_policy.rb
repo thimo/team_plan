@@ -70,6 +70,12 @@ class AgeGroupPolicy < ApplicationPolicy
     @user.role?(Role::AGE_GROUP_SHOW_MEMBER_COUNT, @record)
   end
 
+  def show_alert?
+    return false if @record.archived?
+
+    @user.role?(Role::TEAM_MEMBER_ALERT, @record)
+  end
+
   def set_status?
     return false if @record.new_record? || !@record.season.active?
 
