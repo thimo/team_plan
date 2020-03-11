@@ -13,6 +13,8 @@ class Member < ApplicationRecord
   STATUS_AF_TE_MELDEN = "af te melden"
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = "overschrijving spelactiviteit"
 
+  DISALLOWED_CLUB_SPORTS_FOR_PLAYERS = ["Wachtlijst - training - Week", "Niet Spelend - nvt - Week"].freeze
+
   EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on
                       gender role address zipcode city phone email email_2 member_since previous_team].freeze
   EXPORT_COLUMNS_EVALUATION = %w[field_positions field_positions_thickened prefered_foot advise_next_season].freeze
@@ -82,6 +84,7 @@ class Member < ApplicationRecord
   scope :status_overschrijving, -> {
     where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
   }
+  scope :disallowed_club_sports, -> { where(club_sports: DISALLOWED_CLUB_SPORTS_FOR_PLAYERS) }
 
   scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
@@ -190,6 +193,10 @@ class Member < ApplicationRecord
 
   def status_overschrijving?
     status == STATUS_OVERSCHRIJVING_SPELACTIVITEIT
+  end
+
+  def disallowed_club_sports?
+    club_sports.in?(DISALLOWED_CLUB_SPORTS_FOR_PLAYERS)
   end
 
   def archived?

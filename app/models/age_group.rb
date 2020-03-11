@@ -80,7 +80,8 @@ class AgeGroup < ApplicationRecord
   def inactive_players?
     Member.by_age_group_as_active(self).inactive.any? ||
       Member.by_age_group_as_active_player(self).sportlink_non_player.any? ||
-      Member.by_age_group_as_active_player_in_active_team(self).status_overschrijving.any?
+      Member.by_age_group_as_active_player_in_active_team(self).status_overschrijving.any? ||
+      Member.by_age_group_as_active_player_in_active_team(self).disallowed_club_sports.any?
   end
 
   def always_show_group_members?
