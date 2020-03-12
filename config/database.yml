@@ -10,6 +10,7 @@ development:
 
 test:
   <<: *default
+  port: 5433
   database: teamplan_test
 
 demo:
