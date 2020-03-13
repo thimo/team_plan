@@ -1,4 +1,4 @@
-name: Rails Unit Tests
+name: Ruby on Rails Tests
 
 on: [push, pull_request]
 
@@ -13,10 +13,9 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_DB: teamplan_test
         ports:
         - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
@@ -29,11 +28,14 @@ jobs:
       env:
         PGHOST: 127.0.0.1
         PGUSER: postgres
+        PGPASSWORD: postgres
         RAILS_ENV: test
       run: |
         sudo apt-get -yqq install libpq-dev
+        sudo apt-get install g++ qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
         gem install bundler
         bundle install --jobs 4 --retry 3
+        yarn install
         bundle exec rails db:create
-        bundle exec rails db:migrate
+        bundle exec rails db:schema:load
         bundle exec rails test

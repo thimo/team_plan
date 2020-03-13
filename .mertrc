@@ -12,6 +12,6 @@ layout:
       -
         layout:
           -
-            - SCOUT_DEV_TRACE=false rails s
+            - SCOUT_DEV_TRACE=false rails s -p 3001
           -
             - ls

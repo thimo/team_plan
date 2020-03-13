@@ -1,7 +1,7 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "csv"
-require "rails/all"
+require 'csv'
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -13,10 +13,9 @@ module TeamPlan
     config.load_defaults 6.0
 
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :nl
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml")]
+    config.time_zone = "Amsterdam"
 
     config.autoload_paths += %W[#{config.root}/lib]
 
@@ -25,15 +24,13 @@ module TeamPlan
       Devise::Mailer.layout "mailer" # email.haml or email.erb
     end
 
-    config.generators do |g|
-      g.javascript_engine :js
+    config.generators do |generator|
+      generator.javascript_engine :js
 
-      g.javascripts = false
-      g.stylesheets = false
-      g.helper = false
+      generator.javascripts = false
+      generator.stylesheets = false
+      generator.helper = false
     end
-
-    config.time_zone = "Amsterdam"
 
     config.assets.paths << Rails.root.join("vendor/assets/images")
     # A bit dirty, but needed to get @coreui's 'node_modules/*' links working
