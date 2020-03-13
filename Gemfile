@@ -7,17 +7,14 @@ ruby "2.6.5"
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
 gem "pg", "~> 1.0"
-gem "puma", "~> 4.0"
-# que_scheduler needs beta3, but it's migration only works on beta4
+gem "puma", "~> 4.3"
 gem "que", "~> 1.0.0.beta4"
 # Use Github repo as latest release does not support que 1.0 beta
 gem "que-scheduler", git: "https://github.com/hlascelles/que-scheduler.git"
 gem "que-web"
 gem "rails", "~> 6.0.1"
 gem "rails-i18n"
-gem "sassc-rails"
 gem "turbolinks", "~> 5"
-gem "uglifier", ">= 1.3.0"
 gem "webpacker", ">= 4.0.x"
 gem "webpacker-react"
 
@@ -29,7 +26,7 @@ gem "rest-client"
 gem "slim-rails"
 
 gem "bootstrap4-kaminari-views"
-gem "bootstrap_form", "~> 4.3.0"
+gem "bootstrap_form", "~> 4.4.0"
 gem "breadcrumbs_on_rails", "~> 4.0.0"
 gem "country_select"
 gem "devise", "~> 4.7"
@@ -72,7 +69,6 @@ group :development do
   gem "listen", "~> 3.2.1"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
-  # gem "rack-mini-profiler"
   gem "pry-rails"
   gem "rack-livereload"
   gem "rails-erd", require: false # Run `bundle exec erd`
@@ -96,7 +92,6 @@ end
 
 group :test do
   gem "minitest-reporters"
-  # gem "mini_backtrace"
   gem "launchy" # For "save_and_open_page" debugging during testing
   gem "minitest"
   # Disabled to prevent "uninitialized constant Minitest::Rails::TestUnit"
@@ -108,6 +103,3 @@ group :production, :staging do
   gem "exception_notification"
   gem "rails_12factor"
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

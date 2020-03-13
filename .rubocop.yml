@@ -10,11 +10,20 @@ AllCops:
     - 'bin/**/*'
     - 'node_modules/**/*'
 
-Rails:
-  Enabled: true
-
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 1500
+
+Rails:
+  Enabled: true
 
 Style/Documentation:
   Include:
@@ -30,14 +39,12 @@ Style/StringLiterals:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-Metrics/LineLength:
-  Max: 120
-
-Metrics/MethodLength:
-  Max: 20
-
-Metrics/ClassLength:
-  Max: 1500
-
 Rails/HasAndBelongsToMany:
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true

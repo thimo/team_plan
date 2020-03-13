@@ -24,6 +24,9 @@
     - if member.local_teams.present?
       .light.small
         = "#{member.local_teams}"
+    - if member.club_sports.present?
+      .light.small
+        = member.club_sports
     - unless member.status_definitief? || member.status_af_te_melden?
       .light.small
         = member.status.capitalize
@@ -32,16 +35,22 @@
       | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
 
 - if show_alert
-  - if team_member.player?
-    - if member.status_overschrijving?
-      .alert.alert-danger.mb-0.mt-1
-        i.fa.fa-exclamation-triangle.fa-lg.pr-2
-        | #{member.name} is niet speelgerechtigd, het overschrijvingverzoek is nog niet goedgekeurd
-    - elsif member.sportlink_non_player?
-      .alert.alert-danger.mb-0.mt-1
-        i.fa.fa-exclamation-triangle.fa-lg.pr-2
-        | #{member.name} is niet speelgerechtigd
   - if member.inactive?
     .alert.alert-danger.mb-0.mt-1
       i.fa.fa-exclamation-triangle.fa-lg.pr-2
       | #{member.name} is geen actief lid meer sinds #{I18n.l member.deregistered_at, format: :long}
+  - else
+    - if team_member.player?
+      - if member.status_overschrijving?
+        .alert.alert-danger.mb-0.mt-1
+          i.fa.fa-exclamation-triangle.fa-lg.pr-2
+          | #{member.name} is niet speelgerechtigd, het overschrijvingverzoek is nog niet goedgekeurd
+      - elsif member.sportlink_non_player?
+        .alert.alert-danger.mb-0.mt-1
+          i.fa.fa-exclamation-triangle.fa-lg.pr-2
+          | #{member.name} is niet speelgerechtigd
+      - elsif member.disallowed_club_sports?
+        .alert.alert-danger.mb-0.mt-1
+          i.fa.fa-exclamation-triangle.fa-lg.pr-2
+          | #{member.name} is waarschijnlijk nog niet goed ingedeeld in Sportlink.
+            Neem contact op met de ledenadministratie.
