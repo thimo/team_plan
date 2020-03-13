@@ -28,15 +28,19 @@ clubdata_poules_saturday:
 
 # Team member photos - every sunday at 22:15
 clubdata_team_photos:
-  cron: "15 22 * * 7"
+  cron: "15 22 * * 0"
   class: ClubdataScheduler::TeamPhotosJob
 
 # Database cleanup - every sunday at 0:10
 database_cleanup:
-  cron: "0 10 * * 7"
+  cron: "0 10 * * 0"
   class: DatabaseCleanupJob
 
-# Referees from the website, every hour
+# Referees from the website - every 15 mins on friday/saturday, otherwise every hour
 website_referees:
-  cron: "30 * * * *"
+  cron: "30 * * * 0,1,2,3,4"
+  class: ScheduleRefereeImportJob
+
+website_referees_friday_saturday:
+  cron: "*/15 * * * 5,6"
   class: ScheduleRefereeImportJob
