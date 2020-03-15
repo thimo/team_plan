@@ -10,6 +10,7 @@
   = f.text_field :application_sysadmin_email
   = f.form_group
     = f.check_box :application_maintenance, custom: true
+
   h4 Vereniging
   = f.text_field :club_name
   = f.text_field :club_name_short
@@ -17,12 +18,19 @@
   = f.text_field :club_member_administration_email
   = f.text_field :club_logo_url
   = f.text_field :club_relatiecode
+
   h4 Adres
   = f.text_field :club_sportscenter
   = f.text_field :club_address
   = f.text_field :club_zip
   = f.text_field :club_city
   = f.text_field :club_phone
+
+  h4 Teamindelingen
+  - local_teams = Member.active.with_local_teams.pluck(:local_teams).uniq.sort
+  = f.collection_check_boxes :local_teams_warning_sportlink, local_teams, :to_s, :to_s, custom: true
+  = f.collection_check_boxes :local_teams_always_allowed_in_team, local_teams, :to_s, :to_s, custom: true
+
   h4 Club Data
   = f.text_field :clubdata_client_id
   = f.text_field :clubdata_urls_competities
@@ -34,6 +42,7 @@
   = f.text_field :clubdata_urls_wedstrijd_accommodatie
   = f.text_field :clubdata_urls_afgelastingen
   = f.text_field :clubdata_urls_club_logos
+
   h4 Overig
   = f.text_field :fontawesome_kit_nr
   = f.text_field :google_maps_base_url

@@ -1513,7 +1513,9 @@ CREATE TABLE public.tenant_settings (
     updated_at timestamp without time zone NOT NULL,
     last_import_members timestamp without time zone,
     fontawesome_kit_nr character varying,
-    voetbalassist_referee_url character varying
+    voetbalassist_referee_url character varying,
+    local_teams_always_allowed_in_team character varying[] DEFAULT '{}'::character varying[],
+    local_teams_warning_sportlink character varying[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -4013,6 +4015,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200207190510'),
 ('20200208205958'),
 ('20200213215429'),
-('20200215170050');
+('20200215170050'),
+('20200315183921');
 
 

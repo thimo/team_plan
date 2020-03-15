@@ -86,7 +86,7 @@ class Team < ApplicationRecord
       Member.by_team_as_active_player(self).sportlink_non_player.any? ||
       active? && (
         Member.by_team_as_active_player(self).status_overschrijving.any? ||
-        Member.by_team_as_active_player(self).disallowed_club_sports.any?
+        Member.by_team_as_active_player(self).local_teams_warning_sportlink.any?
       )
   end
 

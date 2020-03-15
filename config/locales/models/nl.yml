@@ -160,6 +160,8 @@ nl:
         google_maps_api_key: Google Maps API key
         google_maps_base_url: Google Maps basis URL
         voetbalassist_referee_url: Voetbalassist scheidsrechters URL
+        local_teams_warning_sportlink: Toon waarschuwing
+        local_teams_always_allowed_in_team: Altijd toegestaan
       todo:
         body: Todo
         ended_on: Einddatum
@@ -202,6 +204,12 @@ nl:
         for_role: Toon aan
         name: Titel
         released_at: Datum
+
+    help:
+      tenant_setting:
+        local_teams_warning_sportlink: Bij spelers met deze lokele teams wordt een waarschuwing getoond
+        local_teams_always_allowed_in_team: Spelers met deze lokale teams mogen altijd ingedeeld zijn
+
     models:
       user: Gebruiker
 

@@ -13,8 +13,6 @@ class Member < ApplicationRecord
   STATUS_AF_TE_MELDEN = "af te melden"
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = "overschrijving spelactiviteit"
 
-  DISALLOWED_CLUB_SPORTS_FOR_PLAYERS = ["Wachtlijst - training - Week", "Niet Spelend - nvt - Week"].freeze
-
   EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on
                       gender role address zipcode city phone email email_2 member_since previous_team].freeze
   EXPORT_COLUMNS_EVALUATION = %w[field_positions field_positions_thickened prefered_foot advise_next_season].freeze
@@ -76,15 +74,17 @@ class Member < ApplicationRecord
   scope :sportlink_player, -> {
     where.not(sport_category: nil)
          .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
+         .or(where(local_teams: Tenant.setting("local_teams_always_allowed_in_team")))
   }
   scope :sportlink_non_player, -> {
     where(sport_category: nil)
       .where.not(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
+      .where.not(local_teams: Tenant.setting("local_teams_always_allowed_in_team"))
   }
   scope :status_overschrijving, -> {
     where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT)
   }
-  scope :disallowed_club_sports, -> { where(club_sports: DISALLOWED_CLUB_SPORTS_FOR_PLAYERS) }
+  scope :local_teams_warning_sportlink, -> { where(local_teams: Tenant.setting("local_teams_warning_sportlink")) }
 
   scope :male,   -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
@@ -184,7 +184,7 @@ class Member < ApplicationRecord
   end
 
   def sportlink_player?
-    sport_category.present?
+    sport_category.present? || local_teams.in?(Tenant.setting("local_teams_always_allowed_in_team"))
   end
 
   def sportlink_non_player?
@@ -195,8 +195,8 @@ class Member < ApplicationRecord
     status == STATUS_OVERSCHRIJVING_SPELACTIVITEIT
   end
 
-  def disallowed_club_sports?
-    club_sports.in?(DISALLOWED_CLUB_SPORTS_FOR_PLAYERS)
+  def local_teams_warning_sportlink?
+    local_teams.in?(Tenant.setting("local_teams_warning_sportlink"))
   end
 
   def archived?

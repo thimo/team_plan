@@ -41,7 +41,9 @@ class TenantSettingPolicy < ApplicationPolicy
       :google_maps_base_url,
       :google_maps_api_key,
       :google_analytics_tracking_id,
-      :voetbalassist_referee_url
+      :voetbalassist_referee_url,
+      local_teams_always_allowed_in_team: [],
+      local_teams_warning_sportlink: []
     ]
     attributes
   end

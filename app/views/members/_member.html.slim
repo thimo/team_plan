@@ -24,9 +24,6 @@
     - if member.local_teams.present?
       .light.small
         = "#{member.local_teams}"
-    - if member.club_sports.present?
-      .light.small
-        = member.club_sports
     - unless member.status_definitief? || member.status_af_te_melden?
       .light.small
         = member.status.capitalize
@@ -49,7 +46,7 @@
         .alert.alert-danger.mb-0.mt-1
           i.fa.fa-exclamation-triangle.fa-lg.pr-2
           | #{member.name} is niet speelgerechtigd
-      - elsif member.disallowed_club_sports?
+      - elsif member.local_teams_warning_sportlink?
         .alert.alert-danger.mb-0.mt-1
           i.fa.fa-exclamation-triangle.fa-lg.pr-2
           | #{member.name} is waarschijnlijk nog niet goed ingedeeld in Sportlink.
