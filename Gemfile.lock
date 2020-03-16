@@ -435,7 +435,7 @@ GEM
     ruby2_keywords (0.0.2)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
-    rubyzip (2.2.0)
+    rubyzip (2.3.0)
     scout_apm (2.6.6)
       parser
     selenium-webdriver (3.142.7)
