@@ -7,6 +7,8 @@ class Injury < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_paper_trail
 
+  delegate :name, to: :member
+
   after_save :update_member
   after_destroy :update_member
 
