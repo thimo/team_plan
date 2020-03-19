@@ -6,7 +6,7 @@ ruby "2.6.5"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
-gem "pg", "~> 1.0"
+gem "pg", "~> 1.2"
 gem "puma", "~> 4.3"
 gem "que", "~> 1.0.0.beta4"
 # Use Github repo as latest release does not support que 1.0 beta
