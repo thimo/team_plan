@@ -12,7 +12,7 @@ gem "que", "~> 1.0.0.beta4"
 # Use Github repo as latest release does not support que 1.0 beta
 gem "que-scheduler", git: "https://github.com/hlascelles/que-scheduler.git"
 gem "que-web"
-gem "rails", "~> 6.0.1"
+gem "rails", "~> 6.0.2"
 gem "rails-i18n"
 gem "turbolinks", "~> 5"
 gem "webpacker", ">= 4.0.x"
