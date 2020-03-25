@@ -51,7 +51,7 @@
     "trix": "^1.2.2",
     "turbolinks": "^5.2.0",
     "vanilla-lazyload": "^13.0.1",
-    "webpack": "^4.42.0",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.1",
     "webpacker-react": "^0.3.2"
