@@ -8581,10 +8581,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vanilla-lazyload@^14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/vanilla-lazyload/-/vanilla-lazyload-14.0.0.tgz#64d9fde88d992aea70cc10b8caa2108a4c427445"
-  integrity sha512-ZMU544KVkqrcOTVmdbx6a7mehzc0ZVsXU0qkG97gpY3m0wFPywG/7NBxcfd4rlW03TU2JUupSuGRV6VKCrAsLQ==
+vanilla-lazyload@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/vanilla-lazyload/-/vanilla-lazyload-14.0.1.tgz#06b4fde74d9fd13223b0c99ce3c60ef97d41630a"
+  integrity sha512-FKdC13Av4rpOIFrVHOeXsl+mmUsnNhyPfk6m+uYxk/THjqqoOWv23BE4cwBjyp1RK3d1auPB7Ueskha0VylMcA==
 
 vary@~1.1.2:
   version "1.1.2"
