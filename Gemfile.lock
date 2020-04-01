@@ -312,8 +312,7 @@ GEM
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     que (1.0.0.beta4)
-    que-web (0.8.0)
-      erubis
+    que-web (0.9.0)
       que (~> 1.0.0.beta3)
       sinatra
     raabro (1.1.6)
