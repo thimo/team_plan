@@ -1,14 +1,3 @@
-GIT
-  remote: https://github.com/hlascelles/que-scheduler.git
-  revision: f53392336d8b1ac44f9ad31f98d4e7c62ca19ae4
-  specs:
-    que-scheduler (3.2.8)
-      activesupport (>= 4.0)
-      backports (~> 3.10)
-      fugit (~> 1.1, >= 1.1.8)
-      hashie (>= 3, < 5)
-      que (>= 0.12, <= 1.0.0.beta4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -324,6 +313,12 @@ GEM
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     que (1.0.0.beta4)
+    que-scheduler (3.2.8)
+      activesupport (>= 4.0)
+      backports (~> 3.10)
+      fugit (~> 1.1, >= 1.1.8)
+      hashie (>= 3, < 5)
+      que (>= 0.12, <= 1.0.0.beta4)
     que-web (0.8.0)
       erubis
       que (~> 1.0.0.beta3)
@@ -581,7 +576,7 @@ DEPENDENCIES
   puma (~> 4.3)
   pundit
   que (~> 1.0.0.beta4)
-  que-scheduler!
+  que-scheduler
   que-web
   rack-livereload
   rails (~> 6.0.2)

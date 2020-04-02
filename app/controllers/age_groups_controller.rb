@@ -20,7 +20,7 @@ class AgeGroupsController < ApplicationController
   def new; end
 
   def create
-    if params[:refresh_only].blank? &&  @age_group.save
+    if params[:refresh_only].blank? && @age_group.save
       redirect_to @age_group, notice: "Leeftijdsgroep is toegevoegd."
     else
       render :new
