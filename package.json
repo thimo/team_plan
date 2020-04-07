@@ -10,7 +10,7 @@
     "@rails/ujs": "^6.0.1",
     "@rails/webpacker": "^5.0.1",
     "animate.css": "^3.6.1",
-    "autoprefixer": "^9.7.5",
+    "autoprefixer": "^9.7.6",
     "autosize": "^4.0.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
