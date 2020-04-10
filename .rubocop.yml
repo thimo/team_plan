@@ -3,7 +3,7 @@ require:
   - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 2.6.5
+  TargetRubyVersion: 2.6.6
   Exclude:
     - 'app/views/**/*'
     - 'db/**/*'
@@ -47,4 +47,8 @@ Style/HashEachMethods:
 Style/HashTransformKeys:
   Enabled: true
 Style/HashTransformValues:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
   Enabled: true
