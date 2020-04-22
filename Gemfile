@@ -2,15 +2,14 @@
 
 source "https://rubygems.org"
 
-ruby "2.6.5"
+ruby "2.6.6"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.5"
 gem "pg", "~> 1.2"
 gem "puma", "~> 4.3"
 gem "que", "~> 1.0.0.beta4"
-# Use Github repo as latest release does not support que 1.0 beta
-gem "que-scheduler", git: "https://github.com/hlascelles/que-scheduler.git"
+gem "que-scheduler"
 gem "que-web"
 gem "rails", "~> 6.0.2"
 gem "rails-i18n"

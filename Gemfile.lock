@@ -1,14 +1,3 @@
-GIT
-  remote: https://github.com/hlascelles/que-scheduler.git
-  revision: f53392336d8b1ac44f9ad31f98d4e7c62ca19ae4
-  specs:
-    que-scheduler (3.2.8)
-      activesupport (>= 4.0)
-      backports (~> 3.10)
-      fugit (~> 1.1, >= 1.1.8)
-      hashie (>= 3, < 5)
-      que (>= 0.12, <= 1.0.0.beta4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -75,10 +64,6 @@ GEM
     ansi (1.5.0)
     ast (2.4.0)
     awesome_print (1.8.0)
-    axiom-types (0.1.1)
-      descendants_tracker (~> 0.0.4)
-      ice_nine (~> 0.11.0)
-      thread_safe (~> 0.3, >= 0.3.1)
     backport (1.1.2)
     backports (3.17.0)
     bcrypt (3.1.13)
@@ -91,7 +76,7 @@ GEM
     bootstrap_form (4.4.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    brakeman (4.8.0)
+    brakeman (4.8.1)
     breadcrumbs_on_rails (4.0.0)
       rails (>= 5.0)
     builder (3.2.4)
@@ -102,7 +87,7 @@ GEM
       bundler (>= 1.2.0, < 3)
       thor (~> 0.18)
     byebug (11.1.1)
-    capybara (3.31.0)
+    capybara (3.32.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -135,11 +120,7 @@ GEM
     choice (0.2.0)
     code_analyzer (0.5.1)
       sexp_processor
-    codeclimate-engine-rb (0.4.1)
-      virtus (~> 1.0)
     coderay (1.1.2)
-    coercible (1.0.0)
-      descendants_tracker (~> 0.0.1)
     colorize (0.8.1)
     concurrent-ruby (1.1.6)
     countries (3.0.1)
@@ -157,8 +138,6 @@ GEM
       path_expander (~> 1.0)
       ruby_parser (~> 3.6)
       sexp_processor (~> 4.5)
-    descendants_tracker (0.0.4)
-      thread_safe (~> 0.3, >= 0.3.1)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -172,7 +151,6 @@ GEM
       http_parser.rb (~> 0.6.0)
     enum_help (0.0.17)
       activesupport (>= 3.0.0)
-    equalizer (0.0.11)
     erubi (1.9.0)
     erubis (2.7.0)
     et-orbi (1.2.4)
@@ -188,14 +166,14 @@ GEM
       railties (>= 4.2.0)
     faker (2.11.0)
       i18n (>= 1.6, < 2)
-    fasterer (0.8.2)
+    fasterer (0.8.3)
       colorize (~> 0.7)
       ruby_parser (>= 3.14.1)
     ffi (1.12.2)
     figaro (1.1.1)
       thor (~> 0.14)
     formatador (0.2.5)
-    fugit (1.3.3)
+    fugit (1.3.4)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.1)
     globalid (0.4.2)
@@ -230,7 +208,6 @@ GEM
     icalendar (2.6.1)
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
-    ice_nine (0.11.2)
     image_optimizer (1.8.0)
     image_processing (1.10.3)
       mini_magick (>= 4.9.5, < 5)
@@ -303,7 +280,7 @@ GEM
       activerecord (>= 4.2)
       request_store (~> 1.1)
     parallel (1.19.1)
-    parser (2.7.0.5)
+    parser (2.7.1.0)
       ast (~> 2.4.0)
     path_expander (1.1.0)
     pg (1.2.3)
@@ -318,14 +295,19 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     psych (3.1.0)
-    public_suffix (4.0.3)
+    public_suffix (4.0.4)
     puma (4.3.3)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     que (1.0.0.beta4)
-    que-web (0.8.0)
-      erubis
+    que-scheduler (3.3.0)
+      activesupport (>= 4.0)
+      backports (~> 3.10)
+      fugit (~> 1.1, >= 1.1.8)
+      hashie (>= 3, < 5)
+      que (>= 0.12, <= 1.0.0.beta4)
+    que-web (0.9.1)
       que (~> 1.0.0.beta3)
       sinatra
     raabro (1.1.6)
@@ -392,8 +374,7 @@ GEM
       ffi (~> 1.0)
     redcarpet (3.5.0)
     redis (4.1.3)
-    reek (5.6.0)
-      codeclimate-engine-rb (~> 0.4.0)
+    reek (6.0.0)
       kwalify (~> 0.7.0)
       parser (>= 2.5.0.0, < 2.8, != 2.5.1.1)
       psych (~> 3.1.0)
@@ -413,17 +394,17 @@ GEM
     reverse_markdown (1.4.0)
       nokogiri
     rexml (3.2.4)
-    rubocop (0.80.1)
+    rubocop (0.81.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
       rexml
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 1.7)
+      unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-performance (1.5.2)
       rubocop (>= 0.71.0)
-    rubocop-rails (2.5.0)
+    rubocop-rails (2.5.2)
       activesupport
       rack (>= 1.1)
       rubocop (>= 0.72.0)
@@ -494,19 +475,14 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.6)
+    tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
-    unicode-display_width (1.6.1)
+    unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
     uniform_notifier (1.13.0)
-    virtus (1.0.5)
-      axiom-types (~> 0.1)
-      coercible (~> 1.0)
-      descendants_tracker (~> 0.0, >= 0.0.3)
-      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.1)
@@ -581,7 +557,7 @@ DEPENDENCIES
   puma (~> 4.3)
   pundit
   que (~> 1.0.0.beta4)
-  que-scheduler!
+  que-scheduler
   que-web
   rack-livereload
   rails (~> 6.0.2)
@@ -614,7 +590,7 @@ DEPENDENCIES
   webpacker-react
 
 RUBY VERSION
-   ruby 2.6.5p114
+   ruby 2.6.6p146
 
 BUNDLED WITH
    2.1.4
