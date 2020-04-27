@@ -17,7 +17,7 @@ gem "turbolinks", "~> 5"
 gem "webpacker", ">= 4.0.x"
 gem "webpacker-react"
 
-gem "carrierwave", "~> 2.0.2"
+gem "carrierwave", "~> 2.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
 gem "faker"
 gem "mini_magick"
