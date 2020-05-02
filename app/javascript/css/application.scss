@@ -2,13 +2,11 @@
 
 @import 'trix/dist/trix.css';
 @import '~bootstrap-datepicker/dist/css/bootstrap-datepicker3';
-@import '~@pnotify/core/dist/PNotify';
-@import '~@pnotify/mobile/dist/PNotifyMobile';
-@import '~@pnotify/bootstrap4/dist/PNotifyBootstrap4';
+@import '@pnotify/core/dist/PNotify';
+@import '@pnotify/mobile/dist/PNotifyMobile';
+@import '@pnotify/bootstrap4/dist/PNotifyBootstrap4';
 
 @import 'theme/coreui';
 @import 'admin/*';
 @import 'partials/*';
 @import 'print';
-
-//
