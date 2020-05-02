@@ -1,26 +1,11 @@
-import PNotify from "pnotify/dist/es/PNotify.js";
-import PNotifyButtons from "pnotify/dist/es/PNotifyButtons.js";
+import * as PNotify from "@pnotify/core";
+import * as PNotifyMobile from "@pnotify/mobile";
+import * as PNotifyBootstrap4 from "@pnotify/bootstrap4";
+import * as PNotifyFontAwesome5 from "@pnotify/font-awesome5";
 
-const stack_topright = {
-  "dir1": "down",
-  "dir2": "left",
-  "firstpos1": 10,
-  "firstpos2": 10,
-  "spacing1": 10,
-  "spacing2": 10
-};
-
-PNotify.defaults.styling = "bootstrap4";
-PNotify.defaults.icons = "fontawesome5";
-PNotify.defaults.shadow = false;
-PNotify.defaults.cornerClass = "alert-fill";
-PNotify.defaults.stack = stack_topright;
-
-PNotify.defaults.modules = {
-  Buttons: {
-    closer: true,
-    sticker: false
-  }
-};
+PNotify.defaultModules.set(PNotifyMobile, {});
+PNotify.defaultModules.set(PNotifyBootstrap4, {});
+PNotify.defaultModules.set(PNotifyFontAwesome5, {});
+PNotify.defaults.sticker = false
 
 window.pnotify = window.PNotify = PNotify
