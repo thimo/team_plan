@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Teamgenoten") do |sheet|
   columns = []

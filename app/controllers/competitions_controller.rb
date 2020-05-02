@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show]
   before_action :add_breadcrumbs

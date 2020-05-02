@@ -1,5 +1,26 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: team_members
+#
+#  id            :integer          not null, primary key
+#  ended_on      :date
+#  prefered_foot :string
+#  role          :integer          default("player")
+#  started_on    :date
+#  status        :integer          default("draft")
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  member_id     :integer
+#  team_id       :integer
+#  tenant_id     :bigint
+#
+# Indexes
+#
+#  index_team_members_on_member_id                       (member_id)
+#  index_team_members_on_member_id_and_team_id_and_role  (member_id,team_id,role) UNIQUE
+#  index_team_members_on_team_id                         (team_id)
+#  index_team_members_on_tenant_id                       (tenant_id)
+#
 class TeamMember < ApplicationRecord
   include Statussable
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class MembersImportController < Admin::BaseController
     before_action :add_breadcrumbs

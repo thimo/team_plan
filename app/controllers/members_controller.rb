@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :create_login, :resend_password]
   before_action :add_breadcrumbs

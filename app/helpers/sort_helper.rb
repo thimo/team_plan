@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module SortHelper
   # Sort array of objects in an human expected way
   def human_sort(objects = [], attribute = "")

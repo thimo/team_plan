@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class TenantSettingsController < Admin::BaseController
     before_action :set_tenant_setting, only: [:edit, :update]

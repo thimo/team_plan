@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TrainingSchedulesController < ApplicationController
   before_action :set_team, only: [:new, :create]
   before_action :create_training_schedule, only: [:new, :create]

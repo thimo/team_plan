@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class VersionUpdatePolicy < ApplicationPolicy
   def index?
     @user.role?(Role::BEHEER_VERSION_UPDATES)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Intranet
   class BaseController < ApplicationController
     add_breadcrumb "Home", "/"

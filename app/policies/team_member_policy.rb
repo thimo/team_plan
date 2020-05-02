@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TeamMemberPolicy < ApplicationPolicy
   def index?
     true

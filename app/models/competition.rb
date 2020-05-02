@@ -1,5 +1,27 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: competitions
+#
+#  id              :bigint           not null, primary key
+#  active          :boolean          default(TRUE)
+#  competitienaam  :string
+#  competitiesoort :string
+#  klasse          :string
+#  klassepoule     :string
+#  poule           :string
+#  poulecode       :integer          not null
+#  ranking         :json
+#  remark          :text
+#  user_modified   :boolean          default(FALSE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  tenant_id       :bigint
+#
+# Indexes
+#
+#  index_competitions_on_poulecode  (tenant_id,poulecode) UNIQUE
+#  index_competitions_on_tenant_id  (tenant_id)
+#
 class Competition < ApplicationRecord
   include Activatable
 

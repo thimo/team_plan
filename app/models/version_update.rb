@@ -1,5 +1,15 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: version_updates
+#
+#  id          :bigint           not null, primary key
+#  body        :text
+#  for_role    :integer          default("member")
+#  name        :string
+#  released_at :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 class VersionUpdate < ApplicationRecord
   validates :released_at, :name, :body, presence: true
 

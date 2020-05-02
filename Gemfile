@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 
 ruby "2.6.6"
@@ -61,17 +59,18 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotate"
   gem "bullet" # help to kill N+1 queries and unused eager loading
   gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
   gem "guard-minitest", require: false
   gem "letter_opener"
   gem "listen", "~> 3.2.1"
-  gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
   gem "pry-rails"
   gem "rack-livereload"
   gem "rails-erd", require: false # Run `bundle exec erd`
   gem "rb-fsevent"
+  gem "spring"
+  gem "spring-watcher-listen", "~> 2.0.0"
   gem "terminal-notifier-guard"
   gem "web-console"
 
@@ -90,9 +89,9 @@ group :development do
 end
 
 group :test do
-  gem "minitest-reporters"
   gem "launchy" # For "save_and_open_page" debugging during testing
   gem "minitest"
+  gem "minitest-reporters"
   # Disabled to prevent "uninitialized constant Minitest::Rails::TestUnit"
   # gem "minitest-rails"
   gem "selenium-webdriver"

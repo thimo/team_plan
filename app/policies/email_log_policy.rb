@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EmailLogPolicy < ApplicationPolicy
   def index?
     @user.role?(Role::BEHEER_EMAIL_LOG)

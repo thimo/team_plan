@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class KeeperPolicy < ApplicationPolicy
   def index?
     @user.role?(Role::KEEPER_SHOW)

@@ -1,4 +1,30 @@
-# frozen_string_literal: true
+# == Schema Information
+#
+# Table name: teams
+#
+#  id                :integer          not null, primary key
+#  division          :string
+#  ended_on          :date
+#  minutes_per_half  :integer
+#  name              :string
+#  players_per_team  :integer
+#  remark            :text
+#  started_on        :date
+#  status            :integer          default("draft")
+#  uuid              :uuid
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  age_group_id      :integer
+#  club_data_team_id :bigint
+#  tenant_id         :bigint
+#
+# Indexes
+#
+#  index_teams_on_age_group_id       (age_group_id)
+#  index_teams_on_club_data_team_id  (club_data_team_id)
+#  index_teams_on_tenant_id          (tenant_id)
+#  index_teams_on_uuid               (uuid)
+#
 
 # Represents a team with players and staff
 class Team < ApplicationRecord

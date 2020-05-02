@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MemberAllocationFiltersController < ApplicationController
   after_action :skip_authorization
 

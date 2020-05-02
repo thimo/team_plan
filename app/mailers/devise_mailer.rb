@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class DeviseMailer < Devise::Mailer
   include DefaultUrlOptions
   # helper :application # gives access to all helpers defined within `application_helper`.

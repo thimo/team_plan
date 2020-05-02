@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Intranet
   class FilesController < Intranet::BaseController
     def index

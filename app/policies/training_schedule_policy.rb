@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TrainingSchedulePolicy < ApplicationPolicy
   def show?
     create? || @user.team_member_for?(@record.team)

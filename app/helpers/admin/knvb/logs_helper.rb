@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin::Knvb::LogsHelper
   def log_row_icon(log)
     case log.level

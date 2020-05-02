@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Anonymizer
   OLD_CLUB_NAME = "ESA"
   NEW_CLUB_NAME = "FC Demo"

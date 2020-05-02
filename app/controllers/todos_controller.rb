@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TodosController < ApplicationController
   before_action :set_todo, only: [:edit, :update, :destroy, :toggle]
   before_action :load_todoable, only: [:new, :create]

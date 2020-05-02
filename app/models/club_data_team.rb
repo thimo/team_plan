@@ -1,5 +1,29 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: club_data_teams
+#
+#  id                 :bigint           not null, primary key
+#  active             :boolean          default(TRUE)
+#  geslacht           :string
+#  kalespelsoort      :string
+#  leeftijdscategorie :string
+#  speeldag           :string
+#  speeldagteam       :string
+#  spelsoort          :string
+#  teamcode           :integer          not null
+#  teamnaam           :string
+#  teamsoort          :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  season_id          :bigint
+#  tenant_id          :bigint
+#
+# Indexes
+#
+#  index_club_data_teams_on_season_id               (season_id)
+#  index_club_data_teams_on_season_id_and_teamcode  (tenant_id,season_id,teamcode) UNIQUE
+#  index_club_data_teams_on_tenant_id               (tenant_id)
+#
 class ClubDataTeam < ApplicationRecord
   include Activatable
 

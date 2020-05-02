@@ -1,5 +1,20 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: seasons
+#
+#  id         :integer          not null, primary key
+#  ended_on   :date
+#  name       :string
+#  started_on :date
+#  status     :integer          default("draft")
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  tenant_id  :bigint
+#
+# Indexes
+#
+#  index_seasons_on_tenant_id  (tenant_id)
+#
 class Season < ApplicationRecord
   include Statussable
 

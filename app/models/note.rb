@@ -1,5 +1,25 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: notes
+#
+#  id         :bigint           not null, primary key
+#  body       :text
+#  title      :string
+#  visibility :integer          default("self")
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  member_id  :bigint
+#  team_id    :bigint
+#  tenant_id  :bigint
+#  user_id    :bigint
+#
+# Indexes
+#
+#  index_notes_on_member_id  (member_id)
+#  index_notes_on_team_id    (team_id)
+#  index_notes_on_tenant_id  (tenant_id)
+#  index_notes_on_user_id    (user_id)
+#
 class Note < ApplicationRecord
   acts_as_tenant :tenant
   belongs_to :user

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ClubdataImporter
   class TeamPhotosJob < Que::Job
     def run(tenant_id:, club_data_team_id:)

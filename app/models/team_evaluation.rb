@@ -1,4 +1,27 @@
-# frozen_string_literal: true
+# == Schema Information
+#
+# Table name: team_evaluations
+#
+#  id                      :integer          not null, primary key
+#  config                  :jsonb
+#  finished_at             :datetime
+#  hide_remark_from_player :boolean          default(FALSE)
+#  invited_at              :datetime
+#  private                 :boolean          default(FALSE)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  finished_by_id          :bigint
+#  invited_by_id           :bigint
+#  team_id                 :integer
+#  tenant_id               :bigint
+#
+# Indexes
+#
+#  index_team_evaluations_on_finished_by_id  (finished_by_id)
+#  index_team_evaluations_on_invited_by_id   (invited_by_id)
+#  index_team_evaluations_on_team_id         (team_id)
+#  index_team_evaluations_on_tenant_id       (tenant_id)
+#
 
 # Evaluates the players in a team
 class TeamEvaluation < ApplicationRecord

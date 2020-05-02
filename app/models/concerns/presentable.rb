@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Extends a model to allow setting presence to members
 module Presentable
   extend ActiveSupport::Concern

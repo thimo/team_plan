@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PlayBanPolicy < ApplicationPolicy
   def index?
     @user.role?(Role::BEHEER_CONTRIBUTIE_SPEELVERBODEN)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TeamActionsController < ApplicationController
   include SortHelper
   before_action :set_base, only: [:new, :create]

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SeasonsController < ApplicationController
   before_action :create_season, only: [:new, :create]
   before_action :set_season, only: [:show, :edit, :update, :destroy, :inherit_age_groups]

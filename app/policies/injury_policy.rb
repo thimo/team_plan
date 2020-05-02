@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class InjuryPolicy < ApplicationPolicy
   def show?
     # Visible for club staff, author, member's team staff, member

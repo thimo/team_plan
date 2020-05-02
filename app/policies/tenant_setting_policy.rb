@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TenantSettingPolicy < ApplicationPolicy
   def update?
     @user.role?(Role::BEHEER_SETTINGS)

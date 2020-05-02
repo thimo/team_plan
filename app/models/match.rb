@@ -1,5 +1,47 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: matches
+#
+#  id                       :bigint           not null, primary key
+#  accommodatie             :string
+#  adres                    :string
+#  afgelast                 :boolean          default(FALSE)
+#  afgelast_status          :string
+#  edit_level               :integer          default("knvb")
+#  eigenteam                :boolean          default(FALSE)
+#  ends_at                  :datetime
+#  plaats                   :string
+#  postcode                 :string
+#  remark                   :text
+#  route                    :string
+#  telefoonnummer           :string
+#  thuisteam                :string
+#  thuisteamclubrelatiecode :string
+#  thuisteamid              :integer
+#  uitslag                  :string
+#  uitslag_at               :datetime
+#  uitteam                  :string
+#  uitteamclubrelatiecode   :string
+#  uitteamid                :integer
+#  user_modified            :boolean          default(FALSE)
+#  website_referee          :string
+#  wedstrijd                :string
+#  wedstrijdcode            :integer
+#  wedstrijddatum           :datetime
+#  wedstrijdnummer          :integer
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  competition_id           :bigint
+#  created_by_id            :bigint
+#  tenant_id                :bigint
+#
+# Indexes
+#
+#  index_matches_on_competition_id  (competition_id)
+#  index_matches_on_created_by_id   (created_by_id)
+#  index_matches_on_tenant_id       (tenant_id)
+#  index_matches_on_wedstrijdcode   (tenant_id,wedstrijdcode) UNIQUE
+#
 class Match < ApplicationRecord
   include Presentable
 

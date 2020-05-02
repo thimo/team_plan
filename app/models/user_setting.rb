@@ -1,5 +1,21 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: user_settings
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  value      :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  tenant_id  :bigint
+#  user_id    :bigint
+#
+# Indexes
+#
+#  index_user_settings_on_tenant_id         (tenant_id)
+#  index_user_settings_on_user_id           (user_id)
+#  index_user_settings_on_user_id_and_name  (user_id,name) UNIQUE
+#
 class UserSetting < ApplicationRecord
   acts_as_tenant :tenant
   belongs_to :user

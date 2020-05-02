@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ClubDataDashboardPolicy < ApplicationPolicy
   def index?
     @user.role?(Role::BEHEER_KNVB_CLUB_DATA)

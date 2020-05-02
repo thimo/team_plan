@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module PresencesHelper
   def color_for_on_time(on_time_value)
     case on_time_value.to_sym

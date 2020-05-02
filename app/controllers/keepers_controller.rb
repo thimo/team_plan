@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class KeepersController < ApplicationController
   before_action :add_breadcrumbs
 

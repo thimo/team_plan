@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PresencePolicy < ApplicationPolicy
   def create?
     return false if @record.presentable.inactive?

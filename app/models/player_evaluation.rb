@@ -1,4 +1,32 @@
-# frozen_string_literal: true
+# == Schema Information
+#
+# Table name: player_evaluations
+#
+#  id                 :integer          not null, primary key
+#  advise_next_season :string
+#  field_1            :string
+#  field_10           :string
+#  field_2            :string
+#  field_3            :string
+#  field_4            :string
+#  field_5            :string
+#  field_6            :string
+#  field_7            :string
+#  field_8            :string
+#  field_9            :string
+#  remark             :text
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  team_evaluation_id :integer
+#  team_member_id     :bigint
+#  tenant_id          :bigint
+#
+# Indexes
+#
+#  index_player_evaluations_on_team_evaluation_id  (team_evaluation_id)
+#  index_player_evaluations_on_team_member_id      (team_member_id)
+#  index_player_evaluations_on_tenant_id           (tenant_id)
+#
 
 # Evaluates a single player
 class PlayerEvaluation < ApplicationRecord

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GroupMemberPolicy < ApplicationPolicy
   def create?
     return false if @record&.memberable&.archived? || @record&.group&.archived?

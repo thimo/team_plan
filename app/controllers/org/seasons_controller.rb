@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Org
   class SeasonsController < Org::BaseController
     include SortHelper

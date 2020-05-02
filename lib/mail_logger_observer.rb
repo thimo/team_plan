@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MailLoggerObserver
   def self.delivered_email(message)
     body = if message.html_part&.present?

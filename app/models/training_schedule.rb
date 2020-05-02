@@ -1,5 +1,29 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: training_schedules
+#
+#  id              :bigint           not null, primary key
+#  active          :boolean          default(TRUE)
+#  cios            :boolean          default(FALSE)
+#  day             :integer
+#  end_time        :time
+#  ended_on        :date
+#  field_part      :integer
+#  present_minutes :integer          default("min_0")
+#  start_time      :time
+#  started_on      :date
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  soccer_field_id :bigint
+#  team_id         :bigint
+#  tenant_id       :bigint
+#
+# Indexes
+#
+#  index_training_schedules_on_soccer_field_id  (soccer_field_id)
+#  index_training_schedules_on_team_id          (team_id)
+#  index_training_schedules_on_tenant_id        (tenant_id)
+#
 class TrainingSchedule < ApplicationRecord
   include Activatable
   include Presentable

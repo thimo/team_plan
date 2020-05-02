@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ClubdataImporter
   class PouleStandingJob < Que::Job
     include ClubdataJob

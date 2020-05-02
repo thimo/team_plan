@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 User.destroy_all
 Season.destroy_all
 # Member.destroy_all

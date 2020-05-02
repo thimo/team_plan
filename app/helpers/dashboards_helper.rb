@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module DashboardsHelper
   def active_members_graph_data
     {

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module TeamsHelper
   def team_presence_graphs
     # FIXME: convert to helper/model

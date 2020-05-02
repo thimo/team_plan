@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module AgeGroupsHelper
   def year_of_birth_range(age_group)
     range = ""

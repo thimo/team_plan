@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class InjuriesController < ApplicationController
   before_action :set_member, only: [:new, :create]
   before_action :create_injury, only: [:new, :create]

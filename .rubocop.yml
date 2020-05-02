@@ -26,10 +26,16 @@ Metrics/ClassLength:
 Rails:
   Enabled: true
 
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
 Style/Documentation:
   Include:
     - app/models/**/*
     - lib/**/*
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
 
 Style/Lambda:
   EnforcedStyle: literal
@@ -39,6 +45,3 @@ Style/StringLiterals:
 
 Style/SymbolArray:
   EnforcedStyle: brackets
-
-Rails/HasAndBelongsToMany:
-  Enabled: false

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GroupMembersController < ApplicationController
   before_action :load_memberable, only: [:new, :create]
   before_action :create_group_member, only: [:new, :create]

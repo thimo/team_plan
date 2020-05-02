@@ -1,5 +1,24 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: comments
+#
+#  id               :integer          not null, primary key
+#  body             :text
+#  comment_type     :integer          default("generic")
+#  commentable_type :string
+#  private          :boolean          default(FALSE)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  commentable_id   :integer
+#  tenant_id        :bigint
+#  user_id          :integer
+#
+# Indexes
+#
+#  index_comments_on_commentable_type_and_commentable_id  (commentable_type,commentable_id)
+#  index_comments_on_tenant_id                            (tenant_id)
+#  index_comments_on_user_id                              (user_id)
+#
 class Comment < ApplicationRecord
   acts_as_tenant :tenant
   belongs_to :user

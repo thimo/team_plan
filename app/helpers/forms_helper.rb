@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module FormsHelper
   def date_picker_options(placeholder: "dd-mm-jjjj", help: nil, style_class: "width-sm-25", append: nil)
     {

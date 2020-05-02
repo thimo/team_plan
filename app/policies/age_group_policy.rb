@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AgeGroupPolicy < ApplicationPolicy
   # def index?
   #   true

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class NotePolicy < ApplicationPolicy
   def show?
     return true if @record.self? && @record.user == @user

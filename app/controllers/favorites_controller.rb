@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class FavoritesController < ApplicationController
   before_action :set_favorite, only: [:destroy]
   before_action :load_favorable, only: [:create]

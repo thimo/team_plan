@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class EmailLogsController < Admin::BaseController
     add_breadcrumb "E-mail log", :admin_email_logs_path

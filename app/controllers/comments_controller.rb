@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CommentsController < ApplicationController
   before_action :load_commentable, only: [:toggle_include_member, :create]
   before_action :create_comment, only: [:create]

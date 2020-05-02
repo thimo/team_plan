@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module GoogleMapsHelper
   def google_maps_url(object:, type:, user: nil, zoom: 12)
     base_url = "#{Tenant.setting('google_maps_base_url')}#{type}"

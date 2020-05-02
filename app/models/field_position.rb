@@ -1,4 +1,25 @@
-# frozen_string_literal: true
+# == Schema Information
+#
+# Table name: field_positions
+#
+#  id               :bigint           not null, primary key
+#  indent_in_select :boolean          default(FALSE)
+#  is_blank         :boolean          default(FALSE)
+#  name             :string
+#  position         :integer          default(0)
+#  position_type    :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  axis_parent_id   :bigint
+#  line_parent_id   :bigint
+#  tenant_id        :bigint
+#
+# Indexes
+#
+#  index_field_positions_on_axis_parent_id  (axis_parent_id)
+#  index_field_positions_on_line_parent_id  (line_parent_id)
+#  index_field_positions_on_tenant_id       (tenant_id)
+#
 
 # Player positions on the soccer field
 class FieldPosition < ApplicationRecord

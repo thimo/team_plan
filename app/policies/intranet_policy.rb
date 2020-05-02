@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IntranetPolicy < ApplicationPolicy
   # TODO: change to correct access level
 

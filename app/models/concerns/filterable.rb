@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Call scopes directly from your URL params:
 #
 #     @products = Product.filter_results(params.slice(:status, :location, :starts_with))

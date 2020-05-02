@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module CommentsHelper
   def comment_types_for(parent)
     comment_types = if parent.class == Team && current_user.setting(:include_member_comments)

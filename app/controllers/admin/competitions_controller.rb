@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class CompetitionsController < Admin::BaseController
     before_action :create_resource, only: [:new, :create]

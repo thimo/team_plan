@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SeasonPolicy < ApplicationPolicy
   def index?
     @user.role?(Role::SEASON_INDEX) || @user.indirect_role?(Role::SEASON_INDEX)

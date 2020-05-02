@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Admin
   class PlayBansImportController < Admin::BaseController
     before_action :add_breadcrumbs

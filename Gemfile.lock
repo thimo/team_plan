@@ -61,6 +61,9 @@ GEM
       request_store (>= 1.0.5)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     ansi (1.5.0)
     ast (2.4.0)
     awesome_print (1.8.0)
@@ -510,6 +513,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tenant
+  annotate
   awesome_print
   bootsnap
   bootstrap4-kaminari-views

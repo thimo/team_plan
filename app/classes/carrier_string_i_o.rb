@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CarrierStringIO < StringIO
   def original_filename
     "photo.jpg"

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "que/web"
 
 Rails.application.routes.draw do

@@ -1,5 +1,65 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: members
+#
+#  id                    :integer          not null, primary key
+#  active                :boolean          default(TRUE)
+#  address               :string
+#  age_category          :string
+#  association_number    :string
+#  association_sports    :string
+#  born_on               :date
+#  city                  :string
+#  club_sports           :string
+#  conduct_number        :string
+#  country               :string
+#  deregistered_at       :date
+#  email                 :string
+#  email2                :string
+#  email_2               :string
+#  email_parent          :string
+#  email_parent_2        :string
+#  first_name            :string
+#  full_name             :string
+#  full_name_2           :string
+#  gender                :string
+#  house_number          :string
+#  house_number_addition :string
+#  initials              :string
+#  injured               :boolean          default(FALSE)
+#  last_change_at        :date
+#  last_name             :string
+#  local_teams           :string
+#  member_number         :string
+#  member_since          :date
+#  middle_name           :string
+#  missed_import_on      :datetime
+#  person_type           :string
+#  phone                 :string
+#  phone2                :string
+#  phone_2               :string
+#  phone_home            :string
+#  phone_parent          :string
+#  phone_parent_2        :string
+#  photo                 :string
+#  photo_md5             :string
+#  privacy_level         :string
+#  registered_at         :date
+#  sport_category        :string
+#  status                :string
+#  street                :string
+#  zipcode               :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  tenant_id             :bigint
+#  user_id               :integer
+#
+# Indexes
+#
+#  index_members_on_association_number  (association_number)
+#  index_members_on_tenant_id           (tenant_id)
+#  index_members_on_user_id             (user_id)
+#
 require "digest/md5"
 
 # Imported members from Sportlink

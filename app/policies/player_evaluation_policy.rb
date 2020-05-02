@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PlayerEvaluationPolicy < ApplicationPolicy
   # Player Evaluation controller does not implement this action. Remove?
   # def index?

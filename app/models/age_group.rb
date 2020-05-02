@@ -1,4 +1,28 @@
-# frozen_string_literal: true
+# == Schema Information
+#
+# Table name: age_groups
+#
+#  id                 :integer          not null, primary key
+#  ended_on           :date
+#  gender             :string
+#  minutes_per_half   :integer
+#  name               :string
+#  players_per_team   :integer
+#  started_on         :date
+#  status             :integer          default("draft")
+#  training_only      :boolean          default(FALSE)
+#  year_of_birth_from :integer
+#  year_of_birth_to   :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  season_id          :integer
+#  tenant_id          :bigint
+#
+# Indexes
+#
+#  index_age_groups_on_season_id  (season_id)
+#  index_age_groups_on_tenant_id  (tenant_id)
+#
 
 # AgeGroups have teams in certain age ranges
 class AgeGroup < ApplicationRecord

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ClubdataScheduler
   class TeamsAndCompetitionsJob < Que::Job
     include ClubdataJob

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TeamEvaluationMailer < ApplicationMailer
   def invite(user, members, team_evaluation)
     @team_evaluation = team_evaluation

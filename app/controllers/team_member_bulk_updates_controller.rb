@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TeamMemberBulkUpdatesController < ApplicationController
   before_action :set_team, only: [:new, :create]
   before_action :add_breadcrumbs

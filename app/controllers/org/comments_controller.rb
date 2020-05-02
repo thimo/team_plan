@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Org
   class CommentsController < Org::BaseController
     before_action :add_breadcrumbs

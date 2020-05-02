@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TeamPolicy < ApplicationPolicy
   def show?
     !@record.draft? || @user.role?(Role::STATUS_DRAFT, @record)

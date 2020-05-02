@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ClubdataImporter
   class ResultsJob < Que::Job
     self.priority = 50

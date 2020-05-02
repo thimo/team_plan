@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RefereeImportJob < Que::Job
   def run(tenant_id:)
     ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do

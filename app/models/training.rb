@@ -1,5 +1,26 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: trainings
+#
+#  id                   :bigint           not null, primary key
+#  active               :boolean          default(TRUE)
+#  body                 :text
+#  ended_at             :datetime
+#  remark               :text
+#  started_at           :datetime
+#  user_modified        :boolean          default(FALSE)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  team_id              :bigint
+#  tenant_id            :bigint
+#  training_schedule_id :bigint
+#
+# Indexes
+#
+#  index_trainings_on_team_id               (team_id)
+#  index_trainings_on_tenant_id             (tenant_id)
+#  index_trainings_on_training_schedule_id  (training_schedule_id)
+#
 class Training < ApplicationRecord
   include Activatable
   include Presentable
