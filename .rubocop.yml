@@ -42,6 +42,3 @@ Style/Lambda:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
-
-Style/SymbolArray:
-  EnforcedStyle: brackets
