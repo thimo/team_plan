@@ -9,7 +9,8 @@ class MembersController < ApplicationController
     @player_evaluations = policy_scope(@member.player_evaluations).finished_desc if policy(@member).show_evaluations?
   end
 
-  def edit; end
+  def edit
+  end
 
   def create_login
     @user = User.find_or_create_by(email: @member.email)
@@ -40,22 +41,22 @@ class MembersController < ApplicationController
 
   private
 
-    def set_member
-      @member = Member.find(params[:id])
-      authorize @member
-    end
+  def set_member
+    @member = Member.find(params[:id])
+    authorize @member
+  end
 
-    def add_breadcrumbs
-      if @member
-        if (team = @member.active_team_member&.team).present?
-          add_breadcrumb team.age_group.season.name, team.age_group.season
-          add_breadcrumb team.age_group.name, team.age_group
-          add_breadcrumb team.name_with_club, team
-        end
-
-        add_breadcrumb @member.name, @member
-      else
-        add_breadcrumb "Leden"
+  def add_breadcrumbs
+    if @member
+      if (team = @member.active_team_member&.team).present?
+        add_breadcrumb team.age_group.season.name, team.age_group.season
+        add_breadcrumb team.age_group.name, team.age_group
+        add_breadcrumb team.name_with_club, team
       end
+
+      add_breadcrumb @member.name, @member
+    else
+      add_breadcrumb "Leden"
     end
+  end
 end

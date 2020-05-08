@@ -17,7 +17,7 @@ class MemberAllocationsController < ApplicationController
 
     @teams_for_filter = human_sort(Team.for_members(@available_players).as_player
                                        .for_season(@season.previous).distinct, :name)
-                        .map { |team| [team.name, team.id] }
+      .map { |team| [team.name, team.id] }
 
     filtered_players = active_players
     if field_positions.present?
@@ -26,17 +26,19 @@ class MemberAllocationsController < ApplicationController
     filtered_players = filtered_players.by_team(session[:filter_team]) if session[:filter_team].present?
 
     @filtered_available_players = (filtered_players - assigned_players)
-                                  .group_by { |member| member.teams_for_season(@previous_season).as_player.first }
-                                  .sort_by { |team, _members| team.present? ? team.name : "ZZZ" }
+      .group_by { |member| member.teams_for_season(@previous_season).as_player.first }
+      .sort_by { |team, _members| team.present? ? team.name : "ZZZ" }
 
     add_breadcrumb @age_group.season.name.to_s, @age_group.season
     add_breadcrumb @age_group.name.to_s, @age_group
     add_breadcrumb "Indeling"
   end
 
-  def create; end
+  def create
+  end
 
-  def update; end
+  def update
+  end
 
   def destroy
     @team_member = TeamMember.find(params[:id])
@@ -49,19 +51,19 @@ class MemberAllocationsController < ApplicationController
 
   private
 
-    def field_positions
-      @field_positions ||= init_field_positions
-    end
+  def field_positions
+    @field_positions ||= init_field_positions
+  end
 
-    def init_field_positions
-      positions = []
-      if (id = session[:filter_field_position]).present?
-        positions << id
-        ids = FieldPosition.find(id).axis_children.pluck(:id)
-        positions << ids if ids.present?
-        ids = FieldPosition.find(id).line_children.pluck(:id)
-        positions << ids if ids.present?
-      end
-      positions.flatten
+  def init_field_positions
+    positions = []
+    if (id = session[:filter_field_position]).present?
+      positions << id
+      ids = FieldPosition.find(id).axis_children.pluck(:id)
+      positions << ids if ids.present?
+      ids = FieldPosition.find(id).line_children.pluck(:id)
+      positions << ids if ids.present?
     end
+    positions.flatten
+  end
 end

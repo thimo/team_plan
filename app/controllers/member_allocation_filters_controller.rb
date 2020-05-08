@@ -15,7 +15,7 @@ class MemberAllocationFiltersController < ApplicationController
 
   private
 
-    def filter_params
-      params.require(:member_allocation_filters).permit(:team, :field_position)
-    end
+  def filter_params
+    params.require(:member_allocation_filters).permit(:team, :field_position)
+  end
 end

@@ -9,7 +9,8 @@ module Admin
       authorize @competitions
     end
 
-    def new; end
+    def new
+    end
 
     def create
       if @competition.save
@@ -19,7 +20,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @competition.update(competition_params)
@@ -36,33 +38,33 @@ module Admin
 
     private
 
-      def create_resource
-        @competition = if action_name == "new"
-                         Competition.new
-                       else
-                         Competition.new(competition_params.merge(poulecode: Competition.new_custom_poulecode))
-                       end
-        authorize @competition
+    def create_resource
+      @competition = if action_name == "new"
+        Competition.new
+      else
+        Competition.new(competition_params.merge(poulecode: Competition.new_custom_poulecode))
       end
+      authorize @competition
+    end
 
-      def set_resource
-        @competition = Competition.find(params[:id])
-        authorize @competition
+    def set_resource
+      @competition = Competition.find(params[:id])
+      authorize @competition
+    end
+
+    def competition_params
+      params.require(:competition).permit(:competitienaam, :competitiesoort)
+    end
+
+    def add_breadcrumbs
+      add_breadcrumb "Wedstrijdsoorten", admin_competitions_path
+      return if @competition.nil?
+
+      if @competition.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @competition.competitienaam, [:edit, :admin, @competition]
       end
-
-      def competition_params
-        params.require(:competition).permit(:competitienaam, :competitiesoort)
-      end
-
-      def add_breadcrumbs
-        add_breadcrumb "Wedstrijdsoorten", admin_competitions_path
-        return if @competition.nil?
-
-        if @competition.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @competition.competitienaam, [:edit, :admin, @competition]
-        end
-      end
+    end
   end
 end

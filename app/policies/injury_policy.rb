@@ -28,6 +28,10 @@ class InjuryPolicy < ApplicationPolicy
     club_or_team_staff?
   end
 
+  def a_hash
+    {a: 1, b: 2}
+  end
+
   class Scope < Scope
     def resolve
       # TODO: limit scope if this is used
@@ -37,9 +41,9 @@ class InjuryPolicy < ApplicationPolicy
 
   private
 
-    def club_or_team_staff?
-      @user.admin? ||
-        @user.role?(Role::INJURY_CREATE, @record.member) ||
-        @user.team_staff_for?(@record.member)
-    end
+  def club_or_team_staff?
+    @user.admin? ||
+      @user.role?(Role::INJURY_CREATE, @record.member) ||
+      @user.team_staff_for?(@record.member)
+  end
 end

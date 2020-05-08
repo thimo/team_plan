@@ -21,7 +21,7 @@ class PlayBanPolicy < ApplicationPolicy
 
   def permitted_attributes
     attributes = [:member_id, :started_on, :ended_on, :body]
-    attributes << :play_ban_type if false # Use has acces to multiple roles
+    # attributes << :play_ban_type if false # User has acces to multiple roles
     attributes
   end
 

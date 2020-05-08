@@ -8,9 +8,9 @@ class TeamEvaluationMailer < ApplicationMailer
 
     if (members = team_evaluation.team.age_group.members).any?
       @salutation_names = members.map(&:name).sort.join(", ")
-      @cc = members.map do |member|
+      @cc = members.map { |member|
         %("#{member.name}" <#{member.preferred_email}>)
-      end
+      }
     end
 
     mail(from: from, to: emails, cc: @cc, subject: "Invullen teamevaluatie #{@team_evaluation.team.name}")

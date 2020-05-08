@@ -11,15 +11,15 @@ class SchedulesController < ApplicationController
 
   private
 
-    def set_team
-      @team = Team.find(params[:team_id])
-      authorize @team, :show_schedules?
-    end
+  def set_team
+    @team = Team.find(params[:team_id])
+    authorize @team, :show_schedules?
+  end
 
-    def add_breadcrumbs
-      # add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
-      add_breadcrumb @team.age_group.name, @team.age_group
-      add_breadcrumb @team.name_with_club, @team
-      add_breadcrumb "Kalender"
-    end
+  def add_breadcrumbs
+    # add_breadcrumb "#{@team.age_group.season.name}", @team.age_group.season
+    add_breadcrumb @team.age_group.name, @team.age_group
+    add_breadcrumb @team.name_with_club, @team
+    add_breadcrumb "Kalender"
+  end
 end

@@ -25,16 +25,16 @@ class TeamEvaluationConfig < ApplicationRecord
 
   DEFAULT_CONFIG = {
     fields: [
-      { label: "Gedrag", answers: "rating_5" },
-      { label: "Techniek", answers: "rating_5" },
-      { label: "Handelingssnelheid", answers: "rating_5" },
-      { label: "Inzicht/Overzicht", answers: "rating_5" },
-      { label: "Passen/Trappen", answers: "rating_5" },
-      { label: "Snelheid", answers: "rating_5" },
-      { label: "Motoriek", answers: "rating_5" },
-      { label: "Fysiek", answers: "rating_5" },
-      { label: "Uithoudingsvermogen", answers: "rating_5" },
-      { label: "Duelkracht", answers: "rating_5" }
+      {label: "Gedrag", answers: "rating_5"},
+      {label: "Techniek", answers: "rating_5"},
+      {label: "Handelingssnelheid", answers: "rating_5"},
+      {label: "Inzicht/Overzicht", answers: "rating_5"},
+      {label: "Passen/Trappen", answers: "rating_5"},
+      {label: "Snelheid", answers: "rating_5"},
+      {label: "Motoriek", answers: "rating_5"},
+      {label: "Fysiek", answers: "rating_5"},
+      {label: "Uithoudingsvermogen", answers: "rating_5"},
+      {label: "Duelkracht", answers: "rating_5"}
     ],
     answers: {
       rating_5: {
@@ -63,13 +63,13 @@ class TeamEvaluationConfig < ApplicationRecord
 
   private
 
-    def valid_config_json?
-      errors.add(:config_json, "is geen geldige JSON") unless valid_json?(config_json)
-    end
+  def valid_config_json?
+    errors.add(:config_json, "is geen geldige JSON") unless valid_json?(config_json)
+  end
 
-    def valid_json?(value)
-      JSON.parse(value).present?
-    rescue JSON::ParserError
-      false
-    end
+  def valid_json?(value)
+    JSON.parse(value).present?
+  rescue JSON::ParserError
+    false
+  end
 end

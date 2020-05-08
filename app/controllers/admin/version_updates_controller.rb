@@ -9,7 +9,8 @@ module Admin
       authorize @version_updates
     end
 
-    def new; end
+    def new
+    end
 
     def create
       if @version_update.save
@@ -19,7 +20,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @version_update.update(version_update_params)
@@ -36,33 +38,33 @@ module Admin
 
     private
 
-      def create_resource
-        @version_update = if action_name == "new"
-                            VersionUpdate.new(released_at: Time.zone.today)
-                          else
-                            VersionUpdate.new(version_update_params)
-                          end
-        authorize @version_update
+    def create_resource
+      @version_update = if action_name == "new"
+        VersionUpdate.new(released_at: Time.zone.today)
+      else
+        VersionUpdate.new(version_update_params)
       end
+      authorize @version_update
+    end
 
-      def set_resource
-        @version_update = VersionUpdate.find(params[:id])
-        authorize @version_update
+    def set_resource
+      @version_update = VersionUpdate.find(params[:id])
+      authorize @version_update
+    end
+
+    def version_update_params
+      params.require(:version_update).permit(:released_at, :name, :body, :for_role)
+    end
+
+    def add_breadcrumbs
+      add_breadcrumb "Versie updates", admin_version_updates_path
+      return if @version_update.nil?
+
+      if @version_update.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @version_update.released_at, [:edit, :admin, @version_update]
       end
-
-      def version_update_params
-        params.require(:version_update).permit(:released_at, :name, :body, :for_role)
-      end
-
-      def add_breadcrumbs
-        add_breadcrumb "Versie updates", admin_version_updates_path
-        return if @version_update.nil?
-
-        if @version_update.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @version_update.released_at, [:edit, :admin, @version_update]
-        end
-      end
+    end
   end
 end

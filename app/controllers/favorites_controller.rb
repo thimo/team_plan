@@ -19,17 +19,17 @@ class FavoritesController < ApplicationController
 
   private
 
-    def set_favorite
-      @favorite = Favorite.find(params[:id])
-      authorize @favorite
-    end
+  def set_favorite
+    @favorite = Favorite.find(params[:id])
+    authorize @favorite
+  end
 
-    def load_favorable
-      resource, id = request.path.split("/")[1, 2]
-      @favorable = resource.singularize.classify.constantize.find(id)
-    end
+  def load_favorable
+    resource, id = request.path.split("/")[1, 2]
+    @favorable = resource.singularize.classify.constantize.find(id)
+  end
 
-    def favorite_params
-      params.require(:favorite)
-    end
+  def favorite_params
+    params.require(:favorite)
+  end
 end

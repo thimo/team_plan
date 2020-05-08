@@ -6,7 +6,8 @@ class TrainingSchedulesController < ApplicationController
 
   # def show; end
 
-  def new; end
+  def new
+  end
 
   def show
     @presences = @training_schedule.find_or_create_presences&.asc
@@ -20,7 +21,8 @@ class TrainingSchedulesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @training_schedule.update(training_schedule_params)
@@ -42,47 +44,47 @@ class TrainingSchedulesController < ApplicationController
 
   private
 
-    def set_team
-      @team = @training_schedule&.team || Team.find(params[:team_id])
-    end
+  def set_team
+    @team = @training_schedule&.team || Team.find(params[:team_id])
+  end
 
-    def create_training_schedule
-      @training_schedule = if action_name == "new"
-                             @team.training_schedules.new(start_time: Time.zone.local(2000, 1, 1, 19, 0),
-                                                          end_time: Time.zone.local(2000, 1, 1, 20, 0))
-                           else
-                             TrainingSchedule.new(training_schedule_params)
-                           end
-      @training_schedule.team = @team
-      check_and_set_dates @training_schedule
-
-      authorize @training_schedule
+  def create_training_schedule
+    @training_schedule = if action_name == "new"
+      @team.training_schedules.new(start_time: Time.zone.local(2000, 1, 1, 19, 0),
+                                   end_time: Time.zone.local(2000, 1, 1, 20, 0))
+    else
+      TrainingSchedule.new(training_schedule_params)
     end
+    @training_schedule.team = @team
+    check_and_set_dates @training_schedule
 
-    def set_training_schedule
-      @training_schedule = TrainingSchedule.find(params[:id])
-      check_and_set_dates @training_schedule
-      authorize @training_schedule
-    end
+    authorize @training_schedule
+  end
 
-    def training_schedule_params
-      params.require(:training_schedule).permit(:day, :present_minutes, :start_time, :end_time, :soccer_field_id,
-                                                :field_part, :cios, :started_on, :ended_on, team_member_ids: [])
-    end
+  def set_training_schedule
+    @training_schedule = TrainingSchedule.find(params[:id])
+    check_and_set_dates @training_schedule
+    authorize @training_schedule
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @training_schedule.team.age_group.season.name, @training_schedule.team.age_group.season
-      add_breadcrumb @training_schedule.team.age_group.name, @training_schedule.team.age_group
-      add_breadcrumb @training_schedule.team.name_with_club, @training_schedule.team
-      if @training_schedule.new_record?
-        add_breadcrumb "Nieuw"
-      else
-        add_breadcrumb @training_schedule.day_i18n, @training_schedule
-      end
-    end
+  def training_schedule_params
+    params.require(:training_schedule).permit(:day, :present_minutes, :start_time, :end_time, :soccer_field_id,
+      :field_part, :cios, :started_on, :ended_on, team_member_ids: [])
+  end
 
-    def check_and_set_dates(training_schedule)
-      training_schedule.started_on ||= [training_schedule.team.age_group.season.started_on, Time.zone.today].max
-      training_schedule.ended_on ||= training_schedule.team.age_group.season.ended_on
+  def add_breadcrumbs
+    add_breadcrumb @training_schedule.team.age_group.season.name, @training_schedule.team.age_group.season
+    add_breadcrumb @training_schedule.team.age_group.name, @training_schedule.team.age_group
+    add_breadcrumb @training_schedule.team.name_with_club, @training_schedule.team
+    if @training_schedule.new_record?
+      add_breadcrumb "Nieuw"
+    else
+      add_breadcrumb @training_schedule.day_i18n, @training_schedule
     end
+  end
+
+  def check_and_set_dates(training_schedule)
+    training_schedule.started_on ||= [training_schedule.team.age_group.season.started_on, Time.zone.today].max
+    training_schedule.ended_on ||= training_schedule.team.age_group.season.ended_on
+  end
 end

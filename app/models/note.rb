@@ -27,7 +27,7 @@ class Note < ApplicationRecord
   belongs_to :member, optional: true
   has_paper_trail
 
-  enum visibility: { self: 0, staff: 1, member: 2 }
+  enum visibility: {self: 0, staff: 1, member: 2}
 
   validates :title, :body, :visibility, :user, :team, presence: true
 

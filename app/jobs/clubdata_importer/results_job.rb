@@ -4,7 +4,7 @@ module ClubdataImporter
 
     def run(tenant_id:)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
-        count = { total: 0, updated: 0 }
+        count = {total: 0, updated: 0}
 
         # Regular import of all club matches
         JSON.parse(RestClient.get(url)).each do |data|
@@ -28,7 +28,7 @@ module ClubdataImporter
     end
 
     def url
-      "#{Tenant.setting('clubdata_urls_uitslagen')}&client_id=#{Tenant.setting('clubdata_client_id')}"
+      "#{Tenant.setting("clubdata_urls_uitslagen")}&client_id=#{Tenant.setting("clubdata_client_id")}"
     end
   end
 end

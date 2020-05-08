@@ -2,7 +2,7 @@ class NotePolicy < ApplicationPolicy
   def show?
     return true if @record.self? && @record.user == @user
     return true if @record.staff? &&
-                   (@user.role?(Role::NOTE_SHOW, @record) || @user.team_staff_for?(@record))
+      (@user.role?(Role::NOTE_SHOW, @record) || @user.team_staff_for?(@record))
     return true if @record.member? && @record.member == @user
 
     false

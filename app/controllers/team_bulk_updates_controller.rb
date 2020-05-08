@@ -2,7 +2,8 @@ class TeamBulkUpdatesController < ApplicationController
   before_action :set_age_group, only: [:new, :create]
   before_action :add_breadcrumbs
 
-  def new; end
+  def new
+  end
 
   def create
     teams = params[:teams]
@@ -32,14 +33,14 @@ class TeamBulkUpdatesController < ApplicationController
 
   private
 
-    def set_age_group
-      @age_group = AgeGroup.find(params[:age_group_id])
-      authorize Team.new(age_group: @age_group)
-    end
+  def set_age_group
+    @age_group = AgeGroup.find(params[:age_group_id])
+    authorize Team.new(age_group: @age_group)
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @age_group.season.name, @age_group.season
-      add_breadcrumb @age_group.name, @age_group
-      add_breadcrumb "Nieuw"
-    end
+  def add_breadcrumbs
+    add_breadcrumb @age_group.season.name, @age_group.season
+    add_breadcrumb @age_group.name, @age_group
+    add_breadcrumb "Nieuw"
+  end
 end

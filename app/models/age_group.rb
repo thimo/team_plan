@@ -50,11 +50,11 @@ class AgeGroup < ApplicationRecord
   scope :asc, -> { order(:training_only, year_of_birth_to: :asc) }
   scope :draft_or_active, -> { where(status: [AgeGroup.statuses[:draft], AgeGroup.statuses[:active]]) }
   scope :active_or_archived, -> { where(status: [AgeGroup.statuses[:archived], AgeGroup.statuses[:active]]) }
-  scope :by_team, ->(team) { joins(:teams).where(teams: { id: team }).distinct }
+  scope :by_team, ->(team) { joins(:teams).where(teams: {id: team}).distinct }
   scope :for_group_members, ->(members) {
-    joins(:group_members).where(group_members: { memberable_type: "AgeGroup", member: members })
+    joins(:group_members).where(group_members: {memberable_type: "AgeGroup", member: members})
   }
-  scope :for_active_season, -> { joins(:season).where(seasons: { status: Season.statuses[:active] }) }
+  scope :for_active_season, -> { joins(:season).where(seasons: {status: Season.statuses[:active]}) }
 
   PLAYER_COUNT = [4, 5, 6, 7, 8, 9, 11].freeze
   MINUTES_PER_HALF = [20, 25, 30, 35, 40, 45].freeze
@@ -63,7 +63,7 @@ class AgeGroup < ApplicationRecord
   before_update :before_update_actions
 
   def not_member?(member)
-    TeamMember.where(member_id: member.id).joins(team: { age_group: :season }).where(seasons: { id: season.id }).empty?
+    TeamMember.where(member_id: member.id).joins(team: {age_group: :season}).where(seasons: {id: season.id}).empty?
   end
 
   def favorite?(user)
@@ -114,26 +114,26 @@ class AgeGroup < ApplicationRecord
 
   private
 
-    def filter_for_birth_date_and_gender(members)
-      members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
-      members = members.to_year(year_of_birth_to) if year_of_birth_to.present?
+  def filter_for_birth_date_and_gender(members)
+    members = members.from_year(year_of_birth_from) if year_of_birth_from.present?
+    members = members.to_year(year_of_birth_to) if year_of_birth_to.present?
 
-      if gender.present?
-        case gender.upcase
-        when "M"
-          members = members.male
-        when "V"
-          members = members.female
-        end
+    if gender.present?
+      case gender.upcase
+      when "M"
+        members = members.male
+      when "V"
+        members = members.female
       end
-
-      members
     end
 
-    def before_update_actions
-      return unless training_only
+    members
+  end
 
-      self.players_per_team = nil
-      self.minutes_per_half = nil
-    end
+  def before_update_actions
+    return unless training_only
+
+    self.players_per_team = nil
+    self.minutes_per_half = nil
+  end
 end

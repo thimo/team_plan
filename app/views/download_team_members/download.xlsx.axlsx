@@ -78,7 +78,7 @@ wb.add_worksheet(name: "Teamgenoten") do |sheet|
       columns << member.phone if @export_columns.include? "phone"
       columns << member.email if @export_columns.include? "email"
       columns << member.member_since if @export_columns.include? "member_since"
-      columns << "" if @export_columns.include? "previous_team" && @previous_season.present?
+      columns << "" if @export_columns.include?("previous_team" && @previous_season.present?)
       columns << nil if @export_columns.include? "field_positions"
       columns << nil if @export_columns.include? "field_positions_thickened"
       columns << nil if @export_columns.include? "prefered_foot"

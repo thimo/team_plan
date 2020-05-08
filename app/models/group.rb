@@ -30,9 +30,9 @@ class Group < ApplicationRecord
 
   scope :by_model, ->(model) { where(memberable_via_type: model) }
   scope :asc, -> { order(name: :asc) }
-  scope :for_member, ->(member) { joins(:group_members).where(group_members: { member: member }) }
+  scope :for_member, ->(member) { joins(:group_members).where(group_members: {member: member}) }
   scope :for_memberable, ->(type, id) {
-    joins(:group_members).where(group_members: { memberable_type: type, memberable_id: id })
+    joins(:group_members).where(group_members: {memberable_type: type, memberable_id: id})
   }
   scope :via_type, -> { where.not(memberable_via_type: [nil, ""]) }
 

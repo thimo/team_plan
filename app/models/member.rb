@@ -74,7 +74,7 @@ class Member < ApplicationRecord
   STATUS_OVERSCHRIJVING_SPELACTIVITEIT = "overschrijving spelactiviteit"
 
   EXPORT_COLUMNS = %w[season age_group team association_number name full_name last_name first_name middle_name born_on
-                      gender role address zipcode city phone email email_2 member_since previous_team].freeze
+    gender role address zipcode city phone email email_2 member_since previous_team].freeze
   EXPORT_COLUMNS_EVALUATION = %w[field_positions field_positions_thickened prefered_foot advise_next_season].freeze
   DEFAULT_COLUMNS = %w[team association_number name born_on role address zipcode city phone email email_2].freeze
   EMAIL_ADDRESSES = %w[email email_2 email_parent email_parent_2].freeze
@@ -100,7 +100,7 @@ class Member < ApplicationRecord
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :order_registered_at, -> { order(registered_at: :asc) }
-  scope :to_year,   ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }
+  scope :to_year, ->(year) { where("born_on <= ?", Time.zone.local(year).end_of_year.to_date) }
   scope :from_year, ->(year) { where("born_on >= ?", Time.zone.local(year).beginning_of_year.to_date) }
   scope :active, -> {
     where(deregistered_at: nil).or(where("deregistered_at > ?", Time.zone.today))
@@ -133,8 +133,8 @@ class Member < ApplicationRecord
 
   scope :sportlink_player, -> {
     where.not(sport_category: nil)
-         .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
-         .or(where(local_teams: Tenant.setting("local_teams_always_allowed_in_team")))
+      .or(where(status: STATUS_OVERSCHRIJVING_SPELACTIVITEIT))
+      .or(where(local_teams: Tenant.setting("local_teams_always_allowed_in_team")))
   }
   scope :sportlink_non_player, -> {
     where(sport_category: nil)
@@ -146,60 +146,60 @@ class Member < ApplicationRecord
   }
   scope :local_teams_warning_sportlink, -> { where(local_teams: Tenant.setting("local_teams_warning_sportlink")) }
 
-  scope :male,   -> { where(gender: "M") }
+  scope :male, -> { where(gender: "M") }
   scope :female, -> { where(gender: "V") }
   scope :gender, ->(gender) { where(gender: gender) }
-  scope :player, -> { includes(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
-  scope :team_staff, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
+  scope :player, -> { includes(:team_members).where(team_members: {role: TeamMember.roles[:player]}) }
+  scope :team_staff, -> { joins(:team_members).where.not(team_members: {role: TeamMember.roles[:player]}) }
   scope :injured, -> { where(injured: true) }
 
   scope :by_season, ->(season) {
-    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season, training_only: false })
+    includes(team_members: {team: :age_group}).where(age_groups: {season_id: season, training_only: false})
   }
   scope :by_season_as_player, ->(season) {
-    includes(team_members: { team: :age_group }).where(age_groups: { season_id: season, training_only: false },
-                                                       team_members: { role: TeamMember.roles[:player],
-                                                                       ended_on: nil,
-                                                                       status: 1 })
+    includes(team_members: {team: :age_group}).where(age_groups: {season_id: season, training_only: false},
+                                                     team_members: {role: TeamMember.roles[:player],
+                                                                    ended_on: nil,
+                                                                    status: 1})
   }
 
   scope :by_age_group, ->(age_group) {
-    includes(team_members: :team).where(teams: { age_group_id: age_group })
+    includes(team_members: :team).where(teams: {age_group_id: age_group})
   }
   scope :by_age_group_as_active, ->(age_group) {
-    by_age_group(age_group).where(team_members: { ended_on: nil, status: 1 })
+    by_age_group(age_group).where(team_members: {ended_on: nil, status: 1})
   }
   scope :by_age_group_as_active_player, ->(age_group) {
     by_age_group_as_active(age_group).player
   }
   scope :by_age_group_as_active_player_in_active_team, ->(age_group) {
-    by_age_group_as_active_player(age_group).where(teams: { status: :active })
+    by_age_group_as_active_player(age_group).where(teams: {status: :active})
   }
 
   scope :by_team, ->(team) {
-    joins(:team_members).where(team_members: { team: team, ended_on: nil })
+    joins(:team_members).where(team_members: {team: team, ended_on: nil})
   }
   scope :by_team_as_active, ->(team) {
-    by_team(team).where(team_members: { status: 1 })
+    by_team(team).where(team_members: {status: 1})
   }
   scope :by_team_as_active_player, ->(team) {
     by_team_as_active(team).player
   }
 
   # scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
-  scope :active_in_a_team, -> { includes(:team_members).where(team_members: { ended_on: nil }) }
+  scope :active_in_a_team, -> { includes(:team_members).where(team_members: {ended_on: nil}) }
   scope :by_field_position, ->(field_positions) {
                               includes(team_members: :field_positions)
-                                .where(field_positions: { id: field_positions })
+                                .where(field_positions: {id: field_positions})
                             }
   scope :by_email, ->(email) {
     where(EMAIL_ADDRESSES.map { |mail| "lower(#{mail}) = ?" }.join(" OR "),
-          *([email.downcase] * EMAIL_ADDRESSES.size))
+      *([email.downcase] * EMAIL_ADDRESSES.size))
   }
 
   scope :with_active_play_ban, -> {
     joins(:play_bans).where("play_bans.started_on <= ? AND (play_bans.ended_on >= ? OR play_bans.ended_on IS null)",
-                            Time.zone.today, Time.zone.today)
+      Time.zone.today, Time.zone.today)
   }
   scope :with_future_play_ban, -> { joins(:play_bans).where("play_bans.started_on > ?", Time.zone.today) }
 
@@ -208,14 +208,14 @@ class Member < ApplicationRecord
 
   scope :query, ->(query) {
                   where("email ILIKE ? OR email_2 ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?",
-                        "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+                    "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
                 }
   pg_search_scope :search_by_name,
-                  against: [:first_name, :middle_name, :last_name, :email, :email2, :phone, :phone2],
-                  using: {
-                    tsearch: { prefix: true }
-                  },
-                  ignoring: :accents
+    against: [:first_name, :middle_name, :last_name, :email, :email2, :phone, :phone2],
+    using: {
+      tsearch: {prefix: true}
+    },
+    ignoring: :accents
 
   before_save :update_users
 
@@ -281,7 +281,7 @@ class Member < ApplicationRecord
 
   def active_team_member
     @active_team_member ||= team_members.for_active_season.active.player.first ||
-                            team_members.for_active_season.active.first
+      team_members.for_active_season.active.first
   end
 
   def evaluation_for_season(season)
@@ -350,9 +350,9 @@ class Member < ApplicationRecord
 
     year_of_birth = born_on.year
     age_groups = AgeGroup.for_active_season.where("year_of_birth_from <= ?", year_of_birth)
-                         .or(AgeGroup.for_active_season.where(year_of_birth_from: [nil, ""]))
+      .or(AgeGroup.for_active_season.where(year_of_birth_from: [nil, ""]))
     age_groups = age_groups.where("year_of_birth_to >= ?", year_of_birth)
-                           .or(age_groups.where(year_of_birth_to: [nil, ""]))
+      .or(age_groups.where(year_of_birth_to: [nil, ""]))
     age_groups = age_groups.where(gender: "m").or(age_groups.all_gender) if male?
     age_groups = age_groups.where(gender: "v").or(age_groups.all_gender) if female?
 
@@ -371,15 +371,15 @@ class Member < ApplicationRecord
     Comment.comment_types
   end
 
-  def self.import(file, encoding="utf-8")
-    result = { counters: { imported: 0, changed: 0 }, created: [], activated: [], member_ids: [] }
+  def self.import(file, encoding = "utf-8")
+    result = {counters: {imported: 0, changed: 0}, created: [], activated: [], member_ids: []}
 
     check_header_translations(file)
 
     CSV.foreach(
       file.path,
       headers: true,
-      header_converters: ->(header) { I18n.t("member.import.#{header.downcase.tr(' ', '_ ')}") },
+      header_converters: ->(header) { I18n.t("member.import.#{header.downcase.tr(" ", "_ ")}") },
       encoding: encoding,
       liberal_parsing: true
     ) do |row|
@@ -422,7 +422,7 @@ class Member < ApplicationRecord
   def self.cleanup(imported_before, imported_member_ids)
     # `cleanup` works with `imported_at` because it can happen that members disappear from
     # from the Sportlink export. It would prob. be better to handle this in the import
-    result = { deregistered: [] }
+    result = {deregistered: []}
 
     Member.active.find_each do |member|
       missed_import_on = member.missed_import_on
@@ -448,7 +448,7 @@ class Member < ApplicationRecord
   def self.check_header_translations(file)
     first_line = File.open(file.path, &:readline)
     header = first_line.strip.split(",").compact
-    missing = header.select { |name| I18n.t("member.import.#{name.downcase.tr(' ', '_ ')}", default: nil).blank? }
+    missing = header.select { |name| I18n.t("member.import.#{name.downcase.tr(" ", "_ ")}", default: nil).blank? }
     return if missing.none?
 
     ActionMailer::Base.mail(from: Tenant.setting("application_email"),
@@ -467,27 +467,27 @@ class Member < ApplicationRecord
 
   private
 
-    def update_users
-      EMAIL_ADDRESSES.each do |field_name|
-        email = send(field_name)
-        email_was_changed = send("#{field_name}_changed?")
+  def update_users
+    EMAIL_ADDRESSES.each do |field_name|
+      email = send(field_name)
+      email_was_changed = send("#{field_name}_changed?")
 
-        add_to_user(email) if new_record? || email_was_changed
-        remove_from_user(send("#{field_name}_was")) if email_was_changed
-        remove_from_user(email) if inactive?
-      end
+      add_to_user(email) if new_record? || email_was_changed
+      remove_from_user(send("#{field_name}_was")) if email_was_changed
+      remove_from_user(email) if inactive?
     end
+  end
 
-    def add_to_user(email)
-      return if email.blank? || (user = User.by_email(email).first).blank?
+  def add_to_user(email)
+    return if email.blank? || (user = User.by_email(email).first).blank?
 
-      users << user
-      user.activate
-    end
+    users << user
+    user.activate
+  end
 
-    def remove_from_user(email)
-      return if email.blank? || (user = User.by_email(email).first).blank?
+  def remove_from_user(email)
+    return if email.blank? || (user = User.by_email(email).first).blank?
 
-      user.remove_member(self)
-    end
+    user.remove_member(self)
+  end
 end

@@ -54,7 +54,7 @@ class MatchPolicy < ApplicationPolicy
 
   def permitted_attributes
     attributes = [:wedstrijddatum, :wedstrijdtijd, :end_time, :uitslag, :opponent, :is_home_match, :competition_id,
-                  :remark, :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route, :thuisteam, :uitteam]
+      :remark, :accomodatie, :plaats, :adres, :postcode, :telefoonnummer, :route, :thuisteam, :uitteam]
     attributes
   end
 

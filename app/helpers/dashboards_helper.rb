@@ -37,7 +37,7 @@ module DashboardsHelper
   end
 
   def member_stats
-    @member_stats ||= (0..35).reverse_each.map do |number|
+    @member_stats ||= (0..35).reverse_each.map { |number|
       date = number.months.ago
       {
         title: I18n.l(date, format: :date_long_without_day),
@@ -45,7 +45,7 @@ module DashboardsHelper
         activated: Member.activated_for_month(date).size,
         deactivated: Member.deactivated_for_month(date).size
       }
-    end
+    }
   end
 
   def comments_graph_data
@@ -87,7 +87,7 @@ module DashboardsHelper
   end
 
   def comment_stats
-    @comment_stats ||= (0..35).reverse_each.map do |number|
+    @comment_stats ||= (0..35).reverse_each.map { |number|
       date = number.months.ago
       {
         title: I18n.l(date, format: :date_long_without_day),
@@ -98,6 +98,6 @@ module DashboardsHelper
         classification: Comment.created_for_month(date).classification.size,
         membership: Comment.created_for_month(date).membership.size
       }
-    end
+    }
   end
 end

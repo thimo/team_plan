@@ -4,7 +4,8 @@ class GroupMembersController < ApplicationController
   before_action :set_group_member, only: [:destroy]
   before_action :add_breadcrumbs, only: [:new]
 
-  def new; end
+  def new
+  end
 
   def create
     if @group_member.save
@@ -22,35 +23,35 @@ class GroupMembersController < ApplicationController
 
   private
 
-    def create_group_member
-      @group_member = if action_name == "new"
-                        GroupMember.new
-                      else
-                        GroupMember.new(group_member_params)
-                      end
-      @group_member.memberable = @memberable
-      @group_member.group ||= Group.find(params[:group_id])
-      authorize @group_member
+  def create_group_member
+    @group_member = if action_name == "new"
+      GroupMember.new
+    else
+      GroupMember.new(group_member_params)
     end
+    @group_member.memberable = @memberable
+    @group_member.group ||= Group.find(params[:group_id])
+    authorize @group_member
+  end
 
-    def set_group_member
-      @group_member = GroupMember.find(params[:id])
-      authorize @group_member
-    end
+  def set_group_member
+    @group_member = GroupMember.find(params[:id])
+    authorize @group_member
+  end
 
-    def load_memberable
-      resource, id = request.path.split("/")[1, 2]
-      @memberable = resource.singularize.classify.constantize.find(id)
-    end
+  def load_memberable
+    resource, id = request.path.split("/")[1, 2]
+    @memberable = resource.singularize.classify.constantize.find(id)
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @group_member.memberable.name, @group_member.memberable
-      # add_breadcrumb @group_member.team.age_group.name, @group_member.team.age_group
-      # add_breadcrumb @group_member.team.name_with_club, @group_member.team
-      add_breadcrumb "Nieuw" if @group_member.new_record?
-    end
+  def add_breadcrumbs
+    add_breadcrumb @group_member.memberable.name, @group_member.memberable
+    # add_breadcrumb @group_member.team.age_group.name, @group_member.team.age_group
+    # add_breadcrumb @group_member.team.name_with_club, @group_member.team
+    add_breadcrumb "Nieuw" if @group_member.new_record?
+  end
 
-    def group_member_params
-      params.require(:group_member).permit(:group_id, :member_id, :memberable_type, :memberable_id)
-    end
+  def group_member_params
+    params.require(:group_member).permit(:group_id, :member_id, :memberable_type, :memberable_id)
+  end
 end

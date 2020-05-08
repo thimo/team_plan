@@ -34,9 +34,9 @@ class Bootstrap4BreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
   def render
     return "" unless should_render?
 
-    @elements.collect do |element|
+    @elements.collect { |element|
       render_element(element)
-    end.join.html_safe
+    }.join.html_safe
   end
 
   def render_element(element)
@@ -49,9 +49,9 @@ class Bootstrap4BreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
 
     tag_options =
       if current
-        { class: ["breadcrumb-item", "active"], "aria-current": "page" }
+        {class: ["breadcrumb-item", "active"], "aria-current": "page"}
       else
-        { class: "breadcrumb-item" }
+        {class: "breadcrumb-item"}
       end
 
     @context.content_tag(item_tag, tag_options) do
@@ -61,7 +61,7 @@ class Bootstrap4BreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
 
   private
 
-    def should_render?
-      @elements.any? || @options[:show_empty]
-    end
+  def should_render?
+    @elements.any? || @options[:show_empty]
+  end
 end

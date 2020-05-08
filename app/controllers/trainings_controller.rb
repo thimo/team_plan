@@ -10,7 +10,8 @@ class TrainingsController < ApplicationController
     @presences = @training.find_or_create_presences.asc if policy(@training).show_presences?
   end
 
-  def new; end
+  def new
+  end
 
   def create
     if @training.save
@@ -39,37 +40,37 @@ class TrainingsController < ApplicationController
 
   private
 
-    def set_team
-      @team = @training&.team || Team.find(params[:team_id])
-    end
+  def set_team
+    @team = @training&.team || Team.find(params[:team_id])
+  end
 
-    def create_training
-      @training = if action_name == "new"
-                    @team.trainings.new(started_at: Time.zone.now.change(hour: 19),
-                                        ended_at: Time.zone.now.change(hour: 20))
-                  else
-                    Training.new(training_params.merge(user_modified: true))
-                  end
-      @training.team = @team
-
-      authorize @training
+  def create_training
+    @training = if action_name == "new"
+      @team.trainings.new(started_at: Time.zone.now.change(hour: 19),
+                          ended_at: Time.zone.now.change(hour: 20))
+    else
+      Training.new(training_params.merge(user_modified: true))
     end
+    @training.team = @team
 
-    def set_training
-      @training = Training.find(params[:id])
-      authorize @training
-    end
+    authorize @training
+  end
 
-    def training_params
-      params.require(:training).permit(:body, :team_id, :started_at, :ended_at, :start_time, :end_time)
-    end
+  def set_training
+    @training = Training.find(params[:id])
+    authorize @training
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @training.team.name_with_club, @training.team
-      if @training.new_record?
-        add_breadcrumb "Nieuw"
-      else
-        add_breadcrumb @training.schedule_title, @training
-      end
+  def training_params
+    params.require(:training).permit(:body, :team_id, :started_at, :ended_at, :start_time, :end_time)
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb @training.team.name_with_club, @training.team
+    if @training.new_record?
+      add_breadcrumb "Nieuw"
+    else
+      add_breadcrumb @training.schedule_title, @training
     end
+  end
 end

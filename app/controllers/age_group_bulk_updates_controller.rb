@@ -2,7 +2,8 @@ class AgeGroupBulkUpdatesController < ApplicationController
   before_action :set_season, only: [:new, :create]
   before_action :add_breadcrumbs
 
-  def new; end
+  def new
+  end
 
   def create
     age_groups = params[:age_groups]
@@ -35,13 +36,13 @@ class AgeGroupBulkUpdatesController < ApplicationController
 
   private
 
-    def set_season
-      @season = Season.find(params[:season_id])
-      authorize AgeGroup.new(season: @season)
-    end
+  def set_season
+    @season = Season.find(params[:season_id])
+    authorize AgeGroup.new(season: @season)
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @season.name.to_s, @season
-      add_breadcrumb "Nieuw"
-    end
+  def add_breadcrumbs
+    add_breadcrumb @season.name.to_s, @season
+    add_breadcrumb "Nieuw"
+  end
 end

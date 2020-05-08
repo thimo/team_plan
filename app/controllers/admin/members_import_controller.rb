@@ -28,26 +28,26 @@ module Admin
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Leden", admin_members_path
-        add_breadcrumb "Import"
-      end
+    def add_breadcrumbs
+      add_breadcrumb "Leden", admin_members_path
+      add_breadcrumb "Import"
+    end
 
-      def accepted_formats
-        [".csv"]
-      end
+    def accepted_formats
+      [".csv"]
+    end
 
-      def accepted_file?(file)
-        file.content_type == "text/csv" || accepted_formats.include?(File.extname(file.original_filename).downcase)
-      end
+    def accepted_file?(file)
+      file.content_type == "text/csv" || accepted_formats.include?(File.extname(file.original_filename).downcase)
+    end
 
-      def cleanup_after_import
-        @cleanup_result = Member.cleanup(7.days.ago, @import_result[:member_ids])
+    def cleanup_after_import
+      @cleanup_result = Member.cleanup(7.days.ago, @import_result[:member_ids])
 
-        # Deactivate users with no matching members
-        # TODO: this may not be needed as activating/de-activating is done on member import en user creation
-        User.deactivate_for_inactive_members
-        User.activate_for_active_members
-      end
+      # Deactivate users with no matching members
+      # TODO: this may not be needed as activating/de-activating is done on member import en user creation
+      User.deactivate_for_inactive_members
+      User.activate_for_active_members
+    end
   end
 end

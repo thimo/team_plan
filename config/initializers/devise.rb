@@ -13,7 +13,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = proc {
-    "\"#{Tenant.setting('club_name_short')} #{Tenant.setting('application_name')}\" <#{Tenant.setting('application_email')}>"
+    "\"#{Tenant.setting("club_name_short")} #{Tenant.setting("application_name")}\" <#{Tenant.setting("application_email")}>"
   }
 
   # Configure the class responsible to send e-mails.

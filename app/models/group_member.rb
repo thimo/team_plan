@@ -35,5 +35,5 @@ class GroupMember < ApplicationRecord
 
   scope :by_group, ->(group) { where(group: group) }
 
-  validates :member, uniqueness: { scope: [:tenant, :group, :memberable_type, :memberable_id] }
+  validates :member, uniqueness: {scope: [:tenant, :group, :memberable_type, :memberable_id]}
 end

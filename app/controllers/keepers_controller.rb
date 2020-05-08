@@ -11,7 +11,7 @@ class KeepersController < ApplicationController
 
   private
 
-    def add_breadcrumbs
-      add_breadcrumb "Keepers", keepers_path
-    end
+  def add_breadcrumbs
+    add_breadcrumb "Keepers", keepers_path
+  end
 end

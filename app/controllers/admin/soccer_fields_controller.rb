@@ -9,7 +9,8 @@ module Admin
       authorize @soccer_fields
     end
 
-    def new; end
+    def new
+    end
 
     def create
       if @soccer_field.save
@@ -19,7 +20,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @soccer_field.update(soccer_field_params)
@@ -36,33 +38,33 @@ module Admin
 
     private
 
-      def create_resource
-        @soccer_field = if action_name == "new"
-                          SoccerField.new
-                        else
-                          SoccerField.new(soccer_field_params)
-                        end
-        authorize @soccer_field
+    def create_resource
+      @soccer_field = if action_name == "new"
+        SoccerField.new
+      else
+        SoccerField.new(soccer_field_params)
       end
+      authorize @soccer_field
+    end
 
-      def set_resource
-        @soccer_field = SoccerField.find(params[:id])
-        authorize @soccer_field
+    def set_resource
+      @soccer_field = SoccerField.find(params[:id])
+      authorize @soccer_field
+    end
+
+    def soccer_field_params
+      params.require(:soccer_field).permit(:name, :training, :match)
+    end
+
+    def add_breadcrumbs
+      add_breadcrumb "Velden", admin_soccer_fields_path
+      return if @soccer_field.nil?
+
+      if @soccer_field.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @soccer_field.name, [:edit, :admin, @soccer_field]
       end
-
-      def soccer_field_params
-        params.require(:soccer_field).permit(:name, :training, :match)
-      end
-
-      def add_breadcrumbs
-        add_breadcrumb "Velden", admin_soccer_fields_path
-        return if @soccer_field.nil?
-
-        if @soccer_field.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @soccer_field.name, [:edit, :admin, @soccer_field]
-        end
-      end
+    end
   end
 end

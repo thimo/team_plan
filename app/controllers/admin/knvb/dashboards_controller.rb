@@ -10,10 +10,10 @@ module Admin
 
       private
 
-        def add_breadcrumbs
-          add_breadcrumb "KNVB", admin_knvb_club_data_teams_path
-          add_breadcrumb "Dashboard"
-        end
+      def add_breadcrumbs
+        add_breadcrumb "KNVB", admin_knvb_club_data_teams_path
+        add_breadcrumb "Dashboard"
+      end
     end
   end
 end

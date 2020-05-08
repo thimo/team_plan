@@ -1,13 +1,13 @@
 module CommentsHelper
   def comment_types_for(parent)
     comment_types = if parent.class == Team && current_user.setting(:include_member_comments)
-                      Member.comment_types
-                    else
-                      parent.class.comment_types
-                    end
-    @comment_types_for ||= comment_types.select do |type, _id|
-      policy(Comment.new(commentable: parent)).public_send("show_#{type}?")
+      Member.comment_types
+    else
+      parent.class.comment_types
     end
+    @comment_types_for ||= comment_types.select { |type, _id|
+      policy(Comment.new(commentable: parent)).public_send("show_#{type}?")
+    }
   end
 
   def comments_for(parent, comment_type)
@@ -27,7 +27,7 @@ module CommentsHelper
 
   private
 
-    def include_member_comments?(parent)
-      parent.is_a?(Team) && current_user.setting(:include_member_comments)
-    end
+  def include_member_comments?(parent)
+    parent.is_a?(Team) && current_user.setting(:include_member_comments)
+  end
 end

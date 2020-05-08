@@ -21,27 +21,27 @@ module Org
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Lokale teams"
-      end
+    def add_breadcrumbs
+      add_breadcrumb "Lokale teams"
+    end
 
-      # def team_staff_members
-      #   policy_scope(TeamMember.for_season(Season.last)).active.staff
-      # end
+    # def team_staff_members
+    #   policy_scope(TeamMember.for_season(Season.last)).active.staff
+    # end
 
-      def members
-        @members ||= policy_scope(Member).active.with_local_teams.asc
-      end
+    def members
+      @members ||= policy_scope(Member).active.with_local_teams.asc
+    end
 
-      def members_per_team
-        @members_per_team ||= members.group_by(&:local_teams)
-      end
+    def members_per_team
+      @members_per_team ||= members.group_by(&:local_teams)
+    end
 
-      def teams_hash
-        teams = members_per_team.keys.sort
-        teams.each.map do |team|
-          { value: team, label: team, count: members_per_team[team].size }
-        end
+    def teams_hash
+      teams = members_per_team.keys.sort
+      teams.each.map do |team|
+        {value: team, label: team, count: members_per_team[team].size}
       end
+    end
   end
 end

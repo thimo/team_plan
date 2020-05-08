@@ -3,7 +3,7 @@ module Statussable
   extend ActiveSupport::Concern
 
   included do
-    enum status: { draft: 0, active: 1, archived: 2 }
+    enum status: {draft: 0, active: 1, archived: 2}
   end
 
   def status_to_badge
@@ -44,17 +44,17 @@ module Statussable
 
   private
 
-    def transmit_status_to_children(new_status)
-      status_children.each do |child|
-        child.transmit_status(new_status) unless child.archived? && child.ended_on.present?
-      end
+  def transmit_status_to_children(new_status)
+    status_children.each do |child|
+      child.transmit_status(new_status) unless child.archived? && child.ended_on.present?
     end
+  end
 
-    def user_invoked_archivation?(old_status)
-      old_status.present? && archived?
-    end
+  def user_invoked_archivation?(old_status)
+    old_status.present? && archived?
+  end
 
-    def unarchived_with_end_date?
-      (draft? || active?) && ended_on.present?
-    end
+  def unarchived_with_end_date?
+    (draft? || active?) && ended_on.present?
+  end
 end

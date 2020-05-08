@@ -12,7 +12,8 @@ class SeasonsController < ApplicationController
     @age_groups_female = policy_scope(@season.age_groups).female.asc
   end
 
-  def new; end
+  def new
+  end
 
   def create
     if @season.save
@@ -22,7 +23,8 @@ class SeasonsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     old_status = @season.status
@@ -50,42 +52,42 @@ class SeasonsController < ApplicationController
 
   private
 
-    def create_season
-      @season = if action_name == "new"
-                  start_year = Time.zone.today.year + (Time.zone.today.month >= 7 ? 1 : 0)
-                  started_on = Time.zone.local(start_year, 7, 1)
-                  ended_on = Time.zone.local(start_year + 1, 6, 30)
-                  name = "#{start_year} / #{ended_on.year}"
+  def create_season
+    @season = if action_name == "new"
+      start_year = Time.zone.today.year + (Time.zone.today.month >= 7 ? 1 : 0)
+      started_on = Time.zone.local(start_year, 7, 1)
+      ended_on = Time.zone.local(start_year + 1, 6, 30)
+      name = "#{start_year} / #{ended_on.year}"
 
-                  Season.new(started_on: started_on, ended_on: ended_on, name:  name)
-                else
-                  Season.new(permitted_attributes(Season.new))
-                end
-
-      authorize @season
+      Season.new(started_on: started_on, ended_on: ended_on, name: name)
+    else
+      Season.new(permitted_attributes(Season.new))
     end
 
-    def set_season
-      # Find season by id in params
-      @season = Season.find(params[:id]) unless params[:id].nil?
-      # Find first active season
-      @season = Season.find_by(status: Season.statuses[:active]) if @season.nil?
-      # Find first draft season
-      @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
-      # Create a new draft season in the database
-      @season = Season.create(name: "#{Time.zone.today.year} / #{Time.zone.today.year + 1}") if @season.nil?
+    authorize @season
+  end
 
-      authorize @season
+  def set_season
+    # Find season by id in params
+    @season = Season.find(params[:id]) unless params[:id].nil?
+    # Find first active season
+    @season = Season.find_by(status: Season.statuses[:active]) if @season.nil?
+    # Find first draft season
+    @season = Season.find_by(status: Season.statuses[:draft]) if @season.nil?
+    # Create a new draft season in the database
+    @season = Season.create(name: "#{Time.zone.today.year} / #{Time.zone.today.year + 1}") if @season.nil?
+
+    authorize @season
+  end
+
+  def add_breadcrumbs
+    return if @season.nil?
+
+    if @season.new_record?
+      add_breadcrumb "Seizoenen", seasons_path
+      add_breadcrumb "Nieuw"
+    else
+      add_breadcrumb @season.name, @season
     end
-
-    def add_breadcrumbs
-      return if @season.nil?
-
-      if @season.new_record?
-        add_breadcrumb "Seizoenen", seasons_path
-        add_breadcrumb "Nieuw"
-      else
-        add_breadcrumb @season.name, @season
-      end
-    end
+  end
 end

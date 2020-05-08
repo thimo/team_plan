@@ -28,7 +28,7 @@ class DashboardsController < ApplicationController
     @canceled_matches = not_played_matches.afgelast.group_by(&:wedstrijddatum_date)
 
     @played_matches = matches.played.in_period(1.week.ago.end_of_day, 0.hours.ago).desc.limit(10)
-                             .group_by(&:wedstrijddatum_date)
+      .group_by(&:wedstrijddatum_date)
 
     team_ids = current_user.teams_as_staff_in_season(@season).pluck(:id).uniq
     @open_team_evaluations = policy_scope(TeamEvaluation).open_at_team.desc.where(team_id: team_ids)
@@ -45,8 +45,8 @@ class DashboardsController < ApplicationController
   def program
     authorize Match, :show?
     matches = policy_scope(Match).own.not_played.asc
-                                 .in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day)
-                                 .includes(:competition, :teams)
+      .in_period(0.days.ago.beginning_of_day, 1.week.from_now.end_of_day)
+      .includes(:competition, :teams)
     @not_played_matches = matches.niet_afgelast.group_by(&:wedstrijddatum_date)
     @canceled_matches = matches.afgelast.group_by(&:wedstrijddatum_date)
   end
@@ -54,16 +54,16 @@ class DashboardsController < ApplicationController
   def referees
     authorize Match, :show?
     @matches = policy_scope(Match).own.with_referee.asc
-                                  .from_today
-                                  .with_referee
-                                  .includes(:competition, :teams)
+      .from_today
+      .with_referee
+      .includes(:competition, :teams)
   end
 
   def results
     authorize Match, :show?
     @played_matches = policy_scope(Match).own.played.desc
-                                         .in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day)
-                                         .includes(:competition).group_by(&:wedstrijddatum_date)
+      .in_period(1.week.ago.end_of_day, 0.days.from_now.end_of_day)
+      .includes(:competition).group_by(&:wedstrijddatum_date)
   end
 
   def cancellations
@@ -73,7 +73,7 @@ class DashboardsController < ApplicationController
 
   private
 
-    def set_season
-      @season = policy_scope(Season).active.first
-    end
+  def set_season
+    @season = policy_scope(Season).active.first
+  end
 end

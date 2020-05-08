@@ -35,14 +35,14 @@ class Competition < ApplicationRecord
   has_paper_trail
 
   validates :competitienaam, presence: true
-  validates :poulecode, uniqueness: { scope: :tenant }
+  validates :poulecode, uniqueness: {scope: :tenant}
 
-  scope :asc,     -> { order(:created_at) }
-  scope :desc,    -> { order(created_at: :desc) }
+  scope :asc, -> { order(:created_at) }
+  scope :desc, -> { order(created_at: :desc) }
   scope :regular, -> { where(competitiesoort: COMPETITIESOORT_REGULIER) }
-  scope :other,   -> { where.not(competitiesoort: COMPETITIESOORT_REGULIER) }
-  scope :knvb,    -> { where("poulecode > 0") }
-  scope :custom,  -> { where("poulecode < 0") }
+  scope :other, -> { where.not(competitiesoort: COMPETITIESOORT_REGULIER) }
+  scope :knvb, -> { where("poulecode > 0") }
+  scope :custom, -> { where("poulecode < 0") }
 
   def self.new_custom_poulecode
     # Custom competitions have a poulecode < 0

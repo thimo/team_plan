@@ -14,11 +14,11 @@ module DefaultUrlOptions
 
   private
 
-    def host
-      Tenant.setting("application_hostname")
-    end
+  def host
+    Tenant.setting("application_hostname")
+  end
 
-    def protocol
-      "https"
-    end
+  def protocol
+    "https"
+  end
 end

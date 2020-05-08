@@ -21,9 +21,9 @@ module Admin
         @confirmed = params[:confirmed] == "true"
         @body = params[:body] == "true"
 
-        @confirm_messages = members.map do |member|
+        @confirm_messages = members.map { |member|
           [member, process_play_ban(member)]
-        end
+        }
 
         if @confirmed
           flash_message(:success, "Speelverboden zijn aangemaakt en/of aangepast.")
@@ -36,75 +36,79 @@ module Admin
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Speelverboden", admin_play_bans_path
-        add_breadcrumb "Import"
+    def add_breadcrumbs
+      add_breadcrumb "Speelverboden", admin_play_bans_path
+      add_breadcrumb "Import"
+    end
+
+    def validate_params
+      return "Voer de KNVB nummers in" if params[:association_numbers].blank?
+      return "Voer een datum in" if params[:date].blank?
+      return "Selecteer aanmaken of afronden" if ["create", "finish"].exclude?(params[:play_ban_action])
+      begin
+          return "Voer een correcte datum in" unless params[:date].to_date
+      rescue
+        false
+        end
+    end
+
+    def process_play_ban(member)
+      # Find active of future play ban
+      play_bans = policy_scope(PlayBan).by_member(member).end_in_future
+
+      if play_bans.size > 1
+        "Meerdere actieve speelverboden gevonden, graag handmatig aanpassen"
+      elsif play_bans.size == 1
+        play_ban = play_bans.first
+        process_existing_play_ban(play_ban)
+      else
+        create_play_ban(member)
       end
+    end
 
-      def validate_params
-        return "Voer de KNVB nummers in" if params[:association_numbers].blank?
-        return "Voer een datum in" if params[:date].blank?
-        return "Selecteer aanmaken of afronden" if ["create", "finish"].exclude?(params[:play_ban_action])
-        return "Voer een correcte datum in" unless params[:date].to_date rescue false
-      end
+    def process_existing_play_ban(play_ban)
+      if create?
+        current_date = play_ban.started_on
+        play_ban.update!(started_on: @date) if @confirmed
+        "Speelverbod gevonden, de startdatum wordt aangepast van <b>#{l(current_date, format: :date_long)}</b> naar <b>#{l(@date, format: :date_long)}</b>"
+      elsif finish?
+        current_date = play_ban.ended_on
+        play_ban.update!(ended_on: @date) if @confirmed
 
-      def process_play_ban(member)
-        # Find active of future play ban
-        play_bans = policy_scope(PlayBan).by_member(member).end_in_future
-
-        if play_bans.size > 1
-          "Meerdere actieve speelverboden gevonden, graag handmatig aanpassen"
-        elsif play_bans.size == 1
-          play_ban = play_bans.first
-          process_existing_play_ban(play_ban)
+        if play_ban.ended_on.blank?
+          "Speelverbod gevonden, de einddatum wordt ingesteld op <b>#{l(@date, format: :date_long)}</b>"
         else
-          create_play_ban(member)
+          "Speelverbod gevonden, de einddatum wordt aangepast van <b>#{l(current_date, format: :date_long)}</b> naar <b>#{l(@date, format: :date_long)}</b>"
         end
       end
+    end
 
-      def process_existing_play_ban(play_ban)
-        if create?
-          current_date = play_ban.started_on
-          play_ban.update!(started_on: @date) if @confirmed
-          "Speelverbod gevonden, de startdatum wordt aangepast van <b>#{l(current_date, format: :date_long)}</b> naar <b>#{l(@date, format: :date_long)}</b>"
-        elsif finish?
-          current_date = play_ban.ended_on
-          play_ban.update!(ended_on: @date) if @confirmed
-
-          if play_ban.ended_on.blank?
-            "Speelverbod gevonden, de einddatum wordt ingesteld op <b>#{l(@date, format: :date_long)}</b>"
+    def create_play_ban(member)
+      if create?
+        if @confirmed
+          play_ban_type = if current_user.role?(Role::BEHEER_CONTRIBUTIE_SPEELVERBODEN)
+            PlayBan.play_ban_types[:contribution]
           else
-            "Speelverbod gevonden, de einddatum wordt aangepast van <b>#{l(current_date, format: :date_long)}</b> naar <b>#{l(@date, format: :date_long)}</b>"
+            raise "Could not determine play_ban_type"
           end
+          PlayBan.create(member: member,
+                         started_on: @date,
+                         body: @body,
+                         play_ban_type: play_ban_type)
         end
-      end
 
-      def create_play_ban(member)
-        if create?
-          if @confirmed
-            play_ban_type = if current_user.role?(Role::BEHEER_CONTRIBUTIE_SPEELVERBODEN)
-                              PlayBan.play_ban_types[:contribution]
-                            else
-                              raise "Could not determine play_ban_type"
-                            end
-            PlayBan.create(member: member,
-                           started_on: @date,
-                           body: @body,
-                           play_ban_type: play_ban_type)
-          end
-
-          "Speelverbod wordt aangemaakt met ingang van <b>#{l(@date, format: :date_long)}</b>"
-        elsif finish?
-          "Geen actief of aanstaand speelverbod gevonden"
-        end
+        "Speelverbod wordt aangemaakt met ingang van <b>#{l(@date, format: :date_long)}</b>"
+      elsif finish?
+        "Geen actief of aanstaand speelverbod gevonden"
       end
+    end
 
-      def create?
-        @action == "create"
-      end
+    def create?
+      @action == "create"
+    end
 
-      def finish?
-        @action == "finish"
-      end
+    def finish?
+      @action == "finish"
+    end
   end
 end

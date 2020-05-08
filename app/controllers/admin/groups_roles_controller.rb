@@ -34,8 +34,8 @@ module Admin
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Rollenmatrix", admin_groups_roles_path
-      end
+    def add_breadcrumbs
+      add_breadcrumb "Rollenmatrix", admin_groups_roles_path
+    end
   end
 end

@@ -38,12 +38,12 @@ class TeamMember < ApplicationRecord
 
   attr_writer :initial_status
 
-  enum role: { player: 0, head_coach: 5, coach: 1, trainer: 2, assistant_trainer: 7, keeper_trainer: 9, team_parent: 3,
-               manager: 4, leader: 10, physio: 6, referee: 11, assistant_referee: 8 }
-  enum initial_status: { initial_active: 1, initial_draft: 0 }
+  enum role: {player: 0, head_coach: 5, coach: 1, trainer: 2, assistant_trainer: 7, keeper_trainer: 9, team_parent: 3,
+              manager: 4, leader: 10, physio: 6, referee: 11, assistant_referee: 8}
+  enum initial_status: {initial_active: 1, initial_draft: 0}
 
   validates :team_id, :member_id, :role, presence: true
-  validates :role, uniqueness: { scope: [:tenant, :team, :member] }
+  validates :role, uniqueness: {scope: [:tenant, :team, :member]}
 
   delegate :email, to: :member
   delegate :name, to: :member
@@ -53,15 +53,15 @@ class TeamMember < ApplicationRecord
   scope :staff, -> { where.not(role: TeamMember.roles[:player]).includes(:member) }
   scope :trainers, -> {
     where(role: [
-            TeamMember.roles[:head_coach],
-            TeamMember.roles[:coach],
-            TeamMember.roles[:trainer],
-            TeamMember.roles[:assistant_trainer],
-            TeamMember.roles[:keeper_trainer]
-          ])
+      TeamMember.roles[:head_coach],
+      TeamMember.roles[:coach],
+      TeamMember.roles[:trainer],
+      TeamMember.roles[:assistant_trainer],
+      TeamMember.roles[:keeper_trainer]
+    ])
   }
   scope :asc, -> { includes(:member).order("members.last_name ASC, members.first_name ASC").includes(:team) }
-  scope :includes_parents, -> { includes(:team).includes(team: :age_group).includes(team: { age_group: :season }) }
+  scope :includes_parents, -> { includes(:team).includes(team: :age_group).includes(team: {age_group: :season}) }
   scope :recent_first, -> { order(created_at: :desc) }
   scope :active_for_team, ->(team) {
     where(status: team.status, ended_on: nil).or(where(status: TeamMember.statuses[:active]))
@@ -74,10 +74,10 @@ class TeamMember < ApplicationRecord
   }
   scope :not_ended, -> { where(ended_on: nil) }
   scope :ended, -> { where.not(ended_on: nil) }
-  scope :for_season, ->(season) { joins(team: :age_group).where(age_groups: { season_id: season }) }
-  scope :goalkeeper, -> { joins(:field_positions).where(field_positions: { id: FieldPosition.goalkeeper }) }
+  scope :for_season, ->(season) { joins(team: :age_group).where(age_groups: {season_id: season}) }
+  scope :goalkeeper, -> { joins(:field_positions).where(field_positions: {id: FieldPosition.goalkeeper}) }
   scope :for_active_season, -> {
-    joins(team: { age_group: :season }).where(seasons: { status: Season.statuses[:active] })
+    joins(team: {age_group: :season}).where(seasons: {status: Season.statuses[:active]})
   }
 
   def self.players_by_year(team_members_scope)
@@ -131,24 +131,24 @@ class TeamMember < ApplicationRecord
 
   private
 
-    def inherit_fields
-      return if (team_member = member.active_team_member).blank?
+  def inherit_fields
+    return if (team_member = member.active_team_member).blank?
 
-      self.prefered_foot = team_member.prefered_foot if prefered_foot.nil?
+    self.prefered_foot = team_member.prefered_foot if prefered_foot.nil?
 
-      return if field_positions.present?
+    return if field_positions.present?
 
-      team_member.field_positions.each do |field_position|
-        field_positions << field_position
-      end
+    team_member.field_positions.each do |field_position|
+      field_positions << field_position
     end
+  end
 
-    def save_for_archive?
-      # Only keep a team member as 'archived' if its and all parent's statusses are active and the season has started
-      active? &&
-        team.active? &&
-        team.age_group.active? &&
-        team.age_group.season.active? &&
-        team.age_group.season.started_on.beginning_of_day.past?
-    end
+  def save_for_archive?
+    # Only keep a team member as 'archived' if its and all parent's statusses are active and the season has started
+    active? &&
+      team.active? &&
+      team.age_group.active? &&
+      team.age_group.season.active? &&
+      team.age_group.season.started_on.beginning_of_day.past?
+  end
 end

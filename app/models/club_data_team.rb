@@ -34,7 +34,7 @@ class ClubDataTeam < ApplicationRecord
   has_many :competitions, through: :club_data_team_competitions
 
   validates :teamcode, :teamnaam, presence: true
-  validates :teamcode, uniqueness: { scope: [:tenant, :season] }
+  validates :teamcode, uniqueness: {scope: [:tenant, :season]}
 
   scope :asc, -> { order(:id) }
 
@@ -42,8 +42,8 @@ class ClubDataTeam < ApplicationRecord
     return if teams.for_active_season.present?
 
     teamname_without_club = teamnaam.gsub(Tenant.setting("club_name"), "")
-                                    .gsub(Tenant.setting("club_name_short"), "")
-                                    .strip
+      .gsub(Tenant.setting("club_name_short"), "")
+      .strip
 
     team = Team.for_active_season.active.find_by(name: [teamnaam, teamname_without_club])
 

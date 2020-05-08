@@ -11,7 +11,8 @@ module Admin
       authorize @users
     end
 
-    def show; end
+    def show
+    end
 
     def new
       prefill_from_member
@@ -33,7 +34,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       @user.skip_reconfirmation!
@@ -67,36 +69,36 @@ module Admin
 
     private
 
-      def create_resource
-        @user = if action_name == "new"
-                  User.new
-                else
-                  User.new(permitted_attributes(User.new))
-                end
-        authorize @user
+    def create_resource
+      @user = if action_name == "new"
+        User.new
+      else
+        User.new(permitted_attributes(User.new))
       end
+      authorize @user
+    end
 
-      def set_resource
-        @user = User.find(params[:id])
-        authorize @user
+    def set_resource
+      @user = User.find(params[:id])
+      authorize @user
+    end
+
+    def add_breadcrumbs
+      add_breadcrumb "Gebruikers", admin_users_path
+      return if @user.nil?
+
+      if @user.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @user.email, [:edit, :admin, @user]
       end
+    end
 
-      def add_breadcrumbs
-        add_breadcrumb "Gebruikers", admin_users_path
-        return if @user.nil?
+    def prefill_from_member
+      return if params[:member].blank?
 
-        if @user.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @user.email, [:edit, :admin, @user]
-        end
-      end
-
-      def prefill_from_member
-        return if params[:member].blank?
-
-        member = policy_scope(Member).find(params[:member])
-        @user.prefill(member)
-      end
+      member = policy_scope(Member).find(params[:member])
+      @user.prefill(member)
+    end
   end
 end

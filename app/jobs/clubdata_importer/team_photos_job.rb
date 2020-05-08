@@ -19,8 +19,8 @@ module ClubdataImporter
     end
 
     def url(club_data_team)
-      "#{Tenant.setting('clubdata_urls_team_indeling')}&teamcode=#{club_data_team.teamcode}" \
-      "&client_id=#{Tenant.setting('clubdata_client_id')}"
+      "#{Tenant.setting("clubdata_urls_team_indeling")}&teamcode=#{club_data_team.teamcode}" \
+      "&client_id=#{Tenant.setting("clubdata_client_id")}"
     end
 
     def update_photo(member, data)
@@ -32,7 +32,7 @@ module ClubdataImporter
     end
 
     def count
-      @count ||= { total: 0, updated: 0 }
+      @count ||= {total: 0, updated: 0}
     end
 
     def log(club_data_team)

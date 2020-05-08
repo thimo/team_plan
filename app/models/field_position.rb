@@ -32,7 +32,7 @@ class FieldPosition < ApplicationRecord
   has_many :axis_children, foreign_key: :axis_parent_id, class_name: "FieldPosition", dependent: :destroy
   has_paper_trail
 
-  enum position_type: { goalkeeper: 0, defender: 1, midfielder: 2, forward: 3 }
+  enum position_type: {goalkeeper: 0, defender: 1, midfielder: 2, forward: 3}
 
   default_scope { order(position: :asc) }
 

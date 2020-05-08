@@ -10,15 +10,15 @@ class CompetitionsController < ApplicationController
 
   private
 
-    def set_competition
-      @competition = Competition.find(params[:id])
-      authorize @competition
-    end
+  def set_competition
+    @competition = Competition.find(params[:id])
+    authorize @competition
+  end
 
-    def add_breadcrumbs
-      @competition.teams.each do |team|
-        add_breadcrumb team.name_with_club, team
-      end
-      add_breadcrumb "#{t @competition.competitiesoort} - #{@competition.klasse}"
+  def add_breadcrumbs
+    @competition.teams.each do |team|
+      add_breadcrumb team.name_with_club, team
     end
+    add_breadcrumb "#{t @competition.competitiesoort} - #{@competition.klasse}"
+  end
 end

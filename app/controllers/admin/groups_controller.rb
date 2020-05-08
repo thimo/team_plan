@@ -9,9 +9,11 @@ module Admin
       authorize @groups
     end
 
-    def show; end
+    def show
+    end
 
-    def new; end
+    def new
+    end
 
     def create
       if @group.save
@@ -21,7 +23,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @group.update(permitted_attributes(@group))
@@ -38,26 +41,26 @@ module Admin
 
     private
 
-      def create_resource
-        @group = Group.new
-        @group.assign_attributes(permitted_attributes(@group)) if action_name == "create"
-        authorize @group
-      end
+    def create_resource
+      @group = Group.new
+      @group.assign_attributes(permitted_attributes(@group)) if action_name == "create"
+      authorize @group
+    end
 
-      def set_resource
-        @group = Group.find(params[:id])
-        authorize @group
-      end
+    def set_resource
+      @group = Group.find(params[:id])
+      authorize @group
+    end
 
-      def add_breadcrumbs
-        add_breadcrumb "Groepen", admin_groups_path
-        return if @group.nil?
+    def add_breadcrumbs
+      add_breadcrumb "Groepen", admin_groups_path
+      return if @group.nil?
 
-        if @group.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @group.name, [:edit, :admin, @group]
-        end
+      if @group.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @group.name, [:edit, :admin, @group]
       end
+    end
   end
 end

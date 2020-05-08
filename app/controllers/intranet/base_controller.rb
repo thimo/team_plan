@@ -16,12 +16,12 @@ module Intranet
 
     private
 
-      def admin_user
-        permission_denied unless policy(:intranet).show?
-      end
+    def admin_user
+      permission_denied unless policy(:intranet).show?
+    end
 
-      def default_breadcrumb
-        add_breadcrumb "Intranet", intranet_path
-      end
+    def default_breadcrumb
+      add_breadcrumb "Intranet", intranet_path
+    end
   end
 end

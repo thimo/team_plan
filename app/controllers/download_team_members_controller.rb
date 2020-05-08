@@ -9,17 +9,17 @@ class DownloadTeamMembersController < ApplicationController
       @season = policy_scope(Season).find(params[:season_id])
 
       @teams = if params[:age_group_ids].present?
-                 AgeGroup.where(id: params[:age_group_ids]).map do |age_group|
-                   hashes_for teams_for(age_group)
-                 end
-               else
-                 policy_scope(@season.age_groups).male.asc.map do |age_group|
-                   hashes_for teams_for(age_group)
-                 end
-                 policy_scope(@season.age_groups).female.asc.map do |age_group|
-                   hashes_for teams_for(age_group)
-                 end
-               end.flatten
+        AgeGroup.where(id: params[:age_group_ids]).map do |age_group|
+          hashes_for teams_for(age_group)
+        end
+      else
+        policy_scope(@season.age_groups).male.asc.map do |age_group|
+          hashes_for teams_for(age_group)
+        end
+        policy_scope(@season.age_groups).female.asc.map do |age_group|
+          hashes_for teams_for(age_group)
+        end
+      end.flatten
 
       @previous_season = @season.previous
 
@@ -32,10 +32,10 @@ class DownloadTeamMembersController < ApplicationController
       teams = teams.where(status: params[:status].to_sym) if params[:status].present?
 
       @teams += if params[:team_ids].present?
-                  hashes_for(teams.where(id: params[:team_ids]))
-                else
-                  hashes_for(teams)
-                end
+        hashes_for(teams.where(id: params[:team_ids]))
+      else
+        hashes_for(teams)
+      end
 
       @previous_season = @age_group.season.previous
 
@@ -52,7 +52,7 @@ class DownloadTeamMembersController < ApplicationController
 
     @export_columns = current_user.export_columns
 
-    filename = "#{Tenant.setting('club_name')}_#{@season.name}"
+    filename = "#{Tenant.setting("club_name")}_#{@season.name}"
     filename += "_#{@age_group.name}" if @age_group.present?
     filename += "_#{@team.name}" if @team.present?
     filename += "_#{Time.zone.now}.xlsx"
@@ -64,25 +64,25 @@ class DownloadTeamMembersController < ApplicationController
 
   private
 
-    def hashes_for(teams)
-      team_hashes = []
-      human_sort(policy_scope(teams), :name).each do |team|
-        team_hashes << team_hash(team)
-      end
-      team_hashes
+  def hashes_for(teams)
+    team_hashes = []
+    human_sort(policy_scope(teams), :name).each do |team|
+      team_hashes << team_hash(team)
     end
+    team_hashes
+  end
 
-    def team_hash(team)
-      {
-        season: team.age_group.season.name,
-        age_group: team.age_group.name,
-        team: team.name,
-        players: team.team_members.active_for_team(team).player.asc,
-        staff: team.team_members.active_for_team(team).staff.asc
-      }
-    end
+  def team_hash(team)
+    {
+      season: team.age_group.season.name,
+      age_group: team.age_group.name,
+      team: team.name,
+      players: team.team_members.active_for_team(team).player.asc,
+      staff: team.team_members.active_for_team(team).staff.asc
+    }
+  end
 
-    def teams_for(age_group)
-      params[:status].present? ? age_group.teams.send(params[:status]) : age_group.teams
-    end
+  def teams_for(age_group)
+    params[:status].present? ? age_group.teams.send(params[:status]) : age_group.teams
+  end
 end

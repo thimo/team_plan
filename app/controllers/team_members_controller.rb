@@ -9,7 +9,8 @@ class TeamMembersController < ApplicationController
     redirect_to @team_member.member
   end
 
-  def new; end
+  def new
+  end
 
   def create
     if params[:age_group_id].present?
@@ -61,7 +62,7 @@ class TeamMembersController < ApplicationController
       end
 
       archived_member = @team.team_members.ended.where(member: @team_member.member,
-                                                                   role: @team_member.role).first
+                                                       role: @team_member.role).first
       if archived_member.present?
         # Re-activate archived team member
         archived_member.update!(ended_on: nil, status: @team_member.status)
@@ -92,7 +93,8 @@ class TeamMembersController < ApplicationController
     redirect_to back_url
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     old_status = @team_member.status
@@ -115,34 +117,34 @@ class TeamMembersController < ApplicationController
 
   private
 
-    def create_team_member
-      return if params[:team_id].blank?
+  def create_team_member
+    return if params[:team_id].blank?
 
-      @team = Team.find(params[:team_id])
+    @team = Team.find(params[:team_id])
 
-      @team_member = if action_name == "new"
-                       @team.team_members.new
-                     else
-                       TeamMember.new(permitted_attributes(TeamMember.new(team: @team)))
-                     end
-      @team_member.team ||= @team
-
-      authorize @team_member
+    @team_member = if action_name == "new"
+      @team.team_members.new
+    else
+      TeamMember.new(permitted_attributes(TeamMember.new(team: @team)))
     end
+    @team_member.team ||= @team
 
-    def set_team_member
-      @team_member = TeamMember.find(params[:id])
-      authorize @team_member
-    end
+    authorize @team_member
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @team_member.team.age_group.season.name, @team_member.team.age_group.season
-      add_breadcrumb @team_member.team.age_group.name, @team_member.team.age_group
-      add_breadcrumb @team_member.team.name_with_club, @team_member.team
-      if @team_member.new_record?
-        add_breadcrumb "Nieuw"
-      else
-        add_breadcrumb @team_member.member.name, @team_member
-      end
+  def set_team_member
+    @team_member = TeamMember.find(params[:id])
+    authorize @team_member
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb @team_member.team.age_group.season.name, @team_member.team.age_group.season
+    add_breadcrumb @team_member.team.age_group.name, @team_member.team.age_group
+    add_breadcrumb @team_member.team.name_with_club, @team_member.team
+    if @team_member.new_record?
+      add_breadcrumb "Nieuw"
+    else
+      add_breadcrumb @team_member.member.name, @team_member
     end
+  end
 end

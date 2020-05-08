@@ -22,7 +22,7 @@ class PlayBan < ApplicationRecord
   belongs_to :member
   has_many :comments, as: :commentable, dependent: :destroy
 
-  enum play_ban_type: { contribution: 0 }
+  enum play_ban_type: {contribution: 0}
 
   scope :by_member, ->(member) { where(member: member) }
   scope :active, -> { start_in_past.end_in_future }

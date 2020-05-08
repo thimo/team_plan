@@ -53,16 +53,16 @@ class Tenant < ApplicationRecord
   class << self
     private
 
-      def clean_up(name)
-        name.gsub(/[-\.]/, "_")
-      end
+    def clean_up(name)
+      name.gsub(/[-\.]/, "_")
+    end
 
-      def domain(request)
-        request.host.split(".").last(2).join(".").downcase
-      end
+    def domain(request)
+      request.host.split(".").last(2).join(".").downcase
+    end
 
-      def subdomain(request)
-        request.host.split(".")[0..-3].last.downcase
-      end
+    def subdomain(request)
+      request.host.split(".")[0..-3].last.downcase
+    end
   end
 end

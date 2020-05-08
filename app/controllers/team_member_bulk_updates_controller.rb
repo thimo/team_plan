@@ -49,15 +49,15 @@ class TeamMemberBulkUpdatesController < ApplicationController
 
   private
 
-    def set_team
-      @team = Team.find(params[:team_id])
-      authorize TeamMember.new(team: @team)
-    end
+  def set_team
+    @team = Team.find(params[:team_id])
+    authorize TeamMember.new(team: @team)
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @team.age_group.season.name, @team.age_group.season
-      add_breadcrumb @team.age_group.name, @team.age_group
-      add_breadcrumb @team.name_with_club, @team
-      add_breadcrumb "Nieuw"
-    end
+  def add_breadcrumbs
+    add_breadcrumb @team.age_group.season.name, @team.age_group.season
+    add_breadcrumb @team.age_group.name, @team.age_group
+    add_breadcrumb @team.name_with_club, @team
+    add_breadcrumb "Nieuw"
+  end
 end

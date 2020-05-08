@@ -13,7 +13,7 @@ module FormsHelper
       },
       class: style_class,
       input_group_class: style_class,
-      append: append || tag.i(class: "fa fa-calendar-alt", data: { target: "clickable-append.span" }),
+      append: append || tag.i(class: "fa fa-calendar-alt", data: {target: "clickable-append.span"}),
       autocomplete: "off"
     }
   end

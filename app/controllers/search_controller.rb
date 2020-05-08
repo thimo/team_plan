@@ -14,7 +14,7 @@ class SearchController < ApplicationController
 
   private
 
-    def add_breadcrumbs
-      add_breadcrumb "Zoekresultaten"
-    end
+  def add_breadcrumbs
+    add_breadcrumb "Zoekresultaten"
+  end
 end

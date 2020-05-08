@@ -11,8 +11,8 @@ module Org
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Opmerkingen"
-      end
+    def add_breadcrumbs
+      add_breadcrumb "Opmerkingen"
+    end
   end
 end

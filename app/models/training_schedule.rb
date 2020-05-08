@@ -39,9 +39,9 @@ class TrainingSchedule < ApplicationRecord
 
   validates :day, :start_time, :end_time, :soccer_field_id, :field_part, presence: true
 
-  enum day: { monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 0 }
-  enum field_part: { whole: 0, part_ab: 5, part_a: 1, part_b: 2, part_cd: 6, part_c: 3, part_d: 4 }
-  enum present_minutes: { min_0: 0, min_5: 5, min_10: 10, min_15: 15, min_30: 30, min_45: 45, min_60: 60 }
+  enum day: {monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 0}
+  enum field_part: {whole: 0, part_ab: 5, part_a: 1, part_b: 2, part_cd: 6, part_c: 3, part_d: 4}
+  enum present_minutes: {min_0: 0, min_5: 5, min_10: 10, min_15: 15, min_30: 30, min_45: 45, min_60: 60}
 
   scope :asc, -> { order(:day) }
 
@@ -101,16 +101,16 @@ class TrainingSchedule < ApplicationRecord
 
   private
 
-    def training_this_week?(started_at)
-      trainings.this_week(started_at).present?
-    end
+  def training_this_week?(started_at)
+    trainings.this_week(started_at).present?
+  end
 
-    def next_training_day
-      next_wday([started_on.beginning_of_day, Time.zone.now].max, day_number)
-    end
+  def next_training_day
+    next_wday([started_on.beginning_of_day, Time.zone.now].max, day_number)
+  end
 
-    def next_wday(from_date, wday)
-      skip_week_in_days = wday >= from_date.wday ? 0 : 7
-      from_date + (skip_week_in_days - from_date.wday + wday).days
-    end
+  def next_wday(from_date, wday)
+    skip_week_in_days = wday >= from_date.wday ? 0 : 7
+    from_date + (skip_week_in_days - from_date.wday + wday).days
+  end
 end

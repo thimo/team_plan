@@ -23,7 +23,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @comment.update(comment_params)
@@ -40,31 +41,31 @@ class CommentsController < ApplicationController
 
   private
 
-    def create_comment
-      @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
-      authorize @comment
-    end
+  def create_comment
+    @comment = Comment.new(comment_params.merge(commentable: @commentable, user: current_user))
+    authorize @comment
+  end
 
-    def set_comment
-      @comment = Comment.find(params[:id])
-      authorize @comment
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+    authorize @comment
+  end
 
-    def load_commentable
-      resource, id = request.path.split("/")[1, 2]
-      @commentable = resource.singularize.classify.constantize.find(id)
-    end
+  def load_commentable
+    resource, id = request.path.split("/")[1, 2]
+    @commentable = resource.singularize.classify.constantize.find(id)
+  end
 
-    def comment_params
-      params.require(:comment).permit(:body, :comment_type, :private)
-    end
+  def comment_params
+    params.require(:comment).permit(:body, :comment_type, :private)
+  end
 
-    def add_breadcrumbs
-      add_breadcrumb @comment.commentable.name, @comment.commentable
-      if @comment.new_record?
-        add_breadcrumb "Nieuw"
-      else
-        add_breadcrumb "Opmerking"
-      end
+  def add_breadcrumbs
+    add_breadcrumb @comment.commentable.name, @comment.commentable
+    if @comment.new_record?
+      add_breadcrumb "Nieuw"
+    else
+      add_breadcrumb "Opmerking"
     end
+  end
 end

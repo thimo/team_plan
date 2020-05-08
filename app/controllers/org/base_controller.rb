@@ -15,8 +15,8 @@ module Org
 
     private
 
-      def default_breadcrumb
-        add_breadcrumb "Organisatie", org_path
-      end
+    def default_breadcrumb
+      add_breadcrumb "Organisatie", org_path
+    end
   end
 end

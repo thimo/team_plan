@@ -48,7 +48,7 @@
 #
 #  index_tenant_settings_on_tenant_id  (tenant_id)
 #
-require 'test_helper'
+require "test_helper"
 
 class TenantSettingTest < ActiveSupport::TestCase
   # test "the truth" do

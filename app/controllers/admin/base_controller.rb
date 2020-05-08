@@ -15,8 +15,8 @@ module Admin
 
     private
 
-      def default_breadcrumb
-        add_breadcrumb "Beheer", admin_path
-      end
+    def default_breadcrumb
+      add_breadcrumb "Beheer", admin_path
+    end
   end
 end

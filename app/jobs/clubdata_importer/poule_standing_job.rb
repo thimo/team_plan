@@ -14,8 +14,8 @@ module ClubdataImporter
     end
 
     def url(competition)
-      "#{Tenant.setting('clubdata_urls_poulestand')}&poulecode=#{competition.poulecode}" \
-      "&client_id=#{Tenant.setting('clubdata_client_id')}"
+      "#{Tenant.setting("clubdata_urls_poulestand")}&poulecode=#{competition.poulecode}" \
+      "&client_id=#{Tenant.setting("clubdata_client_id")}"
     end
   end
 end

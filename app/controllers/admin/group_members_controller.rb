@@ -4,7 +4,8 @@ module Admin
     before_action :set_resource, only: [:edit, :update, :destroy]
     before_action :add_breadcrumbs
 
-    def new; end
+    def new
+    end
 
     def create
       if @group_member.save
@@ -14,7 +15,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @group_member.update(permitted_attributes(@group_member))
@@ -31,32 +33,32 @@ module Admin
 
     private
 
-      def create_resource
-        @group = Group.find(params[:group_id])
+    def create_resource
+      @group = Group.find(params[:group_id])
 
-        @group_member = GroupMember.new
-        @group_member.assign_attributes(permitted_attributes(@group_member)) if action_name == "create"
-        @group_member.group = @group
+      @group_member = GroupMember.new
+      @group_member.assign_attributes(permitted_attributes(@group_member)) if action_name == "create"
+      @group_member.group = @group
 
-        authorize @group_member
+      authorize @group_member
+    end
+
+    def set_resource
+      @group_member = GroupMember.find(params[:id])
+      authorize @group_member
+    end
+
+    def add_breadcrumbs
+      add_breadcrumb "Groepen", admin_groups_path
+      return if @group_member.nil?
+
+      add_breadcrumb @group_member.group.name
+
+      if @group_member.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @group_member.member.name, [:edit, :admin, @group_member]
       end
-
-      def set_resource
-        @group_member = GroupMember.find(params[:id])
-        authorize @group_member
-      end
-
-      def add_breadcrumbs
-        add_breadcrumb "Groepen", admin_groups_path
-        return if @group_member.nil?
-
-        add_breadcrumb @group_member.group.name
-
-        if @group_member.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @group_member.member.name, [:edit, :admin, @group_member]
-        end
-      end
+    end
   end
 end

@@ -54,23 +54,23 @@ class User < ApplicationRecord
   has_and_belongs_to_many :members
   has_many :group_members, -> { active }, through: :members
   has_many :all_groups, through: :group_members, source: :group
-  has_many :direct_groups, -> { where(group_members: { memberable_type: nil, memberable_id: nil }).active },
-           through: :group_members,
-           source: :group
+  has_many :direct_groups, -> { where(group_members: {memberable_type: nil, memberable_id: nil}).active },
+    through: :group_members,
+    source: :group
   has_many :direct_roles, through: :direct_groups, source: :roles
 
-  has_many :indirect_groups, -> { where.not(group_members: { memberable_type: nil, memberable_id: nil }) },
-           through: :group_members,
-           source: :group
+  has_many :indirect_groups, -> { where.not(group_members: {memberable_type: nil, memberable_id: nil}) },
+    through: :group_members,
+    source: :group
   has_many :indirect_roles, through: :indirect_groups, source: :roles
 
   has_paper_trail
 
   validates :email, presence: true, format: Devise.email_regexp
   validates_uniqueness_to_tenant :email
-  validates :password, presence: true, length: { in: 6..30 }, if: :password_required?
+  validates :password, presence: true, length: {in: 6..30}, if: :password_required?
 
-  enum role: { member: 0, admin: 1 }
+  enum role: {member: 0, admin: 1}
 
   scope :asc, -> { order(last_name: :asc, first_name: :asc) }
   scope :role, ->(role) { where(role: role) }
@@ -154,14 +154,14 @@ class User < ApplicationRecord
 
   def favorite_teams
     @favorite_teams ||= Team.joins(:favorites)
-                            .where(favorites: { user_id: id, favorable_type: Team.to_s })
-                            .active
+      .where(favorites: {user_id: id, favorable_type: Team.to_s})
+      .active
   end
 
   def favorite_age_groups
     @favorite_age_groups ||= AgeGroup.joins(:favorites)
-                                     .where(favorites: { user_id: id, favorable_type: AgeGroup.to_s })
-                                     .active
+      .where(favorites: {user_id: id, favorable_type: AgeGroup.to_s})
+      .active
   end
 
   def favorite?(member)
@@ -217,16 +217,16 @@ class User < ApplicationRecord
 
   def inactive_message
     if tenant.draft? || tenant.archived?
-      "#{Tenant.setting('application_name')} is op dit moment niet geactiveerd voor \
-      #{Tenant.setting('club_name_short')}. Probeer het later nog een keer of neem contact op met de beheerder."
+      "#{Tenant.setting("application_name")} is op dit moment niet geactiveerd voor \
+      #{Tenant.setting("club_name_short")}. Probeer het later nog een keer of neem contact op met de beheerder."
     elsif !confirmed?
       "Je e-mailadres is nog niet bevestigd. Klik op de link \
-      \"#{I18n.t('devise.shared.links.didn_t_receive_confirmation_instructions')}\" hieronder om een nieuwe \
+      \"#{I18n.t("devise.shared.links.didn_t_receive_confirmation_instructions")}\" hieronder om een nieuwe \
       bevestiging aan te vragen."
     else
       "Met dit account is het helaas niet mogelijk om in te loggen. Ga alsjeblieft zelf na of het e-mailadres dat \
       je gebruikt wel is gekoppeld aan een lidmaatschap in de ledenadministratie van \
-      #{Tenant.setting('club_name_short')}."
+      #{Tenant.setting("club_name_short")}."
     end
   end
 
@@ -304,89 +304,89 @@ class User < ApplicationRecord
 
   private
 
-    def team_id_for(record, as_team_staf = false)
-      @team_id_for ||= {}
-      key = [record, as_team_staf]
-      @team_id_for[key] ||= case [record.class]
-                            when [Team]
-                              record.id
-                            when [Member]
-                              # Find overlap in teams between current user and given member
-                              team_members = as_team_staf ? record.team_members.staff : record.team_members
-                              team_members = team_members.active if member?
-                              team_members.pluck(:team_id).uniq
-                            when [PlayerEvaluation]
-                              record.team_evaluation.team_id
-                            when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
-                              record.team_id
-                            when [Comment]
-                              if record.commentable_type == "Team"
-                                record.commentable_id
-                              elsif record.commentable_type == "Member"
-                                record.commentable.active_team&.id
-                              else
-                                0
-                              end
-                            when [Presence]
-                              if record.presentable_type == "Match"
-                                record.presentable.teams.pluck(:id)
-                              else
-                                record.presentable.team_id
-                              end
-                            when [Match]
-                              record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
+  def team_id_for(record, as_team_staf = false)
+    @team_id_for ||= {}
+    key = [record, as_team_staf]
+    @team_id_for[key] ||= case [record.class]
+                          when [Team]
+                            record.id
+                          when [Member]
+                            # Find overlap in teams between current user and given member
+                            team_members = as_team_staf ? record.team_members.staff : record.team_members
+                            team_members = team_members.active if member?
+                            team_members.pluck(:team_id).uniq
+                          when [PlayerEvaluation]
+                            record.team_evaluation.team_id
+                          when [TeamMember], [TeamEvaluation], [Note], [TrainingSchedule], [Training]
+                            record.team_id
+                          when [Comment]
+                            if record.commentable_type == "Team"
+                              record.commentable_id
+                            elsif record.commentable_type == "Member"
+                              record.commentable.active_team&.id
                             else
                               0
                             end
+                          when [Presence]
+                            if record.presentable_type == "Match"
+                              record.presentable.teams.pluck(:id)
+                            else
+                              record.presentable.team_id
+                            end
+                          when [Match]
+                            record.persisted? ? record.teams.pluck(:id) : record.teams.map(&:id)
+                          else
+                            0
     end
+  end
 
-    def age_group_id_for(record)
-      @age_group_id_for ||= {}
-      @age_group_id_for[record] ||= case [record.class]
-                                    when [AgeGroup]
-                                      record.id
-                                    when [Team]
-                                      record.age_group_id # Included here to make sure it works for new Team objects
-                                    else
-                                      ids = AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
-                                      ids = record.suggested_age_groups.pluck(:id) if ids.blank? && record.is_a?(Member)
-                                      ids
-                                    end
+  def age_group_id_for(record)
+    @age_group_id_for ||= {}
+    @age_group_id_for[record] ||= case [record.class]
+                                  when [AgeGroup]
+                                    record.id
+                                  when [Team]
+                                    record.age_group_id # Included here to make sure it works for new Team objects
+                                  else
+                                    ids = AgeGroup.draft_or_active.by_team(team_id_for(record)).pluck(:id)
+                                    ids = record.suggested_age_groups.pluck(:id) if ids.blank? && record.is_a?(Member)
+                                    ids
     end
+  end
 
-    def direct_role_names
-      @direct_role_names ||= direct_roles.distinct.pluck(:name)
-    end
+  def direct_role_names
+    @direct_role_names ||= direct_roles.distinct.pluck(:name)
+  end
 
-    # All role names from indirect groups, should only be used on special occasions. Preferred
-    # way is through `indirect_role_names_for(record)``
-    def indirect_role_names
-      @indirect_role_names ||= indirect_roles.distinct.pluck(:name)
-    end
+  # All role names from indirect groups, should only be used on special occasions. Preferred
+  # way is through `indirect_role_names_for(record)``
+  def indirect_role_names
+    @indirect_role_names ||= indirect_roles.distinct.pluck(:name)
+  end
 
-    def indirect_role_names_for(record)
-      return [] if record.nil?
+  def indirect_role_names_for(record)
+    return [] if record.nil?
 
-      @indirect_role_names_for ||= {}
-      @indirect_role_names_for[record] ||= indirect_roles_for(record).distinct.pluck(:name)
-    end
+    @indirect_role_names_for ||= {}
+    @indirect_role_names_for[record] ||= indirect_roles_for(record).distinct.pluck(:name)
+  end
 
-    def indirect_roles_for(record)
-      age_group_id = age_group_id_for(record)
-      team_id = team_id_for(record)
-      groups = (Group.for_member(members).for_memberable("AgeGroup", age_group_id) +
-                 Group.for_member(members).for_memberable("Team", team_id)).compact
-      Role.by_group(groups)
-    end
+  def indirect_roles_for(record)
+    age_group_id = age_group_id_for(record)
+    team_id = team_id_for(record)
+    groups = (Group.for_member(members).for_memberable("AgeGroup", age_group_id) +
+               Group.for_member(members).for_memberable("Team", team_id)).compact
+    Role.by_group(groups)
+  end
 
-    # Copied from validatable module
-    def password_required?
-      !persisted? || !password.nil? || !password_confirmation.nil?
-    end
+  # Copied from validatable module
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
 
-    def settings
-      @settings ||= user_settings.each_with_object({}.with_indifferent_access) do |setting, hash|
-        hash[setting.name] = setting.value
-      end
-    end
+  def settings
+    @settings ||= user_settings.each_with_object({}.with_indifferent_access) { |setting, hash|
+      hash[setting.name] = setting.value
+    }
+  end
 end

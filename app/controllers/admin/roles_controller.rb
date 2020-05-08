@@ -9,9 +9,11 @@ module Admin
       authorize @roles
     end
 
-    def show; end
+    def show
+    end
 
-    def new; end
+    def new
+    end
 
     def create
       if @role.save
@@ -21,7 +23,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @role.update(permitted_attributes(@role))
@@ -38,26 +41,26 @@ module Admin
 
     private
 
-      def create_resource
-        @role = Role.new
-        @role.assign_attributes(permitted_attributes(@role)) if action_name == "create"
-        authorize @role
-      end
+    def create_resource
+      @role = Role.new
+      @role.assign_attributes(permitted_attributes(@role)) if action_name == "create"
+      authorize @role
+    end
 
-      def set_resource
-        @role = Role.find(params[:id])
-        authorize @role
-      end
+    def set_resource
+      @role = Role.find(params[:id])
+      authorize @role
+    end
 
-      def add_breadcrumbs
-        add_breadcrumb "Rollen", admin_roles_path
-        return if @role.nil?
+    def add_breadcrumbs
+      add_breadcrumb "Rollen", admin_roles_path
+      return if @role.nil?
 
-        if @role.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @role.name, [:edit, :admin, @role]
-        end
+      if @role.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @role.name, [:edit, :admin, @role]
       end
+    end
   end
 end

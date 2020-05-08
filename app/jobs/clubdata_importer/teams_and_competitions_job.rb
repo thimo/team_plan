@@ -2,8 +2,8 @@ module ClubdataImporter
   class TeamsAndCompetitionsJob < Que::Job
     def run(tenant_id:)
       ActsAsTenant.with_tenant(Tenant.find(tenant_id)) do
-        team_count = { total: 0, created: 0, updated: 0 }
-        competition_count = { total: 0, created: 0, updated: 0 }
+        team_count = {total: 0, created: 0, updated: 0}
+        competition_count = {total: 0, created: 0, updated: 0}
 
         JSON.parse(RestClient.get(url)).each do |data|
           team_count[:total] += 1
@@ -15,8 +15,8 @@ module ClubdataImporter
           end
           if club_data_team.new_record?
             ClubDataLog.create level: :info,
-                              source: :teams_and_competitions_import,
-                              body: "Team '#{club_data_team.teamnaam}' aangemaakt"
+                               source: :teams_and_competitions_import,
+                               body: "Team '#{club_data_team.teamnaam}' aangemaakt"
             team_count[:created] += 1
             club_data_team.save!
           elsif club_data_team.changed?
@@ -53,8 +53,8 @@ module ClubdataImporter
         end
 
         ClubDataLog.create level: :info,
-                          source: :teams_and_competitions_import,
-                          body: "#{team_count[:total]} teams imported \
+                           source: :teams_and_competitions_import,
+                           body: "#{team_count[:total]} teams imported \
                                     (#{team_count[:created]} created, \
                                     #{team_count[:updated]} updated), \
                                   #{competition_count[:total]} competitions imported \
@@ -64,7 +64,7 @@ module ClubdataImporter
     end
 
     def url
-      "#{Tenant.setting('clubdata_urls_competities')}&client_id=#{Tenant.setting('clubdata_client_id')}"
+      "#{Tenant.setting("clubdata_urls_competities")}&client_id=#{Tenant.setting("clubdata_client_id")}"
     end
   end
 end

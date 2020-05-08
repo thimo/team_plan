@@ -25,7 +25,7 @@ class RolePolicy < ApplicationPolicy
 
   def permitted_attributes
     attributes = [:name, :body]
-    attributes << { group_ids: [] } if modify_groups?
+    attributes << {group_ids: []} if modify_groups?
     attributes
   end
 

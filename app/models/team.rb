@@ -31,16 +31,16 @@ class Team < ApplicationRecord
   include Statussable
 
   DIVISION_OPTIONS = %w[1e\ divisie 2e\ divisie 3e\ divisie 4e\ divisie Hoofdklasse 1e\ klasse 2e\ klasse
-                        3e\ klasse 4e\ klasse 5e\ klasse 6e\ klasse].freeze
+    3e\ klasse 4e\ klasse 5e\ klasse 6e\ klasse].freeze
 
   acts_as_tenant :tenant
   belongs_to :age_group, touch: true
   belongs_to :club_data_team, optional: true
   has_many :team_members, dependent: :destroy
   has_many :members, through: :team_members
-  has_many :active_members, -> { where(team_members: { status: TeamMember.statuses[:active] }) },
-           through: :team_members,
-           source: :member
+  has_many :active_members, -> { where(team_members: {status: TeamMember.statuses[:active]}) },
+    through: :team_members,
+    source: :member
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :favorites, as: :favorable, dependent: :destroy
@@ -59,16 +59,16 @@ class Team < ApplicationRecord
   delegate :season, to: :age_group
 
   scope :asc, -> { order(:name) }
-  scope :for_members, ->(members) { joins(:team_members).where(team_members: { member_id: members, ended_on: nil }) }
+  scope :for_members, ->(members) { joins(:team_members).where(team_members: {member_id: members, ended_on: nil}) }
   scope :for_group_members, ->(members) {
-    joins(:group_members).where(group_members: { memberable_type: "Team", member: members })
+    joins(:group_members).where(group_members: {memberable_type: "Team", member: members})
   }
-  scope :as_player, -> { joins(:team_members).where(team_members: { role: TeamMember.roles[:player] }) }
-  scope :as_not_player, -> { joins(:team_members).where.not(team_members: { role: TeamMember.roles[:player] }) }
-  scope :for_season, ->(season) { joins(:age_group).where(age_groups: { season_id: season }) }
-  scope :for_active_season, -> { joins(age_group: :season).where(seasons: { status: Season.statuses[:active] }) }
+  scope :as_player, -> { joins(:team_members).where(team_members: {role: TeamMember.roles[:player]}) }
+  scope :as_not_player, -> { joins(:team_members).where.not(team_members: {role: TeamMember.roles[:player]}) }
+  scope :for_season, ->(season) { joins(:age_group).where(age_groups: {season_id: season}) }
+  scope :for_active_season, -> { joins(age_group: :season).where(seasons: {status: Season.statuses[:active]}) }
   scope :active_or_archived, -> { where(status: [Team.statuses[:archived], Team.statuses[:active]]) }
-  scope :by_teamcode, ->(teamcode) { joins(:club_data_team).where(club_data_teams: { teamcode: teamcode }) }
+  scope :by_teamcode, ->(teamcode) { joins(:club_data_team).where(club_data_teams: {teamcode: teamcode}) }
   scope :by_status, ->(status) { where(status: status) }
 
   before_update :before_update_actions
@@ -104,7 +104,7 @@ class Team < ApplicationRecord
   end
 
   def name_with_club
-    "#{Tenant.setting('club_name_short')} #{name}"
+    "#{Tenant.setting("club_name_short")} #{name}"
   end
 
   def inactive_players?
@@ -138,11 +138,11 @@ class Team < ApplicationRecord
 
   private
 
-    def before_update_actions
-      return unless age_group.training_only
+  def before_update_actions
+    return unless age_group.training_only
 
-      self.division = nil
-      self.players_per_team = nil
-      self.minutes_per_half = nil
-    end
+    self.division = nil
+    self.players_per_team = nil
+    self.minutes_per_half = nil
+  end
 end

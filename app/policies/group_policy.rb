@@ -29,7 +29,7 @@ class GroupPolicy < ApplicationPolicy
 
   def permitted_attributes
     attributes = [:name]
-    attributes << { member_ids: [] } if modify_members?
+    attributes << {member_ids: []} if modify_members?
     attributes << :memberable_via_type if set_memberable_via_type?
     attributes
   end

@@ -153,8 +153,8 @@ class TeamPolicy < ApplicationPolicy
 
   private
 
-    def club_or_team_staff?
-      @user.admin? ||
-        @user.team_staff_for?(@record)
-    end
+  def club_or_team_staff?
+    @user.admin? ||
+      @user.team_staff_for?(@record)
+  end
 end

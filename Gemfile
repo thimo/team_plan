@@ -56,6 +56,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "guard"
   gem "scout_apm" # Disable to improve loading without internet connction
+  gem "standard"
 end
 
 group :development do
@@ -81,9 +82,6 @@ group :development do
   gem "fasterer"
   gem "rails_best_practices"
   gem "reek"
-  gem "rubocop"
-  gem "rubocop-performance"
-  gem "rubocop-rails"
   gem "ruby-debug-ide"
   gem "solargraph"
 end

@@ -37,22 +37,22 @@ module Presentable
 
   private
 
-    def create_presences(team)
-      # Add presences for all local teams (can be two local teams per match)
-      team.team_members.player.active.asc.each do |team_member|
-        presence = presences.create(member: team_member.member, team: team)
+  def create_presences(team)
+    # Add presences for all local teams (can be two local teams per match)
+    team.team_members.player.active.asc.each do |team_member|
+      presence = presences.create(member: team_member.member, team: team)
 
-        if team_member.member.injured?
-          presence.update!(is_present: false, remark: "Blessure (#{team_member.member.injuries.active.last.title})")
-        elsif respond_to? :training_schedule
-          if (inherit_from = training_schedule&.presences&.find_by(member: team_member.member)).present?
-            # Inherit fields from training schedule
-            %w[is_present on_time signed_off remark].each do |field|
-              presence.write_attribute(field, inherit_from.send(field))
-            end
-            presence.save!
+      if team_member.member.injured?
+        presence.update!(is_present: false, remark: "Blessure (#{team_member.member.injuries.active.last.title})")
+      elsif respond_to? :training_schedule
+        if (inherit_from = training_schedule&.presences&.find_by(member: team_member.member)).present?
+          # Inherit fields from training schedule
+          %w[is_present on_time signed_off remark].each do |field|
+            presence.write_attribute(field, inherit_from.send(field))
           end
+          presence.save!
         end
       end
     end
+  end
 end

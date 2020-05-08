@@ -11,15 +11,15 @@ module Admin
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Leden", admin_members_path
-        return if @member.nil?
+    def add_breadcrumbs
+      add_breadcrumb "Leden", admin_members_path
+      return if @member.nil?
 
-        if @member.new_record?
-          add_breadcrumb "Nieuw"
-        else
-          add_breadcrumb @member.name, @member
-        end
+      if @member.new_record?
+        add_breadcrumb "Nieuw"
+      else
+        add_breadcrumb @member.name, @member
       end
+    end
   end
 end

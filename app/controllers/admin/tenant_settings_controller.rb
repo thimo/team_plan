@@ -3,7 +3,8 @@ module Admin
     before_action :set_tenant_setting, only: [:edit, :update]
     before_action :add_breadcrumbs
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @tenant_setting.update(permitted_attributes(@tenant_setting))
@@ -15,13 +16,13 @@ module Admin
 
     private
 
-      def set_tenant_setting
-        @tenant_setting = TenantSetting.find(params[:id])
-        authorize @tenant_setting
-      end
+    def set_tenant_setting
+      @tenant_setting = TenantSetting.find(params[:id])
+      authorize @tenant_setting
+    end
 
-      def add_breadcrumbs
-        add_breadcrumb "Instellingen", [:edit, :admin, @tenant_setting]
-      end
+    def add_breadcrumbs
+      add_breadcrumb "Instellingen", [:edit, :admin, @tenant_setting]
+    end
   end
 end

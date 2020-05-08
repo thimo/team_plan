@@ -37,7 +37,7 @@ class Injury < ApplicationRecord
   scope :active, -> { where(ended_on: nil) }
 
   def self.comment_types
-    { "generic" => 0 }
+    {"generic" => 0}
   end
 
   def archived?
@@ -46,7 +46,7 @@ class Injury < ApplicationRecord
 
   private
 
-    def update_member
-      member.update_injured
-    end
+  def update_member
+    member.update_injured
+  end
 end

@@ -27,57 +27,57 @@ module Org
 
     private
 
-      def add_breadcrumbs
-        add_breadcrumb "Actieve leden"
-      end
+    def add_breadcrumbs
+      add_breadcrumb "Actieve leden"
+    end
 
-      def team_staff_members
-        policy_scope(TeamMember.for_season(Season.last)).active.staff
-      end
+    def team_staff_members
+      policy_scope(TeamMember.for_season(Season.last)).active.staff
+    end
 
-      def roles_hash
-        roles = team_staff_members.pluck(:role)
-        roles_hash = roles.uniq
-                          .map { |role| { value: role, label: TeamMember.roles_i18n[role] } }
-                          .sort_by { |role| role[:label] }
-        roles_hash.each do |role|
-          role[:count] = roles.count(role[:value])
+    def roles_hash
+      roles = team_staff_members.pluck(:role)
+      roles_hash = roles.uniq
+        .map { |role| {value: role, label: TeamMember.roles_i18n[role]} }
+        .sort_by { |role| role[:label] }
+      roles_hash.each do |role|
+        role[:count] = roles.count(role[:value])
+      end
+    end
+
+    def group_hash(group)
+      if group.memberable_via_type.blank?
+        group.group_members.active
+          .sort_by { |gm| gm.member.last_name }
+          .map do |group_member|
+          {
+            member: group_member.member,
+            description: group_member.description
+          }
+        end
+      else
+        group.group_members.active
+          .group_by(&:member)
+          .sort_by { |member, _gms| member.last_name }
+          .map do |member, gms|
+          {
+            member: member,
+            description: human_sort(gms.map(&:memberable), :name).map(&:name).uniq.join(", ")
+          }
         end
       end
+    end
 
-      def group_hash(group)
-        if group.memberable_via_type.blank?
-          group.group_members.active
-               .sort_by { |gm| gm.member.last_name }
-               .map do |group_member|
-                 {
-                   member: group_member.member,
-                   description: group_member.description
-                 }
-               end
-        else
-          group.group_members.active
-               .group_by(&:member)
-               .sort_by { |member, _gms| member.last_name }
-               .map do |member, gms|
-                 {
-                   member: member,
-                   description: human_sort(gms.map(&:memberable), :name).map(&:name).uniq.join(", ")
-                 }
-               end
-        end
+    def team_staff_hash(role)
+      team_staff_members.send(role)
+        .group_by(&:member)
+        .sort_by { |member, _tms| member.last_name }
+        .map do |member, tms|
+        {
+          member: member,
+          description: tms.map { |tm| tm.team.name_with_club }.join(", ")
+        }
       end
-
-      def team_staff_hash(role)
-        team_staff_members.send(role)
-                          .group_by(&:member)
-                          .sort_by { |member, _tms| member.last_name }
-                          .map do |member, tms|
-                            {
-                              member: member,
-                              description: tms.map { |tm| tm.team.name_with_club }.join(", ")
-                            }
-                          end
-      end
+    end
   end
 end
