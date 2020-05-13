@@ -79,7 +79,7 @@ GEM
     bootstrap_form (4.5.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    brakeman (4.8.1)
+    brakeman (4.8.2)
     breadcrumbs_on_rails (4.0.0)
       rails (>= 5.0)
     builder (3.2.4)
