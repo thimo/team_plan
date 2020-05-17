@@ -212,6 +212,12 @@ nl:
 
     models:
       user: Gebruiker
+      team:
+        one: team
+        other: teams
+      age_group:
+        one: leeftijdsgroep
+        other: leeftijdsgroepen
 
   enums:
     age_group:

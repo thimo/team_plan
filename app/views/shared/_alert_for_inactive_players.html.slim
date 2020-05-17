@@ -1,0 +1,19 @@
+- if items_with_inactive_players.present?
+  .alert.alert-danger.d-flex
+    .my-2
+      i.fa.fa-exclamation-triangle.fa-3x.pr-3
+    div
+      h4.alert-heading
+        | Indelingsfout
+      p
+        | De volgende #{items_with_inactive_players.first.model_name.human(count: 2)} bevatten fouten in de indeling:
+      ul.mb-2
+        - items_with_inactive_players.each do |item|
+          li
+            = link_to item
+              - if item.respond_to?(:name_with_club)
+                = item.name_with_club
+              - else
+                = item.name
+      div
+        | Onderneem zo snel mogelijk actie. Neem contact op met de ledenadminstratie of beheerder van TeamPlan indien nodig.

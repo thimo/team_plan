@@ -13,6 +13,7 @@ class AgeGroupsController < ApplicationController
     @injureds = policy_scope(Member).by_age_group_as_active_player(@age_group).player.injured.asc
     set_matches
     set_play_bans
+    set_teams_with_inactive_players
   end
 
   def new
@@ -126,5 +127,13 @@ class AgeGroupsController < ApplicationController
     play_bans = PlayBan.by_member(members).order_started_on
     @play_bans = play_bans.active
     @play_bans_future = play_bans.start_in_future
+  end
+
+  def set_teams_with_inactive_players
+    return unless @age_group.active?
+
+    @teams_with_inactive_players = @teams.map { |team|
+      team if policy(team).show_alert? && team.inactive_players?
+    }.compact
   end
 end

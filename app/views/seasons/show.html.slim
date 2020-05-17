@@ -10,6 +10,8 @@
     = link_to season_path(@season),  method: :delete, data: { confirm: 'Seizoen wordt verwijderd. Doorgaan?' }, title: "Seizoen verwijderen", class: "btn"
       i.fa-trash-alt[class=fa_class]
 
+= render "shared/alert_for_inactive_players", items_with_inactive_players: @age_groups_with_inactive_players
+
 - if @age_groups_male.any? || @age_groups_female.any?
   .row
     - if @age_groups_male.size > 0

@@ -22,6 +22,8 @@
         | Todo
   = render "shared/favorite", parent: @age_group, styleClass: "btn"
 
+= render "shared/alert_for_inactive_players", items_with_inactive_players: @teams_with_inactive_players
+
 .row
   .col-lg-6
     .card
@@ -54,8 +56,8 @@
                 td
                   = team.division
                 td.text-right
-                  - if policy(team).show_alert? && team.inactive_players?
-                    i.fa.fa-exclamation-triangle.color-red.mr-1 title="Het team bevat mogelijk een fout in de indeling"
+                  - if @teams_with_inactive_players.include?(team)
+                    i.fa.fa-exclamation-triangle.color-red.mr-1 title="Het team bevat een fout in de indeling"
                   - if policy(team).show_status?
                     => team.status_to_badge.html_safe
                   - if policy_scope(team.team_members).size > 0

@@ -10,6 +10,7 @@ class SeasonsController < ApplicationController
   def show
     @age_groups_male = policy_scope(@season.age_groups).male.asc
     @age_groups_female = policy_scope(@season.age_groups).female.asc
+    set_age_groups_with_inactive_players
   end
 
   def new
@@ -78,6 +79,14 @@ class SeasonsController < ApplicationController
     @season = Season.create(name: "#{Time.zone.today.year} / #{Time.zone.today.year + 1}") if @season.nil?
 
     authorize @season
+  end
+
+  def set_age_groups_with_inactive_players
+    return unless @season.active?
+
+    @age_groups_with_inactive_players = (@age_groups_male + @age_groups_female).map { |age_group|
+      age_group if policy(age_group).show_alert? && age_group.inactive_players?
+    }.compact
   end
 
   def add_breadcrumbs

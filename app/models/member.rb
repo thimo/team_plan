@@ -465,6 +465,19 @@ class Member < ApplicationRecord
     play_bans.active.any?
   end
 
+  def inactive_member_message(team_member)
+    return "#{name} is geen actief lid meer sinds #{I18n.l(deregistered_at, format: :long)}." if inactive?
+    return unless team_member.player?
+
+    if status_overschrijving?
+      "#{name} is niet speelgerechtigd, het overschrijvingverzoek is nog niet goedgekeurd."
+    elsif sportlink_non_player?
+      "#{name} is niet speelgerechtigd."
+    elsif local_teams_warning_sportlink?
+      "#{name} is nog niet goed ingedeeld in Sportlink. Neem contact op met de ledenadministratie."
+    end
+  end
+
   private
 
   def update_users

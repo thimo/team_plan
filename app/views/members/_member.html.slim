@@ -31,23 +31,9 @@
     .light.small
       | Afmelddatum: #{I18n.l member.deregistered_at, format: :long}
 
-- if show_alert
-  - if member.inactive?
-    .alert.alert-danger.mb-0.mt-1
-      i.fa.fa-exclamation-triangle.fa-lg.pr-2
-      | #{member.name} is geen actief lid meer sinds #{I18n.l member.deregistered_at, format: :long}
-  - else
-    - if team_member.player?
-      - if member.status_overschrijving?
-        .alert.alert-danger.mb-0.mt-1
-          i.fa.fa-exclamation-triangle.fa-lg.pr-2
-          | #{member.name} is niet speelgerechtigd, het overschrijvingverzoek is nog niet goedgekeurd
-      - elsif member.sportlink_non_player?
-        .alert.alert-danger.mb-0.mt-1
-          i.fa.fa-exclamation-triangle.fa-lg.pr-2
-          | #{member.name} is niet speelgerechtigd
-      - elsif member.local_teams_warning_sportlink?
-        .alert.alert-danger.mb-0.mt-1
-          i.fa.fa-exclamation-triangle.fa-lg.pr-2
-          | #{member.name} is waarschijnlijk nog niet goed ingedeeld in Sportlink.
-            Neem contact op met de ledenadministratie.
+- if show_alert && (message = member.inactive_member_message(team_member)).present?
+  .alert.alert-danger.mb-0.mt-1
+    .d-flex
+      .my-2
+        i.fa.fa-exclamation-triangle.fa-2x.pr-3
+      = message
