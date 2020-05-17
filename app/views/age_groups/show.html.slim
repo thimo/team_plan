@@ -56,7 +56,7 @@
                 td
                   = team.division
                 td.text-right
-                  - if @teams_with_inactive_players.include?(team)
+                  - if @teams_with_inactive_players&.include?(team)
                     i.fa.fa-exclamation-triangle.color-red.mr-1 title="Het team bevat een fout in de indeling"
                   - if policy(team).show_status?
                     => team.status_to_badge.html_safe
