@@ -175,6 +175,9 @@ class Member < ApplicationRecord
   scope :by_age_group_as_active_player_in_active_team, ->(age_group) {
     by_age_group_as_active_player(age_group).where(teams: {status: :active})
   }
+  scope :by_age_group_as_draft_or_active, ->(age_group) {
+    by_age_group(age_group).where(team_members: {ended_on: nil, status: [0, 1]})
+  }
 
   scope :by_team, ->(team) {
     joins(:team_members).where(team_members: {team: team, ended_on: nil})
@@ -184,6 +187,9 @@ class Member < ApplicationRecord
   }
   scope :by_team_as_active_player, ->(team) {
     by_team_as_active(team).player
+  }
+  scope :by_team_as_draft_or_active, ->(team) {
+    by_team(team).where(team_members: {status: [0, 1]})
   }
 
   # scope :not_in_team, -> { includes(team_members: { team: :age_group }).where(age_groups: { season_id: nil }) }
