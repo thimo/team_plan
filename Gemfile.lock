@@ -425,7 +425,7 @@ GEM
     sexp_processor (4.14.1)
     shellany (0.0.1)
     simple-password-gen (0.1.5)
-    simple_calendar (2.3.0)
+    simple_calendar (2.4.0)
       rails (>= 3.0)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
@@ -498,7 +498,7 @@ GEM
       semantic_range (>= 2.3.0)
     webpacker-react (0.3.2)
       webpacker
-    websocket-driver (0.7.1)
+    websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
     xpath (3.2.0)
@@ -577,7 +577,7 @@ DEPENDENCIES
   scout_apm
   selenium-webdriver
   simple-password-gen
-  simple_calendar (~> 2.0)
+  simple_calendar (~> 2.4)
   slim-rails
   solargraph
   spring
