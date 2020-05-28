@@ -2,7 +2,7 @@
   "name": "team_plan",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.10.1",
     "@babel/preset-react": "^7.9.4",
     "@coreui/coreui": "^2.0.4",
     "@rails/actioncable": "^6.0.3",
