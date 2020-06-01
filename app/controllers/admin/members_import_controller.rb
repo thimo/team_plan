@@ -24,6 +24,9 @@ module Admin
 
       # After an import with at least one member, cleanup members that were last imported 7 days ago
       cleanup_after_import if @import_result[:counters][:imported].positive?
+    rescue CSV::MalformedCSVError
+      flash.now[:danger] = "Er is een fout gevonden in het CSV bestand."
+      render :new
     end
 
     private
