@@ -70,6 +70,7 @@ GEM
     backport (1.1.2)
     backports (3.17.0)
     bcrypt (3.1.13)
+    benchmark-ips (2.8.2)
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -79,16 +80,12 @@ GEM
     bootstrap_form (4.5.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    brakeman (4.8.2)
     breadcrumbs_on_rails (4.0.0)
       rails (>= 5.0)
     builder (3.2.4)
     bullet (6.1.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
-    bundler-audit (0.6.1)
-      bundler (>= 1.2.0, < 3)
-      thor (~> 0.18)
     byebug (11.1.3)
     capybara (3.32.2)
       addressable
@@ -121,10 +118,7 @@ GEM
       caxlsx (>= 3.0)
     childprocess (3.0.0)
     choice (0.2.0)
-    code_analyzer (0.5.1)
-      sexp_processor
     coderay (1.1.2)
-    colorize (0.8.1)
     concurrent-ruby (1.1.6)
     countries (3.0.1)
       i18n_data (~> 0.10.0)
@@ -134,13 +128,17 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.6)
-    debase (0.2.4.1)
-      debase-ruby_core_source (>= 0.10.2)
-    debase-ruby_core_source (0.10.9)
-    debride (1.8.2)
-      path_expander (~> 1.0)
-      ruby_parser (~> 3.6)
-      sexp_processor (~> 4.5)
+    derailed_benchmarks (1.7.0)
+      benchmark-ips (~> 2)
+      get_process_mem (~> 0)
+      heapy (~> 0)
+      memory_profiler (~> 0)
+      mini_histogram (~> 0)
+      rack (>= 1)
+      rake (> 10, < 14)
+      ruby-statistics (>= 2.1)
+      thor (>= 0.19, < 2)
+      unicode_plot (>= 0.0.4, < 1.0.0)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -154,8 +152,8 @@ GEM
       http_parser.rb (~> 0.6.0)
     enum_help (0.0.17)
       activesupport (>= 3.0.0)
+    enumerable-statistics (2.0.1)
     erubi (1.9.0)
-    erubis (2.7.0)
     et-orbi (1.2.4)
       tzinfo
     eventmachine (1.2.7)
@@ -169,9 +167,6 @@ GEM
       railties (>= 4.2.0)
     faker (2.12.0)
       i18n (>= 1.6, < 2)
-    fasterer (0.8.3)
-      colorize (~> 0.7)
-      ruby_parser (>= 3.14.1)
     ffi (1.12.2)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -179,6 +174,8 @@ GEM
     fugit (1.3.4)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.1)
+    get_process_mem (0.2.5)
+      ffi (~> 1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     guard (2.16.2)
@@ -200,6 +197,7 @@ GEM
       guard-compat (~> 1.2)
       minitest (>= 3.0)
     hashie (4.1.0)
+    heapy (0.1.4)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.3)
@@ -251,11 +249,13 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     maruku (0.7.3)
+    memory_profiler (0.9.14)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
     mimemagic (0.3.5)
+    mini_histogram (0.1.3)
     mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -285,7 +285,6 @@ GEM
     parallel (1.19.1)
     parser (2.7.1.3)
       ast (~> 2.4.0)
-    path_expander (1.1.0)
     pg (1.2.3)
     pg_search (2.3.2)
       activerecord (>= 5.2)
@@ -354,14 +353,6 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_best_practices (1.20.0)
-      activesupport
-      code_analyzer (>= 0.5.1)
-      erubis
-      i18n
-      json
-      require_all (~> 3.0)
-      ruby-progressbar
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (6.0.3.1)
@@ -385,7 +376,6 @@ GEM
     regexp_parser (1.7.0)
     request_store (1.5.0)
       rack (>= 1.4)
-    require_all (3.0.0)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -406,15 +396,12 @@ GEM
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-performance (1.5.2)
       rubocop (>= 0.71.0)
-    ruby-debug-ide (0.7.2)
-      rake (>= 0.8.1)
     ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.1)
+    ruby-statistics (2.1.2)
     ruby-vips (2.0.17)
       ffi (~> 1.9)
     ruby2_keywords (0.0.2)
-    ruby_parser (3.14.2)
-      sexp_processor (~> 4.9)
     rubyzip (2.3.0)
     scout_apm (2.6.7)
       parser
@@ -422,7 +409,6 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (2.3.0)
-    sexp_processor (4.14.1)
     shellany (0.0.1)
     simple-password-gen (0.1.5)
     simple_calendar (2.4.0)
@@ -482,6 +468,8 @@ GEM
       unf_ext
     unf_ext (0.0.7.6)
     unicode-display_width (1.7.0)
+    unicode_plot (0.0.4)
+      enumerable-statistics (>= 2.0.1)
     unicode_utils (1.4.0)
     uniform_notifier (1.13.0)
     warden (1.2.8)
@@ -516,10 +504,8 @@ DEPENDENCIES
   bootsnap
   bootstrap4-kaminari-views
   bootstrap_form (~> 4.5.0)
-  brakeman
   breadcrumbs_on_rails (~> 4.0.0)
   bullet
-  bundler-audit
   byebug
   capybara
   capybara-webkit
@@ -528,14 +514,12 @@ DEPENDENCIES
   caxlsx (~> 3.0)
   caxlsx_rails
   country_select
-  debase
-  debride
+  derailed_benchmarks
   devise (~> 4.7)
   enum_help (~> 0.0.17)
   exception_notification
   factory_bot_rails
   faker
-  fasterer
   figaro (~> 1.2.0)
   guard
   guard-livereload
@@ -566,13 +550,11 @@ DEPENDENCIES
   rails-erd
   rails-i18n
   rails_12factor
-  rails_best_practices
   rb-fsevent
   redcarpet (~> 3.5.0)
   redis (~> 4.1)
   reek
   rest-client
-  ruby-debug-ide
   rubyzip
   scout_apm
   selenium-webdriver

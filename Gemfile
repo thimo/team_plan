@@ -62,6 +62,7 @@ end
 group :development do
   gem "annotate"
   gem "bullet" # help to kill N+1 queries and unused eager loading
+  gem "derailed_benchmarks" # bundle exec derailed bundle:mem
   gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
   gem "guard-minitest", require: false
   gem "letter_opener"
@@ -75,14 +76,7 @@ group :development do
   gem "terminal-notifier-guard"
   gem "web-console"
 
-  gem "brakeman"
-  gem "bundler-audit"
-  gem "debase"
-  gem "debride"
-  gem "fasterer"
-  gem "rails_best_practices"
   gem "reek"
-  gem "ruby-debug-ide"
   gem "solargraph"
 end
 
