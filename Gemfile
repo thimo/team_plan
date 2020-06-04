@@ -76,8 +76,10 @@ group :development do
   gem "terminal-notifier-guard"
   gem "web-console"
 
+  gem "derailed_benchmarks" # bundle exec derailed bundle:mem
   gem "reek"
   gem "solargraph"
+  gem "stackprof"
 end
 
 group :test do

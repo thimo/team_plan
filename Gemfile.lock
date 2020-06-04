@@ -451,6 +451,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stackprof (0.2.15)
     standard (0.4.6)
       rubocop (~> 0.83.0)
       rubocop-performance (~> 1.5.2)
@@ -564,6 +565,7 @@ DEPENDENCIES
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)
+  stackprof
   standard
   terminal-notifier-guard
   turbolinks (~> 5)
