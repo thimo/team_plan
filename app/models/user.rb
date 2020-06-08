@@ -247,7 +247,7 @@ class User < ApplicationRecord
   def update_members
     self.members = Member.by_email(email).active
 
-    if members.any? || admin?
+    if members.any?
       activate
     else
       deactivate

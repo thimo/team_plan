@@ -16,6 +16,8 @@ class Tenant < ApplicationRecord
 
   has_one :tenant_setting, dependent: :destroy
   has_many :seasons, dependent: :destroy
+  has_many :users, dependent: :destroy
+  has_many :members, dependent: :destroy
 
   def settings
     # Auto-create tenant_setting

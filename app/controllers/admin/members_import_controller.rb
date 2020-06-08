@@ -51,6 +51,7 @@ module Admin
       # TODO: this may not be needed as activating/de-activating is done on member import en user creation
       User.deactivate_for_inactive_members
       User.activate_for_active_members
+      Current.tenant.update(status: :archived) if User.admin.active.none?
     end
   end
 end
