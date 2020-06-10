@@ -31,7 +31,7 @@ gem "enum_help", "~> 0.0.17"
 gem "figaro", "~> 1.2.0"
 gem "inline_svg"
 gem "kaminari"
-gem "net-ssh", "~> 6.0.2"
+gem "net-ssh", "~> 6.1.0"
 
 gem "awesome_print", require: "awesome_print"
 gem "paper_trail"
