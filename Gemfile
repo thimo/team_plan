@@ -71,8 +71,6 @@ group :development do
   gem "rack-livereload"
   gem "rails-erd", require: false # Run `bundle exec erd`
   gem "rb-fsevent"
-  gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
   gem "terminal-notifier-guard"
   gem "web-console"
 
