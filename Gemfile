@@ -52,7 +52,7 @@ gem "simple_calendar", "~> 2.4"
 group :development, :test do
   gem "byebug", platform: :mri
   gem "capybara"
-  gem "capybara-webkit"
+  gem "selenium-webdriver"
   gem "factory_bot_rails"
   gem "guard"
   gem "scout_apm" # Disable to improve loading without internet connction
