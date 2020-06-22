@@ -102,6 +102,8 @@ class AgeGroup < ApplicationRecord
   end
 
   def inactive_players?
+    return false unless active?
+
     Member.by_age_group_as_draft_or_active(self).inactive.any? ||
       Member.by_age_group_as_active_player(self).sportlink_non_player.any? ||
       Member.by_age_group_as_active_player_in_active_team(self).status_overschrijving.any? ||
