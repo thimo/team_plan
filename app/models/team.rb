@@ -108,8 +108,6 @@ class Team < ApplicationRecord
   end
 
   def inactive_players?
-    return false unless active?
-
     Member.by_team_as_draft_or_active(self).inactive.any? ||
       Member.by_team_as_active_player(self).sportlink_non_player.any? ||
       active? && (
