@@ -155,7 +155,7 @@ GEM
     et-orbi (1.2.4)
       tzinfo
     eventmachine (1.2.7)
-    exception_notification (4.4.0)
+    exception_notification (4.4.1)
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
     factory_bot (6.0.0)
