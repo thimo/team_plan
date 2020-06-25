@@ -412,7 +412,7 @@ GEM
     semantic_range (2.3.0)
     shellany (0.0.1)
     simple-password-gen (0.1.5)
-    simple_calendar (2.4.0)
+    simple_calendar (2.4.1)
       rails (>= 3.0)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
