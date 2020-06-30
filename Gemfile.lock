@@ -155,7 +155,7 @@ GEM
     et-orbi (1.2.4)
       tzinfo
     eventmachine (1.2.7)
-    exception_notification (4.4.1)
+    exception_notification (4.4.3)
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
     factory_bot (6.0.0)
@@ -492,7 +492,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.25)
-    zeitwerk (2.3.0)
+    zeitwerk (2.3.1)
 
 PLATFORMS
   ruby
