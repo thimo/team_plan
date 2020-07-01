@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.10.3",
-    "@babel/preset-react": "^7.10.1",
+    "@babel/preset-react": "^7.10.4",
     "@coreui/coreui": "^2.0.4",
     "@rails/actioncable": "^6.0.3",
     "@rails/activestorage": "^6.0.3",
