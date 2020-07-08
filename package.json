@@ -39,9 +39,6 @@
     "postcss-smart-import": "^0.7.5",
     "precss": "^4.0.0",
     "prop-types": "^15.6.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-hot-loader": "^4.12.21",
     "resolve-url-loader": "^3.1.1",
     "sass-loader": "^9.0.2",
     "select2": "^4.0.5",
@@ -53,8 +50,7 @@
     "vanilla-lazyload": "^17.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.0.8",
-    "webpacker-react": "^0.3.2"
+    "webpack-merge": "^5.0.8"
   },
   "version": "0.1.0",
   "devDependencies": {
