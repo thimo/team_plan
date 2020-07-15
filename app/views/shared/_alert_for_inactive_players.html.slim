@@ -18,5 +18,6 @@
       div
         | Onderneem zo snel mogelijk actie. Neem contact op met de ledenadminstratie of beheerder van TeamPlan indien nodig.
 
-  script
-    | alert('Let op: één of meerdere #{items_with_inactive_players.first.model_name.human(count: 2)} bevatten indelingsfouten!')
+  - unless current_user.admin?
+    script
+      | alert('Let op: één of meerdere #{items_with_inactive_players.first.model_name.human(count: 2)} bevatten indelingsfouten!')
