@@ -15,7 +15,7 @@
         .card-header
           = @members_title
         .card-body.p-0
-          - if @team_members.any?
+          - if @team_members&.any?
             table.table.table-sm.tr-links
               - @team_members.each do |member|
                 tr
