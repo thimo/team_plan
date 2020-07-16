@@ -13,7 +13,7 @@
     help: "Gebruik het e-mailadres waarmee je bekend bent in de ledenadministratie van #{Tenant.setting("club_name_short")}."
 
   = f.password_field :password,
-    prepend: tag.i(class: [fa_class, 'fa-lock-alt']),
+    prepend: tag.i(class: [fa_class, 'fa-lock']),
     autocomplete: 'off',
     class: 'form-control',
     placeholder: User.human_attribute_name(:password),
