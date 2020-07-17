@@ -105,7 +105,7 @@ GEM
     carrierwave-imageoptimizer (1.5.0)
       carrierwave (>= 0.8, < 2.2)
       image_optimizer (~> 1.6)
-    caxlsx (3.0.1)
+    caxlsx (3.0.2)
       htmlentities (~> 4.3, >= 4.3.4)
       mimemagic (~> 0.3)
       nokogiri (~> 1.10, >= 1.10.4)
