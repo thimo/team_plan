@@ -65,7 +65,7 @@ group :development do
   gem "guard-livereload", require: false # Adds live-reloading, run with `guard -P livereload`
   gem "guard-minitest", require: false
   gem "letter_opener"
-  gem "listen", "~> 3.2.1"
+  gem "listen"
   gem "pry-rails"
   gem "rack-livereload"
   gem "rails-erd", require: false # Run `bundle exec erd`

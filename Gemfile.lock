@@ -527,7 +527,7 @@ DEPENDENCIES
   kaminari
   launchy
   letter_opener
-  listen (~> 3.2.1)
+  listen
   mini_magick
   minitest
   minitest-reporters
