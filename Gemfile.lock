@@ -68,7 +68,7 @@ GEM
     ast (2.4.1)
     awesome_print (1.8.0)
     backport (1.1.2)
-    bcrypt (3.1.13)
+    bcrypt (3.1.15)
     benchmark (0.1.0)
     benchmark-ips (2.8.2)
     bindex (0.8.1)
@@ -201,7 +201,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
     icalendar (2.6.1)
@@ -240,7 +240,7 @@ GEM
     loofah (2.6.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lumberjack (1.2.5)
+    lumberjack (1.2.6)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
@@ -263,7 +263,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     msgpack (1.3.3)
-    multi_json (1.14.1)
+    multi_json (1.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nenv (0.3.0)
@@ -484,13 +484,13 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    websocket-driver (0.7.2)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.25)
-    zeitwerk (2.3.1)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
@@ -567,7 +567,7 @@ DEPENDENCIES
   webpacker (>= 4.0.x)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.1.4
