@@ -68,11 +68,11 @@ GEM
     ast (2.4.1)
     awesome_print (1.8.0)
     backport (1.1.2)
-    bcrypt (3.1.13)
+    bcrypt (3.1.15)
     benchmark (0.1.0)
     benchmark-ips (2.8.2)
     bindex (0.8.1)
-    bootsnap (1.4.6)
+    bootsnap (1.4.7)
       msgpack (~> 1.0)
     bootstrap4-kaminari-views (1.0.1)
       kaminari (>= 0.13)
@@ -105,7 +105,7 @@ GEM
     carrierwave-imageoptimizer (1.5.0)
       carrierwave (>= 0.8, < 2.2)
       image_optimizer (~> 1.6)
-    caxlsx (3.0.1)
+    caxlsx (3.0.2)
       htmlentities (~> 4.3, >= 4.3.4)
       mimemagic (~> 0.3)
       nokogiri (~> 1.10, >= 1.10.4)
@@ -201,7 +201,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
     icalendar (2.6.1)
@@ -240,7 +240,7 @@ GEM
     loofah (2.6.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lumberjack (1.2.5)
+    lumberjack (1.2.6)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
@@ -263,7 +263,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     msgpack (1.3.3)
-    multi_json (1.14.1)
+    multi_json (1.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nenv (0.3.0)
@@ -392,7 +392,7 @@ GEM
       rubocop-ast (>= 0.0.3)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (0.1.0)
+    rubocop-ast (0.2.0)
       parser (>= 2.7.0.1)
     rubocop-performance (1.6.1)
       rubocop (>= 0.71.0)
@@ -427,7 +427,7 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
-    solargraph (0.39.11)
+    solargraph (0.39.12)
       backport (~> 1.1)
       benchmark
       bundler (>= 1.17.2)
@@ -484,13 +484,13 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    websocket-driver (0.7.2)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.25)
-    zeitwerk (2.3.1)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
@@ -567,7 +567,7 @@ DEPENDENCIES
   webpacker (>= 4.0.x)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.1.4
