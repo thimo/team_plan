@@ -105,6 +105,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.middleware.use ExceptionNotification::Rack,
+    ignore_exceptions: ["ActionController::BadRequest", "ActionController::InvalidAuthenticityToken"] +
+      ExceptionNotifier.ignored_exceptions,
     email: {
       email_prefix: "[ERROR] ",
       sender_address: %("TeamPlan notifier" <teamplan@defrog.nl>),

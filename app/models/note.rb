@@ -27,7 +27,7 @@ class Note < ApplicationRecord
   belongs_to :member, optional: true
   has_paper_trail
 
-  enum visibility: {self: 0, staff: 1, member: 2}
+  enum visibility: {myself: 0, staff: 1, member: 2}
 
   validates :title, :body, :visibility, :user, :team, presence: true
 
@@ -36,7 +36,7 @@ class Note < ApplicationRecord
   def self.for_user(scope, team, user)
     # TODO: would prefer to do this through NotePolicy scope, but not sure how to pass team as parameter
     # Own notes
-    note_scope = scope.self.where(user: user)
+    note_scope = scope.myself.where(user: user)
 
     # Notes visible for staff (either club or team)
     note_scope = note_scope.or(scope.staff) if user.role?(Role::NOTE_SHOW, team) || user.team_staff_for?(team)
