@@ -45,7 +45,7 @@
     "sticky-table-headers": "^0.1.24",
     "stimulus": "^1.0.1",
     "style-loader": "^1.2.1",
-    "trix": "^1.2.2",
+    "trix": "^1.2.4",
     "turbolinks": "^5.2.0",
     "vanilla-lazyload": "^17.1.0",
     "webpack": "^4.44.0",
