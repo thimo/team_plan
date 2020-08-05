@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  body       :text
 #  title      :string
-#  visibility :integer          default("self")
+#  visibility :integer          default("myself")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  member_id  :bigint
