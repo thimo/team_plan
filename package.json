@@ -8,7 +8,7 @@
     "@rails/actioncable": "^6.0.3",
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "^5.1.1",
+    "@rails/webpacker": "^5.2.0",
     "animate.css": "^4.1.0",
     "autoprefixer": "^9.8.6",
     "autosize": "^4.0.0",
