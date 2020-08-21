@@ -2,7 +2,7 @@
   "name": "team_plan",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.11.1",
+    "@babel/core": "^7.11.4",
     "@babel/preset-react": "^7.10.4",
     "@coreui/coreui": "^2.0.4",
     "@rails/actioncable": "^6.0.3",
@@ -17,7 +17,7 @@
     "bootstrap": "^4.5.2",
     "bootstrap-datepicker": "^1.6.4",
     "bs-custom-file-input": "^1.3.2",
-    "caniuse-lite": "^1.0.30001115",
+    "caniuse-lite": "^1.0.30001117",
     "chart.js": "^2.7.0",
     "clean-webpack-plugin": "^3.0.0",
     "core-js": "3",
@@ -50,7 +50,7 @@
     "vanilla-lazyload": "^17.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.1.1"
+    "webpack-merge": "^5.1.2"
   },
   "version": "0.1.0",
   "devDependencies": {
