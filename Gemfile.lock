@@ -451,7 +451,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stackprof (0.2.15)
-    standard (0.5.1)
+    standard (0.5.2)
       rubocop (~> 0.89.1)
       rubocop-performance (~> 1.7.1)
     temple (0.8.2)
