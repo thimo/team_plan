@@ -195,7 +195,8 @@ GEM
       guard-compat (~> 1.2)
       minitest (>= 3.0)
     hashie (4.1.0)
-    heapy (0.1.4)
+    heapy (0.2.0)
+      thor
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.3)
