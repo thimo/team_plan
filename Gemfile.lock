@@ -205,7 +205,7 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
-    icalendar (2.6.1)
+    icalendar (2.7.0)
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
     image_optimizer (1.8.0)
@@ -522,7 +522,7 @@ DEPENDENCIES
   guard
   guard-livereload
   guard-minitest
-  icalendar (~> 2.6.1)
+  icalendar (~> 2.7.0)
   inline_svg
   jbuilder (~> 2.10)
   kaminari
