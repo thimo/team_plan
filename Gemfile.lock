@@ -216,7 +216,7 @@ GEM
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
     jaro_winkler (1.5.4)
-    jbuilder (2.10.0)
+    jbuilder (2.10.1)
       activesupport (>= 5.0.0)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -524,7 +524,7 @@ DEPENDENCIES
   guard-minitest
   icalendar (~> 2.6.1)
   inline_svg
-  jbuilder (~> 2.5)
+  jbuilder (~> 2.10)
   kaminari
   launchy
   letter_opener
