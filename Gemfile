@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "2.7.1"
 
 gem "acts_as_tenant"
-gem "jbuilder", "~> 2.5"
+gem "jbuilder", "~> 2.10"
 gem "pg", "~> 1.2"
 gem "puma", "~> 4.3"
 gem "que", "~> 1.0.0.beta4"
