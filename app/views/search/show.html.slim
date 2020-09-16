@@ -26,7 +26,7 @@
                       - if policy(user).impersonate? && current_user != user
                         .float-right
                           = link_to impersonate_admin_user_path(user), method: :post, title: "Log in als #{user.name}"
-                            i.fa-sign-in.m-1.ml-2[class=fa_class]
+                            i.fa-sign-in-alt.m-1.ml-2[class=fa_class]
                       = link_to user.name, [:edit, :admin, user]
     - else
       .p-3
