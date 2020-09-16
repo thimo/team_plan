@@ -7,7 +7,7 @@ head
   meta name="author" content="#{Tenant.setting('club_name')} #{Tenant.setting('application_name')}"
   meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
   link rel="shortcut icon" href="#{Tenant.setting("application_favicon_url")}"
-  script src="https://kit.fontawesome.com/#{Tenant.setting("fontawesome_kit_nr").presence || '0406076536'}.js"
+  / script src="https://kit.fontawesome.com/#{Tenant.setting("fontawesome_kit_nr").presence || '0406076536'}.js"
 
   = stylesheet_pack_tag 'application', media: 'all'
   / TODO: find solution for print stylesheet
