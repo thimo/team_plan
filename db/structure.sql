@@ -945,39 +945,6 @@ ALTER SEQUENCE public.members_id_seq OWNED BY public.members.id;
 
 
 --
--- Name: members_imports; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.members_imports (
-    id bigint NOT NULL,
-    user_id bigint NOT NULL,
-    csv character varying,
-    result jsonb,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: members_imports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.members_imports_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: members_imports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.members_imports_id_seq OWNED BY public.members_imports.id;
-
-
---
 -- Name: members_users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2024,13 +1991,6 @@ ALTER TABLE ONLY public.members ALTER COLUMN id SET DEFAULT nextval('public.memb
 
 
 --
--- Name: members_imports id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.members_imports ALTER COLUMN id SET DEFAULT nextval('public.members_imports_id_seq'::regclass);
-
-
---
 -- Name: notes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2302,14 +2262,6 @@ ALTER TABLE ONLY public.logs
 
 ALTER TABLE ONLY public.matches
     ADD CONSTRAINT matches_pkey PRIMARY KEY (id);
-
-
---
--- Name: members_imports members_imports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.members_imports
-    ADD CONSTRAINT members_imports_pkey PRIMARY KEY (id);
 
 
 --
@@ -2820,13 +2772,6 @@ CREATE UNIQUE INDEX index_matches_teams_on_match_id_and_team_id ON public.matche
 --
 
 CREATE UNIQUE INDEX index_matches_teams_on_team_id_and_match_id ON public.matches_teams USING btree (team_id, match_id);
-
-
---
--- Name: index_members_imports_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_members_imports_on_user_id ON public.members_imports USING btree (user_id);
 
 
 --
@@ -3364,14 +3309,6 @@ ALTER TABLE ONLY public.comments
 
 ALTER TABLE ONLY public.presences
     ADD CONSTRAINT fk_rails_0d142e1d7d FOREIGN KEY (member_id) REFERENCES public.members(id);
-
-
---
--- Name: members_imports fk_rails_11edf41fd7; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.members_imports
-    ADD CONSTRAINT fk_rails_11edf41fd7 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -4116,7 +4053,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200213215429'),
 ('20200215170050'),
 ('20200315183921'),
-('20200502201108'),
 ('20200805122248');
 
 
