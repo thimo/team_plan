@@ -18,7 +18,8 @@
               td
                 = render member
               td
-                = member.email
+                - policy(member).show_private_data?
+                  = member.email
               - if policy(User).update?
                 td
                   - member.users.each do |user|
