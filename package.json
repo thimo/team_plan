@@ -51,7 +51,7 @@
     "vanilla-lazyload": "^17.1.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.1.4"
+    "webpack-merge": "^5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
