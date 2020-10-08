@@ -32,7 +32,7 @@ tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through
       - else
         .match-hometeam.nowrap.text-right
           - if (relatiecode = match.thuisteamclubrelatiecode).present?
-            = image_tag "#{Tenant.setting('clubdata_urls_club_logos')}#{relatiecode}.png", class: 'clublogo d-none d-sm-inline-block'
+            = image_tag Tenant.setting('clubdata_urls_club_logos').gsub("%relatiecode%", relatiecode), class: 'clublogo d-none d-sm-inline-block'
           - if match.thuisteamclubrelatiecode == Tenant.setting('club_relatiecode') || \
                  match.thuisteam.include?(Tenant.setting('club_name_short'))
             = link_to match
@@ -43,7 +43,7 @@ tr.match-row[class="#{'line-through' if match.afgelast? && !disable_line_through
           = " - "
         .match-awayteam.nowrap.text-left
           - if (relatiecode = match.uitteamclubrelatiecode).present?
-            = image_tag "#{Tenant.setting('clubdata_urls_club_logos')}#{relatiecode}.png", class: 'clublogo d-none d-sm-inline-block'
+            = image_tag Tenant.setting('clubdata_urls_club_logos').gsub("%relatiecode%", relatiecode), class: 'clublogo d-none d-sm-inline-block'
           - if match.uitteamclubrelatiecode == Tenant.setting('club_relatiecode') || \
                  match.uitteam.include?(Tenant.setting('club_name_short'))
             = link_to match

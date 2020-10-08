@@ -1531,7 +1531,7 @@ CREATE TABLE public.tenant_settings (
     clubdata_urls_team_indeling character varying DEFAULT 'https://data.sportlink.com/team-indeling?lokaleteamcode=-1&teampersoonrol=ALLES&toonlidfoto=JA'::character varying,
     clubdata_urls_wedstrijd_accommodatie character varying DEFAULT 'https://data.sportlink.com/wedstrijd-accommodatie'::character varying,
     clubdata_urls_afgelastingen character varying DEFAULT 'https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1'::character varying,
-    clubdata_urls_club_logos character varying DEFAULT 'http://bin617.website-voetbal.nl/sites/voetbal.nl/files/knvblogos/'::character varying,
+    clubdata_urls_club_logos character varying DEFAULT 'https://logoapi.voetbal.nl/logo.php?clubcode=%relatiecode%'::character varying,
     clubdata_client_id character varying,
     google_maps_base_url character varying DEFAULT 'https://www.google.com/maps/embed/v1/'::character varying,
     google_maps_api_key character varying,
@@ -4053,6 +4053,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200213215429'),
 ('20200215170050'),
 ('20200315183921'),
-('20200805122248');
+('20200805122248'),
+('20201008080438');
 
 

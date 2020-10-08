@@ -6,7 +6,7 @@ class TenantSettingPolicy < ApplicationPolicy
   def permitted_attributes
     # TODO: Split attributes for different levels of access, like this:
     # attributes << :status if set_status?
-    attributes = [
+    [
       :application_name,
       :application_hostname,
       :application_email,
@@ -43,7 +43,6 @@ class TenantSettingPolicy < ApplicationPolicy
       local_teams_always_allowed_in_team: [],
       local_teams_warning_sportlink: []
     ]
-    attributes
   end
 
   class Scope < Scope

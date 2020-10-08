@@ -22,7 +22,7 @@
 #  club_website                         :string           default("https://teamplan.defrog.nl/")
 #  club_zip                             :string
 #  clubdata_urls_afgelastingen          :string           default("https://data.sportlink.com/afgelastingen?aantalregels=100&weekoffset=-1")
-#  clubdata_urls_club_logos             :string           default("http://bin617.website-voetbal.nl/sites/voetbal.nl/files/knvblogos/")
+#  clubdata_urls_club_logos             :string           default("https://logoapi.voetbal.nl/logo.php?clubcode=%relatiecode%")
 #  clubdata_urls_competities            :string           default("https://data.sportlink.com/teams?teamsoort=bond&spelsoort=ve&gebruiklokaleteamgegevens=NEE")
 #  clubdata_urls_poule_programma        :string           default("https://data.sportlink.com/poule-programma?eigenwedstrijden=NEE&gebruiklokaleteamgegevens=NEE&aantaldagen=365&weekoffset=-2")
 #  clubdata_urls_poulestand             :string           default("https://data.sportlink.com/poulestand?gebruiklokaleteamgegevens=NEE")
