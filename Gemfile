@@ -42,7 +42,7 @@ gem "bootsnap", require: false
 gem "caxlsx", "~> 3.0"
 gem "caxlsx_rails"
 gem "icalendar", "~> 2.7.0"
-gem "pg_search", "2.3.2" # Bug in 2.3.3: https://github.com/Casecommons/pg_search/issues/446
+gem "pg_search", "2.3.4" # Bug in 2.3.3: https://github.com/Casecommons/pg_search/issues/446
 gem "pretender"
 gem "redis", "~> 4.2"
 gem "simple-password-gen"
