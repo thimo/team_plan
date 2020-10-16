@@ -11,9 +11,6 @@
     - if @competitions_other.any?
       - @competitions_other.each do |competition|
         = render "competitions/standing", competition: competition, compact: true
-    - else
-      .card.card-body
-        i Geen competitie gevonden
 
     - @custom_competition_matches.each do |competition, matches|
       = render "matches/list", matches: matches, title: competition.competitienaam, team: @team
