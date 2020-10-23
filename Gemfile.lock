@@ -450,7 +450,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stackprof (0.2.15)
+    stackprof (0.2.16)
     standard (0.7)
       rubocop (= 0.92)
       rubocop-performance (= 1.8.1)
