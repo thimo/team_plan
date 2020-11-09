@@ -532,7 +532,7 @@ DEPENDENCIES
   net-ssh (~> 6.1.0)
   paper_trail
   pg (~> 1.2)
-  pg_search (= 2.3.4)
+  pg_search (~> 2.3.4)
   pretender
   pry-rails
   puma (~> 5.0)

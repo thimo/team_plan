@@ -42,7 +42,7 @@ gem "bootsnap", require: false
 gem "caxlsx", "~> 3.0"
 gem "caxlsx_rails"
 gem "icalendar", "~> 2.7.0"
-gem "pg_search", "2.3.4" # Bug in 2.3.3: https://github.com/Casecommons/pg_search/issues/446
+gem "pg_search", "~> 2.3.4"
 gem "pretender"
 gem "redis", "~> 4.2"
 gem "simple-password-gen"
@@ -73,7 +73,6 @@ group :development do
   gem "terminal-notifier-guard"
   gem "web-console"
 
-  gem "derailed_benchmarks" # bundle exec derailed bundle:mem
   gem "reek"
   gem "solargraph"
   gem "stackprof"
@@ -85,7 +84,6 @@ group :test do
   gem "minitest-reporters"
   # Disabled to prevent "uninitialized constant Minitest::Rails::TestUnit"
   # gem "minitest-rails"
-  gem "selenium-webdriver"
 end
 
 group :production, :staging do
