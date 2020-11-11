@@ -13,7 +13,7 @@
     "animate.css": "^4.1.1",
     "autoprefixer": "^9.8.6",
     "autosize": "^4.0.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.2.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.5.3",
     "bootstrap-datepicker": "^1.6.4",
