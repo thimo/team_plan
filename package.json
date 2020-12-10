@@ -7,7 +7,7 @@
     "@coreui/coreui": "^2.0.4",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@rails/actioncable": "^6.0.3",
-    "@rails/activestorage": "^6.0.3",
+    "@rails/activestorage": "^6.1.0",
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "^5.2.1",
     "animate.css": "^4.1.1",
