@@ -361,7 +361,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     redis (4.2.5)
     reek (6.0.2)
       kwalify (~> 0.7.0)
@@ -546,7 +546,7 @@ DEPENDENCIES
   rails-i18n
   rails_12factor
   rb-fsevent
-  redcarpet (~> 3.5.0)
+  redcarpet (~> 3.5.1)
   redis (~> 4.2)
   reek
   rest-client
