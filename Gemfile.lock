@@ -275,7 +275,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    paper_trail (11.0.0)
+    paper_trail (11.1.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
     parallel (1.19.2)
@@ -462,7 +462,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.8)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
