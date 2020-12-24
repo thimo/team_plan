@@ -2222,10 +2222,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000805, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001093, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001161, caniuse-lite@^1.0.30001165:
-  version "1.0.30001165"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001165.tgz#32955490d2f60290bb186bb754f2981917fa744f"
-  integrity sha512-8cEsSMwXfx7lWSUMA2s08z9dIgsnR5NAqjXP23stdsU3AUWkCr/rr4s4OFtHXn5XXr6+7kam3QFVoYyXNPdJPA==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000805, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001093, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001161, caniuse-lite@^1.0.30001170:
+  version "1.0.30001170"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001170.tgz#0088bfecc6a14694969e391cc29d7eb6362ca6a7"
+  integrity sha512-Dd4d/+0tsK0UNLrZs3CvNukqalnVTRrxb5mcQm8rHL49t7V5ZaTygwXkrq+FB+dVDf++4ri8eJnFEJAB8332PA==
 
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.3.0"
@@ -2637,6 +2637,13 @@ cookie@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
+
+copy-anything@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/copy-anything/-/copy-anything-2.0.1.tgz#2afbce6da684bdfcbec93752fa762819cb480d9a"
+  integrity sha512-lA57e7viQHOdPQcrytv5jFeudZZOXuyk47lZym279FiDQ8jeZomXiGuVf6ffMKkJ+3TIai3J1J3yi6M+/4U35g==
+  dependencies:
+    is-what "^3.7.1"
 
 copy-concurrently@^1.0.0:
   version "1.0.5"
@@ -4699,6 +4706,11 @@ is-utf8@^0.2.0:
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
   integrity sha1-Sw2hRCEE0bM2NA6AeX6GXPOffXI=
 
+is-what@^3.7.1:
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/is-what/-/is-what-3.12.0.tgz#f4405ce4bd6dd420d3ced51a026fb90e03705e55"
+  integrity sha512-2ilQz5/f/o9V7WRWJQmpFYNmQFZ9iM+OXRonZKcYgTkCzjb949Vi4h282PD1UfmgHk666rcWonbRJ++KI41VGw==
+
 is-windows@^1.0.1, is-windows@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
@@ -4879,20 +4891,21 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-less-loader@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-7.1.0.tgz#958d41e86d7de0bcb490711ee0f235aa9dc596aa"
-  integrity sha512-EHbnRaTzHgsxnd3RK6OXSiygcCJs72+2ezXVLg+Hgl/ijUTtthKZXZh4MvQkWJr3h/SSKvxGZr7IIHzuS2KbVQ==
+less-loader@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-7.2.0.tgz#37ba9c778d999930cd24fa1b59aa4e0ba5ba0441"
+  integrity sha512-C/08kYL2+wFLFQ/c8tey4qX6xpPVtBBwGa9gtpI/bktWpSUaUkZxeOUMM2zGDrQ4s/ZVpA+Rv2RyIvwEXNVuIg==
   dependencies:
     klona "^2.0.4"
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-less@^3.12.2:
-  version "3.12.2"
-  resolved "https://registry.yarnpkg.com/less/-/less-3.12.2.tgz#157e6dd32a68869df8859314ad38e70211af3ab4"
-  integrity sha512-+1V2PCMFkL+OIj2/HrtrvZw0BC0sYLMICJfbQjuj/K8CEnlrFX6R5cKKgzzttsZDHyxQNL1jqMREjKN3ja/E3Q==
+less@^3.13.1:
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/less/-/less-3.13.1.tgz#0ebc91d2a0e9c0c6735b83d496b0ab0583077909"
+  integrity sha512-SwA1aQXGUvp+P5XdZslUOhhLnClSLIjWvJhmd+Vgib5BFIr9lMNlQwmwUNOjXThF/A0x+MCYYPeWEfeWiLRnTw==
   dependencies:
+    copy-anything "^2.0.1"
     tslib "^1.10.0"
   optionalDependencies:
     errno "^0.1.1"
@@ -8650,12 +8663,7 @@ ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
-tslib@^1.10.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
-  integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
-
-tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
