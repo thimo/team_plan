@@ -3,7 +3,22 @@
 @import 'bootstrap-variables';
 @import '~@coreui/coreui/scss/coreui';
 
-@import './partials/*';
+@import './partials/alert';
+@import './partials/badge';
+@import './partials/breadcrumb';
+@import './partials/buttons';
+@import './partials/card';
+@import './partials/colors';
+@import './partials/devise';
+@import './partials/forms';
+@import './partials/grid_framework';
+@import './partials/grid';
+@import './partials/header';
+@import './partials/layout';
+@import './partials/list';
+@import './partials/nav';
+@import './partials/table';
+
 @import 'dark_mode';
 
 //
