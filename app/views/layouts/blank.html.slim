@@ -14,7 +14,7 @@ html
     = csrf_meta_tags
 
     / Use 'defer' here as with 'async' 'turbolinks:load' is not called
-    = javascript_pack_tag 'application', defer: Rails.env.production?
+    = javascript_packs_with_chunks_tag 'application', defer: Rails.env.production?
 
   body
     = yield

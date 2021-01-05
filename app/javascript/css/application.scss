@@ -13,6 +13,23 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
 @import 'theme/coreui';
-@import 'admin/*';
-@import 'partials/*';
+@import 'admin/email_logs';
+
+@import 'partials/charts';
+@import 'partials/favorites';
+@import 'partials/generic';
+@import 'partials/matches';
+@import 'partials/member_allocation_filters';
+@import 'partials/member_allocations';
+@import 'partials/members';
+@import 'partials/presences';
+@import 'partials/rails_bootstrap_forms';
+@import 'partials/schedules';
+@import 'partials/select2';
+@import 'partials/team_evaluations';
+@import 'partials/theme_overwrite';
+@import 'partials/todos';
+@import 'partials/utils';
+@import 'partials/simple_calendar';
+
 @import 'print';
