@@ -54,7 +54,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "@webpack-cli/serve": "^1.2.1",
+    "@webpack-cli/serve": "^1.2.2",
     "webpack-dev-server": "^3.11.2"
   },
   "babel": {
