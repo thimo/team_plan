@@ -1,18 +1,18 @@
 source "https://rubygems.org"
 
-ruby "2.7.1"
+ruby "2.7.2"
 
 gem "acts_as_tenant"
-gem "jbuilder", "~> 2.10"
+gem "jbuilder", "~> 2.11"
 gem "pg", "~> 1.2"
-gem "puma", "~> 5.0"
+gem "puma", "~> 5.2"
 gem "que", "~> 1.0.0.beta4"
 gem "que-scheduler"
 gem "que-web"
-gem "rails", "~> 6.0.3"
+gem "rails", "~> 6.1.1"
 gem "rails-i18n"
 gem "turbolinks", "~> 5"
-gem "webpacker", ">= 4.0.x"
+gem "webpacker", "~> 6.0.0.pre.2"
 
 gem "carrierwave", "~> 2.1.0"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
@@ -35,7 +35,7 @@ gem "net-ssh", "~> 6.1.0"
 gem "awesome_print", require: "awesome_print"
 gem "paper_trail"
 gem "pundit"
-gem "redcarpet", "~> 3.5.0"
+gem "redcarpet", "~> 3.5.1"
 gem "rubyzip"
 
 gem "bootsnap", require: false

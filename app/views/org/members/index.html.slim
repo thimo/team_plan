@@ -2,14 +2,15 @@
 
 .row
   .col-sm-4
-    ul.list-group.mb-4
-      li.list-group-item.strong
-        = "Teamleiding #{@season.name}"
-      - @roles.each do |role|
-        = link_to [:org, :members, expand: role[:value]], class: "list-group-item list-group-item-action #{'active' if params[:expand] == role[:value]}"
-          = role[:label]
-          .badge.badge-secondary.badge-pill.float-right
-            = role[:count]
+    - if @season.present?
+      ul.list-group.mb-4
+        li.list-group-item.strong
+          = "Teamleiding #{@season.name}"
+        - @roles.each do |role|
+          = link_to [:org, :members, expand: role[:value]], class: "list-group-item list-group-item-action #{'active' if params[:expand] == role[:value]}"
+            = role[:label]
+            .badge.badge-secondary.badge-pill.float-right
+              = role[:count]
 
     ul.list-group.mb-4
       li.list-group-item.strong
