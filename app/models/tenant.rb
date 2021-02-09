@@ -56,7 +56,7 @@ class Tenant < ApplicationRecord
     private
 
     def clean_up(name)
-      name.gsub(/[-\.]/, "_")
+      name.gsub(/[-.]/, "_")
     end
 
     def domain(request)

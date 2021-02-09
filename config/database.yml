@@ -5,12 +5,10 @@ default: &default
 
 development:
   <<: *default
-  port: 5433
   database: teamplan_defrog_nl
 
 test:
   <<: *default
-  port: 5433
   database: teamplan_test
 
 demo:
