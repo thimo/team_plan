@@ -44,7 +44,7 @@ class AgeGroup < ApplicationRecord
 
   validates :name, :season, presence: true
 
-  scope :male, -> { where(gender: "m").or(AgeGroup.where(gender: [nil, "all", ""])) }
+  scope :male, -> { where(gender: [nil, "m", "all", ""]) }
   scope :female, -> { where(gender: "v") }
   scope :all_gender, -> { where(gender: [nil, "all", ""]) }
   scope :asc, -> { order(:training_only, year_of_birth_to: :asc) }
