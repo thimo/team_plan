@@ -381,7 +381,7 @@ class User < ApplicationRecord
 
   # Copied from validatable module
   def password_required?
-    !persisted? || !password.nil? || !password_confirmation.nil?
+    new_record? || password.blank? || password_confirmation.blank?
   end
 
   def settings
