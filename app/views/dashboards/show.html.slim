@@ -62,6 +62,6 @@
                                              "Laatste import: #{l(date, format: :date_long)}" : \
                                              nil
 
-      - if @version_updates.present?
-        - cache [@version_updates, current_user.role]
-          = render "version_updates/list", version_updates: @version_updates
+      / - if @version_updates.present?
+      /   - cache [@version_updates, current_user.role]
+      /     = render "version_updates/list", version_updates: @version_updates
