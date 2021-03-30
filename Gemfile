@@ -14,7 +14,7 @@ gem "rails-i18n"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 6.0.0.beta.6"
 
-gem "carrierwave", "~> 2.2.0"
+gem "carrierwave", "~> 2.2.1"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
 gem "faker"
 gem "mini_magick"
