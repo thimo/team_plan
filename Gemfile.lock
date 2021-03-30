@@ -110,9 +110,9 @@ GEM
     carrierwave-imageoptimizer (1.6.0)
       carrierwave (>= 0.8, < 3.0)
       image_optimizer (~> 1.6)
-    caxlsx (3.0.4)
+    caxlsx (3.1.0)
       htmlentities (~> 4.3, >= 4.3.4)
-      mimemagic (~> 0.3)
+      marcel (~> 1.0)
       nokogiri (~> 1.10, >= 1.10.4)
       rubyzip (>= 1.3.0, < 3)
     caxlsx_rails (0.6.2)
@@ -520,7 +520,7 @@ DEPENDENCIES
   capybara
   carrierwave (~> 2.2.0)
   carrierwave-imageoptimizer
-  caxlsx (~> 3.0)
+  caxlsx (~> 3.1)
   caxlsx_rails
   country_select
   derailed_benchmarks
