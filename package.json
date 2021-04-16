@@ -27,7 +27,7 @@
     "jquery": "^3.6.0",
     "js-yaml": "^4.0.0",
     "less": "^4.1.1",
-    "less-loader": "^8.1.0",
+    "less-loader": "^8.1.1",
     "mini-css-extract-plugin": "^1.4.1",
     "node-sass": "^5.0.0",
     "nonblockjs": "^1.0.8",
