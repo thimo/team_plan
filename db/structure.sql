@@ -201,6 +201,36 @@ $$;
 
 
 --
+-- Name: que_scheduler_check_job_exists(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.que_scheduler_check_job_exists() RETURNS boolean
+    LANGUAGE sql
+    AS $$
+SELECT EXISTS(SELECT * FROM que_jobs WHERE job_class = 'Que::Scheduler::SchedulerJob');
+$$;
+
+
+--
+-- Name: que_scheduler_prevent_job_deletion(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.que_scheduler_prevent_job_deletion() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+BEGIN
+    IF OLD.job_class = 'Que::Scheduler::SchedulerJob' THEN
+        IF NOT que_scheduler_check_job_exists() THEN
+            raise exception 'Deletion of que_scheduler job % prevented. Deleting the que_scheduler job is almost certainly a mistake.', OLD.job_id;
+        END IF;
+    END IF;
+    RETURN OLD;
+END;
+$$;
+
+
+--
 -- Name: que_state_notify(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -1163,7 +1193,7 @@ CREATE TABLE public.que_scheduler_audit (
 -- Name: TABLE que_scheduler_audit; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON TABLE public.que_scheduler_audit IS '5';
+COMMENT ON TABLE public.que_scheduler_audit IS '6';
 
 
 --
@@ -3244,6 +3274,13 @@ CREATE INDEX que_scheduler_audit_enqueued_job_id ON public.que_scheduler_audit_e
 
 
 --
+-- Name: que_scheduler_job_in_que_jobs_unique_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX que_scheduler_job_in_que_jobs_unique_index ON public.que_jobs USING btree (job_class) WHERE (job_class = 'Que::Scheduler::SchedulerJob'::text);
+
+
+--
 -- Name: schedule_member; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3262,6 +3299,13 @@ CREATE UNIQUE INDEX team_competition ON public.club_data_team_competitions USING
 --
 
 CREATE TRIGGER que_job_notify AFTER INSERT ON public.que_jobs FOR EACH ROW EXECUTE PROCEDURE public.que_job_notify();
+
+
+--
+-- Name: que_jobs que_scheduler_prevent_job_deletion_trigger; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE CONSTRAINT TRIGGER que_scheduler_prevent_job_deletion_trigger AFTER DELETE OR UPDATE ON public.que_jobs DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE PROCEDURE public.que_scheduler_prevent_job_deletion();
 
 
 --
@@ -4054,6 +4098,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200215170050'),
 ('20200315183921'),
 ('20200805122248'),
-('20201008080438');
+('20201008080438'),
+('20210505130017');
 
 
