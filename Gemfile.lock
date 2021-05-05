@@ -76,7 +76,7 @@ GEM
     benchmark (0.1.1)
     benchmark-ips (2.8.4)
     bindex (0.8.1)
-    bootsnap (1.7.4)
+    bootsnap (1.7.5)
       msgpack (~> 1.0)
     bootstrap4-kaminari-views (1.0.1)
       kaminari (>= 0.13)
