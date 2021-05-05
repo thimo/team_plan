@@ -10,6 +10,8 @@ class VoetbalassistRefereeScraper
 
     doc = Nokogiri::HTML(URI.open(url))
     programma_tabel_body = doc.at_css("#ProgrammaTabel tbody")
+    return [] if programma_tabel_body.blank?
+
     programma_tabel_body.css("tr").map { |row|
       cells = row.css("td")
       referee = cells.slice(1).text
