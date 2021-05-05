@@ -8,10 +8,10 @@ head
   meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
   link rel="shortcut icon" href="#{Tenant.setting("application_favicon_url")}"
 
-  = stylesheet_packs_with_chunks_tag 'application', media: 'all'
+  = stylesheet_pack_tag 'application', media: 'all'
   / TODO: find solution for print stylesheet
   / = stylesheet_link_tag 'print/print', media: 'print', 'data-turbolinks-track': 'reload'
-  = javascript_packs_with_chunks_tag 'application', defer: true
+  = javascript_pack_tag 'application', defer: true
 
   = render "layouts/analytics"
   = csrf_meta_tags
