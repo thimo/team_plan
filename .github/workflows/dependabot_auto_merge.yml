@@ -11,5 +11,7 @@ jobs:
       - uses: koj-co/dependabot-pr-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          auto-label: true
           merge-minor: true
           merge-patch: true
+          merge-commit: Merge #$PR_NUMBER ($PR_TITLE)
