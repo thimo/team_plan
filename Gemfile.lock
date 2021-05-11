@@ -164,10 +164,10 @@ GEM
     exception_notification (4.4.3)
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
-    factory_bot (6.1.0)
+    factory_bot (6.2.0)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.1.0)
-      factory_bot (~> 6.1.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     faker (2.17.0)
       i18n (>= 1.6, < 2)
@@ -304,7 +304,7 @@ GEM
       pry (>= 0.10.4)
     psych (3.3.1)
     public_suffix (4.0.6)
-    puma (5.2.2)
+    puma (5.3.0)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -369,7 +369,7 @@ GEM
       thor (~> 1.0)
     rainbow (3.0.0)
     rake (13.0.3)
-    rb-fsevent (0.10.4)
+    rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
@@ -488,7 +488,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (6.0.0.pre.2)
+    webpacker (6.0.0.beta.7)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -546,7 +546,7 @@ DEPENDENCIES
   pg_search (~> 2.3.5)
   pretender
   pry-rails
-  puma (~> 5.2)
+  puma (~> 5.3)
   pundit
   que (~> 1.0.0.beta4)
   que-scheduler
@@ -573,7 +573,7 @@ DEPENDENCIES
   terminal-notifier-guard
   turbolinks (~> 5)
   web-console
-  webpacker (~> 6.0.0.beta.6)
+  webpacker (~> 6.0.0.beta.7)
 
 RUBY VERSION
    ruby 2.7.3p183
