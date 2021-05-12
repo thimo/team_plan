@@ -130,8 +130,8 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.1)
     crass (1.0.6)
-    dead_end (1.1.6)
-    derailed_benchmarks (2.0.1)
+    dead_end (1.1.7)
+    derailed_benchmarks (2.1.0)
       benchmark-ips (~> 2)
       dead_end
       get_process_mem (~> 0)
