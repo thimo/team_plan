@@ -207,7 +207,7 @@ nl:
 
     help:
       tenant_setting:
-        local_teams_warning_sportlink: Bij spelers met deze lokele teams wordt een waarschuwing getoond
+        local_teams_warning_sportlink: Bij spelers met deze lokale teams wordt een waarschuwing getoond
         local_teams_always_allowed_in_team: Spelers met deze lokale teams mogen altijd ingedeeld zijn
 
     models:
