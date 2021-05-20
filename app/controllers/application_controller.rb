@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :permission_denied
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_auth_token
 
+  def back_url
+    request.referer || root_path
+  end
+
   private
 
   def invalid_auth_token
@@ -38,10 +42,6 @@ class ApplicationController < ActionController::Base
     return if devise_controller? || self.class == DashboardsController
 
     add_breadcrumb "Home", :root_path
-  end
-
-  def back_url
-    request.referer || root_path
   end
 
   # Current is an object that is available even in models
