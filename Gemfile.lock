@@ -415,7 +415,7 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
-    scout_apm (4.1.0)
+    scout_apm (4.1.1)
       parser
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
