@@ -41,7 +41,7 @@
     "prop-types": "^15.6.0",
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.34.1",
-    "sass-loader": "^12.0.0",
+    "sass-loader": "^12.1.0",
     "select2": "^4.0.5",
     "sticky-table-headers": "^0.1.24",
     "stimulus": "^2.0.0",
