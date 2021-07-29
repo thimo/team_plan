@@ -464,7 +464,7 @@ GEM
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
     stackprof (0.2.17)
-    standard (1.1.6)
+    standard (1.1.7)
       rubocop (= 1.18.4)
       rubocop-performance (= 1.11.4)
     temple (0.8.2)
