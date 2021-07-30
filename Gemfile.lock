@@ -304,7 +304,7 @@ GEM
       pry (>= 0.10.4)
     psych (3.3.1)
     public_suffix (4.0.6)
-    puma (5.3.2)
+    puma (5.4.0)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -547,7 +547,7 @@ DEPENDENCIES
   pg_search (~> 2.3.5)
   pretender
   pry-rails
-  puma (~> 5.3)
+  puma (~> 5.4)
   pundit
   que (~> 1.0.0.beta4)
   que-scheduler
