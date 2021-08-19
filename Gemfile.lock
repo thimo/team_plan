@@ -248,7 +248,7 @@ GEM
     listen (3.6.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.10.0)
+    loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.2.8)
@@ -263,7 +263,7 @@ GEM
     mini_histogram (0.3.1)
     mini_magick (4.11.0)
     mini_mime (1.1.0)
-    mini_portile2 (2.5.3)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     minitest-reporters (1.4.3)
       ansi
@@ -278,8 +278,8 @@ GEM
     net-ssh (6.1.0)
     netrc (0.11.0)
     nio4r (2.5.7)
-    nokogiri (1.11.7)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.12.3)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
@@ -323,7 +323,7 @@ GEM
       rack
     rack-protection (2.1.0)
       rack
-    rack-proxy (0.6.5)
+    rack-proxy (0.7.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -350,7 +350,7 @@ GEM
       activesupport (>= 4.2)
       choice (~> 0.2.0)
       ruby-graphviz (~> 1.2)
-    rails-html-sanitizer (1.3.0)
+    rails-html-sanitizer (1.4.1)
       loofah (~> 2.3)
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
@@ -487,7 +487,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (6.0.0.beta.7)
+    webpacker (6.0.0.rc.1)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -572,7 +572,7 @@ DEPENDENCIES
   terminal-notifier-guard
   turbolinks (~> 5)
   web-console
-  webpacker (~> 6.0.0.beta.7)
+  webpacker (~> 6.0.0.rc.1)
 
 RUBY VERSION
    ruby 2.7.3p183
