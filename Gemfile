@@ -44,7 +44,7 @@ gem "caxlsx_rails"
 gem "icalendar", "~> 2.7.1"
 gem "pg_search", "~> 2.3.5"
 gem "pretender"
-gem "redis", "~> 4.4"
+gem "redis", "~> 4.5"
 gem "simple-password-gen"
 gem "simple_calendar", "~> 2.4"
 
