@@ -223,7 +223,7 @@ GEM
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
     jaro_winkler (1.5.4)
-    jbuilder (2.11.3)
+    jbuilder (2.11.4)
       activesupport (>= 5.0.0)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
