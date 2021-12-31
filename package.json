@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.7",
-    "@babel/preset-react": "^7.16.5",
+    "@babel/preset-react": "^7.16.7",
     "@coreui/coreui": "^2.0.4",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@rails/actioncable": "latest",
