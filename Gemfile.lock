@@ -156,7 +156,7 @@ GEM
     em-websocket (0.5.2)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    enum_help (0.0.17)
+    enum_help (0.0.18)
       activesupport (>= 3.0.0)
     erubi (1.10.0)
     et-orbi (1.2.6)
@@ -524,7 +524,7 @@ DEPENDENCIES
   country_select
   derailed_benchmarks
   devise (~> 4.8)
-  enum_help (~> 0.0.17)
+  enum_help (~> 0.0.18)
   exception_notification
   factory_bot_rails
   faker
