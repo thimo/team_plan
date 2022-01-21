@@ -12,7 +12,7 @@ gem "que-web"
 gem "rails", "~> 6.1.4"
 gem "rails-i18n"
 gem "turbolinks", "~> 5"
-gem "webpacker", "~> 6.0.0.rc.5"
+gem "webpacker", "~> 6.0.0.rc.6"
 
 gem "carrierwave", "~> 2.2.2"
 gem "carrierwave-imageoptimizer" # also do: brew install optipng jpegoptim (or via "apt-get" on Ubuntu)
