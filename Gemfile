@@ -4,7 +4,7 @@ ruby "2.7.3"
 
 gem "acts_as_tenant"
 gem "jbuilder", "~> 2.11"
-gem "pg", "~> 1.2"
+gem "pg", "~> 1.3"
 gem "puma", "~> 5.5"
 gem "que", "~> 1.0.0.beta4"
 gem "que-scheduler"
