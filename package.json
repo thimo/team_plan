@@ -51,7 +51,7 @@
     "turbolinks": "^5.2.0",
     "vanilla-lazyload": "^17.5.0",
     "webpack": "^5.67.0",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.2"
   },
   "version": "0.1.0",
   "babel": {
