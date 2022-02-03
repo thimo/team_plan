@@ -2,7 +2,7 @@
   "name": "team_plan",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.16.12",
+    "@babel/core": "^7.17.0",
     "@babel/preset-react": "^7.16.7",
     "@coreui/coreui": "^2.0.4",
     "@fortawesome/fontawesome-free": "^5.15.4",
@@ -22,7 +22,7 @@
     "caniuse-lite": "^1.0.30001255",
     "chart.js": "^3.7.0",
     "core-js": "3",
-    "css-loader": "^6.5.1",
+    "css-loader": "^6.6.0",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "file-loader": "^6.2.0",
     "jquery": "^3.6.0",
@@ -64,6 +64,6 @@
   ],
   "devDependencies": {
     "@webpack-cli/serve": "^1.6.1",
-    "webpack-dev-server": "^4.7.3"
+    "webpack-dev-server": "^4.7.4"
   }
 }
