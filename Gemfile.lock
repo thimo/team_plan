@@ -209,7 +209,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.15.0)
       simple_po_parser (~> 1.1)
@@ -312,11 +312,11 @@ GEM
     pundit (2.1.1)
       activesupport (>= 3.0.0)
     que (1.0.0.beta4)
-    que-scheduler (4.2.0)
+    que-scheduler (4.2.1)
       activesupport (>= 5.0)
       fugit (~> 1.1, >= 1.1.8)
       hashie (>= 3, < 6)
-      que (>= 0.12, <= 1.0.0.beta5)
+      que (>= 0.12, <= 2.0.0)
     que-web (0.9.3)
       que (~> 1.0.0.beta3)
       sinatra
@@ -503,7 +503,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.26)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
