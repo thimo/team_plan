@@ -2,7 +2,7 @@
   "name": "team_plan",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.17.2",
+    "@babel/core": "^7.17.4",
     "@babel/preset-react": "^7.16.7",
     "@coreui/coreui": "^2.0.4",
     "@fortawesome/fontawesome-free": "^5.15.4",
@@ -42,7 +42,7 @@
     "prop-types": "^15.8.1",
     "resolve-url-loader": "^4.0.0",
     "sass": "1.49.7",
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^12.6.0",
     "select2": "^4.0.5",
     "sticky-table-headers": "^0.1.24",
     "stimulus": "^2.0.0",
