@@ -312,7 +312,7 @@ GEM
     pundit (2.2.0)
       activesupport (>= 3.0.0)
     que (1.0.0.beta4)
-    que-scheduler (4.2.1)
+    que-scheduler (4.2.2)
       activesupport (>= 5.0)
       fugit (~> 1.1, >= 1.1.8)
       hashie (>= 3, < 6)
