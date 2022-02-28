@@ -39,7 +39,7 @@ gem "redcarpet", "~> 3.5.1"
 gem "rubyzip"
 
 gem "bootsnap", require: false
-gem "caxlsx", "~> 3.1"
+gem "caxlsx", "~> 3.2"
 gem "caxlsx_rails"
 gem "icalendar", "~> 2.7.1"
 gem "pg_search", "~> 2.3.6"
