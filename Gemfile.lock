@@ -76,7 +76,7 @@ GEM
     benchmark (0.2.0)
     benchmark-ips (2.9.1)
     bindex (0.8.1)
-    bootsnap (1.10.3)
+    bootsnap (1.11.1)
       msgpack (~> 1.2)
     bootstrap4-kaminari-views (1.0.1)
       kaminari (>= 0.13)
@@ -274,7 +274,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.4.4)
+    msgpack (1.4.5)
     multi_json (1.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
