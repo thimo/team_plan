@@ -2,7 +2,7 @@
   "name": "team_plan",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.17.7",
+    "@babel/core": "^7.17.8",
     "@babel/preset-react": "^7.16.7",
     "@coreui/coreui": "^2.0.4",
     "@fortawesome/fontawesome-free": "^5.15.4",
