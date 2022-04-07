@@ -41,7 +41,7 @@
     "precss": "^4.0.0",
     "prop-types": "^15.8.1",
     "resolve-url-loader": "^4.0.0",
-    "sass": "1.49.11",
+    "sass": "1.50.0",
     "sass-loader": "^12.6.0",
     "select2": "^4.0.5",
     "sticky-table-headers": "^0.1.24",
