@@ -22,7 +22,7 @@ gem "rest-client"
 gem "slim-rails"
 
 gem "bootstrap4-kaminari-views"
-gem "bootstrap_form", "~> 4.5.0"
+gem "bootstrap_form", "~> 5.0.0"
 gem "breadcrumbs_on_rails", "~> 4.1.0"
 gem "country_select"
 gem "devise", "~> 4.8"
