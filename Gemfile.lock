@@ -322,7 +322,7 @@ GEM
       sinatra
     raabro (1.4.0)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.4)
     rack-livereload (0.3.17)
       rack
     rack-protection (2.2.0)
