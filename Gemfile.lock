@@ -277,7 +277,7 @@ GEM
       ruby-progressbar
     msgpack (1.4.5)
     multi_json (1.15.0)
-    mustermann (1.1.1)
+    mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     nenv (0.3.0)
     net-ssh (6.1.0)
@@ -323,10 +323,10 @@ GEM
       sinatra
     raabro (1.4.0)
     racc (1.6.1)
-    rack (2.2.4)
+    rack (2.2.6.2)
     rack-livereload (0.3.17)
       rack
-    rack-protection (2.2.0)
+    rack-protection (3.0.5)
       rack
     rack-proxy (0.7.0)
       rack
@@ -430,10 +430,10 @@ GEM
     simple_calendar (2.4.3)
       rails (>= 3.0)
     simple_po_parser (1.1.5)
-    sinatra (2.2.0)
-      mustermann (~> 1.0)
-      rack (~> 2.2)
-      rack-protection (= 2.2.0)
+    sinatra (3.0.5)
+      mustermann (~> 3.0)
+      rack (~> 2.2, >= 2.2.4)
+      rack-protection (= 3.0.5)
       tilt (~> 2.0)
     sixarm_ruby_unaccent (1.2.0)
     slim (4.1.0)
@@ -475,7 +475,7 @@ GEM
     temple (0.8.2)
     terminal-notifier-guard (1.7.0)
     thor (1.2.1)
-    tilt (2.0.10)
+    tilt (2.0.11)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
