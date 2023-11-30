@@ -328,7 +328,7 @@ GEM
       rack
     rack-protection (2.2.0)
       rack
-    rack-proxy (0.7.0)
+    rack-proxy (0.7.2)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -494,7 +494,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (6.0.0.rc.5)
+    webpacker (6.0.0.rc.6)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -581,7 +581,7 @@ DEPENDENCIES
   terminal-notifier-guard
   turbolinks (~> 5)
   web-console
-  webpacker (~> 6.0.0.rc.5)
+  webpacker (~> 6.0.0.rc.6)
 
 RUBY VERSION
    ruby 2.7.3p183
