@@ -3751,12 +3751,10 @@ klona@^2.0.4, klona@^2.0.5:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.5.tgz#d166574d90076395d9963aa7a928fabb8d76afbc"
   integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
 
-less-loader@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-10.2.0.tgz#97286d8797dc3dc05b1d16b0ecec5f968bdd4e32"
-  integrity sha512-AV5KHWvCezW27GT90WATaDnfXBv99llDbtaj4bshq6DvAihMdNjaPDcUMa6EXKLRF+P2opFenJp89BXg91XLYg==
-  dependencies:
-    klona "^2.0.4"
+less-loader@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-12.0.0.tgz#d45b322c01b3e6c3784298d7e4257ce25f714516"
+  integrity sha512-fcRoWK28+eD+1PxuwNG+44V2v32IBdzsYAi0keUncHVblbpxMPWwrGlnw0wZKCdOg7O0HNwfhWNw/DrRZ45xCA==
 
 less@^4.1.2:
   version "4.1.2"
