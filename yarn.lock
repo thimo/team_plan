@@ -1336,9 +1336,9 @@
     "@pnotify/core" "^5.2.0"
 
 "@rails/actioncable@latest":
-  version "6.1.4-1"
-  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.4-1.tgz#69982e7f352d732f71fda0cc01b7ba8269c9945b"
-  integrity sha512-b6sLoMop3gX22Wm2P5LPpKcZGwsf1ZoAGS+g1HrTrdlsZ/ENOKIBiSNnHOJajHwcYlF0TefBs7e7jIYZHVYihQ==
+  version "7.1.3-2"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.1.3-2.tgz#7105fd8fc6db87d11510d5e9ac8e5b68add6124e"
+  integrity sha512-0j/bo3Aehk3R3LTc/Nu4eegvUR+8kRObq/t1BtBLGF8xdPzrUQciv+KvAABdACl4Vw82yo0LB1r0J0zVH9Gefg==
 
 "@rails/activestorage@latest":
   version "6.1.4-1"
